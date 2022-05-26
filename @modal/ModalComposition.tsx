@@ -5,11 +5,11 @@ import { Modal, ModalContent, useModalRegistry } from '@modal'
 export function ModalComposition({
   modalName,
   content,
-  modalTrigger,
+  trigger,
 }: {
   modalName: string
   content?: JSX.Element
-  modalTrigger?: JSX.Element
+  trigger?: JSX.Element
 }) {
   const { modalType, requestClose, requestOpen } = useModalRegistry()
 
@@ -21,7 +21,7 @@ export function ModalComposition({
     <>
       <Box>
         <Button variant="unset" onClick={modalHandler}>
-          {modalTrigger}
+          {trigger}
         </Button>
       </Box>
       <Modal open={modalType === modalName} onOpenChange={requestClose}>
