@@ -1,5 +1,4 @@
-# ZORA STARTER
-Repo to bootstrap Zora MARKETPLACE project with:
+# ⌐◨-◨
 
 ```
     "@zoralabs/nft-hooks"
@@ -13,7 +12,3 @@ Repo to bootstrap Zora MARKETPLACE project with:
     "wagmi"
 
 ```
-
-## FEATURES
-
-## TODO
