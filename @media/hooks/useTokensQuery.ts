@@ -5,7 +5,7 @@ import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { ZDK } from '@zoralabs/zdk-alpha'
 import {
   MarketCategory,
-  SortDirection,
+  // SortDirection,
   TokenSortKey,
 } from '@zoralabs/zdk-alpha/dist/queries/queries-sdk'
 import { flatten } from 'lodash'

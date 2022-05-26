@@ -6,9 +6,8 @@ import { NFTCardMarket } from './NFTCardMarket'
 
 export function NFTCard({ nft }: NFTObject) {
   const {
-    rawData,
-    media,
-    rawData: { token, marketsSummary },
+    /* @ts-ignore */
+    rawData, media, rawData: { token, marketsSummary },
   } = nft
 
   return (
@@ -17,7 +16,10 @@ export function NFTCard({ nft }: NFTObject) {
         <Box as="img" src={media?.image?.uri} w="100%" />
       </Box>
       <Stack>
-        <Text>{nft?.metadata?.name}</Text>
+        <Text>{
+          /* @ts-ignore */
+          nft?.metadata?.name
+        }</Text>
         <NFTCardMarket marketsSummary={marketsSummary} />
       </Stack>
       <Box w="100%">{/*<RawDisplayer data={nft} />*/}</Box>

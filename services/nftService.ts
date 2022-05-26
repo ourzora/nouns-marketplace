@@ -1,1 +1,0 @@
-/* Single NFT data service */

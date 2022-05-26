@@ -4,7 +4,7 @@ import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
 import { Heading } from '@zoralabs/zord/elements'
 
-
+/* @ts-ignore */
 const Collection: NextPage = ({
   initialPage,
   contractAddress,

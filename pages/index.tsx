@@ -5,7 +5,7 @@ import { Seo } from 'components/Seo'
 import { Heading } from '@zoralabs/zord/elements'
 import { SITE_TITLE } from 'constants/seo'
 import { NFTGrid } from '@media/NFTGrid'
-
+/* @ts-ignore */
 const Home: NextPage = ({
   initialPage,
   contractAddress,
