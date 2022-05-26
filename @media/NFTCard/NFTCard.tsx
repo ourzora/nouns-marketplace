@@ -3,11 +3,14 @@ import { NFTObject, MARKET_TYPES } from '@zoralabs/nft-hooks/dist/types/NFTInter
 import { useRelevantMarket } from '@media/hooks/useRelevantMarket'
 import { useEffect } from 'react'
 import { NFTCardMarket } from './NFTCardMarket'
+import { TestModal } from 'components/TestModal'
 
 export function NFTCard({ nft }: NFTObject) {
   const {
     /* @ts-ignore */
-    rawData, media, rawData: { token, marketsSummary },
+    rawData,
+    media,
+    rawData: { token, marketsSummary },
   } = nft
 
   return (
@@ -16,11 +19,14 @@ export function NFTCard({ nft }: NFTObject) {
         <Box as="img" src={media?.image?.uri} w="100%" />
       </Box>
       <Stack>
-        <Text>{
-          /* @ts-ignore */
-          nft?.metadata?.name
-        }</Text>
+        <Text>
+          {
+            /* @ts-ignore */
+            nft?.metadata?.name
+          }
+        </Text>
         <NFTCardMarket marketsSummary={marketsSummary} />
+        <TestModal />
       </Stack>
       <Box w="100%">{/*<RawDisplayer data={nft} />*/}</Box>
     </Stack>
