@@ -1,9 +1,7 @@
 import { Stack, Box, Text } from '@zoralabs/zord/elements'
-import { NFTObject, MARKET_TYPES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { useRelevantMarket } from '@media/hooks/useRelevantMarket'
-import { useEffect } from 'react'
+import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTCardMarket } from './NFTCardMarket'
-import { TestModal } from 'components/TestModal'
+import { ModalComposition } from '@modal'
 
 export function NFTCard({ nft }: NFTObject) {
   const {
@@ -15,9 +13,19 @@ export function NFTCard({ nft }: NFTObject) {
 
   return (
     <Stack w="100%">
-      <Box w="100%">
-        <Box as="img" src={media?.image?.uri} w="100%" />
-      </Box>
+      <ModalComposition
+        modalName={nft?.metadata?.name}
+        modalTrigger={
+          <Box w="100%">
+            <Box as="img" src={media?.image?.uri} w="100%" />
+          </Box>
+        }
+        content={
+          <Box w="100%">
+            <Box as="img" src={media?.image?.uri} w="100%" />
+          </Box>
+        }
+      />
       <Stack>
         <Text>
           {
@@ -26,7 +34,6 @@ export function NFTCard({ nft }: NFTObject) {
           }
         </Text>
         <NFTCardMarket marketsSummary={marketsSummary} />
-        <TestModal />
       </Stack>
       <Box w="100%">{/*<RawDisplayer data={nft} />*/}</Box>
     </Stack>

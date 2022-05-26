@@ -1,4 +1,4 @@
-export * from './hooks/useModalRegistry'
+export * from './useModalRegistry'
 export * from './Modal'
-export * from './providers/ModalProvider'
-export { ModalRegistry } from '../modalRegistry'
+export * from './ModalProvider'
+export { ModalComposition } from './ModalComposition'
