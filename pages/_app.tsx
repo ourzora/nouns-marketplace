@@ -10,11 +10,11 @@ import '@zoralabs/zord/style.css'
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { createClient, defaultChains, WagmiProvider } from 'wagmi'
-import ModalProvider from '../providers/ModalProvider'
 import { Header } from 'compositions/Header/HeaderComposition'
 
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKAlphaFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
+import { ModalContextProvider } from '@modal'
 
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
 
@@ -50,11 +50,12 @@ function MyApp({ Component, pageProps }: AppProps) {
             borderRadius: 'small',
           })}
         >
-          <ModalProvider>
-            <div id="modal-root" />
-            <Header />
-            <Component {...pageProps} />
-          </ModalProvider>
+          <ModalContextProvider>
+            <>
+              <Header />
+              <Component {...pageProps} />
+            </>
+          </ModalContextProvider>
         </RainbowKitProvider>
       </NFTFetchConfiguration>
     </WagmiProvider>
