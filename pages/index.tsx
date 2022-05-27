@@ -5,6 +5,7 @@ import { Seo } from 'components/Seo'
 import { Heading } from '@zoralabs/zord/elements'
 import { SITE_TITLE } from 'constants/seo'
 import { NFTGrid } from '@media/NFTGrid'
+import { NFTCardMarket } from '@market'
 /* @ts-ignore */
 const Home: NextPage = ({
   initialPage,
@@ -21,7 +22,6 @@ const Home: NextPage = ({
         url={seo.url}
         twitterImageUrl={seo.twitterImageUrl}
       />
-      <Heading as="h1">{SITE_TITLE}</Heading>
       <NFTGrid contractAddress={contractAddress} initialPage={initialPage} />
     </PageWrapper>
   )

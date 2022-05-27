@@ -1,5 +1,4 @@
-import { ModalType } from '../modal_types'
-import { ModalContext, ModalContextType } from './ModalProvider'
+import { ModalContext, ModalContextType, ModalType } from './ModalProvider'
 import { useCallback, useContext } from 'react'
 
 export function useModalRegistry() {

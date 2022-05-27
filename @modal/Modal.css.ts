@@ -15,12 +15,13 @@ export const overlay = style([
 
 export const content = style([
   {
-    position: 'absolute',
+    position: 'fixed',
     left: '50%',
     top: '40%',
     transform: 'translate(-50%)',
     width: 'calc(100vw - 30px)',
     maxWidth: 960,
+
     zIndex: MODAL_BACKDROP_LAYER + 1,
     selectors: {
       '&:focus': {
@@ -37,6 +38,8 @@ export const background = style([
     maxHeight: 'calc(100vh - 30px)',
     overflowY: 'auto',
     background: 'white',
+    borderRadius: 40,
+    boxShadow: '0 0 20px rgba(0, 0, 0, 0.05)',
     animation: `0.3s cubic-bezier(0.65, 0, 0.35, 1), ${keyframes({
       '0%': { opacity: 0, transform: 'scale(0.95)' },
       '100%': { opacity: 1, transform: 'scale(1)' },

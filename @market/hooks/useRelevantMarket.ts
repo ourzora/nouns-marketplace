@@ -22,7 +22,9 @@ function isAsk(value: any): value is any {
 
 export const useRelevantMarket = (markets: any[]) => {
   const auctions: AuctionLike[] = markets.filter(isAuctionLike)
+
   const asks: any = markets.filter(isAsk)
+
   const offers: FixedPriceLike[] = markets.filter(isOfferLike)
 
   const ask = asks[0]

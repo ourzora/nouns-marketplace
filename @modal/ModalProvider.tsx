@@ -1,8 +1,8 @@
-import { ModalRegistry } from '../../modalRegistry'
 import React, { Dispatch, SetStateAction, createContext, useState } from 'react'
+export type ModalType = string | undefined
 
 export type ModalState = {
-  modalType?: ModalRegistry
+  modalType?: ModalType
   modalOptions?: Record<any, any>
 }
 

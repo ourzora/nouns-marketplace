@@ -12,12 +12,11 @@ import { flatten } from 'lodash'
 import { useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
-const PAGE_SIZE = 8
-
 interface UseCollectionQueryProps {
   contractAddress?: string
   ownerAddress?: string
   initialData?: NFTObject[]
+  pageSize?: number
 }
 
 const zdkAlpha = new ZDK('https://api.zora.co/graphql')
@@ -33,6 +32,7 @@ export function useTokensQuery({
   contractAddress,
   ownerAddress,
   initialData = [],
+  pageSize = 8,
 }: UseCollectionQueryProps) {
   const getKey = (pageIndex: number = 0, previousPageData: NFTObject[]) => {
     if (previousPageData && !previousPageData.length) return null // reached the end
@@ -51,8 +51,8 @@ export function useTokensQuery({
         sortKey: TokenSortKey.EthPrice,
       },
       pagination: {
-        offset: pageIndex * PAGE_SIZE,
-        limit: PAGE_SIZE,
+        offset: pageIndex * pageSize,
+        limit: pageSize,
       },
     }
   }
@@ -71,7 +71,7 @@ export function useTokensQuery({
   const isLoadingMore =
     isLoadingInitialData || (size > 0 && data && typeof data[size - 1] === 'undefined')
   const isEmpty = data?.[0]?.length === 0
-  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE)
+  const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < pageSize)
   const isRefreshing = isValidating && data && data.length === size
 
   return {
