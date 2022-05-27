@@ -1,19 +1,25 @@
-import { Paragraph, Text, Box, BoxProps } from '@zoralabs/zord/elements'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+
+import { Paragraph, Text, Box, BoxProps, Stack } from '@zoralabs/zord/elements'
 import { AddressZero } from '@ethersproject/constants'
 import { ModalTitleAndDescription } from '@modal'
 import { TransactionSubmitButton } from '../components/TransactionSubmitButton'
 import { ContractInteractionStatus } from '../components/ContractInteractionStatus'
 import { useContractTransaction } from '../hooks/useContractTransaction'
-import { useAuth } from '../hooks/useAuth'
+// import { useAuth } from '../hooks/useAuth'
 import { useCurrencyBalance } from '../hooks/useCurrencyBalance'
 import { useERC20TokenAllowance } from '../hooks/useERC20TokenAllowance'
+
 import useToggle from '../hooks/useToggle'
+
 import { useZoraV3Context } from '../hooks/useZoraV3Context'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { ERC20_TRANSFER_HELPER_ADDRESS } from '../utils/addresses'
 import { isAddressMatch } from '../utils/validators'
 
 import { RawDisplayer } from '../../components/utils'
+
+import { useAccount } from 'wagmi'
+import { useBalance } from 'wagmi'
 
 type FillAskProps = {
   tokenId: string
@@ -22,10 +28,26 @@ type FillAskProps = {
   askPrice: string
   askCurrency: string
   previewURL?: string
+  marketSummary: any
   onClose?: () => void
 }
 
 type FillAskStep = 'ConnectWallet' | 'ReviewDetails' | 'Confirmation'
+
+export function WalletBalance({ address }: { address: string }) {
+  const { data, isError, isLoading } = useBalance({
+    addressOrName: address,
+  })
+
+  if (isLoading) return <div>Fetching balance…</div>
+  if (isError) return <div>Error fetching balance</div>
+
+  return (
+    <div>
+      Balance: {data?.formatted} {data?.symbol}
+    </div>
+  )
+}
 
 export function FillAsk({
   tokenAddress,
@@ -34,12 +56,22 @@ export function FillAsk({
   askPrice,
   askCurrency,
   previewURL,
+  marketSummary,
   onClose,
 }: FillAskProps) {
-  const [noWallet, toggleNoWallet] = useToggle()
-  const { user: account } = useAuth()
+  const { data: account, isError, isLoading } = useAccount()
+
+  // const { user: account, address } = useAuth()
   const { AsksV11 } = useZoraV3Context()
   const { tx, txStatus, handleTx, txInProgress } = useContractTransaction()
+
+  useEffect(() => {
+    console.log(marketSummary)
+  }, [marketSummary])
+
+  const noWallet = useMemo(() => {
+    return account === null ? true : false
+  }, [account])
 
   const [balance, sufficientBalance, refetchBalance] = useCurrencyBalance(
     askCurrency,
@@ -50,6 +82,7 @@ export function FillAsk({
     ERC20_TRANSFER_HELPER_ADDRESS,
     askPrice
   )
+
   const [wizardStep, setWizardStep] = useState<FillAskStep>('ReviewDetails')
   const [error, setError] = useState<string>()
 
@@ -106,17 +139,21 @@ export function FillAsk({
   }, [account, refetchBalance, wizardStep])
 
   return (
-    <>
+    <Box w="100%">
       {wizardStep !== 'Confirmation' && (
-        <ModalTitleAndDescription
-          title={noWallet ? 'Connect your Wallet' : `Buy ${tokenName}`}
-          description={
-            noWallet
-              ? undefined
-              : "You're about to buy this NFT at the currently listed price."
-          }
-          mb={noWallet ? 'x2' : 'x6'}
-        />
+        <Stack>
+          <ModalTitleAndDescription
+            title={noWallet ? 'Connect your Wallet' : `Buy ${tokenName}`}
+            description={
+              noWallet
+                ? undefined
+                : "You're about to buy this NFT at the currently listed price."
+            }
+          />
+          {account !== null && account?.address && (
+            <WalletBalance address={account?.address} />
+          )}
+        </Stack>
       )}
       {wizardStep === 'ConnectWallet' ? (
         noWallet ? (
@@ -173,7 +210,7 @@ export function FillAsk({
           </TransactionSubmitButton>
         </>
       )}
-    </>
+    </Box>
   )
 }
 interface PreviewImageProps extends BoxProps {

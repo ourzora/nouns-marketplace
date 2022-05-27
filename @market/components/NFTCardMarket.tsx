@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { formatCryptoVal } from '../utils/numbers'
-import { Text, Button, Box } from '@zoralabs/zord/elements'
+import { Text, Button, Box, Flex, Stack } from '@zoralabs/zord/elements'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useRelevantMarket } from '../hooks/useRelevantMarket'
 import { ModalComposition } from '@modal'
@@ -28,30 +28,37 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
   }
 
   return (
-    <Text>
+    <Flex w="100%">
       {status === 'ACTIVE' ? (
-        <ModalComposition
-          modalName={`buy-${nft.contract.address}-${nft.tokenId}`}
-          trigger={
-            <Button variant="primary" borderRadius="round">
-              Buy Now
-            </Button>
-          }
-          content={
-            <Box p="x6">
-              <FillAsk
-                tokenAddress={nft.contract.address}
-                tokenId={nft.tokenId}
-                tokenName={metadata.name}
-                askCurrency={nativePrice.currency.address}
-                askPrice={nativePrice.raw}
-              />
-            </Box>
-          }
-        />
+        <Flex w="100%" justify="space-between">
+          <Stack>
+            <Text>Price</Text>
+            <Text>{cryptoVal}</Text>
+          </Stack>
+          <ModalComposition
+            modalName={`buy-${nft.contract.address}-${nft.tokenId}`}
+            trigger={
+              <Button variant="primary" borderRadius="round">
+                Buy
+              </Button>
+            }
+            content={
+              <Box p="x8">
+                <FillAsk
+                  marketSummary={marketsSummary}
+                  tokenAddress={nft.contract.address}
+                  tokenId={nft.tokenId}
+                  tokenName={metadata.name}
+                  askCurrency={nativePrice.currency.address}
+                  askPrice={nativePrice.raw}
+                />
+              </Box>
+            }
+          />
+        </Flex>
       ) : (
         `Sold for ${cryptoVal}`
       )}
-    </Text>
+    </Flex>
   )
 }

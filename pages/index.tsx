@@ -22,7 +22,6 @@ const Home: NextPage = ({
         url={seo.url}
         twitterImageUrl={seo.twitterImageUrl}
       />
-      <Heading as="h1">{SITE_TITLE}</Heading>
       <NFTGrid contractAddress={contractAddress} initialPage={initialPage} />
     </PageWrapper>
   )

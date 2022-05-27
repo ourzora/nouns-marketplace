@@ -14,12 +14,12 @@ export function ModalTitleAndDescription({
   return (
     <Box {...props}>
       {!!title && (
-        <Heading size="xs" mb={!!description ? 'x2' : 'x0'}>
+        <Heading size="md" mb={!!description ? 'x2' : 'x0'}>
           {title}
         </Heading>
       )}
       {description && (
-        <Paragraph size="sm" mb="x4">
+        <Paragraph size="lg" mb="x4">
           {description}
         </Paragraph>
       )}
