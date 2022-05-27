@@ -15,7 +15,7 @@ import { Header } from 'compositions/Header/HeaderComposition'
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKAlphaFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 import { ModalContextProvider } from '@modal'
-
+import { V3Provider } from '@market'
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
 
 const infuraId = process.env.INFURA_ID
@@ -50,12 +50,14 @@ function MyApp({ Component, pageProps }: AppProps) {
             borderRadius: 'small',
           })}
         >
-          <ModalContextProvider>
-            <>
-              <Header />
-              <Component {...pageProps} />
-            </>
-          </ModalContextProvider>
+          <V3Provider>
+            <ModalContextProvider>
+              <>
+                <Header />
+                <Component {...pageProps} />
+              </>
+            </ModalContextProvider>
+          </V3Provider>
         </RainbowKitProvider>
       </NFTFetchConfiguration>
     </WagmiProvider>
