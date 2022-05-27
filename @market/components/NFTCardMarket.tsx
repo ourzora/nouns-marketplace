@@ -5,6 +5,7 @@ import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useRelevantMarket } from '../hooks/useRelevantMarket'
 import { ModalComposition } from '@modal'
 import { FillAsk } from '../wizards/FillAsk'
+import { buttonStyle, lightFont } from './MarketComponents.css'
 
 /* MARKETS_SUMMARY TYPE? */
 export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
@@ -21,7 +22,7 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
     },
   } = useRelevantMarket(marketsSummary)
 
-  const cryptoVal = useMemo(() => `${formatCryptoVal(nativePrice.raw)} Ξ`, [])
+  const cryptoVal = useMemo(() => `${formatCryptoVal(nativePrice.raw)} ETH`, [])
 
   if (!nft || !metadata) {
     return null
@@ -32,15 +33,26 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
       {status === 'ACTIVE' ? (
         <Flex w="100%" justify="space-between">
           <Stack>
-            <Text>Price</Text>
-            <Text>{cryptoVal}</Text>
+            <Text variant="heading-xs" className={lightFont} color="tertiary">
+              Price
+            </Text>
+            <Text variant="heading-sm" className={lightFont}>
+              {cryptoVal}
+            </Text>
           </Stack>
           <ModalComposition
             modalName={`buy-${nft.contract.address}-${nft.tokenId}`}
             trigger={
-              <Button variant="primary" borderRadius="round">
+              <Text
+                px="x6"
+                py="x2"
+                as="span"
+                variant="heading-sm"
+                color="reverse"
+                className={buttonStyle}
+              >
                 Buy
-              </Button>
+              </Text>
             }
             content={
               <Box p="x8">
@@ -51,13 +63,21 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
                   tokenName={metadata.name}
                   askCurrency={nativePrice.currency.address}
                   askPrice={nativePrice.raw}
+                  nftData={nftData}
                 />
               </Box>
             }
           />
         </Flex>
       ) : (
-        `Sold for ${cryptoVal}`
+        <Stack>
+          <Text variant="heading-xs" className={lightFont} color="tertiary">
+            Sold for
+          </Text>
+          <Text variant="heading-sm" className={lightFont}>
+            {cryptoVal}
+          </Text>
+        </Stack>
       )}
     </Flex>
   )

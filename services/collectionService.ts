@@ -47,7 +47,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
         sortKey: TokenSortKey.EthPrice,
       },
       pagination: {
-        limit: 8,
+        limit: 9,
       },
     })
 

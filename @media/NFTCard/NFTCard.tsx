@@ -12,21 +12,20 @@ export function NFTCard({
   cardMarketComponent?: JSX.Element
 }) {
   const { metadata, media, nft } = nftData
-
-  console.log(nft)
-
   const { image } = useRawImageTransform(media?.image?.uri)
 
   return (
     <Stack w="100%" position="relative" overflow="hidden" p="x6" className={cardWrapper}>
       <Flex>
-        <Heading size="md">{nft?.contract.name}</Heading>
+        <Heading size="sm" textTransform="uppercase">
+          {nft?.contract.name}
+        </Heading>
       </Flex>
       <Box w="100%">
         <Box as="img" src={image} w="100%" />
       </Box>
       <Stack gap="x4" mt="x4">
-        <Text>{metadata?.name}</Text>
+        <Heading size="md">{metadata?.name}</Heading>
         <NFTCardMarket nftData={nftData} />
       </Stack>
     </Stack>

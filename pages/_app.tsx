@@ -18,6 +18,8 @@ import { ModalContextProvider } from '@modal'
 import { V3Provider } from '@market'
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
 
+import 'styles/styles.css'
+
 const infuraId = process.env.INFURA_ID
 
 // const chains = defaultChains

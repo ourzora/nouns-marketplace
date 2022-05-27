@@ -29,6 +29,7 @@ type FillAskProps = {
   askCurrency: string
   previewURL?: string
   marketSummary: any
+  nftData?: any
   onClose?: () => void
 }
 
@@ -57,6 +58,7 @@ export function FillAsk({
   askCurrency,
   previewURL,
   marketSummary,
+  nftData,
   onClose,
 }: FillAskProps) {
   const { data: account, isError, isLoading } = useAccount()
@@ -66,8 +68,8 @@ export function FillAsk({
   const { tx, txStatus, handleTx, txInProgress } = useContractTransaction()
 
   useEffect(() => {
-    console.log(marketSummary)
-  }, [marketSummary])
+    console.log(nftData)
+  }, [nftData])
 
   const noWallet = useMemo(() => {
     return account === null ? true : false

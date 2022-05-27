@@ -4,7 +4,7 @@ import { headerWrapper } from './Header.css'
 
 export function Header() {
   return (
-    <Flex as="header" p="x4" position="sticky" top="x0" className={headerWrapper}>
+    <Flex as="header" p="x4" position="relative" className={headerWrapper}>
       <HeaderNav />
     </Flex>
   )
