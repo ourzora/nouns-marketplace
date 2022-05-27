@@ -1,4 +1,3 @@
-import { PriceWithLabelAndConversion } from './PriceWithLabelAndConversion'
 import { ModalTitleAndDescription } from '@modal'
 import { Box, Button, Flex, Label, Paragraph, Text, Stack } from '@zoralabs/zord/elements'
 import React from 'react'
@@ -33,11 +32,7 @@ export function ContractInteractionStatus({
       <ModalTitleAndDescription title={title} description={description} />
       {amount && (
         <Box mt="x2" mb="x4">
-          <PriceWithLabelAndConversion
-            label="Price"
-            amount={amount}
-            currencyAddress={currencyAddress}
-          />
+          {amount} {currencyAddress}
         </Box>
       )}
       <Stack>

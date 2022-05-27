@@ -1,28 +1,34 @@
+import { cloneElement } from 'react'
 import { Stack, Box, Text } from '@zoralabs/zord/elements'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { NFTCardMarket } from './NFTCardMarket'
+import { NFTCardMarket } from '@market'
+import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 
-export function NFTCard({ nft }: NFTObject) {
-  const {
-    /* @ts-ignore */
-    rawData,
-    media,
-    rawData: { marketsSummary },
-  } = nft
+export function NFTCard({
+  nftData,
+  cardMarketComponent,
+}: {
+  nftData: NFTObject
+  cardMarketComponent?: JSX.Element
+}) {
+  const { metadata, media } = nftData
+
+  const { image } = useRawImageTransform(media?.image?.uri)
 
   return (
     <Stack w="100%">
       <Box w="100%">
-        <Box as="img" src={media?.image?.uri} w="100%" />
+        <Box as="img" src={image} w="100%" />
       </Box>
       <Stack>
         <Text>
           {
             /* @ts-ignore */
-            nft?.metadata?.name
+            metadata?.name
           }
         </Text>
-        <NFTCardMarket marketsSummary={marketsSummary} />
+        {/* THIS SHOULD INHERIT NFT DATA via hooks */}
+        <NFTCardMarket nftData={nftData} />
       </Stack>
     </Stack>
   )

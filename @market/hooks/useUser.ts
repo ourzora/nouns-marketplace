@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { shortenAddress } from './format'
+import { shortenAddress } from '../utils/format'
 import { useProvider } from 'wagmi'
 
 export type AddressType = string | undefined

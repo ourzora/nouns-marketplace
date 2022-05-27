@@ -1,4 +1,4 @@
-import { Grid, Button, Flex, Icon, Stack } from '@zoralabs/zord/elements'
+import { Grid, Button, Stack } from '@zoralabs/zord/elements'
 import { useTokensQuery } from '@media/hooks/useTokensQuery'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTCard } from '../NFTCard/NFTCard'
@@ -9,12 +9,14 @@ export type NFTGridProps = {
   contractAddress?: string
   ownerAddress?: string
   initialPage?: NFTObject[]
+  cardMarketComponent?: JSX.Element
 }
 
 export function NFTGrid({
   contractAddress,
   ownerAddress,
   initialPage = [],
+  cardMarketComponent,
 }: NFTGridProps) {
   const {
     data: items,
@@ -24,6 +26,7 @@ export function NFTGrid({
   } = useTokensQuery({
     contractAddress,
     ownerAddress,
+    pageSize: 20,
     initialData: initialPage,
   })
 
@@ -39,7 +42,8 @@ export function NFTGrid({
           <NFTCard
             key={`${nft?.nft?.contract.address}-${nft?.nft?.tokenId}`}
             /* @ts-ignore */
-            nft={nft}
+            nftData={nft}
+            cardMarketComponent={cardMarketComponent}
           />
         ))}
       </Grid>

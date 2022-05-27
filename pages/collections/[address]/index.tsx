@@ -3,6 +3,7 @@ import { RawDisplayer } from 'components/utils'
 import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
 import { Heading } from '@zoralabs/zord/elements'
+import { NFTGrid } from '@media/NFTGrid'
 
 /* @ts-ignore */
 const Collection: NextPage = ({
@@ -10,11 +11,12 @@ const Collection: NextPage = ({
   contractAddress,
   seo,
   aggregateStats,
-  collection
+  collection,
 }: CollectionServiceProps) => {
   return (
     <PageWrapper p="x4" direction="column" gap="x4">
       <Heading as="h1">{collection.name}</Heading>
+      <NFTGrid contractAddress={contractAddress} initialPage={initialPage} />
       <Heading>Collection Data</Heading>
       <RawDisplayer data={contractAddress} />
       <RawDisplayer data={collection} />

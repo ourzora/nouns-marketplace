@@ -4,7 +4,7 @@ import rinkebyAuction from '@zoralabs/auction-house/dist/addresses/4.json'
 import mainnetV3 from '@zoralabs/v3/dist/addresses/1.json'
 import rinkebyV3 from '@zoralabs/v3/dist/addresses/4.json'
 import { addresses } from '@zoralabs/zdk'
-import { NETWORK_CHAIN_ID } from 'utils/web3/connectors'
+import { NETWORK_CHAIN_ID } from './connectors'
 
 export const DAI_ADDRESS =
   NETWORK_CHAIN_ID === 1

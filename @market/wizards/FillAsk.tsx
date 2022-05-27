@@ -1,8 +1,5 @@
-import { Label, Paragraph, Text, Box, BoxProps, Flex } from '@zoralabs/zord/elements'
+import { Paragraph, Text, Box, BoxProps } from '@zoralabs/zord/elements'
 import { AddressZero } from '@ethersproject/constants'
-import { PriceWithLabelAndConversion } from '../components/PriceWithLabelAndConversion'
-import { ExchangeValue } from '../components/ExchangeValue'
-import { UniswapLink } from '../components/UniswapLink'
 import { ModalTitleAndDescription } from '@modal'
 import { TransactionSubmitButton } from '../components/TransactionSubmitButton'
 import { ContractInteractionStatus } from '../components/ContractInteractionStatus'
@@ -15,6 +12,8 @@ import { useZoraV3Context } from '../hooks/useZoraV3Context'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { ERC20_TRANSFER_HELPER_ADDRESS } from '../utils/addresses'
 import { isAddressMatch } from '../utils/validators'
+
+import { RawDisplayer } from '../../components/utils'
 
 type FillAskProps = {
   tokenId: string
@@ -41,6 +40,7 @@ export function FillAsk({
   const { user: account } = useAuth()
   const { AsksV11 } = useZoraV3Context()
   const { tx, txStatus, handleTx, txInProgress } = useContractTransaction()
+
   const [balance, sufficientBalance, refetchBalance] = useCurrencyBalance(
     askCurrency,
     askPrice
@@ -109,7 +109,7 @@ export function FillAsk({
     <>
       {wizardStep !== 'Confirmation' && (
         <ModalTitleAndDescription
-          title={noWallet ? WALLET_TITLE : `Buy ${tokenName}`}
+          title={noWallet ? 'Connect your Wallet' : `Buy ${tokenName}`}
           description={
             noWallet
               ? undefined
@@ -134,87 +134,44 @@ export function FillAsk({
           onConfirm={onClose}
         />
       ) : (
-        <ExchangeValue fallback="..." currencyAddress={askCurrency} amount={askPrice}>
-          {(rate) => (
-            <>
-              <Flex justify="space-between" css={{ py: '$2' }}>
-                <PreviewImage src={previewURL} />
-                <Flex
-                  css={{
-                    // TODO - this should be a common layout
-                    flexDirection: 'column',
-                    alignItems: 'flex-end',
-                    alignContent: 'flex-start',
-                  }}
-                >
-                  <PriceWithLabelAndConversion
-                    label="Price"
-                    amount={askPrice}
-                    currencyAddress={askCurrency}
-                  />
-                </Flex>
-              </Flex>
-              {/* 
-              <Flex justify="space-between">
-                <Paragraph size="sm" color="tertiary">
-                  Your balance
-                </Paragraph>
-                <ExchangeValue
-                  fallback="..."
-                  currencyAddress={askCurrency}
-                  amount={balance?.toString() || '0'}
-                >
-                  {(balanceRate) => (
-                    <Label size="sm">
-                      {balanceRate?.amount} {balanceRate?.symbol}
-                    </Label>
-                  )}
-                </ExchangeValue>
-              </Flex>
-              */}
-              {/*balance && !sufficientBalance && (
-                <Paragraph size="sm">
-                  Not enough ${rate?.symbol}.{' '}
-                  <UniswapLink outputCurrency={askCurrency}>
-                    Get {rate?.symbol} on UNISWAP
-                  </UniswapLink>
-                </Paragraph>
-              )*/}
-              {balance && sufficientBalance && needsERC20Approval && (
-                <Paragraph size="sm">
-                  You must first approve ZORA V3 to use your {rate?.symbol}.
-                  <Text
-                    as="a"
-                    variant="link"
-                    href="https://help.zora.co/en/articles/5882367-approving-tokens-to-zora-v3"
-                    target="_blank"
-                    rel="noreferer"
-                  >
-                    What is an approval?
-                  </Text>{' '}
-                  <Paragraph as="sup" top="x0" size="sm">
-                    ↗
-                  </Paragraph>
-                </Paragraph>
-              )}
-              {error && <Text>{error}</Text>}
-              <TransactionSubmitButton
-                disabled={!balance || !sufficientBalance}
-                txInProgress={txInProgress}
-                txStatus={txStatus}
-                onClick={
-                  balance && sufficientBalance && needsERC20Approval
-                    ? handleApproveERC20
-                    : handleFillAsk
-                }
+        <>
+          <Box>
+            <PreviewImage src={previewURL} />
+            <RawDisplayer data={{ askCurrency, askPrice }} />
+          </Box>
+          {balance && sufficientBalance && needsERC20Approval && (
+            <Paragraph size="sm">
+              {/*You must first approve ZORA V3 to use your {rate?.symbol}*/}
+              <Text
+                as="a"
+                variant="link"
+                href="https://help.zora.co/en/articles/5882367-approving-tokens-to-zora-v3"
+                target="_blank"
+                rel="noreferer"
               >
-                {balance && sufficientBalance && needsERC20Approval
-                  ? 'Approve Token Contract'
-                  : 'Buy NFT'}
-              </TransactionSubmitButton>
-            </>
+                What is an approval?
+              </Text>{' '}
+              <Paragraph as="sup" top="x0" size="sm">
+                ↗
+              </Paragraph>
+            </Paragraph>
           )}
-        </ExchangeValue>
+          {error && <Text>{error}</Text>}
+          <TransactionSubmitButton
+            disabled={!balance || !sufficientBalance}
+            txInProgress={txInProgress}
+            txStatus={txStatus}
+            onClick={
+              balance && sufficientBalance && needsERC20Approval
+                ? handleApproveERC20
+                : handleFillAsk
+            }
+          >
+            {balance && sufficientBalance && needsERC20Approval
+              ? 'Approve Token Contract'
+              : 'Buy NFT'}
+          </TransactionSubmitButton>
+        </>
       )}
     </>
   )
