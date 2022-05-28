@@ -5,7 +5,7 @@ import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { ZDK } from '@zoralabs/zdk-alpha'
 import {
   MarketCategory,
-  // SortDirection,
+  SortDirection,
   TokenSortKey,
 } from '@zoralabs/zdk-alpha/dist/queries/queries-sdk'
 import { flatten } from 'lodash'
@@ -13,7 +13,7 @@ import { useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
 interface UseCollectionQueryProps {
-  contractAddress?: string
+  contractAddress?: string[]
   ownerAddress?: string
   initialData?: NFTObject[]
   pageSize?: number
@@ -39,14 +39,14 @@ export function useTokensQuery({
     return {
       where: {
         ...(contractAddress && {
-          collectionAddresses: [getAddress(contractAddress)],
+          collectionAddresses: contractAddress,
         }),
         ...(ownerAddress && {
           ownerAddresses: [getAddress(ownerAddress)],
         }),
       },
       sort: {
-        // sortDirection: SortDirection.Desc,
+        sortDirection: SortDirection.Desc,
         sortAxis: MarketCategory.Ask,
         sortKey: TokenSortKey.EthPrice,
       },

@@ -19,7 +19,7 @@ const Collection: NextPage = ({
     <PageWrapper p="x4" direction="column" gap="x4">
       <CollectionHeader collection={collection} />
       <MarketStats aggregateStats={aggregateStats} />
-      <NFTGrid contractAddress={contractAddress} initialPage={initialPage} />
+      <NFTGrid contractAddress={[contractAddress]} initialPage={initialPage} />
     </PageWrapper>
   )
 }

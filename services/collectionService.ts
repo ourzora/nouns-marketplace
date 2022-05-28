@@ -37,19 +37,31 @@ export async function collectionService({ params }: CollectionParamsProps) {
   if (!tokenAddress) return false
 
   try {
-    const resp = await zdkAlphaService.tokens({
-      where: {
-        collectionAddresses: [tokenAddress],
-      },
-      sort: {
-        sortDirection: SortDirection.Desc,
-        sortAxis: MarketCategory.Ask,
-        sortKey: TokenSortKey.EthPrice,
-      },
-      pagination: {
-        limit: 9,
-      },
-    })
+    let resp
+    try {
+      resp = await zdkAlphaService.tokens({
+        where: {
+          collectionAddresses: [tokenAddress],
+        },
+        sort: {
+          sortDirection: SortDirection.Desc,
+          sortAxis: MarketCategory.Ask,
+          sortKey: TokenSortKey.EthPrice,
+        },
+        pagination: {
+          limit: 9,
+        },
+      })
+    } catch (err) {
+      resp = await zdkAlphaService.tokens({
+        where: {
+          collectionAddresses: [tokenAddress],
+        },
+        pagination: {
+          limit: 9,
+        },
+      })
+    }
 
     const initialPage = resp.tokens.nodes
       .map((token) => transformNFTZDKAlpha(token, { rawData: token }))

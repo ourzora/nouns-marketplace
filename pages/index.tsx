@@ -2,10 +2,10 @@ import type { NextPage } from 'next'
 import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
 import { Seo } from 'components/Seo'
-import { Heading } from '@zoralabs/zord/elements'
-import { SITE_TITLE } from 'constants/seo'
 import { NFTGrid } from '@media/NFTGrid'
-import { NFTCardMarket } from '@market'
+
+import { collections } from 'collections'
+
 /* @ts-ignore */
 const Home: NextPage = ({
   initialPage,
@@ -22,7 +22,7 @@ const Home: NextPage = ({
         url={seo.url}
         twitterImageUrl={seo.twitterImageUrl}
       />
-      <NFTGrid contractAddress={contractAddress} initialPage={initialPage} />
+      <NFTGrid contractAddress={collections} initialPage={initialPage} />
     </PageWrapper>
   )
 }
