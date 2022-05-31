@@ -12,7 +12,7 @@ import { flatten } from 'lodash'
 import { useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
-interface UseCollectionQueryProps {
+interface useCollectionProps {
   contractAddress?: string[]
   ownerAddress?: string
   initialData?: NFTObject[]
@@ -33,7 +33,7 @@ export function useTokensQuery({
   ownerAddress,
   initialData = [],
   pageSize = 8,
-}: UseCollectionQueryProps) {
+}: useCollectionProps) {
   const getKey = (pageIndex: number = 0, previousPageData: NFTObject[]) => {
     if (previousPageData && !previousPageData.length) return null // reached the end
     return {

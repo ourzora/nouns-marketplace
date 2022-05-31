@@ -8,10 +8,10 @@ import {
   Network,
   SortDirection,
   TokenSortKey,
-} from '@zoralabs/zdk-alpha/dist/queries/queries-sdk'
+} from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { GetServerSideProps } from 'next'
-import { zdkAlphaService } from 'utils/zdk'
+import { zdkService } from 'utils/zdk'
 import { buildCollectionSEO, SeoProps } from 'utils/seo'
 
 export type CollectionServiceProps = {
@@ -39,7 +39,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
   try {
     let resp
     try {
-      resp = await zdkAlphaService.tokens({
+      resp = await zdkService.tokens({
         where: {
           collectionAddresses: [tokenAddress],
         },
@@ -53,7 +53,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
         },
       })
     } catch (err) {
-      resp = await zdkAlphaService.tokens({
+      resp = await zdkService.tokens({
         where: {
           collectionAddresses: [tokenAddress],
         },
@@ -62,8 +62,6 @@ export async function collectionService({ params }: CollectionParamsProps) {
         },
       })
     }
-
-    console.log(resp.tokens)
 
     const initialPage = resp.tokens.nodes
       .map((token) => transformNFTZDK(token, { rawData: token }))
@@ -74,7 +72,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
       network: Network.Ethereum,
     }
 
-    const collection = await zdkAlphaService.collection({
+    const collection = await zdkService.collection({
       address: tokenAddress,
       network: networkInput,
       includeFullDetails: true,
@@ -89,7 +87,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
 
     const { name, symbol } = collection
 
-    const aggregateStats = await zdkAlphaService.collectionStatsAggregate({
+    const aggregateStats = await zdkService.collectionStatsAggregate({
       collectionAddress: tokenAddress,
       network: networkInput,
     })
