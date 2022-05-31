@@ -1,8 +1,12 @@
 import { style, globalStyle } from '@vanilla-extract/css'
-import { HEADER_HEIGHT } from 'styles/style-constants'
+import { HEADER_HEIGHT, HEADER_Z } from 'styles/style-constants'
 
 export const headerWrapper = style({
-  height: 120,
-  backgroundColor: 'rgba(255,255,255,0.25)',
-  backdropFilter: 'blur(10px)',
+  height: HEADER_HEIGHT,
+  zIndex: HEADER_Z,
+})
+
+export const nounsGlasses = style({
+  width: 101,
+  height: 34,
 })
