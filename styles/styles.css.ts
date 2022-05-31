@@ -1,4 +1,4 @@
-import { style, globalStyle, globalFontFace } from '@vanilla-extract/css'
+import { style, globalStyle } from '@vanilla-extract/css'
 
 globalStyle('html, body', {
   margin: 0,
@@ -15,4 +15,8 @@ globalStyle('light-font', {
 
 export const lightFont = style({
   fontWeight: 300,
+})
+
+export const leadingTight = style({
+  lineHeight: 1.125,
 })
