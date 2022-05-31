@@ -6,7 +6,7 @@ import { Homepage } from 'templates/Homepage'
 /* @ts-ignore */
 const Home: NextPage = () => {
   return (
-    <PageWrapper p="x4" direction="column" gap="x4">
+    <PageWrapper direction="column">
       <Seo />
       <Homepage />
     </PageWrapper>
