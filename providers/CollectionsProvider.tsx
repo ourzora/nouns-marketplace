@@ -1,5 +1,5 @@
-import { Collection } from '@zoralabs/zdk-alpha/dist/queries/queries-sdk'
-import { ReactNode, createContext, useContext, useState, useEffect } from 'react'
+import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { ReactNode, createContext, useContext } from 'react'
 import { collectionAddresses } from 'utils/collection-addresses'
 import { useCollections } from 'hooks/zdk/useCollections'
 
@@ -23,6 +23,7 @@ export function CollectionsProvider({ children }: CollectionsProps) {
   return (
     <CollectionsContext.Provider
       value={{
+        /* @ts-ignore */
         collections: collections ? collections : [],
       }}
     >

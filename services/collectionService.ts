@@ -46,7 +46,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
         sort: {
           sortDirection: SortDirection.Desc,
           sortAxis: MarketCategory.Ask,
-          sortKey: TokenSortKey.EthPrice,
+          sortKey: TokenSortKey.NativePrice,
         },
         pagination: {
           limit: 9,
