@@ -1,4 +1,4 @@
-import { transformNFTZDKAlpha } from '@zoralabs/nft-hooks/dist/backends'
+import { transformNFTZDK } from '@zoralabs/nft-hooks/dist/backends'
 import { prepareJson } from '@zoralabs/nft-hooks/dist/fetcher/NextUtils'
 import {
   Chain,
@@ -63,8 +63,10 @@ export async function collectionService({ params }: CollectionParamsProps) {
       })
     }
 
+    console.log(resp.tokens)
+
     const initialPage = resp.tokens.nodes
-      .map((token) => transformNFTZDKAlpha(token, { rawData: token }))
+      .map((token) => transformNFTZDK(token, { rawData: token }))
       .map(prepareJson)
 
     const networkInput = {

@@ -1,9 +1,6 @@
 import { WETH } from '@uniswap/sdk'
-import mainnetAuction from '@zoralabs/auction-house/dist/addresses/1.json'
-import rinkebyAuction from '@zoralabs/auction-house/dist/addresses/4.json'
 import mainnetV3 from '@zoralabs/v3/dist/addresses/1.json'
 import rinkebyV3 from '@zoralabs/v3/dist/addresses/4.json'
-import { addresses } from '@zoralabs/zdk'
 import { NETWORK_CHAIN_ID } from './connectors'
 
 export const DAI_ADDRESS =
@@ -23,9 +20,6 @@ export const DEPRECATED_ASK_V1_ADDRESS =
 
 export const ASK_V11_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? mainnetV3.AsksV1_1 : rinkebyV3.AsksV1_1
-
-export const AUCTION_HOUSE_ADDRESS =
-  NETWORK_CHAIN_ID === 1 ? mainnetAuction.auctionHouse : rinkebyAuction.auctionHouse
 
 export const MODULE_MANAGER_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? mainnetV3.ZoraModuleManager : rinkebyV3.ZoraModuleManager
@@ -79,12 +73,6 @@ export const YUP_ADDRESS = '0x69bbc3f8787d573f1bbdd0a5f40c7ba0aee9bcc9'
 export const SUPERRARE_TOKEN_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? '0xb932a70A57673d89f4acfFBE830E8ed7f75Fb9e0' : ''
 
-export const ZORA_TOKEN_ADDRESS =
-  NETWORK_CHAIN_ID === 1 ? addresses.mainnet.media : addresses.rinkeby.media
-// TODO - can remove duplicates when fully migrated
-export const ZORA_RINKEBY_TOKEN_ADDRESS = addresses.rinkeby.media
-export const ZORA_MAINNET_TOKEN_ADDRESS = addresses.mainnet.media
-
 export const FOUNDATION_TOKEN_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? '0x3B3ee1931Dc30C1957379FAc9aba94D1C48a5405' : ''
 
@@ -92,7 +80,6 @@ export const ARTBLOCKS_TOKEN_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270' : ''
 
 export const KnownContracts = [
-  ZORA_TOKEN_ADDRESS,
   FOUNDATION_TOKEN_ADDRESS,
   SUPERRARE_TOKEN_ADDRESS,
   ARTBLOCKS_TOKEN_ADDRESS,
@@ -102,7 +89,6 @@ interface Contract {
   [key: string]: string | undefined
 }
 export const KnownContractsByName: Contract = {
-  zora: ZORA_TOKEN_ADDRESS,
   foundation: FOUNDATION_TOKEN_ADDRESS,
   superrare: SUPERRARE_TOKEN_ADDRESS,
   artblocks: ARTBLOCKS_TOKEN_ADDRESS,

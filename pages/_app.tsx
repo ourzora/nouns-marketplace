@@ -13,10 +13,11 @@ import { createClient, defaultChains, WagmiProvider } from 'wagmi'
 import { Header } from 'compositions/Header/HeaderComposition'
 
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
-import { ZDKAlphaFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
+import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 import { ModalContextProvider } from '@modal'
 import { V3Provider } from '@market'
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
+import { CollectionsProvider } from 'providers/CollectionsProvider'
 
 import 'styles/styles.css'
 
@@ -38,7 +39,7 @@ const wagmiClient = createClient({
   provider,
 })
 
-export const strategy = new ZDKAlphaFetchStrategy('1', GALACTUS_BASE_URL)
+export const strategy = new ZDKFetchStrategy('1', GALACTUS_BASE_URL)
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -53,12 +54,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           })}
         >
           <V3Provider>
-            <ModalContextProvider>
-              <>
-                <Header />
-                <Component {...pageProps} />
-              </>
-            </ModalContextProvider>
+            <CollectionsProvider>
+              <ModalContextProvider>
+                <>
+                  <Header />
+                  <Component {...pageProps} />
+                </>
+              </ModalContextProvider>
+            </CollectionsProvider>
           </V3Provider>
         </RainbowKitProvider>
       </NFTFetchConfiguration>
