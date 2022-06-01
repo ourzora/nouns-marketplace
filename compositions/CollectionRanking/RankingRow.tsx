@@ -1,4 +1,4 @@
-import { Flex } from '@zoralabs/zord/elements'
+import { Flex } from '@zoralabs/zord'
 
 export function RankingRow() {
   return <Flex>Ranking Row</Flex>

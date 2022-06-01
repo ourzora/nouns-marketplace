@@ -6,18 +6,18 @@ import {
   lightTheme,
 } from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
-import '@zoralabs/zord/style.css'
+import '@zoralabs/zord'
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { createClient, defaultChains, WagmiProvider } from 'wagmi'
 import { Header } from 'compositions/Header/HeaderComposition'
-
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 import { ModalContextProvider } from '@modal'
 import { V3Provider } from '@market'
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
 import { CollectionsProvider } from 'providers/CollectionsProvider'
+// import NProgress from "next-nprogress/component";
 
 import 'styles/styles.css'
 
@@ -56,10 +56,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           <V3Provider>
             <CollectionsProvider>
               <ModalContextProvider>
-                <>
-                  <Header />
-                  <Component {...pageProps} />
-                </>
+                <Header />
+                <Component {...pageProps} />
               </ModalContextProvider>
             </CollectionsProvider>
           </V3Provider>

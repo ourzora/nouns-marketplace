@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { Paragraph, Text, Box, BoxProps, Stack } from '@zoralabs/zord/elements'
+import { Paragraph, Text, Box, BoxProps, Stack } from '@zoralabs/zord'
 import { AddressZero } from '@ethersproject/constants'
 import { ModalTitleAndDescription } from '@modal'
 import { TransactionSubmitButton } from '../components/TransactionSubmitButton'

@@ -1,4 +1,4 @@
-import { Stack, Box, Text, Flex, Heading } from '@zoralabs/zord/elements'
+import { Stack, Box, Text, Flex, Heading } from '@zoralabs/zord'
 import { Link } from 'components/Link'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTCardMarket } from '@market'

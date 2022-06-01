@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react'
-import { Text, Box, Heading, Icon, Flex } from '@zoralabs/zord/elements'
+import { Text, Box, Heading, Icon, Flex } from '@zoralabs/zord'
 import { ModalComposition, useModalRegistry } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { Link } from 'components/Link'

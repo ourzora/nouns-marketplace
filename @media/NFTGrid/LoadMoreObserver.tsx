@@ -1,4 +1,4 @@
-import { Box, BoxProps } from '@zoralabs/zord/elements'
+import { Box, BoxProps } from '@zoralabs/zord'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 

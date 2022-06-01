@@ -1,4 +1,4 @@
-import { Flex } from '@zoralabs/zord/elements'
+import { Flex } from '@zoralabs/zord'
 import { HeaderNav } from './HeaderNav'
 import { headerWrapper } from './Header.css'
 

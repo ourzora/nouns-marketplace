@@ -1,10 +1,10 @@
-import { zord } from '@zoralabs/zord'
+import { lightTheme } from '@zoralabs/zord'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html className={lightTheme}>
         <Head>
           <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
@@ -15,7 +15,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className={zord()}>
+        <body>
           <Main />
           <NextScript />
         </body>

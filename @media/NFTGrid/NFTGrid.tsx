@@ -1,4 +1,4 @@
-import { Grid, Button, Stack, Flex } from '@zoralabs/zord/elements'
+import { Grid, Button, Stack, Flex } from '@zoralabs/zord'
 import { useTokensQuery } from '@media/hooks/useTokensQuery'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTCard } from '../NFTCard/NFTCard'

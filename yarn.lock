@@ -1007,7 +1007,7 @@
 
 "@radix-ui/number@0.1.0":
   version "0.1.0"
-  resolved "https://registry.npmjs.org/@radix-ui/number/-/number-0.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/number/-/number-0.1.0.tgz#73ad13d5cc5f75fa5e147d72e5d5d5e50d688256"
   integrity sha512-rpf6QiOWLHAkM4FEMYu9i+5Jr8cKT893+R4mPpcdsy4LD7omr9JfdOqj/h/xPA5+EcVrpMMlU6rrRYpUB5UI8g==
   dependencies:
     "@babel/runtime" "^7.13.10"
@@ -1021,7 +1021,7 @@
 
 "@radix-ui/react-accordion@^0.1.6":
   version "0.1.6"
-  resolved "https://registry.npmjs.org/@radix-ui/react-accordion/-/react-accordion-0.1.6.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-accordion/-/react-accordion-0.1.6.tgz#b76613d56717ed24b8cf6cb1897cbd54f04714ed"
   integrity sha512-LOXlqPU6y6EMBopdRIKCWFvMPY1wPTQ4uJiX7ZVxldrMJcM7imBzI3wlRTkPCHZ3FLHmpuw+cQi3du23pzJp1g==
   dependencies:
     "@babel/runtime" "^7.13.10"
@@ -1036,7 +1036,7 @@
 
 "@radix-ui/react-checkbox@^0.1.5":
   version "0.1.5"
-  resolved "https://registry.npmjs.org/@radix-ui/react-checkbox/-/react-checkbox-0.1.5.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-checkbox/-/react-checkbox-0.1.5.tgz#3a6bd54ba1720c8e5c03852acf460e35dfbe9da3"
   integrity sha512-M8Y4dSXsKSbF+FryG5VvZKr/1MukMVG7swq9p5s7wYb8Rvn0UM0rQ5w8BWmSWSV4BL/gbJdhwVCznwXXlgZRZg==
   dependencies:
     "@babel/runtime" "^7.13.10"
@@ -1052,7 +1052,7 @@
 
 "@radix-ui/react-collapsible@0.1.6":
   version "0.1.6"
-  resolved "https://registry.npmjs.org/@radix-ui/react-collapsible/-/react-collapsible-0.1.6.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-collapsible/-/react-collapsible-0.1.6.tgz#3eeadac476761b3c9b8dd91e8a32eb1a547e5a06"
   integrity sha512-Gkf8VuqMc6HTLzA2AxVYnyK6aMczVLpatCjdD9Lj4wlYLXCz9KtiqZYslLMeqnQFLwLyZS0WKX/pQ8j5fioIBw==
   dependencies:
     "@babel/runtime" "^7.13.10"
@@ -1067,7 +1067,7 @@
 
 "@radix-ui/react-collection@0.1.4":
   version "0.1.4"
-  resolved "https://registry.npmjs.org/@radix-ui/react-collection/-/react-collection-0.1.4.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-collection/-/react-collection-0.1.4.tgz#734061ffd5bb93e88889d49b87391a73a63824c9"
   integrity sha512-3muGI15IdgaDFjOcO7xX8a35HQRBRF6LH9pS6UCeZeRmbslkVeHyJRQr2rzICBUoX7zgIA0kXyMDbpQnJGyJTA==
   dependencies:
     "@babel/runtime" "^7.13.10"
@@ -1141,10 +1141,10 @@
     "@radix-ui/react-primitive" "0.1.4"
     "@radix-ui/react-use-callback-ref" "0.1.0"
 
-"@radix-ui/react-icons@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@radix-ui/react-icons/-/react-icons-1.1.0.tgz"
-  integrity sha512-nhctV9YKN8G4HfkS3p03ml+osTBDMGKImaAJTm666hymtaWEgIPiqL7F53ivDqIO4A+20ERwUiiKJ8h3XK7uAg==
+"@radix-ui/react-icons@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-icons/-/react-icons-1.1.1.tgz#38d2aa548035dd3b799c169bd17177b1cec3152b"
+  integrity sha512-xc3wQC59rsFylVbSusQCrrM+6695ppF730Q6yqzhRdqDcRNWIm2R6ngpzBoSOQMcwnq4p805F+Gr7xo4fmtN1A==
 
 "@radix-ui/react-id@0.1.5":
   version "0.1.5"
@@ -1156,7 +1156,7 @@
 
 "@radix-ui/react-label@0.1.5":
   version "0.1.5"
-  resolved "https://registry.npmjs.org/@radix-ui/react-label/-/react-label-0.1.5.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-label/-/react-label-0.1.5.tgz#12cd965bfc983e0148121d4c99fb8e27a917c45c"
   integrity sha512-Au9+n4/DhvjR0IHhvZ1LPdx/OW+3CGDie30ZyCkbSHIuLp4/CV4oPPGBwJ1vY99Jog3zyQhsGww9MXj8O9Aj/A==
   dependencies:
     "@babel/runtime" "^7.13.10"
@@ -1193,7 +1193,7 @@
 
 "@radix-ui/react-radio-group@^0.1.5":
   version "0.1.5"
-  resolved "https://registry.npmjs.org/@radix-ui/react-radio-group/-/react-radio-group-0.1.5.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-radio-group/-/react-radio-group-0.1.5.tgz#ca8a676123a18b44804aff10af46129e2c2b37c3"
   integrity sha512-ybgHsmh/V2crKvK6xZ56dpPul7b+vyxcq7obWqHbr5W6Ca11wdm0E7lS0i/Y6pgfIKYOWIARmZYDpRMEeRCPOw==
   dependencies:
     "@babel/runtime" "^7.13.10"
@@ -1210,7 +1210,7 @@
 
 "@radix-ui/react-roving-focus@0.1.5":
   version "0.1.5"
-  resolved "https://registry.npmjs.org/@radix-ui/react-roving-focus/-/react-roving-focus-0.1.5.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-roving-focus/-/react-roving-focus-0.1.5.tgz#cc48d17a36b56f253d54905b0fd60ee134cb97ee"
   integrity sha512-ClwKPS5JZE+PaHCoW7eu1onvE61pDv4kO8W4t5Ra3qMFQiTJLZMdpBQUhksN//DaVygoLirz4Samdr5Y1x1FSA==
   dependencies:
     "@babel/runtime" "^7.13.10"
@@ -1223,17 +1223,9 @@
     "@radix-ui/react-use-callback-ref" "0.1.0"
     "@radix-ui/react-use-controllable-state" "0.1.0"
 
-"@radix-ui/react-separator@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.npmjs.org/@radix-ui/react-separator/-/react-separator-0.1.4.tgz"
-  integrity sha512-ct2qE072ydvMyFiPwgO8xGE4iLGR9BsSk2tIan23TYSiNTeQ89anzkuax5vNGjey0el2vnwUcReFS0Gy7Lk2VQ==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
-    "@radix-ui/react-primitive" "0.1.4"
-
 "@radix-ui/react-slider@^0.1.4":
   version "0.1.4"
-  resolved "https://registry.npmjs.org/@radix-ui/react-slider/-/react-slider-0.1.4.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-slider/-/react-slider-0.1.4.tgz#a7b7a480ee00158195794b08cd3f1583cf102518"
   integrity sha512-0z3bCcdrAi+FIcoLXS6r0ESVWuuyMnUJoCsFm7tC7Rtv95x34YtaI8YfSyQmzuMVS4rTsNtCCTZ/s727uRaVkQ==
   dependencies:
     "@babel/runtime" "^7.13.10"
@@ -1282,7 +1274,7 @@
 
 "@radix-ui/react-use-direction@0.1.0":
   version "0.1.0"
-  resolved "https://registry.npmjs.org/@radix-ui/react-use-direction/-/react-use-direction-0.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-use-direction/-/react-use-direction-0.1.0.tgz#97ac1d52e497c974389e7988f809238ed72e7df7"
   integrity sha512-NajpY/An9TCPSfOVkgWIdXJV+VuWl67PxB6kOKYmtNAFHvObzIoh8o0n9sAuwSAyFCZVq211FEf9gvVDRhOyiA==
   dependencies:
     "@babel/runtime" "^7.13.10"
@@ -1304,14 +1296,14 @@
 
 "@radix-ui/react-use-previous@0.1.1":
   version "0.1.1"
-  resolved "https://registry.npmjs.org/@radix-ui/react-use-previous/-/react-use-previous-0.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-use-previous/-/react-use-previous-0.1.1.tgz#0226017f72267200f6e832a7103760e96a6db5d0"
   integrity sha512-O/ZgrDBr11dR8rhO59ED8s5zIXBRFi8MiS+CmFGfi7MJYdLbfqVOmQU90Ghf87aifEgWe6380LA69KBneaShAg==
   dependencies:
     "@babel/runtime" "^7.13.10"
 
 "@radix-ui/react-use-size@0.1.1":
   version "0.1.1"
-  resolved "https://registry.npmjs.org/@radix-ui/react-use-size/-/react-use-size-0.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-use-size/-/react-use-size-0.1.1.tgz#f6b75272a5d41c3089ca78c8a2e48e5f204ef90f"
   integrity sha512-pTgWM5qKBu6C7kfKxrKPoBI2zZYZmp2cSXzpUiGM3qEBQlMLtYhaY2JXdXUCxz+XmD1YEjc8oRwvyfsD4AG4WA==
   dependencies:
     "@babel/runtime" "^7.13.10"
@@ -1384,10 +1376,23 @@
   resolved "https://registry.npmjs.org/@types/mime-types/-/mime-types-2.1.1.tgz"
   integrity sha512-vXOTGVSLR2jMw440moWTC7H19iUyLtP3Z1YTj7cSsubOICinjMxFeb/V57v9QdyyPGbbWolUFSSmSiRSn94tFw==
 
+"@types/next-nprogress@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@types/next-nprogress/-/next-nprogress-1.4.1.tgz#df79deb087729ebbb4c4251af4293a65dccfe8c4"
+  integrity sha512-pwRtoH9tw8FAdf8wLe3NczmsFOsrmG6BbyMMlX0aRlIJR71Kg8VtB1PqDpu2fPXNLXpIATmO9PQPOd140BbyOg==
+  dependencies:
+    "@types/nprogress" "*"
+    "@types/react" "*"
+
 "@types/node@*", "@types/node@17.0.23":
   version "17.0.23"
   resolved "https://registry.npmjs.org/@types/node/-/node-17.0.23.tgz"
   integrity sha512-UxDxWn7dl97rKVeVS61vErvw086aCYhDLyvRQZ5Rk65rZKepaFdm53GeqXaKBuOhED4e9uWq34IC3TdSdJJ2Gw==
+
+"@types/nprogress@*":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@types/nprogress/-/nprogress-0.2.0.tgz#86c593682d4199212a0509cc3c4d562bbbd6e45f"
+  integrity sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==
 
 "@types/pbkdf2@^3.0.0":
   version "3.1.0"
@@ -1407,6 +1412,15 @@
   integrity sha512-Tr9VU9DvNoHDWlmecmcsE5ZZiUkYx+nKBzum4Oxe1K0yJVyBlfbq7H3eXjxXqJczBKqPGq3EgfTru4MgKb9+Yw==
   dependencies:
     "@types/react" "^17"
+
+"@types/react@*":
+  version "18.0.10"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.10.tgz#5692944d4a45e204fb7a981eb1388afe919cf4d0"
+  integrity sha512-dIugadZuIPrRzvIEevIu7A1smqOAjkSMv8qOfwPt9Ve6i6JT/FQcCHyk2qIAxwsQNKZt5/oGR0T4z9h2dXRAkg==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
 
 "@types/react@^17", "@types/react@^17.0.2":
   version "17.0.44"
@@ -1581,12 +1595,12 @@
   resolved "https://registry.npmjs.org/@vanilla-extract/private/-/private-1.0.3.tgz"
   integrity sha512-17kVyLq3ePTKOkveHxXuIJZtGYs+cSoev7BlP+Lf4916qfDhk/HBjvlYDe8egrea7LNPHKwSZJK/bzZC+Q6AwQ==
 
-"@vanilla-extract/recipes@^0.2.3":
-  version "0.2.4"
-  resolved "https://registry.npmjs.org/@vanilla-extract/recipes/-/recipes-0.2.4.tgz"
-  integrity sha512-UwRR3IbxYmKOBSML8oze77T2ZuAGyCmIYqhzRW7kk+AmVNqPwtfDtnf3z6quf+E/B4an5g1TlSGJwHvq9QaVTQ==
+"@vanilla-extract/recipes@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/recipes/-/recipes-0.2.5.tgz#40314b6db7319707303cccfb2c7200d919c313a8"
+  integrity sha512-OWXUUiFJdswD3+Xg8f8avuw/vAHZRFS4oHqFeoV1TcO8cfbDQ0zmkreBHvyspoJU+qsyWK48yPHKSptqNRPy9Q==
 
-"@vanilla-extract/sprinkles@^1.4.0":
+"@vanilla-extract/sprinkles@^1.4.0", "@vanilla-extract/sprinkles@^1.4.1":
   version "1.4.1"
   resolved "https://registry.npmjs.org/@vanilla-extract/sprinkles/-/sprinkles-1.4.1.tgz"
   integrity sha512-aW6CfMMToX4a+baLuVxwcT0FSACjX3xrNt8wdi/3LLRlLAfhyue8OK7kJxhcYNZfydBeWTP59aRy8p5FUTIeew==
@@ -1807,15 +1821,15 @@
   dependencies:
     ethers "^5.0.19"
 
-"@zoralabs/nft-hooks@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@zoralabs/nft-hooks/-/nft-hooks-1.1.0.tgz#dce5de87f68150857140af042a64487e5489a4e7"
-  integrity sha512-+6zQaNAu75QjlIKFploJOrJPAIAYSyZDis9QHRuWiTBLSOm/5tZ7dZupqYYN9+v4gGypOlJesZja72BP7QPNvg==
+"@zoralabs/nft-hooks@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@zoralabs/nft-hooks/-/nft-hooks-1.1.1.tgz#a842cd78f974ae2a162944572e4dd6584e2c3dcc"
+  integrity sha512-vVR2pxE7AqsCLISzCfwoIR2box8wQ/ZC6tYAlfGAPP5dklY9+QxAgIi/zIghO6PqTt//+PRaZUaC3O3WVmZB6g==
   dependencies:
     "@ethersproject/address" "^5.6.0"
     "@ethersproject/bytes" "^5.6.1"
     "@types/deepmerge" "^2.2.0"
-    "@zoralabs/zdk" "^2.0.0"
+    "@zoralabs/zdk" "^2.0.1"
     big.js "^6.1.0"
     cross-fetch "^3.1.4"
     dataloader "^2.0.0"
@@ -1835,21 +1849,10 @@
     "@rari-capital/solmate" "^5.9.0"
     "@zoralabs/core" "^1.0.5"
 
-"@zoralabs/zdk-alpha@^0.0.39":
-  version "0.0.39"
-  resolved "https://registry.yarnpkg.com/@zoralabs/zdk-alpha/-/zdk-alpha-0.0.39.tgz#e141f41ff092e315aaf27b9701c2308415db450b"
-  integrity sha512-Nin+SKa//ZgFaMpqfTtihcxq0w3ejhtqBbNPyv+0spu0u4rSnq0YwWMMQBrBf6clTsjWoPBejzqlmKUqfUZFWw==
-  dependencies:
-    big.js "^6.1.0"
-    graphql "^16.5.0"
-    graphql-request "^4.2.0"
-    graphql-tag "^2.12.6"
-    tslib "^2.2.0"
-
-"@zoralabs/zdk@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@zoralabs/zdk/-/zdk-2.0.0.tgz#bfd3f71253e15a43128ae4a82c1a0ab1dfe7c9c6"
-  integrity sha512-rNZwWLLl+OCj6k0FK0sCGP+n4ji8mrZRBUJja4RELtgiBG/gdt1+2atDRFYkoUR/3DLkvspwDs4gX3F6IyM7Cg==
+"@zoralabs/zdk@2.0.1", "@zoralabs/zdk@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@zoralabs/zdk/-/zdk-2.0.1.tgz#c7d3145588ff9e8abe6eca671f4a392a9f7ae790"
+  integrity sha512-VPontguf4uoVXb/eH1qULcvvDHuqMaiWmNbHAedu7hTIyPqbeBA/HJ9+UIVihNTy3QByISfRESOGv8mseuupXg==
   dependencies:
     big.js "^6.1.0"
     graphql "^16.5.0"
@@ -1858,20 +1861,7 @@
     tslib "^2.2.0"
 
 "@zoralabs/zord@file:.yalc/@zoralabs/zord":
-  version "0.0.0"
-  dependencies:
-    "@radix-ui/react-accordion" "^0.1.6"
-    "@radix-ui/react-checkbox" "^0.1.5"
-    "@radix-ui/react-dialog" "^0.1.7"
-    "@radix-ui/react-icons" "^1.1.0"
-    "@radix-ui/react-radio-group" "^0.1.5"
-    "@radix-ui/react-separator" "^0.1.4"
-    "@radix-ui/react-slider" "^0.1.4"
-    "@vanilla-extract/css" "^1.6.8"
-    "@vanilla-extract/recipes" "^0.2.3"
-    "@vanilla-extract/sprinkles" "^1.4.0"
-    clsx "^1.1.1"
-    lodash "^4.17.21"
+  version "0.0.1"
 
 acorn-jsx@^5.3.1:
   version "5.3.2"
@@ -4518,6 +4508,13 @@ natural-compare@^1.4.0:
   resolved "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
+next-nprogress@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/next-nprogress/-/next-nprogress-1.4.0.tgz#508058dc15fd2aee406da3cc6ffc8cdf3ebabb75"
+  integrity sha512-b0QCax2iQeIN4pJaTHA6ofDXYoQLfc2m2b/QIJV9/QIUd3RqaFMAcT0f0CnS8J3TF8a5eO4a8oEgMrd/IqKFfA==
+  dependencies:
+    nprogress "^0.2.0"
+
 next@12.1.5:
   version "12.1.5"
   resolved "https://registry.npmjs.org/next/-/next-12.1.5.tgz"
@@ -4579,6 +4576,11 @@ npm-run-path@^4.0.1:
   integrity sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==
   dependencies:
     path-key "^3.0.0"
+
+nprogress@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
+  integrity sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==
 
 object-assign@^4.1.1:
   version "4.1.1"

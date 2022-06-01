@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { Box, Button } from '@zoralabs/zord/elements'
+import { Box, Button } from '@zoralabs/zord'
 import { Modal, ModalContent, useModalRegistry } from '@modal'
 
 export function ModalComposition({

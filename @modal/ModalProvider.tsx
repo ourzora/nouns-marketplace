@@ -1,4 +1,10 @@
-import React, { Dispatch, SetStateAction, createContext, useState } from 'react'
+import React, {
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useState,
+} from 'react'
 export type ModalType = string | undefined
 
 export type ModalState = {
@@ -13,7 +19,7 @@ export const ModalContext = createContext<ModalContextType>([
   () => null,
 ] as ModalContextType)
 
-export const ModalContextProvider = ({ children }: { children: JSX.Element }) => {
+export const ModalContextProvider = ({ children }: { children: ReactNode }) => {
   const [modalState, setModalState] = useState<ModalState>({
     modalType: undefined,
   })

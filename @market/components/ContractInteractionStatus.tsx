@@ -1,5 +1,5 @@
 import { ModalTitleAndDescription } from '@modal'
-import { Box, Button, Flex, Label, Paragraph, Text, Stack } from '@zoralabs/zord/elements'
+import { Box, Button, Flex, Label, Paragraph, Text, Stack } from '@zoralabs/zord'
 import React from 'react'
 import { shortenTxHash } from '../utils/format'
 import { ETHERSCAN_BASE_URL } from '../utils/transactions'
