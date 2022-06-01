@@ -20,3 +20,7 @@ export const lightFont = style({
 export const leadingTight = style({
   lineHeight: 1.125,
 })
+
+export const lightGreyType = style({
+  color: 'rgba(0,0,0,.6)',
+})

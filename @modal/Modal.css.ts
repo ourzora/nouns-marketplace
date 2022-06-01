@@ -5,7 +5,7 @@ const MODAL_BACKDROP_LAYER = 20
 
 export const overlay = style([
   {
-    background: 'rgba(0, 0, 0, 0.14)',
+    background: 'rgba(0, 0, 0, 0.45)',
     inset: 0,
     placeItems: 'center',
     zIndex: MODAL_BACKDROP_LAYER,
@@ -20,7 +20,7 @@ export const content = style([
     top: '40%',
     transform: 'translate(-50%)',
     width: 'calc(100vw - 30px)',
-    maxWidth: 960,
+    maxWidth: 750,
 
     zIndex: MODAL_BACKDROP_LAYER + 1,
     selectors: {

@@ -5,53 +5,35 @@ import {
   useContext,
   useState,
   useEffect,
-  useCallback,
+  Dispatch,
+  SetStateAction,
 } from 'react'
 import { collectionAddresses } from 'utils/collection-addresses'
-import { useCollections } from 'hooks/zdk/useCollections'
+import { CollectionsData } from 'hooks/zdk/useCollections'
 
 const CollectionsContext = createContext<{
-  collections: Collection[] | []
+  collections: CollectionsData[] | []
   collectionAmount: number
-  currentCollection: any | undefined
-  setCurrentCollection: (collectionName: string | undefined) => void
+  currentCollection: string
+  setCurrentCollection: Dispatch<SetStateAction<string>>
 }>({
   collections: [],
   collectionAmount: collectionAddresses.length,
-  currentCollection: undefined,
+  currentCollection: 'Explore',
   setCurrentCollection: () => {},
 })
 
 type CollectionsProps = {
   children?: ReactNode
+  collections: CollectionsData[]
 }
 
 export function useCollectionsContext() {
   return useContext(CollectionsContext)
 }
 
-export function CollectionsProvider({ children }: CollectionsProps) {
-  const { collections } = useCollections(collectionAddresses)
-  const [currentCollection, setCurrentCollection] = useState(undefined)
-
-  const currentCollectionHandler = useCallback(
-    (collectionName) => {
-      const navCollection = collections?.find(
-        (collection) => collection.name === collectionName || 'Nouns'
-      )
-      /* @ts-ignore */
-      setCurrentCollection(navCollection)
-    },
-    [currentCollection, collections, setCurrentCollection]
-  )
-
-  useEffect(() => {
-    const defaultCollection = collections?.find(
-      (collection) => collection.name === 'Nouns'
-    )
-    /* @ts-ignore */
-    setCurrentCollection(defaultCollection)
-  }, [collections])
+export function CollectionsProvider({ children, collections }: CollectionsProps) {
+  const [currentCollection, setCurrentCollection] = useState<string>('Explore')
 
   return (
     <CollectionsContext.Provider
@@ -60,7 +42,7 @@ export function CollectionsProvider({ children }: CollectionsProps) {
         collections: collections ? collections : [],
         collectionAmount: collectionAddresses.length,
         currentCollection,
-        setCurrentCollection: currentCollectionHandler,
+        setCurrentCollection,
       }}
     >
       {children}
