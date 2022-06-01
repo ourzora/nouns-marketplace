@@ -1,7 +1,8 @@
 import { useCallback, useMemo } from 'react'
-import { Text, Box, Heading, Icon, Flex } from '@zoralabs/zord'
+import { Text, Box, Heading, Icon, Flex, Paragraph, Label } from '@zoralabs/zord'
 import { ModalComposition, useModalRegistry } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
+import { collectionTrigger } from './Header.css'
 import { Link } from 'components/Link'
 
 export function CollectionMenu() {
@@ -25,19 +26,11 @@ export function CollectionMenu() {
     <ModalComposition
       modalName={`collections-menu`}
       trigger={
-        <Flex align="center">
-          <Text
-            pl="x2"
-            pr="x4"
-            py="x2"
-            as="span"
-            variant="heading-sm"
-            display="flex"
-            align="center"
-            h="100%"
-          >
-            {currentCollection?.name}: {currentCollection?.aggregateStat?.nftCount} NFTs
-          </Text>
+        <Flex align="center" className={collectionTrigger}>
+          <Label py="x2" as="span" display="flex" align="center" h="100%" size="lg">
+            {currentCollection?.name}:
+          </Label>
+          <Label>{currentCollection?.aggregateStat?.nftCount} NFTs</Label>
           <Icon id="ChevronDown" size="md" />
         </Flex>
       }
