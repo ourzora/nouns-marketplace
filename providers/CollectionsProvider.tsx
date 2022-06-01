@@ -39,6 +39,7 @@ export function CollectionsProvider({ children }: CollectionsProps) {
       const navCollection = collections?.find(
         (collection) => collection.name === collectionName || 'Nouns'
       )
+      /* @ts-ignore */
       setCurrentCollection(navCollection)
     },
     [currentCollection, collections, setCurrentCollection]
@@ -48,6 +49,7 @@ export function CollectionsProvider({ children }: CollectionsProps) {
     const defaultCollection = collections?.find(
       (collection) => collection.name === 'Nouns'
     )
+    /* @ts-ignore */
     setCurrentCollection(defaultCollection)
   }, [collections])
 

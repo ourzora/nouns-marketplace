@@ -50,7 +50,15 @@ export function CollectionMenu() {
               href={`/collections/${collection.address}`}
               passHref
             >
-              <Flex as="a" onClick={() => collectionHandler(collection?.name)}>
+              <Flex
+                as="a"
+                onClick={() =>
+                  collectionHandler(
+                    /* @ts-ignore */
+                    collection.name
+                  )
+                }
+              >
                 <Text>{collection.name}</Text>
               </Flex>
             </Link>
