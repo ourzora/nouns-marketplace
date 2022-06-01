@@ -11,7 +11,6 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { createClient, defaultChains, WagmiProvider } from 'wagmi'
 import { HeaderComposition } from 'compositions/Header/HeaderComposition'
-
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 import { ModalContextProvider } from '@modal'
