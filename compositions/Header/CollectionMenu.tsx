@@ -1,22 +1,12 @@
-import { useCallback, useMemo } from 'react'
-import { Text, Box, Heading, Icon, Flex, Paragraph, Label } from '@zoralabs/zord'
-import { ModalComposition, useModalRegistry } from '@modal'
+import { Box, Heading, Icon, Flex, Label, Stack } from '@zoralabs/zord'
+import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { collectionTrigger } from './Header.css'
-import { Link } from 'components/Link'
+
+import { CollectionLink } from './CollectionLink'
 
 export function CollectionMenu() {
-  const { collections, collectionAmount, currentCollection, setCurrentCollection } =
-    useCollectionsContext()
-  const { requestClose } = useModalRegistry()
-
-  const collectionHandler = useCallback(
-    (collectionName: string) => {
-      setCurrentCollection(collectionName)
-      requestClose()
-    },
-    [currentCollection, collections]
-  )
+  const { collections, collectionAmount, currentCollection } = useCollectionsContext()
 
   if (collections?.length === 0) {
     return null
@@ -36,26 +26,15 @@ export function CollectionMenu() {
       }
       content={
         <Box p="x8">
-          <Heading>Explore Collections {collectionAmount}</Heading>
-          {collections.map((collection) => (
-            <Link
-              key={`${collection.address}-${collection.name}`}
-              href={`/collections/${collection.address}`}
-              passHref
-            >
-              <Flex
-                as="a"
-                onClick={() =>
-                  collectionHandler(
-                    /* @ts-ignore */
-                    collection.name
-                  )
-                }
-              >
-                <Text>{collection.name}</Text>
-              </Flex>
-            </Link>
-          ))}
+          <Stack gap="x6">
+            <Heading>Explore Collections {collectionAmount}</Heading>
+            {collections.map((collection) => (
+              <CollectionLink
+                key={`${collection.address}-${collection.name}`}
+                collection={collection}
+              />
+            ))}
+          </Stack>
         </Box>
       }
     />

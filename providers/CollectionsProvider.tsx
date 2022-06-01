@@ -4,8 +4,8 @@ import {
   createContext,
   useContext,
   useState,
-  useEffect,
   useCallback,
+  useEffect,
 } from 'react'
 import { collectionAddresses } from 'utils/collection-addresses'
 import { useCollections } from 'hooks/zdk/useCollections'
@@ -31,26 +31,20 @@ export function useCollectionsContext() {
 }
 
 export function CollectionsProvider({ children }: CollectionsProps) {
-  const { collections } = useCollections(collectionAddresses)
+  const { collections } = useCollections()
   const [currentCollection, setCurrentCollection] = useState(undefined)
 
-  const currentCollectionHandler = useCallback(
-    (collectionName) => {
-      const navCollection = collections?.find(
-        (collection) => collection.name === collectionName || 'Nouns'
-      )
-      /* @ts-ignore */
-      setCurrentCollection(navCollection)
-    },
-    [currentCollection, collections, setCurrentCollection]
-  )
+  const currentCollectionHandler = useCallback((collectionName) => {
+    const navCollection = collections?.find(
+      (collection) => collection.name === collectionName
+    )
+    console.log(navCollection, collections)
+    /* @ts-ignore */
+    setCurrentCollection(navCollection)
+  }, [])
 
   useEffect(() => {
-    const defaultCollection = collections?.find(
-      (collection) => collection.name === 'Nouns'
-    )
-    /* @ts-ignore */
-    setCurrentCollection(defaultCollection)
+    console.log(collections)
   }, [collections])
 
   return (

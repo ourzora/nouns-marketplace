@@ -22,3 +22,13 @@ export const cardWrapper = style([
     borderRadius: 'phat',
   }),
 ])
+
+/* Thumbnail */
+export const nftThumbnail = style([
+  {},
+  atoms({
+    position: 'relative',
+    w: 'x10',
+    h: 'x10',
+  }),
+])

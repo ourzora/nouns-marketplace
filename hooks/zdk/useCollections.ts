@@ -1,6 +1,7 @@
 import { Chain, Network } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { zdkService } from 'utils/zdk'
 import useSWR from 'swr'
+import { collectionAddresses } from 'utils/collection-addresses'
 
 const networkInput = {
   chain: Chain.Mainnet,
@@ -43,7 +44,7 @@ const fetchCollections = async (collections: string[]) => {
   }
 }
 
-export function useCollections(collectionAddresses: string[]) {
+export function useCollections() {
   const { data, error } = useSWR([collectionAddresses], fetchCollections)
   return {
     collections: data?.data,
