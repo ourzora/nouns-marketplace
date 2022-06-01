@@ -18,9 +18,8 @@ export function CollectionMenu() {
       trigger={
         <Flex align="center" className={collectionTrigger}>
           <Label py="x2" as="span" display="flex" align="center" h="100%" size="lg">
-            {currentCollection?.name}:
+            {currentCollection}&nbsp;
           </Label>
-          <Label>{currentCollection?.aggregateStat?.nftCount} NFTs</Label>
           <Icon id="ChevronDown" size="md" />
         </Flex>
       }
@@ -30,7 +29,7 @@ export function CollectionMenu() {
             <Heading>Explore Collections {collectionAmount}</Heading>
             {collections.map((collection) => (
               <CollectionLink
-                key={`${collection.address}-${collection.name}`}
+                key={`${collection.collectionInfo.address}-${collection.collectionInfo.name}`}
                 collection={collection}
               />
             ))}
