@@ -1,4 +1,5 @@
 import { Chain, Network } from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { Collection, AggregateStat } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { zdkService } from 'utils/zdk'
 import useSWR from 'swr'
 import { collectionAddresses } from 'utils/collection-addresses'
@@ -6,6 +7,11 @@ import { collectionAddresses } from 'utils/collection-addresses'
 const networkInput = {
   chain: Chain.Mainnet,
   network: Network.Ethereum,
+}
+
+export type CollectionsData = {
+  collectionInfo: Collection
+  aggregateStat: AggregateStat
 }
 
 const mergeCollectionFetch = async (address: string) => {
@@ -25,7 +31,7 @@ const mergeCollectionFetch = async (address: string) => {
     .then((res) => {
       return res
     })
-  return { ...collection, ...statsResponse }
+  return { collectionInfo: collection, ...statsResponse }
 }
 
 const fetchCollections = async (collections: string[]) => {
@@ -46,6 +52,7 @@ const fetchCollections = async (collections: string[]) => {
 
 export function useCollections() {
   const { data, error } = useSWR([collectionAddresses], fetchCollections)
+
   return {
     collections: data?.data,
     error,

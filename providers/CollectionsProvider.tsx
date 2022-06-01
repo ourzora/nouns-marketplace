@@ -8,7 +8,7 @@ import {
   useEffect,
 } from 'react'
 import { collectionAddresses } from 'utils/collection-addresses'
-import { useCollections } from 'hooks/zdk/useCollections'
+import { CollectionsData } from 'hooks/zdk/useCollections'
 
 const CollectionsContext = createContext<{
   collections: Collection[] | []
@@ -24,19 +24,19 @@ const CollectionsContext = createContext<{
 
 type CollectionsProps = {
   children?: ReactNode
+  collections: CollectionsData[]
 }
 
 export function useCollectionsContext() {
   return useContext(CollectionsContext)
 }
 
-export function CollectionsProvider({ children }: CollectionsProps) {
-  const { collections } = useCollections()
+export function CollectionsProvider({ children, collections }: CollectionsProps) {
   const [currentCollection, setCurrentCollection] = useState(undefined)
 
   const currentCollectionHandler = useCallback((collectionName) => {
     const navCollection = collections?.find(
-      (collection) => collection.name === collectionName
+      (collection) => collection.collectionInfo.name === collectionName
     )
     console.log(navCollection, collections)
     /* @ts-ignore */
