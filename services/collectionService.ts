@@ -63,6 +63,8 @@ export async function collectionService({ params }: CollectionParamsProps) {
       })
     }
 
+    console.log(resp.tokens.nodes)
+
     const initialPage = resp.tokens.nodes
       .map((token) => transformNFTZDK(token, { rawData: token }))
       .map(prepareJson)

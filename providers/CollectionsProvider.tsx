@@ -1,10 +1,8 @@
-import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import {
   ReactNode,
   createContext,
   useContext,
   useState,
-  useEffect,
   Dispatch,
   SetStateAction,
 } from 'react'
@@ -25,7 +23,7 @@ const CollectionsContext = createContext<{
 
 type CollectionsProps = {
   children?: ReactNode
-  collections: CollectionsData[]
+  collections: CollectionsData[] | undefined
 }
 
 export function useCollectionsContext() {

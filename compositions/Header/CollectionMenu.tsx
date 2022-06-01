@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { Box, Heading, Icon, Flex, Label, Stack } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
@@ -7,10 +8,6 @@ import { CollectionLink } from './CollectionLink'
 
 export function CollectionMenu() {
   const { collections, collectionAmount, currentCollection } = useCollectionsContext()
-
-  if (collections?.length === 0) {
-    return null
-  }
 
   return (
     <ModalComposition

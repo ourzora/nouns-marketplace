@@ -56,7 +56,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           })}
         >
           <V3Provider>
-            <CollectionsProvider collections={collections}>
+            <CollectionsProvider
+              /* @ts-ignore */
+              collections={collections}
+            >
               <ModalContextProvider>
                 <>
                   <HeaderComposition />
