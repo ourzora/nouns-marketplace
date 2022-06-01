@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { NOUNS_GLASSES } from 'styles/style-constants'
 import { SITE_TITLE } from 'utils/env-vars'
 import { nounsGlasses } from './Header.css'
+import { CollectionMenu } from './CollectionMenu'
 
 export function HeaderNav() {
   return (
@@ -12,6 +13,7 @@ export function HeaderNav() {
         <Link passHref href="/">
           <Box as="img" className={nounsGlasses} src={NOUNS_GLASSES} alt={SITE_TITLE} />
         </Link>
+        <CollectionMenu />
       </Flex>
       <Box>
         <ConnectButton showBalance={false} />
