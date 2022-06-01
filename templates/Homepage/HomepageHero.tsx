@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Flex, Grid, Stack, Display, Paragraph, Box } from '@zoralabs/zord/elements'
+import { Flex, Grid, Stack, Display, Paragraph, Box } from '@zoralabs/zord'
 import { homepageHeroWrapper, homepageHeroInner, nounsImage } from './Homepage.css'
 import { lightFont, leadingTight } from 'styles/styles.css'
 import { useNFT } from '@zoralabs/nft-hooks'

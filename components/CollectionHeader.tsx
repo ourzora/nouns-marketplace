@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Stack, Display, Paragraph } from '@zoralabs/zord/elements'
+import { Stack, Display, Paragraph } from '@zoralabs/zord'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { lightFont } from 'styles/styles.css'
 

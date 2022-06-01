@@ -1,5 +1,5 @@
 import { WalletCallStatus } from '../typings/transactions'
-import { Box, Button, ButtonProps } from '@zoralabs/zord/elements'
+import { Box, Button, ButtonProps } from '@zoralabs/zord'
 import React, { useMemo } from 'react'
 
 /**

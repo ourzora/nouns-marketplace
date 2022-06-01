@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { formatCryptoVal } from '../utils/numbers'
-import { Text, Button, Box, Flex, Stack } from '@zoralabs/zord/elements'
+import { Text, Button, Box, Flex, Stack } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useRelevantMarket } from '../hooks/useRelevantMarket'
 import { ModalComposition } from '@modal'

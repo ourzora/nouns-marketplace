@@ -1,4 +1,4 @@
-import { Flex, Text, Stack } from '@zoralabs/zord/elements'
+import { Flex, Text, Stack } from '@zoralabs/zord'
 import { CollectionStatsAggregateQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { lightFont } from 'styles/styles.css'
 

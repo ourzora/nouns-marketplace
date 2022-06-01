@@ -2,8 +2,7 @@ import type { NextPage } from 'next'
 import { RawDisplayer } from 'components/utils'
 import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
-import { Heading, Paragraph } from '@zoralabs/zord/elements'
-
+import { Heading, Paragraph } from '@zoralabs/zord'
 
 const Collections: NextPage = () => {
   return (

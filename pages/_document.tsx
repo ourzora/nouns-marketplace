@@ -1,4 +1,3 @@
-import { zord } from '@zoralabs/zord'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class MyDocument extends Document {
@@ -15,7 +14,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className={zord()}>
+        <body>
           <Main />
           <NextScript />
         </body>

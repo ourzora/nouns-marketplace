@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { Flex, FlexProps } from '@zoralabs/zord/elements'
+import { Flex, FlexProps } from '@zoralabs/zord'
 
 export interface PageWrapperProps extends FlexProps {
   children: ReactNode

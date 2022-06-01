@@ -6,11 +6,11 @@ import {
   lightTheme,
 } from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
-import '@zoralabs/zord/style.css'
+import '@zoralabs/zord/index.css'
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { createClient, defaultChains, WagmiProvider } from 'wagmi'
-import { Header } from 'compositions/Header/HeaderComposition'
+import { HeaderComposition } from 'compositions/Header/HeaderComposition'
 
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
@@ -57,7 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <CollectionsProvider>
               <ModalContextProvider>
                 <>
-                  <Header />
+                  <HeaderComposition />
                   <Component {...pageProps} />
                 </>
               </ModalContextProvider>

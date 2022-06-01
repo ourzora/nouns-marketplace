@@ -1,5 +1,5 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { Box, Flex, Heading } from '@zoralabs/zord/elements'
+import { Box, Flex, Heading } from '@zoralabs/zord'
 import Link from 'next/link'
 import { NOUNS_GLASSES } from 'styles/style-constants'
 import { SITE_TITLE } from 'utils/env-vars'
