@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { PageWrapper } from 'components/PageWrapper'
-import { Heading } from '@zoralabs/zord'
+import { Heading, Text } from '@zoralabs/zord'
 import { useRouter } from 'next/router'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { RawDisplayer } from 'components/utils'
@@ -21,6 +21,11 @@ const NFT: NextPage = () => {
       <Heading>Last Refresh Time</Heading>
       <RawDisplayer data={data?.rawData?.APIIndexer?.lastRefreshTime} />
       <Heading>Markets</Heading>
+      {data?.markets &&
+        data?.markets.map((data) => (
+          <RawDisplayer data={{ ...data?.createdAt, status: data?.status }} />
+        ))}
+
       <RawDisplayer data={data?.markets} />
     </PageWrapper>
   )
