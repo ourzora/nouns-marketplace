@@ -10,21 +10,17 @@ function isAuctionLike(value: MarketModule): value is AuctionLike {
   return value.type === MARKET_TYPES.AUCTION
 }
 function isAskLike(value: MarketModule): value is FixedPriceLike {
-  return value.type === MARKET_TYPES.FIXED_PRICE && value.side === FIXED_SIDE_TYPES.OFFER
+  return value.type === MARKET_TYPES.FIXED_PRICE && value.side === FIXED_SIDE_TYPES.ASK
 }
 function isOfferLike(value: MarketModule): value is FixedPriceLike {
   return value.type === MARKET_TYPES.FIXED_PRICE && value.side === FIXED_SIDE_TYPES.OFFER
 }
 
-function isAsk(value: any): value is any {
-  return value.marketType === 'V3_ASK'
-}
+export const useRelevantMarket = (markets: readonly MarketModule[] = []) => {
+  console.log(markets)
 
-export const useRelevantMarket = (markets: any[]) => {
   const auctions: AuctionLike[] = markets.filter(isAuctionLike)
-
-  const asks: any = markets.filter(isAsk)
-
+  const asks: FixedPriceLike[] = markets.filter(isAskLike)
   const offers: FixedPriceLike[] = markets.filter(isOfferLike)
 
   const ask = asks[0]

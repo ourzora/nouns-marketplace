@@ -6,23 +6,13 @@ import { useRelevantMarket } from '../hooks/useRelevantMarket'
 import { ModalComposition } from '@modal'
 import { FillAsk } from '../wizards/FillAsk'
 import { buttonStyle, lightFont } from './MarketComponents.css'
+import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 
 /* MARKETS_SUMMARY TYPE? */
 export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
-  const {
-    nft,
-    metadata,
-    rawData: { marketsSummary },
-  } = nftData
+  const { nft, metadata, markets } = nftData
 
-  const {
-    ask: {
-      price: { nativePrice },
-      status,
-    },
-  } = useRelevantMarket(marketsSummary)
-
-  const cryptoVal = useMemo(() => `${formatCryptoVal(nativePrice.raw)} ETH`, [])
+  const { ask } = useRelevantMarket(markets)
 
   if (!nft || !metadata) {
     return null
@@ -30,14 +20,14 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
 
   return (
     <Flex w="100%">
-      {status === 'ACTIVE' ? (
+      {ask && ask.status === MARKET_INFO_STATUSES.ACTIVE ? (
         <Flex w="100%" justify="space-between">
           <Stack>
             <Text variant="heading-xs" className={lightFont} color="tertiary">
               Price
             </Text>
             <Text variant="heading-sm" className={lightFont}>
-              {cryptoVal}
+              {ask.amount?.amount.value} {ask.amount?.symbol}
             </Text>
           </Stack>
           <ModalComposition
@@ -56,15 +46,17 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
             }
             content={
               <Box p="x8">
-                <FillAsk
-                  marketSummary={marketsSummary}
-                  tokenAddress={nft.contract.address}
-                  tokenId={nft.tokenId}
-                  tokenName={metadata.name}
-                  askCurrency={nativePrice.currency.address}
-                  askPrice={nativePrice.raw}
-                  nftData={nftData}
-                />
+                {ask.amount && (
+                  <FillAsk
+                    marketSummary={markets}
+                    tokenAddress={nft.contract.address}
+                    tokenId={nft.tokenId}
+                    tokenName={metadata.name}
+                    askCurrency={ask.amount.address}
+                    askPrice={ask.amount.amount.raw}
+                    nftData={nftData}
+                  />
+                )}
               </Box>
             }
           />
@@ -75,7 +67,7 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
             Sold for
           </Text>
           <Text variant="heading-sm" className={lightFont}>
-            {cryptoVal}
+            cryptoVal
           </Text>
         </Stack>
       )}
