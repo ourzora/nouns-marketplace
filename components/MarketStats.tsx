@@ -1,5 +1,5 @@
-import { Flex, Text, Stack } from '@zoralabs/zord/elements'
-import { CollectionStatsAggregateQuery } from '@zoralabs/zdk-alpha/dist/queries/queries-sdk'
+import { Flex, Text, Stack } from '@zoralabs/zord'
+import { CollectionStatsAggregateQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { lightFont } from 'styles/styles.css'
 
 export function StatBlock({
@@ -38,7 +38,7 @@ export function MarketStats({
         />
         <StatBlock
           statType="Volume"
-          statValue={`${aggregateStat?.salesVolume?.ethPrice} ETH`}
+          statValue={`${aggregateStat?.salesVolume?.chainTokenPrice} ETH`}
         />
         <StatBlock
           statType="USDC Volume"

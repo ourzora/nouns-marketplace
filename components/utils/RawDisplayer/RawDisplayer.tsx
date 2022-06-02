@@ -1,4 +1,4 @@
-import { Box } from '@zoralabs/zord/elements'
+import { Box } from '@zoralabs/zord'
 import { codeWrapper, code } from './RawDisplayer.css'
 
 export function RawDisplayer({ data }: { data?: any }) {

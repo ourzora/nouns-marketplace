@@ -1,4 +1,4 @@
-import { Text } from '@zoralabs/zord/elements'
+import { Text } from '@zoralabs/zord'
 import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 import { useRouter } from 'next/router'
 

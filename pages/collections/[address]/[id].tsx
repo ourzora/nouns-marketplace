@@ -1,8 +1,7 @@
 import type { NextPage } from 'next'
 import { RawDisplayer } from 'components/utils'
 import { PageWrapper } from 'components/PageWrapper'
-import { Heading } from '@zoralabs/zord/elements'
-
+import { Heading } from '@zoralabs/zord'
 
 const NFT: NextPage = () => {
   return (

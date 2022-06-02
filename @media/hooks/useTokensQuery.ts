@@ -1,18 +1,18 @@
 import { getAddress } from '@ethersproject/address'
-import { transformNFTZDKAlpha } from '@zoralabs/nft-hooks/dist/backends'
+import { transformNFTZDK } from '@zoralabs/nft-hooks/dist/backends'
 import { prepareJson } from '@zoralabs/nft-hooks/dist/fetcher/NextUtils'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { ZDK } from '@zoralabs/zdk-alpha'
+import { ZDK } from '@zoralabs/zdk'
 import {
   MarketCategory,
   SortDirection,
   TokenSortKey,
-} from '@zoralabs/zdk-alpha/dist/queries/queries-sdk'
+} from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { flatten } from 'lodash'
 import { useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
-interface UseCollectionQueryProps {
+interface useCollectionProps {
   contractAddress?: string[]
   ownerAddress?: string
   initialData?: NFTObject[]
@@ -23,9 +23,12 @@ const zdkAlpha = new ZDK('https://api.zora.co/graphql')
 
 async function getNFTs(query: any): Promise<NFTObject[]> {
   const resp = await zdkAlpha.tokens(query)
-  return resp.tokens.nodes
-    .map((token) => transformNFTZDKAlpha(token, { rawData: token }))
-    .map(prepareJson)
+  return (
+    resp.tokens.nodes
+      /* @ts-ignore */
+      .map((token) => transformNFTZDK(token, { rawData: token }))
+      .map(prepareJson)
+  )
 }
 
 export function useTokensQuery({
@@ -33,7 +36,7 @@ export function useTokensQuery({
   ownerAddress,
   initialData = [],
   pageSize = 8,
-}: UseCollectionQueryProps) {
+}: useCollectionProps) {
   const getKey = (pageIndex: number = 0, previousPageData: NFTObject[]) => {
     if (previousPageData && !previousPageData.length) return null // reached the end
     return {
@@ -48,12 +51,14 @@ export function useTokensQuery({
       sort: {
         sortDirection: SortDirection.Desc,
         sortAxis: MarketCategory.Ask,
-        sortKey: TokenSortKey.EthPrice,
+        sortKey: TokenSortKey.NativePrice,
       },
+      ilter: {},
       pagination: {
         offset: pageIndex * pageSize,
         limit: pageSize,
       },
+      includeFullDetails: true,
     }
   }
 

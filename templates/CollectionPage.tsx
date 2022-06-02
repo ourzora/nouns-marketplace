@@ -1,4 +1,4 @@
-import { Box } from '@zoralabs/zord/elements'
+import { Box } from '@zoralabs/zord'
 
 export function CollectionPage() {
   return <Box></Box>

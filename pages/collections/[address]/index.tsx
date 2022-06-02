@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
-import { RawDisplayer } from 'components/utils'
 import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
-import { Heading } from '@zoralabs/zord/elements'
+import { useEffect } from 'react'
 import { NFTGrid } from '@media/NFTGrid'
 import { MarketStats } from 'components/MarketStats'
 import { CollectionHeader } from 'components/CollectionHeader'
+import { useCollectionsContext } from 'providers/CollectionsProvider'
 
 /* @ts-ignore */
 const Collection: NextPage = ({
@@ -15,6 +15,15 @@ const Collection: NextPage = ({
   aggregateStats,
   collection,
 }: CollectionServiceProps) => {
+  const { setCurrentCollection } = useCollectionsContext()
+
+  useEffect(() => {
+    if (collection && collection?.name) setCurrentCollection(collection.name)
+    return () => {
+      setCurrentCollection('Explore')
+    }
+  }, [collection])
+
   return (
     <PageWrapper p="x4" direction="column" gap="x4">
       <CollectionHeader collection={collection} />

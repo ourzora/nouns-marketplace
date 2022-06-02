@@ -1,4 +1,4 @@
-import { Box, BoxProps, Heading, Paragraph } from '@zoralabs/zord/elements'
+import { Box, BoxProps, Heading, Paragraph } from '@zoralabs/zord'
 import React from 'react'
 
 interface ModalTitleAndDescriptionProps extends BoxProps {

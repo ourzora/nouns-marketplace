@@ -1,5 +1,6 @@
-import { Flex, Text, Stack, Display, Paragraph, Eyebrow } from '@zoralabs/zord/elements'
-import { Collection } from '@zoralabs/zdk-alpha/dist/queries/queries-sdk'
+import { useEffect } from 'react'
+import { Stack, Display, Paragraph } from '@zoralabs/zord'
+import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { lightFont } from 'styles/styles.css'
 
 export function CollectionHeader({ collection }: { collection: Collection }) {

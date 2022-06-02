@@ -1,4 +1,4 @@
-import { Box, Icon } from '@zoralabs/zord/elements'
+import { Box, Icon } from '@zoralabs/zord'
 import { background, close, content, overlay } from './Modal.css'
 import * as Dialog from '@radix-ui/react-dialog'
 import clsx from 'clsx'
