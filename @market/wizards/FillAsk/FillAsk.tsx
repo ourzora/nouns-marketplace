@@ -11,13 +11,12 @@ import { useERC20TokenAllowance } from '../../hooks/useERC20TokenAllowance'
 import { useZoraV3Context } from '../../hooks/useZoraV3Context'
 import { ERC20_TRANSFER_HELPER_ADDRESS } from '../../utils/addresses'
 import { isAddressMatch } from '../../utils/validators'
+import { PrintError } from '@market/components/PrintError'
 
 import { RawDisplayer } from '../../../components/utils'
 import { NftInfo } from '../../components/NftInfo'
 
 import { useAccount } from 'wagmi'
-
-import { WalletBalance } from './../../components/WalletBalace'
 
 type FillAskProps = {
   tokenId: string
@@ -75,7 +74,7 @@ export function FillAsk({
   const handleFillAsk = useCallback(async () => {
     try {
       if (!AsksV11 || !account || !account.address) {
-        throw new Error('V3AskContract is not ready, please try again.')
+        throw new Error(`V3AskContract is not ready, please try again.`)
       }
       const promise = AsksV11.fillAsk(
         tokenAddress,
@@ -152,7 +151,7 @@ export function FillAsk({
               </Paragraph>
             </Paragraph>
           )}
-          {error && <Text>{error}</Text>}
+          {error && <PrintError errorMessage={error} />}
           <TransactionSubmitButton
             disabled={!balance || !sufficientBalance}
             txInProgress={txInProgress}
@@ -171,28 +170,5 @@ export function FillAsk({
         </>
       )}
     </Box>
-  )
-}
-
-interface PreviewImageProps extends BoxProps {
-  src?: string
-}
-
-function PreviewImage({ src, ...props }: PreviewImageProps) {
-  return (
-    <Box
-      {...props}
-      w="x10"
-      h="x10"
-      borderRadius="small"
-      style={
-        src
-          ? {
-              backgroundImage: `url(${src})`,
-              backgroundPosition: `center`,
-            }
-          : undefined
-      }
-    />
   )
 }

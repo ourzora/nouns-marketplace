@@ -1,12 +1,22 @@
-import { style } from '@vanilla-extract/css'
+import { style, globalStyle } from '@vanilla-extract/css'
+import { atoms } from '@zoralabs/zord'
 
-export const codeWrapper = style({
-  textAlign: 'start',
-})
+export const codeWrapper = style([
+  {
+    textAlign: 'start',
+    overflowX: 'scroll',
+  },
+  atoms({
+    w: '100%',
+    backgroundColor: 'tertiary',
+    p: 'x4',
+    borderRadius: 'curved',
+    mt: 'x2',
+  }),
+])
 
-export const code = style({
-  fontSize: '14px',
-  fontFamily: 'SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace',
-  lineHeight: 1.25,
-  overflowX: 'scroll',
+globalStyle(`${codeWrapper} pre`, {
+  fontSize: '12px',
+  fontFamily: 'SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace!important',
+  lineHeight: '1!important',
 })
