@@ -4,7 +4,6 @@ import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTCardMarket } from '@market'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 import { cardWrapper } from '@media/NftMedia.css'
-import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 
 export function NFTCard({
   nftData,

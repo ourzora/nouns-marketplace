@@ -49,11 +49,11 @@ export function useTokensQuery({
         }),
       },
       sort: {
-        sortDirection: SortDirection.Desc,
+        sortDirection: SortDirection.Asc,
         sortAxis: MarketCategory.Ask,
         sortKey: TokenSortKey.NativePrice,
       },
-      ilter: {},
+      filter: {},
       pagination: {
         offset: pageIndex * pageSize,
         limit: pageSize,
