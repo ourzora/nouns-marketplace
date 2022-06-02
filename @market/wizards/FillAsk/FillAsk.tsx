@@ -6,20 +6,18 @@ import { ModalTitleAndDescription } from '@modal'
 import { TransactionSubmitButton } from '../../components/TransactionSubmitButton'
 import { ContractInteractionStatus } from '../../components/ContractInteractionStatus'
 import { useContractTransaction } from '../../hooks/useContractTransaction'
-// import { useAuth } from '../hooks/useAuth'
 import { useCurrencyBalance } from '../../hooks/useCurrencyBalance'
 import { useERC20TokenAllowance } from '../../hooks/useERC20TokenAllowance'
-
-import useToggle from '../../hooks/useToggle'
-
 import { useZoraV3Context } from '../../hooks/useZoraV3Context'
 import { ERC20_TRANSFER_HELPER_ADDRESS } from '../../utils/addresses'
 import { isAddressMatch } from '../../utils/validators'
 
 import { RawDisplayer } from '../../../components/utils'
+import { NftInfo } from '../../components/NftInfo'
 
 import { useAccount } from 'wagmi'
-import { useBalance } from 'wagmi'
+
+import { WalletBalance } from './../../components/WalletBalace'
 
 type FillAskProps = {
   tokenId: string
@@ -34,21 +32,6 @@ type FillAskProps = {
 }
 
 type FillAskStep = 'ConnectWallet' | 'ReviewDetails' | 'Confirmation'
-
-export function WalletBalance({ address }: { address: string }) {
-  const { data, isError, isLoading } = useBalance({
-    addressOrName: address,
-  })
-
-  if (isLoading) return <div>Fetching balance…</div>
-  if (isError) return <div>Error fetching balance</div>
-
-  return (
-    <div>
-      Balance: {data?.formatted} {data?.symbol}
-    </div>
-  )
-}
 
 export function FillAsk({
   tokenAddress,
@@ -66,10 +49,6 @@ export function FillAsk({
   // const { user: account, address } = useAuth()
   const { AsksV11 } = useZoraV3Context()
   const { tx, txStatus, handleTx, txInProgress } = useContractTransaction()
-
-  useEffect(() => {
-    console.log(nftData)
-  }, [nftData])
 
   const noWallet = useMemo(() => {
     return account === null ? true : false
@@ -143,27 +122,9 @@ export function FillAsk({
   return (
     <Box w="100%">
       {wizardStep !== 'Confirmation' && (
-        <Stack>
-          <ModalTitleAndDescription
-            title={noWallet ? 'Connect your Wallet' : `Buy ${tokenName}`}
-            description={
-              noWallet
-                ? undefined
-                : "You're about to buy this NFT at the currently listed price."
-            }
-          />
-          {account !== null && account?.address && (
-            <WalletBalance address={account?.address} />
-          )}
-        </Stack>
+        <NftInfo collectionAddress={tokenAddress} tokenId={tokenId} askPrice={askPrice} />
       )}
-      {wizardStep === 'ConnectWallet' ? (
-        noWallet ? (
-          <Box>You need to connect your wallet</Box>
-        ) : (
-          <Box>You need have options</Box>
-        )
-      ) : wizardStep === 'Confirmation' && tx ? (
+      {wizardStep === 'Confirmation' && tx ? (
         <ContractInteractionStatus
           title="Your purchase will be confirmed shortly"
           previewURL={previewURL}
@@ -174,13 +135,9 @@ export function FillAsk({
         />
       ) : (
         <>
-          <Box>
-            <PreviewImage src={previewURL} />
-            <RawDisplayer data={{ askCurrency, askPrice }} />
-          </Box>
           {balance && sufficientBalance && needsERC20Approval && (
             <Paragraph size="sm">
-              {/*You must first approve ZORA V3 to use your {rate?.symbol}*/}
+              You must first approve ZORA V3 to use your {rate?.symbol}
               <Text
                 as="a"
                 variant="link"
@@ -200,6 +157,7 @@ export function FillAsk({
             disabled={!balance || !sufficientBalance}
             txInProgress={txInProgress}
             txStatus={txStatus}
+            variant="outline"
             onClick={
               balance && sufficientBalance && needsERC20Approval
                 ? handleApproveERC20
@@ -208,13 +166,14 @@ export function FillAsk({
           >
             {balance && sufficientBalance && needsERC20Approval
               ? 'Approve Token Contract'
-              : 'Buy NFT'}
+              : 'Buy now'}
           </TransactionSubmitButton>
         </>
       )}
     </Box>
   )
 }
+
 interface PreviewImageProps extends BoxProps {
   src?: string
 }

@@ -5,12 +5,13 @@ import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { rankingRow, rankingStats } from './CollectionRanking.css'
 import { Link } from 'components/Link'
 import { buttonStyle } from 'styles/styles.css'
+import { roundTwoDecimals } from 'utils/math'
 
 /* todo: add a skeleton or some kind of loading state */
 
 export function RankingRow({ collection }: { collection: CollectionsData }) {
   const collectionVolume = useMemo(
-    () => Math.round(collection.aggregateStat.salesVolume.chainTokenPrice * 100) / 100,
+    () => roundTwoDecimals(collection.aggregateStat.salesVolume.chainTokenPrice),
     [collection]
   )
 
@@ -18,7 +19,7 @@ export function RankingRow({ collection }: { collection: CollectionsData }) {
     () =>
       collection.aggregateStat?.floorPrice &&
       collection.aggregateStat?.floorPrice !== null
-        ? Math.round(collection.aggregateStat.floorPrice * 100) / 100
+        ? roundTwoDecimals(collection.aggregateStat.floorPrice)
         : 'NA',
     [collection]
   )
