@@ -10,3 +10,8 @@ a {
 * {
   box-sizing: border-box;
 }
+
+:root {
+  --dk-grey: rgba(0, 0, 0, 0.6);
+  --light-grey: rgba(0, 0, 0, 0.125);
+}

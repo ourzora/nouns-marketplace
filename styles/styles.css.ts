@@ -1,4 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css'
+import { atoms } from '@zoralabs/zord'
 
 globalStyle('html, body', {
   margin: 0,
@@ -22,5 +23,17 @@ export const leadingTight = style({
 })
 
 export const lightGreyType = style({
-  color: 'rgba(0,0,0,.6)',
+  color: 'var(--dk-grey)',
 })
+
+export const buttonStyle = style([
+  {
+    backgroundColor: 'var(--light-grey)',
+  },
+  atoms({
+    borderRadius: 'round',
+    px: 'x4',
+    py: 'x2',
+    justifyContent: 'center',
+  }),
+])
