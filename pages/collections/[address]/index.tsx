@@ -3,7 +3,7 @@ import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
 import { useEffect } from 'react'
 import { NFTGrid } from '@media/NFTGrid'
-import { MarketStats } from 'components/MarketStats'
+import { MarketStats } from '@market/components/MarketStats'
 import { CollectionHeader } from 'components/CollectionHeader'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 
@@ -26,9 +26,11 @@ const Collection: NextPage = ({
 
   return (
     <PageWrapper p="x4" direction="column" gap="x4">
-      <CollectionHeader collection={collection} />
+      <CollectionHeader collection={collection} aggregateStats={aggregateStats} />
       <MarketStats aggregateStats={aggregateStats} />
-      <NFTGrid contractAddress={[contractAddress]} initialPage={initialPage} />
+      {contractAddress && (
+        <NFTGrid contractAddress={[contractAddress]} initialPage={initialPage} />
+      )}
     </PageWrapper>
   )
 }

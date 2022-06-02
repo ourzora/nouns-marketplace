@@ -1,6 +1,8 @@
+import { useMemo } from 'react'
 import { Flex, Text, Stack } from '@zoralabs/zord'
 import { CollectionStatsAggregateQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { lightFont } from 'styles/styles.css'
+import { roundFourDecimals, roundTwoDecimals } from 'utils/math'
 
 export function StatBlock({
   statType,
@@ -27,6 +29,16 @@ export function MarketStats({
   aggregateStats: CollectionStatsAggregateQuery
 }) {
   const { aggregateStat } = aggregateStats
+
+  const volume = useMemo(
+    () => roundFourDecimals(aggregateStat?.salesVolume?.chainTokenPrice),
+    [aggregateStat?.salesVolume?.chainTokenPrice]
+  )
+  const usdcPrice = useMemo(
+    () => roundTwoDecimals(aggregateStat?.salesVolume?.usdcPrice),
+    [aggregateStat?.salesVolume?.usdcPrice]
+  )
+
   return (
     <Flex justify="center" mb="x10">
       <Flex gap="x4">
@@ -34,16 +46,12 @@ export function MarketStats({
         <StatBlock statType="Items" statValue={aggregateStat?.nftCount} />
         <StatBlock
           statType="Floor Price"
-          statValue={`${aggregateStat?.floorPrice} ETH`}
+          statValue={`${
+            aggregateStat?.floorPrice === null ? '0' : aggregateStat.floorPrice
+          } ETH`}
         />
-        <StatBlock
-          statType="Volume"
-          statValue={`${aggregateStat?.salesVolume?.chainTokenPrice} ETH`}
-        />
-        <StatBlock
-          statType="USDC Volume"
-          statValue={`$${aggregateStat?.salesVolume?.usdcPrice}`}
-        />
+        <StatBlock statType="Volume" statValue={`${volume} ETH`} />
+        <StatBlock statType="USDC Volume" statValue={`$${usdcPrice}`} />
       </Flex>
     </Flex>
   )

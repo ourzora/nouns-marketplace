@@ -137,7 +137,7 @@ export function FillAsk({
         <>
           {balance && sufficientBalance && needsERC20Approval && (
             <Paragraph size="sm">
-              You must first approve ZORA V3 to use your {rate?.symbol}
+              You must first approve ZORA V3 to use your {/*rate?.symbol*/}
               <Text
                 as="a"
                 variant="link"
