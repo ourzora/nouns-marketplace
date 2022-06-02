@@ -12,12 +12,7 @@ export function NFTCard({
   nftData: NFTObject
   cardMarketComponent?: JSX.Element
 }) {
-  const {
-    metadata,
-    media,
-    nft,
-    rawData: { marketsSummary },
-  } = nftData
+  const { metadata, media, nft, markets } = nftData
   const { image } = useRawImageTransform(media?.image?.uri)
 
   return (
@@ -34,7 +29,11 @@ export function NFTCard({
       </Box>
       <Stack gap="x4" mt="x4">
         <Heading size="md">{metadata?.name}</Heading>
-        {marketsSummary.length ? <NFTCardMarket nftData={nftData} /> : <div>List</div>}
+        {markets && markets.length ? (
+          <NFTCardMarket nftData={nftData} />
+        ) : (
+          <div>List</div>
+        )}
       </Stack>
     </Stack>
   )
