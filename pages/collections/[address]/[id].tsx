@@ -25,7 +25,10 @@ const NFT: NextPage = () => {
       <Heading>Markets</Heading>
       {data?.markets &&
         data?.markets.map((data) => (
-          <RawDisplayer data={{ ...data?.createdAt, status: data?.status }} />
+          <RawDisplayer
+            key={data.createdAt.transactionHash}
+            data={{ ...data?.createdAt, status: data?.status }}
+          />
         ))}
 
       <RawDisplayer data={data?.markets} />
