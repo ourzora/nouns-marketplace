@@ -53,10 +53,12 @@ export function useTokensQuery({
         sortAxis: MarketCategory.Ask,
         sortKey: TokenSortKey.NativePrice,
       },
+      ilter: {},
       pagination: {
         offset: pageIndex * pageSize,
         limit: pageSize,
       },
+      includeFullDetails: true,
     }
   }
 

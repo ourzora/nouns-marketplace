@@ -48,9 +48,11 @@ export async function collectionService({ params }: CollectionParamsProps) {
           sortAxis: MarketCategory.Ask,
           sortKey: TokenSortKey.NativePrice,
         },
+        filter: {},
         pagination: {
           limit: 9,
         },
+        includeFullDetails: true,
       })
     } catch (err) {
       resp = await zdkService.tokens({
@@ -62,8 +64,6 @@ export async function collectionService({ params }: CollectionParamsProps) {
         },
       })
     }
-
-    console.log(resp.tokens.nodes)
 
     const initialPage = resp.tokens.nodes
       .map((token) => transformNFTZDK(token, { rawData: token }))

@@ -1,5 +1,5 @@
 import { Flex } from '@zoralabs/zord'
 
 export function RecentSales() {
-  return <Flex>Recent Sales</Flex>
+  return <Flex></Flex>
 }
