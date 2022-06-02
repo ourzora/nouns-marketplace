@@ -1,5 +1,5 @@
 import { Box } from '@zoralabs/zord'
-import { codeWrapper, code } from './RawDisplayer.css'
+import { codeWrapper } from './RawDisplayer.css'
 
 export function RawDisplayer({ data }: { data?: any }) {
   return (
@@ -11,9 +11,9 @@ export function RawDisplayer({ data }: { data?: any }) {
       w="100%"
       position="relative"
     >
-      <Box className={code} w="100%">
+      <code>
         <pre>{JSON.stringify(data, null, 2)}</pre>
-      </Box>
+      </code>
     </Box>
   )
 }
