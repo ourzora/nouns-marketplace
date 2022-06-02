@@ -4,10 +4,10 @@ import { useNFT } from '@zoralabs/nft-hooks'
 
 export function CollectionThumbnail({
   collectionAddress,
-  tokenId,
+  tokenId = '1',
 }: {
   collectionAddress: string
-  tokenId: string
+  tokenId?: string
 }) {
   const { data } = useNFT(collectionAddress, tokenId)
 

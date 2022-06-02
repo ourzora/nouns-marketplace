@@ -3,7 +3,6 @@ import { Box, Heading, Icon, Flex, Label, Stack } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { collectionTrigger } from './Header.css'
-
 import { CollectionLink } from './CollectionLink'
 
 export function CollectionMenu() {

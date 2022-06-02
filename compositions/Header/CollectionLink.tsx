@@ -13,10 +13,7 @@ export function CollectionLink({ collection }: { collection: CollectionsData }) 
     <Link href={`/collections/${collection.collectionInfo.address}`} passHref>
       <Flex align="center" justify="space-between" gap="x4" onClick={requestClose}>
         <Flex align="center" gap="x4">
-          <CollectionThumbnail
-            collectionAddress={collection.collectionInfo.address}
-            tokenId="1"
-          />
+          <CollectionThumbnail collectionAddress={collection.collectionInfo.address} />
           <Stack>
             <Label size="lg" className={leadingTight}>
               {collection.collectionInfo.name}
