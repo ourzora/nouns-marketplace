@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import { PageWrapper } from 'components/PageWrapper'
 import { Heading } from '@zoralabs/zord'
-import { NFTCard } from '@media/NFTCard'
 import { useRouter } from 'next/router'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { RawDisplayer } from 'components/utils'
@@ -10,7 +9,11 @@ const NFT: NextPage = () => {
   const { query } = useRouter()
   console.log(query)
 
-  const { data } = useNFT(query.address, query.id)
+  const { data } = useNFT(
+    /* @ts-ignore */
+    query.address,
+    query.id
+  )
 
   return (
     <PageWrapper p="x4" direction="column" gap="x4">
