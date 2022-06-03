@@ -8,14 +8,12 @@ export type NFTGridProps = {
   contractAddress?: string[]
   ownerAddress?: string
   initialPage?: NFTObject[]
-  cardMarketComponent?: JSX.Element
 }
 
 export function NFTGrid({
   contractAddress,
   ownerAddress,
   initialPage = [],
-  cardMarketComponent,
 }: NFTGridProps) {
   const {
     data: items,
@@ -35,9 +33,7 @@ export function NFTGrid({
         {items.map((nft) => (
           <NFTCard
             key={`${nft?.nft?.contract.address}-${nft?.nft?.tokenId}`}
-            /* @ts-ignore */
             nftData={nft}
-            cardMarketComponent={cardMarketComponent}
           />
         ))}
       </Grid>
