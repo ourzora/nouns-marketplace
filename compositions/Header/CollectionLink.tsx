@@ -1,13 +1,13 @@
 import { useCallback } from 'react'
 import { Flex, Stack, Label, Eyebrow, Icon } from '@zoralabs/zord'
-import { useModalRegistry } from '@modal'
+import { useModal } from '@modal'
 import { Link } from 'components/Link'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { lightGreyType, leadingTight, lightFont } from 'styles/styles.css'
 import { CollectionsData } from 'hooks/zdk/useCollections'
 
 export function CollectionLink({ collection }: { collection: CollectionsData }) {
-  const { requestClose } = useModalRegistry()
+  const { requestClose } = useModal()
 
   return (
     <Link href={`/collections/${collection.collectionInfo.address}`} passHref>

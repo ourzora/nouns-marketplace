@@ -61,3 +61,8 @@ export const close = style([
     p: 'x3',
   }),
 ])
+
+export const modalContentWrapper = style({
+  maxWidth: 900,
+  padding: 0,
+})

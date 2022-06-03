@@ -1,4 +1,4 @@
-import { ModalTitleAndDescription } from '@modal'
+import { ModalTitleAndDescription } from '@market/components'
 import { Box, Button, Flex, Label, Paragraph, Text, Stack } from '@zoralabs/zord'
 import React from 'react'
 import { shortenTxHash } from '../utils/format'
