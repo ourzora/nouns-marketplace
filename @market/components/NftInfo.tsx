@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Flex, Label, Stack } from '@zoralabs/zord'
+import { Flex, Label, Stack, Heading, Separator } from '@zoralabs/zord'
 import { ModalTitleAndDescription } from './ModalTitleAndDescription'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { useAccount } from 'wagmi'
@@ -28,34 +28,42 @@ export function NftInfo({
     if (askPrice) return `${formatCryptoVal(parseFloat(askPrice))} ETH`
   }, [])
 
-  if (!data) {
-    return null
-  }
-
   return (
-    <Stack gap="x6">
-      <Flex justify="space-between">
-        <Stack>
-          <ModalTitleAndDescription
-            title={noWallet ? 'Connect your Wallet' : `Buy ${data.metadata?.name}`}
-          />
-          {askPrice && <Label>for: {cryptoVal}</Label>}
-          {account?.address && <WalletBalance address={account.address} />}
-        </Stack>
+    <Stack gap="x4">
+      <Flex justify="space-between" align="center">
+        <ModalTitleAndDescription
+          title={
+            noWallet ? 'Connect your Wallet' : `Buy ${data ? data.metadata?.name : '...'}`
+          }
+        />
         <CollectionThumbnail collectionAddress={collectionAddress} tokenId={tokenId} />
       </Flex>
+      <Separator />
       <Flex justify="space-between">
-        <Label>Owned by</Label>
-        {data?.nft?.owner?.address && (
+        <Label color="tertiary">Owned by</Label>
+        {data?.nft?.owner?.address ? (
           <AddressWithLink address={data.nft.owner.address} />
+        ) : (
+          '...'
         )}
       </Flex>
       <Flex justify="space-between">
-        <Label>Minted by</Label>
-        {data?.nft?.minted?.address && (
+        <Label color="tertiary">Minted by</Label>
+        {data?.nft?.minted?.address ? (
           <AddressWithLink address={data.nft.minted.address} />
+        ) : (
+          '...'
         )}
       </Flex>
+      <Stack align="flex-end">
+        {askPrice && (
+          <Flex justify="space-between" align="center" w="100%">
+            <Label color="tertiary">Price:</Label>
+            <Heading size="md">{cryptoVal}</Heading>
+          </Flex>
+        )}
+        {account?.address && <WalletBalance address={account.address} />}
+      </Stack>
     </Stack>
   )
 }

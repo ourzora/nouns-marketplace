@@ -12,7 +12,6 @@ export function CollectionHeader({
   collection: Collection
   aggregateStats: CollectionStatsAggregateQuery
 }) {
-  console.log(aggregateStats)
   return (
     <Stack align="center">
       <Display>{collection.name}</Display>

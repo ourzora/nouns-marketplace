@@ -25,10 +25,7 @@ export const cardWrapper = style([
 
 /* Thumbnail */
 export const nftThumbnail = style([
-  {},
-  atoms({
-    position: 'relative',
-    w: 'x10',
-    h: 'x10',
-  }),
+  {
+    boxShadow: '0 0 20px rgba(0, 0, 0, 0.05)',
+  },
 ])

@@ -1,7 +1,7 @@
 import { atoms } from '@zoralabs/zord'
 import { keyframes, style } from '@vanilla-extract/css'
 
-const MODAL_BACKDROP_LAYER = 20
+const MODAL_BACKDROP_LAYER = 2000
 
 export const overlay = style([
   {
@@ -39,7 +39,7 @@ export const background = style([
     overflowY: 'auto',
     background: 'white',
     borderRadius: 40,
-    boxShadow: '0 0 20px rgba(0, 0, 0, 0.05)',
+    boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
     animation: `0.3s cubic-bezier(0.65, 0, 0.35, 1), ${keyframes({
       '0%': { opacity: 0, transform: 'scale(0.95)' },
       '100%': { opacity: 1, transform: 'scale(1)' },

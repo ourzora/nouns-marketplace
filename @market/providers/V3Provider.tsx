@@ -4,7 +4,7 @@ import { ZoraModuleManager as ZoraModuleManagerInterface } from '@zoralabs/v3/di
 import { AsksV1__factory } from '@zoralabs/v3/dist/typechain/factories/AsksV1__factory'
 import { AsksV11__factory } from '@zoralabs/v3/dist/typechain/factories/AsksV11__factory'
 import { ZoraModuleManager__factory as ModuleManagerFactory } from '@zoralabs/v3/dist/typechain/factories/ZoraModuleManager__factory'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState, useCallback } from 'react'
 import {
   ASKS_V11_ADDRESS,
   MODULE_MANAGER_ADDRESS,
@@ -62,14 +62,6 @@ const V3Provider: React.FC = ({ children }) => {
       setIsReadOnly(false)
     }
   }, [signer, account])
-
-  useEffect(() => {
-    if (!account && !isReadOnly) {
-      setModuleManager(defaultModuleManager)
-      setAsksV11(defaultAsksV11)
-      setIsReadOnly(true)
-    }
-  }, [account, isReadOnly])
 
   return (
     <V3ContractCtx.Provider

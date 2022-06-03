@@ -34,6 +34,8 @@ export function CollectionThumbnail({
       position="relative"
       overflow="hidden"
       borderRadius="curved"
+      className={nftThumbnail}
+      backgroundColoe="tertiary"
     >
       {data?.metadata?.imageUri && (
         <Box
@@ -42,7 +44,6 @@ export function CollectionThumbnail({
           w="100%"
           h="100%"
           position="absolute"
-          className={nftThumbnail}
           src={data?.metadata?.imageUri}
         />
       )}
