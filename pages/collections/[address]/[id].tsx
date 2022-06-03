@@ -8,7 +8,6 @@ import { NFTCard } from '@media/NFTCard'
 
 const NFT: NextPage = () => {
   const { query } = useRouter()
-  console.log(query)
 
   const { data } = useNFT(
     /* @ts-ignore */

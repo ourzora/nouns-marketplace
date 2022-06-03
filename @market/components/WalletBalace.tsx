@@ -13,7 +13,7 @@ export function WalletBalance({ address }: { address: string }) {
   }, [data])
 
   return (
-    <Paragraph>
+    <Paragraph color="tertiary">
       Your balance: {balance} {data?.symbol}
     </Paragraph>
   )

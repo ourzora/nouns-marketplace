@@ -17,8 +17,6 @@ function isOfferLike(value: MarketModule): value is FixedPriceLike {
 }
 
 export const useRelevantMarket = (markets: readonly MarketModule[] = []) => {
-  console.log(markets)
-
   const auctions: AuctionLike[] = markets.filter(isAuctionLike)
   const asks: FixedPriceLike[] = markets.filter(isAskLike)
   const offers: FixedPriceLike[] = markets.filter(isOfferLike)

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { Paragraph, Text, Box } from '@zoralabs/zord'
+import { Paragraph, Text, Box, Separator, Flex } from '@zoralabs/zord'
 import { AddressZero } from '@ethersproject/constants'
 import {
   TransactionSubmitButton,
@@ -28,6 +28,7 @@ type FillAskProps = {
   marketSummary: any
   nftData?: any
   onClose?: () => void
+  cancelButton?: JSX.Element
 }
 
 type FillAskStep = 'ConnectWallet' | 'ReviewDetails' | 'Confirmation'
@@ -35,23 +36,15 @@ type FillAskStep = 'ConnectWallet' | 'ReviewDetails' | 'Confirmation'
 export function FillAsk({
   tokenAddress,
   tokenId,
-  tokenName = 'NFT',
   askPrice,
   askCurrency,
   previewURL,
-  marketSummary,
-  nftData,
   onClose,
+  cancelButton,
 }: FillAskProps) {
-  const { data: account, isError, isLoading } = useAccount()
-
-  // const { user: account, address } = useAuth()
+  const { data: account } = useAccount()
   const { AsksV11 } = useZoraV3Context()
   const { tx, txStatus, handleTx, txInProgress } = useContractTransaction()
-
-  const noWallet = useMemo(() => {
-    return account === null ? true : false
-  }, [account])
 
   const [balance, sufficientBalance, refetchBalance] = useCurrencyBalance(
     askCurrency,
@@ -123,6 +116,7 @@ export function FillAsk({
       {wizardStep !== 'Confirmation' && (
         <NftInfo collectionAddress={tokenAddress} tokenId={tokenId} askPrice={askPrice} />
       )}
+      <Separator mt="x3" mb="x4" />
       {wizardStep === 'Confirmation' && tx ? (
         <ContractInteractionStatus
           title="Your purchase will be confirmed shortly"
@@ -152,21 +146,25 @@ export function FillAsk({
             </Paragraph>
           )}
           {error && <PrintError errorMessage={error} />}
-          <TransactionSubmitButton
-            disabled={!balance || !sufficientBalance}
-            txInProgress={txInProgress}
-            txStatus={txStatus}
-            variant="outline"
-            onClick={
-              balance && sufficientBalance && needsERC20Approval
-                ? handleApproveERC20
-                : handleFillAsk
-            }
-          >
-            {balance && sufficientBalance && needsERC20Approval
-              ? 'Approve Token Contract'
-              : 'Buy now'}
-          </TransactionSubmitButton>
+          <Flex>
+            {cancelButton}
+            <TransactionSubmitButton
+              disabled={!balance || !sufficientBalance}
+              txInProgress={txInProgress}
+              txStatus={txStatus}
+              variant="primary"
+              borderRadius="curved"
+              onClick={
+                balance && sufficientBalance && needsERC20Approval
+                  ? handleApproveERC20
+                  : handleFillAsk
+              }
+            >
+              {balance && sufficientBalance && needsERC20Approval
+                ? 'Approve Token Contract'
+                : 'Buy now'}
+            </TransactionSubmitButton>
+          </Flex>
         </>
       )}
     </Box>
