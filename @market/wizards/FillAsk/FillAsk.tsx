@@ -1,20 +1,20 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-
-import { Paragraph, Text, Box, BoxProps, Stack } from '@zoralabs/zord'
+import { Paragraph, Text, Box } from '@zoralabs/zord'
 import { AddressZero } from '@ethersproject/constants'
-import { ModalTitleAndDescription } from '@modal'
-import { TransactionSubmitButton } from '../../components/TransactionSubmitButton'
-import { ContractInteractionStatus } from '../../components/ContractInteractionStatus'
+import {
+  TransactionSubmitButton,
+  ContractInteractionStatus,
+  NftInfo,
+  PrintError,
+} from '@market/components'
+
 import { useContractTransaction } from '../../hooks/useContractTransaction'
 import { useCurrencyBalance } from '../../hooks/useCurrencyBalance'
 import { useERC20TokenAllowance } from '../../hooks/useERC20TokenAllowance'
 import { useZoraV3Context } from '../../hooks/useZoraV3Context'
 import { ERC20_TRANSFER_HELPER_ADDRESS } from '../../utils/addresses'
-import { isAddressMatch } from '../../utils/validators'
-import { PrintError } from '@market/components/PrintError'
 
-import { RawDisplayer } from '../../../components/utils'
-import { NftInfo } from '../../components/NftInfo'
+import { isAddressMatch } from '../../utils/validators'
 
 import { useAccount } from 'wagmi'
 

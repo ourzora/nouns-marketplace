@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Flex, Label, Stack } from '@zoralabs/zord'
-import { ModalTitleAndDescription } from '@modal'
+import { ModalTitleAndDescription } from './ModalTitleAndDescription'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { useAccount } from 'wagmi'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'

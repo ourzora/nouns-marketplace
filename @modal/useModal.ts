@@ -1,7 +1,7 @@
 import { ModalContext, ModalContextType, ModalType } from './ModalProvider'
 import { useCallback, useContext } from 'react'
 
-export function useModalRegistry() {
+export function useModal() {
   const [state, setState] = useContext<ModalContextType>(ModalContext)
   const { modalType, modalOptions = {} } = state
 

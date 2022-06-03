@@ -1,7 +1,8 @@
 import { useCallback } from 'react'
 import { Box, Button } from '@zoralabs/zord'
-import { Modal, ModalContent, useModalRegistry } from '@modal'
+import { Modal, ModalContent, useModal } from '@modal'
 
+/* TODO: Modify Zord ModalContent component to accept custom styling */
 export function ModalComposition({
   modalName,
   content,
@@ -11,7 +12,7 @@ export function ModalComposition({
   content?: JSX.Element
   trigger?: JSX.Element
 }) {
-  const { modalType, requestClose, requestOpen } = useModalRegistry()
+  const { modalType, requestClose, requestOpen } = useModal()
 
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
