@@ -5,6 +5,7 @@ import { NOUNS_GLASSES } from 'styles/style-constants'
 import { SITE_TITLE } from 'utils/env-vars'
 import { nounsGlasses } from './Header.css'
 import { CollectionMenu } from './CollectionMenu'
+// import { CollectionLinks } from './CollectionLinks'
 
 export function HeaderNav() {
   return (

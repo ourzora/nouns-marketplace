@@ -22,3 +22,8 @@ export const collectionTrigger = style([
     px: 'x4',
   }),
 ])
+
+export const modalWrapper = style({
+  overflowY: 'scroll',
+  height: 300,
+})

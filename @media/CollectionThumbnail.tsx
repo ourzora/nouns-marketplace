@@ -2,6 +2,7 @@ import { Box } from '@zoralabs/zord'
 import { nftThumbnail } from './NftMedia.css'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { useMemo } from 'react'
+import { useRawImageTransform } from './hooks/useRawImageTransform'
 
 export function CollectionThumbnail({
   collectionAddress,
@@ -13,6 +14,7 @@ export function CollectionThumbnail({
   size?: 'sm' | 'md' | 'lg'
 }) {
   const { data } = useNFT(collectionAddress, tokenId)
+  const { image } = useRawImageTransform(data?.media?.image?.uri)
 
   const thumbnailSize = useMemo(() => {
     switch (size) {
@@ -37,15 +39,8 @@ export function CollectionThumbnail({
       className={nftThumbnail}
       backgroundColoe="tertiary"
     >
-      {data?.metadata?.imageUri && (
-        <Box
-          as="img"
-          inset="x0"
-          w="100%"
-          h="100%"
-          position="absolute"
-          src={data?.metadata?.imageUri}
-        />
+      {data?.media?.image?.uri && (
+        <Box as="img" inset="x0" w="100%" h="100%" position="absolute" src={image} />
       )}
     </Box>
   )

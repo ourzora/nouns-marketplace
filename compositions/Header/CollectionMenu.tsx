@@ -1,8 +1,7 @@
-import { useMemo } from 'react'
 import { Box, Heading, Icon, Flex, Label, Stack } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
-import { collectionTrigger } from './Header.css'
+import { collectionTrigger, modalWrapper } from './Header.css'
 import { CollectionLink } from './CollectionLink'
 
 export function CollectionMenu() {
@@ -23,12 +22,14 @@ export function CollectionMenu() {
         <Box p="x8">
           <Stack gap="x6">
             <Heading>Explore Collections {collectionAmount}</Heading>
-            {collections.map((collection) => (
-              <CollectionLink
-                key={`${collection.collectionInfo.address}-${collection.collectionInfo.name}`}
-                collection={collection}
-              />
-            ))}
+            <Stack className={modalWrapper} gap="x4">
+              {collections.map((collection) => (
+                <CollectionLink
+                  key={`${collection.collectionInfo.address}-${collection.collectionInfo.name}`}
+                  collection={collection}
+                />
+              ))}
+            </Stack>
           </Stack>
         </Box>
       }
