@@ -31,7 +31,7 @@ const NFT: NextPage = () => {
         ))}
 
       <RawDisplayer data={data?.markets} />
-      <Heading>ALL NFT DATA - via useNFT 'nfthooks'</Heading>
+      <Heading>ALL NFT DATA - via useNFT nfthooks</Heading>
       <RawDisplayer data={data} />
     </PageWrapper>
   )
