@@ -10,7 +10,7 @@ export function AddressWithLink({ address }: { address: string }) {
 
   const shortAddress = useShortAddress(address)
 
-  const buildEtherscanLink = useMemo(
+  const buildTokenInfoLink = useMemo(
     () => `https://etherscan.io/address/${address}`,
     [address]
   )
@@ -20,7 +20,7 @@ export function AddressWithLink({ address }: { address: string }) {
       align="center"
       gap="x2"
       as="a"
-      href={buildEtherscanLink}
+      href={buildTokenInfoLink}
       target="_blank"
       rel="noreferrer"
     >

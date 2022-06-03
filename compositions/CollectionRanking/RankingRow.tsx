@@ -6,10 +6,13 @@ import { rankingRow, rankingStats } from './CollectionRanking.css'
 import { Link } from 'components/Link'
 import { buttonStyle } from 'styles/styles.css'
 import { roundTwoDecimals } from 'utils/math'
+// import { useCollection } from 'hooks/zdk/useCollection'
 
 /* todo: add a skeleton or some kind of loading state */
 
 export function RankingRow({ collection }: { collection: CollectionsData }) {
+  // const { collection: collectionData } = useCollection()
+
   const collectionVolume = useMemo(
     () => roundTwoDecimals(collection.aggregateStat.salesVolume.chainTokenPrice),
     [collection]

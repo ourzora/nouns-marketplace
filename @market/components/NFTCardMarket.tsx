@@ -1,5 +1,3 @@
-import { useMemo } from 'react'
-import { formatCryptoVal } from '../utils/numbers'
 import { Text, Box, Flex, Stack } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useRelevantMarket } from '../hooks/useRelevantMarket'

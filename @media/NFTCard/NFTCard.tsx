@@ -1,9 +1,10 @@
-import { Stack, Box, Text, Flex, Heading } from '@zoralabs/zord'
+import { Stack, Box, Icon, Flex, Heading, Separator } from '@zoralabs/zord'
 import { Link } from 'components/Link'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { NFTCardMarket } from '@market'
+import { NFTCardMarket, TokenInfoLink, EtherscanLogo } from '@market'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 import { cardWrapper } from '@media/NftMedia.css'
+import { Zorb } from '@zora-brand'
 
 export function NFTCard({ nftData }: { nftData: NFTObject }) {
   const { metadata, media, nft, markets } = nftData
@@ -24,7 +25,27 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
         </Box>
       </Link>
       <Stack gap="x4" mt="x4">
-        <Heading size="md">{metadata?.name}</Heading>
+        <Separator />
+        <Flex align="center" gap="x2" justify="space-between">
+          <Heading size="md">{metadata?.name}</Heading>
+          <Flex align="center" gap="x3">
+            <TokenInfoLink
+              linkType="nft"
+              contractAddress={nft?.contract.address}
+              tokenId={nft?.tokenId}
+            >
+              <EtherscanLogo size={24} />
+            </TokenInfoLink>
+            <TokenInfoLink
+              linkType="zoraNft"
+              contractAddress={nft?.contract.address}
+              tokenId={nft?.tokenId}
+            >
+              <Zorb size={24} address={nft?.contract.address} />
+            </TokenInfoLink>
+          </Flex>
+        </Flex>
+        <Separator />
         {markets && markets.length ? (
           <NFTCardMarket nftData={nftData} />
         ) : (
