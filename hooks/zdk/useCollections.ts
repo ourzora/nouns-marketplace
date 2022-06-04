@@ -3,6 +3,7 @@ import { Collection, AggregateStat } from '@zoralabs/zdk/dist/queries/queries-sd
 import { zdkService } from 'utils/zdk'
 import useSWR from 'swr'
 import { collectionAddresses } from 'utils/collection-addresses'
+import { useEffect } from 'react'
 
 const networkInput = {
   chain: Chain.Mainnet,
@@ -18,7 +19,7 @@ const mergeCollectionFetch = async (address: string) => {
   const collection = await zdkService
     .collection({
       address: address,
-      includeFullDetails: true,
+      includeFullDetails: false,
     })
     .then((res) => {
       return res
@@ -42,6 +43,7 @@ const fetchCollections = async (collections: string[]) => {
         return response
       })
     )
+    console.log(responses)
     return {
       data: responses,
     }
@@ -52,6 +54,9 @@ const fetchCollections = async (collections: string[]) => {
 
 export function useCollections() {
   const { data, error } = useSWR([collectionAddresses], fetchCollections)
+  useEffect(() => {
+    console.log('collections', data, error)
+  }, [data, error])
 
   return {
     collections: data?.data,

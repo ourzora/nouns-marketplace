@@ -11,7 +11,6 @@ export const collectionAddresses: string[] = [
   '0x551e8866512183c35176752741cfd3ce9e3a6c0e',
   '0xd9e49f550d0f605e3ccee3167ec14ee7a9134ddb',
   '0xeef77d7f89090667f5618acc194d66d2cba42c76',
-  '0xc295d52bce076be5a43f2353f3841c34ee2add8a',
   '0xdB05F0d43B15fba15A003B1fE7933441e04F0802',
   '0xb9b096c521e7356888fd3cb04a3af943f401b86b',
   '0xFdF27D7c95Eac62d86979E2d73ffFBCf380fA9fe',
@@ -25,8 +24,6 @@ export const collectionAddresses: string[] = [
 
 /* DERIVITIVES
 [
-DEFAULT_CONTRACT,
-  '0x4b10701Bfd7BFEdc47d50562b76b436fbB5BdB3B',
   '0xCa21d4228cDCc68D4e23807E5e370C07577Dd152',
 ]
 */
