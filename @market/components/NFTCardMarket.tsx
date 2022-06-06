@@ -12,6 +12,8 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
 
   const { ask } = useRelevantMarket(markets)
 
+  console.log(ask)
+
   if (!nft || !metadata) {
     return null
   }
@@ -61,14 +63,33 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
           />
         </Flex>
       ) : (
-        <Stack>
-          <Text variant="heading-xs" className={lightFont} color="tertiary">
-            Sold for
-          </Text>
-          <Text variant="heading-xs" className={lightFont}>
-            cryptoVal
-          </Text>
-        </Stack>
+        <>
+          {ask.status === MARKET_INFO_STATUSES.COMPLETE && (
+            <Flex justify="space-between" w="100%">
+              <Stack>
+                <Text variant="heading-xs" className={lightFont} color="tertiary">
+                  Sold for
+                </Text>
+                <Text variant="heading-xs" className={lightFont}>
+                  {ask.amount?.amount.value} {ask.amount?.symbol}
+                </Text>
+              </Stack>
+              <Stack align="flex-end">
+                <Text
+                  variant="heading-xs"
+                  align="right"
+                  className={lightFont}
+                  color="tertiary"
+                >
+                  Owned buy
+                </Text>
+                <Text variant="heading-xs" className={lightFont}>
+                  {ask.raw.properties.buyer}
+                </Text>
+              </Stack>
+            </Flex>
+          )}
+        </>
       )}
     </Flex>
   )

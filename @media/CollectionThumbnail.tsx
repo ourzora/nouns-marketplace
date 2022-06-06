@@ -19,7 +19,6 @@ export function CollectionThumbnail({
   const { image } = useRawImageTransform(data?.media?.image?.uri)
 
   const thumbnailSize = useMemo(() => {
-    console.log(size)
     switch (size) {
       case 'xs':
         return 'x10'

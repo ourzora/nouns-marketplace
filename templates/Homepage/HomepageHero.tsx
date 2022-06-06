@@ -31,7 +31,9 @@ export function HomepageHero() {
     >
       <Grid className={homepageHeroInner} w="100%" gap="x12">
         <Stack justify="center" gap="x4" pb="x16">
-          <Display className={leadingTight}>The Nouns Marketplace</Display>
+          <Display as="h1" className={leadingTight}>
+            The Nouns Marketplace
+          </Display>
           <Paragraph size="lg" className={lightFont}>
             Nouns are an experimental attemplt to improve the formation of on-chain avatar
             communities. While projects such as Cryptopunks have attempted to bootstrap
