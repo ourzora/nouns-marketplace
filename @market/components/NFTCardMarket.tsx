@@ -1,4 +1,4 @@
-import { Text, Box, Flex, Stack } from '@zoralabs/zord'
+import { Text, Box, Flex, Stack, Heading } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useRelevantMarket } from '../hooks/useRelevantMarket'
 import { ModalComposition } from '@modal'
@@ -19,28 +19,29 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
   return (
     <Flex w="100%">
       {ask && ask.status === MARKET_INFO_STATUSES.ACTIVE ? (
-        <Flex w="100%" justify="space-between">
+        <Flex w="100%" justify="space-between" align="flex-end">
           <Stack>
             <Text variant="heading-xs" className={lightFont} color="tertiary">
               Price
             </Text>
-            <Text variant="heading-sm" className={lightFont}>
+            <Text variant="heading-xs" className={lightFont}>
               {ask.amount?.amount.value} {ask.amount?.symbol}
             </Text>
           </Stack>
           <ModalComposition
             modalName={`buy-${nft.contract.address}-${nft.tokenId}`}
             trigger={
-              <Text
+              <Heading
                 px="x6"
                 py="x2"
                 as="span"
-                variant="heading-sm"
-                color="reverse"
-                className={buttonStyle}
+                size="xs"
+                color="primary"
+                borderRadius="round"
+                backgroundColor="tertiary"
               >
                 Buy
-              </Text>
+              </Heading>
             }
             content={
               <Box p="x8">
@@ -64,7 +65,7 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
           <Text variant="heading-xs" className={lightFont} color="tertiary">
             Sold for
           </Text>
-          <Text variant="heading-sm" className={lightFont}>
+          <Text variant="heading-xs" className={lightFont}>
             cryptoVal
           </Text>
         </Stack>

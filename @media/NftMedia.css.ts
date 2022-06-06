@@ -15,8 +15,8 @@ export const nftGridWrapper = style([
 /* Card */
 export const cardWrapper = style([
   {
-    boxShadow: '0 0 20px rgba(0, 0, 0, 0.05)',
     backgroundColor: '#ffffff',
+    border: '1px solid rgba(0,0,0,.075)',
   },
   atoms({
     borderRadius: 'phat',

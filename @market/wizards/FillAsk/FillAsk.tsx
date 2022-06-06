@@ -152,8 +152,7 @@ export function FillAsk({
               disabled={!balance || !sufficientBalance}
               txInProgress={txInProgress}
               txStatus={txStatus}
-              variant="primary"
-              borderRadius="curved"
+              variant="secondary"
               onClick={
                 balance && sufficientBalance && needsERC20Approval
                   ? handleApproveERC20

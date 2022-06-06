@@ -31,7 +31,15 @@ export function TransactionSubmitButton({
   const isDisabled = isLoading || disabled
 
   return (
-    <Button loading={isLoading} disabled={isDisabled} w="100%" mt="x4" mb="x1" {...props}>
+    <Button
+      className="transaction-submit-button"
+      loading={isLoading}
+      disabled={isDisabled}
+      w="100%"
+      mt="x4"
+      mb="x1"
+      {...props}
+    >
       {txStatus === WalletCallStatus.ERRORED ? (
         'Try Again'
       ) : txStatus === WalletCallStatus.PROMPTED ? (
