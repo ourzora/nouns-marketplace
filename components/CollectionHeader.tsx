@@ -14,7 +14,7 @@ export function CollectionHeader({
 }) {
   return (
     <Stack align="center">
-      <Display>{collection.name}</Display>
+      <Display as="h1">{collection.name}</Display>
       <Paragraph size="lg" className={lightFont} color="tertiary">
         {aggregateStats.aggregateStat.nftCount} NFTs
       </Paragraph>

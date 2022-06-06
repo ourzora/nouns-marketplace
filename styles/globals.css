@@ -1,3 +1,18 @@
+@font-face {
+  font-family: ptRegular;
+  src: url('/fonts/PT-Root-UI_Regular.woff');
+}
+
+@font-face {
+  font-family: ptMedium;
+  src: url('/fonts/PT-Root-UI_Medium.woff');
+}
+
+@font-face {
+  font-family: ptBold;
+  src: url('/fonts/PT-Root-UI_Bold.woff');
+}
+
 * {
   box-sizing: border-box;
 }

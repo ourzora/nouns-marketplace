@@ -7,6 +7,10 @@ globalStyle('html, body', {
 })
 
 globalStyle('*', {
+  fontFamily: "'ptBold', Arial, Helvetica, sans-serif!important",
+})
+
+globalStyle('h1, h2, h3', {
   fontFamily: "'Londrina Solid', cursive!important",
 })
 
@@ -32,7 +36,7 @@ export const buttonStyle = style([
   },
   atoms({
     borderRadius: 'round',
-    px: 'x4',
+    px: 'x2',
     py: 'x2',
     justifyContent: 'center',
   }),

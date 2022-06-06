@@ -8,16 +8,20 @@ export function CollectionThumbnail({
   collectionAddress,
   tokenId = '1',
   size = 'md',
+  radius = 'curved',
 }: {
   collectionAddress: string
   tokenId?: string
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
+  radius?: 'curved' | 'round'
 }) {
   const { data } = useNFT(collectionAddress, tokenId)
   const { image } = useRawImageTransform(data?.media?.image?.uri)
 
   const thumbnailSize = useMemo(() => {
     switch (size) {
+      case 'xs':
+        return 'x10'
       case 'sm':
         return 'x14'
       case 'md':
@@ -27,7 +31,7 @@ export function CollectionThumbnail({
       default:
         return 'x14'
     }
-  }, [])
+  }, [size])
 
   return (
     <Box
@@ -35,7 +39,7 @@ export function CollectionThumbnail({
       h={thumbnailSize}
       position="relative"
       overflow="hidden"
-      borderRadius="curved"
+      borderRadius={radius}
       className={nftThumbnail}
       backgroundColoe="tertiary"
     >
