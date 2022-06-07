@@ -4,10 +4,13 @@
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { GetServerSideProps } from 'next'
 import { zdkService } from 'utils/zdk'
+import { assert } from 'console'
+import { defaultProvider } from '@market/utils/connectors'
+import { isAddress } from 'utils/address'
 
 export type ManageNFTsServiceProps = {
   initialPage?: NFTObject[] | []
-  userAddress: string
+  ownerAddress: string
 }
 
 type ManageParams = {
@@ -15,17 +18,28 @@ type ManageParams = {
 }
 
 interface ManageNftsProps extends GetServerSideProps {
-  params?: ManageParams
+  params: ManageParams
 }
 
 export async function manageNftsService({ params }: ManageNftsProps) {
-  const userAddress = params && params.address
+  assert(params, 'User template must provide a params object with an address')
   let initialPage: NFTObject[] | [] = []
+
+  const ownerAddress = isAddress(params.address)
+    ? params.address
+    : await defaultProvider.resolveName(params.address)
+
+  if (!ownerAddress || !isAddress(ownerAddress)) {
+    return {
+      notFound: true,
+      revalidate: 600,
+    }
+  }
 
   return {
     props: {
       initialPage,
-      userAddress,
+      ownerAddress,
     },
   }
 }

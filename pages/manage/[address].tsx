@@ -1,20 +1,25 @@
 import type { NextPage } from 'next'
 import { PageWrapper } from 'components/PageWrapper'
 import { useEffect } from 'react'
-// import { NFTGrid } from '@media/NFTGrid'
+import { NFTGrid } from '@media/NFTGrid'
 import { manageNftsService, ManageNFTsServiceProps } from 'services/manageNftsService'
+import { collectionAddresses } from 'utils/collection-addresses'
 
 /* @ts-ignore */
-const Manage: NextPage = ({ initialPage, userAddress }: ManageNFTsServiceProps) => {
+const Manage: NextPage = ({ initialPage, ownerAddress }: ManageNFTsServiceProps) => {
   useEffect(() => {
-    console.log(initialPage, userAddress)
-  }, [initialPage, userAddress])
+    console.log(initialPage, ownerAddress)
+  }, [initialPage, ownerAddress])
 
   return (
     <PageWrapper p="x4" direction="column" gap="x4">
-      {/*contractAddress && (
-        <NFTGrid contractAddress={[contractAddress]} initialPage={initialPage} />
-      )*/}
+      {ownerAddress && (
+        <NFTGrid
+          ownerAddress={ownerAddress}
+          initialPage={initialPage}
+          contractAddress={collectionAddresses}
+        />
+      )}
     </PageWrapper>
   )
 }
