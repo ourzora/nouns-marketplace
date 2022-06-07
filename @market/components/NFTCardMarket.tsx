@@ -5,14 +5,13 @@ import { ModalComposition } from '@modal'
 import { FillAsk } from '../wizards/FillAsk'
 import { lightFont } from './MarketComponents.css'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { AddressWithLink } from './AddressWithLink'
+import { NFTOwner } from './NFTOwner'
 
-/* MARKETS_SUMMARY TYPE? */
 export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
   const { nft, metadata, markets } = nftData
   const { ask } = useRelevantMarket(markets)
 
-  if (!nft || !metadata) {
+  if (!nft || !metadata || ask?.status === MARKET_INFO_STATUSES.INVALID) {
     return null
   }
 
@@ -62,28 +61,24 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
         </Flex>
       ) : (
         <>
-          {ask && ask?.status === MARKET_INFO_STATUSES.COMPLETE && (
-            <Flex justify="space-between" w="100%">
-              <Stack>
-                <Text variant="label-lg" className={lightFont} color="tertiary">
-                  Sold for
-                </Text>
-                <Text variant="heading-xs" className={lightFont}>
-                  {ask.amount?.amount.value} {ask.amount?.symbol}
-                </Text>
-              </Stack>
-              <Stack align="flex-end">
-                <Text
-                  variant="label-lg"
-                  align="right"
-                  className={lightFont}
-                  color="tertiary"
-                >
-                  Owned by
-                </Text>
-                <AddressWithLink address={ask.raw.properties.buyer} />
-              </Stack>
-            </Flex>
+          {ask && (
+            <>
+              {ask?.status === MARKET_INFO_STATUSES.COMPLETE ? (
+                <Flex justify="space-between" w="100%">
+                  <Stack>
+                    <Text variant="label-lg" className={lightFont} color="tertiary">
+                      Sold for
+                    </Text>
+                    <Text variant="heading-xs" className={lightFont}>
+                      {ask.amount?.amount.value} {ask.amount?.symbol}
+                    </Text>
+                  </Stack>
+                  <NFTOwner address={ask.raw.properties.buyer} />
+                </Flex>
+              ) : ask?.status === MARKET_INFO_STATUSES.CANCELED ? (
+                <NFTOwner address={nft?.owner?.address} align="left" />
+              ) : null}
+            </>
           )}
         </>
       )}
