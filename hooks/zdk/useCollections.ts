@@ -1,65 +1,44 @@
-import { Chain, Network } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Collection, AggregateStat } from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { zdkService } from 'utils/zdk'
-import useSWR from 'swr'
+import { useEffect, useState } from 'react'
 import { collectionAddresses } from 'utils/collection-addresses'
-import { useEffect } from 'react'
 
-const networkInput = {
-  chain: Chain.Mainnet,
-  network: Network.Ethereum,
-}
-
-export type CollectionsData = {
-  collectionInfo: Collection
-  aggregateStat: AggregateStat
-}
-
-const mergeCollectionFetch = async (address: string) => {
-  const collection = await zdkService
-    .collection({
-      address: address,
-      includeFullDetails: false,
-    })
-    .then((res) => {
-      return res
-    })
-  const statsResponse = await zdkService
-    .collectionStatsAggregate({
-      collectionAddress: address,
-      network: networkInput,
-    })
-    .then((res) => {
-      return res
-    })
-  return { collectionInfo: collection, ...statsResponse }
-}
-
-const fetchCollections = async (collections: string[]) => {
-  try {
-    const responses = await Promise.all(
-      collections.map((address) => {
-        const response = mergeCollectionFetch(address)
-        return response
-      })
-    )
-    console.log(responses)
-    return {
-      data: responses,
-    }
-  } catch (error) {
-    return { data: undefined, error }
-  }
-}
+export type CollectionsData = Collection
 
 export function useCollections() {
-  const { data, error } = useSWR([collectionAddresses], fetchCollections)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<any>(undefined)
+  const [collections, setCollections] = useState<Collection[] | undefined>(undefined)
+
   useEffect(() => {
-    console.log('collections', data, error)
-  }, [data, error])
+    const fetchCollections = async () => {
+      try {
+        const data = await Promise.all(
+          collectionAddresses.map((address) => {
+            const response = zdkService
+              .collection({
+                address: address,
+                includeFullDetails: false,
+              })
+              .then((res) => {
+                return res
+              })
+            return response
+          })
+        )
+        setCollections(data)
+        setLoading(false)
+      } catch (error) {
+        setError(error)
+        setLoading(false)
+      }
+    }
+    fetchCollections()
+  }, [])
 
   return {
-    collections: data?.data,
+    loading,
     error,
+    collections,
   }
 }

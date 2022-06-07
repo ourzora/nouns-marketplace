@@ -10,22 +10,22 @@ export function CollectionLink({ collection }: { collection: CollectionsData }) 
   const { requestClose } = useModal()
 
   return (
-    <Link href={`/collections/${collection.collectionInfo.address}`} passHref>
+    <Link href={`/collections/${collection.address}`} passHref>
       <Flex align="center" justify="space-between" gap="x4" onClick={requestClose}>
         <Flex align="center" gap="x4">
-          <CollectionThumbnail collectionAddress={collection.collectionInfo.address} />
+          <CollectionThumbnail collectionAddress={collection.address} />
           <Stack>
             <Label size="lg" className={leadingTight}>
-              {collection.collectionInfo.name}
+              {collection.name}
             </Label>
             <Eyebrow className={[lightGreyType, lightFont]}>
-              Floor Price: {collection?.aggregateStat?.floorPrice} ETH
+              Floor Price: {/*collection?.aggregateStat?.floorPrice*/} ETH
             </Eyebrow>
           </Stack>
         </Flex>
         <Flex gap="x2" align="center">
           <Label className={[lightGreyType, lightFont]}>
-            {collection?.aggregateStat?.nftCount} NFTs
+            {/*collection?.aggregateStat?.nftCount*/} NFTs
           </Label>
           <Icon id="ChevronRight" />
         </Flex>

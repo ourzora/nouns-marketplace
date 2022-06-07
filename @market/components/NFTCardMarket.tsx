@@ -3,16 +3,14 @@ import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useRelevantMarket } from '../hooks/useRelevantMarket'
 import { ModalComposition } from '@modal'
 import { FillAsk } from '../wizards/FillAsk'
-import { buttonStyle, lightFont } from './MarketComponents.css'
+import { lightFont } from './MarketComponents.css'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
+import { AddressWithLink } from './AddressWithLink'
 
 /* MARKETS_SUMMARY TYPE? */
 export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
   const { nft, metadata, markets } = nftData
-
   const { ask } = useRelevantMarket(markets)
-
-  console.log(ask)
 
   if (!nft || !metadata) {
     return null
@@ -64,10 +62,10 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
         </Flex>
       ) : (
         <>
-          {ask.status === MARKET_INFO_STATUSES.COMPLETE && (
+          {ask && ask?.status === MARKET_INFO_STATUSES.COMPLETE && (
             <Flex justify="space-between" w="100%">
               <Stack>
-                <Text variant="heading-xs" className={lightFont} color="tertiary">
+                <Text variant="label-lg" className={lightFont} color="tertiary">
                   Sold for
                 </Text>
                 <Text variant="heading-xs" className={lightFont}>
@@ -76,16 +74,14 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
               </Stack>
               <Stack align="flex-end">
                 <Text
-                  variant="heading-xs"
+                  variant="label-lg"
                   align="right"
                   className={lightFont}
                   color="tertiary"
                 >
-                  Owned buy
+                  Owned by
                 </Text>
-                <Text variant="heading-xs" className={lightFont}>
-                  {ask.raw.properties.buyer}
-                </Text>
+                <AddressWithLink address={ask.raw.properties.buyer} />
               </Stack>
             </Flex>
           )}
