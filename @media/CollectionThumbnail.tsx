@@ -3,6 +3,7 @@ import { nftThumbnail } from './NftMedia.css'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { useMemo } from 'react'
 import { useRawImageTransform } from './hooks/useRawImageTransform'
+import { useInterval } from '@market/hooks'
 
 export function CollectionThumbnail({
   collectionAddress,
@@ -17,6 +18,20 @@ export function CollectionThumbnail({
 }) {
   const { data } = useNFT(collectionAddress, tokenId)
   const { image } = useRawImageTransform(data?.media?.image?.uri)
+
+  /*
+  useInterval(() => {
+    const tokenClamp = 4
+    let currentToken = parseInt(tokenNo)
+    if (currentToken < tokenClamp) {
+      currentToken = currentToken + 1
+    } else {
+      currentToken = 1
+    }
+    updateTokenNo(currentToken.toString())
+    console.log(tokenNo)
+  }, 1000)
+  */
 
   const thumbnailSize = useMemo(() => {
     switch (size) {
@@ -41,7 +56,7 @@ export function CollectionThumbnail({
       overflow="hidden"
       borderRadius={radius}
       className={nftThumbnail}
-      backgroundColoe="tertiary"
+      backgroundColor="tertiary"
     >
       {data?.media?.image?.uri && (
         <Box as="img" inset="x0" w="100%" h="100%" position="absolute" src={image} />

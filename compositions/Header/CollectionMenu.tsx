@@ -25,7 +25,7 @@ export function CollectionMenu() {
             <Stack className={modalWrapper} gap="x4">
               {collections.map((collection) => (
                 <CollectionLink
-                  key={`${collection.collectionInfo.address}-${collection.collectionInfo.name}`}
+                  key={`${collection.address}-${collection.name}`}
                   collection={collection}
                 />
               ))}

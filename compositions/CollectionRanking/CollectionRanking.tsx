@@ -7,7 +7,6 @@ export const statRows = ['Volume', 'Items', 'Floor', 'Owners']
 
 export function CollectionRanking() {
   const { collections } = useCollectionsContext()
-
   return (
     <Stack className={rankingWrapper}>
       <Grid className={rankingRow} style={{ borderBottom: 0 }}>
@@ -22,7 +21,7 @@ export function CollectionRanking() {
       </Grid>
       {collections.length > 0 &&
         collections.map((collection) => (
-          <RankingRow key={collection.collectionInfo.address} collection={collection} />
+          <RankingRow key={collection.address} collection={collection} />
         ))}
     </Stack>
   )

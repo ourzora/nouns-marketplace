@@ -1,26 +1,8 @@
-import { useEffect } from 'react'
 import { Flex, Grid, Stack, Display, Paragraph, Box } from '@zoralabs/zord'
 import { homepageHeroWrapper, homepageHeroInner, nounsImage } from './Homepage.css'
 import { lightFont, leadingTight } from 'styles/styles.css'
-import { useNFT } from '@zoralabs/nft-hooks'
-import { DEFAULT_CONTRACT } from 'utils/env-vars'
-import { useCollection } from 'hooks/zdk/useCollection'
-import { useCollectionsContext } from 'providers/CollectionsProvider'
 
 export function HomepageHero() {
-  /**
-   * Get total amount of items, random number in that range
-   * Get background color of Noun
-   */
-  const { collection } = useCollection(DEFAULT_CONTRACT)
-  const { collections } = useCollectionsContext()
-
-  const { data, error } = useNFT(DEFAULT_CONTRACT, '1')
-
-  useEffect(() => {
-    console.log(collections, data)
-  }, [data, error, collection])
-
   return (
     <Flex
       className={homepageHeroWrapper}

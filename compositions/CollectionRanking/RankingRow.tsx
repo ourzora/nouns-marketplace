@@ -6,63 +6,46 @@ import { rankingRow, rankingStats } from './CollectionRanking.css'
 import { Link } from 'components/Link'
 import { buttonStyle } from 'styles/styles.css'
 import { roundTwoDecimals } from 'utils/math'
-import { useInterval } from '@market/hooks'
-// import { useCollection } from 'hooks/zdk/useCollection'
+import { useAggregate } from 'hooks/zdk/useAggregate'
 
 /* todo: add a skeleton or some kind of loading state */
 
 export function RankingRow({ collection }: { collection: CollectionsData }) {
   const [tokenNo, updateTokenNo] = useState('1')
-  /*
-  useInterval(() => {
-    const tokenClamp = 4
-    let currentToken = parseInt(tokenNo)
-    if (currentToken < tokenClamp) {
-      currentToken = currentToken + 1
-    } else {
-      currentToken = 1
-    }
-    updateTokenNo(currentToken.toString())
-    console.log(tokenNo)
-  }, 1000)
-  */
-  const collectionVolume = useMemo(
-    () => roundTwoDecimals(collection.aggregateStat.salesVolume.chainTokenPrice),
-    [collection]
-  )
+  const { aggregate } = useAggregate(collection.address)
 
-  const collectionFloor = useMemo(
-    () =>
-      collection.aggregateStat?.floorPrice &&
-      collection.aggregateStat?.floorPrice !== null
-        ? roundTwoDecimals(collection.aggregateStat.floorPrice)
-        : 'NA',
-    [collection]
-  )
+  const collectionPriceData = useMemo(() => {
+    if (aggregate)
+      return {
+        volume: roundTwoDecimals(aggregate.aggregateStat.salesVolume.chainTokenPrice),
+        floor:
+          aggregate.aggregateStat?.floorPrice &&
+          aggregate.aggregateStat?.floorPrice !== null
+            ? `${roundTwoDecimals(aggregate.aggregateStat.floorPrice)} ETH`
+            : 'NA',
+      }
+  }, [collection])
 
   return (
     <Grid className={rankingRow}>
       <Flex align="center" gap="x4">
-        <CollectionThumbnail
-          collectionAddress={collection.collectionInfo.address}
-          tokenId={tokenNo}
-        />
-        <Label size="lg">{collection.collectionInfo.name}</Label>
+        <CollectionThumbnail collectionAddress={collection.address} tokenId={tokenNo} />
+        <Label size="lg">{collection.name}</Label>
       </Flex>
       <Grid className={rankingStats}>
         <Label size="lg" align="right">
-          {collectionVolume}&nbsp;ETH
+          {aggregate ? <>{collectionPriceData?.volume}&nbsp;ETH</> : '...'}
         </Label>
         <Label size="lg" align="right">
-          {collection.aggregateStat.nftCount}
+          {/*aggregate?.nftCount*/}
         </Label>
         <Label size="lg" align="right">
-          {collectionFloor} ETH
+          {aggregate ? <>{collectionPriceData?.floor}&nbsp;ETH</> : '...'}
         </Label>
         <Label size="lg" align="right">
-          {collection.aggregateStat.ownerCount}
+          {/*aggregate.ownerCount*/}
         </Label>
-        <Link href={`/collections/${collection.collectionInfo.address}`} passHref>
+        <Link href={`/collections/${collection.address}`} passHref>
           <Flex className={buttonStyle}>
             <Label>Explore</Label>
           </Flex>
