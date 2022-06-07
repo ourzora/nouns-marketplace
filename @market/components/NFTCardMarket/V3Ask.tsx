@@ -1,13 +1,13 @@
 import { Text, Box, Flex, Stack, Heading } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { useRelevantMarket } from '../hooks/useRelevantMarket'
+import { useRelevantMarket } from '../../hooks/useRelevantMarket'
 import { ModalComposition } from '@modal'
-import { FillAsk } from '../wizards/FillAsk'
-import { lightFont } from './MarketComponents.css'
+import { FillAsk } from '../../wizards/FillAsk'
+import { lightFont } from '../MarketComponents.css'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { NFTOwner } from './NFTOwner'
+import { NFTOwner } from '../NFTOwner'
 
-export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
+export function V3Ask({ nftData }: { nftData: NFTObject }) {
   const { nft, metadata, markets } = nftData
   const { ask } = useRelevantMarket(markets)
 
@@ -16,7 +16,7 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
   }
 
   return (
-    <Flex w="100%">
+    <>
       {ask && ask.status === MARKET_INFO_STATUSES.ACTIVE ? (
         <Flex w="100%" justify="space-between" align="flex-end">
           <Stack>
@@ -82,6 +82,6 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
           )}
         </>
       )}
-    </Flex>
+    </>
   )
 }

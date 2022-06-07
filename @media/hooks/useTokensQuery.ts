@@ -39,6 +39,7 @@ export function useTokensQuery({
 }: useCollectionProps) {
   const getKey = (pageIndex: number = 0, previousPageData: NFTObject[]) => {
     if (previousPageData && !previousPageData.length) return null // reached the end
+
     return {
       where: {
         ...(contractAddress && {

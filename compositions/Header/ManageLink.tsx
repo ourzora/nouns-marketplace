@@ -6,8 +6,6 @@ import { collectionTrigger } from './Header.css'
 export function ManageLink() {
   const { data: account } = useAccount()
 
-  console.log(account)
-
   if (account === null) {
     return null
   }
