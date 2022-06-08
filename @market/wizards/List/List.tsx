@@ -6,8 +6,9 @@ import {
   NftInfo,
   PrintError,
 } from '@market/components'
+import { CreateAsk } from './CreateAsk'
 
-type ListStep = 'ConnectWallet' | 'ReviewDetails' | 'Confirmation'
+export type ListStep = 'ConnectWallet' | 'ReviewDetails' | 'Confirmation'
 
 export function List({
   tokenId,
@@ -19,10 +20,11 @@ export function List({
   const [wizardStep, setWizardStep] = useState<ListStep>('ReviewDetails')
 
   return (
-    <Stack w="100%">
+    <Stack w="100%" gap="x4">
       {wizardStep !== 'Confirmation' && (
         <NftInfo collectionAddress={tokenAddress} tokenId={tokenId} modalType="list" />
       )}
+      <CreateAsk />
     </Stack>
   )
 }
