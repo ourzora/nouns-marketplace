@@ -19,6 +19,7 @@ import { V3Provider } from '@market'
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
 import { CollectionsProvider } from 'providers/CollectionsProvider'
 import { useCollections } from 'hooks/zdk/useCollections'
+import { ContractProvider } from '@market/providers/ContractProvider'
 
 import 'styles/styles.css'
 
@@ -57,15 +58,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           })}
         >
           <V3Provider>
-            <CollectionsProvider
-              /* @ts-ignore */
-              collections={collections}
-            >
+            <CollectionsProvider collections={collections}>
               <ModalContextProvider>
-                <>
+                <ContractProvider>
                   <HeaderComposition />
                   <Component {...pageProps} />
-                </>
+                </ContractProvider>
               </ModalContextProvider>
             </CollectionsProvider>
           </V3Provider>

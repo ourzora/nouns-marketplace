@@ -1,6 +1,9 @@
-import { WETH } from '@uniswap/sdk'
+import mainnetAuction from '@zoralabs/auction-house/dist/addresses/1.json'
+import rinkebyAuction from '@zoralabs/auction-house/dist/addresses/4.json'
 import mainnetV3 from '@zoralabs/v3/dist/addresses/1.json'
 import rinkebyV3 from '@zoralabs/v3/dist/addresses/4.json'
+import mainnetLegacy from '@zoralabs/core/dist/addresses/1.json'
+import rinkebyLegacy from '@zoralabs/core/dist/addresses/4.json'
 import { NETWORK_CHAIN_ID } from './connectors'
 
 export const DAI_ADDRESS =
@@ -13,13 +16,13 @@ export const USDC_ADDRESS =
     ? '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
     : '0x4D725235e41b0D79BBDCC1b4c16B550522BEE6c5'
 
-export const WETH_ADDRESS = NETWORK_CHAIN_ID === 1 ? WETH['1'].address : WETH['4'].address
+export const WETH_ADDRESS = NETWORK_CHAIN_ID === 1 ? mainnetV3.WETH : rinkebyV3.WETH
 
 export const DEPRECATED_ASK_V1_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? mainnetV3.AsksV1 : rinkebyV3.AsksV1
 
-export const ASK_V11_ADDRESS =
-  NETWORK_CHAIN_ID === 1 ? mainnetV3.AsksV1_1 : rinkebyV3.AsksV1_1
+export const AUCTION_HOUSE_ADDRESS =
+  NETWORK_CHAIN_ID === 1 ? mainnetAuction.auctionHouse : rinkebyAuction.auctionHouse
 
 export const MODULE_MANAGER_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? mainnetV3.ZoraModuleManager : rinkebyV3.ZoraModuleManager
@@ -70,26 +73,9 @@ export const BANK_ADDRESS = '0x2d94aa3e47d9d5024503ca8491fce9a2fb4da198'
 
 export const YUP_ADDRESS = '0x69bbc3f8787d573f1bbdd0a5f40c7ba0aee9bcc9'
 
-export const SUPERRARE_TOKEN_ADDRESS =
-  NETWORK_CHAIN_ID === 1 ? '0xb932a70A57673d89f4acfFBE830E8ed7f75Fb9e0' : ''
-
-export const FOUNDATION_TOKEN_ADDRESS =
-  NETWORK_CHAIN_ID === 1 ? '0x3B3ee1931Dc30C1957379FAc9aba94D1C48a5405' : ''
-
-export const ARTBLOCKS_TOKEN_ADDRESS =
-  NETWORK_CHAIN_ID === 1 ? '0xa7d8d9ef8d8ce8992df33d8b8cf4aebabd5bd270' : ''
-
-export const KnownContracts = [
-  FOUNDATION_TOKEN_ADDRESS,
-  SUPERRARE_TOKEN_ADDRESS,
-  ARTBLOCKS_TOKEN_ADDRESS,
-]
-
-interface Contract {
-  [key: string]: string | undefined
-}
-export const KnownContractsByName: Contract = {
-  foundation: FOUNDATION_TOKEN_ADDRESS,
-  superrare: SUPERRARE_TOKEN_ADDRESS,
-  artblocks: ARTBLOCKS_TOKEN_ADDRESS,
-}
+export const ZORA_TOKEN_ADDRESS =
+  NETWORK_CHAIN_ID === 1 ? mainnetLegacy.media : rinkebyLegacy.media
+export const ZORA_MARKET_ADDRESS =
+  NETWORK_CHAIN_ID === 1 ? mainnetLegacy.market : rinkebyLegacy.market
+export const ZORA_RINKEBY_TOKEN_ADDRESS = rinkebyLegacy.media
+export const ZORA_MAINNET_TOKEN_ADDRESS = mainnetLegacy.media
