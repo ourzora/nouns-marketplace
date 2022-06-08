@@ -19,7 +19,6 @@ import { V3Provider } from '@market'
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
 import { CollectionsProvider } from 'providers/CollectionsProvider'
 import { useCollections } from 'hooks/zdk/useCollections'
-
 import 'styles/styles.css'
 
 const infuraId = process.env.INFURA_ID
@@ -44,7 +43,6 @@ export const strategy = new ZDKFetchStrategy('1', GALACTUS_BASE_URL)
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { collections } = useCollections()
-
   return (
     <WagmiProvider client={wagmiClient}>
       <NFTFetchConfiguration networkId="1" strategy={strategy}>
