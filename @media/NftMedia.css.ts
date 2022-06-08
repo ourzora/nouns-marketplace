@@ -23,6 +23,29 @@ export const cardWrapper = style([
   }),
 ])
 
+export const titleWrapper = style([
+  {
+    whiteSpace: 'nowrap',
+  },
+  atoms({
+    w: '100%',
+  }),
+])
+
+export const titleScroll = style([
+  {
+    overflowX: 'scroll',
+    maskImage:
+      'linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))',
+  },
+])
+
+export const titleHeading = style([
+  {
+    paddingRight: 'var(--titlePad)',
+  },
+])
+
 /* Thumbnail */
 export const nftThumbnail = style([
   {
