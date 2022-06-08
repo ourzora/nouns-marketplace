@@ -1,20 +1,14 @@
-import { useMemo } from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Heading, Box } from '@zoralabs/zord'
+import { Box } from '@zoralabs/zord'
 import { NFTOwner } from '../NFTOwner'
-import { useAccount } from 'wagmi'
 import { ModalComposition } from '@modal'
 import { List } from '@market/wizards'
 import { CardMarketTrigger } from './CardMarketTrigger'
+import { useIsOwner } from '@market/hooks/useIsOwner'
 
 export function ListToken({ nftData }: { nftData: NFTObject }) {
   const { nft } = nftData
-  const { data: account } = useAccount()
-
-  const isOwner = useMemo(
-    () => account?.address?.toLowerCase() === nft?.owner?.address.toLowerCase(),
-    [account?.address, nft?.owner]
-  )
+  const { isOwner } = useIsOwner(nftData)
 
   if (!nft) {
     return null
