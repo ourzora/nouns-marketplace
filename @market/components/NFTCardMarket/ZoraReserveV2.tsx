@@ -1,4 +1,4 @@
-import { Text, Box, Flex, Stack, Heading } from '@zoralabs/zord'
+import { Flex } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { CardMarketTrigger } from './CardMarketTrigger'
 import { NFTOwner } from '../NFTOwner'
