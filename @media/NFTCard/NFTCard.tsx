@@ -45,9 +45,7 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
                 radius="round"
                 size="xs"
               />
-              <Heading size="xs" textTransform="uppercase">
-                {nft?.contract.name}
-              </Heading>
+              <Heading size="xs">{nft?.contract.name}</Heading>
             </Flex>
           </Link>
         </Flex>

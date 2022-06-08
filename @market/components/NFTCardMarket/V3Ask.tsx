@@ -6,6 +6,7 @@ import { FillAsk } from '../../wizards/FillAsk'
 import { lightFont } from '../MarketComponents.css'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTOwner } from '../NFTOwner'
+import { CardMarketTrigger } from './CardMarketTrigger'
 
 export function V3Ask({ nftData }: { nftData: NFTObject }) {
   const { nft, metadata, markets } = nftData
@@ -29,19 +30,7 @@ export function V3Ask({ nftData }: { nftData: NFTObject }) {
           </Stack>
           <ModalComposition
             modalName={`buy-${nft.contract.address}-${nft.tokenId}`}
-            trigger={
-              <Heading
-                px="x6"
-                py="x2"
-                as="span"
-                size="xs"
-                color="primary"
-                borderRadius="round"
-                backgroundColor="tertiary"
-              >
-                Buy
-              </Heading>
-            }
+            trigger={<CardMarketTrigger cta="Buy" />}
             content={
               <Box p="x8">
                 {ask.amount && (
@@ -67,7 +56,7 @@ export function V3Ask({ nftData }: { nftData: NFTObject }) {
                 <Flex justify="space-between" w="100%">
                   <Stack>
                     <Text variant="label-lg" className={lightFont} color="tertiary">
-                      Sold for
+                      Sold on Chain for
                     </Text>
                     <Text variant="heading-xs" className={lightFont}>
                       {ask.amount?.amount.value} {ask.amount?.symbol}
@@ -75,9 +64,9 @@ export function V3Ask({ nftData }: { nftData: NFTObject }) {
                   </Stack>
                   <NFTOwner address={ask.raw.properties.buyer} />
                 </Flex>
-              ) : ask?.status === MARKET_INFO_STATUSES.CANCELED ? (
+              ) : (
                 <NFTOwner address={nft?.owner?.address} align="left" />
-              ) : null}
+              )}
             </>
           )}
         </>
