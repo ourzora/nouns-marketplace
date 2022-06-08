@@ -1,11 +1,11 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { Box, Flex, Heading } from '@zoralabs/zord'
+import { Box, Flex } from '@zoralabs/zord'
 import Link from 'next/link'
 import { NOUNS_GLASSES } from 'styles/style-constants'
 import { SITE_TITLE } from 'utils/env-vars'
 import { nounsGlasses } from './Header.css'
 import { CollectionMenu } from './CollectionMenu'
-// import { CollectionLinks } from './CollectionLinks'
+import { ManageLink } from './ManageLink'
 
 export function HeaderNav() {
   return (
@@ -16,9 +16,12 @@ export function HeaderNav() {
         </Link>
         <CollectionMenu />
       </Flex>
-      <Box>
-        <ConnectButton showBalance={false} />
-      </Box>
+      <Flex align="center" gap="x6">
+        <ManageLink />
+        <Box>
+          <ConnectButton showBalance={false} />
+        </Box>
+      </Flex>
     </Flex>
   )
 }

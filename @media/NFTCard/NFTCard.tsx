@@ -1,23 +1,14 @@
-import {
-  Stack,
-  Box,
-  Icon,
-  Flex,
-  Heading,
-  Separator,
-  Label,
-  Paragraph,
-} from '@zoralabs/zord'
+import { Stack, Box, Flex, Heading } from '@zoralabs/zord'
 import { Link } from 'components/Link'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { NFTCardMarket, TokenInfoLink, EtherscanLogo } from '@market'
+import { NFTCardMarket, TokenInfoLink, EtherscanLogo, ListToken } from '@market'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 import { cardWrapper } from '@media/NftMedia.css'
 import { Zorb } from '@zora-brand'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 
 export function NFTCard({ nftData }: { nftData: NFTObject }) {
-  const { metadata, media, nft, markets } = nftData
+  const { metadata, media, nft } = nftData
   const { image } = useRawImageTransform(media?.image?.uri)
 
   if (!nft) {
@@ -65,11 +56,7 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
             </TokenInfoLink>
           </Flex>
         </Flex>
-        {markets && markets.length ? (
-          <NFTCardMarket nftData={nftData} />
-        ) : (
-          <div>List</div>
-        )}
+        <NFTCardMarket nftData={nftData} />
       </Stack>
     </Stack>
   )

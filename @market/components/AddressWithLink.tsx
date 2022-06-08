@@ -1,9 +1,18 @@
 import { useMemo } from 'react'
-import { Label, Icon, Flex } from '@zoralabs/zord'
+import { Label, Icon, Flex, FlexProps } from '@zoralabs/zord'
 import { useEnsName } from 'wagmi'
 import { useShortAddress } from 'hooks/useShortAddress'
 
-export function AddressWithLink({ address }: { address: string }) {
+interface AddressWithLinkProps extends FlexProps {
+  address: string
+  useEns?: boolean
+}
+
+export function AddressWithLink({
+  address,
+  useEns = true,
+  ...props
+}: AddressWithLinkProps) {
   const { data: ensName } = useEnsName({
     address: address,
   })
@@ -23,8 +32,9 @@ export function AddressWithLink({ address }: { address: string }) {
       href={buildTokenInfoLink}
       target="_blank"
       rel="noreferrer"
+      {...props}
     >
-      <Label>{ensName ? ensName : shortAddress}</Label>
+      <Label>{ensName && useEns ? ensName : shortAddress}</Label>
       <Icon id="ArrowRightAngle" />
     </Flex>
   )

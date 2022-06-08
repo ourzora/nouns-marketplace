@@ -13,9 +13,7 @@ import { useCurrencyBalance } from '../../hooks/useCurrencyBalance'
 import { useERC20TokenAllowance } from '../../hooks/useERC20TokenAllowance'
 import { useZoraV3Context } from '../../hooks/useZoraV3Context'
 import { ERC20_TRANSFER_HELPER_ADDRESS } from '../../utils/addresses'
-
 import { isAddressMatch } from '../../utils/validators'
-
 import { useAccount } from 'wagmi'
 
 type FillAskProps = {
@@ -114,7 +112,12 @@ export function FillAsk({
   return (
     <Box w="100%">
       {wizardStep !== 'Confirmation' && (
-        <NftInfo collectionAddress={tokenAddress} tokenId={tokenId} askPrice={askPrice} />
+        <NftInfo
+          collectionAddress={tokenAddress}
+          tokenId={tokenId}
+          askPrice={askPrice}
+          modalType="fillAsk"
+        />
       )}
       <Separator mt="x3" mb="x4" />
       {wizardStep === 'Confirmation' && tx ? (

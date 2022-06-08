@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import { Flex, Stack, Label, Eyebrow, Icon } from '@zoralabs/zord'
 import { useModal } from '@modal'
 import { Link } from 'components/Link'
