@@ -67,7 +67,7 @@ export function ERC721ContractApprovalForm({
           </Paragraph>
         </a>
       </Box>
-      {error && <PrintError>{error}</PrintError>}
+      {error && <PrintError errorMessage={error} />}
       <TransactionSubmitButton
         txInProgress={txInProgress}
         txStatus={txStatus}
