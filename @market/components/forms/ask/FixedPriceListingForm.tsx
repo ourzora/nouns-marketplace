@@ -1,16 +1,10 @@
 import React, { useCallback, useState } from 'react'
-import { Field, FieldProps, Form, Formik, FormikHelpers } from 'formik'
+import { Form, Formik, FormikHelpers } from 'formik'
 import { ContractTransaction } from '@ethersproject/contracts'
 import { BigNumber } from 'ethers'
-import { Box, Eyebrow, Flex, Label } from '@zoralabs/zord'
+import { Flex, Label } from '@zoralabs/zord'
 
-import {
-  InputGroup,
-  InputPad,
-  TransactionSubmitButton,
-  PrintError,
-  BigNumberField,
-} from '@market/components'
+import { TransactionSubmitButton, PrintError, BigNumberField } from '@market/components'
 
 import { useAuth, useContractContext, useContractTransaction } from '@market/hooks'
 
@@ -20,7 +14,6 @@ import {
   INITIAL_VALUE_ZERO,
   fixedPriceSchema,
 } from '@market/utils'
-import { RawDisplayer } from 'components/utils'
 
 type FixedPriceListingFormProps = {
   tokenId: string
@@ -42,6 +35,7 @@ const initialValues: FixedPriceListingFormState = {
 }
 
 // TODO - add royalty
+
 export function FixedPriceListingForm({
   tokenId,
   tokenAddress,
