@@ -44,8 +44,8 @@ export async function collectionService({ params }: CollectionParamsProps) {
           collectionAddresses: [tokenAddress],
         },
         sort: {
-          sortDirection: SortDirection.Desc,
-          sortAxis: MarketCategory.Ask,
+          sortDirection: SortDirection.Asc,
+          sortAxis: /* MarketCategory.Ask */ undefined,
           sortKey: TokenSortKey.NativePrice,
         },
         filter: {},

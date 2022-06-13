@@ -50,9 +50,9 @@ export function useTokensQuery({
         }),
       },
       sort: {
-        sortDirection: SortDirection.Asc,
-        sortAxis: MarketCategory.Ask,
-        sortKey: TokenSortKey.NativePrice,
+        sortDirection: SortDirection.Desc,
+        sortAxis: /*MarketCategory.Ask*/ undefined,
+        sortKey: /* TokenSortKey.NativePrice */ undefined,
       },
       filter: {},
       pagination: {
