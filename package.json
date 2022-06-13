@@ -42,6 +42,7 @@
     "lodash": "^4.17.21",
     "mime-types": "^2.1.35",
     "next": "12.1.5",
+    "nextjs-progressbar": "^0.0.14",
     "polished": "^4.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

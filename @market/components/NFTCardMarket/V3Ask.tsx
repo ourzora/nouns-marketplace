@@ -9,11 +9,13 @@ import { NFTOwner } from '../NFTOwner'
 import { CardMarketTrigger } from './CardMarketTrigger'
 import { useIsOwner } from '@market/hooks/useIsOwner'
 import { ManageOwnedToken } from './ManageOwnedToken'
+import { useModal } from '@modal'
 
 export function V3Ask({ nftData }: { nftData: NFTObject }) {
   const { nft, metadata, markets } = nftData
   const { ask } = useRelevantMarket(markets)
 
+  const { requestClose } = useModal()
   const { isOwner } = useIsOwner(nftData)
 
   if (!nft || !metadata || ask?.status === MARKET_INFO_STATUSES.INVALID) {
@@ -47,6 +49,7 @@ export function V3Ask({ nftData }: { nftData: NFTObject }) {
                       askCurrency={ask.amount.address}
                       askPrice={ask.amount.amount.raw}
                       nftData={nftData}
+                      onClose={requestClose}
                     />
                   )}
                 </Box>

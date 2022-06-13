@@ -5,10 +5,12 @@ import { ModalComposition } from '@modal'
 import { List } from '@market/wizards'
 import { CardMarketTrigger } from './CardMarketTrigger'
 import { useIsOwner } from '@market/hooks/useIsOwner'
+import { useModal } from '@modal'
 
 export function ListToken({ nftData }: { nftData: NFTObject }) {
   const { nft } = nftData
   const { isOwner } = useIsOwner(nftData)
+  const { requestClose } = useModal()
 
   if (!nft) {
     return null
@@ -26,6 +28,7 @@ export function ListToken({ nftData }: { nftData: NFTObject }) {
                 tokenAddress={nft.contract.address}
                 tokenId={nft.tokenId}
                 nftData={nftData}
+                onClose={requestClose}
               />
             </Box>
           }
