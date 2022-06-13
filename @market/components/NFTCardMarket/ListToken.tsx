@@ -22,7 +22,11 @@ export function ListToken({ nftData }: { nftData: NFTObject }) {
           trigger={<CardMarketTrigger cta="List" />}
           content={
             <Box p="x8">
-              <List tokenAddress={nft.contract.address} tokenId={nft.tokenId} />
+              <List
+                tokenAddress={nft.contract.address}
+                tokenId={nft.tokenId}
+                nftData={nftData}
+              />
             </Box>
           }
         />
