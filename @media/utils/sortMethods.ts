@@ -10,15 +10,13 @@ import {
 import {
   MarketStatusFilter,
   PriceRangeFilter,
-  useCollectionFilters,
-} from '@next/providers/CollectionFilterProvider'
+} from '@media/providers/CollectionFilterProvider'
 import {
   CollectionAttributesFilter,
   SortMethodType,
-} from '@next/providers/CollectionFilterProvider/filterStore'
-import { FilterWrapper } from '@next/compositions/CollectionsFilter'
+} from '@media/providers/CollectionFilterProvider/filterStore'
 
-function marketStatusToSortAxis(marketType: MarketStatusFilter) {
+export function marketStatusToSortAxis(marketType: MarketStatusFilter) {
   switch (marketType) {
     case 'buy-now':
       return MarketCategory.Ask
@@ -29,7 +27,7 @@ function marketStatusToSortAxis(marketType: MarketStatusFilter) {
   }
 }
 
-function marketStatusToSortKey(marketType: MarketStatusFilter) {
+export function marketStatusToSortKey(marketType: MarketStatusFilter) {
   switch (marketType) {
     case 'live':
       return TokenSortKey.TimedSaleEnding
@@ -38,7 +36,7 @@ function marketStatusToSortKey(marketType: MarketStatusFilter) {
   }
 }
 
-function sortMethodToSortParams(
+export function sortMethodToSortParams(
   sortMethod: SortMethodType,
   marketStatus: MarketStatusFilter
 ): TokenSortInput | undefined {
@@ -83,7 +81,7 @@ function sortMethodToSortParams(
   }
 }
 
-function marketTypeToFilterParams(
+export function marketTypeToFilterParams(
   marketType: MarketStatusFilter
 ): TokensQueryFilter | undefined {
   switch (marketType) {
@@ -111,7 +109,7 @@ function marketTypeToFilterParams(
   }
 }
 
-function priceRangeToQueryParams(priceRange: PriceRangeFilter) {
+export function priceRangeToQueryParams(priceRange: PriceRangeFilter) {
   return (
     priceRange && {
       priceFilter: {
@@ -123,7 +121,7 @@ function priceRangeToQueryParams(priceRange: PriceRangeFilter) {
   )
 }
 
-function attributesToFilterParams(attributeFilters: CollectionAttributesFilter) {
+export function attributesToFilterParams(attributeFilters: CollectionAttributesFilter) {
   return (
     attributeFilters.length > 0 && {
       attributeFilters,

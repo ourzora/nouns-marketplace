@@ -2,23 +2,25 @@ import { Box, BoxProps } from '@zoralabs/zord'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-/* THIS IS FIRING A LOT */
-
 interface LoadMoreObserverProps extends BoxProps {
   handleVisible?: () => void
 }
 
-export function LoadMoreObserver({ handleVisible, ...props }: LoadMoreObserverProps) {
-  const { ref, inView } = useInView({
-    threshold: 0,
-  })
+export function LoadMoreObserver({
+  handleVisible,
+  className,
+  ...props
+}: LoadMoreObserverProps) {
+  const [ref, inView] = useInView()
 
   useEffect(() => {
     if (inView && handleVisible) {
-      console.log(inView)
+      console.log('load more')
       handleVisible()
     }
-  }, [inView])
+  }, [inView, handleVisible])
 
-  return <Box pointerEvents="none" ref={ref} {...props} aria-hidden />
+  return (
+    <Box pointerEvents="none" className={className} ref={ref} {...props} aria-hidden />
+  )
 }

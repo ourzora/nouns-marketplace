@@ -1,7 +1,9 @@
+import { useEffect } from 'react'
 import { Grid, Button, Stack, Flex } from '@zoralabs/zord'
 import { useTokensQuery } from '@media/hooks/useTokensQuery'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTCard } from '../NFTCard/NFTCard'
+import { NFTGridLoadMore } from './NFTGridLoadMore'
 import { nftGridWrapper } from '../NftMedia.css'
 
 export type NFTGridProps = {
@@ -21,10 +23,18 @@ export function NFTGrid({
     isReachingEnd,
     handleLoadMore,
   } = useTokensQuery({
-    contractAddress,
+    contractAddress: contractAddress ? contractAddress[0] : undefined,
     ownerAddress,
-    pageSize: 9,
     initialData: initialPage,
+    /*
+    sort: sortMethodToSortParams(filters.sortMethod, filters.marketStatus),
+    filter: {
+      ...marketTypeToFilterParams(filters.marketStatus),
+      ...priceRangeToQueryParams(filters.priceRange),
+      mediaType: filters.mediaType,
+      ...attributesToFilterParams(filters.collectionAttributes),
+    },
+    */
   })
 
   return (
@@ -37,18 +47,25 @@ export function NFTGrid({
           />
         ))}
       </Grid>
-      {!isReachingEnd && (
+      <NFTGridLoadMore
+        showObserver={true}
+        isValidating={isValidating}
+        handleLoadMore={handleLoadMore}
+      />
+
+      {/*!isReachingEnd && (
         <Flex justify="center">
           <Button
             variant="secondary"
             size="lg"
             borderRadius="round"
             onClick={handleLoadMore}
+            loading={isValidating}
           >
             Load More
           </Button>
         </Flex>
-      )}
+      )*/}
     </Stack>
   )
 }

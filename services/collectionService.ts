@@ -43,11 +43,6 @@ export async function collectionService({ params }: CollectionParamsProps) {
         where: {
           collectionAddresses: [tokenAddress],
         },
-        sort: {
-          sortDirection: SortDirection.Asc,
-          sortAxis: /* MarketCategory.Ask */ undefined,
-          sortKey: TokenSortKey.NativePrice,
-        },
         filter: {},
         pagination: {
           limit: 9,
