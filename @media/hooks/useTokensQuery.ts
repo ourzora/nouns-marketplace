@@ -12,6 +12,8 @@ import { flatten } from 'lodash'
 import { useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
+import { collectionAddresses } from 'utils/collection-addresses'
+
 const PAGE_SIZE = 12
 
 interface UseTokenQueryProps {
@@ -49,20 +51,23 @@ export function useTokensQuery({
   filter,
   where,
 }: UseTokenQueryProps) {
+  console.log(ownerAddress)
+
   const getKey = (pageIndex: number, previousPageData: GetNFTReturnType) => {
     if (pageIndex > 0 && !previousPageData.nextCursor) return null // reached the end
     return {
       where: {
         ...(contractAddress && {
-          collectionAddresses: [getAddress(contractAddress)],
+          collectionAddresses: ownerAddress
+            ? collectionAddresses
+            : [getAddress(contractAddress)],
         }),
         ...(ownerAddress && {
           ownerAddresses: [getAddress(ownerAddress)],
         }),
         ...where,
       },
-      sort,
-      filter,
+      filter: {},
       pagination: {
         after: previousPageData?.nextCursor,
         limit: PAGE_SIZE,

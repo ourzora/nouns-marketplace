@@ -38,34 +38,37 @@ export function NFTGrid({
   })
 
   return (
-    <Stack gap="x14" pb="x10">
-      <Grid gap="x4" className={nftGridWrapper}>
-        {items.map((nft) => (
-          <NFTCard
-            key={`${nft?.nft?.contract.address}-${nft?.nft?.tokenId}`}
-            nftData={nft}
-          />
-        ))}
-      </Grid>
-      <NFTGridLoadMore
-        showObserver={true}
-        isValidating={isValidating}
-        handleLoadMore={handleLoadMore}
-      />
-
-      {/*!isReachingEnd && (
-        <Flex justify="center">
-          <Button
-            variant="secondary"
-            size="lg"
-            borderRadius="round"
-            onClick={handleLoadMore}
-            loading={isValidating}
-          >
-            Load More
-          </Button>
-        </Flex>
-      )*/}
-    </Stack>
+    <>
+      <Stack gap="x14" pb="x10">
+        <Grid gap="x4" className={nftGridWrapper}>
+          {items.map((nft) => (
+            <NFTCard
+              key={`${nft?.nft?.contract.address}-${nft?.nft?.tokenId}`}
+              nftData={nft}
+            />
+          ))}
+        </Grid>
+        {/*!isReachingEnd && (
+          <Flex justify="center">
+            <Button
+              variant="secondary"
+              size="lg"
+              borderRadius="round"
+              onClick={handleLoadMore}
+              loading={isValidating}
+            >
+              Load More
+            </Button>
+          </Flex>
+        )*/}
+      </Stack>
+      {!isReachingEnd && (
+        <NFTGridLoadMore
+          showObserver={true}
+          isValidating={isValidating}
+          handleLoadMore={handleLoadMore}
+        />
+      )}
+    </>
   )
 }

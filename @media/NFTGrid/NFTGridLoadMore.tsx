@@ -18,7 +18,12 @@ export const NFTGridLoadMore = ({
   }, [handleLoadMore, showObserver])
 
   return (
-    <>
+    <Flex
+      w="100%"
+      className={[isValidating ? 'validating' : '']}
+      position="relative"
+      mb="x6"
+    >
       {!isValidating && (
         <LoadMoreObserver
           position="absolute"
@@ -29,9 +34,9 @@ export const NFTGridLoadMore = ({
           handleVisible={handleVisible}
         />
       )}
-      <Flex justify="center" py="x4" aria-hidden height="x16">
+      <Flex justify="center" py="x4" aria-hidden height="x16" w="100%">
         {isValidating && <Icon key="spinner" id="Spinner" color="primary" size="lg" />}
       </Flex>
-    </>
+    </Flex>
   )
 }

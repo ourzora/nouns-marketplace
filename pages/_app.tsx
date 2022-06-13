@@ -21,6 +21,8 @@ import { CollectionsProvider } from 'providers/CollectionsProvider'
 import { useCollections } from 'hooks/zdk/useCollections'
 import { ContractProvider } from '@market/providers/ContractProvider'
 
+import NextNProgress from 'nextjs-progressbar'
+
 import 'styles/styles.css'
 
 const infuraId = process.env.INFURA_ID
@@ -62,6 +64,13 @@ function MyApp({ Component, pageProps }: AppProps) {
               <ModalContextProvider>
                 <ContractProvider>
                   <HeaderComposition />
+                  <NextNProgress
+                    color="rgba(0,0,0,.5)"
+                    startPosition={0.125}
+                    stopDelayMs={200}
+                    height={2}
+                    showOnShallow={true}
+                  />
                   <Component {...pageProps} />
                 </ContractProvider>
               </ModalContextProvider>
