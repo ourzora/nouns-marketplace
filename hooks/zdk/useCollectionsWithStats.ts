@@ -43,7 +43,7 @@ const fetchCollections = async (collections: string[]) => {
         return response
       })
     )
-    console.log(responses)
+    // console.log(responses)
     return {
       data: responses,
     }
@@ -55,7 +55,7 @@ const fetchCollections = async (collections: string[]) => {
 export function useCollections() {
   const { data, error } = useSWR([collectionAddresses], fetchCollections)
   useEffect(() => {
-    console.log('collections', data, error)
+    // console.log('collections', data, error)
   }, [data, error])
 
   return {

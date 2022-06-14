@@ -6,11 +6,16 @@ import { List } from '@market/wizards'
 import { CardMarketTrigger } from './CardMarketTrigger'
 import { useIsOwner } from '@market/hooks/useIsOwner'
 import { useModal } from '@modal'
+import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 
 export function ListToken({ nftData }: { nftData: NFTObject }) {
-  const { nft } = nftData
+  const { nft, metadata } = nftData
   const { isOwner } = useIsOwner(nftData)
   const { requestClose } = useModal()
+
+  // console.log(metadata)
+
+  const { image } = useRawImageTransform(metadata?.imageUri)
 
   if (!nft) {
     return null
@@ -29,6 +34,7 @@ export function ListToken({ nftData }: { nftData: NFTObject }) {
                 tokenId={nft.tokenId}
                 nftData={nftData}
                 onClose={requestClose}
+                previewURL={image}
               />
             </Box>
           }

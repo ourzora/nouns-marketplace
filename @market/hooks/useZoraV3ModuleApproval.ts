@@ -1,10 +1,10 @@
 import { ContractTransaction } from '@ethersproject/contracts'
-import { useAuth } from './useAuth'
+import { useAccount } from 'wagmi'
 import { useContractContext } from './useContractContext'
 import useSWR from 'swr'
 
 export function useZoraV3ModuleApproval(address: string) {
-  const { user: account } = useAuth()
+  const { data: account } = useAccount()
   const { ModuleManager, isReadOnly } = useContractContext()
 
   const { data: approved, ...rest } = useSWR(

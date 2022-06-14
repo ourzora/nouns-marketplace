@@ -2,7 +2,7 @@ import { ModalTitleAndDescription } from '../../ModalTitleAndDescription'
 import { TransactionSubmitButton } from '../../TransactionSubmitButton'
 import { PrintError } from '../../PrintError'
 import { useContractTransaction, useERC721TokenApproval } from '@market/hooks'
-import { Box, Button, Paragraph, Text } from '@zoralabs/zord'
+import { Box, Button, Paragraph, Text, Stack } from '@zoralabs/zord'
 import React, { useCallback, useEffect, useState } from 'react'
 
 interface ContractApprovalFormProps {
@@ -55,7 +55,7 @@ export function ERC721ContractApprovalForm({
       <Box>
         <ModalTitleAndDescription title={title} description={approvalCopy} mb="x2" />
         <a
-          href="https://help.zora.co/en/articles/5878598-what-s-an-approval"
+          href="https://support.zora.co/en/articles/5878598-what-s-an-approval"
           target="_blank"
           rel="noreferrer"
         >
@@ -68,16 +68,18 @@ export function ERC721ContractApprovalForm({
         </a>
       </Box>
       {error && <PrintError errorMessage={error} />}
-      <TransactionSubmitButton
-        txInProgress={txInProgress}
-        txStatus={txStatus}
-        onClick={handleApproveERC721ForSpender}
-      >
-        {buttonCopy}
-      </TransactionSubmitButton>
-      <Button disabled={txInProgress} variant="ghost" w="100%" onClick={onBack}>
-        Go back
-      </Button>
+      <Stack gap="x2">
+        <TransactionSubmitButton
+          txInProgress={txInProgress}
+          txStatus={txStatus}
+          onClick={handleApproveERC721ForSpender}
+        >
+          {buttonCopy}
+        </TransactionSubmitButton>
+        <Button disabled={txInProgress} variant="secondary" w="100%" onClick={onBack}>
+          Go back
+        </Button>
+      </Stack>
     </Box>
   )
 }
