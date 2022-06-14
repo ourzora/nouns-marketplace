@@ -1,8 +1,20 @@
 import { ModalTitleAndDescription } from '@market/components'
-import { Box, Button, Flex, Label, Paragraph, Text, Stack } from '@zoralabs/zord'
+import {
+  Box,
+  Button,
+  Flex,
+  Label,
+  Paragraph,
+  Text,
+  Stack,
+  Separator,
+} from '@zoralabs/zord'
 import React from 'react'
 import { shortenTxHash } from '../utils/format'
 import { ETHERSCAN_BASE_URL } from '../utils/transactions'
+import { getCurrency, Currency } from '@market/utils/currencies'
+import { formatCryptoVal } from '@market/utils/numbers'
+import { RawDisplayer } from 'components/utils'
 
 interface ContractInteractionStatusProps {
   title: string
@@ -27,13 +39,20 @@ export function ContractInteractionStatus({
   txHash,
   previewURL,
 }: ContractInteractionStatusProps) {
+  const currency = currencyAddress && getCurrency({ address: currencyAddress })
+  const prettyAmount = amount && formatCryptoVal(amount)
+
   return (
     <Box>
       <ModalTitleAndDescription title={title} description={description} />
       {amount && (
-        <Box mt="x2" mb="x4">
-          {amount} {currencyAddress}
-        </Box>
+        <>
+          <Separator />
+          <Label mt="x2" mb="x4">
+            {/** @ts-ignore */}
+            Listed for: {prettyAmount} {currency?.symbol}
+          </Label>
+        </>
       )}
       <Stack>
         <Flex gap="x4">
@@ -47,31 +66,35 @@ export function ContractInteractionStatus({
             backgroundColor="secondary"
           />
           <Flex flex={1} direction={['column', 'row']} w="100%">
-            <Box flex={1}>
-              <Label mb="x0" size="sm">
-                Status
-              </Label>
-              <Paragraph mb="x0" size="sm">
-                Processing
-              </Paragraph>
-            </Box>
-            <Box flex={1}>
-              <Label mb="x0" size="sm">
-                Transaction Hash
-              </Label>
-              <a
-                href={`${ETHERSCAN_BASE_URL}/tx/${txHash}`}
-                target="_blank"
-                rel="noreferer noopener noreferrer"
-              >
-                <Text as="span" variant="link">
-                  {shortenTxHash(txHash, 7, 4)}
-                </Text>{' '}
-                <Paragraph as="sup" top="x0" size="sm">
-                  ↗
+            <Stack justify="center" h="100%">
+              <Stack>
+                <Label mb="x0" size="sm">
+                  Status
+                </Label>
+                <Paragraph mb="x0" size="sm">
+                  Processing
                 </Paragraph>
-              </a>
-            </Box>
+              </Stack>
+            </Stack>
+            <Stack justify="center" h="100%">
+              <Stack>
+                <Label mb="x0" size="sm">
+                  Transaction Hash
+                </Label>
+                <a
+                  href={`${ETHERSCAN_BASE_URL}/tx/${txHash}`}
+                  target="_blank"
+                  rel="noreferer noopener noreferrer"
+                >
+                  <Text as="span" variant="link">
+                    {shortenTxHash(txHash, 7, 4)}
+                  </Text>{' '}
+                  <Paragraph as="sup" top="x0" size="sm">
+                    ↗
+                  </Paragraph>
+                </a>
+              </Stack>
+            </Stack>
           </Flex>
         </Flex>
       </Stack>

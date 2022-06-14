@@ -13,7 +13,7 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
   const { ask, auction } = useRelevantMarket(markets)
 
   const marketComponent = useMemo(() => {
-    console.log(ask)
+    // console.log(ask)
     if (markets && markets.length > 0) {
       if (auction && auction.status === MARKET_INFO_STATUSES.ACTIVE)
         return <ZoraReserveV2 nftData={nftData} />

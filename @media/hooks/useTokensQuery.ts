@@ -51,7 +51,7 @@ export function useTokensQuery({
   filter,
   where,
 }: UseTokenQueryProps) {
-  console.log(ownerAddress)
+  // console.log(ownerAddress)
 
   const getKey = (pageIndex: number, previousPageData: GetNFTReturnType) => {
     if (pageIndex > 0 && !previousPageData.nextCursor) return null // reached the end

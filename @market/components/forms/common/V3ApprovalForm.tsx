@@ -34,6 +34,7 @@ export function V3ApprovalForm({
       await mutate()
     } catch (e: any) {
       setError(e.message)
+      console.log(e)
       await mutate()
     }
   }, [approve, handleTx, mutate])

@@ -9,7 +9,7 @@ export const errorBox = style([
   atoms({
     w: '100%',
     backgroundColor: 'tertiary',
-    px: 'x4',
+    px: 'x3',
     py: 'x2',
     borderRadius: 'curved',
     mt: 'x2',
@@ -20,6 +20,7 @@ globalStyle(`${errorBox} pre`, {
   fontSize: '12px',
   fontFamily: 'SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace!important',
   lineHeight: '1!important',
+  color: 'red',
 })
 
 export const buttonStyle = style({
