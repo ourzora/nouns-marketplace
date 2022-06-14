@@ -11,7 +11,6 @@ import '../styles/globals.css'
 import '../styles/reset.css'
 import type { AppProps } from 'next/app'
 import { createClient, defaultChains, WagmiProvider } from 'wagmi'
-import { HeaderComposition } from 'compositions/Header/HeaderComposition'
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 import { ModalContextProvider } from '@modal'
@@ -22,6 +21,9 @@ import { useCollections } from 'hooks/zdk/useCollections'
 import { ContractProvider } from '@market/providers/ContractProvider'
 
 import NextNProgress from 'nextjs-progressbar'
+
+import { HeaderComposition } from 'compositions/Header'
+import { FooterComposition } from 'compositions/Footer'
 
 import 'styles/styles.css'
 
@@ -72,6 +74,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     showOnShallow={true}
                   />
                   <Component {...pageProps} />
+                  <FooterComposition />
                 </ContractProvider>
               </ModalContextProvider>
             </CollectionsProvider>

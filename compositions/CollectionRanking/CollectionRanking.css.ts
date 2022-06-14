@@ -5,6 +5,7 @@ import { MAX_WIDTH } from 'styles/style-constants'
 export const rankingWrapper = style([
   {
     maxWidth: MAX_WIDTH.LG,
+    minHeight: 550,
   },
   atoms({
     w: '100%',

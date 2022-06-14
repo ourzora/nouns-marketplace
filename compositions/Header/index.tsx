@@ -1,1 +1,1 @@
-export * as Header from './HeaderComposition'
+export * from './HeaderComposition'
