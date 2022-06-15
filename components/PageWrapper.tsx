@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Flex, FlexProps } from '@zoralabs/zord'
-import { HEADER_HEIGHT, FOOTER_HEIGHT } from 'styles/style-constants'
+import { pageWrapper } from 'styles/styles.css'
 
 export interface PageWrapperProps extends FlexProps {
   children: ReactNode
@@ -8,12 +8,7 @@ export interface PageWrapperProps extends FlexProps {
 
 export function PageWrapper({ children, ...props }: PageWrapperProps) {
   return (
-    <Flex
-      as="main"
-      px="x4"
-      {...props}
-      style={{ minHeight: `calc(100vh - ${HEADER_HEIGHT + FOOTER_HEIGHT}px)` }}
-    >
+    <Flex as="main" className={pageWrapper} {...props}>
       {children}
     </Flex>
   )

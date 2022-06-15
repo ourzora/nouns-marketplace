@@ -3,6 +3,7 @@ export const NOUNS_GLASSES =
 export const HEADER_HEIGHT = 104
 export const HEADER_HEIGHT_MOBILE = 160
 export const FOOTER_HEIGHT = 204
+export const FOOTER_HEIGHT_MOBILE = 80
 export const HEADER_Z = 100
 
 export const MAX_WIDTH = {

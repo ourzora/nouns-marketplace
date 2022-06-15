@@ -55,7 +55,10 @@ export function HeaderNav() {
       </Flex>
       <Flex
         align="center"
-        justify="flex-end"
+        justify={{
+          '@initial': 'space-between',
+          '@1024': 'flex-end',
+        }}
         w="100%"
         gap={{
           '@initial': 'x4',
@@ -73,26 +76,28 @@ export function HeaderNav() {
             <Box as="img" className={nounsGlasses} src={NOUNS_GLASSES} alt={APP_TITLE} />
           </Box>
         </Link>
-        <Flex
-          as="a"
-          align="center"
-          href="https://nouns.wtf/"
-          target="_blank"
-          rel="noreferrer"
-          display={{
-            '@initial': 'none',
-            '@1024': 'block',
-          }}
-        >
-          <Flex h="100%" align="center" gap="x2">
-            <Label size="lg">Nouns Center</Label>
-            <Icon id="ArrowRightAngle" size="sm" />
+        <Flex gap="x4" align="center">
+          <Flex
+            as="a"
+            align="center"
+            href="https://nouns.wtf/"
+            target="_blank"
+            rel="noreferrer"
+            display={{
+              '@initial': 'none',
+              '@1024': 'block',
+            }}
+          >
+            <Flex h="100%" align="center" gap="x2">
+              <Label size="lg">Nouns Center</Label>
+              <Icon id="ArrowRightAngle" size="sm" />
+            </Flex>
           </Flex>
+          <ManageLink />
+          <Box>
+            <ConnectButton showBalance={false} />
+          </Box>
         </Flex>
-        <ManageLink />
-        <Box>
-          <ConnectButton showBalance={false} />
-        </Box>
       </Flex>
     </Flex>
   )
