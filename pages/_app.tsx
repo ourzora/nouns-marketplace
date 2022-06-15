@@ -74,7 +74,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           coolMode
           theme={lightTheme({
             accentColor: 'black',
-            borderRadius: 'small',
+            borderRadius: 'large',
           })}
         >
           <V3Provider>

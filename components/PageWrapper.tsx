@@ -10,6 +10,7 @@ export function PageWrapper({ children, ...props }: PageWrapperProps) {
   return (
     <Flex
       as="main"
+      px="x4"
       {...props}
       style={{ minHeight: `calc(100vh - ${HEADER_HEIGHT + FOOTER_HEIGHT}px)` }}
     >

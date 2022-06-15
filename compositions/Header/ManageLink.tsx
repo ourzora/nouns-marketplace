@@ -15,12 +15,15 @@ export function ManageLink() {
       <Link href={`/manage/${account?.address}`}>
         <Label
           className={collectionTrigger}
-          py="x2"
           as="a"
           display="flex"
           align="center"
           h="100%"
           size="lg"
+          py={{
+            '@initial': 'x1',
+            '@1024': 'x2',
+          }}
         >
           Manage
         </Label>

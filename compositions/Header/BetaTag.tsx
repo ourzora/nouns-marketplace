@@ -4,13 +4,24 @@ export function BetaTag() {
   return (
     <Flex
       backgroundColor="tertiary"
-      h="100%"
       py="x2"
       pr="x5"
       pl="x2"
       borderRadius="curved"
       align="center"
       gap="x3"
+      position={{
+        '@initial': 'fixed',
+        '@1024': 'relative',
+      }}
+      bottom={{
+        '@initial': 'x4',
+        '@1024': 'auto',
+      }}
+      right={{
+        '@initial': 'x4',
+        '@1024': 'auto',
+      }}
     >
       <Box h="x8" w="x8">
         <Box
