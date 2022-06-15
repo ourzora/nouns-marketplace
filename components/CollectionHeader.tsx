@@ -4,6 +4,7 @@ import {
   CollectionStatsAggregateQuery,
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { lightFont } from 'styles/styles.css'
+import { AddressWithLink } from '@market'
 
 export function CollectionHeader({
   collection,
@@ -18,6 +19,16 @@ export function CollectionHeader({
       <Paragraph size="lg" className={lightFont} color="tertiary">
         {aggregateStats.aggregateStat.nftCount} NFTs
       </Paragraph>
+      <AddressWithLink
+        address={collection.address}
+        useEns={false}
+        backgroundColor="secondary"
+        px="x4"
+        py="x2"
+        borderRadius="curved"
+        mt="x2"
+        mb="x2"
+      />
       {collection.description !== "''" && collection.description && (
         <Paragraph>{collection.description}</Paragraph>
       )}

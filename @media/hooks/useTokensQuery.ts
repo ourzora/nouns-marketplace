@@ -7,6 +7,7 @@ import {
   TokenSortInput,
   TokensQueryFilter,
   TokensQueryInput,
+  SortDirection,
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { flatten } from 'lodash'
 import { useCallback } from 'react'
@@ -51,8 +52,6 @@ export function useTokensQuery({
   filter,
   where,
 }: UseTokenQueryProps) {
-  // console.log(ownerAddress)
-
   const getKey = (pageIndex: number, previousPageData: GetNFTReturnType) => {
     if (pageIndex > 0 && !previousPageData.nextCursor) return null // reached the end
     return {
@@ -66,6 +65,11 @@ export function useTokensQuery({
           ownerAddresses: [getAddress(ownerAddress)],
         }),
         ...where,
+      },
+      sort: {
+        sortDirection: SortDirection.Desc,
+        sortAxis: undefined,
+        sortKey: null,
       },
       filter: {},
       pagination: {

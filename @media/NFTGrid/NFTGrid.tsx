@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { Grid, Button, Stack, Flex } from '@zoralabs/zord'
+import { Grid, Stack } from '@zoralabs/zord'
 import { useTokensQuery } from '@media/hooks/useTokensQuery'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTCard } from '../NFTCard/NFTCard'
@@ -48,19 +47,6 @@ export function NFTGrid({
             />
           ))}
         </Grid>
-        {/*!isReachingEnd && (
-          <Flex justify="center">
-            <Button
-              variant="secondary"
-              size="lg"
-              borderRadius="round"
-              onClick={handleLoadMore}
-              loading={isValidating}
-            >
-              Load More
-            </Button>
-          </Flex>
-        )*/}
       </Stack>
       {!isReachingEnd && (
         <NFTGridLoadMore

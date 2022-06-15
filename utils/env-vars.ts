@@ -11,9 +11,9 @@ assert(DEFAULT_CONTRACT, 'At least one token contract is required as an env vari
 /* 
   SEO
 **/
-export const SITE_TITLE = process.env.NEXT_PUBLIC_SITE_TITLE || ''
-export const SITE_DESCRIPTION = process.env.NEXT_PUBLIC_SITE_DESCRIPTION || ''
-export const TWITTER_HANDLE = process.env.NEXT_PUBLIC_TWITTER_HANDLE || ''
-export const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL || ''
-export const OG_IMAGE = process.env.NEXT_PUBLIC_OG_IMAGE || ''
-export const FAVICON = `${WEBSITE_URL}/favicon.png`
+export const APP_TITLE = process.env.NEXT_PUBLIC_SITE_TITLE
+export const APP_DESCRIPTION = process.env.NEXT_PUBLIC_SITE_DESCRIPTION || ''
+export const BASE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL || ''
+export const OG_IMAGE = `${BASE_URL}/meta-content/og-image.jpg`
+export const FAVICON = `${BASE_URL}/meta-content/favicon.png`
+export const TWITTER_HANDLE = process.env.NEXT_PUBLIC_TWITTER_HANDLE

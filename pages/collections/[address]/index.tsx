@@ -6,6 +6,7 @@ import { NFTGrid } from '@media/NFTGrid'
 import { MarketStats } from '@market/components/MarketStats'
 import { CollectionHeader } from 'components/CollectionHeader'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
+import { Seo } from 'components/Seo'
 
 /* @ts-ignore */
 const Collection: NextPage = ({
@@ -26,6 +27,7 @@ const Collection: NextPage = ({
 
   return (
     <PageWrapper p="x4" direction="column" gap="x4">
+      <Seo title={seo.title} description={seo.description} />
       <CollectionHeader collection={collection} aggregateStats={aggregateStats} />
       <MarketStats aggregateStats={aggregateStats} />
       {contractAddress && (

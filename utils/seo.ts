@@ -3,21 +3,21 @@ import { identity, pickBy, truncate } from 'lodash'
 import { NETWORK_CHAIN_ID } from 'utils/env-vars'
 import {
   OG_IMAGE,
-  SITE_DESCRIPTION,
-  SITE_TITLE,
+  APP_DESCRIPTION,
+  APP_TITLE,
   TWITTER_HANDLE,
-  WEBSITE_URL
+  BASE_URL,
 } from 'utils/env-vars'
 
 export const DEFAULT_SEO = {
-  title: SITE_TITLE,
-  description: SITE_DESCRIPTION,
+  title: APP_TITLE,
+  description: APP_DESCRIPTION,
   openGraph: {
-    title: SITE_TITLE,
+    title: APP_TITLE,
     type: 'website',
     locale: 'en_IE',
-    url: WEBSITE_URL,
-    site_name: SITE_TITLE,
+    url: BASE_URL,
+    site_name: APP_TITLE,
     images: [
       {
         url: OG_IMAGE,
@@ -44,7 +44,7 @@ export const DEFAULT_SEO = {
     },
     {
       name: 'generator',
-      content: 'ZORA',
+      content: APP_TITLE,
     },
   ],
 }
@@ -58,9 +58,9 @@ export type SeoProps = {
 }
 
 export function buildMetaTags({
-  title: rawTitle = SITE_TITLE,
-  description = SITE_DESCRIPTION,
-  url = WEBSITE_URL,
+  title: rawTitle = APP_TITLE,
+  description = APP_DESCRIPTION,
+  url = BASE_URL,
   image = OG_IMAGE,
   twitterImageUrl,
 }: SeoProps) {
@@ -101,7 +101,7 @@ export function buildMetaTags({
     },
     {
       name: 'twitter:site',
-      content: '@ourzora',
+      content: TWITTER_HANDLE,
     },
     {
       name: 'twitter:url',
@@ -126,7 +126,7 @@ export function buildGalactusNFTSeo(nft: NFTObject, path: string): SeoProps {
     title: (nft.metadata?.name || `#${nft.nft?.tokenId}`) + ` | ${contractName}`,
     description,
     image,
-    url: `${WEBSITE_URL}/${path}`,
+    url: `${BASE_URL}/${path}`,
     twitterImageUrl: encodeURI(image),
   }
 }
@@ -136,8 +136,6 @@ export async function buildCollectionSEO(
   symbol?: string | null,
   iconURL?: string | null
 ): Promise<SeoProps> {
-  
-  
   const title = `${symbol ? symbol + ': ' : ''}${collectionName} NFT Marketplace`
   const description = `${
     symbol ? symbol + ': ' : ''
@@ -149,7 +147,7 @@ export async function buildCollectionSEO(
       title,
       description,
       image: image,
-      url: `${WEBSITE_URL}/${NETWORK_CHAIN_ID}/${collectionName}`,
+      url: `${BASE_URL}/${NETWORK_CHAIN_ID}/${collectionName}`,
     },
     identity
   )
