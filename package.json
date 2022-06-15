@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "@types/dompurify": "^2.3.3",
+    "@types/gtag.js": "^0.0.10",
     "@types/lodash": "^4.14.182",
     "@types/mime-types": "^2.1.1",
     "@types/node": "17.0.23",
