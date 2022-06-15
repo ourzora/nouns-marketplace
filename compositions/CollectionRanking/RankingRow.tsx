@@ -17,14 +17,16 @@ export function RankingRow({ collection }: { collection: CollectionsData }) {
   const collectionPriceData = useMemo(() => {
     if (aggregate)
       return {
-        volume: roundTwoDecimals(aggregate.aggregateStat.salesVolume.chainTokenPrice),
+        volume: `${roundTwoDecimals(
+          aggregate.aggregateStat.salesVolume.chainTokenPrice
+        )} ETH`,
         floor:
           aggregate.aggregateStat?.floorPrice &&
           aggregate.aggregateStat?.floorPrice !== null
             ? `${roundTwoDecimals(aggregate.aggregateStat.floorPrice)} ETH`
             : 'NA',
       }
-  }, [collection])
+  }, [aggregate])
 
   return (
     <Grid className={rankingRow}>
@@ -34,16 +36,16 @@ export function RankingRow({ collection }: { collection: CollectionsData }) {
       </Flex>
       <Grid className={rankingStats}>
         <Label size="lg" align="right">
-          {aggregate ? <>{collectionPriceData?.volume}&nbsp;ETH</> : '...'}
+          {aggregate ? <>{collectionPriceData?.volume}</> : '...'}
         </Label>
         <Label size="lg" align="right">
-          {/*aggregate?.nftCount*/}
+          {aggregate?.aggregateStat?.nftCount}
         </Label>
         <Label size="lg" align="right">
-          {aggregate ? <>{collectionPriceData?.floor}&nbsp;ETH</> : '...'}
+          {aggregate ? <>{collectionPriceData?.floor}</> : '...'}
         </Label>
         <Label size="lg" align="right">
-          {/*aggregate.ownerCount*/}
+          {aggregate?.aggregateStat?.ownerCount}
         </Label>
         <Link href={`/collections/${collection.address}`} passHref>
           <Flex className={buttonStyle}>

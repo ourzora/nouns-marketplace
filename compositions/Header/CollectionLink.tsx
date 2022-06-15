@@ -4,9 +4,11 @@ import { Link } from 'components/Link'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { lightGreyType, leadingTight, lightFont } from 'styles/styles.css'
 import { CollectionsData } from 'hooks/zdk/useCollections'
+import { useAggregate } from 'hooks/zdk/useAggregate'
 
 export function CollectionLink({ collection }: { collection: CollectionsData }) {
   const { requestClose } = useModal()
+  const { aggregate } = useAggregate(collection.address)
 
   return (
     <Link href={`/collections/${collection.address}`} passHref>
@@ -17,14 +19,16 @@ export function CollectionLink({ collection }: { collection: CollectionsData }) 
             <Label size="lg" className={leadingTight}>
               {collection.name}
             </Label>
-            <Eyebrow className={[lightGreyType, lightFont]}>
-              Floor Price: {/*collection?.aggregateStat?.floorPrice*/} ETH
-            </Eyebrow>
+            {aggregate?.aggregateStat?.floorPrice !== null && (
+              <Eyebrow className={[lightGreyType, lightFont]}>
+                Floor Price: {aggregate?.aggregateStat?.floorPrice} ETH
+              </Eyebrow>
+            )}
           </Stack>
         </Flex>
         <Flex gap="x2" align="center">
           <Label className={[lightGreyType, lightFont]}>
-            {/*collection?.aggregateStat?.nftCount*/} NFTs
+            {aggregate?.aggregateStat?.nftCount} NFTs
           </Label>
           <Icon id="ChevronRight" />
         </Flex>
