@@ -15,7 +15,7 @@ import useSWRInfinite from 'swr/infinite'
 
 import { collectionAddresses } from 'utils/collection-addresses'
 
-const PAGE_SIZE = 12
+const PAGE_SIZE = 24
 
 interface UseTokenQueryProps {
   contractAddress?: string | null
