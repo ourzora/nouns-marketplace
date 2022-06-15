@@ -13,6 +13,7 @@ import { NFTObject } from '@zoralabs/nft-hooks'
 import { GetServerSideProps } from 'next'
 import { zdkService } from 'utils/zdk'
 import { buildCollectionSEO, SeoProps } from 'utils/seo'
+import { collectionAddresses } from 'utils/collection-addresses'
 
 export type CollectionServiceProps = {
   initialPage: NFTObject[]
@@ -33,6 +34,13 @@ interface CollectionParamsProps extends GetServerSideProps {
 export async function collectionService({ params }: CollectionParamsProps) {
   // assert(params, 'Page template must provide a params object')
   const tokenAddress = params ? params.address : process.env.NEXT_PUBLIC_DEFAULT_CONTRACT
+
+  console.log(params?.address, collectionAddresses)
+
+  if (tokenAddress && !collectionAddresses.includes(tokenAddress))
+    return {
+      notFound: true,
+    }
 
   if (!tokenAddress) return false
 

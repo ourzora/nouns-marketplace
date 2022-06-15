@@ -1,6 +1,6 @@
 import { DEFAULT_CONTRACT } from './env-vars'
 
-export const collectionAddresses: string[] = [
+const collections: string[] = [
   DEFAULT_CONTRACT,
   '0x4b10701Bfd7BFEdc47d50562b76b436fbB5BdB3B',
   '0xe169c2ed585e62b1d32615bf2591093a629549b6',
@@ -13,7 +13,6 @@ export const collectionAddresses: string[] = [
   '0xeef77d7f89090667f5618acc194d66d2cba42c76',
   '0xdB05F0d43B15fba15A003B1fE7933441e04F0802',
   '0xb9b096c521e7356888fd3cb04a3af943f401b86b',
-  // '0xFdF27D7c95Eac62d86979E2d73ffFBCf380fA9fe',
   '0x2605aFBb22c59296C16ef5e477110357F760b20F',
   '0xe451fe020e8d554c10510c0572aba06eed1dcdcd',
   '0x643AfeE78bD8C693Be049AA40e337fD15CdFB61b',
@@ -21,3 +20,7 @@ export const collectionAddresses: string[] = [
   '0x70b44ea398a33593af1cb348f3837b89a85d4f91',
   '0x9e1f32b2BBeDe1a544b69e5403860Bba8542962B',
 ]
+
+export const collectionAddresses = collections.map((collection) =>
+  collection.toLowerCase()
+)
