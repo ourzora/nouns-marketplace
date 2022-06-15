@@ -20,6 +20,17 @@ export const cardWrapper = style([
   },
   atoms({
     borderRadius: 'phat',
+    position: 'relative',
+  }),
+])
+
+export const cardImageWrapper = style([
+  {
+    aspectRatio: '1/1',
+  },
+  atoms({
+    w: '100%',
+    position: 'relative',
   }),
 ])
 

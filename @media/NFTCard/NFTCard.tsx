@@ -4,7 +4,13 @@ import { Link } from 'components/Link'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTCardMarket } from '@market'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
-import { cardWrapper, titleWrapper, titleScroll, titleHeading } from '@media/NftMedia.css'
+import {
+  cardWrapper,
+  titleWrapper,
+  titleScroll,
+  titleHeading,
+  cardImageWrapper,
+} from '@media/NftMedia.css'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 
 export function NFTCard({ nftData }: { nftData: NFTObject }) {
@@ -24,8 +30,16 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
   return (
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
       <Link href={`/collections/${nft?.contract.address}/${nft?.tokenId}`}>
-        <Box w="100%">
-          <Box as="img" src={image} w="100%" />
+        <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
+          <Box
+            as="img"
+            src={image}
+            w="100%"
+            h="100%"
+            position="absolute"
+            inset="x0"
+            objectFit="cover"
+          />
         </Box>
       </Link>
       <Stack gap="x2" mt="x2" px="x4" pb="x4">

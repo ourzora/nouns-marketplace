@@ -1,3 +1,6 @@
+import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import {
   apiProvider,
   configureChains,
@@ -9,8 +12,8 @@ import '@rainbow-me/rainbowkit/styles.css'
 import '@zoralabs/zord/index.css'
 import '../styles/globals.css'
 import '../styles/reset.css'
-import type { AppProps } from 'next/app'
-import { createClient, defaultChains, WagmiProvider } from 'wagmi'
+import * as gtag from 'lib/gtag'
+import { createClient, chain, WagmiProvider } from 'wagmi'
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 import { ModalContextProvider } from '@modal'
@@ -30,9 +33,10 @@ import 'styles/styles.css'
 const infuraId = process.env.INFURA_ID
 
 // const chains = defaultChains
-const { chains, provider } = configureChains(defaultChains, [
-  apiProvider.infura(infuraId),
-])
+const { chains, provider } = configureChains(
+  [chain.mainnet],
+  [apiProvider.infura(infuraId)]
+)
 
 const { connectors } = getDefaultWallets({
   appName: 'Contract Manager',
@@ -49,6 +53,18 @@ export const strategy = new ZDKFetchStrategy('1', GALACTUS_BASE_URL)
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { collections } = useCollections()
+
+  const router = useRouter()
+
+  useEffect(() => {
+    const handleRouteChange = (url: URL) => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return (
     <WagmiProvider client={wagmiClient}>
