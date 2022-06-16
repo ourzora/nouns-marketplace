@@ -31,3 +31,16 @@ export const buttonStyle = style({
 export const lightFont = style({
   fontWeight: 300,
 })
+
+export const marketStatsWrapper = style([
+  {
+    overflowX: 'scroll',
+  },
+  atoms({
+    w: '100%',
+  }),
+])
+
+export const stat = style({
+  whiteSpace: 'nowrap',
+})

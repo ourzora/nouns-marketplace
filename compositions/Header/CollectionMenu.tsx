@@ -12,7 +12,17 @@ export function CollectionMenu() {
       modalName={`collections-menu`}
       trigger={
         <Flex align="center" className={collectionTrigger}>
-          <Label py="x2" as="span" display="flex" align="center" h="100%" size="lg">
+          <Label
+            py={{
+              '@initial': 'x1',
+              '@1024': 'x2',
+            }}
+            as="span"
+            display="flex"
+            align="center"
+            h="100%"
+            size="lg"
+          >
             {currentCollection}&nbsp;
           </Label>
           <Icon id="ChevronDown" size="md" />

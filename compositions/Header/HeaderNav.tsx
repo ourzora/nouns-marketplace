@@ -10,30 +10,110 @@ import { BetaTag } from './BetaTag'
 
 export function HeaderNav() {
   return (
-    <Flex align="center" justify="space-between" w="100%" px="x6">
-      <Flex align="center" gap="x8">
+    <Flex
+      w="100%"
+      align={{
+        '@initial': 'start',
+        '@1024': 'center',
+      }}
+      direction={{
+        '@initial': 'column-reverse',
+        '@1024': 'row',
+      }}
+      justify={{
+        '@initial': 'flex-end',
+        '@1024': 'space-between',
+      }}
+      gap="x4"
+    >
+      <Flex
+        align="center"
+        justify={{
+          '@initial': 'space-between',
+          '@1024': 'flex-start',
+        }}
+        w={{
+          '@initial': '100%',
+          '@1024': 'auto',
+        }}
+        gap="x8"
+      >
         <Link passHref href="/">
-          <Box as="img" className={nounsGlasses} src={NOUNS_GLASSES} alt={APP_TITLE} />
+          <Box
+            as="img"
+            className={nounsGlasses}
+            src={NOUNS_GLASSES}
+            alt={APP_TITLE}
+            display={{
+              '@initial': 'none',
+              '@1024': 'block',
+            }}
+          />
         </Link>
         <BetaTag />
         <CollectionMenu />
-      </Flex>
-      <Flex align="center" gap="x6">
         <Flex
           as="a"
           align="center"
-          gap="x2"
           href="https://nouns.wtf/"
           target="_blank"
           rel="noreferrer"
+          display={{
+            '@initial': 'block',
+            '@1024': 'none',
+          }}
         >
-          <Label size="lg">Nouns Center</Label>
-          <Icon id="ArrowRightAngle" size="sm" />
+          <Flex h="100%" align="center" gap="x2">
+            <Label size="lg">Nouns Center</Label>
+            <Icon id="ArrowRightAngle" size="sm" />
+          </Flex>
         </Flex>
-        <ManageLink />
-        <Box>
-          <ConnectButton showBalance={false} />
-        </Box>
+      </Flex>
+      <Flex
+        align="center"
+        justify={{
+          '@initial': 'space-between',
+          '@1024': 'flex-end',
+        }}
+        w="100%"
+        gap={{
+          '@initial': 'x4',
+          '@1024': 'x6',
+        }}
+      >
+        <Link passHref href="/">
+          <Box
+            as="a"
+            display={{
+              '@initial': 'block',
+              '@1024': 'none',
+            }}
+          >
+            <Box as="img" className={nounsGlasses} src={NOUNS_GLASSES} alt={APP_TITLE} />
+          </Box>
+        </Link>
+        <Flex gap="x4" align="center">
+          <Flex
+            as="a"
+            align="center"
+            href="https://nouns.wtf/"
+            target="_blank"
+            rel="noreferrer"
+            display={{
+              '@initial': 'none',
+              '@1024': 'block',
+            }}
+          >
+            <Flex h="100%" align="center" gap="x2">
+              <Label size="lg">Nouns Center</Label>
+              <Icon id="ArrowRightAngle" size="sm" />
+            </Flex>
+          </Flex>
+          <ManageLink />
+          <Box>
+            <ConnectButton showBalance={false} />
+          </Box>
+        </Flex>
       </Flex>
     </Flex>
   )

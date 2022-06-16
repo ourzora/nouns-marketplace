@@ -1,10 +1,19 @@
 import { style } from '@vanilla-extract/css'
-import { atoms } from '@zoralabs/zord'
+import { atoms, media } from '@zoralabs/zord'
+import { MAX_WIDTH } from 'styles/style-constants'
 
 export const nftGridWrapper = style([
   {
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    maxWidth: 1440,
+    gridTemplateColumns: 'repeat(1, 1fr)',
+    maxWidth: MAX_WIDTH.LG,
+    '@media': {
+      [media.min576]: {
+        gridTemplateColumns: 'repeat(2, 1fr)',
+      },
+      [media.min1024]: {
+        gridTemplateColumns: 'repeat(3, 1fr)',
+      },
+    },
   },
   atoms({
     w: '100%',
