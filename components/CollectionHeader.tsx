@@ -14,7 +14,7 @@ export function CollectionHeader({
   aggregateStats: CollectionStatsAggregateQuery
 }) {
   return (
-    <Stack align="center">
+    <Stack align="center" w="100%" px="x4">
       <Display as="h1">{collection.name}</Display>
       <Paragraph size="lg" className={lightFont} color="tertiary">
         {aggregateStats.aggregateStat.nftCount} NFTs

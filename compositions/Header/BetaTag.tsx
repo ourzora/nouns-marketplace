@@ -1,8 +1,26 @@
+import { useRef, useState } from 'react'
 import { Label, Flex, Box } from '@zoralabs/zord'
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 
 export function BetaTag() {
+  const [hideOnScroll, setHideOnScroll] = useState(true)
+  const childRef = useRef<HTMLDivElement>(null)
+
+  useScrollPosition(
+    ({ currPos }) => {
+      setHideOnScroll(currPos.y > 400)
+    },
+    [hideOnScroll],
+    // @ts-ignore-next-line
+    childRef,
+    false,
+    500,
+    false
+  )
+
   return (
     <Flex
+      ref={childRef}
       backgroundColor="tertiary"
       py="x2"
       pr="x5"
@@ -22,6 +40,7 @@ export function BetaTag() {
         '@initial': 'x4',
         '@1024': 'auto',
       }}
+      style={{ opacity: `${hideOnScroll ? 1 : 1}` }}
     >
       <Box h="x8" w="x8">
         <Box

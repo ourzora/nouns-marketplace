@@ -52,6 +52,22 @@ export function HeaderNav() {
         </Link>
         <BetaTag />
         <CollectionMenu />
+        <Flex
+          as="a"
+          align="center"
+          href="https://nouns.wtf/"
+          target="_blank"
+          rel="noreferrer"
+          display={{
+            '@initial': 'block',
+            '@1024': 'none',
+          }}
+        >
+          <Flex h="100%" align="center" gap="x2">
+            <Label size="lg">Nouns Center</Label>
+            <Icon id="ArrowRightAngle" size="sm" />
+          </Flex>
+        </Flex>
       </Flex>
       <Flex
         align="center"

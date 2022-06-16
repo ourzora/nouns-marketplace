@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { Flex, Text, Stack } from '@zoralabs/zord'
 import { CollectionStatsAggregateQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { lightFont } from 'styles/styles.css'
+import { marketStatsWrapper, stat } from './MarketComponents.css'
 import { roundFourDecimals, roundTwoDecimals } from 'utils/math'
 
 export function StatBlock({
@@ -12,11 +13,15 @@ export function StatBlock({
   statValue: string | number | null | undefined
 }) {
   return (
-    <Stack p="x4" backgroundColor="tertiary" borderRadius="phat" gap="x1">
-      <Text variant="heading-xs" color="secondary" className={lightFont}>
+    <Stack p="x4" backgroundColor="tertiary" borderRadius="phat">
+      <Text
+        variant={['heading-xs, heading-xl']}
+        color="secondary"
+        className={[lightFont, stat]}
+      >
         {statType}
       </Text>
-      <Text variant="heading-xs" className={lightFont}>
+      <Text variant="heading-xs" className={[lightFont, stat]}>
         {statValue}
       </Text>
     </Stack>
@@ -40,8 +45,23 @@ export function MarketStats({
   )
 
   return (
-    <Flex justify="center" mb="x10">
-      <Flex gap="x4">
+    <Flex
+      justify="center"
+      w="100%"
+      mb={{
+        '@initial': 'x2',
+        '@1024': 'x12',
+      }}
+      className={marketStatsWrapper}
+    >
+      <Flex
+        gap="x4"
+        w="100%"
+        justify={{
+          '@initial': 'flex-start',
+          '@1024': 'center',
+        }}
+      >
         <StatBlock statType="Owners" statValue={aggregateStat?.ownerCount} />
         <StatBlock statType="Items" statValue={aggregateStat?.nftCount} />
         <StatBlock
