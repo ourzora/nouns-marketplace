@@ -7,6 +7,7 @@ import { Link } from 'components/Link'
 import { buttonStyle } from 'styles/styles.css'
 import { roundTwoDecimals } from 'utils/math'
 import { useAggregate } from 'hooks/zdk/useAggregate'
+import { numberFormatter } from 'utils/numbers'
 
 /* todo: add a skeleton or some kind of loading state */
 
@@ -23,7 +24,9 @@ export function RankingRow({ collection }: { collection: CollectionsData }) {
         floor:
           aggregate.aggregateStat?.floorPrice &&
           aggregate.aggregateStat?.floorPrice !== null
-            ? `${roundTwoDecimals(aggregate.aggregateStat.floorPrice)} ETH`
+            ? `${numberFormatter(
+                roundTwoDecimals(aggregate.aggregateStat.floorPrice)
+              )} ETH`
             : 'NA',
       }
   }, [aggregate])
@@ -39,16 +42,31 @@ export function RankingRow({ collection }: { collection: CollectionsData }) {
         </Flex>
         <Grid className={rankingStats}>
           <Label size="lg" as="span" align="right">
-            {aggregate ? <>{collectionPriceData?.volume}</> : '...'}
+            {aggregate ? (
+              <>{numberFormatter(collectionPriceData?.volume || 0)} Ξ</>
+            ) : (
+              '...'
+            )}
           </Label>
           <Label size="lg" as="span" align="right">
-            {aggregate?.aggregateStat?.nftCount}
+            {numberFormatter(aggregate?.aggregateStat?.nftCount || 0)}
           </Label>
           <Label size="lg" as="span" align="right">
-            {aggregate ? <>{collectionPriceData?.floor}</> : '...'}
+            {aggregate ? (
+              <>
+                {collectionPriceData?.floor &&
+                collectionPriceData.floor.includes('NaN') ? (
+                  <>{numberFormatter(collectionPriceData?.floor)} Ξ</>
+                ) : (
+                  <>n/a</>
+                )}
+              </>
+            ) : (
+              '...'
+            )}
           </Label>
           <Label size="lg" as="span" align="right">
-            {aggregate?.aggregateStat?.ownerCount}
+            {numberFormatter(aggregate?.aggregateStat?.ownerCount || '0')}
           </Label>
           <Flex className={buttonStyle}>
             <Label>Explore</Label>

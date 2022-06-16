@@ -4,6 +4,7 @@ import { CollectionStatsAggregateQuery } from '@zoralabs/zdk/dist/queries/querie
 import { lightFont } from 'styles/styles.css'
 import { marketStatsWrapper, stat } from './MarketComponents.css'
 import { roundFourDecimals, roundTwoDecimals } from 'utils/math'
+import { numberFormatter } from 'utils/numbers'
 
 export function StatBlock({
   statType,
@@ -36,11 +37,11 @@ export function MarketStats({
   const { aggregateStat } = aggregateStats
 
   const volume = useMemo(
-    () => roundFourDecimals(aggregateStat?.salesVolume?.chainTokenPrice),
+    () => numberFormatter(roundFourDecimals(aggregateStat?.salesVolume?.chainTokenPrice)),
     [aggregateStat?.salesVolume?.chainTokenPrice]
   )
   const usdcPrice = useMemo(
-    () => roundTwoDecimals(aggregateStat?.salesVolume?.usdcPrice),
+    () => numberFormatter(roundTwoDecimals(aggregateStat?.salesVolume?.usdcPrice)),
     [aggregateStat?.salesVolume?.usdcPrice]
   )
 
@@ -62,8 +63,14 @@ export function MarketStats({
           '@1024': 'center',
         }}
       >
-        <StatBlock statType="Owners" statValue={aggregateStat?.ownerCount} />
-        <StatBlock statType="Items" statValue={aggregateStat?.nftCount} />
+        <StatBlock
+          statType="Owners"
+          statValue={numberFormatter(aggregateStat?.ownerCount)}
+        />
+        <StatBlock
+          statType="Items"
+          statValue={numberFormatter(aggregateStat?.nftCount)}
+        />
         <StatBlock
           statType="Floor Price"
           statValue={`${
