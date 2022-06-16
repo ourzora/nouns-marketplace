@@ -29,6 +29,7 @@ export type CollectionAttributeFilterValue = { traitType: string; value: string 
 export type CollectionAttributesFilter = CollectionAttributeFilterValue[]
 
 export type FilterStore = {
+  collections?: string[]
   filters: FilterState
   showFilters: boolean
   toggleShowFilters: () => void

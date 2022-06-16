@@ -1,4 +1,4 @@
-import { FilterStore, initialFilterStore, useFilterStore } from '../data/filterStore'
+import { FilterStore, initialFilterStore, useFilterStore } from '../state/filterStore'
 import { ReactNode, createContext, useContext } from 'react'
 
 const CollectionFilterContext = createContext<{

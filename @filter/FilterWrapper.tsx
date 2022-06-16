@@ -8,7 +8,7 @@ import {
 import { FilterHeader } from './FilterHeader'
 import { FilterSidebar } from './FilterSidebar'
 import { SelectedFilters } from './SelectedFilters'
-import { useCollectionFilters } from '@next/providers/CollectionFilterProvider'
+import { useCollectionFilters } from './providers/CollectionFilterProvider'
 import { Box, Flex, Grid, Stack } from '@zoralabs/zord'
 
 export function FilterWrapper({

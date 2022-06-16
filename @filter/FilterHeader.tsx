@@ -4,7 +4,7 @@ import {
   filtersButton,
   stickyFilterHeader,
 } from './CollectionsFilter.css'
-import { useCollectionFilters } from '@next/providers/CollectionFilterProvider'
+import { useCollectionFilters } from './providers/CollectionFilterProvider'
 import { Button, Flex, Text } from '@zoralabs/zord'
 
 export function FilterHeader({

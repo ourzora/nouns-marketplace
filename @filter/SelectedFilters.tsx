@@ -8,14 +8,14 @@ import {
   mediaTypeOptions,
   ownerStatusOptions,
   useCollectionFilters,
-} from '@next/providers/CollectionFilterProvider'
+} from '@filter/providers'
 import {
   MarketStatusFilter,
   MediaTypeFilter,
   OwnerStatusFilter,
   SelectOption,
   Status,
-} from '@next/providers/CollectionFilterProvider/filterStore'
+} from '@filter/state/filterStore'
 import { Button, Flex } from '@zoralabs/zord'
 import { useCallback, useMemo } from 'react'
 

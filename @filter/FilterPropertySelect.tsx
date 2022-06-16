@@ -1,5 +1,5 @@
 import { filterPropertySelect } from './CollectionsFilter.css'
-import { useCollectionFilters } from '@next/providers/CollectionFilterProvider'
+import { useCollectionFilters } from './providers/CollectionFilterProvider'
 import { CollectionAttributeValue } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Button, Checkbox } from '@zoralabs/zord'
 import { useCallback, useMemo } from 'react'

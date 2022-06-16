@@ -1,5 +1,5 @@
 import { FilterOptionButton } from './FilterOptionButton'
-import { useCollectionFilters } from '@next/providers/CollectionFilterProvider'
+import { useCollectionFilters } from './providers/CollectionFilterProvider'
 import { useMemo } from 'react'
 
 export function SelectedPriceRange() {

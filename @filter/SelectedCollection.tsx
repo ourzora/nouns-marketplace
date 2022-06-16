@@ -1,7 +1,7 @@
 import { FilterOptionButton } from './FilterOptionButton'
-import { Avatar } from '@next/components/Avatar'
-import { useCollectionFilters } from '@next/providers/CollectionFilterProvider'
-import { shortenAddress } from 'utils/format'
+import { Zorb } from '@zora-brand'
+import { useCollectionFilters } from './providers/CollectionFilterProvider'
+import { shortenAddress } from '@shared/utils/format'
 
 export function SelectedCollection({ tokenAddress }: { tokenAddress: any }) {
   const {
@@ -19,7 +19,7 @@ export function SelectedCollection({ tokenAddress }: { tokenAddress: any }) {
       rightPad
       onClick={() => setTokenContracts(tokenAddress)}
     >
-      <Avatar size="30" address={tokenAddress} />
+      <Zorb size={30} address={tokenAddress} />
     </FilterOptionButton>
   )
 }

@@ -8,11 +8,7 @@ import { FilterHeader } from './FilterHeader'
 import { FilterOptions } from './FilterOptions'
 import { FilterPriceRange } from './FilterPriceRange'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
-import {
-  marketStatusOptions,
-  mediaTypeOptions,
-  useCollectionFilters,
-} from '@next/providers/CollectionFilterProvider'
+import { marketStatusOptions, mediaTypeOptions, useCollectionFilters } from './providers'
 import { Box, Stack } from '@zoralabs/zord'
 import { useRef, useState } from 'react'
 import { FilterProperties } from './FilterProperties'

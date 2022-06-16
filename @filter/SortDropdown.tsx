@@ -1,9 +1,8 @@
 import { activityButton, activityModal } from './CollectionsFilter.css'
-import { useCollectionFilters } from '@next/providers/CollectionFilterProvider'
-import { sortMethodOptions } from '@next/providers/CollectionFilterProvider/filterStore'
-import { Box, Button, Icon, Modal, ModalContent, Stack, Text } from '@zoralabs/zord'
-import { ModalType } from 'compositions/modal/ModalRegistry'
-import { useModalRegistry } from 'hooks/useModalRegistry'
+import { useCollectionFilters } from './providers/CollectionFilterProvider'
+import { sortMethodOptions } from './state/filterStore'
+import { Button, Icon, Stack, Text, Box } from '@zoralabs/zord'
+import { ModalComposition, useModal } from '@modal'
 import { useCallback, useMemo } from 'react'
 
 export function SortDropdown() {
@@ -14,7 +13,7 @@ export function SortDropdown() {
     },
   } = useCollectionFilters()
 
-  const { modalType, requestClose, requestOpen } = useModalRegistry()
+  const { requestClose } = useModal()
 
   const activitySelectHandler = useCallback(
     (option) => {
@@ -29,26 +28,21 @@ export function SortDropdown() {
   }, [sortMethod])
 
   return (
-    <>
-      <Box>
+    <ModalComposition
+      modalName={`sort-dropdown`}
+      trigger={
         <Button
           variant="secondary"
           borderRadius="round"
           size="sm"
           icon="ChevronDown"
-          onClick={() => requestOpen(ModalType.RECENT_ACTIVITY)}
           className={activityButton}
         >
           {selectedOption}
         </Button>
-      </Box>
-      <Modal open={modalType === ModalType.RECENT_ACTIVITY} onOpenChange={requestClose}>
-        <ModalContent
-          title="modal"
-          className={activityModal}
-          showClose={false}
-          removePadding
-        >
+      }
+      content={
+        <Box className={activityModal}>
           <Stack>
             {sortMethodOptions.map((option) => (
               <Button
@@ -65,12 +59,12 @@ export function SortDropdown() {
                 <Text as="span" pr="x10">
                   {option.label}
                 </Text>
-                {option.value === sortMethod && <Icon id="Check" size="sm" />}
+                {option.value === sortMethod && <Icon id="Plus" size="sm" />}
               </Button>
             ))}
           </Stack>
-        </ModalContent>
-      </Modal>
-    </>
+        </Box>
+      }
+    />
   )
 }

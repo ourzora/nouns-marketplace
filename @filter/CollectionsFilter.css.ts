@@ -1,6 +1,7 @@
 import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from './filter-constants'
 import { style } from '@vanilla-extract/css'
-import { atoms, textVariants, vars } from '@zoralabs/zord'
+import { recipe } from '@vanilla-extract/recipes'
+import { atoms, textVariants, fontWeight, vars } from '@zoralabs/zord'
 import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE } from 'styles/style-constants'
 
 export const homepageGrid = style({
@@ -221,3 +222,77 @@ export const filterPropertySelect = style([
     justifyContent: 'flex-start',
   },
 ])
+
+const pill = {
+  paddingLeft: vars.space.x3,
+  paddingRight: vars.space.x3,
+  paddingTop: 0,
+  paddingBottom: 0,
+  height: vars.space.x10,
+  borderRadius: vars.radii.round,
+  marginBottom: 0,
+  fontSize: textVariants.variant['label-md'].fontSize,
+  fontWeight: fontWeight.label,
+  lineHeight: 1,
+}
+
+export const currencySelectVariants = {
+  variant: {
+    large: {
+      paddingLeft: vars.space.x4,
+      paddingRight: vars.space.x4,
+      height: vars.space.x15,
+      fontSize: textVariants.variant['label-md'].fontSize,
+    },
+    greyPill: {
+      ...pill,
+      selectors: {
+        '&:focus': {
+          border: 0,
+        },
+      },
+    },
+    whitePill: {
+      ...pill,
+      boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.1), 0px 0.8px 2.6px rgba(0, 0, 0, 0.05)',
+      backgroundColor: vars.color.background.primary,
+    },
+  },
+}
+
+export const currencySelect = recipe({
+  variants: currencySelectVariants,
+
+  base: {},
+})
+
+const symbolTextVariants = {
+  variant: {
+    large: {
+      fontSize: textVariants.variant['label-md'].fontSize,
+    },
+    greyPill: {
+      fontSize: textVariants.variant['label-md'].fontSize,
+      fontWeight: fontWeight.label,
+    },
+    whitePill: {
+      fontSize: textVariants.variant['label-md'].fontSize,
+      fontWeight: fontWeight.label,
+    },
+  },
+}
+
+export const symbolText = recipe({
+  variants: symbolTextVariants,
+
+  base: [
+    style({
+      visibility: 'hidden',
+    }),
+    atoms({
+      position: 'absolute',
+      pointerEvents: 'none',
+      width: 'auto',
+    }),
+  ],
+})

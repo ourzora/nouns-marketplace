@@ -1,4 +1,4 @@
-import { Avatar } from '@next/components/Avatar'
+import { Zorb } from '@zora-brand'
 import {
   collectionBlock,
   collectionBlockContent,
@@ -48,7 +48,7 @@ export function FilterCollectionListItem({
           w="100%"
         >
           <Flex gap="x3" className={collectionBlockContent}>
-            <Avatar size="48" address={tokenAddress} />
+            <Zorb size={48} address={tokenAddress} />
             <Flex
               direction="column"
               className={[collectionBlockMeta, 'zora-collectionListMeta']}

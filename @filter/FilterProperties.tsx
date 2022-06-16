@@ -1,6 +1,6 @@
 import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { FilterPropertySelect } from './FilterPropertySelect'
-import { useCollection } from 'hooks/useCollection'
+import { useCollection } from './hooks/useCollection'
 import { Accordion, Box, Stack } from '@zoralabs/zord'
 
 export function FilterProperties({ collectionAddress }: { collectionAddress: string }) {
