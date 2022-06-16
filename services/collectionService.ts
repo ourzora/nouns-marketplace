@@ -32,10 +32,7 @@ interface CollectionParamsProps extends GetServerSideProps {
 }
 
 export async function collectionService({ params }: CollectionParamsProps) {
-  // assert(params, 'Page template must provide a params object')
   const tokenAddress = params ? params.address : process.env.NEXT_PUBLIC_DEFAULT_CONTRACT
-
-  console.log(params?.address, collectionAddresses)
 
   if (tokenAddress && !collectionAddresses.includes(tokenAddress))
     return {
