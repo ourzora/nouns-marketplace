@@ -1,4 +1,12 @@
-import { Filter, useTokensQuery } from '@filter'
+import {
+  Filter,
+  useTokensQuery,
+  sortMethodToSortParams,
+  attributesToFilterParams,
+  priceRangeToQueryParams,
+  marketTypeToFilterParams,
+  useCollectionFilters,
+} from '@filter'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { NFTGrid } from '@media/NFTGrid'
 
@@ -14,6 +22,10 @@ export function Collections({
   initialPage,
 }: CollectionProps) {
   const {
+    filterStore: { filters },
+  } = useCollectionFilters()
+
+  const {
     data: items,
     isValidating,
     isReachingEnd,
@@ -22,6 +34,13 @@ export function Collections({
     contractAddress: contractAddress ? contractAddress : undefined,
     ownerAddress,
     initialData: initialPage,
+    sort: sortMethodToSortParams(filters.sortMethod, filters.marketStatus),
+    filter: {
+      ...marketTypeToFilterParams(filters.marketStatus),
+      ...priceRangeToQueryParams(filters.priceRange),
+      mediaType: filters.mediaType,
+      ...attributesToFilterParams(filters.collectionAttributes),
+    },
   })
 
   return (

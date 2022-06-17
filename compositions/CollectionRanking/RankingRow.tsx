@@ -19,11 +19,11 @@ export function RankingRow({ collection }: { collection: CollectionsData }) {
     if (aggregate)
       return {
         volume: `${roundTwoDecimals(
-          aggregate.aggregateStat.salesVolume.chainTokenPrice
+          aggregate?.aggregateStat?.salesVolume?.chainTokenPrice
         )} ETH`,
         floor:
-          aggregate.aggregateStat?.floorPrice &&
-          aggregate.aggregateStat?.floorPrice !== null
+          aggregate?.aggregateStat?.floorPrice &&
+          aggregate?.aggregateStat?.floorPrice !== null
             ? `${numberFormatter(
                 roundTwoDecimals(aggregate.aggregateStat.floorPrice)
               )} ETH`

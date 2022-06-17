@@ -1,4 +1,6 @@
 import { ZDK } from '@zoralabs/zdk'
-import { GALACTUS_BASE_URL } from 'utils/env-vars'
 
-export const zdkService = new ZDK(GALACTUS_BASE_URL)
+export const zdk = new ZDK({
+  endpoint: 'https://api.zora.co/graphql',
+  apiKey: process.env.NEXT_PUBLIC_ZORA_API_KEY,
+})

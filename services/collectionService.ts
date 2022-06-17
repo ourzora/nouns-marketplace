@@ -4,14 +4,11 @@ import {
   Chain,
   Collection,
   CollectionStatsAggregateQuery,
-  MarketCategory,
   Network,
-  SortDirection,
-  TokenSortKey,
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { GetServerSideProps } from 'next'
-import { zdkService } from 'utils/zdk'
+import { zdk } from '@shared/utils/zdk'
 import { buildCollectionSEO, SeoProps } from 'utils/seo'
 import { collectionAddresses } from 'utils/collection-addresses'
 
@@ -44,7 +41,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
   try {
     let resp
     try {
-      resp = await zdkService.tokens({
+      resp = await zdk.tokens({
         where: {
           collectionAddresses: [tokenAddress],
         },
@@ -55,7 +52,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
         includeFullDetails: true,
       })
     } catch (err) {
-      resp = await zdkService.tokens({
+      resp = await zdk.tokens({
         where: {
           collectionAddresses: [tokenAddress],
         },
@@ -74,7 +71,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
       network: Network.Ethereum,
     }
 
-    const collection = await zdkService.collection({
+    const collection = await zdk.collection({
       address: tokenAddress,
       network: networkInput,
       includeFullDetails: true,
@@ -89,7 +86,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
 
     const { name, symbol } = collection
 
-    const aggregateStats = await zdkService.collectionStatsAggregate({
+    const aggregateStats = await zdk.collectionStatsAggregate({
       collectionAddress: tokenAddress,
       network: networkInput,
     })

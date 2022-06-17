@@ -11,14 +11,8 @@ import { FilterHeader } from './FilterHeader'
 import { FilterSidebar } from './FilterSidebar'
 import { SelectedFilters } from './SelectedFilters'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
-import { useTokensQuery } from '@media'
-
-import {
-  sortMethodToSortParams,
-  attributesToFilterParams,
-  priceRangeToQueryParams,
-  marketTypeToFilterParams,
-} from './utils/sortMethods'
+import { useTokensQuery } from './hooks/useTokensQuery'
+import { useEffect } from 'react'
 
 export function Filter({
   grid,
@@ -37,18 +31,9 @@ export function Filter({
     filterStore: { filters, showFilters },
   } = useCollectionFilters()
 
-  useTokensQuery({
-    contractAddress: contractAddress ? contractAddress[0] : undefined,
-    ownerAddress,
-    initialData: initialPage,
-    sort: sortMethodToSortParams(filters.sortMethod, filters.marketStatus),
-    filter: {
-      ...marketTypeToFilterParams(filters.marketStatus),
-      ...priceRangeToQueryParams(filters.priceRange),
-      mediaType: filters.mediaType,
-      ...attributesToFilterParams(filters.collectionAttributes),
-    },
-  })
+  useEffect(() => {
+    console.log('filters', filters)
+  }, [filters])
 
   return (
     <Stack>

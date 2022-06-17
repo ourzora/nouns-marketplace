@@ -1,12 +1,12 @@
 import useSWR from 'swr'
-import { zdkService } from '@shared/utils/zdk'
+import { zdk } from '@shared/utils/zdk'
 import { SearchableEntity, SearchResult } from '@zoralabs/zdk/dist/queries/queries-sdk'
 
 export function useSearchQuery(query: string, entityType: SearchableEntity) {
   const { data, ...rest } = useSWR(
     query ? ['collectionSearch', query] : null,
     (_, query) =>
-      zdkService
+      zdk
         .search({
           pagination: {},
           /* @ts-ignore */
