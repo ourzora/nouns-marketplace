@@ -8,6 +8,8 @@ export const headerWrapper = style({
   '@media': {
     [media.min1024]: {
       height: HEADER_HEIGHT,
+      position: 'sticky',
+      top: 0,
     },
   },
 })

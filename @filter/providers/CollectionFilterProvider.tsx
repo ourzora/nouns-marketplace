@@ -1,5 +1,5 @@
-import { FilterStore, initialFilterStore, useFilterStore } from '../state/filterStore'
-import { ReactNode, createContext, useContext, useEffect } from 'react'
+import { initialFilterStore, useFilterStore } from '@filter/state/filterStore'
+import { createContext, useContext } from 'react'
 import { useTokensQuery } from '@filter/hooks/useTokensQuery'
 import {
   sortMethodToSortParams,
@@ -7,17 +7,13 @@ import {
   priceRangeToQueryParams,
   marketTypeToFilterParams,
 } from '@filter'
-import { NFTObject } from '@zoralabs/nft-hooks'
 
-const CollectionFilterContext = createContext<{
-  filterStore: FilterStore
-  items: NFTObject[]
-  isValidating: boolean
-  isReachingEnd: boolean | undefined
-  handleLoadMore: () => void
-  contractWhiteList?: string[] | undefined
-  contractAddress?: string | undefined | null
-}>({
+import {
+  CollectionFilterContextTypes,
+  CollectionFilterProviderProps,
+} from '@filter/typings'
+
+const CollectionFilterContext = createContext<CollectionFilterContextTypes>({
   filterStore: initialFilterStore,
   items: [],
   isValidating: false,
@@ -25,15 +21,13 @@ const CollectionFilterContext = createContext<{
   handleLoadMore: () => {},
   contractWhiteList: undefined,
   contractAddress: undefined,
+  ownerAddress: undefined,
+  useMarketStatus: true,
+  useOwnerStatus: true,
+  useMediaTypes: true,
+  useSortMethod: true,
+  usePriceRange: true,
 })
-
-type CollectionFilterProviderProps = {
-  children?: ReactNode
-  contractAddress?: string | null
-  ownerAddress?: string
-  initialPage?: NFTObject[]
-  contractWhiteList?: string[] | undefined
-}
 
 export function useCollectionFilters() {
   return useContext(CollectionFilterContext)
@@ -45,12 +39,14 @@ export function CollectionFilterProvider({
   initialPage,
   contractWhiteList,
   children,
+  filtersVisible,
+  useMarketStatus,
+  useOwnerStatus,
+  useMediaTypes,
+  useSortMethod,
+  usePriceRange,
 }: CollectionFilterProviderProps) {
-  const filterStore = useFilterStore()
-
-  useEffect(() => {
-    console.log(filterStore)
-  }, [filterStore])
+  const filterStore = useFilterStore(filtersVisible)
 
   const {
     data: items,
@@ -83,6 +79,12 @@ export function CollectionFilterProvider({
         isReachingEnd,
         handleLoadMore,
         contractAddress,
+        ownerAddress,
+        useMarketStatus,
+        useOwnerStatus,
+        useMediaTypes,
+        useSortMethod,
+        usePriceRange,
       }}
     >
       {children}

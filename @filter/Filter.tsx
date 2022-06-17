@@ -12,18 +12,7 @@ import { FilterSidebar } from './FilterSidebar'
 import { SelectedFilters } from './SelectedFilters'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 
-export function Filter({
-  grid,
-  itemCount = 0,
-  contractAddress,
-  ownerAddress,
-}: {
-  grid?: JSX.Element
-  itemCount?: number
-  contractAddress?: string
-  ownerAddress?: string
-  initialPage?: NFTObject[]
-}) {
+export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[] }) {
   const {
     filterStore: { showFilters },
   } = useCollectionFilters()
@@ -31,7 +20,7 @@ export function Filter({
   return (
     <Stack>
       {!showFilters && (
-        <FilterHeader itemCount={itemCount}>
+        <FilterHeader>
           <>
             <SelectedFilters />
             <SortDropdown />
@@ -61,7 +50,7 @@ export function Filter({
             },
           ]}
         >
-          <FilterSidebar ownerAddress={ownerAddress} />
+          <FilterSidebar />
         </Box>
         <Stack>
           {showFilters && (

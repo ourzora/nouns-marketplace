@@ -89,7 +89,7 @@ export const filterHeader = style({
 })
 
 export const stickyFilterHeader = style({
-  top: `${HEADER_HEIGHT}px`,
+  top: `0px`,
   backdropFilter: 'blur(20px)',
   backgroundColor: 'rgba(255, 255, 255, 0.92)',
 })

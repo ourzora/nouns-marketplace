@@ -13,9 +13,6 @@ import { flatten } from 'lodash'
 import { useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
-/* Make this a prop */
-import { collectionAddresses } from '../../utils/collection-addresses'
-
 const PAGE_SIZE = 24
 
 export interface UseTokenQueryProps {
@@ -53,7 +50,6 @@ export function useTokensQuery({
   contractWhiteList,
   contractAddress,
   ownerAddress,
-  initialData = [],
   sort,
   filter,
   where,
@@ -64,10 +60,11 @@ export function useTokensQuery({
       where: {
         ...(contractAddress && {
           collectionAddresses: ownerAddress
-            ? collectionAddresses
+            ? contractWhiteList
             : [getAddress(contractAddress)],
         }),
         ...(ownerAddress && {
+          collectionAddresses: contractWhiteList,
           ownerAddresses: [getAddress(ownerAddress)],
         }),
         ...where,
@@ -89,7 +86,6 @@ export function useTokensQuery({
     size,
     isValidating,
   } = useSWRInfinite<GetNFTReturnType>(getKey, getNFTs, {
-    // fallbackData: [initialData],
     refreshInterval: 5000,
   })
 

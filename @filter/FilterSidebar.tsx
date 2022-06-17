@@ -1,3 +1,9 @@
+import { Box, Stack } from '@zoralabs/zord'
+import { useRef, useState } from 'react'
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+
+import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filter/state'
+import { useCollectionFilters } from '@filter/providers'
 import {
   filterSidebar,
   filterSidebarScrolled,
@@ -7,16 +13,17 @@ import { CollectionsFilterList } from './CollectionsFilterList'
 import { FilterHeader } from './FilterHeader'
 import { FilterOptions } from './FilterOptions'
 import { FilterPriceRange } from './FilterPriceRange'
-import { useScrollPosition } from '@n8tb1t/use-scroll-position'
-import { marketStatusOptions, mediaTypeOptions, useCollectionFilters } from './providers'
-import { Box, Stack } from '@zoralabs/zord'
-import { useRef, useState } from 'react'
 import { FilterProperties } from './FilterProperties'
 
-export function FilterSidebar({}: { ownerAddress?: string }) {
+export function FilterSidebar() {
   const {
-    filterStore: { showFilters, setMarketStatus, setMediaType, filters },
+    filterStore: { showFilters, setMarketStatus, setMediaType, setOwnerStatus, filters },
+    ownerAddress,
     contractAddress,
+    useMarketStatus,
+    useOwnerStatus,
+    useMediaTypes,
+    usePriceRange,
   } = useCollectionFilters()
 
   const [scrolled, setScrolled] = useState(false)
@@ -59,30 +66,34 @@ export function FilterSidebar({}: { ownerAddress?: string }) {
         ref={parentRef}
       >
         <Box position="relative" ref={childRef}>
-          <FilterOptions
-            label="Market Status"
-            options={marketStatusOptions}
-            selectedOption={filters.marketStatus}
-            setOption={setMarketStatus}
-            showCheckbox
-          />
-          {/*{ownerAddress && (*/}
-          {/*  <FilterOptions*/}
-          {/*    label="Owner Status"*/}
-          {/*    options={ownerStatusOptions}*/}
-          {/*    selectedOption={filters.ownerStatus[0]}*/}
-          {/*    setOption={setOwnerStatus}*/}
-          {/*    showCheckbox*/}
-          {/*  />*/}
-          {/*)}*/}
-          <FilterOptions
-            label="Media Type"
-            options={mediaTypeOptions}
-            selectedOption={filters.mediaType}
-            setOption={setMediaType}
-            showCheckbox
-          />
-          <FilterPriceRange />
+          {useMarketStatus && (
+            <FilterOptions
+              label="Market Status"
+              options={marketStatusOptions}
+              selectedOption={filters.marketStatus}
+              setOption={setMarketStatus}
+              showCheckbox
+            />
+          )}
+          {useOwnerStatus && ownerAddress && (
+            <FilterOptions
+              label="Owner Status"
+              options={ownerStatusOptions}
+              selectedOption={filters.ownerStatus[0]}
+              setOption={setOwnerStatus}
+              showCheckbox
+            />
+          )}
+          {useMediaTypes && (
+            <FilterOptions
+              label="Media Type"
+              options={mediaTypeOptions}
+              selectedOption={filters.mediaType}
+              setOption={setMediaType}
+              showCheckbox
+            />
+          )}
+          {usePriceRange && <FilterPriceRange />}
           {contractAddress ? (
             <FilterProperties collectionAddress={contractAddress} />
           ) : (

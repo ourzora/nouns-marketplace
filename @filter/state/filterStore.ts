@@ -1,48 +1,18 @@
 import { useCallback, useMemo, useState } from 'react'
-import { Currency } from '@shared/constants/currencies'
 import { MediaType } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { removeItemAtIndex } from '../utils/store'
-
-type Address = string
-export type SelectOption<T> = { label: string; value: T }
-export type Status<T> = T
-
-export type FilterState = {
-  marketStatus: MarketStatusFilter
-  ownerStatus: OwnerStatusFilter[]
-  mediaType: MediaTypeFilter
-  sortMethod: SortMethodType
-  priceRange: PriceRangeFilter | null
-  tokenContracts: TokenContractsFilter
-  collectionAttributes: CollectionAttributesFilter
-}
-
-export type MarketStatusFilter = 'live' | 'buy-now' | 'reserve-not-met' | null
-export type MediaTypeFilter = MediaType | null
-export type OwnerStatusFilter = 'collected' | 'minted' | null
-export type SortMethodType =
-  // | 'recently-active'
-  'ending-soon' | 'lowest-price' | 'highest-price' | 'newest' | 'oldest' | null
-export type PriceRangeFilter = { min?: number; max?: number; currency: Currency } | null
-export type TokenContractsFilter = Address | null
-export type CollectionAttributeFilterValue = { traitType: string; value: string }
-export type CollectionAttributesFilter = CollectionAttributeFilterValue[]
-
-export type FilterStore = {
-  collections?: string[]
-  filters: FilterState
-  showFilters: boolean
-  toggleShowFilters: () => void
-  setMarketStatus: (marketStatus: Status<MarketStatusFilter>) => void
-  setOwnerStatus: (ownerStatus: Status<OwnerStatusFilter>) => void
-  setMediaType: (mediaType: Status<MediaTypeFilter>) => void
-  setSortMethod: (sortMethod: SortMethodType) => void
-  setPriceRange: (priceRange: PriceRangeFilter | null) => void
-  setTokenContracts: (tokenContracts: TokenContractsFilter) => void
-  setCollectionAttributes: (collectionAttributes: CollectionAttributeFilterValue) => void
-  clearFilters: () => void
-  hasFilters: boolean
-}
+import {
+  SelectOption,
+  MarketStatusFilter,
+  OwnerStatusFilter,
+  MediaTypeFilter,
+  SortMethodType,
+  FilterState,
+  FilterStore,
+  PriceRangeFilter,
+  TokenContractsFilter,
+  CollectionAttributeFilterValue,
+} from '@filter/typings'
 
 export const marketStatusOptions: SelectOption<MarketStatusFilter>[] = [
   { label: 'Live Auction', value: 'live' },
@@ -84,7 +54,6 @@ export const initialFilterState: FilterState = {
 }
 
 export const initialFilterStore: FilterStore = {
-  showFilters: true,
   filters: initialFilterState,
   toggleShowFilters: () => {},
   setMarketStatus: () => {},
@@ -96,11 +65,14 @@ export const initialFilterStore: FilterStore = {
   setCollectionAttributes: () => {},
   clearFilters: () => {},
   hasFilters: false,
+  showFilters: true,
 }
 
-export function useFilterStore(initialFilters = initialFilterState): FilterStore {
-  const [filters, setFilters] = useState<FilterState>(initialFilters)
-  const [showFilters, setShowFilters] = useState(true)
+export function useFilterStore(
+  filtersVisible: boolean = initialFilterStore.showFilters
+): FilterStore {
+  const [filters, setFilters] = useState<FilterState>(initialFilterState)
+  const [showFilters, setShowFilters] = useState(filtersVisible)
 
   const setMarketStatus = useCallback(
     (marketStatus: MarketStatusFilter) => {

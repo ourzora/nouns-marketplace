@@ -6,7 +6,6 @@ export function Collections() {
 
   return (
     <Filter
-      itemCount={items.length}
       grid={
         <NFTGrid
           items={items}
