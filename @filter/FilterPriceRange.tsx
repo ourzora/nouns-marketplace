@@ -1,9 +1,10 @@
 /* Is this anywhere other than the Filter? */
-import { filterOptionsWrapper } from './CollectionsFilter.css'
-import { PriceRangeSelector } from './PriceRangeSelector'
-import { PriceRangeFilter, useCollectionFilters } from './providers'
 import { Accordion, Box, Button, Stack } from '@zoralabs/zord'
 import { useCallback, useState } from 'react'
+import { filterOptionsWrapper } from './CollectionsFilter.css'
+import { PriceRangeSelector } from './PriceRangeSelector'
+import { useCollectionFilters } from '@filter/providers'
+import { PriceRangeFilter } from '@filter/typings'
 import { ETH_CURRENCY_SHIM } from '@shared/constants/currencies'
 
 export function FilterPriceRange() {

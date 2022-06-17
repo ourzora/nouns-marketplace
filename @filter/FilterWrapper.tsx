@@ -13,9 +13,6 @@ import { Box, Flex, Grid, Stack } from '@zoralabs/zord'
 
 export function FilterWrapper({
   grid,
-  itemCount = 0,
-  contractAddress,
-  ownerAddress,
 }: {
   grid?: JSX.Element
   itemCount?: number
@@ -29,7 +26,7 @@ export function FilterWrapper({
   return (
     <Stack px="x8">
       {!showFilters && (
-        <FilterHeader itemCount={itemCount}>
+        <FilterHeader>
           <>
             <SelectedFilters />
             <SortDropdown />
@@ -59,11 +56,7 @@ export function FilterWrapper({
             },
           ]}
         >
-          <FilterSidebar
-            itemCount={itemCount}
-            contractAddress={contractAddress}
-            ownerAddress={ownerAddress}
-          />
+          <FilterSidebar />
         </Box>
         <Stack>
           {showFilters && (

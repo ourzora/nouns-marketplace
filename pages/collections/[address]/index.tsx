@@ -1,4 +1,3 @@
-import type { NextPage } from 'next'
 import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
 import { useEffect } from 'react'
@@ -10,7 +9,7 @@ import { Collections } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
 
 /* @ts-ignore */
-const Collection: NextPage = ({
+const Collection = ({
   initialPage,
   contractAddress,
   seo,

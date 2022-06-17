@@ -5,7 +5,6 @@ import { defaultProvider } from '@market/utils/connectors'
 import { isAddress } from 'utils/address'
 
 export type ManageNFTsServiceProps = {
-  initialPage?: NFTObject[] | []
   ownerAddress: string
 }
 
