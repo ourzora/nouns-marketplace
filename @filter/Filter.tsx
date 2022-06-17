@@ -51,7 +51,7 @@ export function Filter({
   })
 
   return (
-    <Stack px="x8">
+    <Stack>
       {!showFilters && (
         <FilterHeader itemCount={itemCount}>
           <>

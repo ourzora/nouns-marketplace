@@ -7,6 +7,7 @@ import { CollectionHeader } from 'components/CollectionHeader'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { Seo } from 'components/Seo'
 import { Collections } from 'compositions/Collections'
+import { CollectionFilterProvider } from '@filter'
 
 /* @ts-ignore */
 const Collection: NextPage = ({
@@ -31,7 +32,9 @@ const Collection: NextPage = ({
       <CollectionHeader collection={collection} aggregateStats={aggregateStats} />
       <MarketStats aggregateStats={aggregateStats} />
       {contractAddress && (
-        <Collections contractAddress={contractAddress} initialPage={initialPage} />
+        <CollectionFilterProvider>
+          <Collections contractAddress={contractAddress} initialPage={initialPage} />
+        </CollectionFilterProvider>
       )}
     </PageWrapper>
   )

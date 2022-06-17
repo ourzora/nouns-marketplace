@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 import { PageWrapper } from 'components/PageWrapper'
-import { useEffect } from 'react'
 import { NFTGrid } from '@media/NFTGrid'
 import { manageNftsService, ManageNFTsServiceProps } from 'services/manageNftsService'
 import { collectionAddresses } from 'utils/collection-addresses'
 import { ManageHeader } from 'components/ManageHeader'
 import { Seo } from 'components/Seo'
+import { Collections } from 'compositions/Collections'
 
 /* @ts-ignore */
 const Manage: NextPage = ({ initialPage, ownerAddress }: ManageNFTsServiceProps) => {
@@ -14,11 +14,7 @@ const Manage: NextPage = ({ initialPage, ownerAddress }: ManageNFTsServiceProps)
       <Seo title={`Manage | ${ownerAddress}`}></Seo>
       <ManageHeader ownerAddress={ownerAddress} />
       {ownerAddress && (
-        <NFTGrid
-          ownerAddress={ownerAddress}
-          initialPage={initialPage}
-          contractAddress={collectionAddresses}
-        />
+        <Collections ownerAddress={ownerAddress} initialPage={initialPage} />
       )}
     </PageWrapper>
   )

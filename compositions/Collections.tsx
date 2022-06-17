@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Filter, useTokensQuery } from '@filter'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { NFTGrid } from '@media/NFTGrid'
@@ -24,12 +23,6 @@ export function Collections({
     ownerAddress,
     initialData: initialPage,
   })
-
-  console.log('contractAddress', contractAddress)
-
-  useEffect(() => {
-    console.log(items)
-  }, [items])
 
   return (
     <Filter

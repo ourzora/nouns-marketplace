@@ -29,7 +29,6 @@ const NFT: NextPage = () => {
             data={{ ...data?.createdAt, status: data?.status }}
           />
         ))}
-
       <RawDisplayer data={data?.markets} />
       <Heading>ALL NFT DATA - via useNFT nfthooks</Heading>
       <RawDisplayer data={data} />
