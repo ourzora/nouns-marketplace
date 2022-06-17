@@ -50,7 +50,6 @@ export function FilterOptionButton({
       mr={rightPad ? 'x1' : 'x0'}
       borderColor={checked || useBorder ? 'primary' : 'tertiary'}
       borderWidth="thin"
-      borderStyle="solid"
       borderRadius="round"
       color="primary"
       onClick={onClick}

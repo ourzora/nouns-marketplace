@@ -1,53 +1,12 @@
-import {
-  Filter,
-  useTokensQuery,
-  sortMethodToSortParams,
-  attributesToFilterParams,
-  priceRangeToQueryParams,
-  marketTypeToFilterParams,
-  useCollectionFilters,
-} from '@filter'
-import { NFTObject } from '@zoralabs/nft-hooks'
+import { Filter, useCollectionFilters } from '@filter'
 import { NFTGrid } from '@media/NFTGrid'
 
-export type CollectionProps = {
-  contractAddress?: string | undefined
-  ownerAddress?: string
-  initialPage?: NFTObject[] | undefined
-}
-
-export function Collections({
-  contractAddress,
-  ownerAddress,
-  initialPage,
-}: CollectionProps) {
-  const {
-    filterStore: { filters },
-  } = useCollectionFilters()
-
-  const {
-    data: items,
-    isValidating,
-    isReachingEnd,
-    handleLoadMore,
-  } = useTokensQuery({
-    contractAddress: contractAddress ? contractAddress : undefined,
-    ownerAddress,
-    initialData: initialPage,
-    sort: sortMethodToSortParams(filters.sortMethod, filters.marketStatus),
-    filter: {
-      ...marketTypeToFilterParams(filters.marketStatus),
-      ...priceRangeToQueryParams(filters.priceRange),
-      mediaType: filters.mediaType,
-      ...attributesToFilterParams(filters.collectionAttributes),
-    },
-  })
+export function Collections() {
+  const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
 
   return (
     <Filter
       itemCount={items.length}
-      ownerAddress={ownerAddress}
-      contractAddress={contractAddress}
       grid={
         <NFTGrid
           items={items}

@@ -11,15 +11,12 @@ import { FilterHeader } from './FilterHeader'
 import { FilterSidebar } from './FilterSidebar'
 import { SelectedFilters } from './SelectedFilters'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
-import { useTokensQuery } from './hooks/useTokensQuery'
-import { useEffect } from 'react'
 
 export function Filter({
   grid,
   itemCount = 0,
   contractAddress,
   ownerAddress,
-  initialPage = [],
 }: {
   grid?: JSX.Element
   itemCount?: number
@@ -28,12 +25,8 @@ export function Filter({
   initialPage?: NFTObject[]
 }) {
   const {
-    filterStore: { filters, showFilters },
+    filterStore: { showFilters },
   } = useCollectionFilters()
-
-  useEffect(() => {
-    console.log('filters', filters)
-  }, [filters])
 
   return (
     <Stack>
@@ -68,11 +61,7 @@ export function Filter({
             },
           ]}
         >
-          <FilterSidebar
-            itemCount={itemCount}
-            contractAddress={contractAddress}
-            ownerAddress={ownerAddress}
-          />
+          <FilterSidebar ownerAddress={ownerAddress} />
         </Box>
         <Stack>
           {showFilters && (

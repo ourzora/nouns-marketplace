@@ -32,8 +32,11 @@ const Collection: NextPage = ({
       <CollectionHeader collection={collection} aggregateStats={aggregateStats} />
       <MarketStats aggregateStats={aggregateStats} />
       {contractAddress && (
-        <CollectionFilterProvider>
-          <Collections contractAddress={contractAddress} initialPage={initialPage} />
+        <CollectionFilterProvider
+          contractAddress={contractAddress}
+          initialPage={initialPage}
+        >
+          <Collections />
         </CollectionFilterProvider>
       )}
     </PageWrapper>

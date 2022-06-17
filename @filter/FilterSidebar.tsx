@@ -13,16 +13,10 @@ import { Box, Stack } from '@zoralabs/zord'
 import { useRef, useState } from 'react'
 import { FilterProperties } from './FilterProperties'
 
-export function FilterSidebar({
-  itemCount = 0,
-  contractAddress,
-}: {
-  itemCount?: number
-  contractAddress?: string
-  ownerAddress?: string
-}) {
+export function FilterSidebar({}: { ownerAddress?: string }) {
   const {
     filterStore: { showFilters, setMarketStatus, setMediaType, filters },
+    contractAddress,
   } = useCollectionFilters()
 
   const [scrolled, setScrolled] = useState(false)
@@ -41,9 +35,11 @@ export function FilterSidebar({
     parentRef
   )
 
+  console.log('contractAddress', contractAddress)
+
   return (
     <Box h="100%" w="100%" position="sticky" display={showFilters ? 'block' : 'none'}>
-      <FilterHeader itemCount={itemCount} />
+      <FilterHeader />
       <Box
         position="relative"
         className={[

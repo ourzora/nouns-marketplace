@@ -18,7 +18,8 @@ import { collectionAddresses } from '../../utils/collection-addresses'
 
 const PAGE_SIZE = 24
 
-interface UseTokenQueryProps {
+export interface UseTokenQueryProps {
+  contractWhiteList?: string[] | undefined
   contractAddress?: string | null
   ownerAddress?: string
   initialData?: NFTObject[]
@@ -49,9 +50,10 @@ async function getNFTs(query: TokensQueryArgs): Promise<GetNFTReturnType> {
 }
 
 export function useTokensQuery({
+  contractWhiteList,
   contractAddress,
   ownerAddress,
-  // initialData = [],
+  initialData = [],
   sort,
   filter,
   where,
