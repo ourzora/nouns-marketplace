@@ -10,6 +10,7 @@ export const headerWrapper = style({
       height: HEADER_HEIGHT,
       position: 'sticky',
       top: 0,
+      backdropFilter: 'blur(10px)',
     },
   },
 })

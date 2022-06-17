@@ -3,6 +3,7 @@ import { errorText } from './CollectionsFilter.css'
 import { Flex, Input, Paragraph } from '@zoralabs/zord'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Currency } from '@shared/constants/currencies'
+import { useCollectionFilters } from './providers'
 
 export type PriceRangeReturnValue = {
   min: number
@@ -25,6 +26,8 @@ export function PriceRangeSelector({
   const [minValue, setMinValue] = useState(0)
   const [maxValue, setMaxValue] = useState(0)
   const [currency, setCurrency] = useState<Currency>(currencyOptions[0])
+
+  const { usePriceRange } = useCollectionFilters()
 
   const minHandler = useCallback(
     (e) => {
@@ -87,12 +90,14 @@ export function PriceRangeSelector({
           min={0}
           size="sm"
         />
-        <CurrencySelect
-          options={currencyOptions}
-          name="currency"
-          variant="greyPill"
-          onChange={currencySelectHandler}
-        />
+        {!usePriceRange?.hideCurrencySelect && (
+          <CurrencySelect
+            options={currencyOptions}
+            name="currency"
+            variant="greyPill"
+            onChange={currencySelectHandler}
+          />
+        )}
       </Flex>
 
       {error && (

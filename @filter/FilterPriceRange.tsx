@@ -26,11 +26,15 @@ export function FilterPriceRange() {
 
   const {
     filterStore: { setPriceRange },
+    usePriceRange,
   } = useCollectionFilters()
 
   return (
-    <Box className={filterOptionsWrapper} pb="x0">
-      <Accordion label="Price Range">
+    <Box className={!usePriceRange?.hideBorder && filterOptionsWrapper} pb="x0">
+      <Accordion
+        label={usePriceRange?.label || 'Price Range'}
+        defaultState={usePriceRange?.defaultState}
+      >
         <Stack gap="x4" pb="x4">
           <PriceRangeSelector
             onSelect={priceRangeSelection}

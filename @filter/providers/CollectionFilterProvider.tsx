@@ -22,11 +22,6 @@ const CollectionFilterContext = createContext<CollectionFilterContextTypes>({
   contractWhiteList: undefined,
   contractAddress: undefined,
   ownerAddress: undefined,
-  useMarketStatus: true,
-  useOwnerStatus: true,
-  useMediaTypes: true,
-  useSortMethod: true,
-  usePriceRange: true,
 })
 
 export function useCollectionFilters() {
@@ -39,12 +34,14 @@ export function CollectionFilterProvider({
   initialPage,
   contractWhiteList,
   children,
-  filtersVisible,
-  useMarketStatus,
-  useOwnerStatus,
-  useMediaTypes,
-  useSortMethod,
-  usePriceRange,
+  filtersVisible = false,
+  useMarketStatus = false,
+  useOwnerStatus = false,
+  useMediaTypes = false,
+  useSortMethod = false,
+  usePriceRange = false,
+  useCollectionSearch = false,
+  useCollectionProperties = false,
 }: CollectionFilterProviderProps) {
   const filterStore = useFilterStore(filtersVisible)
 
@@ -85,6 +82,9 @@ export function CollectionFilterProvider({
         useMediaTypes,
         useSortMethod,
         usePriceRange,
+        useCollectionSearch,
+        useCollectionProperties,
+        filtersVisible,
       }}
     >
       {children}

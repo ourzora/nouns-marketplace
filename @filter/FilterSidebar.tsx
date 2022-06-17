@@ -1,9 +1,8 @@
 import { Box, Stack } from '@zoralabs/zord'
 import { useRef, useState } from 'react'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
-
-import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filter/state'
 import { useCollectionFilters } from '@filter/providers'
+import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filter/state'
 import {
   filterSidebar,
   filterSidebarScrolled,
@@ -24,6 +23,8 @@ export function FilterSidebar() {
     useOwnerStatus,
     useMediaTypes,
     usePriceRange,
+    useCollectionSearch,
+    useCollectionProperties,
   } = useCollectionFilters()
 
   const [scrolled, setScrolled] = useState(false)
@@ -93,12 +94,11 @@ export function FilterSidebar() {
               showCheckbox
             />
           )}
-          {usePriceRange && <FilterPriceRange />}
-          {contractAddress ? (
+          {contractAddress && useCollectionProperties ? (
             <FilterProperties collectionAddress={contractAddress} />
-          ) : (
-            <CollectionsFilterList />
-          )}
+          ) : null}
+          {usePriceRange && <FilterPriceRange />}
+          {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
         </Box>
       </Stack>
     </Box>

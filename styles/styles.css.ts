@@ -1,5 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, media } from '@zoralabs/zord'
+import { atoms, media, typography } from '@zoralabs/zord'
 import {
   FOOTER_HEIGHT,
   FOOTER_HEIGHT_MOBILE,
@@ -58,3 +58,9 @@ export const pageWrapper = style([
     },
   },
 ])
+
+globalStyle('.zord-acccordionTrigger > span ', {
+  fontFamily: "'Londrina Solid', cursive!important",
+  fontSize: typography.size[7],
+  paddingBottom: 20,
+})
