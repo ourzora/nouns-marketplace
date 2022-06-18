@@ -43,8 +43,6 @@ export function FilterSidebar() {
     parentRef
   )
 
-  console.log('contractAddress', contractAddress)
-
   return (
     <Box h="100%" w="100%" position="sticky" display={showFilters ? 'block' : 'none'}>
       <FilterHeader />
@@ -94,10 +92,10 @@ export function FilterSidebar() {
               showCheckbox
             />
           )}
+          {usePriceRange && <FilterPriceRange />}
           {contractAddress && useCollectionProperties ? (
             <FilterProperties collectionAddress={contractAddress} />
           ) : null}
-          {usePriceRange && <FilterPriceRange />}
           {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
         </Box>
       </Stack>

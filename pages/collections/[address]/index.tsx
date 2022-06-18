@@ -34,14 +34,18 @@ const Collection = ({
         <CollectionFilterProvider
           contractAddress={contractAddress}
           initialPage={initialPage}
-          useCollectionProperties
+          useCollectionProperties={{
+            header: 'Traits',
+            selector: 'nouns-market-traits',
+            hideBorder: true,
+          }}
+          filtersVisible
           usePriceRange={{
             label: 'Price',
             defaultState: 'open',
             hideBorder: true,
             hideCurrencySelect: true,
           }}
-          filtersVisible
         >
           <Collections />
         </CollectionFilterProvider>

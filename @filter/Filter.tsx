@@ -15,6 +15,7 @@ import { useCollectionFilters } from './providers/CollectionFilterProvider'
 export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[] }) {
   const {
     filterStore: { showFilters },
+    useSortDropdown,
   } = useCollectionFilters()
 
   return (
@@ -23,7 +24,7 @@ export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[]
         <FilterHeader>
           <>
             <SelectedFilters />
-            <SortDropdown />
+            {useSortDropdown && <SortDropdown />}
           </>
         </FilterHeader>
       )}
@@ -56,7 +57,7 @@ export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[]
           {showFilters && (
             <Flex justify="space-between" align="center">
               <SelectedFilters />
-              <SortDropdown />
+              {useSortDropdown && <SortDropdown />}
             </Flex>
           )}
           {grid}

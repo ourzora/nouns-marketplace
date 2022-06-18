@@ -6,10 +6,15 @@ export type FilterOptionConfig = {
   label?: string
   defaultState?: 'open' | undefined
   hideBorder?: boolean
+  selector?: string
 }
 
 export type PriceRangeFilterConfig = {
   hideCurrencySelect?: boolean
+} & FilterOptionConfig
+
+export type PropertiesConfig = {
+  header?: string
 } & FilterOptionConfig
 
 export interface FilterConfigProps {
@@ -17,10 +22,10 @@ export interface FilterConfigProps {
   useMarketStatus?: boolean
   useOwnerStatus?: boolean
   useMediaTypes?: boolean
-  useSortMethod?: boolean
+  useSortDropdown?: boolean
   usePriceRange?: PriceRangeFilterConfig | undefined
   useCollectionSearch?: boolean
-  useCollectionProperties?: boolean
+  useCollectionProperties?: PropertiesConfig | undefined
 }
 
 export interface FilterContextInputProps extends FilterConfigProps {
