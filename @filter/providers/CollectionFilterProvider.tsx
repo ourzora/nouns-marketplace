@@ -39,9 +39,9 @@ export function CollectionFilterProvider({
   useOwnerStatus = false,
   useMediaTypes = false,
   useSortDropdown = false,
-  usePriceRange = false,
   useCollectionSearch = false,
-  useCollectionProperties = false,
+  usePriceRange,
+  useCollectionProperties,
 }: CollectionFilterProviderProps) {
   const filterStore = useFilterStore(filtersVisible)
 
