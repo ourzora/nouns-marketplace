@@ -1,4 +1,3 @@
-import type { NextPage } from 'next'
 import { PageWrapper } from 'components/PageWrapper'
 import { Heading, Box } from '@zoralabs/zord'
 import { useRouter } from 'next/router'
@@ -6,7 +5,7 @@ import { useNFT } from '@zoralabs/nft-hooks'
 import { RawDisplayer } from 'components/utils'
 import { NFTCard } from '@media/NFTCard'
 
-const NFT: NextPage = () => {
+const NFT = () => {
   const { query } = useRouter()
 
   const { data } = useNFT(
@@ -29,7 +28,6 @@ const NFT: NextPage = () => {
             data={{ ...data?.createdAt, status: data?.status }}
           />
         ))}
-
       <RawDisplayer data={data?.markets} />
       <Heading>ALL NFT DATA - via useNFT nfthooks</Heading>
       <RawDisplayer data={data} />

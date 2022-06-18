@@ -7,14 +7,13 @@ import {
   TokenSortKey,
   TokensQueryFilter,
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import {
-  MarketStatusFilter,
-  PriceRangeFilter,
-} from '@media/providers/CollectionFilterProvider'
+
 import {
   CollectionAttributesFilter,
   SortMethodType,
-} from '@media/providers/CollectionFilterProvider/filterStore'
+  MarketStatusFilter,
+  PriceRangeFilter,
+} from '@filter/typings'
 
 export function marketStatusToSortAxis(marketType: MarketStatusFilter) {
   switch (marketType) {
@@ -88,20 +87,32 @@ export function marketTypeToFilterParams(
     case 'buy-now':
       return {
         marketFilters: [
-          { marketType: MarketType.V1Ask, statuses: [MarketStatus.Active] },
-          { marketType: MarketType.V3Ask, statuses: [MarketStatus.Active] },
+          {
+            marketType: MarketType.V1Ask,
+            statuses: [MarketStatus.Active],
+          },
+          {
+            marketType: MarketType.V3Ask,
+            statuses: [MarketStatus.Active],
+          },
         ],
       }
     case 'reserve-not-met':
       return {
         marketFilters: [
-          { marketType: MarketType.V2Auction, statuses: [MarketStatus.Active] },
+          {
+            marketType: MarketType.V2Auction,
+            statuses: [MarketStatus.Active],
+          },
         ],
       }
     case 'live':
       return {
         marketFilters: [
-          { marketType: MarketType.V2Auction, statuses: [MarketStatus.Active] },
+          {
+            marketType: MarketType.V2Auction,
+            statuses: [MarketStatus.Active],
+          },
         ],
       }
     default:

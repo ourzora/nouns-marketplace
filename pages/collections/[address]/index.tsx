@@ -1,15 +1,15 @@
-import type { NextPage } from 'next'
 import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
 import { useEffect } from 'react'
-import { NFTGrid } from '@media/NFTGrid'
 import { MarketStats } from '@market/components/MarketStats'
 import { CollectionHeader } from 'components/CollectionHeader'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { Seo } from 'components/Seo'
+import { Collections } from 'compositions/Collections'
+import { CollectionFilterProvider } from '@filter'
 
 /* @ts-ignore */
-const Collection: NextPage = ({
+const Collection = ({
   initialPage,
   contractAddress,
   seo,
@@ -31,7 +31,24 @@ const Collection: NextPage = ({
       <CollectionHeader collection={collection} aggregateStats={aggregateStats} />
       <MarketStats aggregateStats={aggregateStats} />
       {contractAddress && (
-        <NFTGrid contractAddress={[contractAddress]} initialPage={initialPage} />
+        <CollectionFilterProvider
+          contractAddress={contractAddress}
+          initialPage={initialPage}
+          useCollectionProperties={{
+            header: 'Traits',
+            selector: 'nouns-market-traits',
+            hideBorder: true,
+          }}
+          filtersVisible
+          usePriceRange={{
+            label: 'Price',
+            defaultState: 'open',
+            hideBorder: true,
+            hideCurrencySelect: true,
+          }}
+        >
+          <Collections />
+        </CollectionFilterProvider>
       )}
     </PageWrapper>
   )

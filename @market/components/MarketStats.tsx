@@ -51,7 +51,7 @@ export function MarketStats({
       w="100%"
       mb={{
         '@initial': 'x2',
-        '@1024': 'x12',
+        '@1024': 'x0',
       }}
       className={marketStatsWrapper}
     >

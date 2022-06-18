@@ -5,13 +5,16 @@ import { MAX_WIDTH } from 'styles/style-constants'
 export const nftGridWrapper = style([
   {
     gridTemplateColumns: 'repeat(1, 1fr)',
-    maxWidth: MAX_WIDTH.LG,
+    // maxWidth: MAX_WIDTH.LG,
     '@media': {
       [media.min576]: {
         gridTemplateColumns: 'repeat(2, 1fr)',
       },
       [media.min1024]: {
         gridTemplateColumns: 'repeat(3, 1fr)',
+      },
+      [`(min-width: 1440px)`]: {
+        gridTemplateColumns: 'repeat(4, 1fr)',
       },
     },
   },

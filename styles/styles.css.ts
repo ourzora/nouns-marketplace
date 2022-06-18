@@ -1,5 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, media } from '@zoralabs/zord'
+import { atoms, media, typography, colorTheme, radii } from '@zoralabs/zord'
 import {
   FOOTER_HEIGHT,
   FOOTER_HEIGHT_MOBILE,
@@ -58,3 +58,30 @@ export const pageWrapper = style([
     },
   },
 ])
+
+globalStyle('.zord-acccordionTrigger > span', {
+  fontFamily: "'Londrina Solid', cursive!important",
+  fontSize: typography.size[8],
+  paddingBottom: 10,
+})
+
+globalStyle('.zord-attributesHeading', {
+  fontFamily: "'Londrina Solid', cursive!important",
+  fontSize: typography.size[8],
+  paddingTop: 10,
+})
+
+globalStyle('.nouns-market-traits h3 > button > span', {
+  fontFamily: "'ptBold', Arial, Helvetica, sans-serif!important",
+  fontSize: `${typography.size[10]}!important`,
+  textTransform: 'capitalize',
+  paddingBottom: 0,
+})
+
+globalStyle('.nouns-market-traits h3 > button', {
+  backgroundColor: `${colorTheme.background.tertiary}!important`,
+  paddingLeft: 10,
+  paddingRight: 10,
+  borderRadius: radii.curved,
+  marginBottom: 5,
+})

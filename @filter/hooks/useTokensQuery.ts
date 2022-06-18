@@ -13,11 +13,10 @@ import { flatten } from 'lodash'
 import { useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
-import { collectionAddresses } from 'utils/collection-addresses'
-
 const PAGE_SIZE = 24
 
-interface UseTokenQueryProps {
+export interface UseTokenQueryProps {
+  contractWhiteList?: string[] | undefined
   contractAddress?: string | null
   ownerAddress?: string
   initialData?: NFTObject[]
@@ -26,7 +25,10 @@ interface UseTokenQueryProps {
   where?: TokensQueryInput
 }
 
-const zdkAlpha = new ZDK('https://api.zora.co/graphql')
+const zdk = new ZDK({
+  endpoint: 'https://api.zora.co/graphql',
+  apiKey: process.env.NEXT_PUBLIC_ZORA_API_KEY,
+})
 
 type GetNFTReturnType = {
   tokens: NFTObject[]
@@ -34,7 +36,7 @@ type GetNFTReturnType = {
 }
 
 async function getNFTs(query: TokensQueryArgs): Promise<GetNFTReturnType> {
-  const resp = await zdkAlpha.tokens(query)
+  const resp = await zdk.tokens(query)
   const tokens = resp.tokens.nodes
     .map((token) => transformNFTZDK(token, { rawData: token }))
     .map(prepareJson)
@@ -45,9 +47,9 @@ async function getNFTs(query: TokensQueryArgs): Promise<GetNFTReturnType> {
 }
 
 export function useTokensQuery({
+  contractWhiteList,
   contractAddress,
   ownerAddress,
-  // initialData = [],
   sort,
   filter,
   where,
@@ -58,20 +60,17 @@ export function useTokensQuery({
       where: {
         ...(contractAddress && {
           collectionAddresses: ownerAddress
-            ? collectionAddresses
+            ? contractWhiteList
             : [getAddress(contractAddress)],
         }),
         ...(ownerAddress && {
+          collectionAddresses: contractWhiteList,
           ownerAddresses: [getAddress(ownerAddress)],
         }),
         ...where,
       },
-      sort: {
-        sortDirection: SortDirection.Desc,
-        sortAxis: undefined,
-        sortKey: null,
-      },
-      filter: {},
+      sort,
+      filter,
       pagination: {
         after: previousPageData?.nextCursor,
         limit: PAGE_SIZE,
@@ -87,7 +86,6 @@ export function useTokensQuery({
     size,
     isValidating,
   } = useSWRInfinite<GetNFTReturnType>(getKey, getNFTs, {
-    // fallbackData: [initialData],
     refreshInterval: 5000,
   })
 

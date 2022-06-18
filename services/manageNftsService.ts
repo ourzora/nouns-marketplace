@@ -1,15 +1,10 @@
-// import { transformNFTZDK } from '@zoralabs/nft-hooks/dist/backends'
-// import { prepareJson } from '@zoralabs/nft-hooks/dist/fetcher/NextUtils'
-// import { } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { GetServerSideProps } from 'next'
-import { zdkService } from 'utils/zdk'
 import { assert } from 'console'
 import { defaultProvider } from '@market/utils/connectors'
 import { isAddress } from 'utils/address'
 
 export type ManageNFTsServiceProps = {
-  initialPage?: NFTObject[] | []
   ownerAddress: string
 }
 
