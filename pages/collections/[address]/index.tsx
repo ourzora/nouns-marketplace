@@ -16,14 +16,19 @@ const Collection = ({
   aggregateStats,
   collection,
 }: CollectionServiceProps) => {
-  const { setCurrentCollection } = useCollectionsContext()
+  const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
 
+  /* DAIN TODO: add to provider */
   useEffect(() => {
-    if (collection && collection?.name) setCurrentCollection(collection.name)
-    return () => {
-      setCurrentCollection('Explore')
+    if (collection && collection?.name) {
+      setCurrentCollection(collection.name)
+      setCurrentCollectionCount(`${aggregateStats.aggregateStat.nftCount} NFTs`)
     }
-  }, [collection])
+    return () => {
+      setCurrentCollection('Explore Collections...')
+      setCurrentCollectionCount(undefined)
+    }
+  }, [aggregateStats, collection])
 
   return (
     <PageWrapper p="x4" direction="column" gap="x4">

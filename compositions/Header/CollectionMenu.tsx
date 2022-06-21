@@ -4,11 +4,12 @@ import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { collectionTrigger, modalWrapper } from './Header.css'
 import { CollectionLink } from './CollectionLink'
 import { Link } from 'components/Link'
-import { lightFont } from 'styles/styles.css'
+import { lightFont, noTextWrap } from 'styles/styles.css'
 import { useModal } from '@modal'
 
 export function CollectionMenu() {
-  const { collections, collectionAmount, currentCollection } = useCollectionsContext()
+  const { collections, collectionAmount, currentCollection, currentCollectionCount } =
+    useCollectionsContext()
   const { requestClose } = useModal()
 
   return (
@@ -22,14 +23,23 @@ export function CollectionMenu() {
               '@1024': 'x2',
             }}
             as="span"
-            display="flex"
-            align="center"
-            h="100%"
             size="lg"
+            color="secondary"
+            className={[noTextWrap]}
           >
-            {currentCollection}&nbsp;
+            {currentCollection}
           </Label>
-          <Icon id="ChevronDown" size="md" />
+          {currentCollectionCount ? (
+            <Label
+              as="span"
+              className={[lightFont, noTextWrap]}
+              color="tertiary"
+              size="lg"
+            >
+              {currentCollectionCount}
+            </Label>
+          ) : null}
+          <Icon id="ChevronDown" size="md" color="secondary" ml="x2" />
         </Flex>
       }
       content={
@@ -39,13 +49,15 @@ export function CollectionMenu() {
               <Heading as="h3">
                 Explore Collections
                 <Box as="h3" display="inline" color="tertiary">
-                  {collectionAmount}
+                  &nbsp;{collectionAmount}
                 </Box>
               </Heading>
               <Link href="/collections" passHref>
-                <Flex align="center" gap="x2" onClick={requestClose}>
-                  <Label className={lightFont}>Rankings</Label>
-                  <Icon id="ArrowRight" />
+                <Flex gap="x2" align="center" onClick={requestClose}>
+                  <Label color="tertiary" className={lightFont}>
+                    Rankings
+                  </Label>
+                  <Icon id="ChevronRight" color="tertiary" />
                 </Flex>
               </Link>
             </Flex>
