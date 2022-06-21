@@ -46,6 +46,7 @@ export type FilterStore = {
   clearFilters: () => void
   hasFilters: boolean
   showFilters: boolean
+  filterCount: number
 }
 
 export type FilterProviderProps = {

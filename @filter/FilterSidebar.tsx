@@ -13,6 +13,7 @@ import { FilterHeader } from './FilterHeader'
 import { FilterOptions } from './FilterOptions'
 import { FilterPriceRange } from './FilterPriceRange'
 import { FilterProperties } from './FilterProperties'
+import { ClearFilters } from './ClearFilters'
 
 export function FilterSidebar() {
   const {
@@ -25,6 +26,7 @@ export function FilterSidebar() {
     usePriceRange,
     useCollectionSearch,
     useCollectionProperties,
+    useSidebarClearButton,
   } = useCollectionFilters()
 
   const [scrolled, setScrolled] = useState(false)
@@ -97,6 +99,7 @@ export function FilterSidebar() {
             <FilterProperties collectionAddress={contractAddress} />
           ) : null}
           {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
+          {useSidebarClearButton ? <ClearFilters mt="x2" /> : null}
         </Box>
       </Stack>
     </Box>

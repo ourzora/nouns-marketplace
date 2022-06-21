@@ -26,6 +26,7 @@ export interface FilterConfigProps {
   usePriceRange?: PriceRangeFilterConfig | undefined
   useCollectionSearch?: boolean
   useCollectionProperties?: PropertiesConfig | undefined
+  useSidebarClearButton?: boolean
 }
 
 export interface FilterContextInputProps extends FilterConfigProps {

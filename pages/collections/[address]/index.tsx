@@ -51,6 +51,7 @@ const Collection = ({
             hideBorder: true,
             hideCurrencySelect: true,
           }}
+          useSidebarClearButton
         >
           <Collections />
         </CollectionFilterProvider>

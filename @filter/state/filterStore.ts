@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { MediaType } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { removeItemAtIndex } from '../utils/store'
 import {
@@ -66,6 +66,7 @@ export const initialFilterStore: FilterStore = {
   clearFilters: () => {},
   hasFilters: false,
   showFilters: true,
+  filterCount: 0,
 }
 
 export function useFilterStore(
@@ -73,6 +74,7 @@ export function useFilterStore(
 ): FilterStore {
   const [filters, setFilters] = useState<FilterState>(initialFilterState)
   const [showFilters, setShowFilters] = useState(filtersVisible)
+  const [filterCount, setFilterCount] = useState(0)
 
   const setMarketStatus = useCallback(
     (marketStatus: MarketStatusFilter) => {
@@ -149,12 +151,18 @@ export function useFilterStore(
             ? removeItemAtIndex(filters.collectionAttributes, index)
             : [...filters.collectionAttributes, attribute],
       })
+      setFilterCount(filters.collectionAttributes.length)
     },
     [filters]
   )
 
+  useEffect(() => {
+    console.log('filtercount', filterCount)
+  }, [filterCount])
+
   const clearFilters = useCallback(() => {
     setFilters(initialFilterState)
+    setFilterCount(0)
   }, [setFilters])
 
   const toggleShowFilters = useCallback(() => {
@@ -178,5 +186,6 @@ export function useFilterStore(
     setCollectionAttributes,
     showFilters,
     hasFilters,
+    filterCount,
   }
 }
