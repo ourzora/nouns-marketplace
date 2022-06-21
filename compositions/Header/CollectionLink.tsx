@@ -27,10 +27,10 @@ export function CollectionLink({ collection }: { collection: CollectionsData }) 
           </Stack>
         </Flex>
         <Flex gap="x2" align="center">
-          <Label className={[lightGreyType, lightFont]}>
+          <Label color="tertiary" className={[lightFont]}>
             {aggregate?.aggregateStat?.nftCount} NFTs
           </Label>
-          <Icon id="ChevronRight" />
+          <Icon id="ChevronRight" color="tertiary" />
         </Flex>
       </Flex>
     </Link>

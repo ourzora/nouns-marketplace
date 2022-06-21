@@ -14,11 +14,15 @@ const CollectionsContext = createContext<{
   collectionAmount: number
   currentCollection: string
   setCurrentCollection: Dispatch<SetStateAction<string>>
+  currentCollectionCount: string | undefined
+  setCurrentCollectionCount: Dispatch<SetStateAction<string | undefined>>
 }>({
   collections: [],
   collectionAmount: collectionAddresses.length,
-  currentCollection: 'Explore',
+  currentCollection: 'Explore Collections...',
   setCurrentCollection: () => {},
+  currentCollectionCount: undefined,
+  setCurrentCollectionCount: () => {},
 })
 
 type CollectionsProps = {
@@ -31,7 +35,12 @@ export function useCollectionsContext() {
 }
 
 export function CollectionsProvider({ children, collections }: CollectionsProps) {
-  const [currentCollection, setCurrentCollection] = useState<string>('Explore')
+  const [currentCollection, setCurrentCollection] = useState<string>(
+    'Explore Collections...'
+  )
+  const [currentCollectionCount, setCurrentCollectionCount] = useState<
+    string | undefined
+  >(undefined)
 
   return (
     <CollectionsContext.Provider
@@ -41,6 +50,8 @@ export function CollectionsProvider({ children, collections }: CollectionsProps)
         collectionAmount: collectionAddresses.length,
         currentCollection,
         setCurrentCollection,
+        currentCollectionCount,
+        setCurrentCollectionCount,
       }}
     >
       {children}

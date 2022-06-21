@@ -7,6 +7,7 @@ export const FOOTER_HEIGHT_MOBILE = 80
 export const HEADER_Z = 100
 
 export const MAX_WIDTH = {
+  SM: 564,
   MED: 1100,
   LG: 1200,
   XL: 1376,

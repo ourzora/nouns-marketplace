@@ -5,6 +5,7 @@ import {
   FOOTER_HEIGHT_MOBILE,
   HEADER_HEIGHT,
   HEADER_HEIGHT_MOBILE,
+  MAX_WIDTH,
 } from './style-constants'
 
 globalStyle('html, body', {
@@ -22,10 +23,20 @@ globalStyle('h1, h2, h3', {
 
 globalStyle('light-font', {
   fontWeight: 300,
+  fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
 })
 
 export const lightFont = style({
   fontWeight: 300,
+  fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
+})
+
+export const noTextWrap = style({
+  whiteSpace: 'nowrap',
+})
+
+export const textCenter = style({
+  textAlign: 'center',
 })
 
 export const leadingTight = style({
@@ -57,6 +68,16 @@ export const pageWrapper = style([
       },
     },
   },
+])
+
+export const maxWidthSm = style([
+  {
+    maxWidth: MAX_WIDTH.SM,
+  },
+  atoms({
+    width: '100%',
+    margin: 'auto',
+  }),
 ])
 
 globalStyle('.zord-acccordionTrigger > span', {

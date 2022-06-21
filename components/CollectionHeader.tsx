@@ -1,10 +1,10 @@
-import { Stack, Display, Paragraph } from '@zoralabs/zord'
+import { Stack, Paragraph } from '@zoralabs/zord'
 import {
   Collection,
   CollectionStatsAggregateQuery,
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { lightFont } from 'styles/styles.css'
 import { AddressWithLink } from '@market'
+import { PageHeader } from './PageHeader'
 
 export function CollectionHeader({
   collection,
@@ -15,10 +15,10 @@ export function CollectionHeader({
 }) {
   return (
     <Stack align="center" w="100%" px="x4">
-      <Display as="h1">{collection.name}</Display>
-      <Paragraph size="lg" className={lightFont} color="tertiary">
-        {aggregateStats.aggregateStat.nftCount} NFTs
-      </Paragraph>
+      <PageHeader
+        headline={collection.name}
+        copy={`${aggregateStats.aggregateStat.nftCount} NFTs`}
+      />
       <AddressWithLink
         address={collection.address}
         useEns={false}

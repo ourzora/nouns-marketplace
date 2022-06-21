@@ -13,7 +13,7 @@ export function Link({ children, href, ...otherProps }: LinkProps) {
   return (
     <NextLink href={href} passHref {...otherProps}>
       <Text as="a" variant="label-md" color={active ? 'primary' : 'secondary'}>
-        {children} {active && '*'}
+        {children}
       </Text>
     </NextLink>
   )

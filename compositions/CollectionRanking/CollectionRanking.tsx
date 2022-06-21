@@ -7,6 +7,7 @@ import {
   rankingStats,
   rankingHeader,
 } from './CollectionRanking.css'
+import { lightFont } from 'styles/styles.css'
 
 export const statRows = ['Volume', 'Items', 'Floor', 'Owners']
 
@@ -21,10 +22,18 @@ export function CollectionRanking() {
       }}
     >
       <Grid className={[rankingRow, rankingHeader]}>
-        <Label size="lg">Collection</Label>
+        <Label size="lg" className={lightFont} color="tertiary">
+          Collection
+        </Label>
         <Grid className={rankingStats}>
           {statRows.map((stat) => (
-            <Label size="lg" align="right" key={stat}>
+            <Label
+              size="lg"
+              align="right"
+              className={lightFont}
+              color="tertiary"
+              key={stat}
+            >
               {stat}
             </Label>
           ))}
