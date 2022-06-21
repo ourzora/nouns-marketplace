@@ -6,7 +6,7 @@ export function SelectedPriceRange() {
   const {
     filterStore: {
       filters: { priceRange },
-      setPriceRange,
+      clearPriceRange,
     },
   } = useCollectionFilters()
 
@@ -31,7 +31,7 @@ export function SelectedPriceRange() {
       showCheckbox={false}
       showCloseIcon
       useBorder
-      onClick={() => setPriceRange(null)}
+      onClick={clearPriceRange}
     />
   )
 }

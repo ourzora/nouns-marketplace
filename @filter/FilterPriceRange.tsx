@@ -1,31 +1,12 @@
-/* Is this anywhere other than the Filter? */
 import { Accordion, Box, Button, Stack } from '@zoralabs/zord'
-import { useCallback, useState } from 'react'
 import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { PriceRangeSelector } from './PriceRangeSelector'
 import { useCollectionFilters } from '@filter/providers'
-import { PriceRangeFilter } from '@filter/typings'
 import { ETH_CURRENCY_SHIM } from '@shared/constants/currencies'
 
 export function FilterPriceRange() {
-  const [priceRangeSelect, setPriceRangeSelect] = useState<PriceRangeFilter | null>(null)
-  const [invalidPriceRange, setInvalidPriceRange] = useState(true)
-
-  const priceRangeSelection = useCallback((event: any) => {
-    setPriceRangeSelect({
-      min: event.min,
-      max: event.max,
-      currency: event.currency,
-    })
-    if (event.min >= 0 && event.max > 0 && !event.error) {
-      setInvalidPriceRange(false)
-    } else {
-      setInvalidPriceRange(true)
-    }
-  }, [])
-
   const {
-    filterStore: { setPriceRange },
+    filterStore: { setPriceRange, priceRangeSelection, invalidPriceRange },
     usePriceRange,
   } = useCollectionFilters()
 
@@ -40,11 +21,7 @@ export function FilterPriceRange() {
             onSelect={priceRangeSelection}
             currencyOptions={[ETH_CURRENCY_SHIM]}
           />
-          <Button
-            variant="outline"
-            disabled={invalidPriceRange}
-            onClick={() => setPriceRange(priceRangeSelect)}
-          >
+          <Button variant="outline" disabled={invalidPriceRange} onClick={setPriceRange}>
             Apply
           </Button>
         </Stack>

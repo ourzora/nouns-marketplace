@@ -61,12 +61,15 @@ export const initialFilterStore: FilterStore = {
   setMediaType: () => {},
   setSortMethod: () => {},
   setPriceRange: () => {},
+  priceRangeSelection: () => {},
   setTokenContracts: () => {},
   setCollectionAttributes: () => {},
   clearFilters: () => {},
+  clearPriceRange: () => {},
   hasFilters: false,
   showFilters: true,
   filterCount: 0,
+  invalidPriceRange: false,
 }
 
 export function useFilterStore(
@@ -75,6 +78,43 @@ export function useFilterStore(
   const [filters, setFilters] = useState<FilterState>(initialFilterState)
   const [showFilters, setShowFilters] = useState(filtersVisible)
   const [filterCount, setFilterCount] = useState(0)
+
+  const [priceRange, setPriceRangeSelect] = useState<PriceRangeFilter | null>(null)
+  const [invalidPriceRange, setInvalidPriceRange] = useState(true)
+
+  console.log(filters)
+
+  const priceRangeSelection = useCallback((event: any) => {
+    console.log(event)
+    setPriceRangeSelect({
+      min: event.min,
+      max: event.max,
+      currency: event.currency,
+    })
+    console.log(priceRange)
+    if (event.min >= 0 && event.max > 0 && !event.error) {
+      setInvalidPriceRange(false)
+    } else {
+      setInvalidPriceRange(true)
+    }
+  }, [])
+
+  const setPriceRange = useCallback(() => {
+    setFilterCount(filterCount + 1)
+    setFilters({
+      ...filters,
+      priceRange,
+    })
+  }, [filters, priceRange])
+
+  const clearPriceRange = useCallback(() => {
+    setFilterCount(filterCount - 1)
+    const priceRange = null
+    setFilters({
+      ...filters,
+      priceRange,
+    })
+  }, [filters, priceRange])
 
   const setMarketStatus = useCallback(
     (marketStatus: MarketStatusFilter) => {
@@ -118,16 +158,6 @@ export function useFilterStore(
     [filters]
   )
 
-  const setPriceRange = useCallback(
-    (priceRange: PriceRangeFilter) => {
-      setFilters({
-        ...filters,
-        priceRange,
-      })
-    },
-    [filters]
-  )
-
   const setTokenContracts = useCallback(
     (tokenContracts: TokenContractsFilter) => {
       setFilters({
@@ -156,10 +186,6 @@ export function useFilterStore(
     [filters]
   )
 
-  useEffect(() => {
-    console.log('filtercount', filterCount)
-  }, [filterCount])
-
   const clearFilters = useCallback(() => {
     setFilters(initialFilterState)
     setFilterCount(0)
@@ -182,10 +208,13 @@ export function useFilterStore(
     setMediaType,
     setSortMethod: setRecentActivity,
     setPriceRange,
+    priceRangeSelection,
     setTokenContracts,
     setCollectionAttributes,
+    clearPriceRange,
     showFilters,
     hasFilters,
     filterCount,
+    invalidPriceRange,
   }
 }
