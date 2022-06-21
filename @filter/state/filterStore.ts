@@ -67,8 +67,8 @@ export const initialFilterStore: FilterStore = {
   clearFilters: () => {},
   clearPriceRange: () => {},
   hasFilters: false,
+  activeFilterCount: 1,
   showFilters: true,
-  filterCount: 0,
   invalidPriceRange: false,
 }
 
@@ -82,8 +82,6 @@ export function useFilterStore(
   const [priceRange, setPriceRangeSelect] = useState<PriceRangeFilter | null>(null)
   const [invalidPriceRange, setInvalidPriceRange] = useState(true)
 
-  console.log(filters)
-
   const priceRangeSelection = useCallback((event: any) => {
     console.log(event)
     setPriceRangeSelect({
@@ -91,7 +89,6 @@ export function useFilterStore(
       max: event.max,
       currency: event.currency,
     })
-    console.log(priceRange)
     if (event.min >= 0 && event.max > 0 && !event.error) {
       setInvalidPriceRange(false)
     } else {
@@ -100,7 +97,6 @@ export function useFilterStore(
   }, [])
 
   const setPriceRange = useCallback(() => {
-    setFilterCount(filterCount + 1)
     setFilters({
       ...filters,
       priceRange,
@@ -108,7 +104,6 @@ export function useFilterStore(
   }, [filters, priceRange])
 
   const clearPriceRange = useCallback(() => {
-    setFilterCount(filterCount - 1)
     const priceRange = null
     setFilters({
       ...filters,
@@ -181,23 +176,38 @@ export function useFilterStore(
             ? removeItemAtIndex(filters.collectionAttributes, index)
             : [...filters.collectionAttributes, attribute],
       })
-      setFilterCount(filters.collectionAttributes.length)
     },
     [filters]
   )
 
   const clearFilters = useCallback(() => {
     setFilters(initialFilterState)
-    setFilterCount(0)
   }, [setFilters])
 
   const toggleShowFilters = useCallback(() => {
     setShowFilters(!showFilters)
   }, [setShowFilters, showFilters])
 
-  const hasFilters = useMemo(() => {
-    return !(JSON.stringify(filters) === JSON.stringify(initialFilterState))
+  const activeFilterCount = useMemo(() => {
+    const { sortMethod, ...rest } = filters
+    let count = 0
+    Object.values(rest).map((f) => {
+      if (Array.isArray(f) && f?.length === 0) {
+        return false
+      } else {
+        if (Array.isArray(f)) {
+          count = count + f.length
+          return
+        }
+        return f && count++
+      }
+    })
+    return count
   }, [filters])
+
+  const hasFilters = useMemo(() => {
+    return activeFilterCount > 0
+  }, [activeFilterCount])
 
   return {
     toggleShowFilters,
@@ -214,7 +224,7 @@ export function useFilterStore(
     clearPriceRange,
     showFilters,
     hasFilters,
-    filterCount,
+    activeFilterCount,
     invalidPriceRange,
   }
 }

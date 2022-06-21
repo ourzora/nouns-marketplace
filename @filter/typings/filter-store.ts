@@ -47,8 +47,8 @@ export type FilterStore = {
   clearFilters: () => void
   clearPriceRange: () => void
   hasFilters: boolean
+  activeFilterCount: number
   showFilters: boolean
-  filterCount: number
   invalidPriceRange: boolean
 }
 
