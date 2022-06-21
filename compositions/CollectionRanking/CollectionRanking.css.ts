@@ -22,7 +22,7 @@ export const rankingRow = style([
     alignItems: 'center',
     '@media': {
       [media.min1024]: {
-        gridTemplateColumns: '1fr 3fr',
+        gridTemplateColumns: '1fr 3.75fr',
       },
     },
   },
@@ -42,22 +42,25 @@ export const rankingHeader = style([
     backdropFilter: 'blur(5px)',
     backgroundColor: 'rgba(255,255,255,0.5)',
     paddingTop: 20,
+    position: 'sticky',
     '@media': {
       [media.min1024]: {
         paddingTop: 0,
         borderBottom: 0,
+        backdropFilter: 'blur(0px)',
+        backgroundColor: 'transparent',
+        position: 'relative',
       },
     },
   },
   atoms({
-    position: 'sticky',
     top: 'x0',
   }),
 ])
 
 export const rankingStats = style([
   {
-    gridTemplateColumns: 'repeat(4, 1fr) 1.5fr',
+    gridTemplateColumns: 'repeat(4, 1fr) 1fr',
     alignItems: 'center',
   },
   atoms({
