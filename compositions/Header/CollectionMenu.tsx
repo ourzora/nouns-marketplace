@@ -16,7 +16,13 @@ export function CollectionMenu() {
     <ModalComposition
       modalName={`collections-menu`}
       trigger={
-        <Flex align="center" className={collectionTrigger}>
+        <Flex
+          align="center"
+          borderRadius="curved"
+          backgroundColor="tertiary"
+          margin="auto"
+          px="x6"
+        >
           <Label
             py={{
               '@initial': 'x1',
