@@ -8,6 +8,7 @@ import { Seo } from 'components/Seo'
 import { Collections } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
 import { useWindowWidth } from 'hooks/useWindowWidth'
+import { useMemo } from 'react'
 
 /* @ts-ignore */
 const Collection = ({
@@ -19,7 +20,7 @@ const Collection = ({
 }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
 
-  const { isLarge } = useWindowWidth()
+  const { isLarge, windowWidth } = useWindowWidth()
 
   /* DAIN TODO: add to provider */
   useEffect(() => {
@@ -47,7 +48,7 @@ const Collection = ({
             selector: 'nouns-market-traits',
             hideBorder: true,
           }}
-          filtersVisible={isLarge ? true : false}
+          filtersVisible={isLarge}
           usePriceRange={{
             label: 'Price',
             defaultState: 'open',
