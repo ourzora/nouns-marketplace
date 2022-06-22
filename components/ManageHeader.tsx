@@ -11,7 +11,14 @@ export function ManageHeader({ ownerAddress }: { ownerAddress: string }) {
   const shortAddress = useShortAddress(ownerAddress)
 
   return (
-    <Stack align="center" mb="x12" gap="x2">
+    <Stack
+      align="center"
+      mb={{
+        '@initial': 'x0',
+        '@1024': 'x2',
+      }}
+      gap="x2"
+    >
       <Display as="h1">{ensName ? ensName : shortAddress}</Display>
       <AddressWithLink
         address={ownerAddress}

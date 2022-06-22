@@ -52,8 +52,8 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
           </Heading>
         </Flex>
         <Flex align="center" gap="x2" justify="space-between">
-          <Link href={`/collections/${nft?.contract.address}`} passHref>
-            <Flex as="a" align="center" gap="x2">
+          <Link href={`/collections/${nft?.contract.address}`}>
+            <Flex align="center" gap="x2">
               <CollectionThumbnail
                 collectionAddress={nft?.contract.address}
                 radius="round"

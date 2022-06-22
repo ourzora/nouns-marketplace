@@ -14,6 +14,7 @@ import { FilterOptions } from './FilterOptions'
 import { FilterPriceRange } from './FilterPriceRange'
 import { FilterProperties } from './FilterProperties'
 import { ClearFilters } from './ClearFilters'
+import PreventOutsideScroll from 'react-prevent-outside-scroll'
 
 export function FilterSidebar() {
   const {
@@ -61,7 +62,10 @@ export function FilterSidebar() {
         gap="x2"
         w="100%"
         pb="x8"
-        pr="x8"
+        pr={{
+          '@initial': 'x4',
+          '@1024': 'x4',
+        }}
         position="absolute"
         className={[filterSidebar, 'zora-filterSidebar']}
         ref={parentRef}

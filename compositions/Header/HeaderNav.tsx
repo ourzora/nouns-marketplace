@@ -7,6 +7,7 @@ import { nounsGlasses } from './Header.css'
 import { CollectionMenu } from './CollectionMenu'
 import { ManageLink } from './ManageLink'
 import { BetaTag } from './BetaTag'
+import { noTextWrap } from 'styles/styles.css'
 
 export function HeaderNav() {
   return (
@@ -36,7 +37,10 @@ export function HeaderNav() {
           '@initial': '100%',
           '@1024': 'auto',
         }}
-        gap="x8"
+        gap={{
+          '@initial': 'x2',
+          '@1024': 'x8',
+        }}
       >
         <Link passHref href="/">
           <Box
@@ -64,7 +68,9 @@ export function HeaderNav() {
           }}
         >
           <Flex h="100%" align="center" gap="x2">
-            <Label size="lg">Nouns Center</Label>
+            <Label size="lg" className={noTextWrap}>
+              Nouns Center
+            </Label>
             <Icon id="ArrowRightAngle" size="sm" />
           </Flex>
         </Flex>

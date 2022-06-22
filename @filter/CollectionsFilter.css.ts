@@ -68,7 +68,7 @@ export const openFilterWrapper = style({
     'screen and (max-width: 768px)': {
       position: 'fixed',
       left: 0,
-      paddingLeft: '32px',
+      paddingLeft: '16px',
       top: `${HEADER_HEIGHT_MOBILE}px`,
     },
   },
@@ -109,8 +109,8 @@ export const filterSidebar = style({
     'screen and (max-width: 768px)': {
       position: 'fixed',
       background: vars.color.background.primary,
-      width: '100%',
-      paddingRight: '64px',
+      width: '100vw',
+      paddingRight: '32px',
     },
   },
 })
