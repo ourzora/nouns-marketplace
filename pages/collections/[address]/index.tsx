@@ -60,7 +60,7 @@ const Collection = ({
             NO_FILTER_RESULTS_COPY: 'Sorry no filters',
           }}
         >
-          <Collections />
+          <Collections collectionAddress={contractAddress} />
         </CollectionFilterProvider>
       )}
     </PageWrapper>

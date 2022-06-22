@@ -77,7 +77,6 @@ export function useFilterStore(
 ): FilterStore {
   const [filters, setFilters] = useState<FilterState>(initialFilterState)
   const [showFilters, setShowFilters] = useState(filtersVisible)
-  const [filterCount, setFilterCount] = useState(0)
 
   const [priceRange, setPriceRangeSelect] = useState<PriceRangeFilter | null>(null)
   const [invalidPriceRange, setInvalidPriceRange] = useState(true)
@@ -209,8 +208,8 @@ export function useFilterStore(
   }, [activeFilterCount])
 
   return {
-    toggleShowFilters,
     filters,
+    toggleShowFilters,
     clearFilters,
     setMarketStatus,
     setOwnerStatus,
