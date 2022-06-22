@@ -20,7 +20,7 @@ const Collection = ({
 }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
 
-  const { isLarge, windowWidth } = useWindowWidth()
+  const { isLarge } = useWindowWidth()
 
   /* DAIN TODO: add to provider */
   useEffect(() => {

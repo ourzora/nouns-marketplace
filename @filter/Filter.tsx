@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Stack } from '@zoralabs/zord'
+import { Box, Flex, Grid, Stack, Icon } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { SortDropdown } from './SortDropdown'
 import {
@@ -15,7 +15,7 @@ import { NoFilterResults } from './NoFilterResults'
 
 export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[] }) {
   const {
-    filterStore: { showFilters },
+    filterStore: { showFilters, hasFilters },
     useSortDropdown,
     items,
   } = useCollectionFilters()
@@ -65,7 +65,11 @@ export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[]
           {items.length ? (
             grid
           ) : (
-            <NoFilterResults noResultsString="NO_FILTER_RESULTS_COPY" />
+            <>
+              {!items.length && hasFilters && (
+                <NoFilterResults noResultsString="NO_FILTER_RESULTS_COPY" />
+              )}
+            </>
           )}
         </Stack>
       </Grid>
