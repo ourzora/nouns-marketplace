@@ -20,7 +20,7 @@ const Collection = ({
 }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
 
-  const { isLarge, windowWidth } = useWindowWidth()
+  const { isLarge } = useWindowWidth()
 
   /* DAIN TODO: add to provider */
   useEffect(() => {
@@ -56,8 +56,11 @@ const Collection = ({
             hideCurrencySelect: true,
           }}
           useSidebarClearButton
+          strings={{
+            NO_FILTER_RESULTS_COPY: 'Sorry no filters',
+          }}
         >
-          <Collections />
+          <Collections collectionAddress={contractAddress} />
         </CollectionFilterProvider>
       )}
     </PageWrapper>
