@@ -39,7 +39,7 @@ export function HeaderNav() {
         }}
         gap={{
           '@initial': 'x2',
-          '@1024': 'x8',
+          '@1024': 'x4',
         }}
       >
         <Link passHref href="/">
@@ -56,6 +56,7 @@ export function HeaderNav() {
         </Link>
         <BetaTag />
         <CollectionMenu />
+        {/* 
         <Flex
           as="a"
           align="center"
@@ -74,6 +75,7 @@ export function HeaderNav() {
             <Icon id="ArrowRightAngle" size="sm" />
           </Flex>
         </Flex>
+        */}
       </Flex>
       <Flex
         align="center"
@@ -98,7 +100,9 @@ export function HeaderNav() {
             <Box as="img" className={nounsGlasses} src={NOUNS_GLASSES} alt={APP_TITLE} />
           </Box>
         </Link>
+
         <Flex gap="x4" align="center">
+          {/*
           <Flex
             as="a"
             align="center"
@@ -115,6 +119,7 @@ export function HeaderNav() {
               <Icon id="ArrowRightAngle" size="sm" />
             </Flex>
           </Flex>
+          */}
           <ManageLink />
           <Box>
             <ConnectButton showBalance={false} />

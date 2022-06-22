@@ -5,6 +5,7 @@ import {
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { AddressWithLink } from '@market'
 import { PageHeader } from './PageHeader'
+import { clickAnimation } from 'styles/styles.css'
 
 export function CollectionHeader({
   collection,
@@ -22,7 +23,8 @@ export function CollectionHeader({
       <AddressWithLink
         address={collection.address}
         useEns={false}
-        backgroundColor="secondary"
+        className={clickAnimation}
+        backgroundColor="tertiary"
         px="x4"
         py="x2"
         borderRadius="curved"

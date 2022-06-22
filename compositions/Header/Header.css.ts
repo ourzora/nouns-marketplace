@@ -8,7 +8,7 @@ export const headerWrapper = style({
   '@media': {
     [media.min1024]: {
       height: HEADER_HEIGHT,
-      position: 'sticky',
+      position: 'relative',
       top: 0,
       backdropFilter: 'blur(10px)',
     },
@@ -27,9 +27,6 @@ export const nounsGlasses = style({
 })
 
 export const collectionTrigger = style([
-  {
-    backgroundColor: 'rgba(0,0,0,.1)',
-  },
   atoms({
     borderRadius: 'curved',
     gap: 'x2',

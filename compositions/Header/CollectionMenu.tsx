@@ -42,7 +42,7 @@ export function CollectionMenu() {
               color="tertiary"
               size="lg"
             >
-              {currentCollectionCount}
+              &nbsp;{currentCollectionCount}
             </Label>
           ) : null}
           <Icon id="ChevronDown" size="md" color="secondary" ml="x2" />
