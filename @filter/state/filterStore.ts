@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { MediaType } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { removeItemAtIndex } from '../utils/store'
 import {
@@ -61,11 +61,15 @@ export const initialFilterStore: FilterStore = {
   setMediaType: () => {},
   setSortMethod: () => {},
   setPriceRange: () => {},
+  priceRangeSelection: () => {},
   setTokenContracts: () => {},
   setCollectionAttributes: () => {},
   clearFilters: () => {},
+  clearPriceRange: () => {},
   hasFilters: false,
+  activeFilterCount: 1,
   showFilters: true,
+  invalidPriceRange: false,
 }
 
 export function useFilterStore(
@@ -73,6 +77,39 @@ export function useFilterStore(
 ): FilterStore {
   const [filters, setFilters] = useState<FilterState>(initialFilterState)
   const [showFilters, setShowFilters] = useState(filtersVisible)
+  const [filterCount, setFilterCount] = useState(0)
+
+  const [priceRange, setPriceRangeSelect] = useState<PriceRangeFilter | null>(null)
+  const [invalidPriceRange, setInvalidPriceRange] = useState(true)
+
+  const priceRangeSelection = useCallback((event: any) => {
+    console.log(event)
+    setPriceRangeSelect({
+      min: event.min,
+      max: event.max,
+      currency: event.currency,
+    })
+    if (event.min >= 0 && event.max > 0 && !event.error) {
+      setInvalidPriceRange(false)
+    } else {
+      setInvalidPriceRange(true)
+    }
+  }, [])
+
+  const setPriceRange = useCallback(() => {
+    setFilters({
+      ...filters,
+      priceRange,
+    })
+  }, [filters, priceRange])
+
+  const clearPriceRange = useCallback(() => {
+    const priceRange = null
+    setFilters({
+      ...filters,
+      priceRange,
+    })
+  }, [filters, priceRange])
 
   const setMarketStatus = useCallback(
     (marketStatus: MarketStatusFilter) => {
@@ -116,16 +153,6 @@ export function useFilterStore(
     [filters]
   )
 
-  const setPriceRange = useCallback(
-    (priceRange: PriceRangeFilter) => {
-      setFilters({
-        ...filters,
-        priceRange,
-      })
-    },
-    [filters]
-  )
-
   const setTokenContracts = useCallback(
     (tokenContracts: TokenContractsFilter) => {
       setFilters({
@@ -161,9 +188,26 @@ export function useFilterStore(
     setShowFilters(!showFilters)
   }, [setShowFilters, showFilters])
 
-  const hasFilters = useMemo(() => {
-    return !(JSON.stringify(filters) === JSON.stringify(initialFilterState))
+  const activeFilterCount = useMemo(() => {
+    const { sortMethod, ...rest } = filters
+    let count = 0
+    Object.values(rest).map((f) => {
+      if (Array.isArray(f) && f?.length === 0) {
+        return false
+      } else {
+        if (Array.isArray(f)) {
+          count = count + f.length
+          return
+        }
+        return f && count++
+      }
+    })
+    return count
   }, [filters])
+
+  const hasFilters = useMemo(() => {
+    return activeFilterCount > 0
+  }, [activeFilterCount])
 
   return {
     toggleShowFilters,
@@ -174,9 +218,13 @@ export function useFilterStore(
     setMediaType,
     setSortMethod: setRecentActivity,
     setPriceRange,
+    priceRangeSelection,
     setTokenContracts,
     setCollectionAttributes,
+    clearPriceRange,
     showFilters,
     hasFilters,
+    activeFilterCount,
+    invalidPriceRange,
   }
 }

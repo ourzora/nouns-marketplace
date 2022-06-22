@@ -42,6 +42,7 @@ export function CollectionFilterProvider({
   useCollectionSearch = false,
   usePriceRange,
   useCollectionProperties,
+  useSidebarClearButton = false,
 }: CollectionFilterProviderProps) {
   const filterStore = useFilterStore(filtersVisible)
 
@@ -85,6 +86,7 @@ export function CollectionFilterProvider({
         useCollectionSearch,
         useCollectionProperties,
         filtersVisible,
+        useSidebarClearButton,
       }}
     >
       {children}

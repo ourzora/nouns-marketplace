@@ -41,11 +41,15 @@ export type FilterStore = {
   setMediaType: (mediaType: Status<MediaTypeFilter>) => void
   setSortMethod: (sortMethod: SortMethodType) => void
   setPriceRange: (priceRange: PriceRangeFilter | null) => void
+  priceRangeSelection: (event: any) => void
   setTokenContracts: (tokenContracts: TokenContractsFilter) => void
   setCollectionAttributes: (collectionAttributes: CollectionAttributeFilterValue) => void
   clearFilters: () => void
+  clearPriceRange: () => void
   hasFilters: boolean
+  activeFilterCount: number
   showFilters: boolean
+  invalidPriceRange: boolean
 }
 
 export type FilterProviderProps = {
