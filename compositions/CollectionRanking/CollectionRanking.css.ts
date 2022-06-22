@@ -10,7 +10,7 @@ export const rankingWrapper = style([
   atoms({
     w: '100%',
     m: 'auto',
-    gap: 'x5',
+    gap: 'x4',
   }),
 ])
 
@@ -18,7 +18,6 @@ export const rankingRow = style([
   {
     gridTemplateColumns: '1fr 3fr',
     overflowX: 'scroll',
-    borderBottom: `1px solid rgba(0,0,0,.2)`,
     alignItems: 'center',
     '@media': {
       [media.min1024]: {
@@ -27,8 +26,9 @@ export const rankingRow = style([
     },
   },
   atoms({
-    pb: 'x5',
-    px: 'x4',
+    p: 'x4',
+    borderRadius: 'phat',
+    backgroundColor: 'tertiary',
   }),
 ])
 
@@ -42,10 +42,12 @@ export const rankingHeader = style([
     backdropFilter: 'blur(5px)',
     backgroundColor: 'rgba(255,255,255,0.5)',
     paddingTop: 20,
+    paddingBottom: 0,
     position: 'sticky',
     '@media': {
       [media.min1024]: {
         paddingTop: 0,
+        paddingBottom: 0,
         borderBottom: 0,
         backdropFilter: 'blur(0px)',
         backgroundColor: 'transparent',
@@ -60,7 +62,7 @@ export const rankingHeader = style([
 
 export const rankingStats = style([
   {
-    gridTemplateColumns: 'repeat(4, 1fr) 1fr',
+    gridTemplateColumns: 'repeat(4, 1fr) 64px',
     alignItems: 'center',
   },
   atoms({
