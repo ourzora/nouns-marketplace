@@ -5,14 +5,16 @@ import { Maybe } from '@zoralabs/nft-hooks/dist/backends/zora-indexer-v1/zora-in
 export function PageHeader({
   headline,
   copy,
+  headlineSize = 'md',
 }: {
   headline: Maybe<string> | undefined
   copy?: string
+  headlineSize?: 'md' | 'lg'
 }) {
   return (
     <Stack as="article" align="center" className={maxWidthSm} gap="x4">
       {headline ? (
-        <Display className={textCenter} as="h1">
+        <Display size={headlineSize} className={textCenter} as="h1">
           {headline}
         </Display>
       ) : null}
