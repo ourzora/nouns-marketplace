@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react'
-import { Grid, Flex, Label, Separator } from '@zoralabs/zord'
+import { Grid, Flex, Label, Icon } from '@zoralabs/zord'
 import { CollectionsData } from 'hooks/zdk/useCollections'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { rankingRow, rankingStats } from './CollectionRanking.css'
+import { clickAnimation } from 'styles/styles.css'
 import { Link } from 'components/Link'
-import { buttonStyle } from 'styles/styles.css'
 import { roundTwoDecimals } from 'utils/math'
 import { useAggregate } from 'hooks/zdk/useAggregate'
 import { numberFormatter } from 'utils/numbers'
@@ -33,9 +33,14 @@ export function RankingRow({ collection }: { collection: CollectionsData }) {
 
   return (
     <Link href={`/collections/${collection.address}`} passHref>
-      <Grid className={rankingRow} gap="x4">
+      <Grid className={[rankingRow, clickAnimation]} gap="x4">
         <Flex align="center" gap="x4">
-          <CollectionThumbnail collectionAddress={collection.address} tokenId={tokenNo} />
+          <CollectionThumbnail
+            collectionAddress={collection.address}
+            tokenId={tokenNo}
+            radius="curved"
+            size="sm"
+          />
           <Label size="lg" as="span">
             {collection.name}
           </Label>
@@ -68,8 +73,8 @@ export function RankingRow({ collection }: { collection: CollectionsData }) {
           <Label size="lg" as="span" align="right">
             {numberFormatter(aggregate?.aggregateStat?.ownerCount || '0')}
           </Label>
-          <Flex className={buttonStyle}>
-            <Label>Explore</Label>
+          <Flex justify="flex-end" pr="x2">
+            <Icon id="ChevronRight" color="tertiary" />
           </Flex>
         </Grid>
       </Grid>

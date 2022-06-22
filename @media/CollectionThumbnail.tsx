@@ -14,7 +14,7 @@ export function CollectionThumbnail({
   collectionAddress: string
   tokenId?: string
   size?: 'xs' | 'sm' | 'md' | 'lg'
-  radius?: 'curved' | 'round'
+  radius?: 'curved' | 'round' | 'phat'
 }) {
   const { data } = useNFT(collectionAddress, tokenId)
   const { image } = useRawImageTransform(data?.media?.image?.uri)

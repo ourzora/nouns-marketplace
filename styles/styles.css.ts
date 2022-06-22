@@ -106,3 +106,26 @@ globalStyle('.nouns-market-traits h3 > button', {
   borderRadius: radii.curved,
   marginBottom: 5,
 })
+
+export const clickAnimation = style({
+  transition:
+    'border 0.1s ease-in-out, background 0.1s ease-in-out, transform 0.1s ease-out',
+  userSelect: 'none',
+  selectors: {
+    '&:focus-visible': {
+      outline: '2px solid rgb(32, 103, 243)',
+      outlineStyle: 'auto',
+    },
+    '&:active': {
+      transform: 'scale(0.95)',
+    },
+    '&[disabled]': {
+      cursor: 'not-allowed',
+      pointerEvents: 'none',
+      opacity: 0.6,
+    },
+    '&[disabled]:active': {
+      transform: 'unset',
+    },
+  },
+})

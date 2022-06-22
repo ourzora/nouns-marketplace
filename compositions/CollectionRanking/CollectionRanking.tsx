@@ -18,7 +18,7 @@ export function CollectionRanking() {
       className={rankingWrapper}
       pt={{
         '@initial': 'x0',
-        '@1024': 'x12',
+        '@1024': 'x14',
       }}
     >
       <Grid className={[rankingRow, rankingHeader]}>
