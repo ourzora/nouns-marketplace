@@ -1,6 +1,9 @@
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { FilterStore } from './filter-store'
 import { ReactNode } from 'react'
+import { stringDefaults } from '@filter/constants'
+
+export type Strings = typeof stringDefaults
 
 export type FilterOptionConfig = {
   label?: string
@@ -27,6 +30,7 @@ export interface FilterConfigProps {
   useCollectionSearch?: boolean
   useCollectionProperties?: PropertiesConfig | undefined
   useSidebarClearButton?: boolean
+  strings?: Partial<Strings>
 }
 
 export interface FilterContextInputProps extends FilterConfigProps {
@@ -44,6 +48,7 @@ export interface TokenQueryReturnTypes extends FilterContextInputProps {
 
 export interface CollectionFilterContextTypes extends TokenQueryReturnTypes {
   filterStore: FilterStore
+  strings: Partial<Strings>
 }
 
 export interface CollectionFilterProviderProps extends FilterContextInputProps {

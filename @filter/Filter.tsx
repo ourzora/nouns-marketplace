@@ -11,11 +11,13 @@ import { FilterHeader } from './FilterHeader'
 import { FilterSidebar } from './FilterSidebar'
 import { SelectedFilters } from './SelectedFilters'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
+import { NoFilterResults } from './NoFilterResults'
 
 export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[] }) {
   const {
     filterStore: { showFilters },
     useSortDropdown,
+    items,
   } = useCollectionFilters()
 
   return (
@@ -60,7 +62,11 @@ export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[]
               {useSortDropdown && <SortDropdown />}
             </Flex>
           )}
-          {grid}
+          {items.length ? (
+            grid
+          ) : (
+            <NoFilterResults noResultsString="NO_FILTER_RESULTS_COPY" />
+          )}
         </Stack>
       </Grid>
     </Stack>

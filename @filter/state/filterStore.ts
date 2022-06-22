@@ -83,7 +83,6 @@ export function useFilterStore(
   const [invalidPriceRange, setInvalidPriceRange] = useState(true)
 
   const priceRangeSelection = useCallback((event: any) => {
-    console.log(event)
     setPriceRangeSelect({
       min: event.min,
       max: event.max,

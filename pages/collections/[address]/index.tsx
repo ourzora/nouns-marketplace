@@ -56,6 +56,9 @@ const Collection = ({
             hideCurrencySelect: true,
           }}
           useSidebarClearButton
+          strings={{
+            NO_FILTER_RESULTS_COPY: 'Sorry no filters',
+          }}
         >
           <Collections />
         </CollectionFilterProvider>

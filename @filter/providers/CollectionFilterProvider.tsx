@@ -7,7 +7,7 @@ import {
   priceRangeToQueryParams,
   marketTypeToFilterParams,
 } from '@filter'
-
+import { stringDefaults } from '@filter/constants'
 import {
   CollectionFilterContextTypes,
   CollectionFilterProviderProps,
@@ -22,10 +22,20 @@ const CollectionFilterContext = createContext<CollectionFilterContextTypes>({
   contractWhiteList: undefined,
   contractAddress: undefined,
   ownerAddress: undefined,
+  strings: stringDefaults,
 })
 
 export function useCollectionFilters() {
-  return useContext(CollectionFilterContext)
+  const filterContext = useContext(CollectionFilterContext)
+
+  const getString = (stringName: keyof typeof stringDefaults) => {
+    return filterContext.strings[stringName]
+  }
+
+  return {
+    ...filterContext,
+    getString,
+  }
 }
 
 export function CollectionFilterProvider({
@@ -43,6 +53,7 @@ export function CollectionFilterProvider({
   usePriceRange,
   useCollectionProperties,
   useSidebarClearButton = false,
+  strings = stringDefaults,
 }: CollectionFilterProviderProps) {
   const filterStore = useFilterStore(filtersVisible)
 
@@ -87,6 +98,7 @@ export function CollectionFilterProvider({
         useCollectionProperties,
         filtersVisible,
         useSidebarClearButton,
+        strings,
       }}
     >
       {children}
