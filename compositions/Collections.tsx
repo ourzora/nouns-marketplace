@@ -2,7 +2,7 @@ import { Filter, useCollectionFilters } from '@filter'
 import { NFTGrid } from '@media/NFTGrid'
 import { useEffect } from 'react'
 
-export function Collections({ collectionAddress }: { collectionAddress: string }) {
+export function Collections({ collectionAddress }: { collectionAddress?: string }) {
   const {
     filterStore: { clearFilters },
     items,
