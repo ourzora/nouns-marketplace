@@ -44,20 +44,22 @@ export function FilterWrapper({
           },
         ]}
       >
-        <Box
-          position="sticky"
-          top="x0"
-          w="100%"
-          className={[
-            filterWrapper,
-            'zora-collectionFilterWrapper',
-            {
-              [openFilterWrapper]: showFilters,
-            },
-          ]}
-        >
-          <FilterSidebar />
-        </Box>
+        {showFilters && (
+          <Box
+            position="sticky"
+            top="x0"
+            w="100%"
+            className={[
+              filterWrapper,
+              'zora-collectionFilterWrapper',
+              {
+                [openFilterWrapper]: showFilters,
+              },
+            ]}
+          >
+            <FilterSidebar />
+          </Box>
+        )}
         <Stack>
           {showFilters && (
             <Flex justify="space-between" align="center">

@@ -49,6 +49,7 @@
     "react-dom": "^17.0.2",
     "react-intersection-observer": "^9.1.0",
     "react-markdown": "^5.0.2",
+    "react-prevent-outside-scroll": "^0.0.2",
     "remark-gfm": "^1.0.0",
     "swr": "^1.3.0",
     "tinycolor2": "^1.4.2",
