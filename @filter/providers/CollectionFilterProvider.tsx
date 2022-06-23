@@ -45,6 +45,8 @@ export function CollectionFilterProvider({
   contractWhiteList,
   children,
   filtersVisible = false,
+  useFilterToggle = true,
+  useFilterHeader = true,
   useMarketStatus = false,
   useOwnerStatus = false,
   useMediaTypes = false,
@@ -97,6 +99,8 @@ export function CollectionFilterProvider({
         useCollectionSearch,
         useCollectionProperties,
         filtersVisible,
+        useFilterHeader,
+        useFilterToggle,
         useSidebarClearButton,
         strings,
       }}

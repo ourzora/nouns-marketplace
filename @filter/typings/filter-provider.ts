@@ -22,6 +22,8 @@ export type PropertiesConfig = {
 
 export interface FilterConfigProps {
   filtersVisible?: boolean
+  useFilterToggle?: boolean
+  useFilterHeader?: boolean
   useMarketStatus?: boolean
   useOwnerStatus?: boolean
   useMediaTypes?: boolean

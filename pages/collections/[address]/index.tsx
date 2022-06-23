@@ -56,8 +56,9 @@ const Collection = ({
             hideCurrencySelect: true,
           }}
           useSidebarClearButton
+          useMediaTypes
           strings={{
-            NO_FILTER_RESULTS_COPY: 'Sorry no filters',
+            NO_FILTER_RESULTS_COPY: 'Sorry aint no filters',
           }}
         >
           <Collections collectionAddress={contractAddress} />
