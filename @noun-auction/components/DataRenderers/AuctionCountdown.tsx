@@ -1,21 +1,19 @@
 import { Flex, Label } from '@zoralabs/zord'
 import { useCountdown } from '@noun-auction/hooks/useCountdown'
+import { SharedDataRendererProps } from '@noun-auction/typings'
+import { lightFont } from 'styles/styles.css'
 
 export function AuctionCountdown({
   startTime,
   endTime,
-  label = 'Ends in',
   endedCopy = 'Auction has ended',
+  label = 'Ends in',
   layoutDirection = 'row',
 }: {
   startTime: string
   endTime: string
-  label?: string
   endedCopy?: string
-  layoutDirection?: 'column' | 'row'
-}) {
-  console.log(startTime, endTime)
-
+} & SharedDataRendererProps) {
   if (!startTime || !endTime) return null
 
   const { text, isEnded } = useCountdown(startTime, endTime)
@@ -24,8 +22,10 @@ export function AuctionCountdown({
 
   return (
     <Flex direction={layoutDirection} gap="x1">
-      <Label>{label}</Label>
-      <Label>{text}</Label>
+      <Label size="lg" className={lightFont} color="secondary">
+        {label}
+      </Label>
+      <Label size="lg">{text}</Label>
     </Flex>
   )
 }

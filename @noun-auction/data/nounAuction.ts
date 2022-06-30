@@ -62,6 +62,11 @@ export function nounAuction(tokenId: any) {
           collectionAddress
           marketAddress
           marketType
+          transactionInfo {
+            transactionHash
+            blockNumber
+            blockTimestamp
+          }
         }
       }
     }
