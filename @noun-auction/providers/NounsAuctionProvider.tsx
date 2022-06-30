@@ -1,6 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from 'react'
-import { useInterval } from '@shared'
-import { useNounAuction, useAuction } from '@noun-auction/hooks'
+import { createContext, useContext, ReactNode } from 'react'
+import { useNounAuction } from '@noun-auction/hooks'
 
 const NounsAuctionContext = createContext<{
   // auctionData: any | undefined,
@@ -22,7 +21,7 @@ export function NounsAuctionProvider({
   tokenId: string
   children?: ReactNode
 }) {
-  const { data, error } = useAuction(tokenId)
+  const { data, error } = useNounAuction(tokenId)
 
   return (
     <NounsAuctionContext.Provider

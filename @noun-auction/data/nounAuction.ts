@@ -1,12 +1,77 @@
 export function nounAuction(tokenId: any) {
   return `{
+    markets(
+      filter: {
+        marketFilters: {
+          marketType: NOUNS_AUCTION,
+          statuses: ACTIVE
+        }
+      }, 
+      sort: {
+        sortKey: NONE,
+        sortDirection: DESC
+      },
+      pagination: {
+        limit: 1
+      }) {
+      nodes {
+        market {
+          status
+          tokenId
+          price {
+            chainTokenPrice {
+              decimal
+            }
+          }
+          properties {
+            ... on NounsAuction {
+              firstBidTime
+              highestBidder
+              highestBidPrice {
+                chainTokenPrice {
+                  decimal
+                }
+                usdcPrice {
+                  decimal
+                }
+              }
+              duration
+              endTime
+              auctionId
+              reservePrice {
+                nativePrice {
+                  decimal
+                }
+                usdcPrice {
+                  decimal
+                }
+              }
+              startTime
+              winner
+              estimatedDurationTime
+              amount {
+                chainTokenPrice {
+                  decimal
+                }
+                usdcPrice {
+                  decimal
+                }
+              }
+            }
+          }
+          collectionAddress
+          marketAddress
+          marketType
+        }
+      }
+    }
     events(
       filter: {
         eventTypes: NOUNS_AUCTION_EVENT
       }, 
       where: {
         tokens: {
-          tokenId: ${tokenId},
+          tokenId: "${tokenId}",
           address: "0x9c8ff314c9bc7f6e59a9d9225fb22946427edc03"
         }
       }, 
