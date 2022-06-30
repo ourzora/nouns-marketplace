@@ -7,7 +7,9 @@ export function ManageOwnedToken() {
     <CardMarketTrigger
       cta="On Sale"
       backgroundColor="primary"
-      border="tertiary"
+      borderColor="tertiary"
+      borderStyle="solid"
+      borderWidth="thin"
       color="tertiary"
     />
   )

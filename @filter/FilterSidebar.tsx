@@ -13,8 +13,8 @@ import { FilterHeader } from './FilterHeader'
 import { FilterOptions } from './FilterOptions'
 import { FilterPriceRange } from './FilterPriceRange'
 import { FilterProperties } from './FilterProperties'
+import { FilterOwnerCollections } from './FilterOwnerCollections'
 import { ClearFilters } from './ClearFilters'
-import PreventOutsideScroll from 'react-prevent-outside-scroll'
 
 export function FilterSidebar() {
   const {
@@ -25,6 +25,7 @@ export function FilterSidebar() {
     useOwnerStatus,
     useMediaTypes,
     usePriceRange,
+    useFilterOwnerCollections,
     useCollectionSearch,
     useCollectionProperties,
     useSidebarClearButton,
@@ -98,6 +99,7 @@ export function FilterSidebar() {
               showCheckbox
             />
           )}
+          {ownerAddress && useFilterOwnerCollections && <FilterOwnerCollections />}
           {usePriceRange && <FilterPriceRange />}
           {contractAddress && useCollectionProperties ? (
             <FilterProperties collectionAddress={contractAddress} />

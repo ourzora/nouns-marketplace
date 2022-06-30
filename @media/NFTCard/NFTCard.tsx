@@ -15,7 +15,15 @@ import { CollectionThumbnail } from '@media/CollectionThumbnail'
 
 export function NFTCard({ nftData }: { nftData: NFTObject }) {
   const { metadata, media, nft } = nftData
-  const { image } = useRawImageTransform(media?.image?.uri)
+  const { image } = useRawImageTransform(media?.thumbnail?.uri)
+
+  const srcImg = useMemo(() => {
+    if (media?.mimeType === 'image/svg+xml') {
+      return media?.image?.uri
+    } else {
+      return media?.poster?.uri
+    }
+  }, [image, media])
 
   const useTitleScroll = useMemo(() => {
     if (metadata && metadata?.name) {
@@ -33,7 +41,7 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
         <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
           <Box
             as="img"
-            src={image}
+            src={srcImg}
             w="100%"
             h="100%"
             position="absolute"
@@ -45,7 +53,10 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
       <Stack gap="x2" mt="x2" px="x4" pb="x4">
         <Flex
           className={[titleWrapper, useTitleScroll && titleScroll]}
-          style={{ '--titlePad': titleScroll ? '40px' : '0px' }}
+          style={{
+            /* @ts-ignore */
+            '--titlePad': titleScroll ? '40px' : '0px',
+          }}
         >
           <Heading as="h4" size="sm" className={titleHeading}>
             {metadata?.name}

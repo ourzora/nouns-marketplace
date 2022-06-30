@@ -1,3 +1,5 @@
-# Shared
+# ZORA Shared
 
-constants and utils shared accross packages
+constants, hooks, and utils shared accross packages.
+
+TODO: consolidate the files, split out util functions into smaller chunks

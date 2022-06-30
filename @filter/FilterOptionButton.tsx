@@ -48,7 +48,9 @@ export function FilterOptionButton({
       pl="x3"
       pointerEvents={disabled ? 'none' : 'all'}
       mr={rightPad ? 'x1' : 'x0'}
-      border={checked || useBorder ? 'primary' : 'tertiary'}
+      borderColor={checked || useBorder ? 'primary' : 'tertiary'}
+      borderStyle="solid"
+      borderWidth="thin"
       borderRadius="round"
       color="primary"
       onClick={onClick}

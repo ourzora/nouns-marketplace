@@ -9,9 +9,8 @@ export interface ModalProviderState {
   closeModal: () => void
 }
 
-type ModalParams =
-  | { modalType: ModalType.NONE; props: null }
-  /*| { modalType: ModalType.CONFIGURE_SALE; props: ConfigureSaleModalProps }*/
+type ModalParams = { modalType: ModalType.NONE; props: null }
+/*| { modalType: ModalType.CONFIGURE_SALE; props: ConfigureSaleModalProps }*/
 
 export const ModalContext = React.createContext<ModalProviderState>(
   {} as ModalProviderState

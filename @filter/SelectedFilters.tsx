@@ -5,7 +5,7 @@ import { textButton, textSmall } from './CollectionsFilter.css'
 import { FilterOptionButton } from './FilterOptionButton'
 import { SelectedCollection } from './SelectedCollection'
 import { SelectedPriceRange } from './SelectedPriceRange'
-import { FILTER_HEADER_HEIGHT } from './filter-constants'
+import { FILTER_HEADER_HEIGHT } from '@filter/constants'
 import { useCollectionFilters } from '@filter/providers'
 import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filter/state'
 import {
@@ -85,6 +85,7 @@ export function SelectedFilters() {
       justify="space-between"
       w="100%"
       style={{ height: FILTER_HEADER_HEIGHT }}
+      pl={`${showFilters ? 'x0' : 'x2'}`}
     >
       <Flex align="center" gap="x2">
         <Flex>

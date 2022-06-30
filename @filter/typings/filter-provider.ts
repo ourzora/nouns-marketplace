@@ -1,9 +1,10 @@
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { FilterStore } from './filter-store'
 import { ReactNode } from 'react'
-import { stringDefaults } from '@filter/constants'
+import { stringDefaults, themeDefaults } from '@filter/constants'
 
 export type Strings = typeof stringDefaults
+export type Theme = typeof themeDefaults
 
 export type FilterOptionConfig = {
   label?: string
@@ -30,7 +31,9 @@ export interface FilterConfigProps {
   useCollectionSearch?: boolean
   useCollectionProperties?: PropertiesConfig | undefined
   useSidebarClearButton?: boolean
+  useFilterOwnerCollections?: boolean
   strings?: Partial<Strings>
+  theme?: Partial<Theme>
 }
 
 export interface FilterContextInputProps extends FilterConfigProps {
@@ -43,12 +46,14 @@ export interface TokenQueryReturnTypes extends FilterContextInputProps {
   items: NFTObject[]
   isValidating: boolean
   isReachingEnd: boolean | undefined
+  isEmpty: boolean
   handleLoadMore: () => void
 }
 
 export interface CollectionFilterContextTypes extends TokenQueryReturnTypes {
   filterStore: FilterStore
   strings: Partial<Strings>
+  theme: Partial<Theme>
 }
 
 export interface CollectionFilterProviderProps extends FilterContextInputProps {

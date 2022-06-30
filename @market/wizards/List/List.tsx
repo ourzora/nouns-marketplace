@@ -68,7 +68,7 @@ export function List({
   )
 
   return (
-    <Stack w="100%" gap="x4">
+    <Stack w="100%" gap="x4" p="x4">
       {wizardStep !== 'Confirmation' && (
         <NftInfo collectionAddress={tokenAddress} tokenId={tokenId} modalType="list" />
       )}

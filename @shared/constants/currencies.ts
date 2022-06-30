@@ -21,19 +21,12 @@ import {
   WHALE_ADDRESS,
   YUP_ADDRESS,
 } from './addresses'
-import { isAddressMatch } from './validators'
 import { NETWORK_CHAIN_ID } from './connectors'
 
 export interface Currency {
   id: string
   decimals: number
   symbol: string
-}
-
-export function getCurrency({ address }: { address: string }) {
-  return [ETH_CURRENCY_SHIM, ...SUPPORTED_CURRENCIES].find((c) =>
-    isAddressMatch(c.id, address)
-  ) as Currency
 }
 
 export const ETH_CURRENCY_SHIM = { id: AddressZero, decimals: 18, symbol: 'ETH' }

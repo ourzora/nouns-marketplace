@@ -7,13 +7,17 @@ import { useRelevantMarket } from '../../hooks/useRelevantMarket'
 import { ListToken } from './ListToken'
 import { V3Ask } from './V3Ask'
 import { ZoraReserveV2 } from './ZoraReserveV2'
+import { FlexProps } from '@zoralabs/zord'
 
-export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
+export interface NFTCardMarketProps extends FlexProps {
+  nftData: NFTObject
+}
+
+export function NFTCardMarket({ nftData, ...props }: NFTCardMarketProps) {
   const { markets } = nftData
   const { ask, auction } = useRelevantMarket(markets)
 
   const marketComponent = useMemo(() => {
-    // console.log(ask)
     if (markets && markets.length > 0) {
       if (auction && auction.status === MARKET_INFO_STATUSES.ACTIVE)
         return <ZoraReserveV2 nftData={nftData} />
@@ -22,9 +26,9 @@ export function NFTCardMarket({ nftData }: { nftData: NFTObject }) {
         (ask && ask.status === MARKET_INFO_STATUSES.ACTIVE) ||
         ask?.status === MARKET_INFO_STATUSES.COMPLETE
       )
-        return <V3Ask nftData={nftData} />
-      else return <ListToken nftData={nftData} />
-    } else return <ListToken nftData={nftData} />
+        return <V3Ask nftData={nftData} {...props} />
+      else return <ListToken nftData={nftData} {...props} />
+    } else return <ListToken nftData={nftData} {...props} />
   }, [ask, auction, markets])
 
   return marketComponent

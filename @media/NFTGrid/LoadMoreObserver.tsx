@@ -11,7 +11,10 @@ export function LoadMoreObserver({
   className,
   ...props
 }: LoadMoreObserverProps) {
-  const [ref, inView] = useInView()
+  const [ref, inView] = useInView({
+    threshold: 0.25,
+    rootMargin: '0px 0px 500px 0px',
+  })
 
   useEffect(() => {
     if (inView && handleVisible) {

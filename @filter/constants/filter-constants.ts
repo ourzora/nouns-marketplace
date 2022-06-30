@@ -1,0 +1,15 @@
+import { HEADER_HEIGHT } from 'styles/style-constants'
+export const FILTER_HEADER_HEIGHT = 78
+export const FILTER_SIDEBAR_WIDTH = 300
+export const FILTER_WRAPPER_HEIGHT_DESKTOP = `calc(100vh - ${HEADER_HEIGHT}px)`
+export const FILTER_CLEAR_LAYER = 10
+export const FILTER_OPEN_STICKY_OFFSET = 0
+
+export const themeDefaults = {
+  FILTER_HEADER_HEIGHT: 78,
+  FILTER_SIDEBAR_WIDTH: 300,
+  FILTER_WRAPPER_HEIGHT_DESKTOP: `calc(100vh - 84px)`,
+  FILTER_CLEAR_LAYER: 10,
+  FILTER_OPEN_STICKY_OFFSET: 0,
+  FILTER_OPEN_STICKY_OFFSET_MOBILE: 0,
+}

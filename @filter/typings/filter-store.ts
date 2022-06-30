@@ -1,5 +1,6 @@
 import { MediaType } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Currency } from '@shared/constants/currencies'
+import { MouseEventHandler } from 'react'
 
 type Address = string
 
@@ -21,7 +22,13 @@ export type UseFiltersProps = {
   initialFilterState: FilterState
 }
 
-export type MarketStatusFilter = 'live' | 'buy-now' | 'reserve-not-met' | null
+export type AdditionalMarketStatusFilters = 'buy-now-completed' | null
+export type MarketStatusFilter =
+  | 'live'
+  | 'buy-now'
+  | 'reserve-not-met'
+  | 'buy-now-completed'
+  | null
 export type MediaTypeFilter = MediaType | null
 export type OwnerStatusFilter = 'collected' | 'minted' | null
 export type SortMethodType =
@@ -40,7 +47,7 @@ export type FilterStore = {
   setOwnerStatus: (ownerStatus: Status<OwnerStatusFilter>) => void
   setMediaType: (mediaType: Status<MediaTypeFilter>) => void
   setSortMethod: (sortMethod: SortMethodType) => void
-  setPriceRange: (priceRange: PriceRangeFilter | null) => void
+  setPriceRange: MouseEventHandler<HTMLButtonElement>
   priceRangeSelection: (event: any) => void
   setTokenContracts: (tokenContracts: TokenContractsFilter) => void
   setCollectionAttributes: (collectionAttributes: CollectionAttributeFilterValue) => void

@@ -1,8 +1,9 @@
 import * as _vanilla_extract_private from '@vanilla-extract/private';
 import * as _vanilla_extract_sprinkles_dist_declarations_src_createSprinkles from '@vanilla-extract/sprinkles/dist/declarations/src/createSprinkles';
 import { ClassValue } from 'clsx';
-import React, { CSSProperties, ReactNode, ElementType, SVGProps, Dispatch, SetStateAction, MouseEventHandler } from 'react';
+import React, { ReactNode, CSSProperties, ElementType, SVGProps, Dispatch, SetStateAction, MouseEventHandler } from 'react';
 import { PolymorphicPropsWithRef, PolymorphicForwardRefExoticComponent } from 'react-polymorphic-types';
+import * as _vanilla_extract_recipes_dist_declarations_src_types from '@vanilla-extract/recipes/dist/declarations/src/types';
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { RadioGroupProps } from '@radix-ui/react-radio-group';
@@ -41,6 +42,7 @@ declare const colorTheme: _vanilla_extract_private.MapLeafNodes<{
 }, _vanilla_extract_private.CSSVarFunction>;
 declare const lightTheme: string;
 declare const darkTheme: string;
+declare const baseTheme: string;
 declare const vars: _vanilla_extract_private.MapLeafNodes<{
     color: _vanilla_extract_private.MapLeafNodes<{
         foreground: {
@@ -108,7 +110,7 @@ declare const vars: _vanilla_extract_private.MapLeafNodes<{
         auto: string;
     };
     size: {
-        readonly '100vw': "100vh";
+        readonly '100vw': "100vw";
         readonly '100vh': "100vh";
         readonly '100%': "100%";
         readonly unset: "unset";
@@ -153,7 +155,17 @@ declare const vars: _vanilla_extract_private.MapLeafNodes<{
         readonly round: "9999px";
     };
     border: {
-        solid: string;
+        style: {
+            solid: string;
+            dashed: string;
+            dotted: string;
+        };
+        width: {
+            none: string;
+            thin: string;
+            normal: string;
+            thick: string;
+        };
     };
     ease: {
         in: string;
@@ -161,6 +173,7 @@ declare const vars: _vanilla_extract_private.MapLeafNodes<{
         inOut: string;
     };
 }, _vanilla_extract_private.CSSVarFunction>;
+declare const root: string;
 
 declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSprinkles.SprinklesFn<[{
     conditions: never;
@@ -197,37 +210,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                 };
             };
         };
-        fontFamily: {
-            values: {
-                sans: {
-                    defaultClass: string;
-                };
-                mono: {
-                    defaultClass: string;
-                };
-            };
-        };
-        fontSize: {
-            values: {
-                [x: string]: {
-                    defaultClass: string;
-                };
-            };
-        };
-        fontWeight: {
-            values: {
-                [x: number]: {
-                    defaultClass: string;
-                };
-            };
-        };
-        border: {
-            values: {
-                solid: {
-                    defaultClass: string;
-                };
-            };
-        };
         borderRadius: {
             values: {
                 small: {
@@ -260,6 +242,35 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                 };
             };
         };
+        borderStyle: {
+            values: {
+                solid: {
+                    defaultClass: string;
+                };
+                dashed: {
+                    defaultClass: string;
+                };
+                dotted: {
+                    defaultClass: string;
+                };
+            };
+        };
+        borderWidth: {
+            values: {
+                normal: {
+                    defaultClass: string;
+                };
+                none: {
+                    defaultClass: string;
+                };
+                thin: {
+                    defaultClass: string;
+                };
+                thick: {
+                    defaultClass: string;
+                };
+            };
+        };
     };
 }, {
     conditions: {
@@ -275,6 +286,17 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                 length: 6;
             };
             values: {
+                none: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 block: {
                     defaultClass: string;
                     conditions: {
@@ -341,17 +363,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
-                none: {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
             };
         };
         position: {
@@ -359,7 +370,7 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                 length: 6;
             };
             values: {
-                absolute: {
+                fixed: {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -370,7 +381,7 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
-                fixed: {
+                absolute: {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -421,6 +432,17 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
+                stretch: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 center: {
                     defaultClass: string;
                     conditions: {
@@ -455,17 +477,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                     };
                 };
                 baseline: {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
-                stretch: {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -494,6 +505,17 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
+                stretch: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 center: {
                     defaultClass: string;
                     conditions: {
@@ -528,17 +550,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                     };
                 };
                 baseline: {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
-                stretch: {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -607,6 +618,39 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                 length: 6;
             };
             values: {
+                "space-around": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                "space-between": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                stretch: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 center: {
                     defaultClass: string;
                     conditions: {
@@ -640,6 +684,13 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
+            };
+        };
+        alignItems: {
+            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
+                length: 6;
+            };
+            values: {
                 stretch: {
                     defaultClass: string;
                     conditions: {
@@ -651,35 +702,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
-                "space-around": {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
-                "space-between": {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
-            };
-        };
-        alignItems: {
-            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
-                length: 6;
-            };
-            values: {
                 center: {
                     defaultClass: string;
                     conditions: {
@@ -736,17 +758,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                     };
                 };
                 baseline: {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
-                stretch: {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -899,6 +910,82 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                     };
                 };
                 right: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                justify: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+            };
+        };
+        fontFamily: {
+            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
+                length: 6;
+            };
+            values: {
+                sans: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                mono: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+            };
+        };
+        fontSize: {
+            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
+                length: 6;
+            };
+            values: {
+                [x: string]: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+            };
+        };
+        fontWeight: {
+            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
+                length: 6;
+            };
+            values: {
+                [x: number]: {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -5594,6 +5681,17 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
+                "100vw": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 "100vh": {
                     defaultClass: string;
                     conditions: {
@@ -5958,17 +6056,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                     };
                 };
                 x30: {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
-                "100vw": {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -5997,6 +6084,17 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
+                "100vw": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 "100vh": {
                     defaultClass: string;
                     conditions: {
@@ -6361,17 +6459,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                     };
                 };
                 x30: {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
-                "100vw": {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -6400,6 +6487,17 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
+                "100vw": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 "100vh": {
                     defaultClass: string;
                     conditions: {
@@ -6764,17 +6862,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                     };
                 };
                 x30: {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
-                "100vw": {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -6803,6 +6890,17 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
+                "100vw": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 "100vh": {
                     defaultClass: string;
                     conditions: {
@@ -7167,17 +7265,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                     };
                 };
                 x30: {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
-                "100vw": {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -7206,6 +7293,17 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
+                "100vw": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 "100vh": {
                     defaultClass: string;
                     conditions: {
@@ -7570,17 +7668,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                     };
                 };
                 x30: {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
-                "100vw": {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -7609,6 +7696,17 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
+                "100vw": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 "100vh": {
                     defaultClass: string;
                     conditions: {
@@ -7973,17 +8071,6 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                     };
                 };
                 x30: {
-                    defaultClass: string;
-                    conditions: {
-                        readonly '@initial': string;
-                        readonly '@480': string;
-                        readonly '@576': string;
-                        readonly '@768': string;
-                        readonly '@1024': string;
-                        readonly '@1440': string;
-                    };
-                };
-                "100vw": {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -8444,6 +8531,17 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
+                visible: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 scroll: {
                     defaultClass: string;
                     conditions: {
@@ -8455,7 +8553,98 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                         readonly '@1440': string;
                     };
                 };
+            };
+        };
+        overflowY: {
+            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
+                length: 6;
+            };
+            values: {
+                auto: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                hidden: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
                 visible: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                scroll: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+            };
+        };
+        overflowX: {
+            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
+                length: 6;
+            };
+            values: {
+                auto: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                hidden: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                visible: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                scroll: {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -8682,6 +8871,217 @@ declare const atoms: _vanilla_extract_sprinkles_dist_declarations_src_createSpri
                     };
                 };
                 cover: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+            };
+        };
+        gridAutoRows: {
+            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
+                length: 6;
+            };
+            values: {
+                auto: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+            };
+        };
+        gridAutoColumns: {
+            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
+                length: 6;
+            };
+            values: {
+                auto: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+            };
+        };
+        wordBreak: {
+            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
+                length: 6;
+            };
+            values: {
+                normal: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                "break-word": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                "break-all": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                "keep-all": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+            };
+        };
+        listStyle: {
+            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
+                length: 6;
+            };
+            values: {
+                none: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+            };
+        };
+        whiteSpace: {
+            responsiveArray: ("@initial" | "@480" | "@576" | "@768" | "@1024" | "@1440")[] & {
+                length: 6;
+            };
+            values: {
+                unset: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                inherit: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                revert: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                normal: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                nowrap: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                "break-spaces": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                pre: {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                "pre-line": {
+                    defaultClass: string;
+                    conditions: {
+                        readonly '@initial': string;
+                        readonly '@480': string;
+                        readonly '@576': string;
+                        readonly '@768': string;
+                        readonly '@1024': string;
+                        readonly '@1440': string;
+                    };
+                };
+                "pre-wrap": {
                     defaultClass: string;
                     conditions: {
                         readonly '@initial': string;
@@ -8946,28 +9346,11 @@ declare const transitions: {
     inOut: string;
 };
 
-declare const aspectRatioVariants: {
-    variant: {
-        square: {
-            aspectRatio: string;
-        };
-        twoOne: {
-            aspectRatio: string;
-        };
-        fourThree: {
-            aspectRatio: string;
-        };
-        mediaPreview: {
-            aspectRatio: string;
-        };
-    };
-};
-
-declare type SpaceShorthand = Partial<Pick<Atoms, 'p' | 'px' | 'py' | 'pt' | 'pr' | 'pb' | 'pl' | 'pos' | 'm' | 'mx' | 'my' | 'mt' | 'mr' | 'mb' | 'ml' | 'w' | 'h' | 't' | 'l' | 'b' | 'r'>>;
-interface BoxProps extends SpaceShorthand {
-    style?: CSSProperties;
+interface BoxProps {
     className?: ClassValue;
     children?: ReactNode;
+    style?: CSSProperties;
+    aspectRatio?: React.CSSProperties['aspectRatio'] | number;
     center?: MixinsProp['center'];
     display?: Atoms['display'];
     flex?: Atoms['flex'];
@@ -8976,20 +9359,34 @@ interface BoxProps extends SpaceShorthand {
     justifySelf?: Atoms['justifySelf'];
     color?: Atoms['color'];
     cursor?: Atoms['cursor'];
-    border?: Atoms['borderColor'];
+    borderColor?: Atoms['borderColor'];
+    borderStyle?: Atoms['borderStyle'];
+    borderWidth?: Atoms['borderWidth'];
     backgroundColor?: Atoms['backgroundColor'];
     borderRadius?: Atoms['borderRadius'];
+    fontFamily?: Atoms['fontFamily'];
+    fontSize?: Atoms['fontSize'];
     objectFit?: Atoms['objectFit'];
     position?: Atoms['position'];
-    p?: Atoms['padding'];
+    pos?: Atoms['pos'];
+    p?: Atoms['p'];
+    px?: Atoms['px'];
+    py?: Atoms['py'];
+    pt?: Atoms['pt'];
+    pr?: Atoms['pr'];
+    pb?: Atoms['pb'];
+    pl?: Atoms['pl'];
+    m?: Atoms['m'];
+    mx?: Atoms['mx'];
+    my?: Atoms['my'];
+    mt?: Atoms['mt'];
+    mr?: Atoms['mr'];
+    mb?: Atoms['mb'];
+    ml?: Atoms['ml'];
     top?: Atoms['top'];
     right?: Atoms['right'];
     bottom?: Atoms['bottom'];
     left?: Atoms['left'];
-    l?: Atoms['left'];
-    t?: Atoms['top'];
-    r?: Atoms['right'];
-    b?: Atoms['bottom'];
     w?: Atoms['width'];
     h?: Atoms['height'];
     width?: Atoms['width'];
@@ -8998,18 +9395,17 @@ interface BoxProps extends SpaceShorthand {
     minH?: Atoms['minH'];
     maxW?: Atoms['maxW'];
     maxH?: Atoms['maxH'];
+    listStyle?: Atoms['listStyle'];
     inset?: Atoms['inset'];
     overflow?: Atoms['overflow'];
+    overflowX?: Atoms['overflowX'];
+    overflowY?: Atoms['overflowY'];
     pointerEvents?: Atoms['pointerEvents'];
+    wordBreak?: Atoms['wordBreak'];
 }
 declare const BoxDefaultElement = "div";
 declare type BoxComponentProps<E extends ElementType = typeof BoxDefaultElement> = PolymorphicPropsWithRef<BoxProps, E>;
 declare const Box: PolymorphicForwardRefExoticComponent<BoxProps, typeof BoxDefaultElement>;
-
-interface AspectRatioProps extends BoxProps {
-    variant?: keyof typeof aspectRatioVariants['variant'];
-}
-declare function AspectRatio({ className, children, variant, ...props }: AspectRatioProps): JSX.Element;
 
 declare const buttonVariants: {
     loading: {
@@ -9019,6 +9415,11 @@ declare const buttonVariants: {
         true: string;
     };
     size: {
+        xs: (string | {
+            width: string;
+            fontSize: "14px";
+            fontWeight: number;
+        })[];
         sm: (string | {
             width: string;
             fontSize: "14px";
@@ -9065,6 +9466,7 @@ declare const buttonVariants: {
         outline: {
             color: _vanilla_extract_private.CSSVarFunction;
             borderColor: _vanilla_extract_private.CSSVarFunction;
+            borderWidth: _vanilla_extract_private.CSSVarFunction;
             backgroundColor: string;
             selectors: {
                 '&:not([disabled]):hover': {
@@ -9085,7 +9487,9 @@ declare const buttonVariants: {
         unset: {
             backgroundColor: string;
             gap: string;
-            border: string;
+            borderColor: string;
+            borderWidth: string;
+            borderStyle: string;
             minWidth: string;
             padding: string;
             height: string;
@@ -9123,6 +9527,7 @@ interface ButtonProps extends FlexProps {
     variant?: keyof typeof buttonVariants['variant'];
     size?: keyof typeof buttonVariants['size'];
     icon?: IconProps['id'];
+    type?: 'submit' | 'reset' | 'button';
     iconSize?: keyof typeof iconVariants['size'];
     loading?: boolean;
     pill?: boolean;
@@ -9134,6 +9539,10 @@ interface GridProps extends BoxProps {
     gap?: Atoms['gap'];
     align?: Atoms['alignItems'];
     justify?: Atoms['justifyContent'];
+    columns?: React.CSSProperties['gridTemplateColumns'] | 'auto';
+    rows?: React.CSSProperties['gridTemplateRows'] | 'auto';
+    autoRows?: Atoms['gridAutoRows'] | true;
+    autoColumns?: Atoms['gridAutoColumns'] | true;
 }
 declare const Grid: PolymorphicForwardRefExoticComponent<GridProps, typeof BoxDefaultElement>;
 
@@ -9330,12 +9739,20 @@ interface LabelProps extends Omit<TextProps, 'variant'> {
 }
 declare type LabelComponentProps<E extends ElementType = typeof BoxDefaultElement> = PolymorphicPropsWithRef<LabelProps, E>;
 declare function Label<E extends ElementType = typeof BoxDefaultElement>({ size, ...props }: LabelComponentProps<E>): JSX.Element;
+interface MenuProps extends TextProps {
+}
+declare type MenuTextComponentProps<E extends ElementType = typeof BoxDefaultElement> = PolymorphicPropsWithRef<MenuProps, E>;
+declare function MenuText<E extends ElementType = typeof BoxDefaultElement>({ ...props }: MenuTextComponentProps<E>): JSX.Element;
 
 declare const SvgArrowRightAngle: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
 declare const SvgArrowRight: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
+declare const SvgAuction: (props: SVGProps<SVGSVGElement>) => JSX.Element;
+
 declare const SvgBell: (props: SVGProps<SVGSVGElement>) => JSX.Element;
+
+declare const SvgCheck: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
 declare const SvgChevronDown: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
@@ -9356,6 +9773,8 @@ declare const SvgCreate: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 declare const SvgDiscord: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
 declare const SvgDownload: (props: SVGProps<SVGSVGElement>) => JSX.Element;
+
+declare const SvgEllipsis: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
 declare const SvgEmbed: (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
@@ -9391,7 +9810,9 @@ declare namespace iconComponents {
   export {
     SvgArrowRightAngle as ArrowRightAngle,
     SvgArrowRight as ArrowRight,
+    SvgAuction as Auction,
     SvgBell as Bell,
+    SvgCheck as Check,
     SvgChevronDown as ChevronDown,
     SvgChevronLeft as ChevronLeft,
     SvgChevronRight as ChevronRight,
@@ -9402,6 +9823,7 @@ declare namespace iconComponents {
     SvgCreate as Create,
     SvgDiscord as Discord,
     SvgDownload as Download,
+    SvgEllipsis as Ellipsis,
     SvgEmbed as Embed,
     SvgInstagram as Instagram,
     SvgKebab as Kebab,
@@ -9421,12 +9843,16 @@ declare namespace iconComponents {
 }
 
 declare type IconType = keyof typeof iconComponents;
-declare const icons: ("ArrowRightAngle" | "ArrowRight" | "Bell" | "ChevronDown" | "ChevronLeft" | "ChevronRight" | "ChevronUp" | "Close" | "Coinbase" | "Copy" | "Create" | "Discord" | "Download" | "Embed" | "Instagram" | "Kebab" | "Logout" | "Metamask" | "Plus" | "Question" | "Rainbow" | "Search" | "Shield" | "Spinner" | "Tag" | "Twitter" | "WalletConnect" | "Warning")[];
+declare const icons: ("ArrowRightAngle" | "ArrowRight" | "Auction" | "Bell" | "Check" | "ChevronDown" | "ChevronLeft" | "ChevronRight" | "ChevronUp" | "Close" | "Coinbase" | "Copy" | "Create" | "Discord" | "Download" | "Ellipsis" | "Embed" | "Instagram" | "Kebab" | "Logout" | "Metamask" | "Plus" | "Question" | "Rainbow" | "Search" | "Shield" | "Spinner" | "Tag" | "Twitter" | "WalletConnect" | "Warning")[];
 interface IconProps extends BoxProps {
     id?: IconType;
     size?: keyof typeof iconVariants['size'];
 }
 declare function Icon({ id, size, ...props }: IconProps): JSX.Element;
+
+interface SpinnerProps extends IconProps {
+}
+declare function Spinner({ ...props }: SpinnerProps): JSX.Element;
 
 declare const inputVariants: {
     sizeVariant: {
@@ -9456,13 +9882,37 @@ interface InputFieldProps extends BoxComponentProps<'input'> {
     affix?: string;
     type?: 'text' | 'number';
     step?: number;
+    min?: number;
+    max?: number;
     icon?: IconProps['id'];
     className?: string;
     disabled?: boolean;
     error?: string;
     description?: string;
 }
-declare function InputField({ value, label, name, icon, type, description, error, step, className, placeholder, affix, disabled, ...props }: InputFieldProps): JSX.Element;
+declare function InputField({ value, label, name, icon, type, description, error, step, min, max, className, placeholder, affix, disabled, ...props }: InputFieldProps): JSX.Element;
+
+declare const inputField: string;
+declare const inputFieldLabel: _vanilla_extract_recipes_dist_declarations_src_types.RuntimeFn<{
+    disabled: {
+        true: {
+            cursor: string;
+        };
+    };
+}>;
+declare const inputFieldBaseInput: _vanilla_extract_recipes_dist_declarations_src_types.RuntimeFn<{
+    icon: {
+        true: {
+            paddingLeft: _vanilla_extract_private.CSSVarFunction;
+        };
+    };
+    error: {
+        true: {
+            bgColor: _vanilla_extract_private.CSSVarFunction;
+            borderColor: _vanilla_extract_private.CSSVarFunction;
+        };
+    };
+}>;
 
 interface TextAreaProps extends BoxComponentProps<'textarea'> {
     value?: string;
@@ -9559,21 +10009,10 @@ interface AccordionProps extends BoxProps {
 declare function Accordion({ defaultState, // Hack to allow AccordionItem with value="open" to be opened by default
 label, enableDeselectAll, onDeselectAll, ...props }: AccordionProps): JSX.Element;
 
-interface AuctionBlockProps {
-    durationInSeconds: string;
-    expiresTimestamp?: string | null;
-}
-declare const AuctionBlock: React.FC<AuctionBlockProps>;
-
-interface InlineTransactionProps {
-    timestamp: string;
-    txHash: string;
-}
-declare function InlineTransaction({ timestamp, txHash }: InlineTransactionProps): JSX.Element;
-
 interface ModalContentProps extends Dialog.DialogContentProps {
-    title: string;
+    title?: string;
     showClose?: boolean;
+    removePadding?: boolean;
     children?: JSX.Element;
 }
 interface ModalProps extends Dialog.DialogProps {
@@ -9586,6 +10025,14 @@ interface WellProps extends StackProps {
     label?: string;
 }
 declare function Well({ label, className, children, ...props }: WellProps): JSX.Element;
+
+interface ThemeProviderProps extends BoxProps {
+    theme?: ClassValue;
+}
+declare function themeClass({ theme }: {
+    theme: ClassValue;
+}, className?: ClassValue): string;
+declare const ThemeProvider: PolymorphicForwardRefExoticComponent<ThemeProviderProps, typeof BoxDefaultElement>;
 
 declare const color: {
     black100: string;
@@ -9648,7 +10095,7 @@ declare const space: {
     auto: string;
 };
 declare const size$1: {
-    readonly '100vw': "100vh";
+    readonly '100vw': "100vw";
     readonly '100vh': "100vh";
     readonly '100%': "100%";
     readonly unset: "unset";
@@ -9705,7 +10152,17 @@ declare const radii: {
 };
 
 declare const border: {
-    solid: string;
+    style: {
+        solid: string;
+        dashed: string;
+        dotted: string;
+    };
+    width: {
+        none: string;
+        thin: string;
+        normal: string;
+        thick: string;
+    };
 };
 
 declare const ease: {
@@ -9735,4 +10192,4 @@ declare namespace typography {
   };
 }
 
-export { Accordion, AccordionProps, AspectRatio, AspectRatioProps, Atoms, AuctionBlock, AuctionBlockProps, Box, BoxComponentProps, BoxProps, Button, ButtonProps, Checkbox, CheckboxProps, Display, DisplayProps, Eyebrow, EyebrowProps, Flex, FlexProps, Grid, GridProps, Heading, HeadingProps, Icon, IconProps, IconType, InlineTransaction, InlineTransactionProps, Input, InputComponentProps, InputField, InputFieldProps, InputProps, Label, LabelProps, MAX_GRID_WIDTH, MODAL_BACKDROP_LAYER, Mixins, MixinsProp, Modal, ModalContent, ModalProps, Paragraph, ParagraphProps, RadioButtonGroup, RadioButtonProps, Select, SelectProps, Separator, SeparatorProps, Slider, SliderProps, Stack, StackProps, Tag, TagProps, Text, TextArea, TextAreaProps, TextProps, Well, WellProps, atoms, border, breakpoints, color, colorTheme, darkTheme, ease, fontWeight, icons, lightTheme, media, mixins, radii, size$1 as size, space, textVariants, themeBreakpoints, transitions, typography, vars };
+export { Accordion, AccordionProps, Atoms, Box, BoxComponentProps, BoxProps, Button, ButtonProps, Checkbox, CheckboxProps, Display, DisplayProps, Eyebrow, EyebrowProps, Flex, FlexProps, Grid, GridProps, Heading, HeadingProps, Icon, IconProps, IconType, Input, InputComponentProps, InputField, InputFieldProps, InputProps, Label, LabelProps, MAX_GRID_WIDTH, MODAL_BACKDROP_LAYER, MenuProps, MenuText, Mixins, MixinsProp, Modal, ModalContent, ModalProps, Paragraph, ParagraphProps, RadioButtonGroup, RadioButtonProps, Select, SelectProps, Separator, SeparatorProps, Slider, SliderProps, Spinner, SpinnerProps, Stack, StackProps, Tag, TagProps, Text, TextArea, TextAreaProps, TextProps, ThemeProvider, ThemeProviderProps, Well, WellProps, atoms, baseTheme, border, breakpoints, color, colorTheme, darkTheme, ease, fontWeight, icons, inputField, inputFieldBaseInput, inputFieldLabel, lightTheme, media, mixins, radii, root, size$1 as size, space, textVariants, themeBreakpoints, themeClass, transitions, typography, vars };

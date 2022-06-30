@@ -12,12 +12,16 @@ import { FilterSidebar } from './FilterSidebar'
 import { SelectedFilters } from './SelectedFilters'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 import { NoFilterResults } from './NoFilterResults'
+import { FilterResultsLoading } from './FilterResultsLoading'
 
 export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[] }) {
   const {
-    filterStore: { showFilters, hasFilters },
+    filterStore: { showFilters },
     useSortDropdown,
     items,
+    isValidating,
+    isEmpty,
+    getString,
   } = useCollectionFilters()
 
   return (
@@ -45,6 +49,13 @@ export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[]
           position="sticky"
           top="x0"
           w="100%"
+          style={{
+            /* @ts-ignore */
+            '--filter-offset-mobile': `${getString(
+              'FILTER_OPEN_STICKY_OFFSET_MOBILE'
+            )}px`,
+            '--filter-offset-desktop': `${getString('FILTER_OPEN_STICKY_OFFSET')}px`,
+          }}
           className={[
             filterWrapper,
             'zora-collectionFilterWrapper',
@@ -66,9 +77,11 @@ export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[]
             grid
           ) : (
             <>
-              {!items.length && hasFilters && (
+              {isEmpty ? (
                 <NoFilterResults noResultsString="NO_FILTER_RESULTS_COPY" />
-              )}
+              ) : isValidating ? (
+                <FilterResultsLoading />
+              ) : null}
             </>
           )}
         </Stack>

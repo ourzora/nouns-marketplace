@@ -7,7 +7,7 @@ import {
   priceRangeToQueryParams,
   marketTypeToFilterParams,
 } from '@filter'
-import { stringDefaults } from '@filter/constants'
+import { stringDefaults, themeDefaults } from '@filter/constants'
 import {
   CollectionFilterContextTypes,
   CollectionFilterProviderProps,
@@ -18,18 +18,22 @@ const CollectionFilterContext = createContext<CollectionFilterContextTypes>({
   items: [],
   isValidating: false,
   isReachingEnd: false,
+  isEmpty: true,
   handleLoadMore: () => {},
   contractWhiteList: undefined,
   contractAddress: undefined,
   ownerAddress: undefined,
   strings: stringDefaults,
+  theme: themeDefaults,
 })
+
+const constDefaults = { ...stringDefaults, ...themeDefaults }
 
 export function useCollectionFilters() {
   const filterContext = useContext(CollectionFilterContext)
 
-  const getString = (stringName: keyof typeof stringDefaults) => {
-    return filterContext.strings[stringName]
+  const getString = (stringName: keyof typeof constDefaults) => {
+    return { ...filterContext.strings, ...filterContext.theme }[stringName]
   }
 
   return {
@@ -53,7 +57,9 @@ export function CollectionFilterProvider({
   usePriceRange,
   useCollectionProperties,
   useSidebarClearButton = false,
+  useFilterOwnerCollections = false,
   strings = stringDefaults,
+  theme = themeDefaults,
 }: CollectionFilterProviderProps) {
   const filterStore = useFilterStore(filtersVisible)
 
@@ -61,6 +67,7 @@ export function CollectionFilterProvider({
     data: items,
     isValidating,
     isReachingEnd,
+    isEmpty,
     handleLoadMore,
   } = useTokensQuery({
     contractWhiteList,
@@ -74,8 +81,8 @@ export function CollectionFilterProvider({
     filter: {
       ...marketTypeToFilterParams(filterStore.filters.marketStatus),
       ...priceRangeToQueryParams(filterStore.filters.priceRange),
-      mediaType: filterStore.filters.mediaType,
       ...attributesToFilterParams(filterStore.filters.collectionAttributes),
+      mediaType: filterStore.filters.mediaType,
     },
   })
 
@@ -86,6 +93,7 @@ export function CollectionFilterProvider({
         items,
         isValidating,
         isReachingEnd,
+        isEmpty,
         handleLoadMore,
         contractAddress,
         ownerAddress,
@@ -96,9 +104,11 @@ export function CollectionFilterProvider({
         usePriceRange,
         useCollectionSearch,
         useCollectionProperties,
+        useFilterOwnerCollections,
         filtersVisible,
         useSidebarClearButton,
         strings,
+        theme,
       }}
     >
       {children}

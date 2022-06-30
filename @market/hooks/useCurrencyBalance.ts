@@ -1,11 +1,11 @@
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useBaseERC20 } from './useBaseERC20'
 import { BigNumber } from '@ethersproject/bignumber'
 import { AddressZero } from '@ethersproject/constants'
 import useAsyncEffect from './useAsyncEffect'
 import { useAuth } from './useAuth'
-import { useInterval } from './useInterval'
 import { usePrevious } from './usePrevious'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useInterval } from '@shared/hooks/useInterval'
 import { isAddressMatch } from '../utils/validators'
 
 export function useCurrencyBalance(

@@ -103,6 +103,7 @@ globalStyle('.nouns-market-traits h3 > button', {
   backgroundColor: `${colorTheme.background.tertiary}!important`,
   paddingLeft: 10,
   paddingRight: 10,
+  paddingBottom: 10,
   borderRadius: radii.curved,
   marginBottom: 5,
 })

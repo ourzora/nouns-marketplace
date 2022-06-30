@@ -1,11 +1,11 @@
-import { atoms } from '@zoralabs/zord'
+import { atoms, media, ease, vars } from '@zoralabs/zord'
 import { keyframes, style } from '@vanilla-extract/css'
 
 const MODAL_BACKDROP_LAYER = 2000
 
 export const overlay = style([
   {
-    background: 'rgba(0, 0, 0, 0.45)',
+    background: 'rgba(0, 0, 0, 0.4)',
     inset: 0,
     placeItems: 'center',
     zIndex: MODAL_BACKDROP_LAYER,
@@ -15,13 +15,7 @@ export const overlay = style([
 
 export const content = style([
   {
-    position: 'fixed',
-    left: '50%',
-    top: '40%',
-    transform: 'translate(-50%)',
     width: 'calc(100vw - 30px)',
-    maxWidth: 750,
-
     zIndex: MODAL_BACKDROP_LAYER + 1,
     selectors: {
       '&:focus': {
@@ -38,6 +32,20 @@ export const background = style([
     maxHeight: 'calc(100vh - 30px)',
     overflowY: 'auto',
     background: 'white',
+  },
+  atoms({ borderRadius: 'normal' }),
+])
+
+export const customContent = style([
+  {
+    maxWidth: 750,
+  },
+])
+
+export const customBackground = style([
+  {
+    overflowY: 'scroll',
+    background: vars.color.background.primary,
     borderRadius: 40,
     boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
     animation: `0.3s cubic-bezier(0.65, 0, 0.35, 1), ${keyframes({
@@ -45,7 +53,6 @@ export const background = style([
       '100%': { opacity: 1, transform: 'scale(1)' },
     })}`,
   },
-  atoms({ borderRadius: 'normal' }),
 ])
 
 export const close = style([
@@ -61,8 +68,3 @@ export const close = style([
     p: 'x3',
   }),
 ])
-
-export const modalContentWrapper = style({
-  maxWidth: 900,
-  padding: 0,
-})

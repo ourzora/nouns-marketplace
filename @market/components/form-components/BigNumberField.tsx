@@ -96,6 +96,7 @@ export const BigNumberField: React.FC<BigNumberFieldProps> = ({
       inputMode="decimal"
       value={inputValue}
       onChange={handleOnChange}
+      /* @ts-ignore */
       sizeVariant="lg"
       onBlur={() => setTouched(true)}
       {...props}

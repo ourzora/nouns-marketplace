@@ -20,8 +20,8 @@ export function NftInfo({
   askPrice,
   modalType,
 }: {
-  collectionAddress: string
-  tokenId: string
+  collectionAddress: string | undefined
+  tokenId: string | undefined
   askPrice?: string
   /** Additional NFT info to display based on use context */
   modalType?: 'fillAsk' | 'list'

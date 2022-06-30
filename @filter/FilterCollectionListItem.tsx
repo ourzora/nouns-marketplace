@@ -7,7 +7,7 @@ import {
 } from './CollectionsFilter.css'
 import { FilterProperties } from './FilterProperties'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
-import { Button, Flex, Stack, Text } from '@zoralabs/zord'
+import { Button, Flex, Stack, Text, Box } from '@zoralabs/zord'
 import { useMemo } from 'react'
 import { shortenAddress } from '@shared/utils/format'
 import { numberFormatter } from 'utils/numbers'
@@ -20,7 +20,7 @@ export function FilterCollectionListItem({
 }: {
   tokenAddress: string
   tokenName?: string | null
-  count: number
+  count?: number
 }) {
   const {
     filterStore: {
@@ -48,15 +48,23 @@ export function FilterCollectionListItem({
           w="100%"
         >
           <Flex gap="x3" className={collectionBlockContent}>
-            <Zorb size={48} address={tokenAddress} />
+            <Box>
+              <Zorb size={48} address={tokenAddress} />
+            </Box>
             <Flex
               direction="column"
               className={[collectionBlockMeta, 'zora-collectionListMeta']}
             >
-              <Text variant="label-sm">{tokenName || shortenAddress(tokenAddress)}</Text>
-              <Text variant="paragraph-xs" color="tertiary">
-                {numberFormatter(count)} item{count !== 1 ? 's' : ''}
-              </Text>
+              <Box overflowX="hidden">
+                <Text style={{ whiteSpace: 'nowrap' }} variant="label-sm">
+                  {tokenName || shortenAddress(tokenAddress)}
+                </Text>
+              </Box>
+              {count ? (
+                <Text variant="paragraph-xs" color="tertiary">
+                  {numberFormatter(count)} item{count !== 1 ? 's' : ''}
+                </Text>
+              ) : null}
             </Flex>
           </Flex>
           {isSelected && (

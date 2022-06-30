@@ -1,4 +1,4 @@
-import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from './filter-constants'
+import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 import { atoms, textVariants, fontWeight, vars } from '@zoralabs/zord'
@@ -52,24 +52,24 @@ export const activityButton = style([
 ])
 
 export const filterWrapper = style({
-  top: `${HEADER_HEIGHT}px`,
+  top: `var(--filter-offset-desktop)`,
   background: 'white',
   zIndex: 2,
   '@media': {
     'screen and (max-width: 768px)': {
-      top: `${HEADER_HEIGHT_MOBILE}px`,
+      top: `var(--filter-offset-mobile)`,
     },
   },
 })
 
 export const openFilterWrapper = style({
-  height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+  height: `calc(100vh - var(--filter-offset-desktop))`,
   '@media': {
     'screen and (max-width: 768px)': {
       position: 'fixed',
       left: 0,
       paddingLeft: '16px',
-      top: `${HEADER_HEIGHT_MOBILE}px`,
+      top: `var(--filter-offset-mobile)`,
     },
   },
 })
