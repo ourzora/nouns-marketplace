@@ -16,6 +16,7 @@ export function StatBlock({
   return (
     <Stack p="x4" backgroundColor="tertiary" borderRadius="phat">
       <Text
+        /* @ts-ignore */
         variant={['heading-xs, heading-xl']}
         color="secondary"
         className={[lightFont, stat]}

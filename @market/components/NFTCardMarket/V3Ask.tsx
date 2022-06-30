@@ -1,4 +1,4 @@
-import { Text, Box, Flex, Stack, Heading } from '@zoralabs/zord'
+import { Text, Box, Flex, Stack, FlexProps } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useRelevantMarket } from '../../hooks/useRelevantMarket'
 import { ModalComposition } from '@modal'
@@ -11,7 +11,11 @@ import { useIsOwner } from '@market/hooks/useIsOwner'
 import { ManageOwnedToken } from './ManageOwnedToken'
 import { useModal } from '@modal'
 
-export function V3Ask({ nftData }: { nftData: NFTObject }) {
+export interface V3AskProps extends FlexProps {
+  nftData: NFTObject
+}
+
+export function V3Ask({ nftData, ...props }: V3AskProps) {
   const { nft, metadata, markets } = nftData
   const { ask } = useRelevantMarket(markets)
 
@@ -25,7 +29,14 @@ export function V3Ask({ nftData }: { nftData: NFTObject }) {
   return (
     <>
       {ask && ask.status === MARKET_INFO_STATUSES.ACTIVE ? (
-        <Flex w="100%" justify="space-between" align="flex-end">
+        <Flex
+          id="v3-ask-active"
+          w="100%"
+          justify="space-between"
+          align="flex-end"
+          gap="x2"
+          {...props}
+        >
           <Stack>
             <Text variant="heading-xs" className={lightFont} color="tertiary">
               Price
@@ -64,7 +75,7 @@ export function V3Ask({ nftData }: { nftData: NFTObject }) {
           {ask && (
             <>
               {ask?.status === MARKET_INFO_STATUSES.COMPLETE ? (
-                <Flex justify="space-between" w="100%">
+                <Flex id="v3-ask-complete" justify="space-between" w="100%" {...props}>
                   <Stack>
                     <Text variant="label-lg" className={lightFont} color="tertiary">
                       Sold on Chain for

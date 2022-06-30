@@ -20,7 +20,7 @@ export function CollectionMenu() {
           align="center"
           borderRadius="curved"
           backgroundColor="tertiary"
-          margin="auto"
+          m="auto"
           px="x6"
         >
           <Label

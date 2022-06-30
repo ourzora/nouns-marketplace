@@ -13,12 +13,13 @@ import {
   SortMethodType,
   MarketStatusFilter,
   PriceRangeFilter,
+  AdditionalMarketStatusFilters,
 } from '@filter/typings'
 
 export function marketStatusToSortAxis(marketType: MarketStatusFilter) {
   switch (marketType) {
     case 'buy-now':
-      return MarketCategory.Ask
+      return undefined //MarketCategory.Ask
     case 'reserve-not-met':
       return MarketCategory.Auction
     case 'live':
@@ -83,6 +84,7 @@ export function sortMethodToSortParams(
 export function marketTypeToFilterParams(
   marketType: MarketStatusFilter
 ): TokensQueryFilter | undefined {
+  console.log('marketType', marketType)
   switch (marketType) {
     case 'buy-now':
       return {
@@ -97,6 +99,20 @@ export function marketTypeToFilterParams(
           },
         ],
       }
+    case 'buy-now-completed': {
+      return {
+        marketFilters: [
+          {
+            marketType: MarketType.V1Ask,
+            statuses: [MarketStatus.Completed],
+          },
+          {
+            marketType: MarketType.V3Ask,
+            statuses: [MarketStatus.Completed],
+          },
+        ],
+      }
+    }
     case 'reserve-not-met':
       return {
         marketFilters: [

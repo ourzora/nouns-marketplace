@@ -34,7 +34,9 @@ export function AddressWithLink({
       rel="noreferrer"
       {...props}
     >
-      <Label>{ensName && useEns ? ensName : shortAddress}</Label>
+      <Label className="zora-market-addressWithLink">
+        {ensName && useEns ? ensName : shortAddress}
+      </Label>
       <Icon id="ArrowRightAngle" />
     </Flex>
   )

@@ -6,7 +6,15 @@ import { AddressWithLink } from '@market/components/AddressWithLink'
 import { formatCryptoVal } from '@market/utils/numbers'
 import { WalletBalance } from '@market/components/WalletBalace'
 
-export function FillAskInfo({ nft, askPrice }: { nft: NFTObject; askPrice?: string }) {
+export function FillAskInfo({
+  nft,
+  askPrice,
+  showBalance = true,
+}: {
+  nft: NFTObject
+  askPrice?: string
+  showBalance?: boolean
+}) {
   const { data: account } = useAccount()
 
   const cryptoVal = useMemo(() => {
@@ -20,7 +28,9 @@ export function FillAskInfo({ nft, askPrice }: { nft: NFTObject; askPrice?: stri
   return (
     <>
       <Flex justify="space-between">
-        <Label color="tertiary">Owned by</Label>
+        <Label className="zora-market-fillAskInfo-label" color="tertiary">
+          Owned by
+        </Label>
         {nft?.nft?.owner?.address ? (
           <AddressWithLink address={nft.nft.owner.address} />
         ) : (
@@ -28,7 +38,9 @@ export function FillAskInfo({ nft, askPrice }: { nft: NFTObject; askPrice?: stri
         )}
       </Flex>
       <Flex justify="space-between">
-        <Label color="tertiary">Minted by</Label>
+        <Label className="zora-market-fillAskInfo-label" color="tertiary">
+          Minted by
+        </Label>
         {nft?.nft?.minted?.address ? (
           <AddressWithLink address={nft.nft.minted.address} />
         ) : (
@@ -38,11 +50,13 @@ export function FillAskInfo({ nft, askPrice }: { nft: NFTObject; askPrice?: stri
       <Stack align="flex-end">
         {askPrice && (
           <Flex justify="space-between" align="center" w="100%">
-            <Label color="tertiary">Price:</Label>
+            <Label className="zora-market-fillAskInfo-label" color="tertiary">
+              Price:
+            </Label>
             <Heading size="md">{cryptoVal}</Heading>
           </Flex>
         )}
-        {account?.address && <WalletBalance address={account.address} />}
+        {showBalance && account?.address && <WalletBalance address={account.address} />}
       </Stack>
     </>
   )

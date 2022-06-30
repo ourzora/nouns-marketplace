@@ -1,11 +1,11 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { lightTheme } from '@zoralabs/zord'
+import { ThemeProvider, lightTheme } from '@zoralabs/zord'
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID
 
 class MyDocument extends Document {
   render() {
     return (
-      <Html className={lightTheme}>
+      <Html>
         <Head>
           <link
             href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@300;400&display=swap"
@@ -40,8 +40,10 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
-          <Main />
-          <NextScript />
+          <ThemeProvider theme={lightTheme}>
+            <Main />
+            <NextScript />
+          </ThemeProvider>
         </body>
       </Html>
     )

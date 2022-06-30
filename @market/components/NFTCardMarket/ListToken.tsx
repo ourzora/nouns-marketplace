@@ -1,5 +1,5 @@
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Box } from '@zoralabs/zord'
+import { Box, FlexProps, Stack } from '@zoralabs/zord'
 import { NFTOwner } from '../NFTOwner'
 import { ModalComposition } from '@modal'
 import { List } from '@market/wizards'
@@ -8,12 +8,14 @@ import { useIsOwner } from '@market/hooks/useIsOwner'
 import { useModal } from '@modal'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 
-export function ListToken({ nftData }: { nftData: NFTObject }) {
+export interface ListTokenProps extends FlexProps {
+  nftData: NFTObject
+}
+
+export function ListToken({ nftData, ...props }: ListTokenProps) {
   const { nft, metadata } = nftData
   const { isOwner } = useIsOwner(nftData)
   const { requestClose } = useModal()
-
-  // console.log(metadata)
 
   const { image } = useRawImageTransform(metadata?.imageUri)
 
@@ -22,13 +24,13 @@ export function ListToken({ nftData }: { nftData: NFTObject }) {
   }
 
   return (
-    <>
+    <Stack {...props}>
       {isOwner ? (
         <ModalComposition
           modalName={`list-${nft.tokenId}${nft.contract.address}`}
           trigger={<CardMarketTrigger cta="List" />}
           content={
-            <Box p="x8">
+            <Box p="x8" {...props}>
               <List
                 tokenAddress={nft.contract.address}
                 tokenId={nft.tokenId}
@@ -42,6 +44,6 @@ export function ListToken({ nftData }: { nftData: NFTObject }) {
       ) : (
         <NFTOwner address={nft?.owner?.address} align="left" />
       )}
-    </>
+    </Stack>
   )
 }

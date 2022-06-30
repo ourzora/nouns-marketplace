@@ -2,13 +2,13 @@ import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
 import { useEffect } from 'react'
 import { MarketStats } from '@market/components/MarketStats'
-import { CollectionHeader } from 'components/CollectionHeader'
+import { CollectionHeader, Seo } from 'components'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
-import { Seo } from 'components/Seo'
-import { Collections } from 'compositions/Collections'
+import { Collections, CollectionActivityHeader } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
-import { useWindowWidth } from 'hooks/useWindowWidth'
-import { useMemo } from 'react'
+import { Stack } from '@zoralabs/zord'
+import { useCollection } from '@filter/hooks/useCollection'
+import { NounAuctionHistory } from '@noun-auction'
 
 /* @ts-ignore */
 const Collection = ({
@@ -20,7 +20,7 @@ const Collection = ({
 }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
 
-  const { isLarge } = useWindowWidth()
+  // const { isLarge } = useWindowWidth()
 
   /* DAIN TODO: add to provider */
   useEffect(() => {
@@ -34,6 +34,8 @@ const Collection = ({
     }
   }, [aggregateStats, collection])
 
+  const { data } = useCollection(contractAddress)
+
   return (
     <PageWrapper p="x4" direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
@@ -41,6 +43,8 @@ const Collection = ({
       <MarketStats aggregateStats={aggregateStats} />
       {contractAddress && (
         <CollectionFilterProvider
+          // useSortDropdown
+          useSidebarClearButton
           contractAddress={contractAddress}
           initialPage={initialPage}
           useCollectionProperties={{
@@ -48,19 +52,21 @@ const Collection = ({
             selector: 'nouns-market-traits',
             hideBorder: true,
           }}
-          filtersVisible={isLarge}
+          filtersVisible
           usePriceRange={{
             label: 'Price',
             defaultState: 'open',
             hideBorder: true,
             hideCurrencySelect: true,
           }}
-          useSidebarClearButton
           strings={{
-            NO_FILTER_RESULTS_COPY: 'Sorry no filters',
+            NO_FILTER_RESULTS_COPY: `Sorry no ${data?.name} NFTs are available for purchase on chain.`,
           }}
         >
-          <Collections collectionAddress={contractAddress} />
+          <Stack>
+            <CollectionActivityHeader />
+            <Collections collectionAddress={contractAddress} />
+          </Stack>
         </CollectionFilterProvider>
       )}
     </PageWrapper>

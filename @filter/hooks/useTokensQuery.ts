@@ -7,7 +7,6 @@ import {
   TokenSortInput,
   TokensQueryFilter,
   TokensQueryInput,
-  SortDirection,
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { flatten } from 'lodash'
 import { useCallback } from 'react'
@@ -36,6 +35,7 @@ type GetNFTReturnType = {
 }
 
 async function getNFTs(query: TokensQueryArgs): Promise<GetNFTReturnType> {
+  console.log('getNfts', query?.sort)
   const resp = await zdk.tokens(query)
   const tokens = resp.tokens.nodes
     .map((token) => transformNFTZDK(token, { rawData: token }))
@@ -61,7 +61,7 @@ export function useTokensQuery({
         ...(contractAddress && {
           collectionAddresses: ownerAddress
             ? contractWhiteList
-            : [getAddress(contractAddress)],
+            : getAddress(contractAddress),
         }),
         ...(ownerAddress && {
           collectionAddresses: contractWhiteList,
@@ -106,6 +106,7 @@ export function useTokensQuery({
     isRefreshing,
     isLoadingMore,
     isReachingEnd,
+    isEmpty,
     handleLoadMore,
   }
 }

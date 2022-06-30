@@ -24,8 +24,9 @@ globalStyle(`${errorBox} pre`, {
 })
 
 export const buttonStyle = style({
-  borderRadius: vars.radii.round,
+  borderRadius: vars.radii.curved,
   backgroundColor: vars.color.foreground.primary,
+  color: vars.color.text.primaryInverse,
 })
 
 export const lightFont = style({
