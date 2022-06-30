@@ -6,34 +6,7 @@ import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { numberFormatter } from 'utils/numbers'
 import { roundTwoDecimals } from 'utils/math'
 import { useCountdown } from '@noun-auction/hooks/useCountdown'
-
-export function Countdown({
-  data,
-  label = 'Ends in',
-  endedCopy = 'Auction has ended',
-  layoutDirection = 'row',
-}: {
-  data: any
-  label?: string
-  endedCopy?: string
-  layoutDirection?: 'column' | 'row'
-}) {
-  if (!data) return null
-
-  const { text, isEnded } = useCountdown(
-    data.markets.nodes[0].market.properties.startTime,
-    data.markets.nodes[0].market.properties.endTime
-  )
-
-  if (isEnded) return <Label>{endedCopy}</Label>
-
-  return (
-    <Flex direction={layoutDirection} gap="x1">
-      <Label>{label}</Label>
-      <Label>{text}</Label>
-    </Flex>
-  )
-}
+import { AuctionCountdown } from '../DataRenderers'
 
 export function CurrentBid() {
   const { data } = useNounsAuctionProvider()
@@ -74,13 +47,18 @@ export function CurrentBid() {
           size="lg"
         />
         <Stack gap="x1">
-          <Countdown data={data} />
           {auctionData.auctionInfo.map((data) => (
             <Grid style={{ gridTemplateColumns: '1.125fr 4fr' }} key={data.key}>
               <Label>{data.title}:</Label>
               <Label>{data.value}</Label>
             </Grid>
           ))}
+          {data && (
+            <AuctionCountdown
+              startTime={data.markets.nodes[0].market.properties.startTime}
+              endTime={data.markets.nodes[0].market.properties.endTime}
+            />
+          )}
         </Stack>
       </Flex>
       {/*<RawDisplayer data={data} />*/}
