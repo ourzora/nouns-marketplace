@@ -28,8 +28,9 @@ async function fetchNounAuctionData(tokenId: string) {
 }
 
 export function useNounAuction(tokenId: string) {
-  const { data: response, error } = useSWR(['collectionInfo', tokenId], (_, tokenId) =>
-    fetchNounAuctionData(tokenId)
+  const { data: response, error } = useSWR(
+    [`noun-current-auction-${tokenId}`, tokenId],
+    (_, tokenId) => fetchNounAuctionData(tokenId)
   )
 
   return {
