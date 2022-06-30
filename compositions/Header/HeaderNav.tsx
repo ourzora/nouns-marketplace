@@ -7,7 +7,7 @@ import { nounsGlasses } from './Header.css'
 import { CollectionMenu } from './CollectionMenu'
 import { ManageLink } from './ManageLink'
 import { BetaTag } from './BetaTag'
-import { noTextWrap } from 'styles/styles.css'
+import { clickAnimation, noTextWrap } from 'styles/styles.css'
 
 export function HeaderNav() {
   return (
@@ -42,17 +42,19 @@ export function HeaderNav() {
           '@1024': 'x4',
         }}
       >
-        <Link passHref href="/">
-          <Box
-            as="img"
-            className={nounsGlasses}
-            src={NOUNS_GLASSES}
-            alt={APP_TITLE}
-            display={{
-              '@initial': 'none',
-              '@1024': 'block',
-            }}
-          />
+        <Link href="/">
+          <Box className={[clickAnimation]} cursor="pointer">
+            <Box
+              as="img"
+              className={[nounsGlasses]}
+              src={NOUNS_GLASSES}
+              alt={APP_TITLE}
+              display={{
+                '@initial': 'none',
+                '@1024': 'block',
+              }}
+            />
+          </Box>
         </Link>
         <BetaTag />
         <CollectionMenu />
