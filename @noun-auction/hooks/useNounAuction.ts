@@ -1,6 +1,4 @@
 import useSWR from 'swr'
-import { useEffect, useState } from 'react'
-import { prepareJson } from '@shared'
 import { nounAuction } from '@noun-auction/data'
 
 async function fetchNounAuctionData(tokenId: string) {

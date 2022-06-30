@@ -7,7 +7,7 @@ import { nounsGlasses } from './Header.css'
 import { CollectionMenu } from './CollectionMenu'
 import { ManageLink } from './ManageLink'
 import { BetaTag } from './BetaTag'
-import { clickAnimation, noTextWrap } from 'styles/styles.css'
+import { clickAnimation } from 'styles/styles.css'
 
 export function HeaderNav() {
   return (

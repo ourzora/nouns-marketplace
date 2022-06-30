@@ -6,9 +6,13 @@ import { CurrentBid } from './CurrentBid'
 
 export type ActiveAuctionProps = {
   auctionRenderer: 'CurrentBid' | 'BidHistory'
+  tokenId?: string
 }
 
-export function ActiveAuction({ auctionRenderer = 'CurrentBid' }: ActiveAuctionProps) {
+export function ActiveAuction({
+  auctionRenderer = 'CurrentBid',
+  tokenId,
+}: ActiveAuctionProps) {
   const { loading, activeAuctionToken } = useNounAuctionsHistoryQuery()
 
   const renderer = useMemo(() => {

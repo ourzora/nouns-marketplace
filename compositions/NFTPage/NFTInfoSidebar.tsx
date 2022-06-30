@@ -12,6 +12,7 @@ import {
   nftMarketWrapper,
   askInfoWrapper,
 } from './NFTPage.css'
+import { ActiveAuction } from '@noun-auction'
 
 export interface NFTInfoSidebar extends BoxProps {}
 
@@ -56,6 +57,7 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
           align="flex-start"
           direction="column"
         />
+        <ActiveAuction tokenId={nft?.nft?.tokenId} auctionRenderer="CurrentBid" />
       </Stack>
     </Box>
   )
