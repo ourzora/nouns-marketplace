@@ -16,7 +16,7 @@ export function AuctionHighBid({
   useUsdc?: boolean
 } & SharedDataRendererProps) {
   return (
-    <Flex direction={layoutDirection} gap="x2">
+    <Flex direction={layoutDirection} gap={layoutDirection === 'row' ? 'x2' : 'x0'}>
       <Label
         size="lg"
         className={lightFont}

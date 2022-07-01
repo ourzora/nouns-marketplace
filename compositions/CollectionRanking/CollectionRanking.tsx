@@ -42,7 +42,7 @@ export function CollectionRanking() {
       {collections.length > 0 &&
         collections.map((collection) => (
           <RankingRow
-            borderColor="tertiary"
+            borderColor="secondary"
             borderStyle="solid"
             borderWidth="thin"
             borderRadius="phat"

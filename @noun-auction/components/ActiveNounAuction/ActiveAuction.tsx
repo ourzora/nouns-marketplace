@@ -9,6 +9,7 @@ export interface ActiveAuctionProps extends StackProps {
   tokenId?: string
   hideThumbnail?: boolean
   hideTitle?: boolean
+  flexDirection?: 'row' | 'column'
 }
 
 export function ActiveAuction({
@@ -16,6 +17,7 @@ export function ActiveAuction({
   tokenId,
   hideThumbnail = false,
   hideTitle = false,
+  flexDirection = 'column',
   ...props
 }: ActiveAuctionProps) {
   const { loading, activeAuctionToken } = useNounAuctionsHistoryQuery()
@@ -23,7 +25,13 @@ export function ActiveAuction({
   const renderer = useMemo(() => {
     switch (auctionRenderer) {
       case 'CurrentBid':
-        return <CurrentBid hideThumbnail={hideThumbnail} hideTitle={hideTitle} />
+        return (
+          <CurrentBid
+            flexDirection={flexDirection}
+            hideThumbnail={hideThumbnail}
+            hideTitle={hideTitle}
+          />
+        )
       case 'BidHistory':
         return <div>hello</div>
       default:

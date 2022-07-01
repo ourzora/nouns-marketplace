@@ -11,13 +11,13 @@ import { Link } from 'components'
 interface CurrentBidProps extends FlexProps {
   hideThumbnail: boolean
   hideTitle: boolean
-  flexDirection?: 'row' | 'column'
+  flexDirection: 'row' | 'column'
 }
 
 export function CurrentBid({
   hideThumbnail,
   hideTitle,
-  flexDirection = 'column',
+  flexDirection,
   ...props
 }: CurrentBidProps) {
   const { data, tokenId } = useNounsAuctionProvider()
@@ -68,18 +68,24 @@ export function CurrentBid({
           </Heading>
         )}
         {data && (
-          <Flex gap={hideTitle ? 'x3' : 'x0'} direction={flexDirection}>
+          <Flex
+            gap={hideTitle || flexDirection === 'row' ? 'x4' : 'x0'}
+            direction={flexDirection}
+          >
             <AuctionBidder
               address={auctionData.bidder.address}
               txHash={auctionData.bidder.txHash}
+              layoutDirection={flexDirection === 'row' ? 'column' : 'row'}
             />
             <AuctionCountdown
               startTime={auctionData.countdown.startTime}
               endTime={auctionData.countdown.endTime}
+              layoutDirection={flexDirection === 'row' ? 'column' : 'row'}
             />
             <AuctionHighBid
               ethValue={auctionData.highBid.ethValue}
               usdcValue={auctionData.highBid.usdcValue}
+              layoutDirection={flexDirection === 'row' ? 'column' : 'row'}
             />
           </Flex>
         )}

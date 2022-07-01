@@ -101,7 +101,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
           <Box px="x4">
             <Separator />
           </Box>
-          <ActiveAuction auctionRenderer="CurrentBid" />
+          <ActiveAuction flexDirection="row" auctionRenderer="CurrentBid" />
         </>
       )}
     </Stack>
