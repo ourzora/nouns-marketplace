@@ -25,18 +25,23 @@ export function AuctionBidder({
   return (
     <Flex
       direction={layoutDirection}
-      gap="x2"
       as="a"
       href={buildTxLink}
       target="_blank"
       rel="noreferrer"
       align={layoutDirection === 'row' ? 'center' : 'flex-start'}
+      wrap="wrap"
     >
-      <Label size="lg" className={lightFont} color="secondary">
-        {label}
+      <Label
+        size="lg"
+        className={lightFont}
+        color="secondary"
+        style={{ lineHeight: '1.15' }}
+      >
+        {label}&nbsp;
       </Label>
-      <Label size="lg">
-        <Flex gap="x1" align={'center'}>
+      <Label size="lg" style={{ lineHeight: '1.15' }}>
+        <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
           {ensName ? ensName : shortAddress}
           <Icon id="ArrowRightAngle" />
         </Flex>

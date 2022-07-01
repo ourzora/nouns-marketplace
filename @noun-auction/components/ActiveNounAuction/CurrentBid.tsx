@@ -1,19 +1,28 @@
 import { useMemo } from 'react'
-import { Stack, Flex, Heading } from '@zoralabs/zord'
+import { Stack, Flex, Heading, FlexProps } from '@zoralabs/zord'
 import { useNounsAuctionProvider } from '@noun-auction/providers'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { numberFormatter } from 'utils/numbers'
 import { roundTwoDecimals } from 'utils/math'
 import { AuctionCountdown, AuctionBidder, AuctionHighBid } from '../DataRenderers'
-import { RawDisplayer } from 'components/utils'
 import { useNFT } from '@zoralabs/nft-hooks'
+import { Link } from 'components'
 
-export function CurrentBid() {
+interface CurrentBidProps extends FlexProps {
+  hideThumbnail: boolean
+  hideTitle: boolean
+  flexDirection?: 'row' | 'column'
+}
+
+export function CurrentBid({
+  hideThumbnail,
+  hideTitle,
+  flexDirection = 'column',
+  ...props
+}: CurrentBidProps) {
   const { data, tokenId } = useNounsAuctionProvider()
 
   if (!data) return null
-
-  console.log(tokenId)
 
   const marketData = data.markets?.nodes[0]?.market
   const marketProperties = marketData?.properties
@@ -42,38 +51,39 @@ export function CurrentBid() {
   }, [data])
 
   return (
-    <Stack gap="x6">
-      <Flex p="x4" gap="x4" backgroundColor="tertiary" borderRadius="phat">
-        <CollectionThumbnail
-          collectionAddress={auctionData.collectionAddress}
-          tokenId={auctionData.tokenId}
-          size="lg"
-        />
-        <Stack justify="space-between">
-          {tokenData && (
-            <Heading size="sm" aa="h3">
-              {tokenData?.metadata?.name}
-            </Heading>
-          )}
-          {data && (
-            <Stack gap="x0">
-              <AuctionBidder
-                address={auctionData.bidder.address}
-                txHash={auctionData.bidder.txHash}
-              />
-              <AuctionCountdown
-                startTime={auctionData.countdown.startTime}
-                endTime={auctionData.countdown.endTime}
-              />
-              <AuctionHighBid
-                ethValue={auctionData.highBid.ethValue}
-                usdcValue={auctionData.highBid.usdcValue}
-              />
-            </Stack>
-          )}
-        </Stack>
-      </Flex>
-      <RawDisplayer data={data} />
-    </Stack>
+    <Flex p="x4" gap="x4" {...props}>
+      {!hideThumbnail && (
+        <Link href={`/collections/${auctionData.collectionAddress}/${tokenId}`}>
+          <CollectionThumbnail
+            collectionAddress={auctionData.collectionAddress}
+            tokenId={auctionData.tokenId}
+            size="lg"
+          />
+        </Link>
+      )}
+      <Stack justify="space-between">
+        {tokenData && !hideTitle && (
+          <Heading size="sm" aa="h3">
+            {tokenData?.metadata?.name}
+          </Heading>
+        )}
+        {data && (
+          <Flex gap={hideTitle ? 'x3' : 'x0'} direction={flexDirection}>
+            <AuctionBidder
+              address={auctionData.bidder.address}
+              txHash={auctionData.bidder.txHash}
+            />
+            <AuctionCountdown
+              startTime={auctionData.countdown.startTime}
+              endTime={auctionData.countdown.endTime}
+            />
+            <AuctionHighBid
+              ethValue={auctionData.highBid.ethValue}
+              usdcValue={auctionData.highBid.usdcValue}
+            />
+          </Flex>
+        )}
+      </Stack>
+    </Flex>
   )
 }

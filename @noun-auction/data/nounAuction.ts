@@ -70,6 +70,17 @@ export function nounAuction(tokenId: any) {
         }
       }
     }
+    token(token: 
+      {
+        address: "0x9c8ff314c9bc7f6e59a9d9225fb22946427edc03",
+        tokenId: "${tokenId}",
+      }
+    ) {
+      markets {
+        marketType
+        status
+      }
+    }
     events(
       filter: {
         eventTypes: NOUNS_AUCTION_EVENT

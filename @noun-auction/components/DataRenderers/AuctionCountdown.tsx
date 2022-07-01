@@ -21,11 +21,18 @@ export function AuctionCountdown({
   if (isEnded) return <Label>{endedCopy}</Label>
 
   return (
-    <Flex direction={layoutDirection} gap="x1">
-      <Label size="lg" className={lightFont} color="secondary">
-        {label}
+    <Flex direction={layoutDirection} wrap="wrap">
+      <Label
+        size="lg"
+        className={lightFont}
+        color="secondary"
+        style={{ lineHeight: '1.15' }}
+      >
+        {label}&nbsp;
       </Label>
-      <Label size="lg">{text}</Label>
+      <Label size="lg" style={{ lineHeight: '1.15' }}>
+        {text}
+      </Label>
     </Flex>
   )
 }

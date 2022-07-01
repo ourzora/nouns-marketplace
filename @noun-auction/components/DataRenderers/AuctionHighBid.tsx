@@ -17,10 +17,15 @@ export function AuctionHighBid({
 } & SharedDataRendererProps) {
   return (
     <Flex direction={layoutDirection} gap="x2">
-      <Label size="lg" className={lightFont} color="secondary">
+      <Label
+        size="lg"
+        className={lightFont}
+        color="secondary"
+        style={{ lineHeight: '1.15' }}
+      >
         {label}
       </Label>
-      <Label size="lg">{`${ethValue} ${ethSymbol}`}</Label>
+      <Label style={{ lineHeight: '1.15' }} size="lg">{`${ethValue} ${ethSymbol}`}</Label>
     </Flex>
   )
 }

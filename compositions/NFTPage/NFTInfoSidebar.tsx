@@ -12,14 +12,16 @@ import {
   nftMarketWrapper,
   askInfoWrapper,
 } from './NFTPage.css'
-import { ActiveAuction } from '@noun-auction'
+import { ActiveAuction, useNounAuction } from '@noun-auction'
 
 export interface NFTInfoSidebar extends BoxProps {}
 
 export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
-  const { initialData: nft } = useNFTProvider()
-  if (!nft) return null
+  const { initialData: nft, tokenId, isNounsContract } = useNFTProvider()
+  if (!nft || !tokenId) return null
+
   const { isOwner } = useIsOwner(nft)
+  const { isActiveAuction } = useNounAuction(tokenId)
 
   return (
     <Box id="nft-info-sidebar" className={nftInfoSidebar} {...props}>
@@ -50,14 +52,39 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
             <FillAskInfo showBalance={false} nft={nft} />
           </Stack>
         )}
-        <NFTCardMarket
-          className={nftMarketWrapper}
-          nftData={nft}
-          p="x4"
-          align="flex-start"
-          direction="column"
-        />
-        <ActiveAuction tokenId={nft?.nft?.tokenId} auctionRenderer="CurrentBid" />
+        {isNounsContract ? (
+          <>
+            {isActiveAuction ? (
+              <ActiveAuction
+                tokenId={nft?.nft?.tokenId}
+                hideThumbnail
+                hideTitle
+                auctionRenderer="CurrentBid"
+                backgroundColor="primary"
+                borderColor="secondary"
+                borderStyle="solid"
+                borderWidth="normal"
+                borderRadius="phat"
+              />
+            ) : (
+              <NFTCardMarket
+                className={nftMarketWrapper}
+                nftData={nft}
+                p="x4"
+                align="flex-start"
+                direction="column"
+              />
+            )}
+          </>
+        ) : (
+          <NFTCardMarket
+            className={nftMarketWrapper}
+            nftData={nft}
+            p="x4"
+            align="flex-start"
+            direction="column"
+          />
+        )}
       </Stack>
     </Box>
   )
