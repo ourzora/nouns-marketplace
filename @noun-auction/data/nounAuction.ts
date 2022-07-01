@@ -116,6 +116,11 @@ export function nounAuction(tokenId: any) {
           }
         }
         tokenId
+        transactionInfo {
+          transactionHash
+          blockNumber
+          blockTimestamp
+        }
       }
     }
   }`

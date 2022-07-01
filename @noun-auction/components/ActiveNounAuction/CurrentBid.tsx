@@ -7,17 +7,20 @@ import { roundTwoDecimals } from 'utils/math'
 import { AuctionCountdown, AuctionBidder, AuctionHighBid } from '../DataRenderers'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { Link } from 'components'
+import { PlaceNounsBid } from './PlaceNounsBid'
 
 interface CurrentBidProps extends FlexProps {
   hideThumbnail: boolean
   hideTitle: boolean
   flexDirection: 'row' | 'column'
+  wrapperDirection: 'row' | 'column'
 }
 
 export function CurrentBid({
   hideThumbnail,
   hideTitle,
   flexDirection,
+  wrapperDirection,
   ...props
 }: CurrentBidProps) {
   const { data, tokenId } = useNounsAuctionProvider()
@@ -51,45 +54,50 @@ export function CurrentBid({
   }, [data])
 
   return (
-    <Flex p="x4" gap="x4" {...props}>
-      {!hideThumbnail && (
-        <Link href={`/collections/${auctionData.collectionAddress}/${tokenId}`}>
-          <CollectionThumbnail
-            collectionAddress={auctionData.collectionAddress}
-            tokenId={auctionData.tokenId}
-            size="lg"
-          />
-        </Link>
-      )}
-      <Stack justify="space-between">
-        {tokenData && !hideTitle && (
-          <Heading size="sm" aa="h3">
-            {tokenData?.metadata?.name}
-          </Heading>
+    <Flex p="x4" gap="x4" direction={wrapperDirection} justify="space-between" {...props}>
+      <Flex gap="x4">
+        {!hideThumbnail && (
+          <Link href={`/collections/${auctionData.collectionAddress}/${tokenId}`}>
+            <CollectionThumbnail
+              collectionAddress={auctionData.collectionAddress}
+              tokenId={auctionData.tokenId}
+              size="lg"
+            />
+          </Link>
         )}
-        {data && (
-          <Flex
-            gap={hideTitle || flexDirection === 'row' ? 'x4' : 'x0'}
-            direction={flexDirection}
-          >
-            <AuctionBidder
-              address={auctionData.bidder.address}
-              txHash={auctionData.bidder.txHash}
-              layoutDirection={flexDirection === 'row' ? 'column' : 'row'}
-            />
-            <AuctionCountdown
-              startTime={auctionData.countdown.startTime}
-              endTime={auctionData.countdown.endTime}
-              layoutDirection={flexDirection === 'row' ? 'column' : 'row'}
-            />
-            <AuctionHighBid
-              ethValue={auctionData.highBid.ethValue}
-              usdcValue={auctionData.highBid.usdcValue}
-              layoutDirection={flexDirection === 'row' ? 'column' : 'row'}
-            />
-          </Flex>
-        )}
-      </Stack>
+        <Stack justify="space-between">
+          {tokenData && !hideTitle && (
+            <Heading size="sm" aa="h3">
+              {tokenData?.metadata?.name}
+            </Heading>
+          )}
+          {data && (
+            <Flex
+              gap={hideTitle || flexDirection === 'row' ? 'x4' : 'x0'}
+              direction={flexDirection}
+            >
+              <AuctionBidder
+                address={auctionData.bidder.address}
+                txHash={auctionData.bidder.txHash}
+                layoutDirection={flexDirection === 'row' ? 'column' : 'row'}
+              />
+              <AuctionCountdown
+                startTime={auctionData.countdown.startTime}
+                endTime={auctionData.countdown.endTime}
+                layoutDirection={flexDirection === 'row' ? 'column' : 'row'}
+              />
+              <AuctionHighBid
+                ethValue={auctionData.highBid.ethValue}
+                usdcValue={auctionData.highBid.usdcValue}
+                layoutDirection={flexDirection === 'row' ? 'column' : 'row'}
+              />
+            </Flex>
+          )}
+        </Stack>
+      </Flex>
+      <Flex align="flex-end" justify="flex-end">
+        <PlaceNounsBid />
+      </Flex>
     </Flex>
   )
 }

@@ -6,11 +6,10 @@ import { CollectionHeader, Seo } from 'components'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { Collections, CollectionActivityHeader } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
-import { Stack } from '@zoralabs/zord'
+import { Separator, Stack } from '@zoralabs/zord'
 import { useCollection } from '@filter/hooks/useCollection'
-import { NounAuctionHistory } from '@noun-auction'
+import { ActiveAuction, useNounAuction, useIsNounsAuction } from '@noun-auction'
 
-/* @ts-ignore */
 const Collection = ({
   initialPage,
   contractAddress,
@@ -19,6 +18,10 @@ const Collection = ({
   collection,
 }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
+
+  const { isNounsAuction } = useIsNounsAuction(contractAddress)
+
+  console.log(isNounsAuction, contractAddress)
 
   // const { isLarge } = useWindowWidth()
 
@@ -41,6 +44,15 @@ const Collection = ({
       <Seo title={seo.title} description={seo.description} />
       <CollectionHeader collection={collection} aggregateStats={aggregateStats} />
       <MarketStats aggregateStats={aggregateStats} />
+      {isNounsAuction && (
+        <Stack mt="x8">
+          <ActiveAuction
+            auctionRenderer="CurrentBid"
+            backgroundColor="tertiary"
+            borderRadius="phat"
+          />
+        </Stack>
+      )}
       {contractAddress && (
         <CollectionFilterProvider
           // useSortDropdown
