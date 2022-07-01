@@ -3,6 +3,7 @@ import { Stack, Icon, StackProps } from '@zoralabs/zord'
 import { NounsAuctionProvider } from '@noun-auction/providers'
 import { useNounAuctionsHistoryQuery } from '@noun-auction/hooks'
 import { CurrentBid } from './CurrentBid'
+import { BidHistory } from './BidHistory'
 
 export interface ActiveAuctionProps extends StackProps {
   auctionRenderer: 'CurrentBid' | 'BidHistory'
@@ -36,7 +37,17 @@ export function ActiveAuction({
           />
         )
       case 'BidHistory':
-        return <div>hello</div>
+        return (
+          <Stack>
+            <CurrentBid
+              wrapperDirection={wrapperDirection}
+              flexDirection={flexDirection}
+              hideThumbnail={hideThumbnail}
+              hideTitle={hideTitle}
+            />
+            <BidHistory px="x4" pb="x4" />
+          </Stack>
+        )
       default:
         return null
     }
