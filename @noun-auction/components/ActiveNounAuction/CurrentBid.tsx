@@ -7,17 +7,20 @@ import { roundTwoDecimals } from 'utils/math'
 import { AuctionCountdown, AuctionBidder, AuctionHighBid } from '../DataRenderers'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { Link } from 'components'
+import { PlaceNounsBid } from './PlaceNounsBid'
 
 interface CurrentBidProps extends FlexProps {
   hideThumbnail: boolean
   hideTitle: boolean
   flexDirection: 'row' | 'column'
+  wrapperDirection: 'row' | 'column'
 }
 
 export function CurrentBid({
   hideThumbnail,
   hideTitle,
   flexDirection,
+  wrapperDirection,
   ...props
 }: CurrentBidProps) {
   const { data, tokenId } = useNounsAuctionProvider()
@@ -51,7 +54,7 @@ export function CurrentBid({
   }, [data])
 
   return (
-    <Flex p="x4" gap="x4" {...props}>
+    <Flex p="x4" gap="x4" direction={wrapperDirection} {...props}>
       {!hideThumbnail && (
         <Link href={`/collections/${auctionData.collectionAddress}/${tokenId}`}>
           <CollectionThumbnail
@@ -90,6 +93,9 @@ export function CurrentBid({
           </Flex>
         )}
       </Stack>
+      <Flex w="100%" align="flex-end" justify="flex-end">
+        <PlaceNounsBid />
+      </Flex>
     </Flex>
   )
 }

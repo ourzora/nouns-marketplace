@@ -12,6 +12,7 @@ import { FillAskInfo } from './FillAskInfo'
 export enum MODAL_TYPES {
   list = 'list',
   fillAsk = 'fillAsk',
+  auction = 'auction',
 }
 
 export function NftInfo({
@@ -24,7 +25,7 @@ export function NftInfo({
   tokenId: string | undefined
   askPrice?: string
   /** Additional NFT info to display based on use context */
-  modalType?: 'fillAsk' | 'list'
+  modalType?: 'fillAsk' | 'list' | 'auction'
 }) {
   const { data } = useNFT(collectionAddress, tokenId)
   const { data: account } = useAccount()
@@ -40,9 +41,15 @@ export function NftInfo({
           title={
             noWallet
               ? 'Connect your Wallet'
-              : `${modalType === MODAL_TYPES.fillAsk ? 'Buy' : 'List'} ${
-                  data ? data.metadata?.name : '...'
-                }`
+              : `${
+                  modalType === MODAL_TYPES.fillAsk
+                    ? 'Buy'
+                    : modalType === MODAL_TYPES.list
+                    ? 'List'
+                    : MODAL_TYPES.auction
+                    ? 'Bid on'
+                    : ''
+                } ${data ? data.metadata?.name : '...'}`
           }
         />
         <CollectionThumbnail collectionAddress={collectionAddress} tokenId={tokenId} />

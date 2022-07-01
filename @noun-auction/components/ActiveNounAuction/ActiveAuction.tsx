@@ -10,6 +10,7 @@ export interface ActiveAuctionProps extends StackProps {
   hideThumbnail?: boolean
   hideTitle?: boolean
   flexDirection?: 'row' | 'column'
+  wrapperDirection?: 'row' | 'column'
 }
 
 export function ActiveAuction({
@@ -18,6 +19,7 @@ export function ActiveAuction({
   hideThumbnail = false,
   hideTitle = false,
   flexDirection = 'column',
+  wrapperDirection = 'row',
   ...props
 }: ActiveAuctionProps) {
   const { loading, activeAuctionToken } = useNounAuctionsHistoryQuery()
@@ -27,6 +29,7 @@ export function ActiveAuction({
       case 'CurrentBid':
         return (
           <CurrentBid
+            wrapperDirection={wrapperDirection}
             flexDirection={flexDirection}
             hideThumbnail={hideThumbnail}
             hideTitle={hideTitle}

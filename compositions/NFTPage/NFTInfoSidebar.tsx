@@ -65,6 +65,7 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
                 borderStyle="solid"
                 borderWidth="normal"
                 borderRadius="phat"
+                wrapperDirection="column"
               />
             ) : (
               <NFTCardMarket
