@@ -62,7 +62,23 @@ export function nounAuction(tokenId: any) {
           collectionAddress
           marketAddress
           marketType
+          transactionInfo {
+            transactionHash
+            blockNumber
+            blockTimestamp
+          }
         }
+      }
+    }
+    token(token: 
+      {
+        address: "0x9c8ff314c9bc7f6e59a9d9225fb22946427edc03",
+        tokenId: "${tokenId}",
+      }
+    ) {
+      markets {
+        marketType
+        status
       }
     }
     events(

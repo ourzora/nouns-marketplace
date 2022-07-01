@@ -14,6 +14,8 @@ export interface NFTCardMarketProps extends FlexProps {
 }
 
 export function NFTCardMarket({ nftData, ...props }: NFTCardMarketProps) {
+  if (!nftData) return null
+
   const { markets } = nftData
   const { ask, auction } = useRelevantMarket(markets)
 

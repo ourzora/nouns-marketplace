@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { Text, Stack } from '@zoralabs/zord'
 import { lightFont } from './MarketComponents.css'
 import { AddressWithLink } from './AddressWithLink'

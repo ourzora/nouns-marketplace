@@ -27,8 +27,6 @@ export const rankingRow = style([
   },
   atoms({
     p: 'x4',
-    borderRadius: 'phat',
-    backgroundColor: 'tertiary',
   }),
 ])
 
