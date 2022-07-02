@@ -14,6 +14,7 @@ interface CurrentBidProps extends FlexProps {
   hideTitle: boolean
   flexDirection: 'row' | 'column'
   wrapperDirection: 'row' | 'column'
+  thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | undefined
 }
 
 export function CurrentBid({
@@ -21,6 +22,7 @@ export function CurrentBid({
   hideTitle,
   flexDirection,
   wrapperDirection,
+  thumbnailSize,
   ...props
 }: CurrentBidProps) {
   const { data, tokenId } = useNounsAuctionProvider()
@@ -61,7 +63,7 @@ export function CurrentBid({
             <CollectionThumbnail
               collectionAddress={auctionData.collectionAddress}
               tokenId={auctionData.tokenId}
-              size="lg"
+              size={thumbnailSize}
             />
           </Link>
         )}

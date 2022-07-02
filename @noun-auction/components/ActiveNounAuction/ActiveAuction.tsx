@@ -7,20 +7,24 @@ import { BidHistory } from './BidHistory'
 
 export interface ActiveAuctionProps extends StackProps {
   auctionRenderer: 'CurrentBid' | 'BidHistory'
+  collectionAddress?: string
   tokenId?: string
   hideThumbnail?: boolean
   hideTitle?: boolean
   flexDirection?: 'row' | 'column'
   wrapperDirection?: 'row' | 'column'
+  thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | undefined
 }
 
 export function ActiveAuction({
   auctionRenderer = 'CurrentBid',
+  collectionAddress,
   tokenId,
   hideThumbnail = false,
   hideTitle = false,
   flexDirection = 'column',
   wrapperDirection = 'row',
+  thumbnailSize = 'lg',
   ...props
 }: ActiveAuctionProps) {
   const { loading, activeAuctionToken } = useNounAuctionsHistoryQuery()
@@ -34,6 +38,7 @@ export function ActiveAuction({
             flexDirection={flexDirection}
             hideThumbnail={hideThumbnail}
             hideTitle={hideTitle}
+            thumbnailSize={thumbnailSize}
           />
         )
       case 'BidHistory':
@@ -44,6 +49,7 @@ export function ActiveAuction({
               flexDirection={flexDirection}
               hideThumbnail={hideThumbnail}
               hideTitle={hideTitle}
+              thumbnailSize={thumbnailSize}
             />
             <BidHistory px="x4" pb="x4" />
           </Stack>

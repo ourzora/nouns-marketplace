@@ -1,6 +1,7 @@
 import useSWR from 'swr'
 import { nounAuction } from '@noun-auction/data'
 import { useMemo } from 'react'
+import { NounAuctionHistoryProps } from '@noun-auction/typings'
 
 async function fetchNounAuctionData(tokenId: string) {
   try {
@@ -26,14 +27,18 @@ async function fetchNounAuctionData(tokenId: string) {
   }
 }
 
-export function useNounAuction(tokenId: string) {
+export function useNounAuctionHistory({
+  tokenId,
+  contractAddress,
+  marketType,
+}: NounAuctionHistoryProps) {
   const { data: response, error } = useSWR(
-    [`noun-current-auction-${tokenId}`, tokenId],
+    [`noun-auction-history-${tokenId}`, tokenId],
     (_, tokenId) => fetchNounAuctionData(tokenId)
   )
 
   const isActiveAuction = useMemo(() => {
-    return response?.data.token?.markets[0]?.status === 'ACTIVE'
+    return response?.data.token?.markets[0].status === 'ACTIVE'
   }, [response?.data])
 
   return {

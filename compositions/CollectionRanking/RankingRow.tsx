@@ -17,7 +17,6 @@ import { Link } from 'components/Link'
 import { roundTwoDecimals } from 'utils/math'
 import { useAggregate } from 'hooks/zdk/useAggregate'
 import { numberFormatter } from 'utils/numbers'
-import { ActiveAuction, useNounAuction } from '@noun-auction'
 
 /* todo: add a skeleton or some kind of loading state */
 
@@ -44,8 +43,6 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
             : 'NA',
       }
   }, [aggregate])
-
-  console.log(collection?.address)
 
   return (
     <Stack {...props}>
@@ -96,14 +93,6 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
           </Grid>
         </Grid>
       </Link>
-      {collection.address === '0x9c8ff314c9bc7f6e59a9d9225fb22946427edc03' && (
-        <>
-          <Box px="x4">
-            <Separator />
-          </Box>
-          <ActiveAuction flexDirection="row" auctionRenderer="CurrentBid" />
-        </>
-      )}
     </Stack>
   )
 }

@@ -1,7 +1,8 @@
-import { DEFAULT_CONTRACT } from './env-vars'
+const daos: string[] = ['0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03']
+
+export const daoAddresses = daos.map((dao) => dao.toLocaleLowerCase())
 
 const collections: string[] = [
-  '0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03',
   '0x4b10701Bfd7BFEdc47d50562b76b436fbB5BdB3B',
   '0xb632fD44053B09bddDaF92dE2C212bB12Ce8DbDF',
   '0xe169c2ed585e62b1d32615bf2591093a629549b6',
@@ -26,3 +27,5 @@ const collections: string[] = [
 export const collectionAddresses = collections.map((collection) =>
   collection.toLowerCase()
 )
+
+export const allAddresses = daoAddresses.concat(collectionAddresses)

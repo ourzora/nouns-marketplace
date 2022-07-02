@@ -10,7 +10,7 @@ import { NFTObject } from '@zoralabs/nft-hooks'
 import { GetServerSideProps } from 'next'
 import { zdk } from '@shared/utils/zdk'
 import { buildCollectionSEO, SeoProps } from 'utils/seo'
-import { collectionAddresses } from 'utils/collection-addresses'
+import { allAddresses } from 'utils/collection-addresses'
 
 export type CollectionServiceProps = {
   initialPage: NFTObject[]
@@ -31,7 +31,7 @@ interface CollectionParamsProps extends GetServerSideProps {
 export async function collectionService({ params }: CollectionParamsProps) {
   const tokenAddress = params ? params.address : process.env.NEXT_PUBLIC_DEFAULT_CONTRACT
 
-  if (tokenAddress && !collectionAddresses.includes(tokenAddress))
+  if (tokenAddress && !allAddresses.includes(tokenAddress))
     return {
       notFound: true,
     }
