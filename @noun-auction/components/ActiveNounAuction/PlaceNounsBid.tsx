@@ -4,6 +4,10 @@ import { ModalComposition } from '@modal'
 import { useNounsAuctionProvider } from '@noun-auction/providers'
 import { CardMarketTrigger, NftInfo, BigNumberField } from '@market'
 import { NounsBidForm } from './NounsBidForm'
+import { ContractProvider } from 'providers/ContractProvider'
+import { useContractABI } from 'hooks'
+
+const NOUN_AUCTION_ADDRESS = '0x830BD73E4184ceF73443C15111a1DF14e495C706'
 
 export function PlaceNounsBid() {
   const { data, tokenId } = useNounsAuctionProvider()
@@ -19,6 +23,8 @@ export function PlaceNounsBid() {
     }
   }, [data?.markets])
 
+  const { contractABI } = useContractABI(NOUN_AUCTION_ADDRESS)
+
   const handleOnConfirmation = useCallback(
     (hash: string, amount: string, currency: string) => {
       console.log('confirmed')
@@ -30,20 +36,22 @@ export function PlaceNounsBid() {
   )
 
   return (
-    <ModalComposition
-      modalName={`nouns-bid-${tokenId}`}
-      trigger={<CardMarketTrigger cta="Place Bid" />}
-      content={
-        <Stack p="x8">
-          <NftInfo collectionAddress={tokenInfo.collectionAddress} tokenId={tokenId} />
-          <NounsBidForm
-            mt="x4"
-            tokenAddress={tokenInfo.collectionAddress}
-            tokenId={tokenId}
-            onConfirmation={handleOnConfirmation}
-          />
-        </Stack>
-      }
-    />
+    <ContractProvider contractAddress={NOUN_AUCTION_ADDRESS} abi={contractABI}>
+      <ModalComposition
+        modalName={`nouns-bid-${tokenId}`}
+        trigger={<CardMarketTrigger cta="Place Bid" />}
+        content={
+          <Stack p="x8">
+            <NftInfo collectionAddress={tokenInfo.collectionAddress} tokenId={tokenId} />
+            <NounsBidForm
+              mt="x4"
+              tokenAddress={tokenInfo.collectionAddress}
+              tokenId={tokenId}
+              onConfirmation={handleOnConfirmation}
+            />
+          </Stack>
+        }
+      />
+    </ContractProvider>
   )
 }

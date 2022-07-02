@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, ReactNode, useEffect, useState } from 'react'
 import { useContractRead } from 'wagmi'
 
 export type ContractProps = {
@@ -8,11 +8,13 @@ export type ContractProps = {
 }
 
 const ContractContext = createContext<{
-  contractURIData: any
-  error: any
+  // contractURIData: any
+  // error: any
+  abi?: any
+  contractAddress?: string
 }>({
-  contractURIData: undefined,
-  error: undefined,
+  // contractURIData: undefined,
+  // error: undefined,
 })
 
 export function useContractProvider() {
@@ -20,8 +22,9 @@ export function useContractProvider() {
 }
 
 export function ContractProvider({ contractAddress, abi, children }: ContractProps) {
-  const [contractUriData, setContractUriData] = useState<any>(undefined)
+  // const [contractUriData, setContractUriData] = useState<any>(undefined)
 
+  /*
   const { data, error, isError } = useContractRead(
     {
       addressOrName: contractAddress,
@@ -32,7 +35,6 @@ export function ContractProvider({ contractAddress, abi, children }: ContractPro
 
   useEffect(() => {
     if (data) {
-      /* @ts-ignore */
       fetch(data)
         .then((response) => response.json())
         .then((data) => {
@@ -41,11 +43,15 @@ export function ContractProvider({ contractAddress, abi, children }: ContractPro
     }
   }, [data, error, isError])
 
+  */
+
   return (
     <ContractContext.Provider
       value={{
-        contractURIData: contractUriData,
-        error: error,
+        // contractURIData: contractUriData,
+        abi: abi,
+        contractAddress: contractAddress,
+        // error: error,
       }}
     >
       {children}
