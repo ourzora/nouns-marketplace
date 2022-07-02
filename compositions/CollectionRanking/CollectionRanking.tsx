@@ -1,4 +1,4 @@
-import { Stack, Grid, Label } from '@zoralabs/zord'
+import { Stack, Grid, Label, Heading } from '@zoralabs/zord'
 import { RankingRow } from './RankingRow'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import {
@@ -21,24 +21,29 @@ export function CollectionRanking() {
         '@1024': 'x14',
       }}
     >
-      <Grid className={[rankingRow, rankingHeader]}>
-        <Label size="lg" className={lightFont} color="tertiary">
-          Collection
-        </Label>
-        <Grid className={rankingStats}>
-          {statRows.map((stat) => (
-            <Label
-              size="lg"
-              align="right"
-              className={lightFont}
-              color="tertiary"
-              key={stat}
-            >
-              {stat}
-            </Label>
-          ))}
+      <Heading as="h2" size="lg">
+        Collections
+      </Heading>
+      {/* 
+        <Grid className={[rankingRow, rankingHeader]}>
+          <Label size="lg" className={lightFont} color="tertiary">
+            Collection
+          </Label>
+          <Grid className={rankingStats}>
+            {statRows.map((stat) => (
+              <Label
+                size="lg"
+                align="right"
+                className={lightFont}
+                color="tertiary"
+                key={stat}
+              >
+                {stat}
+              </Label>
+            ))}
+          </Grid>
         </Grid>
-      </Grid>
+      */}
       {collections.length > 0 &&
         collections.map((collection) => (
           <RankingRow

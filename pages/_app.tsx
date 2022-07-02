@@ -56,7 +56,6 @@ export const strategy = new ZDKFetchStrategy('1', GALACTUS_BASE_URL)
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { collections } = useCollections()
-
   const router = useRouter()
 
   useEffect(() => {

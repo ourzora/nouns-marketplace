@@ -59,7 +59,7 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
                 tokenId={nft?.nft?.tokenId}
                 hideThumbnail
                 hideTitle
-                auctionRenderer="BidHistory"
+                auctionRenderer="CurrentBid"
                 backgroundColor="primary"
                 borderColor="secondary"
                 borderStyle="solid"

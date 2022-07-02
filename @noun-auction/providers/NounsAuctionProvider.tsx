@@ -23,6 +23,8 @@ export function NounsAuctionProvider({
 }) {
   const { data, error } = useNounAuction(tokenId)
 
+  console.log(data)
+
   return (
     <NounsAuctionContext.Provider
       value={{
