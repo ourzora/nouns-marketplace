@@ -31,6 +31,11 @@ export interface FilterConfigProps {
   useCollectionSearch?: boolean
   useCollectionProperties?: PropertiesConfig | undefined
   useSidebarClearButton?: boolean
+  /**
+   * Flag to show or hide the Filter sidebar and visibility toggle button
+   * @default true
+   */
+  useSidebarFilter?: boolean
   useFilterOwnerCollections?: boolean
   strings?: Partial<Strings>
   theme?: Partial<Theme>

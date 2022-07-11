@@ -21,12 +21,13 @@ export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[]
     items,
     isValidating,
     isEmpty,
+    useSidebarFilter,
     getString,
   } = useCollectionFilters()
 
   return (
     <Stack>
-      {!showFilters && (
+      {!showFilters && useSidebarFilter && (
         <FilterHeader>
           <>
             <SelectedFilters />
@@ -45,27 +46,29 @@ export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[]
           },
         ]}
       >
-        <Box
-          position="sticky"
-          top="x0"
-          w="100%"
-          style={{
-            /* @ts-ignore */
-            '--filter-offset-mobile': `${getString(
-              'FILTER_OPEN_STICKY_OFFSET_MOBILE'
-            )}px`,
-            '--filter-offset-desktop': `${getString('FILTER_OPEN_STICKY_OFFSET')}px`,
-          }}
-          className={[
-            filterWrapper,
-            'zora-collectionFilterWrapper',
-            {
-              [openFilterWrapper]: showFilters,
-            },
-          ]}
-        >
-          <FilterSidebar />
-        </Box>
+        {useSidebarFilter && (
+          <Box
+            position="sticky"
+            top="x0"
+            w="100%"
+            style={{
+              /* @ts-ignore */
+              '--filter-offset-mobile': `${getString(
+                'FILTER_OPEN_STICKY_OFFSET_MOBILE'
+              )}px`,
+              '--filter-offset-desktop': `${getString('FILTER_OPEN_STICKY_OFFSET')}px`,
+            }}
+            className={[
+              filterWrapper,
+              'zora-collectionFilterWrapper',
+              {
+                [openFilterWrapper]: showFilters,
+              },
+            ]}
+          >
+            <FilterSidebar />
+          </Box>
+        )}
         <Stack>
           {showFilters && (
             <Flex justify="space-between" align="center">
