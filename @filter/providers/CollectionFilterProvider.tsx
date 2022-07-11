@@ -57,6 +57,7 @@ export function CollectionFilterProvider({
   usePriceRange,
   useCollectionProperties,
   useSidebarClearButton = false,
+  useSidebarFilter = true,
   useFilterOwnerCollections = false,
   strings = stringDefaults,
   theme = themeDefaults,
@@ -107,6 +108,7 @@ export function CollectionFilterProvider({
         useFilterOwnerCollections,
         filtersVisible,
         useSidebarClearButton,
+        useSidebarFilter,
         strings,
         theme,
       }}
