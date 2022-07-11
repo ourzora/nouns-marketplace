@@ -6,9 +6,9 @@ import { CollectionHeader, Seo } from 'components'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { Collections, CollectionActivityHeader } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
-import { Separator, Stack } from '@zoralabs/zord'
+import { Stack } from '@zoralabs/zord'
 import { useCollection } from '@filter/hooks/useCollection'
-import { ActiveAuction, useNounAuction, useIsNounsAuction } from '@noun-auction'
+import { ActiveAuction, useIsNounsAuction } from '@noun-auction'
 
 const Collection = ({
   initialPage,
