@@ -40,7 +40,7 @@ export function FillAsk({
   onClose,
   cancelButton,
 }: FillAskProps) {
-  const { data: account } = useAccount()
+  const { address } = useAccount()
   const { AsksV11 } = useZoraV3Context()
   const { tx, txStatus, handleTx, txInProgress } = useContractTransaction()
 
@@ -64,7 +64,7 @@ export function FillAsk({
 
   const handleFillAsk = useCallback(async () => {
     try {
-      if (!AsksV11 || !account || !account.address) {
+      if (!AsksV11 || !address) {
         throw new Error(`V3AskContract is not ready, please try again.`)
       }
       const promise = AsksV11.fillAsk(
@@ -72,7 +72,7 @@ export function FillAsk({
         tokenId,
         askCurrency,
         askPrice,
-        account?.address,
+        address,
         isAddressMatch(askCurrency, AddressZero)
           ? {
               value: askPrice,
@@ -84,7 +84,7 @@ export function FillAsk({
     } catch (err: any) {
       setError(err.message || "There's been an error, please try again.")
     }
-  }, [AsksV11, account, askCurrency, askPrice, handleTx, tokenAddress, tokenId])
+  }, [AsksV11, address, askCurrency, askPrice, handleTx, tokenAddress, tokenId])
 
   const handleApproveERC20 = useCallback(async () => {
     try {
@@ -101,13 +101,13 @@ export function FillAsk({
   useEffect(() => {
     refetchBalance()
     // TODO @ethandaya - this is a lil dank but will work till we consolidate auth
-    if (wizardStep === 'ConnectWallet' && account) {
+    if (wizardStep === 'ConnectWallet' && address) {
       setWizardStep('ReviewDetails')
     }
-    if (!account) {
+    if (!address) {
       setWizardStep('ConnectWallet')
     }
-  }, [account, refetchBalance, wizardStep])
+  }, [address, refetchBalance, wizardStep])
 
   return (
     <Box w="100%">

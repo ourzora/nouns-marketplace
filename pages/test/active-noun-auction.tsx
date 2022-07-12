@@ -5,7 +5,7 @@ export default function NounsAuctionHistory() {
   return (
     <TestPageWrapper title="Active Noun Auction">
       <ActiveAuction
-        auctionRenderer="BidHistory"
+        auctionRenderer="InlineBid"
         flexDirection="row"
         borderRadius="phat"
         borderColor="secondary"

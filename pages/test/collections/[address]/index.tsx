@@ -5,7 +5,7 @@ import { CollectionFilterProvider } from '@filter'
 import { useCollection } from '@filter/hooks/useCollection'
 import { RawDisplayer, CollectionsTest } from 'components/utils'
 import { Accordion, Separator, Stack } from '@zoralabs/zord'
-import { CollectionActivityHeader } from 'compositions/Collections'
+import { useNounAuction } from '@noun-auction'
 
 const Collection = ({
   initialPage,

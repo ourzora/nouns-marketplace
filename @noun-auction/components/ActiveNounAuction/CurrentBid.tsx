@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Stack, Flex, Heading, FlexProps } from '@zoralabs/zord'
+import { Stack, Flex, Heading, FlexProps, Separator } from '@zoralabs/zord'
 import { useNounsAuctionProvider } from '@noun-auction/providers'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { numberFormatter } from 'utils/numbers'
@@ -7,11 +7,12 @@ import { roundTwoDecimals } from 'utils/math'
 import { AuctionCountdown, AuctionBidder, AuctionHighBid } from '../DataRenderers'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { Link } from 'components'
-import { PlaceNounsBid } from './PlaceNounsBid'
+import { PlaceNounsBid } from '../NounsBidUi/PlaceNounsBid'
 
 interface CurrentBidProps extends FlexProps {
   hideThumbnail: boolean
   hideTitle: boolean
+  useModal?: boolean
   flexDirection: 'row' | 'column'
   wrapperDirection: 'row' | 'column'
   thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | undefined
@@ -23,6 +24,7 @@ export function CurrentBid({
   flexDirection,
   wrapperDirection,
   thumbnailSize,
+  useModal,
   ...props
 }: CurrentBidProps) {
   const { data, tokenId } = useNounsAuctionProvider()
@@ -57,7 +59,7 @@ export function CurrentBid({
 
   return (
     <Flex p="x4" gap="x4" direction={wrapperDirection} justify="space-between" {...props}>
-      <Flex gap="x4">
+      <Flex gap="x4" w="100%">
         {!hideThumbnail && (
           <Link href={`/collections/${auctionData.collectionAddress}/${tokenId}`}>
             <CollectionThumbnail
@@ -67,7 +69,7 @@ export function CurrentBid({
             />
           </Link>
         )}
-        <Stack justify="space-between">
+        <Stack justify="space-between" w="100%">
           {tokenData && !hideTitle && (
             <Heading size="sm" aa="h3">
               {tokenData?.metadata?.name}
@@ -77,6 +79,7 @@ export function CurrentBid({
             <Flex
               gap={hideTitle || flexDirection === 'row' ? 'x4' : 'x0'}
               direction={flexDirection}
+              w="100%"
             >
               <AuctionBidder
                 address={auctionData.bidder.address}
@@ -98,7 +101,10 @@ export function CurrentBid({
         </Stack>
       </Flex>
       <Flex align="flex-end" justify="flex-end">
-        <PlaceNounsBid />
+        <Stack w="100%">
+          {!useModal && <Separator mt="x1" />}
+          <PlaceNounsBid useModal={useModal} />
+        </Stack>
       </Flex>
     </Flex>
   )

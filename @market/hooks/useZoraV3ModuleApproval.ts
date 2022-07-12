@@ -4,11 +4,11 @@ import { useContractContext } from './useContractContext'
 import useSWR from 'swr'
 
 export function useZoraV3ModuleApproval(address: string) {
-  const { data: account } = useAccount()
+  const { address: account } = useAccount()
   const { ModuleManager, isReadOnly } = useContractContext()
 
   const { data: approved, ...rest } = useSWR(
-    account ? ['isApprovedForAll', account.address as string, address] : null,
+    account ? ['isApprovedForAll', account as string, address] : null,
     (_, userAddress, spender) => ModuleManager.isModuleApproved(userAddress, spender)
   )
 

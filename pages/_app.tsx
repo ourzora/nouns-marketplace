@@ -1,14 +1,7 @@
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-
-import {
-  apiProvider,
-  configureChains,
-  getDefaultWallets,
-  RainbowKitProvider,
-  lightTheme,
-} from '@rainbow-me/rainbowkit'
+import { getDefaultWallets, RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
 
 import '@zoralabs/zord/index.css'
@@ -17,7 +10,8 @@ import '../styles/reset.css'
 import 'styles/styles.css'
 
 import * as gtag from 'lib/gtag'
-import { createClient, chain, WagmiProvider } from 'wagmi'
+import { createClient, chain, configureChains, WagmiConfig } from 'wagmi'
+import { infuraProvider } from 'wagmi/providers/infura'
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 import { ModalContextProvider } from '@modal'
@@ -33,12 +27,11 @@ import NextNProgress from 'nextjs-progressbar'
 import { HeaderComposition } from 'compositions/Header'
 import { FooterComposition } from 'compositions/Footer'
 
-const infuraId = process.env.INFURA_ID
+const infuraId = process.env.NEXT_PUBLIC_INFURA_ID
 
-// const chains = defaultChains
 const { chains, provider } = configureChains(
-  [chain.mainnet],
-  [apiProvider.infura(infuraId)]
+  [chain.mainnet, chain.polygon],
+  [infuraProvider({ infuraId })]
 )
 
 const { connectors } = getDefaultWallets({
@@ -69,7 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.events])
 
   return (
-    <WagmiProvider client={wagmiClient}>
+    <WagmiConfig client={wagmiClient}>
       <SWRConfig
         value={{
           refreshInterval: 3000,
@@ -106,7 +99,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </RainbowKitProvider>
         </NFTFetchConfiguration>
       </SWRConfig>
-    </WagmiProvider>
+    </WagmiConfig>
   )
 }
 

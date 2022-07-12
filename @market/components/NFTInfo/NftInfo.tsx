@@ -28,11 +28,11 @@ export function NftInfo({
   modalType?: 'fillAsk' | 'list' | 'auction'
 }) {
   const { data } = useNFT(collectionAddress, tokenId)
-  const { data: account } = useAccount()
+  const { address } = useAccount()
 
   const noWallet = useMemo(() => {
-    return account === null ? true : false
-  }, [account])
+    return address === null ? true : false
+  }, [address])
 
   return (
     <Stack gap="x4">

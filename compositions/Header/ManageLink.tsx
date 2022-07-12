@@ -5,15 +5,15 @@ import { collectionTrigger } from './Header.css'
 import { clickAnimation, noTextWrap } from 'styles/styles.css'
 
 export function ManageLink() {
-  const { data: account } = useAccount()
+  const { address } = useAccount()
 
-  if (account === null) {
+  if (address === null) {
     return null
   }
 
   return (
     <Box>
-      <Link href={`/manage/${account?.address}`}>
+      <Link href={`/manage/${address}`}>
         <Label
           className={[collectionTrigger, noTextWrap, clickAnimation]}
           display="flex"

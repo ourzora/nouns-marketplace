@@ -21,6 +21,7 @@ export function nounAuction(tokenId: any) {
           price {
             chainTokenPrice {
               decimal
+              raw
             }
           }
           properties {
@@ -30,6 +31,7 @@ export function nounAuction(tokenId: any) {
               highestBidPrice {
                 chainTokenPrice {
                   decimal
+                  raw
                 }
                 usdcPrice {
                   decimal

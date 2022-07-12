@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
-import { Stack, Icon, StackProps } from '@zoralabs/zord'
+import { Stack, Icon, StackProps, Separator, Box } from '@zoralabs/zord'
 import { NounsAuctionProvider } from '@noun-auction/providers'
 import { useNounAuctionsHistoryQuery } from '@noun-auction/hooks'
 import { CurrentBid } from './CurrentBid'
 import { BidHistory } from './BidHistory'
 
 export interface ActiveAuctionProps extends StackProps {
-  auctionRenderer: 'CurrentBid' | 'BidHistory'
+  auctionRenderer: 'CurrentBid' | 'BidHistory' | 'InlineBid'
   collectionAddress?: string
   tokenId?: string
   hideThumbnail?: boolean
@@ -51,6 +51,23 @@ export function ActiveAuction({
               hideTitle={hideTitle}
               thumbnailSize={thumbnailSize}
             />
+            <BidHistory px="x4" pb="x4" />
+          </Stack>
+        )
+      case 'InlineBid':
+        return (
+          <Stack>
+            <CurrentBid
+              wrapperDirection={'column'}
+              flexDirection={flexDirection}
+              hideThumbnail={hideThumbnail}
+              hideTitle={hideTitle}
+              thumbnailSize={thumbnailSize}
+              useModal={false}
+            />
+            <Box px="x4">
+              <Separator />
+            </Box>
             <BidHistory px="x4" pb="x4" />
           </Stack>
         )

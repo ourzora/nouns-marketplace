@@ -2,15 +2,20 @@
 import { useState, useEffect } from 'react'
 
 export const useContractABI = (contractAddress: string) => {
+  console.log(contractAddress)
   const [contractABI, setContractABI] = useState<any>(undefined)
 
   useEffect(() => {
-    fetch(`https://ether.actor/${contractAddress}.json`)
-      .then((response) => response.json())
-      .then((data) => {
-        setContractABI(data.abi)
-      })
-  }, [])
+    try {
+      fetch(`https://ether.actor/${contractAddress}.json`)
+        .then((response) => response.json())
+        .then((data) => {
+          setContractABI(data?.abi)
+        })
+    } catch (err) {
+      console.error(err)
+    }
+  }, [contractAddress])
 
   return {
     contractABI,
