@@ -6,7 +6,7 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react'
-import { collectionAddresses } from 'utils/collection-addresses'
+import { collectionAddresses } from 'constants/collection-addresses'
 import { CollectionsData } from 'hooks/zdk/useCollections'
 
 const CollectionsContext = createContext<{

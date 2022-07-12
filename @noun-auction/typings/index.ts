@@ -14,3 +14,7 @@ export type NounAuctionHistoryProps = {
   contractAddress: string
   marketType: 'NOUN_AUCTION'
 }
+
+export enum NounEventTypes {
+  NOUNS_AUCTION_EVENT = 'NOUNS_AUCTION_EVENT',
+}

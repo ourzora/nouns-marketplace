@@ -4,23 +4,7 @@ import { ModalComposition } from '@modal'
 import { useNounsAuctionProvider } from '@noun-auction/providers'
 import { CardMarketTrigger, NftInfo } from '@market'
 import { NounsBidForm } from './NounsBidForm'
-import { ContractProvider } from 'providers/ContractProvider'
-import { useContractABI } from 'hooks'
 import { NounishAuctionContractProvider } from '@noun-auction/providers'
-
-/*
-const computeMinimumNextBid = (
-  currentBid: BigNumber,
-  minBidIncPercentage: BigNumber | undefined,
-): BigNumber => {
-  if (!minBidIncPercentage) {
-    return new BigNumber(0);
-  }
-  return currentBid
-    .times(minBidIncPercentage.div(100).plus(1))
-    .decimalPlaces(0, BigNumber.ROUND_UP);
-};
-*/
 
 export function PlaceNounsBid({
   useModal = true,

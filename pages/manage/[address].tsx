@@ -1,6 +1,6 @@
 import { PageWrapper } from 'components/PageWrapper'
 import { manageNftsService, ManageNFTsServiceProps } from 'services/manageNftsService'
-import { collectionAddresses } from 'utils/collection-addresses'
+import { collectionAddresses } from 'constants/collection-addresses'
 import { ManageHeader } from 'components/ManageHeader'
 import { Seo } from 'components/Seo'
 import { Collections } from 'compositions/Collections'

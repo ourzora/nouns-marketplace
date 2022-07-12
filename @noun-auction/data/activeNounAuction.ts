@@ -30,6 +30,7 @@ export function activeNounAuction(auctionType: 'NOUNS_AUCTION') {
               highestBidPrice {
                 chainTokenPrice {
                   decimal
+                  raw
                 }
                 usdcPrice {
                   decimal

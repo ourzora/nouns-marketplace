@@ -10,7 +10,7 @@ import { NFTObject } from '@zoralabs/nft-hooks'
 import { GetServerSideProps } from 'next'
 import { zdk } from '@shared/utils/zdk'
 import { buildCollectionSEO, SeoProps } from 'utils/seo'
-import { allAddresses } from 'utils/collection-addresses'
+import { allAddresses } from 'constants/collection-addresses'
 
 export type CollectionServiceProps = {
   initialPage: NFTObject[]

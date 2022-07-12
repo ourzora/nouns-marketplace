@@ -1,4 +1,4 @@
-export function nounAuction(
+export function nounAuctionHistory(
   tokenId: string,
   contractAddress: string,
   eventType: 'NOUNS_AUCTION_EVENT'
