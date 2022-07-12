@@ -12,6 +12,10 @@ const pageLinks = [
     name: 'Active Noun Auction',
     url: 'active-noun-auction',
   },
+  {
+    name: 'Test Data',
+    url: 'collections',
+  },
 ]
 
 export default function TestPages() {

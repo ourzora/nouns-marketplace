@@ -1,5 +1,14 @@
-import { useMemo } from 'react'
-import { Stack, Flex, Heading, FlexProps, Separator } from '@zoralabs/zord'
+import { useMemo, useCallback } from 'react'
+import {
+  Stack,
+  Flex,
+  Heading,
+  FlexProps,
+  Separator,
+  Label,
+  Button,
+  Box,
+} from '@zoralabs/zord'
 import { useNounsAuctionProvider } from '@noun-auction/providers'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { numberFormatter } from 'utils/numbers'
@@ -8,11 +17,15 @@ import { AuctionCountdown, AuctionBidder, AuctionHighBid } from '../DataRenderer
 import { useNFT } from '@zoralabs/nft-hooks'
 import { Link } from 'components'
 import { PlaceNounsBid } from '../NounsBidUi/PlaceNounsBid'
+import { lightFont } from 'styles/styles.css'
+import { useRouter } from 'next/router'
 
 interface CurrentBidProps extends FlexProps {
   hideThumbnail: boolean
   hideTitle: boolean
+  hideCollectionTitle: boolean
   useModal?: boolean
+  routePrefix?: string
   flexDirection: 'row' | 'column'
   wrapperDirection: 'row' | 'column'
   thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | undefined
@@ -21,6 +34,8 @@ interface CurrentBidProps extends FlexProps {
 export function CurrentBid({
   hideThumbnail,
   hideTitle,
+  hideCollectionTitle,
+  routePrefix,
   flexDirection,
   wrapperDirection,
   thumbnailSize,
@@ -28,6 +43,7 @@ export function CurrentBid({
   ...props
 }: CurrentBidProps) {
   const { data, tokenId } = useNounsAuctionProvider()
+  const router = useRouter()
 
   if (!data) return null
 
@@ -35,6 +51,10 @@ export function CurrentBid({
   const marketProperties = marketData?.properties
 
   const { data: tokenData } = useNFT(marketData.collectionAddress, tokenId)
+
+  /**
+   * Normalze auctionData
+   */
 
   const auctionData = useMemo(() => {
     return {
@@ -57,23 +77,41 @@ export function CurrentBid({
     }
   }, [data])
 
+  /* Make this router pattern optional / customizeable */
+  const contractLinkHandler = useCallback((e) => {
+    e.preventDefault()
+    router.push(`/${routePrefix}/${auctionData.collectionAddress}`)
+  }, [])
+
+  const tokenLinkHandler = useCallback((e) => {
+    e.preventDefault()
+    router.push(`/${routePrefix}/${auctionData.collectionAddress}/${tokenId}`)
+  }, [])
+
   return (
     <Flex p="x4" gap="x4" direction={wrapperDirection} justify="space-between" {...props}>
       <Flex gap="x4" w="100%">
         {!hideThumbnail && (
-          <Link href={`/collections/${auctionData.collectionAddress}/${tokenId}`}>
+          <Button onClick={tokenLinkHandler} variant="unset">
             <CollectionThumbnail
               collectionAddress={auctionData.collectionAddress}
               tokenId={auctionData.tokenId}
               size={thumbnailSize}
             />
-          </Link>
+          </Button>
         )}
         <Stack justify="space-between" w="100%">
           {tokenData && !hideTitle && (
-            <Heading size="sm" aa="h3">
+            <Heading size="sm" as="h3">
               {tokenData?.metadata?.name}
             </Heading>
+          )}
+          {tokenData && !hideCollectionTitle && (
+            <Box mb="x1">
+              <Button onClick={contractLinkHandler} variant="unset" color="tertiary">
+                {tokenData?.nft?.contract?.name}
+              </Button>
+            </Box>
           )}
           {data && (
             <Flex

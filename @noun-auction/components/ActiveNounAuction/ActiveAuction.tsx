@@ -11,6 +11,8 @@ export interface ActiveAuctionProps extends StackProps {
   tokenId?: string
   hideThumbnail?: boolean
   hideTitle?: boolean
+  routePrefix?: string
+  hideCollectionTitle?: boolean
   flexDirection?: 'row' | 'column'
   wrapperDirection?: 'row' | 'column'
   thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | undefined
@@ -22,6 +24,8 @@ export function ActiveAuction({
   tokenId,
   hideThumbnail = false,
   hideTitle = false,
+  hideCollectionTitle = true,
+  routePrefix = 'collections',
   flexDirection = 'column',
   wrapperDirection = 'row',
   thumbnailSize = 'lg',
@@ -39,6 +43,8 @@ export function ActiveAuction({
             hideThumbnail={hideThumbnail}
             hideTitle={hideTitle}
             thumbnailSize={thumbnailSize}
+            hideCollectionTitle={hideCollectionTitle}
+            routePrefix={routePrefix}
           />
         )
       case 'BidHistory':
@@ -50,6 +56,8 @@ export function ActiveAuction({
               hideThumbnail={hideThumbnail}
               hideTitle={hideTitle}
               thumbnailSize={thumbnailSize}
+              hideCollectionTitle={hideCollectionTitle}
+              routePrefix={routePrefix}
             />
             <BidHistory px="x4" pb="x4" />
           </Stack>
@@ -64,6 +72,8 @@ export function ActiveAuction({
               hideTitle={hideTitle}
               thumbnailSize={thumbnailSize}
               useModal={false}
+              hideCollectionTitle={hideCollectionTitle}
+              routePrefix={routePrefix}
             />
             <Box px="x4">
               <Separator />
