@@ -27,6 +27,7 @@ export const buttonStyle = style({
   borderRadius: vars.radii.curved,
   backgroundColor: vars.color.foreground.primary,
   color: vars.color.text.primaryInverse,
+  whiteSpace: 'nowrap',
 })
 
 export const lightFont = style({

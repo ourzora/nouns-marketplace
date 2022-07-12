@@ -1,57 +1,65 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { Form, Formik, FormikHelpers } from 'formik'
-import { BigNumber } from 'ethers'
-import { Flex, Label, Box, BoxProps } from '@zoralabs/zord'
-import { useContractProvider } from 'providers/ContractProvider'
-import { useContractWrite } from 'wagmi'
+import { useContractWrite, useContractRead } from 'wagmi'
+import BigNumber from 'bignumber.js'
+import { utils, BigNumber as EthersBN } from 'ethers'
+import { Flex, Label, Box, BoxProps, Button } from '@zoralabs/zord'
+import { useNounishAuctionContract } from '@noun-auction/providers'
+import { PrintError, BigNumberField } from '@market/components'
+import { Currency, ETH_CURRENCY_SHIM } from '@market/utils'
 
-import { TransactionSubmitButton, PrintError, BigNumberField } from '@market/components'
-import { useAuth, useContractContext, useContractTransaction } from '@market/hooks'
-import { Currency, ETH_CURRENCY_SHIM, INITIAL_VALUE_ZERO } from '@market/utils'
+import { useNounBidIncrement } from '@noun-auction'
 
 interface NounsBidFormProps extends BoxProps {
   tokenId: string
   tokenAddress: string
   isUpdate?: boolean
+  currentBidAmount?: any
+  rawCurrentBidAmount: string
   onConfirmation: (txHash: string, amount: string, currencyAddress: string) => void
 }
 
 type NounsBidFormState = {
   currency: Currency
-  amount: BigNumber
+  amount: EthersBN
 }
 
 const initialValues: NounsBidFormState = {
   currency: ETH_CURRENCY_SHIM,
-  amount: BigNumber.from(0),
+  amount: EthersBN.from(0),
 }
-
-// TODO - add royalty
 
 export function NounsBidForm({
   tokenId,
   tokenAddress,
   onConfirmation,
+  currentBidAmount,
+  rawCurrentBidAmount,
   isUpdate = false,
   ...props
 }: NounsBidFormProps) {
-  const { address } = useAuth()
-  const [error, setError] = useState<string>()
-  const { txStatus, handleTx, txInProgress } = useContractTransaction()
+  const { abi, auctionContractAddress } = useNounishAuctionContract()
 
-  const { abi, contractAddress } = useContractProvider()
+  if (!abi || !auctionContractAddress) return null
 
-  console.log(abi)
+  const { minBidAmount } = useNounBidIncrement(
+    abi,
+    auctionContractAddress,
+    rawCurrentBidAmount
+  )
 
   /* @ts-ignore */
-  const { data, isError, isLoading, write } = useContractWrite(
-    {
-      addressOrName: '0x830bd73e4184cef73443c15111a1df14e495c706',
-      contractInterface: abi,
-    },
-    'createBid',
-    { args: ['nounId'] }
-  )
+  const {
+    data,
+    isError,
+    isLoading,
+    error: writeContractError,
+    write: placeBid,
+  } = useContractWrite({
+    addressOrName: auctionContractAddress as string,
+    contractInterface: abi,
+    functionName: 'createBid',
+  })
 
   const handleOnSubmit = useCallback(
     async (
@@ -61,11 +69,15 @@ export function NounsBidForm({
       // console.log(data, isError, isLoading, write)
       console.log('submit', values)
       try {
-        console.log('submit', values)
-
-        write(tokenId)
+        console.log('submit', values.amount)
+        /*
+        placeBid(tokenId, {
+          value,
+          gasLimit: gasLimit.add(10_000), // A 10,000 gas pad is used to avoid 'Out of gas' errors
+        })
+        */
       } catch (err: any) {
-        setError(err?.message || "There's been an error, please try again.")
+        console.log(err)
       } finally {
         setSubmitting(false)
       }
@@ -94,22 +106,14 @@ export function NounsBidForm({
                 pattern="[0-9.]*"
                 name="amount"
                 min={'0'}
-                placeholder={INITIAL_VALUE_ZERO}
+                placeholder={`${minBidAmount?.pretty} Ξ or more`}
                 decimals={values.currency.decimals}
               />
             </Flex>
-            {error && <PrintError errorMessage={error} />}
-            <button type="submit">Submit</button>
-            {/*
-            
-            <TransactionSubmitButton
-              txStatus={txStatus}
-              txInProgress={txInProgress}
-              // disabled={!isValid}
-            >
-              Submit Bid
-            </TransactionSubmitButton>
-            */}
+            {isError && <PrintError errorMessage={writeContractError?.message} mb="x4" />}
+            <Button type="submit" loading={isLoading}>
+              Submit
+            </Button>
           </Form>
         )}
       </Formik>

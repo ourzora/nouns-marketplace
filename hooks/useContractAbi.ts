@@ -1,6 +1,5 @@
 /* If user connects wallet and they are the creator/owner of the contract Then give them a manage page... maybe different or more features. */
 import { useState, useEffect } from 'react'
-// import useSWR from 'swr'
 
 export const useContractABI = (contractAddress: string) => {
   console.log(contractAddress)
@@ -11,7 +10,6 @@ export const useContractABI = (contractAddress: string) => {
       fetch(`https://ether.actor/${contractAddress}.json`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data)
           setContractABI(data?.abi)
         })
     } catch (err) {
