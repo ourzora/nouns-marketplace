@@ -1,26 +1,15 @@
 import { useMemo, useCallback } from 'react'
-import {
-  Stack,
-  Flex,
-  Heading,
-  FlexProps,
-  Separator,
-  Label,
-  Button,
-  Box,
-} from '@zoralabs/zord'
+import { Stack, Flex, Heading, FlexProps, Separator, Button, Box } from '@zoralabs/zord'
 import { useNounsAuctionProvider } from '@noun-auction/providers'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { numberFormatter } from 'utils/numbers'
 import { roundTwoDecimals } from 'utils/math'
 import { AuctionCountdown, AuctionBidder, AuctionHighBid } from '../DataRenderers'
 import { useNFT } from '@zoralabs/nft-hooks'
-import { Link } from 'components'
-import { PlaceNounsBid } from '../NounsBidUi/PlaceNounsBid'
-import { lightFont } from 'styles/styles.css'
+import { PlaceNounsBid } from './BidUi/PlaceNounsBid'
 import { useRouter } from 'next/router'
 
-interface CurrentBidProps extends FlexProps {
+interface AuctionCompositionProps extends FlexProps {
   hideThumbnail: boolean
   hideTitle: boolean
   hideCollectionTitle: boolean
@@ -31,7 +20,7 @@ interface CurrentBidProps extends FlexProps {
   thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | undefined
 }
 
-export function CurrentBid({
+export function AuctionComposition({
   hideThumbnail,
   hideTitle,
   hideCollectionTitle,
@@ -41,7 +30,7 @@ export function CurrentBid({
   thumbnailSize,
   useModal,
   ...props
-}: CurrentBidProps) {
+}: AuctionCompositionProps) {
   const { data, tokenId } = useNounsAuctionProvider()
   const router = useRouter()
 

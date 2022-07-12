@@ -1,7 +1,6 @@
 import { Stack, StackProps, Flex, Label } from '@zoralabs/zord'
-import { RawDisplayer } from 'components/utils'
 import { useNounsAuctionProvider } from '@noun-auction/providers'
-import { AuctionBidder, BidAmount } from './../DataRenderers'
+import { AuctionBidder, BidAmount } from '@noun-auction'
 
 interface BidHistoryProps extends StackProps {}
 
@@ -11,7 +10,7 @@ export enum NounAuctionEvents {
 }
 
 export function BidHistory({ ...props }: BidHistoryProps) {
-  const { data, tokenId } = useNounsAuctionProvider()
+  const { data } = useNounsAuctionProvider()
 
   if (!data) return null
 
@@ -34,7 +33,6 @@ export function BidHistory({ ...props }: BidHistoryProps) {
                 <Label>Noun Born</Label>
               )}
             </Flex>
-            {/*<RawDisplayer data={event} />*/}
           </Stack>
         ))}
     </Stack>
