@@ -15,7 +15,7 @@ export function FillAskInfo({
   askPrice?: string
   showBalance?: boolean
 }) {
-  const { data: account } = useAccount()
+  const { address } = useAccount()
 
   const cryptoVal = useMemo(() => {
     if (askPrice) return `${formatCryptoVal(parseFloat(askPrice))} ETH`
@@ -56,7 +56,7 @@ export function FillAskInfo({
             <Heading size="md">{cryptoVal}</Heading>
           </Flex>
         )}
-        {showBalance && account?.address && <WalletBalance address={account.address} />}
+        {showBalance && address && <WalletBalance address={address} />}
       </Stack>
     </>
   )

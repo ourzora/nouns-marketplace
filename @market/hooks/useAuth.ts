@@ -7,26 +7,25 @@ import { useAccount, useDisconnect, useNetwork, useProvider, useSigner } from 'w
 export function useAuth() {
   const provider = useProvider()
   const { data: signer } = useSigner()
-  const { data: account, isLoading } = useAccount()
-  const { user } = useUser(account?.address)
+  const { address, isConnecting } = useAccount()
+  const { user } = useUser(address)
   const { disconnect } = useDisconnect()
-  const { activeChain, switchNetwork } = useNetwork()
+  const { chain } = useNetwork()
   const [incorrectChain, setIncorrectChain] = useState(false)
 
   useEffect(() => {
-    setIncorrectChain(activeChain ? activeChain.id !== NETWORK_CHAIN_ID : false)
-  }, [activeChain])
+    setIncorrectChain(chain ? chain.id !== NETWORK_CHAIN_ID : false)
+  }, [chain])
 
   return {
     provider,
     incorrectChain,
-    switchToCorrectNetwork: () => switchNetwork?.(NETWORK_CHAIN_ID),
     signer,
-    user: user?.address ? user : { address: account?.address },
-    displayName: user?.displayName || shortenAddress(account?.address),
+    user: user?.address ? user : { address: address },
+    displayName: user?.displayName || shortenAddress(address),
     ensAvatar: user?.ensAvatar,
-    address: user?.address || account?.address || '',
-    loading: isLoading,
+    address: user?.address || address || '',
+    loading: isConnecting,
     logout: disconnect,
   }
 }

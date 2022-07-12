@@ -27,7 +27,7 @@ export function PlaceNounsBid({
   auctionContractAddress = '0x830BD73E4184ceF73443C15111a1DF14e495C706',
 }: {
   useModal?: boolean
-  auctionContractAddress: string
+  auctionContractAddress?: string
 }) {
   const { data, tokenId } = useNounsAuctionProvider()
 

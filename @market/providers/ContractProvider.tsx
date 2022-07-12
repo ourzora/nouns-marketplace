@@ -55,7 +55,7 @@ export const ContractCtx = createContext<ContractContext>({
 })
 
 const ContractProvider: React.FC = ({ children }) => {
-  const { data: account } = useAccount()
+  const { address } = useAccount()
   const { data: signer } = useSigner()
   const [isReadOnly, setIsReadOnly] = useState<boolean>(false)
 
@@ -71,7 +71,7 @@ const ContractProvider: React.FC = ({ children }) => {
     if (!signer) {
       return
     }
-    if (account && signer) {
+    if (address && signer) {
       const authorisedAuction = AuctionHouse__factory.connect(
         AUCTION_HOUSE_ADDRESS,
         signer
@@ -93,10 +93,10 @@ const ContractProvider: React.FC = ({ children }) => {
 
       setIsReadOnly(false)
     }
-  }, [signer, account])
+  }, [signer, address])
 
   useEffect(() => {
-    if (!account && !isReadOnly) {
+    if (!address && !isReadOnly) {
       setModuleManager(defaultModuleManager)
       setAsksV11(defaultAsksV11)
       setAuctionHouse(defaultAuctionHouse)
@@ -104,7 +104,7 @@ const ContractProvider: React.FC = ({ children }) => {
       setZoraMarket(defaultZoraMarket)
       setIsReadOnly(true)
     }
-  }, [account, isReadOnly])
+  }, [address, isReadOnly])
 
   return (
     <ContractCtx.Provider

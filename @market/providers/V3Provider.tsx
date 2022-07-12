@@ -35,7 +35,7 @@ export const V3ContractCtx = createContext<V3ContractContext>({
 })
 
 const V3Provider: React.FC = ({ children }) => {
-  const { data: account } = useAccount()
+  const { address } = useAccount()
   const { data: signer } = useSigner()
   const [isReadOnly, setIsReadOnly] = useState<boolean>(false)
 
@@ -45,11 +45,11 @@ const V3Provider: React.FC = ({ children }) => {
   const [AsksV1, setAsksV1] = useState<AsksV1Interface>(defaultAsksV1)
 
   useEffect(() => {
-    if (!signer || !account || !account?.address) {
+    if (!signer || !address) {
       return
     }
 
-    if (account && signer) {
+    if (address && signer) {
       const authorisedModuleManager = ModuleManagerFactory.connect(
         MODULE_MANAGER_ADDRESS,
         signer
@@ -61,7 +61,7 @@ const V3Provider: React.FC = ({ children }) => {
       setAsksV1(authorisedAsksV1)
       setIsReadOnly(false)
     }
-  }, [signer, account])
+  }, [signer, address])
 
   return (
     <V3ContractCtx.Provider
