@@ -27,11 +27,13 @@ export function CollectionMenu() {
   const menuCategories = [
     {
       id: tabs.DAOS,
+      label: tabs.DAOS,
       items: daos,
       count: daosAmount,
     },
     {
       id: tabs.COLLECTIONS,
+      label: tabs.COLLECTIONS,
       items: collections,
       count: collectionAmount,
     },

@@ -2,13 +2,12 @@ import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
 import { useEffect } from 'react'
 import { MarketStats } from '@market/components/MarketStats'
-import { CollectionHeader, Seo } from 'components'
+import { CollectionHeader, Seo, HorizontalMenu } from 'components'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { Collections, CollectionActivityHeader } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
 import { Stack } from '@zoralabs/zord'
 import { useCollection } from '@filter/hooks/useCollection'
-import { ActiveAuction, useIsNounsAuction } from '@noun-auction'
 
 const Collection = ({
   initialPage,
