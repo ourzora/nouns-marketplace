@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css'
 import { color, space } from '@zoralabs/zord'
 
-export const collectionActivityButton = style([
+export const horizontalMenuButton = style([
   {
     borderRadius: 0,
     paddingBottom: space.x2,

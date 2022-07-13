@@ -1,6 +1,6 @@
 import { useCallback, Dispatch, SetStateAction } from 'react'
 import { Flex, FlexProps, Button, Box } from '@zoralabs/zord'
-import { collectionActivityButton } from './../compositions/Collections/Collections.css'
+import { horizontalMenuButton } from './HorizontalMenu.css'
 import { lightFont } from 'styles/styles.css'
 
 export interface HorizontalMenuProps extends FlexProps {
@@ -36,7 +36,7 @@ export function HorizontalMenu({
         <Button
           key={item.label}
           variant="unset"
-          className={[currentId === item.id && 'active', collectionActivityButton]}
+          className={[currentId === item.id && 'active', horizontalMenuButton]}
           onClick={
             !useCustomHandler ? (e: MouseEvent) => setCategory(e, item.id) : item.handler
           }

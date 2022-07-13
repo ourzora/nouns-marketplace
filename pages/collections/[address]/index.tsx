@@ -2,7 +2,7 @@ import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
 import { useEffect } from 'react'
 import { MarketStats } from '@market/components/MarketStats'
-import { CollectionHeader, Seo, HorizontalMenu } from 'components'
+import { CollectionHeader, Seo } from 'components'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { Collections, CollectionActivityHeader } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
@@ -18,7 +18,6 @@ const Collection = ({
 }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
 
-  /* DAIN TODO: add to provider */
   useEffect(() => {
     if (collection && collection?.name) {
       setCurrentCollection(collection.name)
