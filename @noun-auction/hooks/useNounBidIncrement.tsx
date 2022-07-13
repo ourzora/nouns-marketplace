@@ -18,6 +18,8 @@ export function useNounBidIncrement(
     functionName: 'minBidIncrementPercentage',
   })
 
+  console.log(auctionContractAddress, minBidIncrementPercentage)
+
   const computeMinBid = useMemo(() => {
     if (!minBidIncrementPercentage) {
       return {

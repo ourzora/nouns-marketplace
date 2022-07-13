@@ -8,8 +8,15 @@ import { lightFont, noTextWrap } from 'styles/styles.css'
 import { useModal } from '@modal'
 
 export function CollectionMenu() {
-  const { collections, collectionAmount, currentCollection, currentCollectionCount } =
-    useCollectionsContext()
+  const {
+    collections,
+    collectionAmount,
+    daos,
+    daosAmount,
+    currentCollection,
+    currentCollectionCount,
+  } = useCollectionsContext()
+
   const { requestClose } = useModal()
 
   return (
@@ -50,24 +57,32 @@ export function CollectionMenu() {
       }
       content={
         <Box p="x8">
-          <Stack gap="x6">
+          <Stack gap="x6" className={modalWrapper}>
             <Flex align="center" w="100%" justify="space-between">
-              <Heading as="h3">
+              <Heading as="h3" size="sm">
+                Explore Daos
+                <Box as="h3" display="inline" color="tertiary">
+                  &nbsp;{daosAmount}
+                </Box>
+              </Heading>
+            </Flex>
+            <Stack gap="x4">
+              {daos.map((collection) => (
+                <CollectionLink
+                  key={`${collection.address}-${collection.name}`}
+                  collection={collection}
+                />
+              ))}
+            </Stack>
+            <Flex align="center" w="100%" justify="space-between">
+              <Heading as="h3" size="sm">
                 Explore Collections
                 <Box as="h3" display="inline" color="tertiary">
                   &nbsp;{collectionAmount}
                 </Box>
               </Heading>
-              <Link href="/collections" passHref>
-                <Flex gap="x2" align="center" onClick={requestClose}>
-                  <Label color="tertiary" className={lightFont}>
-                    Rankings
-                  </Label>
-                  <Icon id="ChevronRight" color="tertiary" />
-                </Flex>
-              </Link>
             </Flex>
-            <Stack className={modalWrapper} gap="x4">
+            <Stack gap="x4">
               {collections.map((collection) => (
                 <CollectionLink
                   key={`${collection.address}-${collection.name}`}

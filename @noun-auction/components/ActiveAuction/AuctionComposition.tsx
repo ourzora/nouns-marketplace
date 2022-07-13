@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react'
 import { Stack, Flex, Heading, FlexProps, Separator, Button, Box } from '@zoralabs/zord'
-import { useNounsAuctionProvider } from '@noun-auction/providers'
+import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { numberFormatter } from 'utils/numbers'
 import { roundTwoDecimals } from 'utils/math'
@@ -31,15 +31,19 @@ export function AuctionComposition({
   useModal,
   ...props
 }: AuctionCompositionProps) {
-  const { data, tokenId } = useNounsAuctionProvider()
   const router = useRouter()
+
+  const { data, auctionConfigParams } = useNounishAuctionProvider()
 
   if (!data) return null
 
   const marketData = data.markets?.nodes[0]?.market
   const marketProperties = marketData?.properties
 
-  const { data: tokenData } = useNFT(marketData.collectionAddress, tokenId)
+  const { data: tokenData } = useNFT(
+    auctionConfigParams?.contractAddress,
+    auctionConfigParams?.tokenId
+  )
 
   /**
    * Normalze auctionData
@@ -47,8 +51,6 @@ export function AuctionComposition({
 
   const auctionData = useMemo(() => {
     return {
-      collectionAddress: marketData?.collectionAddress,
-      tokenId: marketData?.tokenId,
       countdown: {
         startTime: marketProperties?.startTime,
         endTime: marketProperties?.endTime,
@@ -69,12 +71,16 @@ export function AuctionComposition({
   /* Make this router pattern optional / customizeable */
   const contractLinkHandler = useCallback((e) => {
     e.preventDefault()
-    router.push(`/${routePrefix}/${auctionData.collectionAddress}`)
+    router.push(`/${routePrefix}/${auctionConfigParams?.contractAddress.toLowerCase()}`)
   }, [])
 
   const tokenLinkHandler = useCallback((e) => {
     e.preventDefault()
-    router.push(`/${routePrefix}/${auctionData.collectionAddress}/${tokenId}`)
+    router.push(
+      `/${routePrefix}/${auctionConfigParams?.contractAddress.toLowerCase()}/${
+        auctionConfigParams?.tokenId
+      }`
+    )
   }, [])
 
   return (
@@ -83,8 +89,8 @@ export function AuctionComposition({
         {!hideThumbnail && (
           <Button onClick={tokenLinkHandler} variant="unset">
             <CollectionThumbnail
-              collectionAddress={auctionData.collectionAddress}
-              tokenId={auctionData.tokenId}
+              collectionAddress={auctionConfigParams?.contractAddress}
+              tokenId={auctionConfigParams?.tokenId}
               size={thumbnailSize}
             />
           </Button>
@@ -92,7 +98,9 @@ export function AuctionComposition({
         <Stack justify="space-between" w="100%">
           {tokenData && !hideTitle && (
             <Heading size="sm" as="h3">
-              {tokenData?.metadata?.name}
+              {tokenData?.metadata?.name
+                ? tokenData?.metadata?.name
+                : `${tokenData?.nft?.contract?.name} ${tokenData?.nft?.tokenId}`}
             </Heading>
           )}
           {tokenData && !hideCollectionTitle && (

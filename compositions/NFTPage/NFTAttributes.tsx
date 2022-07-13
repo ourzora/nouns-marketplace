@@ -6,7 +6,7 @@ import {
   nftAttribute,
   nftAttributes,
 } from './NFTPage.css'
-import { useNFTProvider } from '@media/providers/NFTPovider'
+import { useNFTProvider } from '@shared/providers/NFTProvider'
 
 export interface NFTAttributesProps extends BoxProps {}
 

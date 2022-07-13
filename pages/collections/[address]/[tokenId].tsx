@@ -4,12 +4,10 @@ import { NFTObject } from '@zoralabs/nft-hooks'
 import { NFTPageHero, NFTInfoSidebar, NFTAttributes } from 'compositions/NFTPage'
 import { Grid } from '@zoralabs/zord'
 import { nftPageWrapper } from 'compositions/NFTPage/NFTPage.css'
-import { NFTProvider } from '@media/providers/NFTPovider'
+import { NFTProvider } from '@shared/providers/NFTProvider'
 import { useEffect } from 'react'
 
 const NFT = ({ nft }: { nft: NFTObject }) => {
-  useEffect(() => console.log(nft), [])
-
   return (
     <PageWrapper direction="column">
       <Seo

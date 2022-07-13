@@ -48,7 +48,7 @@ const wagmiClient = createClient({
 export const strategy = new ZDKFetchStrategy('1', GALACTUS_BASE_URL)
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { collections } = useCollections()
+  const { collections, daos } = useCollections()
   const router = useRouter()
 
   useEffect(() => {
@@ -79,7 +79,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             })}
           >
             <V3Provider>
-              <CollectionsProvider collections={collections}>
+              <CollectionsProvider collections={collections} daos={daos}>
                 <ModalContextProvider>
                   <ContractProvider>
                     <HeaderComposition />

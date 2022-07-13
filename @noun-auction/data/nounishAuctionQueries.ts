@@ -1,9 +1,47 @@
-export function nounAuction(tokenId: any) {
+import { NounishMarketTypes, returnMarketProps } from '@noun-auction/constants'
+
+export interface ContractMarketProps {
+  marketType: NounishMarketTypes | string
+  contractAddress: string
+}
+
+export interface NounAuctionQueryProps extends ContractMarketProps {
+  tokenId?: string
+}
+
+export function activeAuction({ marketType, contractAddress }: ContractMarketProps) {
   return `{
     markets(
       filter: {
         marketFilters: {
-          marketType: NOUNS_AUCTION,
+          marketType: ${marketType},
+          statuses: ACTIVE}
+        }, 
+        where: {
+          collectionAddresses: "${contractAddress}"
+        })
+      {
+      nodes {
+        market {
+          tokenId
+        }
+      }
+    }
+  }`
+}
+
+export function nounAuctionQuery({
+  contractAddress,
+  tokenId,
+  marketType,
+}: NounAuctionQueryProps) {
+  const marketProps = returnMarketProps(marketType as NounishMarketTypes)
+
+  return `{
+    markets(
+      filter: {
+        marketFilters: {
+          marketType: ${marketProps?.type},
           statuses: ACTIVE
         }
       }, 
@@ -25,7 +63,7 @@ export function nounAuction(tokenId: any) {
             }
           }
           properties {
-            ... on NounsAuction {
+            ... on ${marketProps?.propertyType} {
               firstBidTime
               highestBidder
               highestBidPrice {
@@ -74,7 +112,7 @@ export function nounAuction(tokenId: any) {
     }
     token(token: 
       {
-        address: "0x9c8ff314c9bc7f6e59a9d9225fb22946427edc03",
+        address: "${contractAddress}",
         tokenId: "${tokenId}",
       }
     ) {
@@ -85,12 +123,12 @@ export function nounAuction(tokenId: any) {
     }
     events(
       filter: {
-        eventTypes: NOUNS_AUCTION_EVENT
+        eventTypes: ${marketProps?.event}
       }, 
       where: {
         tokens: {
           tokenId: "${tokenId}",
-          address: "0x9c8ff314c9bc7f6e59a9d9225fb22946427edc03"
+          address: "${contractAddress}"
         }
       }, 
       sort: {
@@ -105,13 +143,13 @@ export function nounAuction(tokenId: any) {
         eventType
         collectionAddress
         properties {
-          ... on NounsAuctionEvent {
-            nounsAuctionEventType
+          ... on ${marketProps?.eventNodes?.properties} {
+            ${marketProps?.eventNodes?.propertiesType}
             properties {
-              ... on NounsAuctionBidEventProperties {
+              ... on ${marketProps?.eventNodes?.bidProperties} {
                 sender
                 value
-                nounId
+                ${marketProps?.eventNodes?.eventPropertiesId}
                 extended
               }
             }

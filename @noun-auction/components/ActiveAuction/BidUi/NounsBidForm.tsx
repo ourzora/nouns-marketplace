@@ -1,8 +1,7 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
 import { Form, Formik, FormikHelpers } from 'formik'
-import { useContractWrite, useContractRead } from 'wagmi'
-import BigNumber from 'bignumber.js'
-import { utils, BigNumber as EthersBN } from 'ethers'
+import { useContractWrite } from 'wagmi'
+import { BigNumber as EthersBN } from 'ethers'
 import { Flex, Label, Box, BoxProps, Button } from '@zoralabs/zord'
 import { useNounishAuctionContract } from '@noun-auction/providers'
 import { PrintError, BigNumberField } from '@market/components'
@@ -11,7 +10,7 @@ import { Currency, ETH_CURRENCY_SHIM } from '@market/utils'
 import { useNounBidIncrement } from '@noun-auction'
 
 interface NounsBidFormProps extends BoxProps {
-  tokenId: string
+  tokenId?: string
   tokenAddress: string
   isUpdate?: boolean
   currentBidAmount?: any

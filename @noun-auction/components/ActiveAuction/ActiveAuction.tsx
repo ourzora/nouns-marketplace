@@ -1,11 +1,11 @@
-import { useMemo } from 'react'
-import { Stack, Icon, StackProps, Separator, Box } from '@zoralabs/zord'
-import { NounsAuctionProvider } from '@noun-auction/providers'
-import { useNounAuctionsHistoryQuery } from '@noun-auction/hooks'
+import { Stack, StackProps } from '@zoralabs/zord'
+import { NounishAuctionProvider } from '@noun-auction/providers'
 import { AuctionComposition } from './AuctionComposition'
 import { BidHistory } from './BidHistory'
 
 export interface ActiveAuctionProps extends StackProps {
+  marketType: string
+  contractAddress: string
   showBidHistory?: boolean
   useInlineBid?: boolean
   hideThumbnail?: boolean
@@ -18,6 +18,8 @@ export interface ActiveAuctionProps extends StackProps {
 }
 
 export function ActiveAuction({
+  marketType,
+  contractAddress,
   showBidHistory = false,
   useInlineBid = false,
   hideThumbnail = false,
@@ -29,28 +31,28 @@ export function ActiveAuction({
   thumbnailSize = 'lg',
   ...props
 }: ActiveAuctionProps) {
-  const { loading, activeAuctionToken } = useNounAuctionsHistoryQuery()
-
   return (
     <Stack {...props}>
-      {loading ? <Icon id="Spinner" size="lg" /> : null}
-      {activeAuctionToken && (
-        <NounsAuctionProvider tokenId={activeAuctionToken}>
-          <Stack>
-            <AuctionComposition
-              wrapperDirection={useInlineBid ? 'column' : 'row'}
-              flexDirection={flexDirection}
-              hideThumbnail={hideThumbnail}
-              hideTitle={hideTitle}
-              hideCollectionTitle={hideCollectionTitle}
-              thumbnailSize={thumbnailSize}
-              routePrefix={routePrefix}
-              useModal={!useInlineBid}
-            />
-            {showBidHistory && <BidHistory px="x4" pb="x4" />}
-          </Stack>
-        </NounsAuctionProvider>
-      )}
+      <NounishAuctionProvider
+        auctionConfigParams={{
+          contractAddress: contractAddress,
+          marketType: marketType,
+        }}
+      >
+        <Stack>
+          <AuctionComposition
+            wrapperDirection={useInlineBid ? 'column' : 'row'}
+            flexDirection={flexDirection}
+            hideThumbnail={hideThumbnail}
+            hideTitle={hideTitle}
+            hideCollectionTitle={hideCollectionTitle}
+            thumbnailSize={thumbnailSize}
+            routePrefix={routePrefix}
+            useModal={!useInlineBid}
+          />
+          {showBidHistory && <BidHistory px="x4" pb="x4" />}
+        </Stack>
+      </NounishAuctionProvider>
     </Stack>
   )
 }

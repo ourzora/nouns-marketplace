@@ -1,5 +1,5 @@
 import { Stack, StackProps, Flex, Label } from '@zoralabs/zord'
-import { useNounsAuctionProvider } from '@noun-auction/providers'
+import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { AuctionBidder, BidAmount } from '@noun-auction'
 
 interface BidHistoryProps extends StackProps {}
@@ -10,7 +10,7 @@ export enum NounAuctionEvents {
 }
 
 export function BidHistory({ ...props }: BidHistoryProps) {
-  const { data } = useNounsAuctionProvider()
+  const { data } = useNounishAuctionProvider()
 
   if (!data) return null
 

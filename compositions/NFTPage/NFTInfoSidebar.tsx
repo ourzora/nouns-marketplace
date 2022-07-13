@@ -5,23 +5,28 @@ import { useIsOwner } from '@market/hooks'
 import { Link } from 'components'
 import { clickAnimation, lightFont } from 'styles/styles.css'
 import { NFTCardMarket } from '@market'
-import { useNFTProvider } from '@media/providers/NFTPovider'
-import {
-  nftInfoSidebar,
-  nftInfoSidebarWrapper,
-  nftMarketWrapper,
-  askInfoWrapper,
-} from './NFTPage.css'
-import { ActiveAuction, useNounAuction } from '@noun-auction'
+import { useNFTProvider } from '@shared/providers/NFTProvider'
+import { nftInfoSidebar, nftInfoSidebarWrapper, askInfoWrapper } from './NFTPage.css'
+import { returnDao } from 'constants/collection-addresses'
+import { MarketUi } from './MarketUi'
 
 export interface NFTInfoSidebar extends BoxProps {}
 
 export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
-  const { initialData: nft, tokenId, isNounsContract } = useNFTProvider()
+  const { initialData: nft, tokenId } = useNFTProvider()
+
   if (!nft || !tokenId) return null
 
   const { isOwner } = useIsOwner(nft)
-  const { isActiveAuction } = useNounAuction(tokenId)
+
+  const dao = nft?.nft && returnDao(nft.nft.contract.address)
+  /*
+  const { data, error } = useNounishAuctionQuery({
+    marketType: marketType,
+    contractAddress: contractAddress,
+    tokenId: tokenId ? tokenId : activeToken
+  })
+  */
 
   return (
     <Box id="nft-info-sidebar" className={nftInfoSidebar} {...props}>
@@ -52,38 +57,11 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
             <FillAskInfo showBalance={false} nft={nft} />
           </Stack>
         )}
-        {isNounsContract ? (
-          <>
-            {isActiveAuction ? (
-              <ActiveAuction
-                tokenId={nft?.nft?.tokenId}
-                hideThumbnail
-                hideTitle
-                auctionRenderer="CurrentBid"
-                backgroundColor="primary"
-                borderColor="secondary"
-                borderStyle="solid"
-                borderWidth="normal"
-                borderRadius="phat"
-                wrapperDirection="column"
-              />
-            ) : (
-              <NFTCardMarket
-                className={nftMarketWrapper}
-                nftData={nft}
-                p="x4"
-                align="flex-start"
-                direction="column"
-              />
-            )}
-          </>
-        ) : (
-          <NFTCardMarket
-            className={nftMarketWrapper}
-            nftData={nft}
-            p="x4"
-            align="flex-start"
-            direction="column"
+        {nft?.nft && (
+          <MarketUi
+            contractAddress={nft.nft.contract.address}
+            tokenId={nft.nft.tokenId}
+            nft={nft}
           />
         )}
       </Stack>
