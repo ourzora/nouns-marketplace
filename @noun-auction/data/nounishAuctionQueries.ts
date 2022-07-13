@@ -15,12 +15,13 @@ export function activeAuction({ marketType, contractAddress }: ContractMarketPro
       filter: {
         marketFilters: {
           marketType: ${marketType},
-          statuses: ACTIVE}
-        }, 
-        where: {
-          collectionAddresses: "${contractAddress}"
-        })
-      {
+          statuses: ACTIVE
+        }
+      }, 
+      where: {
+        collectionAddresses: "${contractAddress}"
+      })
+    {
       nodes {
         market {
           tokenId
@@ -36,7 +37,7 @@ export function nounAuctionQuery({
   marketType,
 }: NounAuctionQueryProps) {
   const marketProps = returnMarketProps(marketType as NounishMarketTypes)
-
+  console.log(tokenId)
   return `{
     markets(
       filter: {

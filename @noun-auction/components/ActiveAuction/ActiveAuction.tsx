@@ -6,6 +6,7 @@ import { AuctionDebugger } from '../Debuggers'
 
 export interface ActiveAuctionProps extends StackProps {
   marketType: string
+  tokenId?: string
   contractAddress: string
   showBidHistory?: boolean
   useInlineBid?: boolean
@@ -23,6 +24,7 @@ export interface ActiveAuctionProps extends StackProps {
 export function ActiveAuction({
   marketType,
   contractAddress,
+  tokenId,
   showBidHistory = false,
   useInlineBid = false,
   hideThumbnail = false,
@@ -43,6 +45,7 @@ export function ActiveAuction({
         auctionConfigParams={{
           contractAddress: contractAddress,
           marketType: marketType,
+          tokenId: tokenId,
         }}
       >
         <Stack>

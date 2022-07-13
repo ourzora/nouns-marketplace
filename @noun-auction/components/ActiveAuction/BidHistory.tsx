@@ -14,39 +14,32 @@ export function BidHistory({ ...props }: BidHistoryProps) {
 
   if (!data) return null
 
-  console.log(classifierPrefix)
-
-  const auctionEventTypeKey = () => {
-    if (classifierPrefix !== null) {
-      return `${classifierPrefix?.keyPrefix}NounsAuctionEventType`
-    } else {
-      return 'nounsAuctionEventType'
-    }
-  }
+  const auctionEventTypeKey = () =>
+    classifierPrefix !== null
+      ? `${classifierPrefix?.keyPrefix}NounsAuctionEventType`
+      : 'nounsAuctionEventType'
 
   return (
-    <Stack {...props}>
+    <Stack {...props} gap="x2">
       {data.events.nodes.length &&
         data.events.nodes.map((event: any) => {
           return (
             <Stack key={`${event.transactionInfo.transactionHash}`}>
-              <Flex py="x4" gap="x4" w="100%" justify="space-between">
-                {event.properties[`${auctionEventTypeKey()}`] ===
-                `${classifierPrefix !== null ? classifierPrefix?.typePrefix : ''}${
-                  NounAuctionEvents.bidPlaced
-                }` ? (
-                  <>
-                    <AuctionBidder
-                      address={event.properties.properties.sender}
-                      txHash={event.transactionInfo.transactionHash}
-                      label="Bidder"
-                    />
-                    <BidAmount bidAmount={event.properties.properties.value} />
-                  </>
-                ) : (
-                  <Label>Noun Born</Label>
-                )}
-              </Flex>
+              {event.properties[`${auctionEventTypeKey()}`] ===
+              `${classifierPrefix !== null ? classifierPrefix?.typePrefix : ''}${
+                NounAuctionEvents.bidPlaced
+              }` ? (
+                <Flex w="100%" justify="space-between">
+                  <AuctionBidder
+                    address={event.properties.properties.sender}
+                    txHash={event.transactionInfo.transactionHash}
+                    label="Bidder"
+                  />
+                  <BidAmount bidAmount={event.properties.properties.value} />
+                </Flex>
+              ) : (
+                <Label>Auction {event.properties[`${auctionEventTypeKey()}`]}</Label>
+              )}
             </Stack>
           )
         })}
