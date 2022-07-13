@@ -8,7 +8,6 @@ import { Collections, CollectionActivityHeader } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
 import { Stack } from '@zoralabs/zord'
 import { useCollection } from '@filter/hooks/useCollection'
-import { ActiveAuction, useIsNounsAuction } from '@noun-auction'
 
 const Collection = ({
   initialPage,
@@ -19,7 +18,6 @@ const Collection = ({
 }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
 
-  /* DAIN TODO: add to provider */
   useEffect(() => {
     if (collection && collection?.name) {
       setCurrentCollection(collection.name)
@@ -29,7 +27,7 @@ const Collection = ({
       setCurrentCollection('Explore Collections...')
       setCurrentCollectionCount(undefined)
     }
-  }, [aggregateStats, collection])
+  }, [aggregateStats, collection, setCurrentCollection, setCurrentCollectionCount])
 
   const { data } = useCollection(contractAddress)
 

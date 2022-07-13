@@ -13,7 +13,7 @@ export function CollectionsTest({ collectionAddress }: { collectionAddress?: str
 
   useEffect(() => {
     clearFilters()
-  }, [collectionAddress])
+  }, [collectionAddress, clearFilters])
 
   return (
     <Filter
