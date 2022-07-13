@@ -19,12 +19,6 @@ const Collection = ({
 }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
 
-  const { isNounsAuction } = useIsNounsAuction(contractAddress)
-
-  console.log(isNounsAuction, contractAddress)
-
-  // const { isLarge } = useWindowWidth()
-
   /* DAIN TODO: add to provider */
   useEffect(() => {
     if (collection && collection?.name) {
@@ -44,7 +38,7 @@ const Collection = ({
       <Seo title={seo.title} description={seo.description} />
       <CollectionHeader collection={collection} aggregateStats={aggregateStats} />
       <MarketStats aggregateStats={aggregateStats} />
-      {isNounsAuction && (
+      {/*isNounsAuction && (
         <Stack mt="x8">
           <ActiveAuction
             auctionRenderer="CurrentBid"
@@ -52,7 +46,7 @@ const Collection = ({
             borderRadius="phat"
           />
         </Stack>
-      )}
+      )*/}
       {contractAddress && (
         <CollectionFilterProvider
           // useSortDropdown

@@ -18,6 +18,12 @@
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".yalc/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".yalc/**/*.ts",
+    "@noun-auction/data/nounishAuctionQueryiests"
+  ],
   "exclude": []
 }

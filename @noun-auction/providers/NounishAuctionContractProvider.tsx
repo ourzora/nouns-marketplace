@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode, useEffect, useState } from 'react'
+import { createContext, useContext, ReactNode } from 'react'
 import { useContractABI } from 'hooks'
 
 export type ContractProps = {

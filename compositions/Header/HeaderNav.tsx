@@ -1,5 +1,5 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { Box, Flex, Label, Icon } from '@zoralabs/zord'
+import { Box, Flex } from '@zoralabs/zord'
 import Link from 'next/link'
 import { NOUNS_GLASSES } from 'styles/style-constants'
 import { APP_TITLE } from 'utils/env-vars'
@@ -58,26 +58,6 @@ export function HeaderNav() {
         </Link>
         <BetaTag />
         <CollectionMenu />
-        {/* 
-        <Flex
-          as="a"
-          align="center"
-          href="https://nouns.wtf/"
-          target="_blank"
-          rel="noreferrer"
-          display={{
-            '@initial': 'block',
-            '@1024': 'none',
-          }}
-        >
-          <Flex h="100%" align="center" gap="x2">
-            <Label size="lg" className={noTextWrap}>
-              Nouns Center
-            </Label>
-            <Icon id="ArrowRightAngle" size="sm" />
-          </Flex>
-        </Flex>
-        */}
       </Flex>
       <Flex
         align="center"
@@ -104,24 +84,6 @@ export function HeaderNav() {
         </Link>
 
         <Flex gap="x4" align="center">
-          {/*
-          <Flex
-            as="a"
-            align="center"
-            href="https://nouns.wtf/"
-            target="_blank"
-            rel="noreferrer"
-            display={{
-              '@initial': 'none',
-              '@1024': 'block',
-            }}
-          >
-            <Flex h="100%" align="center" gap="x2">
-              <Label size="lg">Nouns Center</Label>
-              <Icon id="ArrowRightAngle" size="sm" />
-            </Flex>
-          </Flex>
-          */}
           <ManageLink />
           <Box>
             <ConnectButton showBalance={false} />

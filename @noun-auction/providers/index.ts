@@ -1,3 +1,2 @@
-export * from './NounsAuctionHistoryProvider'
-export * from './NounsAuctionProvider'
+export * from './NounishAuctionProvider'
 export * from './NounishAuctionContractProvider'

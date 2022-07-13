@@ -14,7 +14,6 @@ export interface NFTContextTypes {
   hooksData: useNFTType
   initialData: NFTObject | undefined
   tokenId?: string
-  isNounsContract?: boolean
 }
 
 const NFTContext = createContext<NFTContextTypes>({
@@ -40,8 +39,6 @@ export function NFTProvider({
 }: NFTProps) {
   const { data, error, currencyLoaded, marketError } = useNFT(contractAddress, tokenId)
 
-  const isNounsContract = contractAddress === '0x9c8ff314c9bc7f6e59a9d9225fb22946427edc03'
-
   return (
     <NFTContext.Provider
       value={{
@@ -53,7 +50,6 @@ export function NFTProvider({
         },
         initialData,
         tokenId,
-        isNounsContract,
       }}
       {...props}
     >
