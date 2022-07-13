@@ -1,6 +1,6 @@
 import { PageWrapper } from 'components/PageWrapper'
 import { manageNftsService, ManageNFTsServiceProps } from 'services/manageNftsService'
-import { collectionAddresses } from 'constants/collection-addresses'
+import { allAddresses } from 'constants/collection-addresses'
 import { ManageHeader } from 'components/ManageHeader'
 import { Seo } from 'components/Seo'
 import { Collections } from 'compositions/Collections'
@@ -14,7 +14,7 @@ const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
       {ownerAddress && (
         <CollectionFilterProvider
           ownerAddress={ownerAddress}
-          contractWhiteList={collectionAddresses}
+          contractWhiteList={allAddresses}
           filtersVisible
           useFilterOwnerCollections
         >

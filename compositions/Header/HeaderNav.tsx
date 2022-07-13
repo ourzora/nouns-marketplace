@@ -82,7 +82,6 @@ export function HeaderNav() {
             <Box as="img" className={nounsGlasses} src={NOUNS_GLASSES} alt={APP_TITLE} />
           </Box>
         </Link>
-
         <Flex gap="x4" align="center">
           <ManageLink />
           <Box>
