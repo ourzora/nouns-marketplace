@@ -28,7 +28,7 @@ const Collection = ({
       setCurrentCollection('Explore Collections...')
       setCurrentCollectionCount(undefined)
     }
-  }, [aggregateStats, collection])
+  }, [aggregateStats, collection, setCurrentCollection, setCurrentCollectionCount])
 
   const { data } = useCollection(contractAddress)
 

@@ -34,6 +34,7 @@ export function HorizontalMenu({
     <Flex gap="x6" justify="center" {...props}>
       {items.map((item) => (
         <Button
+          key={item.label}
           variant="unset"
           className={[currentId === item.id && 'active', collectionActivityButton]}
           onClick={
