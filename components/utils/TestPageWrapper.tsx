@@ -1,23 +1,30 @@
-import { Stack, Heading, Flex, Label, Icon, Paragraph } from '@zoralabs/zord'
-import { PageWrapper } from 'components/PageWrapper'
+import { Stack, Heading, Flex, Label, Icon, Paragraph, FlexProps } from '@zoralabs/zord'
+import { PageWrapper, PageWrapperProps } from 'components/PageWrapper'
 import { MAX_WIDTH } from 'styles/style-constants'
 import { Link } from 'components'
 import { ReactNode } from 'react'
 
-export type TestPageWrapperProps = {
+export interface TestPageWrapperProps extends PageWrapperProps {
   children: ReactNode
   title?: string
   description?: string
+  maxWidth?: string
 }
 
 export function TestPageWrapper({
   children,
   title = 'Test Page',
   description,
+  maxWidth,
+  ...props
 }: TestPageWrapperProps) {
   return (
-    <PageWrapper>
-      <Stack p="x6" w="100%" mx="auto" style={{ maxWidth: MAX_WIDTH.MED }} gap="x6">
+    <PageWrapper
+      {...props}
+      mx="auto"
+      style={{ maxWidth: maxWidth ? maxWidth : MAX_WIDTH.MED }}
+    >
+      <Stack p="x6" w="100%" mx="auto" gap="x6">
         <Flex id="test-page-header" justify="space-between">
           <Heading>{title}</Heading>
           <Link href="/test">

@@ -1,7 +1,8 @@
 import { Stack, StackProps } from '@zoralabs/zord'
-import { NounishAuctionProvider } from '@noun-auction/providers'
+import { NounishAuctionProvider, ClassifierPrefixProps } from '@noun-auction/providers'
 import { AuctionComposition } from './AuctionComposition'
 import { BidHistory } from './BidHistory'
+import { AuctionDebugger } from '../Debuggers'
 
 export interface ActiveAuctionProps extends StackProps {
   marketType: string
@@ -15,6 +16,8 @@ export interface ActiveAuctionProps extends StackProps {
   wrapperDirection?: 'row' | 'column'
   thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | undefined
   routePrefix?: string
+  debug?: boolean
+  classifierPrefix?: ClassifierPrefixProps
 }
 
 export function ActiveAuction({
@@ -24,16 +27,19 @@ export function ActiveAuction({
   useInlineBid = false,
   hideThumbnail = false,
   hideTitle = false,
+  debug = false,
   hideCollectionTitle = true,
   routePrefix = 'collections',
   flexDirection = 'column',
   wrapperDirection = 'row',
   thumbnailSize = 'lg',
+  classifierPrefix = undefined,
   ...props
 }: ActiveAuctionProps) {
   return (
     <Stack {...props}>
       <NounishAuctionProvider
+        classifierPrefix={classifierPrefix}
         auctionConfigParams={{
           contractAddress: contractAddress,
           marketType: marketType,
@@ -51,6 +57,7 @@ export function ActiveAuction({
             useModal={!useInlineBid}
           />
           {showBidHistory && <BidHistory px="x4" pb="x4" />}
+          {debug && <AuctionDebugger />}
         </Stack>
       </NounishAuctionProvider>
     </Stack>

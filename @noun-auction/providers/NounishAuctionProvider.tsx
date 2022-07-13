@@ -3,11 +3,17 @@ import { useNounishAuctionQuery, useActiveNounishAuctionQuery } from '@noun-auct
 import { NounAuctionQueryProps } from '@noun-auction/data'
 import { returnDaoAuctionContract } from 'constants/collection-addresses'
 
+export type ClassifierPrefixProps = {
+  keyPrefix: string
+  typePrefix: string
+} | null
+
 const NounsAuctionContext = createContext<{
   data?: any
   error?: any
   auctionConfigParams?: NounAuctionQueryProps
   auctionContractAddress?: string
+  classifierPrefix?: ClassifierPrefixProps
 }>({})
 
 export function useNounishAuctionProvider() {
@@ -17,10 +23,12 @@ export function useNounishAuctionProvider() {
 export type NounishAuctionProviderProps = {
   auctionConfigParams: NounAuctionQueryProps
   children?: ReactNode
+  classifierPrefix?: ClassifierPrefixProps
 }
 
 export function NounishAuctionProvider({
   auctionConfigParams,
+  classifierPrefix,
   children,
 }: NounishAuctionProviderProps) {
   const { marketType, contractAddress, tokenId } = auctionConfigParams
@@ -44,6 +52,7 @@ export function NounishAuctionProvider({
         data,
         error,
         auctionContractAddress: auctionContractAddress,
+        classifierPrefix,
         auctionConfigParams: {
           marketType: marketType,
           contractAddress: contractAddress,
