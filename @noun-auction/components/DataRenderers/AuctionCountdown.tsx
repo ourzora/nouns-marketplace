@@ -1,6 +1,10 @@
 import { Flex, Label } from '@zoralabs/zord'
+
+// @noun-auction
 import { useCountdown } from '@noun-auction/hooks/useCountdown'
 import { SharedDataRendererProps } from '@noun-auction/typings'
+
+// @shared
 import { lightFont } from 'styles/styles.css'
 
 export function AuctionCountdown({

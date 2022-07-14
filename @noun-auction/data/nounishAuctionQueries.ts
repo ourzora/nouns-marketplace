@@ -37,7 +37,6 @@ export function nounAuctionQuery({
   marketType,
 }: NounAuctionQueryProps) {
   const marketProps = returnMarketProps(marketType as NounishMarketTypes)
-  console.log(tokenId)
   return `{
     markets(
       filter: {

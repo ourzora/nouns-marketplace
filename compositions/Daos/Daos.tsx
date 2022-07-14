@@ -1,5 +1,5 @@
 import { Stack, Heading } from '@zoralabs/zord'
-import { ActiveAuction, NounishMarketTypes } from '@noun-auction'
+import { NounishAuction, NounishMarketTypes } from '@noun-auction'
 import { daos } from 'constants/collection-addresses'
 import { daosWrapper } from './Daos.css'
 
@@ -10,7 +10,7 @@ export function DaoTable({ routePrefix }: { routePrefix?: string }) {
         Daos
       </Heading>
       {daos.map((dao) => (
-        <ActiveAuction
+        <NounishAuction
           key={dao.collectionAddress}
           contractAddress={dao.collectionAddress}
           marketType={dao.marketType as NounishMarketTypes}

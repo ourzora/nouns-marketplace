@@ -1,5 +1,9 @@
 import { Flex, Label } from '@zoralabs/zord'
+
+// @noun-auction
 import { SharedDataRendererProps } from '@noun-auction/typings'
+
+// @shared
 import { lightFont } from 'styles/styles.css'
 
 export function AuctionHighBid({

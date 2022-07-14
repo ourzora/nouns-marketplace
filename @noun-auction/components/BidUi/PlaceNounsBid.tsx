@@ -1,10 +1,12 @@
 import { useMemo, useCallback } from 'react'
 import { Stack } from '@zoralabs/zord'
-import { ModalComposition } from '@modal'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
-import { CardMarketTrigger, NftInfo } from '@market'
 import { NounsBidForm } from './NounsBidForm'
 import { NounishAuctionContractProvider } from '@noun-auction/providers'
+import { ModalComposition } from '@modal'
+
+// Imports from @markets
+import { CardMarketTrigger, NftInfo } from '@market'
 
 export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
   const { data, auctionConfigParams, auctionContractAddress } =

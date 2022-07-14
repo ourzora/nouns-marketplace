@@ -1,8 +1,12 @@
 import { useMemo } from 'react'
-import { Flex, Label, Icon } from '@zoralabs/zord'
 import { useEnsName } from 'wagmi'
-import { useShortAddress } from 'hooks/useShortAddress'
+import { Flex, Label, Icon } from '@zoralabs/zord'
+
+// @noun-auction
 import { SharedDataRendererProps } from '@noun-auction/typings'
+
+// @shared
+import { useShortAddress } from 'hooks/useShortAddress'
 import { lightFont } from 'styles/styles.css'
 
 export function AuctionBidder({

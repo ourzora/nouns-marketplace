@@ -1,5 +1,5 @@
 import {
-  ActiveAuction,
+  NounishAuction,
   NounishMarketTypes,
   useActiveNounishAuctionQuery,
 } from '@noun-auction'
@@ -40,7 +40,7 @@ export function MarketUi({
 
   if (tokenId === activeToken) {
     return (
-      <ActiveAuction
+      <NounishAuction
         contractAddress={contractAddress}
         marketType={dao.marketType as NounishMarketTypes}
         hideThumbnail

@@ -1,6 +1,8 @@
 import { Flex, BoxProps } from '@zoralabs/zord'
-import { formatCryptoVal } from '@market/utils'
 import { useMemo } from 'react'
+
+// @shared
+import { formatCryptoVal } from '@market/utils'
 
 interface BidAmountProps extends BoxProps {
   bidAmount: string
