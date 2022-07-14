@@ -12,8 +12,10 @@ import { lightFont } from 'styles/styles.css'
 export function AuctionBidder({
   label = 'Top bidder',
   layoutDirection = 'row',
+  showLabels,
   txHash,
   address,
+  ...props
 }: {
   address: string
   txHash: string
@@ -35,17 +37,21 @@ export function AuctionBidder({
       rel="noreferrer"
       align={layoutDirection === 'row' ? 'center' : 'flex-start'}
       wrap="wrap"
+      {...props}
     >
-      <Label
-        size="lg"
-        className={lightFont}
-        color="secondary"
-        style={{ lineHeight: '1.15' }}
-      >
-        {label}&nbsp;
-      </Label>
-      <Label size="lg" style={{ lineHeight: '1.15' }}>
-        <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
+      {showLabels && (
+        <Label
+          size="lg"
+          className={lightFont}
+          color="secondary"
+          style={{ lineHeight: '1.15' }}
+          textAlign="right"
+        >
+          {label}&nbsp;
+        </Label>
+      )}
+      <Label size="lg" style={{ lineHeight: '1.15' }} textAlign="right">
+        <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }} textAlign="right">
           {ensName ? ensName : shortAddress}
           <Icon id="ArrowRightAngle" />
         </Flex>

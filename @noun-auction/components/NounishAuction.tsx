@@ -1,24 +1,32 @@
-import { Accordion, Separator, Stack, StackProps } from '@zoralabs/zord'
+import { Accordion, Separator, Stack, FlexProps } from '@zoralabs/zord'
 import { NounishAuctionProvider, ClassifierPrefixProps } from '@noun-auction/providers'
 import { ActiveAuction } from './ActiveAuction'
 import { AuctionHistory } from './AuctionHistory'
 import { AuctionDebugger } from './Debuggers'
 
-export interface NounishAuctionProps extends StackProps {
-  marketType: string
-  tokenId?: string
+export interface TokenInfoConfig extends FlexProps {
+  hideThumbnail?: boolean
+  hideTitle?: boolean
+  hideCollectionTitle?: boolean
+  thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | '100%' | undefined
+  routePrefix?: string
+}
+
+export interface NounishAuctionProps extends TokenInfoConfig {
   contractAddress: string
+  tokenId?: string
+  /* View Config */
   showBidHistory?: boolean
   useInlineBid?: boolean
-  hideThumbnail?: boolean
-  hideCollectionTitle?: boolean
-  hideTitle?: boolean
+  debug?: boolean
+
   flexDirection?: 'row' | 'column'
   wrapperDirection?: 'row' | 'column'
-  thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | undefined
-  routePrefix?: string
-  debug?: boolean
+
+  marketType: string
   classifierPrefix?: ClassifierPrefixProps
+
+  showLabels?: boolean
 }
 
 export function NounishAuction({
@@ -30,12 +38,13 @@ export function NounishAuction({
   hideThumbnail = false,
   hideTitle = false,
   debug = false,
-  hideCollectionTitle = true,
+  hideCollectionTitle = false,
   routePrefix = 'collections',
-  flexDirection = 'column',
+  flexDirection = 'row',
   wrapperDirection = 'row',
-  thumbnailSize = 'lg',
+  thumbnailSize = '100%',
   classifierPrefix = undefined,
+  showLabels = false,
   ...props
 }: NounishAuctionProps) {
   return (
@@ -58,10 +67,16 @@ export function NounishAuction({
             thumbnailSize={thumbnailSize}
             routePrefix={routePrefix}
             useModal={!useInlineBid}
+            showLabels={showLabels}
           />
-          {showBidHistory && <AuctionHistory px="x4" pb="x4" />}
+          {showBidHistory && (
+            <Stack>
+              <Separator mt="x4" />
+              <AuctionHistory mt="x2" />
+            </Stack>
+          )}
           {debug && (
-            <Stack p="x4" mb="x3">
+            <Stack py="x2" mb="x2">
               <Separator mb="x4" />
               <Accordion label="Api Data">
                 <AuctionDebugger />

@@ -1,12 +1,15 @@
+import { FlexProps } from '@zoralabs/zord'
+
 export type FetchDataTypes = {
   loading?: boolean
   error?: boolean
   errorMsg?: any
 }
 
-export type SharedDataRendererProps = {
-  label?: string
+export interface SharedDataRendererProps extends FlexProps {
+  label?: string | boolean
   layoutDirection?: 'column' | 'row'
+  showLabels?: boolean
 }
 
 export type NounAuctionHistoryProps = {

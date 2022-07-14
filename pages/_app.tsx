@@ -30,7 +30,7 @@ import { FooterComposition } from 'compositions/Footer'
 const infuraId = process.env.NEXT_PUBLIC_INFURA_ID
 
 const { chains, provider } = configureChains(
-  [chain.mainnet, chain.polygon],
+  [chain.mainnet],
   [infuraProvider({ infuraId })]
 )
 

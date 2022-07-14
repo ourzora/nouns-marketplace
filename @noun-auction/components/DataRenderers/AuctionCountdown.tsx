@@ -10,9 +10,11 @@ import { lightFont } from 'styles/styles.css'
 export function AuctionCountdown({
   startTime,
   endTime,
+  showLabels,
   endedCopy = 'Auction has ended',
   label = 'Ends in',
   layoutDirection = 'row',
+  ...props
 }: {
   startTime: string
   endTime: string
@@ -25,18 +27,27 @@ export function AuctionCountdown({
   if (isEnded) return <Label>{endedCopy}</Label>
 
   return (
-    <Flex direction={layoutDirection} wrap="wrap">
-      <Label
-        size="lg"
-        className={lightFont}
-        color="secondary"
-        style={{ lineHeight: '1.15' }}
-      >
-        {label}&nbsp;
-      </Label>
-      <Label size="lg" style={{ lineHeight: '1.15' }}>
-        {text}
-      </Label>
+    <Flex direction={layoutDirection} wrap="wrap" {...props}>
+      {showLabels && (
+        <Label
+          size="lg"
+          className={lightFont}
+          color="secondary"
+          style={{ lineHeight: '1.15' }}
+          textAlign="right"
+        >
+          {label}&nbsp;
+        </Label>
+      )}
+      {!isEnded ? (
+        <Label size="lg" style={{ lineHeight: '1.15' }} textAlign="right">
+          {text}
+        </Label>
+      ) : (
+        <Label size="lg" style={{ lineHeight: '1.15' }} textAlign="right">
+          {endedCopy}
+        </Label>
+      )}
     </Flex>
   )
 }
