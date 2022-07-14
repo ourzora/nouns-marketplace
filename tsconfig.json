@@ -23,7 +23,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".yalc/**/*.ts",
-    "@noun-auction/data/nounishAuctionQueryiests"
+    "@noun-auction/data/nounishAuctionQueryiests",
+    "@noun-auction/abis/lil-nouns-abi.js"
   ],
   "exclude": []
 }

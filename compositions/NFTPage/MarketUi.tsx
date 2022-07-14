@@ -1,8 +1,4 @@
-import {
-  NounishAuction,
-  NounishMarketTypes,
-  useActiveNounishAuctionQuery,
-} from '@noun-auction'
+import { NounishAuction, useActiveNounishAuctionQuery } from '@noun-auction'
 import { NFTCardMarket } from '@market'
 import { returnDao } from 'constants/collection-addresses'
 import { NFTObject } from '@zoralabs/nft-hooks'
@@ -41,8 +37,7 @@ export function MarketUi({
   if (tokenId === activeToken) {
     return (
       <NounishAuction
-        contractAddress={contractAddress}
-        marketType={dao.marketType as NounishMarketTypes}
+        daoConfig={dao}
         hideThumbnail
         hideTitle
         backgroundColor="primary"

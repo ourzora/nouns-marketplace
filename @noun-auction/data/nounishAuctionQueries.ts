@@ -1,4 +1,5 @@
-import { NounishMarketTypes, returnMarketProps } from '@noun-auction/constants'
+import { returnMarketProps } from '@noun-auction/constants'
+import { NounishMarketTypes } from '@noun-auction/typings'
 
 export interface ContractMarketProps {
   marketType: NounishMarketTypes | string
