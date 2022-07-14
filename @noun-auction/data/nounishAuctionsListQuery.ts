@@ -1,19 +1,20 @@
-export function activeNounAuction(auctionType: 'NOUNS_AUCTION') {
+export function nounishAuctionsListQuery(pagination?: number) {
   return `{
     markets(
       filter: {
         marketFilters: {
-          marketType: ${auctionType},
-          statuses: ACTIVE
+          marketType: NOUNS_AUCTION,
+          statuses: [COMPLETED, ACTIVE]
         }
       }, 
       sort: {
-        sortKey: NONE,
+        sortKey: NONE, 
         sortDirection: DESC
       },
       pagination: {
-        limit: 1
-      }) {
+        limit: ${pagination || 50}
+      })
+    {
       nodes {
         market {
           status
@@ -30,7 +31,6 @@ export function activeNounAuction(auctionType: 'NOUNS_AUCTION') {
               highestBidPrice {
                 chainTokenPrice {
                   decimal
-                  raw
                 }
                 usdcPrice {
                   decimal
@@ -50,23 +50,7 @@ export function activeNounAuction(auctionType: 'NOUNS_AUCTION') {
               startTime
               winner
               estimatedDurationTime
-              amount {
-                chainTokenPrice {
-                  decimal
-                }
-                usdcPrice {
-                  decimal
-                }
-              }
             }
-          }
-          collectionAddress
-          marketAddress
-          marketType
-          transactionInfo {
-            transactionHash
-            blockNumber
-            blockTimestamp
           }
         }
       }

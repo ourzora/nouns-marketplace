@@ -3,11 +3,14 @@ import { Form, Formik, FormikHelpers } from 'formik'
 import { useContractWrite } from 'wagmi'
 import { BigNumber as EthersBN } from 'ethers'
 import { Flex, Label, Box, BoxProps, Button } from '@zoralabs/zord'
+
+// @noun-auction
 import { useNounishAuctionContract } from '@noun-auction/providers'
+import { useNounBidIncrement } from '@noun-auction'
+
+// Imports from @markets
 import { PrintError, BigNumberField } from '@market/components'
 import { Currency, ETH_CURRENCY_SHIM } from '@market/utils'
-
-import { useNounBidIncrement } from '@noun-auction'
 
 interface NounsBidFormProps extends BoxProps {
   tokenId?: string
