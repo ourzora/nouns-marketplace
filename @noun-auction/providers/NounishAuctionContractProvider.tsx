@@ -1,5 +1,7 @@
-import { createContext, useContext, ReactNode } from 'react'
+import { createContext, useContext, useEffect, ReactNode } from 'react'
 import { useContractABI } from 'hooks'
+import { useNounBidIncrement } from '@noun-auction/hooks'
+import { useContractRead } from 'wagmi'
 
 export type ContractProps = {
   auctionContractAddress: string
@@ -20,6 +22,16 @@ export function NounishAuctionContractProvider({
   children,
 }: ContractProps) {
   const { contractABI } = useContractABI(auctionContractAddress)
+
+  const { data: minBidIncrementPercentage } = useContractRead({
+    addressOrName: auctionContractAddress as string,
+    contractInterface: contractABI,
+    functionName: 'minBidIncrementPercentage',
+  })
+
+  useEffect(() => {
+    console.log('minBidIncrementPercentage', minBidIncrementPercentage)
+  }, [minBidIncrementPercentage])
 
   return (
     <NounishAuctionContractContext.Provider

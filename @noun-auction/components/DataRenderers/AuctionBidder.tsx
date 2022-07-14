@@ -50,8 +50,8 @@ export function AuctionBidder({
           {label}&nbsp;
         </Label>
       )}
-      <Label size="lg" style={{ lineHeight: '1.15' }} textAlign="right">
-        <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }} textAlign="right">
+      <Label size="lg" style={{ lineHeight: '1.15' }} align="right">
+        <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
           {ensName ? ensName : shortAddress}
           <Icon id="ArrowRightAngle" />
         </Flex>

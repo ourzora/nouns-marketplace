@@ -1,40 +1,34 @@
 import { createContext, useContext, ReactNode, useMemo } from 'react'
 import { useNounishAuctionQuery, useActiveNounishAuctionQuery } from '@noun-auction/hooks'
-import { NounAuctionQueryProps } from '@noun-auction/data'
-import { returnDaoAuctionContract } from 'constants/collection-addresses'
+import { DaoConfigProps } from '@noun-auction/typings'
+import { defaultDaoConfig } from '@noun-auction/constants'
 
-export type ClassifierPrefixProps = {
-  keyPrefix: string
-  typePrefix: string
-} | null
+export type NounishAuctionProviderProps = {
+  tokenId?: string
+  daoConfig: DaoConfigProps
+  children?: ReactNode
+}
 
 const NounsAuctionContext = createContext<{
   data?: any
   error?: any
-  auctionConfigParams?: NounAuctionQueryProps
-  auctionContractAddress?: string
-  classifierPrefix?: ClassifierPrefixProps
+  daoConfig: DaoConfigProps
+  tokenId?: string
   isComplete?: boolean
-}>({})
+}>({
+  daoConfig: defaultDaoConfig,
+})
 
 export function useNounishAuctionProvider() {
   return useContext(NounsAuctionContext)
 }
 
-export type NounishAuctionProviderProps = {
-  auctionConfigParams: NounAuctionQueryProps
-  children?: ReactNode
-  classifierPrefix?: ClassifierPrefixProps
-}
-
 export function NounishAuctionProvider({
-  auctionConfigParams,
-  classifierPrefix,
+  daoConfig,
+  tokenId,
   children,
 }: NounishAuctionProviderProps) {
-  const { marketType, contractAddress, tokenId } = auctionConfigParams
-
-  const auctionContractAddress = returnDaoAuctionContract(contractAddress)
+  const { marketType, contractAddress, classifierPrefix } = daoConfig
 
   const { activeToken } = useActiveNounishAuctionQuery({
     marketType,
@@ -48,7 +42,7 @@ export function NounishAuctionProvider({
   })
 
   const isComplete = useMemo(() => {
-    console.log('data', data)
+    console.log('data', data?.events?.nodes[0])
     if (!data) {
       return false
     } else {
@@ -66,14 +60,9 @@ export function NounishAuctionProvider({
       value={{
         data,
         error,
-        auctionContractAddress: auctionContractAddress,
-        classifierPrefix,
         isComplete,
-        auctionConfigParams: {
-          marketType: marketType,
-          contractAddress: contractAddress,
-          tokenId: tokenId ? tokenId : activeToken,
-        },
+        tokenId: tokenId ? tokenId : activeToken,
+        daoConfig: daoConfig,
       }}
     >
       {children}

@@ -13,7 +13,10 @@ export enum NounAuctionEvents {
 }
 
 export function AuctionHistory({ ...props }: BidHistoryProps) {
-  const { data, classifierPrefix } = useNounishAuctionProvider()
+  const {
+    data,
+    daoConfig: { classifierPrefix },
+  } = useNounishAuctionProvider()
 
   if (!data) return null
 

@@ -24,8 +24,6 @@ export function AuctionCountdown({
 
   const { text, isEnded } = useCountdown(startTime, endTime)
 
-  if (isEnded) return <Label>{endedCopy}</Label>
-
   return (
     <Flex direction={layoutDirection} wrap="wrap" {...props}>
       {showLabels && (
@@ -34,17 +32,17 @@ export function AuctionCountdown({
           className={lightFont}
           color="secondary"
           style={{ lineHeight: '1.15' }}
-          textAlign="right"
+          align="right"
         >
           {label}&nbsp;
         </Label>
       )}
       {!isEnded ? (
-        <Label size="lg" style={{ lineHeight: '1.15' }} textAlign="right">
+        <Label size="lg" style={{ lineHeight: '1.15' }} align="right">
           {text}
         </Label>
       ) : (
-        <Label size="lg" style={{ lineHeight: '1.15' }} textAlign="right">
+        <Label size="lg" style={{ lineHeight: '1.15' }} align="right">
           {endedCopy}
         </Label>
       )}

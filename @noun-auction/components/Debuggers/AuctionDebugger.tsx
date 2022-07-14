@@ -4,7 +4,7 @@ import { useNounishAuctionProvider } from '@noun-auction'
 import { RawDisplayer } from 'components/utils'
 
 export function AuctionDebugger() {
-  const { data, auctionConfigParams } = useNounishAuctionProvider()
+  const { data, daoConfig } = useNounishAuctionProvider()
 
-  return <RawDisplayer data={{ data, auctionConfigParams }} />
+  return <RawDisplayer data={{ data, daoConfig }} />
 }

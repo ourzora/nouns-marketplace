@@ -1,8 +1,9 @@
 import { Accordion, Separator, Stack, FlexProps } from '@zoralabs/zord'
-import { NounishAuctionProvider, ClassifierPrefixProps } from '@noun-auction/providers'
+import { NounishAuctionProvider } from '@noun-auction/providers'
 import { ActiveAuction } from './ActiveAuction'
 import { AuctionHistory } from './AuctionHistory'
 import { AuctionDebugger } from './Debuggers'
+import { ClassifierPrefixProps, DaoConfigProps } from '@noun-auction/typings'
 
 export interface TokenInfoConfig extends FlexProps {
   hideThumbnail?: boolean
@@ -13,25 +14,20 @@ export interface TokenInfoConfig extends FlexProps {
 }
 
 export interface NounishAuctionProps extends TokenInfoConfig {
-  contractAddress: string
+  daoConfig: DaoConfigProps
   tokenId?: string
   /* View Config */
   showBidHistory?: boolean
   useInlineBid?: boolean
   debug?: boolean
-
+  /* Theming */
   flexDirection?: 'row' | 'column'
   wrapperDirection?: 'row' | 'column'
-
-  marketType: string
-  classifierPrefix?: ClassifierPrefixProps
-
   showLabels?: boolean
 }
 
 export function NounishAuction({
-  marketType,
-  contractAddress,
+  daoConfig,
   tokenId,
   showBidHistory = false,
   useInlineBid = false,
@@ -43,20 +39,12 @@ export function NounishAuction({
   flexDirection = 'row',
   wrapperDirection = 'row',
   thumbnailSize = '100%',
-  classifierPrefix = undefined,
   showLabels = false,
   ...props
 }: NounishAuctionProps) {
   return (
     <Stack {...props}>
-      <NounishAuctionProvider
-        classifierPrefix={classifierPrefix}
-        auctionConfigParams={{
-          contractAddress: contractAddress,
-          marketType: marketType,
-          tokenId: tokenId,
-        }}
-      >
+      <NounishAuctionProvider daoConfig={daoConfig} tokenId={tokenId}>
         <Stack>
           <ActiveAuction
             wrapperDirection={useInlineBid ? 'column' : 'row'}

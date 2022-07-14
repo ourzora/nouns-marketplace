@@ -33,7 +33,7 @@ export function AuctionHighBid({
           className={lightFont}
           color="secondary"
           style={{ lineHeight: '1.15' }}
-          textAlign="right"
+          align="right"
         >
           {label}
         </Label>
@@ -41,7 +41,7 @@ export function AuctionHighBid({
       <Label
         style={{ lineHeight: '1.15' }}
         size="lg"
-        textAlign="right"
+        align="right"
       >{`${ethValue} ${ethSymbol}`}</Label>
     </Flex>
   )

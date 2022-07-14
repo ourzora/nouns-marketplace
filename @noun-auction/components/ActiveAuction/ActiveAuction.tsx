@@ -32,35 +32,32 @@ export function ActiveAuction({
   routePrefix,
   ...props
 }: ActiveAuctionProps) {
-  const { data, isComplete, auctionConfigParams } = useNounishAuctionProvider()
-
-  if (!data) return null
-
-  const marketData = data.markets?.nodes[0]?.market
-  const marketProperties = marketData?.properties
-
-  /**
-   * Normalze auctionData
-   */
+  const { data, isComplete, daoConfig, tokenId } = useNounishAuctionProvider()
 
   const auctionData = useMemo(() => {
-    return {
-      countdown: {
-        startTime: marketProperties?.startTime,
-        endTime: marketProperties?.endTime,
-      },
-      highBid: {
-        ethValue: marketProperties?.highestBidPrice?.chainTokenPrice?.decimal,
-        usdcValue: numberFormatter(
-          roundTwoDecimals(marketProperties?.highestBidPrice?.usdcPrice?.decimal)
-        ),
-      },
-      bidder: {
-        address: marketProperties?.highestBidder,
-        txHash: marketData?.transactionInfo.transactionHash,
-      },
+    if (data) {
+      const marketData = data.markets?.nodes[0]?.market
+      const marketProperties = marketData?.properties
+      return {
+        countdown: {
+          startTime: marketProperties?.startTime,
+          endTime: marketProperties?.endTime,
+        },
+        highBid: {
+          ethValue: marketProperties?.highestBidPrice?.chainTokenPrice?.decimal,
+          usdcValue: numberFormatter(
+            roundTwoDecimals(marketProperties?.highestBidPrice?.usdcPrice?.decimal)
+          ),
+        },
+        bidder: {
+          address: marketProperties?.highestBidder,
+          txHash: marketData?.transactionInfo.transactionHash,
+        },
+      }
     }
   }, [data])
+
+  if (!auctionData) return null
 
   return (
     <Flex
@@ -78,8 +75,8 @@ export function ActiveAuction({
           hideTitle={hideTitle}
           hideCollectionTitle={hideCollectionTitle}
           routePrefix={routePrefix}
-          tokenId={auctionConfigParams?.tokenId}
-          contractAddress={auctionConfigParams?.contractAddress}
+          tokenId={tokenId}
+          contractAddress={daoConfig?.contractAddress}
         />
         {!isComplete ? (
           <Grid

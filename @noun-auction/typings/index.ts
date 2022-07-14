@@ -22,6 +22,13 @@ export enum NounEventTypes {
   NOUNS_AUCTION_EVENT = 'NOUNS_AUCTION_EVENT',
 }
 
+export type ClassifierPrefixProps = {
+  keyPrefix: string
+  typePrefix: string
+} | null
+
+export type NounishMarketTypes = 'NOUNS_AUCTION' | 'LIL_NOUNS_AUCTION'
+
 export enum NounishAuctionEventTypes {
   LIL_NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT',
   LIL_NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT',
@@ -37,4 +44,12 @@ export enum NounishAuctionEventTypes {
   NOUNS_AUCTION_HOUSE_AUCTION_TIME_BUFFER_UPDATED_EVENT = 'NOUNS_AUCTION_HOUSE_AUCTION_TIME_BUFFER_UPDATED_EVENT',
   NOUNS_AUCTION_HOUSE_AUCTION_RESERVE_PRICE_UPDATED_EVENT = 'NOUNS_AUCTION_HOUSE_AUCTION_RESERVE_PRICE_UPDATED_EVENT',
   NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED = 'NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED',
+}
+
+export type DaoConfigProps = {
+  contractAddress: string
+  auctionContractAddress: string
+  marketType: NounishMarketTypes
+  classifierPrefix: ClassifierPrefixProps
+  abi: any
 }

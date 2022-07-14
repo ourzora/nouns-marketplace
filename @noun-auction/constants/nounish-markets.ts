@@ -1,8 +1,8 @@
 /**
  * Ideally there would be a simple pattern for naming convention of these market types - as more are added.
  */
-
-export type NounishMarketTypes = 'NOUNS_AUCTION' | 'LIL_NOUNS_AUCTION'
+import { NounishMarketTypes, DaoConfigProps } from '@noun-auction/typings'
+import { nounsAbi } from '@noun-auction/contracts'
 
 export type NounishMarketTypesProps = {
   type: NounishMarketTypes
@@ -46,3 +46,11 @@ export function returnMarketProps(marketType: NounishMarketTypes) {
 }
 
 export const defaultMarketTypes = returnMarketProps('NOUNS_AUCTION')
+
+export const defaultDaoConfig: DaoConfigProps = {
+  contractAddress: '0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03',
+  auctionContractAddress: '0x830BD73E4184ceF73443C15111a1DF14e495C706',
+  marketType: 'NOUNS_AUCTION',
+  classifierPrefix: null,
+  abi: nounsAbi,
+}

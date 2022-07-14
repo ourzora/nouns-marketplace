@@ -10,10 +10,8 @@ export default function NounsAuctionHistory() {
         {daos.map((dao) => {
           return (
             <NounishAuction
-              key={dao.collectionAddress}
-              contractAddress={dao.collectionAddress}
-              marketType={dao.marketType}
-              classifierPrefix={dao.classifierPrefix}
+              key={dao.contractAddress}
+              daoConfig={dao}
               debug
               showBidHistory
               className={nounishAuctionRow}
@@ -23,9 +21,7 @@ export default function NounsAuctionHistory() {
         <Stack>
           <Heading mb="x4">Completed Nouns auction</Heading>
           <NounishAuction
-            contractAddress={daos[0].collectionAddress}
-            marketType={daos[0].marketType}
-            classifierPrefix={daos[0].classifierPrefix}
+            daoConfig={daos[0]}
             tokenId="152"
             className={nounishAuctionRow}
             debug
@@ -35,9 +31,7 @@ export default function NounsAuctionHistory() {
         <Stack>
           <Heading mb="x4">Completed LilNouns auction</Heading>
           <NounishAuction
-            contractAddress={daos[1].collectionAddress}
-            marketType={daos[1].marketType}
-            classifierPrefix={daos[1].classifierPrefix}
+            daoConfig={daos[1]}
             tokenId="3282"
             className={nounishAuctionRow}
             debug

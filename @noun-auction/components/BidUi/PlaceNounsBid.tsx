@@ -10,8 +10,11 @@ import { ModalComposition } from '@modal'
 import { NftInfo } from '@market'
 
 export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
-  const { data, auctionConfigParams, auctionContractAddress } =
-    useNounishAuctionProvider()
+  const {
+    data,
+    daoConfig: { auctionContractAddress },
+    tokenId,
+  } = useNounishAuctionProvider()
 
   if (!data) return null
 
@@ -37,7 +40,7 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
     <NounishAuctionContractProvider auctionContractAddress={auctionContractAddress}>
       {useModal ? (
         <ModalComposition
-          modalName={`nouns-bid-${auctionConfigParams?.tokenId}`}
+          modalName={`nouns-bid-${tokenId}`}
           trigger={
             <Label className={placeBidTrigger} as="span" size="md">
               Place Bid
@@ -47,12 +50,12 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
             <Stack p="x8">
               <NftInfo
                 collectionAddress={tokenInfo.collectionAddress}
-                tokenId={auctionConfigParams?.tokenId}
+                tokenId={tokenId}
               />
               <NounsBidForm
                 mt="x4"
                 tokenAddress={tokenInfo.collectionAddress}
-                tokenId={auctionConfigParams?.tokenId}
+                tokenId={tokenId}
                 currentBidAmount={tokenInfo.currentBidAmount}
                 rawCurrentBidAmount={tokenInfo.rawCurrentBidAmount}
                 onConfirmation={handleOnConfirmation}
@@ -65,7 +68,7 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
           mt="x4"
           w="100%"
           tokenAddress={tokenInfo.collectionAddress}
-          tokenId={auctionConfigParams?.tokenId}
+          tokenId={tokenId}
           currentBidAmount={tokenInfo.currentBidAmount}
           rawCurrentBidAmount={tokenInfo.rawCurrentBidAmount}
           onConfirmation={handleOnConfirmation}
