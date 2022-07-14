@@ -8,7 +8,6 @@ export default function NounsAuctionHistory() {
     <TestPageWrapper title="Active Noun Auction" width="100%" maxWidth="100%">
       <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x4">
         {daos.map((dao) => {
-          console.log(dao.classifierPrefix)
           return (
             <NounishAuction
               key={dao.collectionAddress}
@@ -55,7 +54,7 @@ export default function NounsAuctionHistory() {
             contractAddress={daos[1].collectionAddress}
             marketType={daos[1].marketType}
             classifierPrefix={daos[1].classifierPrefix}
-            tokenId="3266"
+            tokenId="3282"
             hideCollectionTitle={false}
             backgroundColor="primary"
             borderColor="secondary"

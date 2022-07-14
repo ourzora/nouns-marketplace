@@ -26,7 +26,11 @@ export function AuctionHistory({ ...props }: BidHistoryProps) {
     <Stack {...props} gap="x2">
       {data.events.nodes.length &&
         data.events.nodes.map((event: any) => (
-          <Stack key={`${event.transactionInfo.transactionHash}`}>
+          <Stack
+            key={`${event.transactionInfo.transactionHash}-${
+              event.properties[`${auctionEventTypeKey()}`]
+            }`}
+          >
             {event.properties[`${auctionEventTypeKey()}`] ===
             `${classifierPrefix !== null ? classifierPrefix?.typePrefix : ''}${
               NounAuctionEvents.bidPlaced

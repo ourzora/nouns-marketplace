@@ -1,4 +1,4 @@
-import { Stack, StackProps } from '@zoralabs/zord'
+import { Accordion, Separator, Stack, StackProps } from '@zoralabs/zord'
 import { NounishAuctionProvider, ClassifierPrefixProps } from '@noun-auction/providers'
 import { ActiveAuction } from './ActiveAuction'
 import { AuctionHistory } from './AuctionHistory'
@@ -60,7 +60,14 @@ export function NounishAuction({
             useModal={!useInlineBid}
           />
           {showBidHistory && <AuctionHistory px="x4" pb="x4" />}
-          {debug && <AuctionDebugger />}
+          {debug && (
+            <Stack p="x4" mb="x3">
+              <Separator mb="x4" />
+              <Accordion label="Api Data">
+                <AuctionDebugger />
+              </Accordion>
+            </Stack>
+          )}
         </Stack>
       </NounishAuctionProvider>
     </Stack>

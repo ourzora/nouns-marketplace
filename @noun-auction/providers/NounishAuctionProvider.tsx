@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode } from 'react'
+import { createContext, useContext, ReactNode, useMemo } from 'react'
 import { useNounishAuctionQuery, useActiveNounishAuctionQuery } from '@noun-auction/hooks'
 import { NounAuctionQueryProps } from '@noun-auction/data'
 import { returnDaoAuctionContract } from 'constants/collection-addresses'
@@ -14,6 +14,7 @@ const NounsAuctionContext = createContext<{
   auctionConfigParams?: NounAuctionQueryProps
   auctionContractAddress?: string
   classifierPrefix?: ClassifierPrefixProps
+  isComplete?: boolean
 }>({})
 
 export function useNounishAuctionProvider() {
@@ -46,6 +47,20 @@ export function NounishAuctionProvider({
     tokenId: tokenId ? tokenId : activeToken,
   })
 
+  const isComplete = useMemo(() => {
+    console.log('data', data)
+    if (!data) {
+      return false
+    } else {
+      return (
+        data?.token?.markets[0]?.status === 'COMPLETED' ||
+        Object.values(data?.events?.nodes[0]?.properties).includes(
+          `${classifierPrefix?.typePrefix}NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT`
+        )
+      )
+    }
+  }, [data])
+
   return (
     <NounsAuctionContext.Provider
       value={{
@@ -53,6 +68,7 @@ export function NounishAuctionProvider({
         error,
         auctionContractAddress: auctionContractAddress,
         classifierPrefix,
+        isComplete,
         auctionConfigParams: {
           marketType: marketType,
           contractAddress: contractAddress,

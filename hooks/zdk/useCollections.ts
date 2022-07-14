@@ -19,7 +19,6 @@ export function useCollections() {
           where: { collectionAddresses: collectionAddresses },
         })
         setCollections(data?.collections?.nodes)
-        console.log(data)
         setLoading(false)
       } catch (error) {
         setError(error)

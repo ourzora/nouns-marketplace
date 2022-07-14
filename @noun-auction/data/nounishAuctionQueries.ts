@@ -119,6 +119,7 @@ export function nounAuctionQuery({
       markets {
         marketType
         status
+        tokenId
       }
     }
     events(
