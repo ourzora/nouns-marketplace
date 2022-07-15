@@ -70,9 +70,9 @@ export function NounsBidForm({
       { setSubmitting }: FormikHelpers<NounsBidFormState>
     ) => {
       // console.log(data, isError, isLoading, write)
-      console.log('submit', values)
+      // console.log('submit', values)
       try {
-        console.log('submit', values.amount)
+        // console.log('submit', values.amount)
         /*
         placeBid(tokenId, {
           value,

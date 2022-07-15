@@ -28,18 +28,15 @@ export function TokenInfo({
 
   const { data } = useNFT(contractAddress, tokenId)
 
-  const address = contractAddress ? contractAddress.toLowerCase() : ''
-
   /* Make this router pattern optional / customizeable */
   const contractLinkHandler = useCallback((e) => {
     e.preventDefault()
-
-    router.push(`/${routePrefix}/${address}}`)
+    router.push(`/${routePrefix}/${contractAddress}`)
   }, [])
 
   const tokenLinkHandler = useCallback((e) => {
     e.preventDefault()
-    router.push(`/${routePrefix}/${address}}/${tokenId}`)
+    router.push(`/${routePrefix}/${contractAddress}/${tokenId}`)
   }, [])
 
   if (!data) {

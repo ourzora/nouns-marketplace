@@ -17,6 +17,8 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
   const { metadata, media, nft } = nftData
   const { image } = useRawImageTransform(media?.thumbnail?.uri)
 
+  // console.log(nftData)
+
   const srcImg = useMemo(() => {
     if (media?.mimeType === 'image/svg+xml') {
       return media?.image?.uri

@@ -17,6 +17,7 @@ export function NFTGrid({
   isReachingEnd,
   handleLoadMore,
 }: NFTGridProps) {
+  // console.log('NFTS', items)
   return (
     <>
       <Stack gap="x14" pb="x10">

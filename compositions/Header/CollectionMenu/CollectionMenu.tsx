@@ -92,6 +92,7 @@ export function CollectionMenu() {
             />
             {menuCategories.map((category) => (
               <CollectionNavList
+                key={category.id}
                 items={category.items}
                 display={category.id === tab ? 'flex' : 'none'}
               />

@@ -30,7 +30,7 @@
     "@zoralabs/core": "^1.0.1",
     "@zoralabs/nft-hooks": "^1.1.7",
     "@zoralabs/v3": "1.0.1",
-    "@zoralabs/zdk": "^2.1.2",
+    "@zoralabs/zdk": "^2.1.3",
     "@zoralabs/zord": "file:.yalc/@zoralabs/zord",
     "assert": "^2.0.0",
     "bignumber.js": "^9.0.2",

@@ -32,8 +32,6 @@ export function MarketUi({
     contractAddress: contractAddress,
   })
 
-  console.log(activeToken)
-
   if (tokenId === activeToken) {
     return (
       <NounishAuction

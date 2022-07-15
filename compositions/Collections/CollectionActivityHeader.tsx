@@ -7,8 +7,6 @@ export function CollectionActivityHeader() {
     filterStore: { filters, setMarketStatus },
   } = useCollectionFilters()
 
-  console.log(filters)
-
   const items: HorizontalMenuProps['items'] = [
     {
       id: null,

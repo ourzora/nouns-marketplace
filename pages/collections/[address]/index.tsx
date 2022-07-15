@@ -36,18 +36,8 @@ const Collection = ({
       <Seo title={seo.title} description={seo.description} />
       <CollectionHeader collection={collection} aggregateStats={aggregateStats} />
       <MarketStats aggregateStats={aggregateStats} />
-      {/*isNounsAuction && (
-        <Stack mt="x8">
-          <ActiveAuction
-            auctionRenderer="CurrentBid"
-            backgroundColor="tertiary"
-            borderRadius="phat"
-          />
-        </Stack>
-      )*/}
       {contractAddress && (
         <CollectionFilterProvider
-          // useSortDropdown
           useSidebarClearButton
           contractAddress={contractAddress}
           initialPage={initialPage}
