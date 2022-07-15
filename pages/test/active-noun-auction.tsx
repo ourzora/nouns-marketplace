@@ -15,6 +15,7 @@ export default function NounsAuctionHistory() {
               debug
               showBidHistory
               className={nounishAuctionRow}
+              showLabels
             />
           )
         })}
@@ -26,16 +27,18 @@ export default function NounsAuctionHistory() {
             className={nounishAuctionRow}
             debug
             showBidHistory
+            showLabels
           />
         </Stack>
         <Stack>
           <Heading mb="x4">Completed LilNouns auction</Heading>
           <NounishAuction
             daoConfig={daos[1]}
-            tokenId="3282"
+            tokenId="3370"
             className={nounishAuctionRow}
             debug
             showBidHistory
+            showLabels
           />
         </Stack>
       </Grid>

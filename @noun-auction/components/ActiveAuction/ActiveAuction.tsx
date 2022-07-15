@@ -1,5 +1,5 @@
-import { useMemo } from 'react'
-import { Stack, Flex, Grid, Separator } from '@zoralabs/zord'
+import { useMemo, useState } from 'react'
+import { Stack, Flex, Grid, Separator, Label } from '@zoralabs/zord'
 
 // @noun-auction
 import { TokenInfoConfig } from '../NounishAuction'
@@ -7,6 +7,7 @@ import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { AuctionCountdown, AuctionBidder, AuctionHighBid } from '../DataRenderers'
 import { PlaceNounsBid } from '../BidUi/PlaceNounsBid'
 import { TokenInfo } from './TokenInfo'
+import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 
 // @shared
 import { numberFormatter } from 'utils/numbers'
@@ -32,12 +33,22 @@ export function ActiveAuction({
   routePrefix,
   ...props
 }: ActiveAuctionProps) {
-  const { data, isComplete, daoConfig, tokenId } = useNounishAuctionProvider()
+  const { data, isComplete, daoConfig, tokenId, timerComplete } =
+    useNounishAuctionProvider()
+  // const [ timerComplete, setTimerComplete ] = useState(false)
+
+  const noAuctioHistory = useMemo(() => {
+    console.log(tokenId, data?.token?.token?.owner)
+    return data?.events?.nodes.length === 0
+  }, [data])
 
   const auctionData = useMemo(() => {
-    if (data) {
+    if (data && data.markets?.nodes.length) {
       const marketData = data.markets?.nodes[0]?.market
       const marketProperties = marketData?.properties
+
+      // console.log(isComplete, data.events?.nodes[0].properties)
+
       return {
         countdown: {
           startTime: marketProperties?.startTime,
@@ -68,7 +79,7 @@ export function ActiveAuction({
       className={['nounish-auction__auction-data-wrapper']}
       {...props}
     >
-      <Flex gap="x4" w="100%">
+      <Flex gap="x4" w="100%" justify="space-between">
         <TokenInfo
           thumbnailSize={thumbnailSize}
           hideThumbnail={hideThumbnail}
@@ -78,7 +89,7 @@ export function ActiveAuction({
           tokenId={tokenId}
           contractAddress={daoConfig?.contractAddress}
         />
-        {!isComplete ? (
+        {!isComplete && !noAuctioHistory ? (
           <Grid
             gap={hideTitle || flexDirection === 'row' ? 'x4' : 'x0'}
             direction={flexDirection}
@@ -112,12 +123,16 @@ export function ActiveAuction({
             />
           </Grid>
         ) : (
-          <Flex>
+          <Flex h="100%" align="center" justify="flex-end">
             <AuctionBidder
-              address={auctionData.bidder.address}
+              address={
+                noAuctioHistory ? data?.token?.token?.owner : auctionData.bidder.address
+              }
               txHash={auctionData.bidder.txHash}
               layoutDirection={flexDirection === 'row' ? 'column' : 'row'}
-              label="Winning Bid"
+              label={noAuctioHistory ? 'Owned by' : 'Winning Bid'}
+              showLabels={true}
+              align={'flex-end'}
             />
           </Flex>
         )}
@@ -126,7 +141,15 @@ export function ActiveAuction({
         <Flex align="center" justify="flex-end">
           <Stack w="100%">
             {!useModal && <Separator mt="x1" />}
-            <PlaceNounsBid useModal={useModal} />
+            {timerComplete ? (
+              <Stack w="100%">
+                <Label className={placeBidTrigger} as="span" size="md">
+                  Settle Auction
+                </Label>
+              </Stack>
+            ) : (
+              <PlaceNounsBid useModal={useModal} />
+            )}
           </Stack>
         </Flex>
       )}

@@ -122,6 +122,13 @@ export function nounAuctionQuery({
         status
         tokenId
       }
+      token {
+        owner
+        mintInfo {
+          originatorAddress
+          toAddress
+        }
+      }
     }
     events(
       filter: {
