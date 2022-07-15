@@ -1,7 +1,57 @@
 import { style } from '@vanilla-extract/css'
 import { atoms, media } from '@zoralabs/zord'
+import { recipe } from '@vanilla-extract/recipes'
 
-// const STACK_BREAKPOINT = 750
+export const auctionWrapperVariants = {
+  layout: {
+    row: [
+      {
+        height: '68px',
+        gridTemplateColumns: '300px repeat(3, 1fr) 155px',
+      },
+      atoms({
+        height: '100%',
+      }),
+    ],
+    withHistory: [
+      {
+        gridTemplateColumns: '300px repeat(3, 1fr) 155px',
+        gridTemplateRows: '68px 1fr auto',
+      },
+    ],
+  },
+}
+
+export const auctionWrapper = recipe({
+  variants: auctionWrapperVariants,
+  base: style([
+    atoms({
+      width: '100%',
+      position: 'relative',
+    }),
+  ]),
+  defaultVariants: {
+    layout: 'row',
+  },
+})
+
+export const bidHistoryWrapper = style([
+  {
+    gridRowStart: 2,
+    gridRowEnd: 2,
+    gridColumnStart: 1,
+    gridColumnEnd: 6,
+  },
+])
+
+export const debugWrapper = style([
+  {
+    gridRowStart: 3,
+    gridRowEnd: 3,
+    gridColumnStart: 1,
+    gridColumnEnd: 6,
+  },
+])
 
 export const tokenInfoWrapper = style([
   {

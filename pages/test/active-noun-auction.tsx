@@ -14,31 +14,92 @@ export default function NounsAuctionHistory() {
               daoConfig={dao}
               debug
               showBidHistory
-              className={nounishAuctionRow}
               showLabels
+              layout="withHistory"
+              /* Wrapper Styling */
+              borderColor="secondary"
+              borderStyle="solid"
+              borderWidth="normal"
+              borderRadius="phat"
+              backgroundColor="primary"
+              p="x4"
             />
           )
         })}
+      </Grid>
+      <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x4">
         <Stack>
           <Heading mb="x4">Completed Nouns auction</Heading>
           <NounishAuction
             daoConfig={daos[0]}
             tokenId="152"
-            className={nounishAuctionRow}
             debug
             showBidHistory
             showLabels
+            layout="withHistory"
+            /* Wrapper Styling */
+            borderColor="secondary"
+            borderStyle="solid"
+            borderWidth="normal"
+            borderRadius="phat"
+            backgroundColor="primary"
+            p="x4"
           />
         </Stack>
         <Stack>
           <Heading mb="x4">Completed LilNouns auction</Heading>
           <NounishAuction
             daoConfig={daos[1]}
-            tokenId="3370"
-            className={nounishAuctionRow}
+            tokenId="3369"
             debug
             showBidHistory
             showLabels
+            layout="withHistory"
+            /* Wrapper Styling */
+            borderColor="secondary"
+            borderStyle="solid"
+            borderWidth="normal"
+            borderRadius="phat"
+            backgroundColor="primary"
+            p="x4"
+          />
+        </Stack>
+      </Grid>
+      <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x4">
+        <Stack>
+          <Heading mb="x4">Nouns No Auction: Winner nounders.eth</Heading>
+          <NounishAuction
+            daoConfig={daos[0]}
+            tokenId="300"
+            debug
+            showBidHistory
+            showLabels
+            layout="withHistory"
+            /* Wrapper Styling */
+            borderColor="secondary"
+            borderStyle="solid"
+            borderWidth="normal"
+            borderRadius="phat"
+            backgroundColor="primary"
+            p="x4"
+          />
+        </Stack>
+        <Stack>
+          <Heading mb="x4">LilNouns No Auction: Winner lilnounders.eth</Heading>
+          <NounishAuction
+            daoConfig={daos[1]}
+            tokenId="3370"
+            debug
+            showBidHistory
+            showLabels
+            layout="withHistory"
+            /* Wrapper Styling */
+            borderColor="secondary"
+            borderStyle="solid"
+            borderWidth="normal"
+            borderRadius="phat"
+            backgroundColor="primary"
+            p="x4"
           />
         </Stack>
       </Grid>

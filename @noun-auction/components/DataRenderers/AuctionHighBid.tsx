@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { Flex, Label } from '@zoralabs/zord'
 
 // @noun-auction
@@ -5,6 +6,7 @@ import { SharedDataRendererProps } from '@noun-auction/typings'
 
 // @shared
 import { lightFont } from 'styles/styles.css'
+import { roundTwoDecimals } from 'utils/math'
 
 export function AuctionHighBid({
   label = 'Current bid',
@@ -21,6 +23,10 @@ export function AuctionHighBid({
   usdcValue: string
   useUsdc?: boolean
 } & SharedDataRendererProps) {
+  const roundedEthValue = useMemo(() => {
+    return ethValue ? roundTwoDecimals(parseFloat(ethValue)) : 'N/A'
+  }, [ethValue])
+
   return (
     <Flex
       direction={layoutDirection}
@@ -42,7 +48,7 @@ export function AuctionHighBid({
         style={{ lineHeight: '1.15' }}
         size="lg"
         align="right"
-      >{`${ethValue} ${ethSymbol}`}</Label>
+      >{`${roundedEthValue} ${ethSymbol}`}</Label>
     </Flex>
   )
 }

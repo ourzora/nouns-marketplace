@@ -115,7 +115,8 @@ export function nounAuctionQuery({
       {
         address: "${contractAddress}",
         tokenId: "${tokenId}",
-      }
+      },
+      network: {chain: MAINNET}
     ) {
       markets {
         marketType

@@ -1,11 +1,17 @@
-import { Accordion, Separator, Stack, FlexProps } from '@zoralabs/zord'
+import { Accordion, Separator, Stack, BoxProps, Grid } from '@zoralabs/zord'
 import { NounishAuctionProvider } from '@noun-auction/providers'
 import { ActiveAuction } from './ActiveAuction'
 import { AuctionHistory } from './AuctionHistory'
 import { AuctionDebugger } from './Debuggers'
-import { ClassifierPrefixProps, DaoConfigProps } from '@noun-auction/typings'
+import {
+  auctionWrapper,
+  auctionWrapperVariants,
+  bidHistoryWrapper,
+  debugWrapper,
+} from '@noun-auction/styles/NounishStyles.css'
+import { DaoConfigProps } from '@noun-auction/typings'
 
-export interface TokenInfoConfig extends FlexProps {
+export interface TokenInfoConfig extends BoxProps {
   hideThumbnail?: boolean
   hideTitle?: boolean
   hideCollectionTitle?: boolean
@@ -21,12 +27,12 @@ export interface NounishAuctionProps extends TokenInfoConfig {
   useInlineBid?: boolean
   debug?: boolean
   /* Theming */
-  flexDirection?: 'row' | 'column'
-  wrapperDirection?: 'row' | 'column'
+  layout?: keyof typeof auctionWrapperVariants['layout']
   showLabels?: boolean
 }
 
 export function NounishAuction({
+  layout = 'row',
   daoConfig,
   tokenId,
   showBidHistory = false,
@@ -36,43 +42,43 @@ export function NounishAuction({
   debug = false,
   hideCollectionTitle = false,
   routePrefix = 'collections',
-  flexDirection = 'row',
-  wrapperDirection = 'row',
   thumbnailSize = '100%',
   showLabels = false,
   ...props
 }: NounishAuctionProps) {
   return (
-    <Stack {...props}>
+    <Grid
+      className={[
+        'nounish-auction__auction-data-wrapper',
+        auctionWrapper({ layout: layout }),
+      ]}
+      {...props}
+    >
       <NounishAuctionProvider daoConfig={daoConfig} tokenId={tokenId}>
-        <Stack>
-          <ActiveAuction
-            wrapperDirection={useInlineBid ? 'column' : 'row'}
-            flexDirection={flexDirection}
-            hideThumbnail={hideThumbnail}
-            hideTitle={hideTitle}
-            hideCollectionTitle={hideCollectionTitle}
-            thumbnailSize={thumbnailSize}
-            routePrefix={routePrefix}
-            useModal={!useInlineBid}
-            showLabels={showLabels}
-          />
-          {showBidHistory && (
-            <Stack>
-              <Separator mt="x4" />
-              <AuctionHistory mt="x2" />
-            </Stack>
-          )}
-          {debug && (
-            <Stack py="x2" mb="x2">
-              <Separator mb="x4" />
-              <Accordion label="Api Data">
-                <AuctionDebugger />
-              </Accordion>
-            </Stack>
-          )}
-        </Stack>
+        <ActiveAuction
+          layout={layout}
+          hideThumbnail={hideThumbnail}
+          hideTitle={hideTitle}
+          hideCollectionTitle={hideCollectionTitle}
+          thumbnailSize={thumbnailSize}
+          routePrefix={routePrefix}
+          useModal={!useInlineBid}
+          showLabels={showLabels}
+        />
+        {showBidHistory && (
+          <AuctionHistory mt="x2" className={bidHistoryWrapper}>
+            <Separator mt="x4" />
+          </AuctionHistory>
+        )}
+        {debug && (
+          <Stack className={debugWrapper} py="x2" mb="x2">
+            <Separator mb="x4" />
+            <Accordion label="Api Data">
+              <AuctionDebugger />
+            </Accordion>
+          </Stack>
+        )}
       </NounishAuctionProvider>
-    </Stack>
+    </Grid>
   )
 }

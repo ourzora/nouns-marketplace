@@ -54,11 +54,11 @@ export function AuctionBidder({
       <Flex>
         <Label size="lg" style={{ lineHeight: '1.15' }} align="right">
           <Flex gap="x2" align="center">
-            <EnsAvatar address={address} />
             <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
               {ensName ? ensName : shortAddress}
             </Flex>
-            <Icon id="ArrowRightAngle" size="sm" />
+            {/*<Icon id="ArrowRightAngle" size="sm" />*/}
+            <EnsAvatar address={address} />
           </Flex>
         </Label>
       </Flex>
