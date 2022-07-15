@@ -5,7 +5,7 @@ import { BigNumber as EthersBN } from 'ethers'
 import { Flex, Label, Box, BoxProps, Button } from '@zoralabs/zord'
 
 // @noun-auction
-import { useNounishAuctionContract } from '@noun-auction/providers'
+import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { useNounBidIncrement } from '@noun-auction'
 
 // Imports from @markets
@@ -13,7 +13,6 @@ import { PrintError, BigNumberField } from '@market/components'
 import { Currency, ETH_CURRENCY_SHIM } from '@market/utils'
 
 interface NounsBidFormProps extends BoxProps {
-  tokenId?: string
   tokenAddress: string
   isUpdate?: boolean
   currentBidAmount?: any
@@ -32,7 +31,6 @@ const initialValues: NounsBidFormState = {
 }
 
 export function NounsBidForm({
-  tokenId,
   tokenAddress,
   onConfirmation,
   currentBidAmount,
@@ -40,14 +38,17 @@ export function NounsBidForm({
   isUpdate = false,
   ...props
 }: NounsBidFormProps) {
-  const { abi, auctionContractAddress } = useNounishAuctionContract()
+  const {
+    daoConfig: { auctionContractAddress, abi },
+    tokenId,
+    contract: { minBidIncrementPercentage },
+  } = useNounishAuctionProvider()
 
   if (!abi || !auctionContractAddress) return null
 
   const { minBidAmount } = useNounBidIncrement(
-    abi,
-    auctionContractAddress,
-    rawCurrentBidAmount
+    rawCurrentBidAmount,
+    minBidIncrementPercentage
   )
 
   /* @ts-ignore */
@@ -84,7 +85,7 @@ export function NounsBidForm({
         setSubmitting(false)
       }
     },
-    [tokenAddress, tokenId, data]
+    [tokenId, data]
   )
 
   return (

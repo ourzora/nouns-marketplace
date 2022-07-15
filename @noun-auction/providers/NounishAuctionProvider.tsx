@@ -2,6 +2,7 @@ import { createContext, useContext, ReactNode, useMemo } from 'react'
 import { useNounishAuctionQuery, useActiveNounishAuctionQuery } from '@noun-auction/hooks'
 import { DaoConfigProps } from '@noun-auction/typings'
 import { defaultDaoConfig } from '@noun-auction/constants'
+import { useContractRead } from 'wagmi'
 
 export type NounishAuctionProviderProps = {
   tokenId?: string
@@ -15,6 +16,7 @@ const NounsAuctionContext = createContext<{
   daoConfig: DaoConfigProps
   tokenId?: string
   isComplete?: boolean
+  contract?: any
 }>({
   daoConfig: defaultDaoConfig,
 })
@@ -28,11 +30,18 @@ export function NounishAuctionProvider({
   tokenId,
   children,
 }: NounishAuctionProviderProps) {
-  const { marketType, contractAddress, classifierPrefix } = daoConfig
+  const { marketType, contractAddress, classifierPrefix, abi, auctionContractAddress } =
+    daoConfig
 
   const { activeToken } = useActiveNounishAuctionQuery({
     marketType,
     contractAddress,
+  })
+
+  const { data: minBidIncrementPercentage } = useContractRead({
+    addressOrName: auctionContractAddress,
+    contractInterface: abi,
+    functionName: 'minBidIncrementPercentage',
   })
 
   const { data, error } = useNounishAuctionQuery({
@@ -63,6 +72,9 @@ export function NounishAuctionProvider({
         isComplete,
         tokenId: tokenId ? tokenId : activeToken,
         daoConfig: daoConfig,
+        contract: {
+          minBidIncrementPercentage: minBidIncrementPercentage,
+        },
       }}
     >
       {children}

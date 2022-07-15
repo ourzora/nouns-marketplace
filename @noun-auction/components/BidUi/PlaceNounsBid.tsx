@@ -2,7 +2,6 @@ import { useMemo, useCallback } from 'react'
 import { Stack, Label } from '@zoralabs/zord'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { NounsBidForm } from './NounsBidForm'
-import { NounishAuctionContractProvider } from '@noun-auction/providers'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { ModalComposition } from '@modal'
 
@@ -10,11 +9,7 @@ import { ModalComposition } from '@modal'
 import { NftInfo } from '@market'
 
 export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
-  const {
-    data,
-    daoConfig: { auctionContractAddress },
-    tokenId,
-  } = useNounishAuctionProvider()
+  const { data, tokenId } = useNounishAuctionProvider()
 
   if (!data) return null
 
@@ -32,12 +27,8 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
     console.log('confirmed')
   }, [])
 
-  if (!auctionContractAddress) {
-    return null
-  }
-
   return (
-    <NounishAuctionContractProvider auctionContractAddress={auctionContractAddress}>
+    <>
       {useModal ? (
         <ModalComposition
           modalName={`nouns-bid-${tokenId}`}
@@ -55,7 +46,6 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
               <NounsBidForm
                 mt="x4"
                 tokenAddress={tokenInfo.collectionAddress}
-                tokenId={tokenId}
                 currentBidAmount={tokenInfo.currentBidAmount}
                 rawCurrentBidAmount={tokenInfo.rawCurrentBidAmount}
                 onConfirmation={handleOnConfirmation}
@@ -68,12 +58,11 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
           mt="x4"
           w="100%"
           tokenAddress={tokenInfo.collectionAddress}
-          tokenId={tokenId}
           currentBidAmount={tokenInfo.currentBidAmount}
           rawCurrentBidAmount={tokenInfo.rawCurrentBidAmount}
           onConfirmation={handleOnConfirmation}
         />
       )}
-    </NounishAuctionContractProvider>
+    </>
   )
 }
