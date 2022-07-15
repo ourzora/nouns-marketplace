@@ -52,7 +52,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
             <CollectionThumbnail
               collectionAddress={collection.address}
               tokenId={tokenNo}
-              radius="curved"
+              radius="round"
               size="sm"
             />
             <Label size="lg" as="span">

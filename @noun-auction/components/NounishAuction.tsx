@@ -1,53 +1,50 @@
-import { Accordion, Separator, Stack, StackProps } from '@zoralabs/zord'
-import { NounishAuctionProvider, ClassifierPrefixProps } from '@noun-auction/providers'
+import { Accordion, Separator, Stack, FlexProps } from '@zoralabs/zord'
+import { NounishAuctionProvider } from '@noun-auction/providers'
 import { ActiveAuction } from './ActiveAuction'
 import { AuctionHistory } from './AuctionHistory'
 import { AuctionDebugger } from './Debuggers'
+import { ClassifierPrefixProps, DaoConfigProps } from '@noun-auction/typings'
 
-export interface NounishAuctionProps extends StackProps {
-  marketType: string
+export interface TokenInfoConfig extends FlexProps {
+  hideThumbnail?: boolean
+  hideTitle?: boolean
+  hideCollectionTitle?: boolean
+  thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | '100%' | undefined
+  routePrefix?: string
+}
+
+export interface NounishAuctionProps extends TokenInfoConfig {
+  daoConfig: DaoConfigProps
   tokenId?: string
-  contractAddress: string
+  /* View Config */
   showBidHistory?: boolean
   useInlineBid?: boolean
-  hideThumbnail?: boolean
-  hideCollectionTitle?: boolean
-  hideTitle?: boolean
+  debug?: boolean
+  /* Theming */
   flexDirection?: 'row' | 'column'
   wrapperDirection?: 'row' | 'column'
-  thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | undefined
-  routePrefix?: string
-  debug?: boolean
-  classifierPrefix?: ClassifierPrefixProps
+  showLabels?: boolean
 }
 
 export function NounishAuction({
-  marketType,
-  contractAddress,
+  daoConfig,
   tokenId,
   showBidHistory = false,
   useInlineBid = false,
   hideThumbnail = false,
   hideTitle = false,
   debug = false,
-  hideCollectionTitle = true,
+  hideCollectionTitle = false,
   routePrefix = 'collections',
-  flexDirection = 'column',
+  flexDirection = 'row',
   wrapperDirection = 'row',
-  thumbnailSize = 'lg',
-  classifierPrefix = undefined,
+  thumbnailSize = '100%',
+  showLabels = false,
   ...props
 }: NounishAuctionProps) {
   return (
     <Stack {...props}>
-      <NounishAuctionProvider
-        classifierPrefix={classifierPrefix}
-        auctionConfigParams={{
-          contractAddress: contractAddress,
-          marketType: marketType,
-          tokenId: tokenId,
-        }}
-      >
+      <NounishAuctionProvider daoConfig={daoConfig} tokenId={tokenId}>
         <Stack>
           <ActiveAuction
             wrapperDirection={useInlineBid ? 'column' : 'row'}
@@ -58,10 +55,16 @@ export function NounishAuction({
             thumbnailSize={thumbnailSize}
             routePrefix={routePrefix}
             useModal={!useInlineBid}
+            showLabels={showLabels}
           />
-          {showBidHistory && <AuctionHistory px="x4" pb="x4" />}
+          {showBidHistory && (
+            <Stack>
+              <Separator mt="x4" />
+              <AuctionHistory mt="x2" />
+            </Stack>
+          )}
           {debug && (
-            <Stack p="x4" mb="x3">
+            <Stack py="x2" mb="x2">
               <Separator mb="x4" />
               <Accordion label="Api Data">
                 <AuctionDebugger />

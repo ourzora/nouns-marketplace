@@ -71,5 +71,11 @@ export const titleHeading = style([
 export const nftThumbnail = style([
   {
     boxShadow: '0 0 20px rgba(0, 0, 0, 0.05)',
+    aspectRatio: '1/1',
   },
+  atoms({
+    backgroundColor: 'tertiary',
+    position: 'relative',
+    overflow: 'hidden',
+  }),
 ])

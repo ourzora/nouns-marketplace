@@ -29,14 +29,17 @@ interface CollectionParamsProps extends GetServerSideProps {
 }
 
 export async function collectionService({ params }: CollectionParamsProps) {
-  const tokenAddress = params ? params.address : process.env.NEXT_PUBLIC_DEFAULT_CONTRACT
+  const tokenAddress = params
+    ? params.address.toLowerCase()
+    : process.env.NEXT_PUBLIC_DEFAULT_CONTRACT
 
-  if (tokenAddress && !allAddresses.includes(tokenAddress))
+  if (!tokenAddress) return false
+
+  if (tokenAddress && !allAddresses.includes(tokenAddress)) {
     return {
       notFound: true,
     }
-
-  if (!tokenAddress) return false
+  }
 
   try {
     let resp

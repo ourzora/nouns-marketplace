@@ -11,7 +11,7 @@ export function CollectionLink({ collection }: { collection: CollectionsData }) 
   const { aggregate } = useAggregate(collection.address)
 
   return (
-    <Link href={`/collections/${collection.address}`} passHref>
+    <Link href={`/collections/${collection.address}`}>
       <Flex align="center" justify="space-between" gap="x4" onClick={requestClose}>
         <Flex align="center" gap="x4">
           <CollectionThumbnail collectionAddress={collection.address} />

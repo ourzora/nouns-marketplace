@@ -1,15 +1,37 @@
-import { Box, Flex, Label, BoxProps } from '@zoralabs/zord'
+import { Box, Flex, Label, BoxProps, mixins } from '@zoralabs/zord'
 import { nftThumbnail } from './NftMedia.css'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { useMemo } from 'react'
 import { useRawImageTransform } from './hooks/useRawImageTransform'
 
+export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
+
+export const returnThumbnailSize = (size: SizeProps) => {
+  switch (size) {
+    case '100%':
+      return '100%'
+    case 'xxs':
+      return 'x8'
+    case 'xs':
+      return 'x10'
+    case 'sm':
+      return 'x14'
+    case 'md':
+      return 'x20'
+    case 'lg':
+      return 'x30'
+    default:
+      return '100%'
+  }
+}
+
 export interface CollectionThumbnailProps extends BoxProps {
   collectionAddress: string | undefined
   tokenId?: string
-  size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg'
+  size?: SizeProps
   radius?: 'curved' | 'round' | 'phat'
   useTitle?: boolean
+  thumbnailStyle?: any
 }
 
 export function CollectionThumbnail({
@@ -18,43 +40,25 @@ export function CollectionThumbnail({
   size = 'md',
   radius = 'curved',
   useTitle = false,
+  thumbnailStyle,
   ...props
 }: CollectionThumbnailProps) {
   const { data } = useNFT(collectionAddress, tokenId)
   const { image } = useRawImageTransform(data?.media?.image?.uri)
-
-  const thumbnailSize = useMemo(() => {
-    switch (size) {
-      case 'xxs':
-        return 'x8'
-      case 'xs':
-        return 'x10'
-      case 'sm':
-        return 'x14'
-      case 'md':
-        return 'x20'
-      case 'lg':
-        return 'x30'
-      default:
-        return 'x14'
-    }
-  }, [size])
 
   if (!collectionAddress) return null
 
   return (
     <Flex align="center" gap="x4" {...props}>
       <Box
-        w={thumbnailSize}
-        h={thumbnailSize}
-        position="relative"
-        overflow="hidden"
+        h={returnThumbnailSize(size)}
         borderRadius={radius}
-        className={nftThumbnail}
-        backgroundColor="tertiary"
+        className={['zora-media__nft-thumbnail', nftThumbnail]}
       >
-        {data?.media?.image?.uri && (
+        {data?.media?.image?.uri ? (
           <Box as="img" inset="x0" w="100%" h="100%" position="absolute" src={image} />
+        ) : (
+          <Box inset="x0" w="100%" h="100%" position="absolute" />
         )}
       </Box>
       {useTitle && <Label size="lg">{data?.nft?.contract?.name}</Label>}

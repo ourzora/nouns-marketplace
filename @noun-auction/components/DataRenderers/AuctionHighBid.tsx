@@ -11,8 +11,10 @@ export function AuctionHighBid({
   layoutDirection = 'row',
   ethSymbol = 'Ξ',
   ethValue,
+  showLabels,
   usdcValue,
   useUsdc = false,
+  ...props
 }: {
   ethSymbol?: string
   ethValue: string
@@ -20,16 +22,27 @@ export function AuctionHighBid({
   useUsdc?: boolean
 } & SharedDataRendererProps) {
   return (
-    <Flex direction={layoutDirection} gap={layoutDirection === 'row' ? 'x2' : 'x0'}>
+    <Flex
+      direction={layoutDirection}
+      gap={layoutDirection === 'row' ? 'x2' : 'x0'}
+      {...props}
+    >
+      {showLabels && (
+        <Label
+          size="lg"
+          className={lightFont}
+          color="secondary"
+          style={{ lineHeight: '1.15' }}
+          align="right"
+        >
+          {label}
+        </Label>
+      )}
       <Label
-        size="lg"
-        className={lightFont}
-        color="secondary"
         style={{ lineHeight: '1.15' }}
-      >
-        {label}
-      </Label>
-      <Label style={{ lineHeight: '1.15' }} size="lg">{`${ethValue} ${ethSymbol}`}</Label>
+        size="lg"
+        align="right"
+      >{`${ethValue} ${ethSymbol}`}</Label>
     </Flex>
   )
 }

@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import { Flex, Label } from '@zoralabs/zord'
 
 // @noun-auction
+import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { useCountdown } from '@noun-auction/hooks/useCountdown'
 import { SharedDataRendererProps } from '@noun-auction/typings'
 
@@ -10,33 +12,50 @@ import { lightFont } from 'styles/styles.css'
 export function AuctionCountdown({
   startTime,
   endTime,
-  endedCopy = 'Auction has ended',
+  showLabels,
+  endedCopy = 'Bidding & Settling',
   label = 'Ends in',
   layoutDirection = 'row',
+  ...props
 }: {
   startTime: string
   endTime: string
   endedCopy?: string
 } & SharedDataRendererProps) {
+  const { setTimerComplete } = useNounishAuctionProvider()
+
   if (!startTime || !endTime) return null
 
   const { text, isEnded } = useCountdown(startTime, endTime)
 
-  if (isEnded) return <Label>{endedCopy}</Label>
+  useEffect(() => {
+    if (isEnded) {
+      setTimerComplete(true)
+    }
+  }, [isEnded, text])
 
   return (
-    <Flex direction={layoutDirection} wrap="wrap">
-      <Label
-        size="lg"
-        className={lightFont}
-        color="secondary"
-        style={{ lineHeight: '1.15' }}
-      >
-        {label}&nbsp;
-      </Label>
-      <Label size="lg" style={{ lineHeight: '1.15' }}>
-        {text}
-      </Label>
+    <Flex direction={layoutDirection} wrap="wrap" {...props}>
+      {showLabels && (
+        <Label
+          size="lg"
+          className={lightFont}
+          color="secondary"
+          style={{ lineHeight: '1.15' }}
+          align="right"
+        >
+          {!isEnded ? label : 'Status'}&nbsp;
+        </Label>
+      )}
+      {!isEnded ? (
+        <Label size="lg" style={{ lineHeight: '1.15' }} align="right">
+          {text}
+        </Label>
+      ) : (
+        <Label size="lg" style={{ lineHeight: '1.15' }} align="right">
+          {endedCopy}
+        </Label>
+      )}
     </Flex>
   )
 }

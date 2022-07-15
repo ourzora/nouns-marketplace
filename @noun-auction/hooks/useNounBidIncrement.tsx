@@ -3,23 +3,13 @@
  */
 
 import { useMemo } from 'react'
-import { useContractRead } from 'wagmi'
 import BigNumber from 'bignumber.js'
 import { utils, BigNumber as EthersBN } from 'ethers'
 
 export function useNounBidIncrement(
-  abi: any[],
-  auctionContractAddress: string,
-  rawCurrentBidAmount: string
+  rawCurrentBidAmount: string,
+  minBidIncrementPercentage: number
 ) {
-  const { data: minBidIncrementPercentage } = useContractRead({
-    addressOrName: auctionContractAddress as string,
-    contractInterface: abi,
-    functionName: 'minBidIncrementPercentage',
-  })
-
-  console.log(auctionContractAddress, minBidIncrementPercentage)
-
   const computeMinBid = useMemo(() => {
     if (!minBidIncrementPercentage) {
       return {

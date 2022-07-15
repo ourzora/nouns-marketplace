@@ -44,17 +44,12 @@ export function CollectionRanking() {
           </Grid>
         </Grid>
       */}
-      {collections.length > 0 &&
-        collections.map((collection) => (
-          <RankingRow
-            borderColor="secondary"
-            borderStyle="solid"
-            borderWidth="thin"
-            borderRadius="phat"
-            key={collection.address}
-            collection={collection}
-          />
-        ))}
+      <Stack gap="x6">
+        {collections.length > 0 &&
+          collections.map((collection) => (
+            <RankingRow key={collection.address} collection={collection} />
+          ))}
+      </Stack>
     </Stack>
   )
 }

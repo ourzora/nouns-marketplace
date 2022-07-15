@@ -13,7 +13,6 @@ import {
   SortMethodType,
   MarketStatusFilter,
   PriceRangeFilter,
-  AdditionalMarketStatusFilters,
 } from '@filter/typings'
 
 export function marketStatusToSortAxis(marketType: MarketStatusFilter) {
@@ -84,7 +83,7 @@ export function sortMethodToSortParams(
 export function marketTypeToFilterParams(
   marketType: MarketStatusFilter
 ): TokensQueryFilter | undefined {
-  console.log('marketType', marketType)
+  console.log('TokensQueryFilter', marketType)
   switch (marketType) {
     case 'buy-now':
       return {

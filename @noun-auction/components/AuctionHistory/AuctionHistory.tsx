@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { Stack, StackProps, Flex, Label } from '@zoralabs/zord'
 
 // @noun-auction
@@ -13,7 +12,10 @@ export enum NounAuctionEvents {
 }
 
 export function AuctionHistory({ ...props }: BidHistoryProps) {
-  const { data, classifierPrefix } = useNounishAuctionProvider()
+  const {
+    data,
+    daoConfig: { classifierPrefix },
+  } = useNounishAuctionProvider()
 
   if (!data) return null
 
@@ -23,7 +25,7 @@ export function AuctionHistory({ ...props }: BidHistoryProps) {
       : 'nounsAuctionEventType'
 
   return (
-    <Stack {...props} gap="x2">
+    <Stack {...props} gap="x3">
       {data.events.nodes.length &&
         data.events.nodes.map((event: any) => (
           <Stack

@@ -37,9 +37,11 @@ type GetNFTReturnType = {
 async function getNFTs(query: TokensQueryArgs): Promise<GetNFTReturnType> {
   console.log('getNfts', query?.sort)
   const resp = await zdk.tokens(query)
+  console.log('getNFTS RESP', resp)
   const tokens = resp.tokens.nodes
     .map((token) => transformNFTZDK(token, { rawData: token }))
     .map(prepareJson)
+  console.log('tokensQuery', tokens)
   return {
     tokens,
     nextCursor: resp.tokens.pageInfo.endCursor,
@@ -53,7 +55,8 @@ export function useTokensQuery({
   sort,
   filter,
   where,
-}: UseTokenQueryProps) {
+}: // initialData,
+UseTokenQueryProps) {
   const getKey = (pageIndex: number, previousPageData: GetNFTReturnType) => {
     if (pageIndex > 0 && !previousPageData.nextCursor) return null // reached the end
     return {
@@ -86,6 +89,7 @@ export function useTokensQuery({
     size,
     isValidating,
   } = useSWRInfinite<GetNFTReturnType>(getKey, getNFTs, {
+    // fallbackData: [initialData],
     refreshInterval: 5000,
   })
 

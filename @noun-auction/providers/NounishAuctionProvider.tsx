@@ -1,44 +1,59 @@
-import { createContext, useContext, ReactNode, useMemo } from 'react'
+import {
+  createContext,
+  useContext,
+  ReactNode,
+  useMemo,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from 'react'
 import { useNounishAuctionQuery, useActiveNounishAuctionQuery } from '@noun-auction/hooks'
-import { NounAuctionQueryProps } from '@noun-auction/data'
-import { returnDaoAuctionContract } from 'constants/collection-addresses'
+import { DaoConfigProps } from '@noun-auction/typings'
+import { defaultDaoConfig } from '@noun-auction/constants'
+import { useContractRead } from 'wagmi'
 
-export type ClassifierPrefixProps = {
-  keyPrefix: string
-  typePrefix: string
-} | null
+export type NounishAuctionProviderProps = {
+  tokenId?: string
+  daoConfig: DaoConfigProps
+  children?: ReactNode
+}
 
 const NounsAuctionContext = createContext<{
   data?: any
   error?: any
-  auctionConfigParams?: NounAuctionQueryProps
-  auctionContractAddress?: string
-  classifierPrefix?: ClassifierPrefixProps
+  daoConfig: DaoConfigProps
+  tokenId?: string
   isComplete?: boolean
-}>({})
+  contract?: any
+  timerComplete: boolean
+  setTimerComplete: Dispatch<SetStateAction<boolean>>
+}>({
+  daoConfig: defaultDaoConfig,
+  timerComplete: false,
+  setTimerComplete: () => {},
+})
 
 export function useNounishAuctionProvider() {
   return useContext(NounsAuctionContext)
 }
 
-export type NounishAuctionProviderProps = {
-  auctionConfigParams: NounAuctionQueryProps
-  children?: ReactNode
-  classifierPrefix?: ClassifierPrefixProps
-}
-
 export function NounishAuctionProvider({
-  auctionConfigParams,
-  classifierPrefix,
+  daoConfig,
+  tokenId,
   children,
 }: NounishAuctionProviderProps) {
-  const { marketType, contractAddress, tokenId } = auctionConfigParams
-
-  const auctionContractAddress = returnDaoAuctionContract(contractAddress)
+  const { marketType, contractAddress, classifierPrefix, abi, auctionContractAddress } =
+    daoConfig
 
   const { activeToken } = useActiveNounishAuctionQuery({
     marketType,
     contractAddress,
+  })
+
+  const { data: minBidIncrementPercentage } = useContractRead({
+    addressOrName: auctionContractAddress,
+    contractInterface: abi,
+    functionName: 'minBidIncrementPercentage',
   })
 
   const { data, error } = useNounishAuctionQuery({
@@ -47,17 +62,21 @@ export function NounishAuctionProvider({
     tokenId: tokenId ? tokenId : activeToken,
   })
 
+  const [timerComplete, setTimerComplete] = useState(false)
+
   const isComplete = useMemo(() => {
-    console.log('data', data)
+    console.log(data?.token?.markets[0]?.status)
     if (!data) {
       return false
-    } else {
+    } else if (data?.token?.markets.length) {
       return (
         data?.token?.markets[0]?.status === 'COMPLETED' ||
         Object.values(data?.events?.nodes[0]?.properties).includes(
           `${classifierPrefix?.typePrefix}NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT`
         )
       )
+    } else {
+      return false
     }
   }, [data])
 
@@ -66,13 +85,13 @@ export function NounishAuctionProvider({
       value={{
         data,
         error,
-        auctionContractAddress: auctionContractAddress,
-        classifierPrefix,
         isComplete,
-        auctionConfigParams: {
-          marketType: marketType,
-          contractAddress: contractAddress,
-          tokenId: tokenId ? tokenId : activeToken,
+        tokenId: tokenId ? tokenId : activeToken,
+        daoConfig: daoConfig,
+        timerComplete,
+        setTimerComplete,
+        contract: {
+          minBidIncrementPercentage: minBidIncrementPercentage,
         },
       }}
     >

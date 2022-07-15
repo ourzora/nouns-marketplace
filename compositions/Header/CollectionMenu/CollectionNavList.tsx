@@ -10,7 +10,7 @@ export function CollectionNavList({ items, ...props }: CollectionNavListProps) {
     <Stack gap="x4" {...props}>
       {items.map((collection) => (
         <CollectionLink
-          key={`${collection.address}-${collection.name}`}
+          key={`${collection.address}-${collection.name}r`}
           collection={collection}
         />
       ))}

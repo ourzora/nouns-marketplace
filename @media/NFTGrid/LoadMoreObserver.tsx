@@ -18,7 +18,6 @@ export function LoadMoreObserver({
 
   useEffect(() => {
     if (inView && handleVisible) {
-      // console.log('load more')
       handleVisible()
     }
   }, [inView, handleVisible])
