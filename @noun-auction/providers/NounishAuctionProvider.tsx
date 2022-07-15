@@ -6,11 +6,14 @@ import {
   useState,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from 'react'
 import { useNounishAuctionQuery, useActiveNounishAuctionQuery } from '@noun-auction/hooks'
 import { DaoConfigProps } from '@noun-auction/typings'
 import { defaultDaoConfig } from '@noun-auction/constants'
 import { useContractRead } from 'wagmi'
+import { numberFormatter } from '@market/utils'
+import { roundTwoDecimals } from 'utils/math'
 
 export type NounishAuctionProviderProps = {
   tokenId?: string
@@ -24,12 +27,15 @@ const NounsAuctionContext = createContext<{
   daoConfig: DaoConfigProps
   tokenId?: string
   isComplete?: boolean
+  noAuctionHistory?: boolean
   contract?: any
   timerComplete: boolean
+  auctionData?: any
   setTimerComplete: Dispatch<SetStateAction<boolean>>
 }>({
   daoConfig: defaultDaoConfig,
   timerComplete: false,
+  auctionData: undefined,
   setTimerComplete: () => {},
 })
 
@@ -65,7 +71,7 @@ export function NounishAuctionProvider({
   const [timerComplete, setTimerComplete] = useState(false)
 
   const isComplete = useMemo(() => {
-    console.log(data?.token?.markets[0]?.status)
+    // console.log(tokenId, data?.token?.markets[0])
     if (!data) {
       return false
     } else if (data?.token?.markets.length) {
@@ -80,16 +86,50 @@ export function NounishAuctionProvider({
     }
   }, [data])
 
+  const noAuctionHistory = useMemo(() => {
+    if (data) return data?.events?.nodes.length === 0
+  }, [data])
+
+  useEffect(() => {
+    console.log('tokendata', tokenId, data?.token), [data]
+  })
+
+  const normalizedAuctionData = useMemo(() => {
+    if (data && data.markets?.nodes.length) {
+      const marketData = data.markets?.nodes[0]?.market
+      const marketProperties = marketData?.properties
+
+      return {
+        countdown: {
+          startTime: marketProperties?.startTime,
+          endTime: marketProperties?.endTime,
+        },
+        highBid: {
+          ethValue: marketProperties?.highestBidPrice?.chainTokenPrice?.decimal,
+          usdcValue: numberFormatter(
+            roundTwoDecimals(marketProperties?.highestBidPrice?.usdcPrice?.decimal)
+          ),
+        },
+        bidder: {
+          address: marketProperties?.highestBidder,
+          txHash: marketData?.transactionInfo.transactionHash,
+        },
+      }
+    }
+  }, [data])
+
   return (
     <NounsAuctionContext.Provider
       value={{
         data,
         error,
         isComplete,
+        noAuctionHistory,
+        timerComplete,
         tokenId: tokenId ? tokenId : activeToken,
         daoConfig: daoConfig,
-        timerComplete,
         setTimerComplete,
+        auctionData: normalizedAuctionData,
         contract: {
           minBidIncrementPercentage: minBidIncrementPercentage,
         },

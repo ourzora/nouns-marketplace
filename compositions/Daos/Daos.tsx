@@ -16,7 +16,6 @@ export function DaoTable({ routePrefix }: { routePrefix?: string }) {
             daoConfig={dao}
             hideCollectionTitle={false}
             routePrefix={routePrefix}
-            style={{ height: '68px' }}
           />
         </Stack>
       ))}

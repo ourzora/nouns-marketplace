@@ -43,7 +43,6 @@ export function MarketUi({
         borderStyle="solid"
         borderWidth="normal"
         borderRadius="phat"
-        wrapperDirection="column"
       />
     )
   } else {
