@@ -51,7 +51,6 @@ export function NounishAuctionProvider({
   })
 
   const isComplete = useMemo(() => {
-    console.log('data', data?.events?.nodes[0])
     if (!data) {
       return false
     } else {

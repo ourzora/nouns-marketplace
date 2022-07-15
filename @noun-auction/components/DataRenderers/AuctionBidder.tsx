@@ -4,6 +4,7 @@ import { Flex, Label, Icon } from '@zoralabs/zord'
 
 // @noun-auction
 import { SharedDataRendererProps } from '@noun-auction/typings'
+import { EnsAvatar } from './EnsAvatar'
 
 // @shared
 import { useShortAddress } from 'hooks/useShortAddress'
@@ -50,12 +51,17 @@ export function AuctionBidder({
           {label}&nbsp;
         </Label>
       )}
-      <Label size="lg" style={{ lineHeight: '1.15' }} align="right">
-        <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
-          {ensName ? ensName : shortAddress}
-          <Icon id="ArrowRightAngle" />
-        </Flex>
-      </Label>
+      <Flex>
+        <Label size="lg" style={{ lineHeight: '1.15' }} align="right">
+          <Flex gap="x2" align="center">
+            <EnsAvatar address={address} />
+            <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
+              {ensName ? ensName : shortAddress}
+            </Flex>
+            <Icon id="ArrowRightAngle" size="sm" />
+          </Flex>
+        </Label>
+      </Flex>
     </Flex>
   )
 }
