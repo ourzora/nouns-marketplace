@@ -4,10 +4,8 @@ import { FillAskInfo } from '@market'
 import { useIsOwner } from '@market/hooks'
 import { Link } from 'components'
 import { clickAnimation, lightFont } from 'styles/styles.css'
-import { NFTCardMarket } from '@market'
 import { useNFTProvider } from '@shared/providers/NFTProvider'
 import { nftInfoSidebar, nftInfoSidebarWrapper, askInfoWrapper } from './NFTPage.css'
-import { returnDao } from 'constants/collection-addresses'
 import { MarketUi } from './MarketUi'
 
 export interface NFTInfoSidebar extends BoxProps {}
@@ -18,15 +16,6 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
   if (!nft || !tokenId) return null
 
   const { isOwner } = useIsOwner(nft)
-
-  const dao = nft?.nft && returnDao(nft.nft.contract.address)
-  /*
-  const { data, error } = useNounishAuctionQuery({
-    marketType: marketType,
-    contractAddress: contractAddress,
-    tokenId: tokenId ? tokenId : activeToken
-  })
-  */
 
   return (
     <Box id="nft-info-sidebar" className={nftInfoSidebar} {...props}>

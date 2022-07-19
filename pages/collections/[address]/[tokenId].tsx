@@ -1,11 +1,18 @@
 import { PageWrapper, Seo } from 'components'
 import { nftService } from 'services/nftService'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { NFTPageHero, NFTInfoSidebar, NFTAttributes } from 'compositions/NFTPage'
-import { Grid } from '@zoralabs/zord'
-import { nftPageWrapper } from 'compositions/NFTPage/NFTPage.css'
+import {
+  NFTPageHero,
+  NFTInfoSidebar,
+  NFTAttributes,
+  NFTHistory,
+} from 'compositions/NFTPage'
+import { Grid, Stack } from '@zoralabs/zord'
+import {
+  attributesHistoryWrapper,
+  nftPageWrapper,
+} from 'compositions/NFTPage/NFTPage.css'
 import { NFTProvider } from '@shared/providers/NFTProvider'
-import { useEffect } from 'react'
 
 const NFT = ({ nft }: { nft: NFTObject }) => {
   return (
@@ -23,7 +30,10 @@ const NFT = ({ nft }: { nft: NFTObject }) => {
         <Grid className={nftPageWrapper}>
           <NFTPageHero />
           <NFTInfoSidebar />
-          <NFTAttributes />
+          <Stack className={attributesHistoryWrapper}>
+            <NFTHistory />
+            <NFTAttributes />
+          </Stack>
         </Grid>
       </NFTProvider>
     </PageWrapper>
