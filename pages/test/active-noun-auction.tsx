@@ -1,4 +1,4 @@
-import { NounishAuction, nounishAuctionRow } from '@noun-auction'
+import { NounishAuction } from '@noun-auction'
 import { daos } from 'constants/collection-addresses'
 import { TestPageWrapper } from 'components/utils/TestPageWrapper'
 import { Grid, Heading, Stack } from '@zoralabs/zord'

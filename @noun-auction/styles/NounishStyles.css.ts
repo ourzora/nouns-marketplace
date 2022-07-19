@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, space, color } from '@zoralabs/zord'
+import { atoms, space, color, typography } from '@zoralabs/zord'
 import { recipe } from '@vanilla-extract/recipes'
 
 export const auctionWrapperVariants = {
@@ -24,6 +24,15 @@ export const auctionWrapperVariants = {
         gridTemplateRows: '68px 1fr auto',
       },
     ],
+    sideBarBid: [
+      {
+        gridTemplateColumns: '1fr',
+        gridTemplateRows: 'auto',
+      },
+      atoms({
+        width: '100%',
+      }),
+    ],
   },
 }
 
@@ -38,6 +47,33 @@ export const auctionWrapper = recipe({
   defaultVariants: {
     layout: 'row',
   },
+})
+
+export const sidebarBidWrapper = style([
+  {
+    backgroundColor: color.black100,
+  },
+  atoms({
+    p: 'x4',
+    gap: 'x4',
+    borderRadius: 'phat',
+    flexDirection: 'column',
+  }),
+])
+
+export const sidebarHighBid = style([
+  {
+    fontSize: typography.size[5],
+    fontFamily: "'Londrina Solid', cursive!important",
+    fontWeight: 400,
+  },
+  atoms({
+    color: 'reverse',
+  }),
+])
+
+export const sideBarUpperLabel = style({
+  fontSize: typography.size[9],
 })
 
 export const bidHistoryWrapper = style([

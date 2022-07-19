@@ -9,7 +9,7 @@ import { ModalComposition } from '@modal'
 import { NftInfo } from '@market'
 
 export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
-  const { data, tokenId } = useNounishAuctionProvider()
+  const { data, tokenId, layout } = useNounishAuctionProvider()
 
   if (!data) return null
 
@@ -33,7 +33,12 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
         <ModalComposition
           modalName={`nouns-bid-${tokenId}`}
           trigger={
-            <Label className={placeBidTrigger} as="span" size="md">
+            <Label
+              className={placeBidTrigger}
+              as="span"
+              size="md"
+              w={layout === 'sideBarBid' ? '100%' : 'auto'}
+            >
               Place Bid
             </Label>
           }

@@ -13,8 +13,12 @@ import {
   nftPageWrapper,
 } from 'compositions/NFTPage/NFTPage.css'
 import { NFTProvider } from '@shared/providers/NFTProvider'
+import { NounishAuctionProvider } from '@noun-auction'
+import { returnDao } from 'constants/collection-addresses'
 
 const NFT = ({ nft }: { nft: NFTObject }) => {
+  const dao = returnDao(nft?.nft?.contract?.address)
+
   return (
     <PageWrapper direction="column">
       <Seo
@@ -29,7 +33,13 @@ const NFT = ({ nft }: { nft: NFTObject }) => {
       >
         <Grid className={nftPageWrapper}>
           <NFTPageHero />
-          <NFTInfoSidebar />
+          {dao ? (
+            <NounishAuctionProvider daoConfig={dao} tokenId={nft?.nft?.tokenId}>
+              <NFTInfoSidebar />
+            </NounishAuctionProvider>
+          ) : (
+            <NFTInfoSidebar />
+          )}
           <Stack className={attributesHistoryWrapper}>
             <NFTHistory />
             <NFTAttributes />

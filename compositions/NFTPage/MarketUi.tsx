@@ -38,11 +38,9 @@ export function MarketUi({
         daoConfig={dao}
         hideThumbnail
         hideTitle
-        backgroundColor="primary"
-        borderColor="secondary"
-        borderStyle="solid"
-        borderWidth="normal"
-        borderRadius="phat"
+        hideCollectionTitle
+        showLabels
+        layout="sideBarBid"
       />
     )
   } else {
