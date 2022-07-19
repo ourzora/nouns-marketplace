@@ -3,29 +3,25 @@ import { Flex, Label } from '@zoralabs/zord'
 
 // @noun-auction
 import { SharedDataRendererProps } from '@noun-auction/typings'
+import { EthAmount } from './EthAmount'
 
 // @shared
 import { lightFont } from 'styles/styles.css'
-import { roundTwoDecimals } from 'utils/math'
 
 export function AuctionHighBid({
   label = 'Current bid',
   layoutDirection = 'row',
-  ethSymbol = 'Ξ',
   ethValue,
   showLabels,
   usdcValue,
   useUsdc = false,
   ...props
 }: {
-  ethSymbol?: string
   ethValue: string
   usdcValue: string
   useUsdc?: boolean
 } & SharedDataRendererProps) {
-  const roundedEthValue = useMemo(() => {
-    return ethValue ? roundTwoDecimals(parseFloat(ethValue)) : 'N/A'
-  }, [ethValue])
+  console.log(ethValue)
 
   return (
     <Flex
@@ -35,7 +31,7 @@ export function AuctionHighBid({
     >
       {showLabels && (
         <Label
-          size="lg"
+          size="md"
           className={lightFont}
           color="secondary"
           style={{ lineHeight: '1.15' }}
@@ -44,11 +40,12 @@ export function AuctionHighBid({
           {label}
         </Label>
       )}
-      <Label
+      <EthAmount
         style={{ lineHeight: '1.15' }}
-        size="lg"
+        size="md"
         align="right"
-      >{`${roundedEthValue} ${ethSymbol}`}</Label>
+        ethAmount={ethValue}
+      />
     </Flex>
   )
 }

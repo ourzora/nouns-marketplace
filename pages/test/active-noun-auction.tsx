@@ -5,8 +5,8 @@ import { Grid, Heading, Stack } from '@zoralabs/zord'
 
 export default function NounsAuctionHistory() {
   return (
-    <TestPageWrapper title="Active Noun Auction" width="100%" maxWidth="100%">
-      <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x4">
+    <TestPageWrapper title="Active Noun Auction" width="100%" maxWidth="960px">
+      <Grid style={{ gridTemplateColumns: '1fr' }} gap="x4">
         {daos.map((dao) => {
           return (
             <NounishAuction
@@ -103,6 +103,25 @@ export default function NounsAuctionHistory() {
           />
         </Stack>
       </Grid>
+      <Stack>
+        <Heading mb="x4">Nouns Auction History</Heading>
+        <NounishAuction
+          showAuctionRow={false}
+          daoConfig={daos[0]}
+          tokenId="125"
+          debug
+          showBidHistory
+          showLabels
+          layout="historyOnly"
+          /* Wrapper Styling */
+          borderColor="secondary"
+          borderStyle="solid"
+          borderWidth="normal"
+          borderRadius="phat"
+          backgroundColor="primary"
+          p="x4"
+        />
+      </Stack>
     </TestPageWrapper>
   )
 }

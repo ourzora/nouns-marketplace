@@ -38,7 +38,7 @@ export function AuctionCountdown({
     <Flex direction={layoutDirection} wrap="wrap" {...props}>
       {showLabels && (
         <Label
-          size="lg"
+          size="md"
           className={lightFont}
           color="secondary"
           style={{ lineHeight: '1.15' }}
@@ -48,11 +48,11 @@ export function AuctionCountdown({
         </Label>
       )}
       {!isEnded ? (
-        <Label size="lg" style={{ lineHeight: '1.15' }} align="right">
+        <Label size="md" style={{ lineHeight: '1.15' }} align="right">
           {text}
         </Label>
       ) : (
-        <Label size="lg" style={{ lineHeight: '1.15' }} align="right">
+        <Label size="md" style={{ lineHeight: '1.15' }} align="right">
           {endedCopy}
         </Label>
       )}
