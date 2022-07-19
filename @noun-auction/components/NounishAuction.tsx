@@ -56,7 +56,7 @@ export function NounishAuction({
       ]}
       {...props}
     >
-      <NounishAuctionProvider daoConfig={daoConfig} tokenId={tokenId}>
+      <NounishAuctionProvider daoConfig={daoConfig} tokenId={tokenId} layout={layout}>
         {showAuctionRow && (
           <ActiveAuction
             layout={layout}

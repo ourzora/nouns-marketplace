@@ -5,6 +5,7 @@ import { Flex, Label } from '@zoralabs/zord'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { useCountdown } from '@noun-auction/hooks/useCountdown'
 import { SharedDataRendererProps } from '@noun-auction/typings'
+import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 
 // @shared
 import { lightFont } from 'styles/styles.css'
@@ -22,7 +23,7 @@ export function AuctionCountdown({
   endTime: string
   endedCopy?: string
 } & SharedDataRendererProps) {
-  const { setTimerComplete } = useNounishAuctionProvider()
+  const { setTimerComplete, layout } = useNounishAuctionProvider()
 
   if (!startTime || !endTime) return null
 
@@ -39,8 +40,8 @@ export function AuctionCountdown({
       {showLabels && (
         <Label
           size="md"
-          className={lightFont}
-          color="secondary"
+          className={[layout === 'sideBarBid' && sideBarUpperLabel, lightFont]}
+          color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
           style={{ lineHeight: '1.15' }}
           align="right"
         >
@@ -48,11 +49,21 @@ export function AuctionCountdown({
         </Label>
       )}
       {!isEnded ? (
-        <Label size="md" style={{ lineHeight: '1.15' }} align="right">
+        <Label
+          size="md"
+          style={{ lineHeight: '1.15' }}
+          align="right"
+          className={[layout === 'sideBarBid' && sideBarUpperLabel]}
+        >
           {text}
         </Label>
       ) : (
-        <Label size="md" style={{ lineHeight: '1.15' }} align="right">
+        <Label
+          size="md"
+          style={{ lineHeight: '1.15' }}
+          align="right"
+          className={[layout === 'sideBarBid' && sideBarUpperLabel]}
+        >
           {endedCopy}
         </Label>
       )}

@@ -5,6 +5,8 @@ import { Flex, Label, Icon } from '@zoralabs/zord'
 // @noun-auction
 import { SharedDataRendererProps } from '@noun-auction/typings'
 import { EnsAvatar } from './EnsAvatar'
+import { useNounishAuctionProvider } from '@noun-auction/providers'
+import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 
 // @shared
 import { useShortAddress } from 'hooks/useShortAddress'
@@ -24,7 +26,7 @@ export function AuctionBidder({
   const { data: ensName } = useEnsName({
     address: address,
   })
-
+  const { layout } = useNounishAuctionProvider()
   const shortAddress = useShortAddress(address)
 
   const buildTxLink = useMemo(() => `https://etherscan.io/tx/${txHash}`, [txHash])
@@ -43,8 +45,8 @@ export function AuctionBidder({
       {showLabels && (
         <Label
           size="md"
-          className={lightFont}
-          color="secondary"
+          className={[layout === 'sideBarBid' && sideBarUpperLabel, lightFont]}
+          color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
           style={{ lineHeight: '1.15' }}
           textAlign="right"
         >
@@ -52,12 +54,21 @@ export function AuctionBidder({
         </Label>
       )}
       <Flex>
-        <Label size="md" style={{ lineHeight: '1.15' }} align="right">
+        <Label
+          size="md"
+          style={{ lineHeight: '1.15' }}
+          align="right"
+          className={sideBarUpperLabel}
+        >
           <Flex gap="x2" align="center">
             <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
               {ensName ? ensName : shortAddress}
             </Flex>
-            <EnsAvatar address={address} />
+            {layout !== 'sideBarBid' ? (
+              <EnsAvatar address={address} />
+            ) : (
+              <Icon id="ArrowRightAngle" />
+            )}
           </Flex>
         </Label>
       </Flex>

@@ -14,11 +14,13 @@ import { defaultDaoConfig } from '@noun-auction/constants'
 import { useContractRead } from 'wagmi'
 import { numberFormatter } from '@market/utils'
 import { roundTwoDecimals } from 'utils/math'
+import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
 
 export type NounishAuctionProviderProps = {
   tokenId?: string
   daoConfig: DaoConfigProps
   children?: ReactNode
+  layout?: keyof typeof auctionWrapperVariants['layout']
 }
 
 const NounsAuctionContext = createContext<{
@@ -32,6 +34,7 @@ const NounsAuctionContext = createContext<{
   timerComplete: boolean
   auctionData?: any
   setTimerComplete: Dispatch<SetStateAction<boolean>>
+  layout?: keyof typeof auctionWrapperVariants['layout']
 }>({
   daoConfig: defaultDaoConfig,
   timerComplete: false,
@@ -46,6 +49,7 @@ export function useNounishAuctionProvider() {
 export function NounishAuctionProvider({
   daoConfig,
   tokenId,
+  layout,
   children,
 }: NounishAuctionProviderProps) {
   const { marketType, contractAddress, classifierPrefix, abi, auctionContractAddress } =
@@ -129,6 +133,7 @@ export function NounishAuctionProvider({
         tokenId: tokenId ? tokenId : activeToken,
         daoConfig: daoConfig,
         setTimerComplete,
+        layout,
         auctionData: normalizedAuctionData,
         contract: {
           minBidIncrementPercentage: minBidIncrementPercentage,

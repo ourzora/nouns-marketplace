@@ -1,4 +1,4 @@
-import { Flex, Separator, Label } from '@zoralabs/zord'
+import { Flex, Separator, Label, Stack } from '@zoralabs/zord'
 
 // @noun-auction
 import { TokenInfoConfig } from '../NounishAuction'
@@ -9,6 +9,7 @@ import { TokenInfo } from './TokenInfo'
 import {
   placeBidTrigger,
   auctionWrapperVariants,
+  sidebarBidWrapper,
 } from '@noun-auction/styles/NounishStyles.css'
 
 export interface ActiveAuctionProps extends TokenInfoConfig {
@@ -18,7 +19,6 @@ export interface ActiveAuctionProps extends TokenInfoConfig {
 }
 
 export function ActiveAuction({
-  layout,
   useModal,
   showLabels = false,
   /* TokenInfo Props */
@@ -36,21 +36,13 @@ export function ActiveAuction({
     tokenId,
     timerComplete,
     auctionData,
+    layout,
   } = useNounishAuctionProvider()
 
   if (!auctionData) return null
 
-  return (
+  const rowLayout = (
     <>
-      <TokenInfo
-        thumbnailSize={thumbnailSize}
-        hideThumbnail={hideThumbnail}
-        hideTitle={hideTitle}
-        hideCollectionTitle={hideCollectionTitle}
-        routePrefix={routePrefix}
-        tokenId={tokenId}
-        contractAddress={daoConfig?.contractAddress}
-      />
       {!isComplete && !noAuctionHistory ? (
         <>
           <AuctionCountdown
@@ -92,8 +84,55 @@ export function ActiveAuction({
           />
         </Flex>
       )}
+    </>
+  )
+
+  const sideBarTop = (
+    <Stack mb="x4" gap="x4">
+      <AuctionBidder
+        address={auctionData.bidder.address}
+        txHash={auctionData.bidder.txHash}
+        showLabels={showLabels}
+        layoutDirection="row"
+        justify="space-between"
+      />
+      <AuctionCountdown
+        startTime={auctionData.countdown.startTime}
+        endTime={auctionData.countdown.endTime}
+        layoutDirection="row"
+        showLabels={showLabels}
+        justify="space-between"
+      />
+    </Stack>
+  )
+
+  return (
+    <>
+      <TokenInfo
+        thumbnailSize={thumbnailSize}
+        hideThumbnail={hideThumbnail}
+        hideTitle={hideTitle}
+        hideCollectionTitle={hideCollectionTitle}
+        routePrefix={routePrefix}
+        tokenId={tokenId}
+        contractAddress={daoConfig?.contractAddress}
+      />
+      {layout !== 'sideBarBid' ? rowLayout : sideBarTop}
       {!isComplete && !noAuctionHistory && (
-        <Flex align="center" justify="flex-end">
+        <Flex
+          align={layout === 'sideBarBid' ? 'flex-start' : 'center'}
+          justify="flex-end"
+          className={[layout === 'sideBarBid' && sidebarBidWrapper]}
+        >
+          {layout === 'sideBarBid' && (
+            <AuctionHighBid
+              ethValue={auctionData.highBid.ethValue}
+              usdcValue={auctionData.highBid.usdcValue}
+              layoutDirection="column"
+              showLabels={showLabels}
+              justify="flex-start"
+            />
+          )}
           {!useModal && <Separator mt="x1" />}
           {timerComplete ? (
             <Label className={placeBidTrigger} as="span" size="md">

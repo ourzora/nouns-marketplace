@@ -7,6 +7,7 @@ import { clickAnimation, lightFont } from 'styles/styles.css'
 import { useNFTProvider } from '@shared/providers/NFTProvider'
 import { nftInfoSidebar, nftInfoSidebarWrapper, askInfoWrapper } from './NFTPage.css'
 import { MarketUi } from './MarketUi'
+import { useNounishAuctionProvider } from '@noun-auction'
 
 export interface NFTInfoSidebar extends BoxProps {}
 
@@ -16,6 +17,8 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
   if (!nft || !tokenId) return null
 
   const { isOwner } = useIsOwner(nft)
+
+  const { isComplete } = useNounishAuctionProvider()
 
   return (
     <Box id="nft-info-sidebar" className={nftInfoSidebar} {...props}>
@@ -41,7 +44,7 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
         <Paragraph size="lg" className={lightFont}>
           {nft?.metadata?.description}
         </Paragraph>
-        {!isOwner && (
+        {!isOwner && isComplete && (
           <Stack className={askInfoWrapper}>
             <FillAskInfo showBalance={false} nft={nft} />
           </Stack>
