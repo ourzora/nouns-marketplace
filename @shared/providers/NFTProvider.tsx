@@ -14,6 +14,7 @@ export interface NFTContextTypes {
   hooksData: useNFTType
   initialData: NFTObject | undefined
   tokenId?: string
+  contractAddress?: string
 }
 
 const NFTContext = createContext<NFTContextTypes>({
@@ -50,6 +51,7 @@ export function NFTProvider({
         },
         initialData,
         tokenId,
+        contractAddress,
       }}
       {...props}
     >

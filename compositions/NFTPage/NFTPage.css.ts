@@ -77,8 +77,12 @@ export const nftInfoSidebar = style([
 ])
 
 export const nftInfoSidebarWrapper = style([
+  {
+    maxWidth: 400,
+  },
   atoms({
     width: '100%',
+    overflowX: 'hidden',
     gap: {
       '@initial': 'x3',
       '@1024': 'x6',
@@ -161,6 +165,23 @@ export const nftAttributes = style([
     px: {
       '@initial': 'x4',
       '@1024': 'x0',
+    },
+  }),
+])
+
+export const attributesHistoryWrapper = style([
+  {
+    '@media': {
+      [media.min1024]: {
+        gridArea: 'nft-attributes / 1 / 2',
+      },
+    },
+  },
+  atoms({
+    w: '100%',
+    gap: {
+      '@initial': 'x2',
+      '@1024': 'x6',
     },
   }),
 ])

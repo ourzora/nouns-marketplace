@@ -20,7 +20,8 @@ export const daos: DaoConfigProps[] = [
   },
 ]
 
-export function returnDao(collectionAddress: string) {
+export function returnDao(collectionAddress: string | undefined) {
+  if (!collectionAddress) return
   const address = collectionAddress.toLowerCase()
   return daos.find((dao) => dao.contractAddress.toLowerCase() === address)
 }
