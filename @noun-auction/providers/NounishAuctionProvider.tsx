@@ -105,7 +105,7 @@ export function NounishAuctionProvider({
           endTime: marketProperties?.endTime,
         },
         highBid: {
-          ethValue: marketProperties?.highestBidPrice?.chainTokenPrice?.decimal,
+          ethValue: marketProperties?.highestBidPrice?.chainTokenPrice?.raw,
           usdcValue: numberFormatter(
             roundTwoDecimals(marketProperties?.highestBidPrice?.usdcPrice?.decimal)
           ),

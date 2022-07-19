@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, media } from '@zoralabs/zord'
+import { atoms, space, color } from '@zoralabs/zord'
 import { recipe } from '@vanilla-extract/recipes'
 
 export const auctionWrapperVariants = {
@@ -7,15 +7,20 @@ export const auctionWrapperVariants = {
     row: [
       {
         height: '68px',
-        gridTemplateColumns: '300px repeat(3, 1fr) 155px',
+        gridTemplateColumns: '250px repeat(2, 1fr) 1.25fr 155px',
       },
       atoms({
         height: '100%',
       }),
     ],
+    historyOnly: [
+      {
+        gridTemplateRows: 'auto',
+      },
+    ],
     withHistory: [
       {
-        gridTemplateColumns: '300px repeat(3, 1fr) 155px',
+        gridTemplateColumns: '250px repeat(2, 1fr) 1.25fr 155px',
         gridTemplateRows: '68px 1fr auto',
       },
     ],
@@ -87,3 +92,43 @@ export const nounishAuctionRow = style([
     p: 'x2',
   }),
 ])
+
+export const transactionEventWrapper = style([
+  {
+    gridTemplateColumns: '1fr 125px',
+  },
+  atoms({
+    w: '100%',
+  }),
+])
+
+export const auctionEventRow = style([
+  {
+    selectors: {
+      '&:after': {
+        content: '',
+        display: 'block',
+        position: 'relative',
+        width: '100%',
+        height: space.x6,
+        borderLeft: `2px solid ${color.black10}`,
+        margin: `${space.x2} 0 ${space.x2}`,
+        transform: `translateX(calc(${space.x6} - 1px))`,
+      },
+      '&:last-of-type:after': {
+        display: 'none',
+      },
+    },
+  },
+  atoms({
+    w: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  }),
+])
+
+/* STYLE UTILS */
+export const lightFont = style({
+  fontWeight: 300,
+  fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
+})

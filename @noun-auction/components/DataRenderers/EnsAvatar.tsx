@@ -1,8 +1,12 @@
-import { Flex, Box } from '@zoralabs/zord'
+import { Flex, FlexProps, Box } from '@zoralabs/zord'
 import { useEnsAvatar } from 'wagmi'
 import { Zorb } from '@zora-brand'
 
-export function EnsAvatar({ address }: { address: string }) {
+export interface EnsAvatarProps extends FlexProps {
+  address: string
+}
+
+export function EnsAvatar({ address, ...props }: EnsAvatarProps) {
   const {
     data: ensAvatar,
     isError,
@@ -19,8 +23,13 @@ export function EnsAvatar({ address }: { address: string }) {
       overflow="hidden"
       position="relative"
       backgroundColor="tertiary"
+      {...props}
     >
-      {ensAvatar ? <Box as="img" src={ensAvatar} /> : <Zorb address={address} />}
+      {ensAvatar ? (
+        <Box as="img" src={ensAvatar} />
+      ) : (
+        <Zorb size="100%" address={address} />
+      )}
     </Flex>
   )
 }

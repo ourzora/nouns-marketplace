@@ -4,7 +4,7 @@ import { Box } from '@zoralabs/zord'
 
 export interface ZorbProps {
   address?: string
-  size?: number
+  size?: number | '100%'
   greyscale?: boolean
 }
 
@@ -21,11 +21,13 @@ export const Zorb = ({ address, greyscale = false, size = 35 }: ZorbProps) => {
     }
   }, [address])
 
+  const returnSize = size === '100%' ? '100%' : `${size}px`
+
   return (
     <Box
       style={{
-        height: `${size}px`,
-        width: `${size}px`,
+        height: returnSize,
+        width: returnSize,
         background: background,
         overflow: 'hidden',
         borderRadius: 300,

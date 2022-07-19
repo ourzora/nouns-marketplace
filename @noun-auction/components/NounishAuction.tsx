@@ -23,6 +23,7 @@ export interface NounishAuctionProps extends TokenInfoConfig {
   daoConfig: DaoConfigProps
   tokenId?: string
   /* View Config */
+  showAuctionRow?: boolean
   showBidHistory?: boolean
   useInlineBid?: boolean
   debug?: boolean
@@ -35,6 +36,7 @@ export function NounishAuction({
   layout = 'row',
   daoConfig,
   tokenId,
+  showAuctionRow = true,
   showBidHistory = false,
   useInlineBid = false,
   hideThumbnail = false,
@@ -55,19 +57,21 @@ export function NounishAuction({
       {...props}
     >
       <NounishAuctionProvider daoConfig={daoConfig} tokenId={tokenId}>
-        <ActiveAuction
-          layout={layout}
-          hideThumbnail={hideThumbnail}
-          hideTitle={hideTitle}
-          hideCollectionTitle={hideCollectionTitle}
-          thumbnailSize={thumbnailSize}
-          routePrefix={routePrefix}
-          useModal={!useInlineBid}
-          showLabels={showLabels}
-        />
+        {showAuctionRow && (
+          <ActiveAuction
+            layout={layout}
+            hideThumbnail={hideThumbnail}
+            hideTitle={hideTitle}
+            hideCollectionTitle={hideCollectionTitle}
+            thumbnailSize={thumbnailSize}
+            routePrefix={routePrefix}
+            useModal={!useInlineBid}
+            showLabels={showLabels}
+          />
+        )}
         {showBidHistory && (
-          <AuctionHistory mt="x2" className={bidHistoryWrapper}>
-            <Separator mt="x4" />
+          <AuctionHistory className={bidHistoryWrapper} mb="x2">
+            {showAuctionRow && <Separator mt="x4" mb="x3" />}
           </AuctionHistory>
         )}
         {debug && (

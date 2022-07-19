@@ -42,7 +42,7 @@ export function AuctionBidder({
     >
       {showLabels && (
         <Label
-          size="lg"
+          size="md"
           className={lightFont}
           color="secondary"
           style={{ lineHeight: '1.15' }}
@@ -52,12 +52,11 @@ export function AuctionBidder({
         </Label>
       )}
       <Flex>
-        <Label size="lg" style={{ lineHeight: '1.15' }} align="right">
+        <Label size="md" style={{ lineHeight: '1.15' }} align="right">
           <Flex gap="x2" align="center">
             <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
               {ensName ? ensName : shortAddress}
             </Flex>
-            {/*<Icon id="ArrowRightAngle" size="sm" />*/}
             <EnsAvatar address={address} />
           </Flex>
         </Label>
