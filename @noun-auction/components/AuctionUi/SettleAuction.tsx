@@ -5,9 +5,11 @@ import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { PrintError } from '@market'
 
-export interface SettleAuctionProps extends StackProps {}
+export interface SettleAuctionProps extends StackProps {
+  useErrorMsg?: boolean
+}
 
-export function SettleAuction({ ...props }: SettleAuctionProps) {
+export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionProps) {
   const [showError, setShowError] = useState(false)
 
   const {
@@ -16,15 +18,7 @@ export function SettleAuction({ ...props }: SettleAuctionProps) {
     contract: { isPaused },
   } = useNounishAuctionProvider()
 
-  // console.log(auctionContract)
-
-  useEffect(() => {
-    console.log('isPaused', isPaused)
-  }, [isPaused])
-
   const {
-    data,
-    isError,
     isLoading,
     error: writeContractError,
     write: settleAuction,
@@ -52,7 +46,7 @@ export function SettleAuction({ ...props }: SettleAuctionProps) {
           Settle Auction
         </Button>
       </Stack>
-      {showError && writeContractError && (
+      {useErrorMsg && showError && writeContractError && (
         <Button
           variant="unset"
           onClick={() => setShowError(false)}

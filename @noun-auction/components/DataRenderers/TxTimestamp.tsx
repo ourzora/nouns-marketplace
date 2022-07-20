@@ -12,7 +12,6 @@ export interface TxTimestampProps extends FlexProps {
 
 export function TxTimestamp({ transactionInfo }: TxTimestampProps) {
   const timeStamp = useMemo(() => {
-    console.log(format(new Date(transactionInfo.blockTimestamp), 'LLL dd, kk:mm:ss'))
     try {
       return format(new Date(transactionInfo.blockTimestamp), 'LLL dd, kk:mm:ss')
     } catch (err) {

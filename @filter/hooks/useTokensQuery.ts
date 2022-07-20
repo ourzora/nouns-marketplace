@@ -35,13 +35,10 @@ type GetNFTReturnType = {
 }
 
 async function getNFTs(query: TokensQueryArgs): Promise<GetNFTReturnType> {
-  console.log('getNfts', query?.sort)
   const resp = await zdk.tokens(query)
-  console.log('getNFTS RESP', resp)
   const tokens = resp.tokens.nodes
     .map((token) => transformNFTZDK(token, { rawData: token }))
     .map(prepareJson)
-  console.log('tokensQuery', tokens)
   return {
     tokens,
     nextCursor: resp.tokens.pageInfo.endCursor,

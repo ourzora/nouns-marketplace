@@ -41,6 +41,7 @@ export function MarketUi({
         hideCollectionTitle
         showLabels
         layout="sideBarBid"
+        useErrorMsg
       />
     )
   } else {

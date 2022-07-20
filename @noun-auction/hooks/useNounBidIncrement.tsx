@@ -11,7 +11,7 @@ export function useNounBidIncrement(
   minBidIncrementPercentage: number
 ) {
   const computeMinBid = useMemo(() => {
-    if (!minBidIncrementPercentage) {
+    if (!minBidIncrementPercentage || !rawCurrentBidAmount) {
       return {
         raw: new BigNumber(0),
         pretty: 0,

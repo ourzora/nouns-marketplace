@@ -100,10 +100,6 @@ export function NounishAuctionProvider({
     if (data) return data?.events?.nodes.length === 0
   }, [data])
 
-  useEffect(() => {
-    console.log('tokendata', tokenId, data?.token), [data]
-  })
-
   const normalizedAuctionData = useMemo(() => {
     if (data && data.markets?.nodes.length) {
       const marketData = data.markets?.nodes[0]?.market

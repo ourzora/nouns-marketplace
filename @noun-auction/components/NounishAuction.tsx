@@ -27,6 +27,7 @@ export interface NounishAuctionProps extends TokenInfoConfig {
   showBidHistory?: boolean
   useInlineBid?: boolean
   debug?: boolean
+  useErrorMsg?: boolean
   /* Theming */
   layout?: keyof typeof auctionWrapperVariants['layout']
   showLabels?: boolean
@@ -42,6 +43,7 @@ export function NounishAuction({
   hideThumbnail = false,
   hideTitle = false,
   debug = false,
+  useErrorMsg = false,
   hideCollectionTitle = false,
   routePrefix = 'collections',
   thumbnailSize = '100%',
@@ -67,6 +69,7 @@ export function NounishAuction({
             routePrefix={routePrefix}
             useModal={!useInlineBid}
             showLabels={showLabels}
+            useErrorMsg={useErrorMsg}
           />
         )}
         {showBidHistory && (

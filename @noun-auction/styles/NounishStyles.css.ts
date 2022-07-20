@@ -107,6 +107,7 @@ export const tokenInfoWrapper = style([
 export const placeBidTrigger = style([
   {
     whiteSpace: 'nowrap',
+    height: 'auto',
   },
   atoms({
     borderRadius: 'curved',
