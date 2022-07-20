@@ -16,6 +16,7 @@ export interface ActiveAuctionProps extends TokenInfoConfig {
   useModal?: boolean
   showLabels?: boolean
   layout: keyof typeof auctionWrapperVariants['layout']
+  useErrorMsg?: boolean
 }
 
 export function ActiveAuction({
@@ -27,6 +28,7 @@ export function ActiveAuction({
   hideTitle,
   hideCollectionTitle,
   routePrefix,
+  useErrorMsg,
 }: ActiveAuctionProps) {
   const {
     data,
@@ -134,7 +136,11 @@ export function ActiveAuction({
             />
           )}
           {!useModal && <Separator mt="x1" />}
-          {timerComplete ? <SettleAuction /> : <PlaceNounsBid useModal={useModal} />}
+          {timerComplete ? (
+            <SettleAuction useErrorMsg={useErrorMsg} />
+          ) : (
+            <PlaceNounsBid useModal={useModal} />
+          )}
         </Flex>
       )}
     </>

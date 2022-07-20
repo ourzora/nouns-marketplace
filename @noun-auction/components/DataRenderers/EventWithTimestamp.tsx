@@ -16,8 +16,6 @@ export function EventWithTimestamp({ transactionInfo, label }: EventWithTimestam
     daoConfig: { classifierPrefix, contractAddress },
   } = useNounishAuctionProvider()
 
-  console.log(tokenId, contractAddress)
-
   return (
     <Stack>
       <Label gap="x1" style={{ textTransform: 'capitalize' }}>
