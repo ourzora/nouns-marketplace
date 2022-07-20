@@ -4,7 +4,7 @@ import { Flex, Separator, Label, Stack } from '@zoralabs/zord'
 import { TokenInfoConfig } from '../NounishAuction'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { AuctionCountdown, AuctionBidder, AuctionHighBid } from '../DataRenderers'
-import { PlaceNounsBid } from '../BidUi/PlaceNounsBid'
+import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
 import { TokenInfo } from './TokenInfo'
 import {
   placeBidTrigger,
@@ -134,13 +134,7 @@ export function ActiveAuction({
             />
           )}
           {!useModal && <Separator mt="x1" />}
-          {timerComplete ? (
-            <Label className={placeBidTrigger} as="span" size="md">
-              Settle Auction
-            </Label>
-          ) : (
-            <PlaceNounsBid useModal={useModal} />
-          )}
+          {timerComplete ? <SettleAuction /> : <PlaceNounsBid useModal={useModal} />}
         </Flex>
       )}
     </>

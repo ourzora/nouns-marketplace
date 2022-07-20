@@ -1,18 +1,17 @@
-import { vars, atoms } from '@zoralabs/zord'
+import { vars, atoms, color } from '@zoralabs/zord'
 import { style, globalStyle } from '@vanilla-extract/css'
 
 export const errorBox = style([
   {
     textAlign: 'start',
     overflowX: 'scroll',
+    backgroundColor: color.black10,
   },
   atoms({
     w: '100%',
-    backgroundColor: 'tertiary',
     px: 'x3',
     py: 'x2',
     borderRadius: 'curved',
-    mt: 'x2',
   }),
 ])
 
