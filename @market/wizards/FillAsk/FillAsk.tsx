@@ -100,7 +100,6 @@ export function FillAsk({
 
   useEffect(() => {
     refetchBalance()
-    // TODO @ethandaya - this is a lil dank but will work till we consolidate auth
     if (wizardStep === 'ConnectWallet' && address) {
       setWizardStep('ReviewDetails')
     }

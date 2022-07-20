@@ -66,6 +66,12 @@ export function NounishAuctionProvider({
     functionName: 'minBidIncrementPercentage',
   })
 
+  const { data: isPaused } = useContractRead({
+    addressOrName: auctionContractAddress,
+    contractInterface: abi,
+    functionName: 'paused',
+  })
+
   const { data, error } = useNounishAuctionQuery({
     marketType: marketType,
     contractAddress: contractAddress,
@@ -137,6 +143,7 @@ export function NounishAuctionProvider({
         auctionData: normalizedAuctionData,
         contract: {
           minBidIncrementPercentage: minBidIncrementPercentage,
+          isPaused: isPaused,
         },
       }}
     >

@@ -18,10 +18,12 @@ export function AuctionBidder({
   showLabels,
   txHash,
   address,
+  useAvatar = true,
   ...props
 }: {
   address: string
   txHash: string
+  useAvatar?: boolean
 } & SharedDataRendererProps) {
   const { data: ensName } = useEnsName({
     address: address,
@@ -64,10 +66,14 @@ export function AuctionBidder({
             <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
               {ensName ? ensName : shortAddress}
             </Flex>
-            {layout !== 'sideBarBid' ? (
-              <EnsAvatar address={address} />
-            ) : (
-              <Icon id="ArrowRightAngle" />
+            {useAvatar && (
+              <>
+                {layout !== 'sideBarBid' ? (
+                  <EnsAvatar address={address} />
+                ) : (
+                  <Icon id="ArrowRightAngle" />
+                )}
+              </>
             )}
           </Flex>
         </Label>
