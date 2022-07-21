@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { parseUnits } from '@ethersproject/units'
-import { useContractWrite, useSigner, useAccount, useContract } from 'wagmi'
+import { useContractWrite, useSigner, useAccount } from 'wagmi'
 import { BigNumber as EthersBN } from 'ethers'
 import {
   Flex,
@@ -52,15 +52,18 @@ export function NounsBidForm({
   const {
     daoConfig: { auctionContractAddress, abi },
     tokenId,
-    contract: { minBidIncrementPercentage },
+    contract: { minBidIncrementPercentage, reservePrice },
     auctionData,
   } = useNounishAuctionProvider()
 
   if (!abi || !auctionContractAddress) return null
 
+  console.log(auctionData?.rpcData?.amount)
+
   const { minBidAmount } = useNounBidIncrement(
-    rawCurrentBidAmount,
-    minBidIncrementPercentage
+    auctionData?.rpcData?.amount,
+    minBidIncrementPercentage,
+    reservePrice
   )
 
   const { data: signer } = useSigner()
@@ -85,6 +88,8 @@ export function NounsBidForm({
   const {
     isError,
     isLoading,
+    isSuccess,
+    data: successMsg,
     error: writeContractError,
     write: placeBid,
   } = useContractWrite({
@@ -107,6 +112,10 @@ export function NounsBidForm({
     [bidAmount]
   )
 
+  useEffect(() => {
+    console.log('successMsg', successMsg, minBidAmount?.pretty)
+  }, [isSuccess, successMsg])
+
   return (
     <Box {...props}>
       <form onSubmit={handleOnSubmit}>
@@ -115,37 +124,22 @@ export function NounsBidForm({
             Bid
           </Label>
         </Flex>
-        <Flex py="x2">
+        <Flex py="x2" mb="x4">
           <Input
             type="text"
-            min="0"
+            min={minBidAmount?.pretty}
             pattern="[0-9.]*"
-            // min={minBidAmount?.pretty as string || 0}
             placeholder={`${minBidAmount?.pretty} Ξ or more`}
             sizeVariant="lg"
             onChange={(event: any) => handleOnUpdate(event.target.value)}
           />
         </Flex>
         <Stack gap="x4" mb="x4">
-          <AuctionCountdown
-            startTime={auctionData.countdown.startTime}
-            endTime={auctionData.countdown.endTime}
-            layoutDirection="row"
-            showLabels
-            justify="space-between"
-          />
+          <AuctionCountdown layoutDirection="row" showLabels justify="space-between" />
           <Separator />
-          <AuctionHighBid
-            ethValue={auctionData.highBid.ethValue}
-            usdcValue={auctionData.highBid.usdcValue}
-            layoutDirection="row"
-            showLabels
-            justify="space-between"
-          />
+          <AuctionHighBid layoutDirection="row" showLabels justify="space-between" />
           <Separator />
           <AuctionBidder
-            address={auctionData.bidder.address}
-            txHash={auctionData.bidder.txHash}
             layoutDirection="row"
             showLabels
             useAvatar={false}
@@ -163,19 +157,30 @@ export function NounsBidForm({
           <Separator />
         </Stack>
         {isError && <PrintError errorMessage={writeContractError?.message} mb="x4" />}
-        <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x2">
+        {!isSuccess ? (
+          <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x2">
+            <Button
+              onClick={requestClose}
+              w="100%"
+              variant="secondary"
+              borderRadius="curved"
+            >
+              Cancel
+            </Button>
+            <Button type="submit" loading={isLoading} w="100%" borderRadius="curved">
+              Place Bid
+            </Button>
+          </Grid>
+        ) : (
           <Button
             onClick={requestClose}
             w="100%"
             variant="secondary"
             borderRadius="curved"
           >
-            Cancel
+            You're bid has been placed!
           </Button>
-          <Button type="submit" loading={isLoading} w="100%" borderRadius="curved">
-            Place Bid
-          </Button>
-        </Grid>
+        )}
       </form>
     </Box>
   )

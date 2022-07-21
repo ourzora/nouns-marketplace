@@ -64,3 +64,32 @@ export type DaoConfigProps = {
   classifierPrefix: ClassifierPrefixProps
   abi: any
 }
+
+export type ContractAuctionData = {
+  auction:
+    | {
+        nounId: string
+        amount: string
+        startTime: string
+        endTime: string
+        bidder: string
+        settled: boolean
+      }
+    | undefined
+}
+
+export type NormalizedAuctionData = {
+  countdown: {
+    startTime: string
+    endTime: string
+  }
+  highBid: {
+    ethValue: string
+    usdcValue: string
+  }
+  bidder: {
+    address: string
+    txHash: string
+  }
+  rpcData: ContractAuctionData
+}

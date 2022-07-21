@@ -1,22 +1,31 @@
-/**
- * Get Current Bid / Bid increment percentage to compute min bid
- */
-
 import { useMemo } from 'react'
 import BigNumber from 'bignumber.js'
-import { utils, BigNumber as EthersBN } from 'ethers'
+import { utils, BigNumber as EthersBN, BigNumberish } from 'ethers'
 
 export function useNounBidIncrement(
   rawCurrentBidAmount: string,
-  minBidIncrementPercentage: number
+  minBidIncrementPercentage: number,
+  reservePrice: BigNumberish
 ) {
+  /*
+  console.log({
+    minBidIncrementPercentage: minBidIncrementPercentage,
+    raw: reservePrice.valueOf(),
+    pretty: reservePrice.toString(),
+  })
+  */
   const computeMinBid = useMemo(() => {
+    const reserveBn = new BigNumber(reservePrice.toString())
+
     if (!minBidIncrementPercentage || !rawCurrentBidAmount) {
       return {
-        raw: new BigNumber(0),
-        pretty: 0,
+        raw: reservePrice.valueOf(),
+        pretty: reservePrice.toString(),
       }
     }
+
+    console.log('reserv bn', reserveBn.toString())
+
     const minBidIncrement = new BigNumber(minBidIncrementPercentage.toString())
     const currentBid = new BigNumber(rawCurrentBidAmount)
 
@@ -31,7 +40,7 @@ export function useNounBidIncrement(
       raw: minBidRaw,
       pretty: minBidPretty,
     }
-  }, [minBidIncrementPercentage, rawCurrentBidAmount])
+  }, [minBidIncrementPercentage, rawCurrentBidAmount, reservePrice])
 
   return {
     minBidAmount: computeMinBid,

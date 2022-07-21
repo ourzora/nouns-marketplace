@@ -2,21 +2,12 @@
 import { ethers } from 'ethers'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { daos } from 'constants/collection-addresses'
+import { ContractAuctionData } from '@noun-auction'
 
-type AuctionData = {
-  auction:
-    | {
-        nounId: string
-        amount: string
-        startTime: string
-        endTime: string
-        bidder: string
-        settled: boolean
-      }
-    | undefined
-}
-
-export default function handler(req: NextApiRequest, res: NextApiResponse<AuctionData>) {
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse<ContractAuctionData>
+): Promise<void> => {
   const { contract } = req.query
   const dao = daos.find((dao) => dao.auctionContractAddress === contract)
 
@@ -31,23 +22,21 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Auctio
       new ethers.providers.StaticJsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL)
     )
 
-    async function readAuctionState() {
-      const auction = await ethersContract.auction()
+    const auction = await ethersContract.auction()
 
-      return res.status(200).json({
-        auction: {
-          nounId: auction.nounId.toString(),
-          amount: auction.amount.toString(),
-          startTime: auction.startTime.toString(),
-          endTime: auction.endTime.toString(),
-          bidder: auction.bidder,
-          settled: auction.settled,
-        },
-      })
-    }
-
-    readAuctionState()
+    return res.status(200).json({
+      auction: {
+        nounId: auction.nounId.toString(),
+        amount: auction.amount.toString(),
+        startTime: auction.startTime.toString(),
+        endTime: auction.endTime.toString(),
+        bidder: auction.bidder,
+        settled: auction.settled,
+      },
+    })
   } catch (err) {
     return res.status(403).json({ auction: undefined })
   }
 }
+
+export default handler
