@@ -1,6 +1,7 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useEnsName } from 'wagmi'
 import { Flex, Label, Icon } from '@zoralabs/zord'
+import { AddressZero } from '@ethersproject/constants'
 
 // @noun-auction
 import { SharedDataRendererProps } from '@noun-auction/typings'
@@ -16,22 +17,27 @@ export function AuctionBidder({
   label = 'Top bidder',
   layoutDirection = 'row',
   showLabels,
-  txHash,
-  address,
   useAvatar = true,
   ...props
 }: {
-  address: string
-  txHash: string
   useAvatar?: boolean
 } & SharedDataRendererProps) {
-  const { data: ensName } = useEnsName({
-    address: address,
-  })
-  const { layout } = useNounishAuctionProvider()
-  const shortAddress = useShortAddress(address)
+  const { layout, auctionData } = useNounishAuctionProvider()
 
-  const buildTxLink = useMemo(() => `https://etherscan.io/tx/${txHash}`, [txHash])
+  const { data: ensName } = useEnsName({
+    address: auctionData?.rpcData?.bidder,
+  })
+
+  const shortAddress = useShortAddress(auctionData?.rpcData?.bidder)
+
+  const buildTxLink = useMemo(
+    () => `https://etherscan.io/tx/${auctionData.bidder.txHash}`,
+    [auctionData.bidder.txHash]
+  )
+
+  useEffect(() => {
+    auctionData
+  }, [auctionData])
 
   return (
     <Flex
@@ -60,22 +66,27 @@ export function AuctionBidder({
           size="md"
           style={{ lineHeight: '1.15' }}
           align="right"
-          className={sideBarUpperLabel}
+          className={[sideBarUpperLabel]}
+          color={auctionData?.rpcData?.bidder !== AddressZero ? 'primary' : 'tertiary'}
         >
-          <Flex gap="x2" align="center">
-            <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
-              {ensName ? ensName : shortAddress}
+          {auctionData?.rpcData?.bidder !== AddressZero ? (
+            <Flex gap="x2" align="center">
+              <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
+                {ensName ? ensName : shortAddress}
+              </Flex>
+              {useAvatar && (
+                <>
+                  {layout !== 'sideBarBid' ? (
+                    <EnsAvatar address={auctionData?.rpcData?.bidder} />
+                  ) : (
+                    <Icon id="ArrowRightAngle" />
+                  )}
+                </>
+              )}
             </Flex>
-            {useAvatar && (
-              <>
-                {layout !== 'sideBarBid' ? (
-                  <EnsAvatar address={address} />
-                ) : (
-                  <Icon id="ArrowRightAngle" />
-                )}
-              </>
-            )}
-          </Flex>
+          ) : (
+            <>No bids</>
+          )}
         </Label>
       </Flex>
     </Flex>

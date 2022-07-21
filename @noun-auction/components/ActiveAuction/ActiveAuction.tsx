@@ -7,7 +7,6 @@ import { AuctionCountdown, AuctionBidder, AuctionHighBid } from '../DataRenderer
 import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
 import { TokenInfo } from './TokenInfo'
 import {
-  placeBidTrigger,
   auctionWrapperVariants,
   sidebarBidWrapper,
 } from '@noun-auction/styles/NounishStyles.css'
@@ -31,7 +30,6 @@ export function ActiveAuction({
   useErrorMsg,
 }: ActiveAuctionProps) {
   const {
-    data,
     isComplete,
     noAuctionHistory,
     daoConfig,
@@ -45,27 +43,21 @@ export function ActiveAuction({
 
   const rowLayout = (
     <>
-      {!isComplete && !noAuctionHistory ? (
+      {!isComplete ? (
         <>
           <AuctionCountdown
-            startTime={auctionData.countdown.startTime}
-            endTime={auctionData.countdown.endTime}
             layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
             showLabels={showLabels}
             justify={'center'}
             align={'flex-end'}
           />
           <AuctionHighBid
-            ethValue={auctionData.highBid.ethValue}
-            usdcValue={auctionData.highBid.usdcValue}
             layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
             showLabels={showLabels}
             justify={'center'}
             align={'flex-end'}
           />
           <AuctionBidder
-            address={auctionData.bidder.address}
-            txHash={auctionData.bidder.txHash}
             layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
             showLabels={showLabels}
             justify={'center'}
@@ -75,10 +67,6 @@ export function ActiveAuction({
       ) : (
         <Flex h="100%" align="center" justify="flex-end" style={{ gridColumn: '2 / 6' }}>
           <AuctionBidder
-            address={
-              noAuctionHistory ? data?.token?.token?.owner : auctionData.bidder.address
-            }
-            txHash={auctionData.bidder.txHash}
             layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
             label={noAuctionHistory ? 'Owned by' : 'Winning Bid'}
             showLabels={true}
@@ -92,15 +80,11 @@ export function ActiveAuction({
   const sideBarTop = (
     <Stack mb="x4" gap="x4">
       <AuctionBidder
-        address={auctionData.bidder.address}
-        txHash={auctionData.bidder.txHash}
         showLabels={showLabels}
         layoutDirection="row"
         justify="space-between"
       />
       <AuctionCountdown
-        startTime={auctionData.countdown.startTime}
-        endTime={auctionData.countdown.endTime}
         layoutDirection="row"
         showLabels={showLabels}
         justify="space-between"
@@ -128,8 +112,6 @@ export function ActiveAuction({
         >
           {layout === 'sideBarBid' && (
             <AuctionHighBid
-              ethValue={auctionData.highBid.ethValue}
-              usdcValue={auctionData.highBid.usdcValue}
               layoutDirection="column"
               showLabels={showLabels}
               justify="flex-start"

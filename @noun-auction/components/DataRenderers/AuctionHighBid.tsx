@@ -12,17 +12,12 @@ import { lightFont } from 'styles/styles.css'
 export function AuctionHighBid({
   label = 'Current bid',
   layoutDirection = 'row',
-  ethValue,
   showLabels,
-  usdcValue,
-  useUsdc = false,
   ...props
 }: {
-  ethValue: string
-  usdcValue: string
   useUsdc?: boolean
 } & SharedDataRendererProps) {
-  const { layout } = useNounishAuctionProvider()
+  const { layout, auctionData } = useNounishAuctionProvider()
 
   return (
     <Flex
@@ -42,13 +37,15 @@ export function AuctionHighBid({
           {label}
         </Label>
       )}
-      <EthAmount
-        style={{ lineHeight: '1.15' }}
-        size="md"
-        align={layout === 'sideBarBid' ? 'left' : 'right'}
-        className={layout === 'sideBarBid' && sidebarHighBid}
-        ethAmount={ethValue}
-      />
+      {auctionData?.rpcData?.amount && (
+        <EthAmount
+          style={{ lineHeight: '1.15' }}
+          size="md"
+          align={layout === 'sideBarBid' ? 'left' : 'right'}
+          className={layout === 'sideBarBid' && sidebarHighBid}
+          ethAmount={auctionData?.rpcData?.amount}
+        />
+      )}
     </Flex>
   )
 }

@@ -6,9 +6,8 @@ import {
   useState,
   Dispatch,
   SetStateAction,
-  useEffect,
 } from 'react'
-import { useNounishAuctionQuery, useActiveNounishAuctionQuery } from '@noun-auction/hooks'
+import { useNounishAuctionQuery, useAuctionRPC } from '@noun-auction/hooks'
 import { DaoConfigProps } from '@noun-auction/typings'
 import { defaultDaoConfig } from '@noun-auction/constants'
 import { useContractRead } from 'wagmi'
@@ -55,15 +54,18 @@ export function NounishAuctionProvider({
   const { marketType, contractAddress, classifierPrefix, abi, auctionContractAddress } =
     daoConfig
 
-  const { activeToken } = useActiveNounishAuctionQuery({
-    marketType,
-    contractAddress,
-  })
+  const { data: auctionData } = useAuctionRPC(daoConfig.auctionContractAddress)
 
   const { data: minBidIncrementPercentage } = useContractRead({
     addressOrName: auctionContractAddress,
     contractInterface: abi,
     functionName: 'minBidIncrementPercentage',
+  })
+
+  const { data: reservePrice } = useContractRead({
+    addressOrName: auctionContractAddress,
+    contractInterface: abi,
+    functionName: 'reservePrice',
   })
 
   const { data: isPaused } = useContractRead({
@@ -75,13 +77,12 @@ export function NounishAuctionProvider({
   const { data, error } = useNounishAuctionQuery({
     marketType: marketType,
     contractAddress: contractAddress,
-    tokenId: tokenId ? tokenId : activeToken,
+    tokenId: tokenId ? tokenId : auctionData?.auction?.nounId,
   })
 
   const [timerComplete, setTimerComplete] = useState(false)
 
   const isComplete = useMemo(() => {
-    // console.log(tokenId, data?.token?.markets[0])
     if (!data) {
       return false
     } else if (data?.token?.markets.length) {
@@ -120,9 +121,10 @@ export function NounishAuctionProvider({
           address: marketProperties?.highestBidder,
           txHash: marketData?.transactionInfo.transactionHash,
         },
+        rpcData: auctionData?.auction,
       }
     }
-  }, [data])
+  }, [data, auctionData])
 
   return (
     <NounsAuctionContext.Provider
@@ -132,7 +134,7 @@ export function NounishAuctionProvider({
         isComplete,
         noAuctionHistory,
         timerComplete,
-        tokenId: tokenId ? tokenId : activeToken,
+        tokenId: tokenId ? tokenId : auctionData?.auction?.nounId,
         daoConfig: daoConfig,
         setTimerComplete,
         layout,
@@ -140,6 +142,7 @@ export function NounishAuctionProvider({
         contract: {
           minBidIncrementPercentage: minBidIncrementPercentage,
           isPaused: isPaused,
+          reservePrice: '0.01',
         },
       }}
     >

@@ -4,9 +4,7 @@ import { useMemo } from 'react'
 
 // @noun-auction
 import { SharedDataRendererProps } from '@noun-auction/typings'
-import { EthAmount } from './EthAmount'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
-import { sidebarHighBid } from '@noun-auction/styles/NounishStyles.css'
 
 // @shared
 import { lightFont } from 'styles/styles.css'
@@ -49,7 +47,7 @@ export function WalletBalance({
           {label}
         </Label>
       )}
-      <Label>{balance} ETH</Label>
+      <Label>{balance}</Label>
     </Flex>
   )
 }

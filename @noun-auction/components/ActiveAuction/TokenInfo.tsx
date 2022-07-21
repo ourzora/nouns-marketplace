@@ -5,6 +5,7 @@ import { useNFT } from '@zoralabs/nft-hooks'
 import { TokenInfoConfig } from './../NounishAuction'
 import { CollectionThumbnail, returnThumbnailSize } from '@media/CollectionThumbnail'
 import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
+import { useNounishAuctionProvider } from '@noun-auction/providers'
 
 // @shared (or zord)
 import { lightFont } from 'styles/styles.css'
@@ -25,8 +26,10 @@ export function TokenInfo({
   ...props
 }: TokenInfoProps) {
   const router = useRouter()
-
+  const { auctionData, daoConfig } = useNounishAuctionProvider()
   const { data } = useNFT(contractAddress, tokenId)
+
+  // console.log(auctionData?.rpcData, daoConfig)
 
   /* Make this router pattern optional / customizeable */
   const contractLinkHandler = useCallback((e) => {
@@ -39,49 +42,49 @@ export function TokenInfo({
     router.push(`/${routePrefix}/${contractAddress}/${tokenId}`)
   }, [])
 
-  if (!data) {
-    return null
-  }
-
   return (
     <Flex className={['nounish-auction__token-info', tokenInfoWrapper]} {...props}>
-      {!hideThumbnail && (
-        <Button
-          onClick={tokenLinkHandler}
-          variant="unset"
-          h={returnThumbnailSize(thumbnailSize)}
-          style={{ aspectRatio: '1/1' }}
-        >
-          <CollectionThumbnail
-            collectionAddress={contractAddress}
-            tokenId={tokenId}
-            size={thumbnailSize}
-            h="100%"
-            style={{ aspectRatio: '1/1' }}
-          />
-        </Button>
-      )}
-      <Stack justify="space-between">
-        {!hideTitle && (
-          <Heading size="sm" as="h3">
-            {data?.metadata?.name
-              ? data?.metadata?.name
-              : `${data?.nft?.contract?.name} ${data?.nft?.tokenId}`}
-          </Heading>
-        )}
-        {!hideCollectionTitle && (
-          <Box mb="x1">
+      {data && (
+        <>
+          {!hideThumbnail && (
             <Button
-              onClick={contractLinkHandler}
+              onClick={tokenLinkHandler}
               variant="unset"
-              color="tertiary"
-              className={[lightFont]}
+              h={returnThumbnailSize(thumbnailSize)}
+              style={{ aspectRatio: '1/1' }}
             >
-              {data?.nft?.contract?.name}
+              <CollectionThumbnail
+                collectionAddress={contractAddress}
+                tokenId={tokenId}
+                size={thumbnailSize}
+                h="100%"
+                style={{ aspectRatio: '1/1' }}
+              />
             </Button>
-          </Box>
-        )}
-      </Stack>
+          )}
+          <Stack justify="space-between">
+            {!hideTitle && (
+              <Heading size="sm" as="h3">
+                {data?.metadata?.name
+                  ? data?.metadata?.name
+                  : `${data?.nft?.contract?.name} ${data?.nft?.tokenId}`}
+              </Heading>
+            )}
+            {!hideCollectionTitle && (
+              <Box mb="x1">
+                <Button
+                  onClick={contractLinkHandler}
+                  variant="unset"
+                  color="tertiary"
+                  className={[lightFont]}
+                >
+                  {data?.nft?.contract?.name}
+                </Button>
+              </Box>
+            )}
+          </Stack>
+        </>
+      )}
     </Flex>
   )
 }
