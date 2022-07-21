@@ -21,7 +21,6 @@ export function NFTHistory({ ...props }: NFTHistoryProps) {
         showBidHistory
         showLabels
         layout="historyOnly"
-        debug
         /* Wrapper Styling */
         borderColor="secondary"
         borderStyle="solid"
