@@ -2,6 +2,7 @@ import { DaoConfigProps, nounsAbi, lilNounsAbi } from '@noun-auction'
 
 export const daos: DaoConfigProps[] = [
   {
+    name: 'Nouns',
     contractAddress: '0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03',
     auctionContractAddress: '0x830BD73E4184ceF73443C15111a1DF14e495C706',
     marketType: 'NOUNS_AUCTION',
@@ -9,6 +10,7 @@ export const daos: DaoConfigProps[] = [
     abi: nounsAbi,
   },
   {
+    name: 'LilNouns',
     contractAddress: '0x4b10701Bfd7BFEdc47d50562b76b436fbB5BdB3B',
     auctionContractAddress: '0x55e0F7A3bB39a28Bd7Bcc458e04b3cF00Ad3219E',
     marketType: 'LIL_NOUNS_AUCTION',

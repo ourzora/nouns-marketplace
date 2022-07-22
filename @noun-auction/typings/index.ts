@@ -58,6 +58,7 @@ export enum NounishAuctionEventTypes {
 }
 
 export type DaoConfigProps = {
+  name: string
   contractAddress: string
   auctionContractAddress: string
   marketType: NounishMarketTypes
