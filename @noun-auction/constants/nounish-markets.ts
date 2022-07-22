@@ -48,6 +48,7 @@ export function returnMarketProps(marketType: NounishMarketTypes) {
 export const defaultMarketTypes = returnMarketProps('NOUNS_AUCTION')
 
 export const defaultDaoConfig: DaoConfigProps = {
+  name: 'Nouns',
   contractAddress: '0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03',
   auctionContractAddress: '0x830BD73E4184ceF73443C15111a1DF14e495C706',
   marketType: 'NOUNS_AUCTION',
