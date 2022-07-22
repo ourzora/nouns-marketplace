@@ -8,16 +8,21 @@ import { useNFTProvider } from '@shared/providers/NFTProvider'
 import { nftInfoSidebar, nftInfoSidebarWrapper, askInfoWrapper } from './NFTPage.css'
 import { MarketUi } from './MarketUi'
 import { useNounishAuctionProvider } from '@noun-auction'
+import { useTitleWithFallback } from 'hooks'
 
 export interface NFTInfoSidebar extends BoxProps {}
 
 export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
-  const { initialData: nft, tokenId } = useNFTProvider()
+  const { initialData: nft, tokenId, contractAddress } = useNFTProvider()
 
-  if (!nft || !tokenId) return null
+  if (!nft || !tokenId || !contractAddress) return null
 
   const { isOwner } = useIsOwner(nft)
-
+  const { fallbackTitle } = useTitleWithFallback(
+    contractAddress,
+    tokenId,
+    nft?.metadata?.name
+  )
   const { isComplete } = useNounishAuctionProvider()
 
   return (
@@ -39,11 +44,13 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
           </Link>
         </Flex>
         <Heading as="h1" size="xl">
-          {nft?.metadata?.name}
+          {fallbackTitle}
         </Heading>
-        <Paragraph size="lg" className={lightFont}>
-          {nft?.metadata?.description}
-        </Paragraph>
+        {nft?.metadata?.description && (
+          <Paragraph size="lg" className={lightFont}>
+            {nft?.metadata?.description}
+          </Paragraph>
+        )}
         {!isOwner && isComplete && (
           <Stack className={askInfoWrapper}>
             <FillAskInfo showBalance={false} nft={nft} />

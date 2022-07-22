@@ -38,7 +38,7 @@ export const background = style([
 
 export const customContent = style([
   {
-    maxWidth: 750,
+    maxWidth: 500,
   },
 ])
 

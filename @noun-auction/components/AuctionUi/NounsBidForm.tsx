@@ -113,7 +113,8 @@ export function NounsBidForm({
   )
 
   useEffect(() => {
-    console.log('successMsg', successMsg, minBidAmount?.pretty)
+    // console.log('successMsg', successMsg, minBidAmount?.pretty)
+    // successMsg?.hash / successMsg?.value (BigNumber) / successMsg?.gasPrice (BigNumber)
   }, [isSuccess, successMsg])
 
   return (
