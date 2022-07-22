@@ -169,3 +169,16 @@ export const lightFont = style({
   fontWeight: 300,
   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
 })
+
+/* Thumbnail */
+export const nounishThumbnail = style([
+  {
+    boxShadow: '0 0 20px rgba(0, 0, 0, 0.05)',
+    aspectRatio: '1/1',
+  },
+  atoms({
+    backgroundColor: 'tertiary',
+    position: 'relative',
+    overflow: 'hidden',
+  }),
+])

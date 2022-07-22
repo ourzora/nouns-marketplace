@@ -3,9 +3,13 @@ import { Flex, Separator, Label, Stack } from '@zoralabs/zord'
 // @noun-auction
 import { TokenInfoConfig } from '../NounishAuction'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
-import { AuctionCountdown, AuctionBidder, AuctionHighBid } from '../DataRenderers'
+import {
+  AuctionCountdown,
+  AuctionBidder,
+  AuctionHighBid,
+  TokenInfo,
+} from '../DataRenderers'
 import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
-import { TokenInfo } from './TokenInfo'
 import {
   auctionWrapperVariants,
   sidebarBidWrapper,

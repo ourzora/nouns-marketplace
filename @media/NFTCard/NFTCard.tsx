@@ -4,6 +4,7 @@ import { Link } from 'components/Link'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTCardMarket } from '@market'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
+import { useNounsToken } from '@noun-auction/hooks/useNounsToken'
 import {
   cardWrapper,
   titleWrapper,
@@ -12,12 +13,13 @@ import {
   cardImageWrapper,
 } from '@media/NftMedia.css'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { ImageWithNounFallback } from 'components'
 
 export function NFTCard({ nftData }: { nftData: NFTObject }) {
   const { metadata, media, nft } = nftData
   const { image } = useRawImageTransform(media?.thumbnail?.uri)
 
-  // console.log(nftData)
+  if (!nft || !nft?.contract?.address || !nft?.tokenId) return null
 
   const srcImg = useMemo(() => {
     if (media?.mimeType === 'image/svg+xml') {
@@ -33,22 +35,14 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
     }
   }, [metadata])
 
-  if (!nft) {
-    return null
-  }
-
   return (
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
       <Link href={`/collections/${nft?.contract.address}/${nft?.tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
-          <Box
-            as="img"
-            src={srcImg}
-            w="100%"
-            h="100%"
-            position="absolute"
-            inset="x0"
-            objectFit="cover"
+          <ImageWithNounFallback
+            tokenContract={nft?.contract.address}
+            tokenId={nft?.tokenId}
+            srcImg={srcImg}
           />
         </Box>
       </Link>

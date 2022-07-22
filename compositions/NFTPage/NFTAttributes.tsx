@@ -13,8 +13,7 @@ export interface NFTAttributesProps extends BoxProps {}
 export function NFTAttributes({ ...props }: NFTAttributesProps) {
   const { initialData: nft } = useNFTProvider()
 
-  if (!nft || (nft?.metadata?.attributes && !nft?.metadata?.attributes.length))
-    return null
+  if (!nft || !nft?.metadata?.attributes) return null
 
   return (
     <Box className={nftAttributes} {...props}>

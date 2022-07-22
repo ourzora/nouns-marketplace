@@ -46,7 +46,6 @@ const Collection = ({
             selector: 'nouns-market-traits',
             hideBorder: true,
           }}
-          filtersVisible
           usePriceRange={{
             label: 'Price',
             defaultState: 'open',

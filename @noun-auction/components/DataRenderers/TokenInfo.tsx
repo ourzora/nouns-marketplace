@@ -2,17 +2,17 @@ import { useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { Stack, Flex, Heading, Button, Box } from '@zoralabs/zord'
 import { useNFT } from '@zoralabs/nft-hooks'
-import { TokenInfoConfig } from './../NounishAuction'
-import { CollectionThumbnail, returnThumbnailSize } from '@media/CollectionThumbnail'
+
+import { TokenInfoConfig } from '../NounishAuction'
+import { NounishThumbnail, returnThumbnailSize } from './NounishThumbnail'
 import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 
 // @shared (or zord)
 import { lightFont } from 'styles/styles.css'
 
 export interface TokenInfoProps extends TokenInfoConfig {
-  contractAddress?: string
-  tokenId?: string
+  contractAddress: string
+  tokenId: string
 }
 
 export function TokenInfo({
@@ -26,10 +26,7 @@ export function TokenInfo({
   ...props
 }: TokenInfoProps) {
   const router = useRouter()
-  const { auctionData, daoConfig } = useNounishAuctionProvider()
   const { data } = useNFT(contractAddress, tokenId)
-
-  // console.log(auctionData?.rpcData, daoConfig)
 
   /* Make this router pattern optional / customizeable */
   const contractLinkHandler = useCallback((e) => {
@@ -53,8 +50,9 @@ export function TokenInfo({
               h={returnThumbnailSize(thumbnailSize)}
               style={{ aspectRatio: '1/1' }}
             >
-              <CollectionThumbnail
-                collectionAddress={contractAddress}
+              <NounishThumbnail
+                image={data?.media?.image?.uri}
+                tokenContract={contractAddress}
                 tokenId={tokenId}
                 size={thumbnailSize}
                 h="100%"
