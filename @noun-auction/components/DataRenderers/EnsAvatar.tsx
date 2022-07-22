@@ -28,7 +28,7 @@ export function EnsAvatar({ address, ...props }: EnsAvatarProps) {
       {ensAvatar ? (
         <Box as="img" src={ensAvatar} />
       ) : (
-        <Zorb size="100%" address={address} />
+        <Zorb size="100%" address={address} pixelate />
       )}
     </Flex>
   )

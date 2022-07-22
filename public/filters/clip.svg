@@ -1,0 +1,6 @@
+<svg height="0">
+  <clipPath id="clipping-path-1" clipPathUnits="objectBoundingBox">
+    <circle cx="0.25" cy="0.25" r="0.25" id="circle"/>
+    <rect x="0.5" y="0.2" width="0.5" height="0.8"/>
+  </clipPath>
+</svg>
