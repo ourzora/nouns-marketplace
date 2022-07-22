@@ -5,6 +5,7 @@ import { Flex, Stack, Separator } from '@zoralabs/zord'
 import { ModalTitleAndDescription } from '@market/components/ModalTitleAndDescription'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { FillAskInfo } from './FillAskInfo'
+import { useTitleWithFallback } from 'hooks'
 
 /* integrate market types */
 // import { MARKET_TYPES } from '@zoralabs/nft-hooks/dist/types'
@@ -30,13 +31,17 @@ export function NftInfo({
   const { data } = useNFT(collectionAddress, tokenId)
   const { address } = useAccount()
 
+  if (!collectionAddress || !tokenId) return null
+
+  const { fallbackTitle } = useTitleWithFallback(collectionAddress, tokenId)
+
   const noWallet = useMemo(() => {
     return address === null ? true : false
   }, [address])
 
   return (
     <Stack gap="x4">
-      <Flex justify="space-between" align="center">
+      <Flex justify="space-between" align="flex-start">
         <ModalTitleAndDescription
           title={
             noWallet
@@ -49,12 +54,11 @@ export function NftInfo({
                     : MODAL_TYPES.auction
                     ? 'Bid on'
                     : ''
-                } ${data ? data.metadata?.name : '...'}`
+                } ${data && data.metadata?.name ? data.metadata.name : fallbackTitle}`
           }
         />
         <CollectionThumbnail collectionAddress={collectionAddress} tokenId={tokenId} />
       </Flex>
-      <Separator />
       {data && modalType === 'fillAsk' && askPrice && (
         <FillAskInfo nft={data} askPrice={askPrice} />
       )}

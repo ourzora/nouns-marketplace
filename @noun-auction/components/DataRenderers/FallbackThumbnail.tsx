@@ -12,8 +12,12 @@ export function FallbackThumbnail({
   ...props
 }: FallbackThumbnailProps) {
   const { tokenData } = useNounsToken(tokenContract, tokenId)
+
+  if (!tokenData) return null
+
   return (
     <Box
+      className="nouns-fallback-image"
       as="img"
       inset="x0"
       w="100%"

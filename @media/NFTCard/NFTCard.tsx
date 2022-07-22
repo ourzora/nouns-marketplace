@@ -4,7 +4,7 @@ import { Link } from 'components/Link'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTCardMarket } from '@market'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
-import { useNounsToken } from '@noun-auction/hooks/useNounsToken'
+import { useTitleWithFallback } from 'hooks'
 import {
   cardWrapper,
   titleWrapper,
@@ -20,6 +20,12 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
   const { image } = useRawImageTransform(media?.thumbnail?.uri)
 
   if (!nft || !nft?.contract?.address || !nft?.tokenId) return null
+
+  const { fallbackTitle } = useTitleWithFallback(
+    nft?.contract?.address,
+    nft?.tokenId,
+    metadata?.name
+  )
 
   const srcImg = useMemo(() => {
     if (media?.mimeType === 'image/svg+xml') {
@@ -55,7 +61,7 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
           }}
         >
           <Heading as="h4" size="sm" className={titleHeading}>
-            {metadata?.name}
+            {fallbackTitle}
           </Heading>
         </Flex>
         <Flex align="center" gap="x2" justify="space-between">

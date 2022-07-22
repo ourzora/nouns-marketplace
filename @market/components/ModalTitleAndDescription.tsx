@@ -14,7 +14,7 @@ export function ModalTitleAndDescription({
   return (
     <Box {...props}>
       {!!title && (
-        <Heading size="md" mb={!!description ? 'x2' : 'x0'}>
+        <Heading as="h1" size="md" mb={!!description ? 'x2' : 'x0'}>
           {title}
         </Heading>
       )}

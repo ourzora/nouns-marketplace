@@ -1,4 +1,4 @@
-import { Flex, Separator, Label, Stack } from '@zoralabs/zord'
+import { Flex, Separator, Stack } from '@zoralabs/zord'
 
 // @noun-auction
 import { TokenInfoConfig } from '../NounishAuction'
@@ -43,7 +43,7 @@ export function ActiveAuction({
     layout,
   } = useNounishAuctionProvider()
 
-  if (!auctionData) return null
+  if (!auctionData || !tokenId) return null
 
   const rowLayout = (
     <>
