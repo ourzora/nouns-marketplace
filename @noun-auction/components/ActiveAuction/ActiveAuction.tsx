@@ -8,11 +8,15 @@ import {
   AuctionBidder,
   AuctionHighBid,
   TokenInfo,
+  CollectionLink,
 } from '../DataRenderers'
 import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
 import {
   auctionWrapperVariants,
+  responsiveRow,
   sidebarBidWrapper,
+  rowButtonWrapper,
+  rowButton,
 } from '@noun-auction/styles/NounishStyles.css'
 
 export interface ActiveAuctionProps extends TokenInfoConfig {
@@ -20,6 +24,8 @@ export interface ActiveAuctionProps extends TokenInfoConfig {
   showLabels?: boolean
   layout: keyof typeof auctionWrapperVariants['layout']
   useErrorMsg?: boolean
+  /* View Config */
+  showTopBid?: boolean
 }
 
 export function ActiveAuction({
@@ -32,6 +38,7 @@ export function ActiveAuction({
   hideCollectionTitle,
   routePrefix,
   useErrorMsg,
+  showTopBid,
 }: ActiveAuctionProps) {
   const {
     isComplete,
@@ -54,19 +61,24 @@ export function ActiveAuction({
             showLabels={showLabels}
             justify={'center'}
             align={'flex-end'}
+            className={[layout === 'row' && responsiveRow, 'nounish-auction__countdown']}
           />
           <AuctionHighBid
             layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
             showLabels={showLabels}
             justify={'center'}
             align={'flex-end'}
+            className={[layout === 'row' && responsiveRow, 'nounish-auction__high-bid']}
           />
-          <AuctionBidder
-            layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
-            showLabels={showLabels}
-            justify={'center'}
-            align={'flex-end'}
-          />
+          {showTopBid && (
+            <AuctionBidder
+              layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
+              showLabels={showLabels}
+              justify={'center'}
+              align={'flex-end'}
+              className="nounish-auction__bidder"
+            />
+          )}
         </>
       ) : (
         <Flex h="100%" align="center" justify="flex-end" style={{ gridColumn: '2 / 6' }}>
@@ -75,6 +87,7 @@ export function ActiveAuction({
             label={noAuctionHistory ? 'Owned by' : 'Winning Bid'}
             showLabels={true}
             align={'flex-end'}
+            className="nounish-auction__complete-bidder"
           />
         </Flex>
       )}
@@ -87,11 +100,13 @@ export function ActiveAuction({
         showLabels={showLabels}
         layoutDirection="row"
         justify="space-between"
+        className="nounish-auction__sidebar-top-bidder"
       />
       <AuctionCountdown
         layoutDirection="row"
         showLabels={showLabels}
         justify="space-between"
+        className="nounish-auction__sidebar-top-contdown"
       />
     </Stack>
   )
@@ -112,7 +127,15 @@ export function ActiveAuction({
         <Flex
           align={layout === 'sideBarBid' ? 'flex-start' : 'center'}
           justify="flex-end"
-          className={[layout === 'sideBarBid' && sidebarBidWrapper]}
+          gap="x4"
+          w={{
+            '@initial': layout === 'row' ? '100%' : 'auto',
+            '@1024': 'auto',
+          }}
+          className={[
+            layout === 'sideBarBid' && sidebarBidWrapper,
+            layout === 'row' && rowButtonWrapper,
+          ]}
         >
           {layout === 'sideBarBid' && (
             <AuctionHighBid
@@ -121,9 +144,24 @@ export function ActiveAuction({
               justify="flex-start"
             />
           )}
+          {layout === 'row' && (
+            <CollectionLink
+              contractAddress={daoConfig?.contractAddress}
+              className="nounish-auction__row-link"
+              display={{
+                '@initial': 'block',
+                '@1024': 'none',
+              }}
+            >
+              View Collection
+            </CollectionLink>
+          )}
           {!useModal && <Separator mt="x1" />}
           {timerComplete ? (
-            <SettleAuction useErrorMsg={useErrorMsg} />
+            <SettleAuction
+              useErrorMsg={useErrorMsg}
+              className="nounish-auction__row-link"
+            />
           ) : (
             <PlaceNounsBid useModal={useModal} />
           )}

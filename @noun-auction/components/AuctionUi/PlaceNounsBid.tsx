@@ -37,7 +37,7 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
               className={placeBidTrigger}
               as="span"
               size="md"
-              w={layout === 'sideBarBid' ? '100%' : 'auto'}
+              w={layout === 'sideBarBid' || layout === 'row' ? '100%' : 'auto'}
             >
               Place Bid
             </Label>

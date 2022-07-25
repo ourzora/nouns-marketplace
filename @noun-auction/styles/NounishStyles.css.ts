@@ -1,16 +1,40 @@
-import { style } from '@vanilla-extract/css'
-import { atoms, space, color, typography } from '@zoralabs/zord'
+import { style, globalStyle } from '@vanilla-extract/css'
+import { atoms, space, color, typography, media, radii } from '@zoralabs/zord'
 import { recipe } from '@vanilla-extract/recipes'
 
 export const auctionWrapperVariants = {
   layout: {
     row: [
       {
-        height: '68px',
-        gridTemplateColumns: '250px repeat(2, 1fr) 1.25fr 155px',
+        gridTemplateColumns: '1fr 1fr',
+        gridTemplateRows: 'auto',
+        gridAutoFlow: 'row',
+        borderRadius: radii.phat,
+        border: `2px solid ${color.black10}`,
+        height: '232px',
+        '@media': {
+          [media.min1024]: {
+            gridTemplateColumns: '250px repeat(2, 1fr) 1.25fr 155px',
+            height: '85px',
+            borderRadius: 0,
+            border: 'none',
+            borderTop: `2px solid ${color.black10}`,
+          },
+        },
       },
       atoms({
-        height: '100%',
+        gap: {
+          '@initial': 'x3',
+          '@1024': 'x4',
+        },
+        p: {
+          '@initial': 'x4',
+          '@1024': 'x0',
+        },
+        pt: {
+          '@initial': 'x4',
+          '@1024': 'x4',
+        },
       }),
     ],
     historyOnly: [
@@ -46,6 +70,100 @@ export const auctionWrapper = recipe({
   ]),
   defaultVariants: {
     layout: 'row',
+  },
+})
+
+export const tokenInfoWrapper = style([
+  {
+    gridColumn: '1 / 3',
+    borderBottom: `1px solid ${color.black10}`,
+    '@media': {
+      [media.min1024]: {
+        maxWidth: 350,
+        gridColumn: 'auto',
+        borderBottom: 'none',
+      },
+    },
+  },
+  atoms({
+    w: '100%',
+    gap: 'x3',
+    pb: {
+      '@initial': 'x4',
+      '@1024': 'x0',
+    },
+    mb: {
+      '@initial': 'x2',
+      '@1024': 'x0',
+    },
+  }),
+])
+
+export const responsiveRow = style([
+  {
+    alignItems: 'flex-start',
+    '@media': {
+      [media.min1024]: {
+        alignItems: 'flex-end',
+      },
+    },
+    selectors: {
+      '&.nounish-auction__countdown': {
+        gridColumn: '1',
+        '@media': {
+          [media.min1024]: {
+            gridColumn: 'auto',
+          },
+        },
+      },
+      '&.nounish-auction__high-bid': {
+        gridColumn: '2',
+        '@media': {
+          [media.min1024]: {
+            gridColumn: 'auto',
+          },
+        },
+      },
+    },
+  },
+  atoms({
+    w: '100%',
+  }),
+])
+
+export const rowButtonWrapper = style([
+  {
+    gridColumn: '1 / 3',
+    width: '100%',
+    '@media': {
+      [media.min1024]: {
+        gridColumn: 'auto',
+      },
+    },
+  },
+])
+
+globalStyle(
+  `
+  ${rowButtonWrapper} .zora-modal-trigger-wrapper,
+  ${rowButtonWrapper} .nounish-auction__row-link
+`,
+  {
+    width: '50%',
+    '@media': {
+      [media.min1024]: {
+        width: '100%',
+      },
+    },
+  }
+)
+
+globalStyle(`${rowButtonWrapper} .zora-modal-trigger`, {
+  width: '100%',
+  '@media': {
+    [media.min1024]: {
+      width: '100%',
+    },
   },
 })
 
@@ -94,20 +212,10 @@ export const debugWrapper = style([
   },
 ])
 
-export const tokenInfoWrapper = style([
-  {
-    maxWidth: 350,
-  },
-  atoms({
-    w: '100%',
-    gap: 'x3',
-  }),
-])
-
 export const placeBidTrigger = style([
   {
     whiteSpace: 'nowrap',
-    height: 'auto',
+    height: '42px',
   },
   atoms({
     borderRadius: 'curved',

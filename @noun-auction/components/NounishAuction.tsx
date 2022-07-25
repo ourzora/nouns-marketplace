@@ -12,6 +12,7 @@ import {
 import { DaoConfigProps } from '@noun-auction/typings'
 
 export interface TokenInfoConfig extends BoxProps {
+  /* ~ Move to provider as config object */
   hideThumbnail?: boolean
   hideTitle?: boolean
   hideCollectionTitle?: boolean
@@ -19,18 +20,22 @@ export interface TokenInfoConfig extends BoxProps {
   routePrefix?: string
 }
 
-export interface NounishAuctionProps extends TokenInfoConfig {
-  daoConfig: DaoConfigProps
-  tokenId?: string
-  /* View Config */
+export interface AuctionViewConfig extends TokenInfoConfig {
+  /* View Config ~ Move to provider as config object */
   showAuctionRow?: boolean
   showBidHistory?: boolean
   useInlineBid?: boolean
   debug?: boolean
   useErrorMsg?: boolean
+  showTopBid?: boolean
+  showLabels?: boolean
+}
+
+export interface NounishAuctionProps extends AuctionViewConfig {
+  daoConfig: DaoConfigProps
+  tokenId?: string
   /* Theming */
   layout?: keyof typeof auctionWrapperVariants['layout']
-  showLabels?: boolean
 }
 
 export function NounishAuction({
@@ -39,6 +44,7 @@ export function NounishAuction({
   tokenId,
   showAuctionRow = true,
   showBidHistory = false,
+  showTopBid = true,
   useInlineBid = false,
   hideThumbnail = false,
   hideTitle = false,
@@ -54,6 +60,7 @@ export function NounishAuction({
     <Grid
       className={[
         'nounish-auction__auction-data-wrapper',
+        `nounish-auction__${layout}`,
         auctionWrapper({ layout: layout }),
       ]}
       {...props}
@@ -70,6 +77,7 @@ export function NounishAuction({
             useModal={!useInlineBid}
             showLabels={showLabels}
             useErrorMsg={useErrorMsg}
+            showTopBid={showTopBid}
           />
         )}
         {showBidHistory && (

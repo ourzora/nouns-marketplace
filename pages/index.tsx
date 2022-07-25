@@ -1,4 +1,4 @@
-import { Flex, Label } from '@zoralabs/zord'
+import { Flex, Label, Stack } from '@zoralabs/zord'
 import { Link, PageHeader, PageWrapper, Seo } from 'components'
 import { CollectionRanking } from 'compositions/CollectionRanking'
 import { DaoTable } from 'compositions/Daos'
@@ -37,8 +37,10 @@ const Home = () => {
           </Flex>
         </Link>
       </Flex>
-      <DaoTable />
-      <CollectionRanking />
+      <Stack px="x4">
+        <DaoTable />
+        <CollectionRanking />
+      </Stack>
     </PageWrapper>
   )
 }
