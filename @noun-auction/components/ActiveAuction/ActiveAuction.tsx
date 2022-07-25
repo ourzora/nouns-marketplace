@@ -16,7 +16,6 @@ import {
   responsiveRow,
   sidebarBidWrapper,
   rowButtonWrapper,
-  rowButton,
 } from '@noun-auction/styles/NounishStyles.css'
 
 export interface ActiveAuctionProps extends TokenInfoConfig {
