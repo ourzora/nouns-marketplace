@@ -73,32 +73,6 @@ export const auctionWrapper = recipe({
   },
 })
 
-export const tokenInfoWrapper = style([
-  {
-    gridColumn: '1 / 3',
-    borderBottom: `1px solid ${color.black10}`,
-    '@media': {
-      [media.min1024]: {
-        maxWidth: 350,
-        gridColumn: 'auto',
-        borderBottom: 'none',
-      },
-    },
-  },
-  atoms({
-    w: '100%',
-    gap: 'x3',
-    pb: {
-      '@initial': 'x4',
-      '@1024': 'x0',
-    },
-    mb: {
-      '@initial': 'x2',
-      '@1024': 'x0',
-    },
-  }),
-])
-
 export const responsiveRow = style([
   {
     alignItems: 'flex-start',
@@ -279,14 +253,51 @@ export const lightFont = style({
 })
 
 /* Thumbnail */
-export const nounishThumbnail = style([
+export const tokenInfoWrapper = style([
   {
-    boxShadow: '0 0 20px rgba(0, 0, 0, 0.05)',
-    aspectRatio: '1/1',
+    gridColumn: '1 / 3',
+    borderBottom: `1px solid ${color.black10}`,
+    gridTemplateColumns: '68px auto',
+    gridTemplateRows: '68px',
+    '@media': {
+      [media.min1024]: {
+        maxWidth: 350,
+        gridColumn: 'auto',
+        borderBottom: 'none',
+      },
+    },
   },
+  atoms({
+    w: '100%',
+    gap: 'x3',
+    display: 'grid',
+    pb: {
+      '@initial': 'x4',
+      '@1024': 'x0',
+    },
+    mb: {
+      '@initial': 'x2',
+      '@1024': 'x0',
+    },
+  }),
+])
+
+export const nounishThumbnail = style([
   atoms({
     backgroundColor: 'tertiary',
     position: 'relative',
     overflow: 'hidden',
+    h: '100%',
+    w: '100%',
+  }),
+])
+
+export const nounishThumbnailImage = style([
+  atoms({
+    inset: 'x0',
+    position: 'absolute',
+    w: '100%',
+    h: '100%',
+    objectFit: 'cover',
   }),
 ])

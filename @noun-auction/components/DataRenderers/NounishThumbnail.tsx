@@ -1,5 +1,8 @@
-import { Box, Flex, Label, BoxProps, mixins } from '@zoralabs/zord'
-import { nounishThumbnail } from '@noun-auction/styles/NounishStyles.css'
+import { Box, BoxProps } from '@zoralabs/zord'
+import {
+  nounishThumbnail,
+  nounishThumbnailImage,
+} from '@noun-auction/styles/NounishStyles.css'
 import { FallbackThumbnail } from './FallbackThumbnail'
 
 export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
@@ -42,18 +45,20 @@ export function NounishThumbnail({
   ...props
 }: NounishThumbnailProps) {
   return (
-    <Flex align="center" gap="x4" {...props}>
-      <Box
-        h={returnThumbnailSize(size)}
-        borderRadius={radius}
-        className={['nounish-thumbnail', nounishThumbnail]}
-      >
-        {image ? (
-          <Box as="img" inset="x0" w="100%" h="100%" position="absolute" src={image} />
-        ) : (
-          <FallbackThumbnail tokenContract={tokenContract} tokenId={tokenId} />
-        )}
-      </Box>
-    </Flex>
+    <Box
+      borderRadius={radius}
+      className={['nounish-thumbnail', nounishThumbnail]}
+      {...props}
+    >
+      {image ? (
+        <Box
+          as="img"
+          className={[nounishThumbnailImage, 'nouns-fallback-image']}
+          src={image}
+        />
+      ) : (
+        <FallbackThumbnail tokenContract={tokenContract} tokenId={tokenId} />
+      )}
+    </Box>
   )
 }

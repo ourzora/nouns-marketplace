@@ -32,16 +32,18 @@ export const Zorb = ({
   return (
     <>
       <Box
+        display="block"
+        borderRadius="round"
+        overflow="hidden"
+        inset="x0"
         style={{
           height: returnSize,
           width: returnSize,
-          transform: `${pixelate ? 'scale(.65)' : 'scale(1)'}`,
-          inset: 0,
           background: background,
-          overflow: 'hidden',
-          borderRadius: 300,
-          display: 'block',
-          filter: `${pixelate ? "url('#mosaic')" : ''}`,
+          '@supports (filter: url("#mosaic"))': {
+            transform: `${pixelate && 'scale(.65)'}`,
+            filter: `${pixelate && 'url("#mosaic")'}`,
+          },
         }}
       />
     </>
