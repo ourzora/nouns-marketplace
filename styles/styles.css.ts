@@ -1,5 +1,13 @@
 import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, media, typography, colorTheme, radii } from '@zoralabs/zord'
+import {
+  atoms,
+  media,
+  typography,
+  colorTheme,
+  radii,
+  fontWeight,
+  color,
+} from '@zoralabs/zord'
 import {
   FOOTER_HEIGHT,
   FOOTER_HEIGHT_MOBILE,
@@ -7,6 +15,7 @@ import {
   HEADER_HEIGHT_MOBILE,
   MAX_WIDTH,
 } from './style-constants'
+import { recipe } from '@vanilla-extract/recipes'
 
 globalStyle('html, body', {
   margin: 0,
@@ -129,4 +138,57 @@ export const clickAnimation = style({
       transform: 'unset',
     },
   },
+})
+
+/* PAGE HEADER */
+export const pageHeadline = [
+  {
+    fontWeight: fontWeight.display,
+    lineHeight: '40px',
+    '@media': {
+      [media.min1024]: {
+        lineHeight: '85px',
+      },
+    },
+  },
+  atoms({
+    fontSize: {
+      '@initial': '48px',
+      '@1024': '80px',
+    },
+  }),
+]
+
+export const pageHeaderVariants = {
+  variant: {
+    topBorder: [
+      {
+        borderTop: `2px solid ${color.black10}`,
+        '@media': {
+          [media.min1024]: {
+            borderTop: 0,
+          },
+        },
+      },
+      atoms({
+        pt: {
+          '@initial': 'x6',
+          '@1024': 'x0',
+        },
+      }),
+    ],
+  },
+}
+
+export const pageHeaderWrapper = recipe({
+  variants: pageHeaderVariants,
+  base: style([
+    {
+      maxWidth: MAX_WIDTH.SM,
+    },
+    atoms({
+      width: '100%',
+      margin: 'auto',
+    }),
+  ]),
 })

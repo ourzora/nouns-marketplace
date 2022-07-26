@@ -9,11 +9,7 @@ const Home = () => {
   return (
     <PageWrapper direction="column" gap="x6">
       <Seo />
-      <PageHeader
-        headline="The Nouns Marketplace"
-        headlineSize="lg"
-        copy={COLLECTIONS_INDEX_COPY}
-      />
+      <PageHeader headline="The Nouns Marketplace" copy={COLLECTIONS_INDEX_COPY} />
       <Flex w="100%" justify="center">
         <Link href="/collections">
           <Flex
