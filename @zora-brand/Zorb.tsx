@@ -40,10 +40,6 @@ export const Zorb = ({
           height: returnSize,
           width: returnSize,
           background: background,
-          '@supports (filter: url("#mosaic"))': {
-            transform: `${pixelate && 'scale(.65)'}`,
-            filter: `${pixelate && 'url("#mosaic")'}`,
-          },
         }}
       />
     </>

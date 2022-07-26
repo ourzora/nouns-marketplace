@@ -214,10 +214,19 @@ export const nounishAuctionRow = style([
 
 export const transactionEventWrapper = style([
   {
-    gridTemplateColumns: '1fr 125px',
+    gridTemplateColumns: 'auto 125px',
   },
   atoms({
     w: '100%',
+  }),
+])
+
+export const transactionBidder = style([
+  {
+    gridTemplateColumns: `${space.x12} auto`,
+  },
+  atoms({
+    gap: 'x3',
   }),
 ])
 
@@ -229,10 +238,16 @@ export const auctionEventRow = style([
         display: 'block',
         position: 'relative',
         width: '100%',
-        height: space.x6,
+        height: space.x5,
         borderLeft: `2px solid ${color.black10}`,
-        margin: `${space.x2} 0 ${space.x2}`,
+        margin: `${space.x1} 0 ${space.x1}`,
         transform: `translateX(calc(${space.x6} - 1px))`,
+        '@media': {
+          [media.min1024]: {
+            height: space.x6,
+            margin: `${space.x2} 0 ${space.x2}`,
+          },
+        },
       },
       '&:last-of-type:after': {
         display: 'none',
@@ -300,4 +315,15 @@ export const nounishThumbnailImage = style([
     h: '100%',
     objectFit: 'cover',
   }),
+])
+
+export const pixelate = style([
+  {
+    '@supports': {
+      '(filter: url("#mosaic"))': {
+        filter: 'url("#mosaic")',
+        transform: 'scale(.65)',
+      },
+    },
+  },
 ])

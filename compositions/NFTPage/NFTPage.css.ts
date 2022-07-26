@@ -87,10 +87,6 @@ export const nftInfoSidebarWrapper = style([
       '@initial': 'x3',
       '@1024': 'x6',
     },
-    px: {
-      '@initial': 'x4',
-      '@1024': 'x0',
-    },
     position: {
       '@initial': 'relative',
       '@1024': 'sticky',
@@ -180,7 +176,7 @@ export const attributesHistoryWrapper = style([
   atoms({
     w: '100%',
     gap: {
-      '@initial': 'x2',
+      '@initial': 'x4',
       '@1024': 'x6',
     },
   }),
