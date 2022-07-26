@@ -39,8 +39,10 @@ const Collection = ({
       {contractAddress && (
         <CollectionFilterProvider
           useSidebarClearButton
+          filtersVisible
           contractAddress={contractAddress}
           initialPage={initialPage}
+          useMarketStatus
           useCollectionProperties={{
             header: 'Traits',
             selector: 'nouns-market-traits',

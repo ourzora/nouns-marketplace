@@ -44,19 +44,11 @@ export function TokenInfo({
       {data && (
         <>
           {!hideThumbnail && (
-            <Button
-              onClick={tokenLinkHandler}
-              variant="unset"
-              h={returnThumbnailSize(thumbnailSize)}
-              style={{ aspectRatio: '1/1' }}
-            >
+            <Button onClick={tokenLinkHandler} variant="unset" w="unset">
               <NounishThumbnail
                 image={data?.media?.image?.uri}
                 tokenContract={contractAddress}
                 tokenId={tokenId}
-                size={thumbnailSize}
-                h="100%"
-                style={{ aspectRatio: '1/1' }}
               />
             </Button>
           )}

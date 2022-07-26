@@ -73,32 +73,6 @@ export const auctionWrapper = recipe({
   },
 })
 
-export const tokenInfoWrapper = style([
-  {
-    gridColumn: '1 / 3',
-    borderBottom: `1px solid ${color.black10}`,
-    '@media': {
-      [media.min1024]: {
-        maxWidth: 350,
-        gridColumn: 'auto',
-        borderBottom: 'none',
-      },
-    },
-  },
-  atoms({
-    w: '100%',
-    gap: 'x3',
-    pb: {
-      '@initial': 'x4',
-      '@1024': 'x0',
-    },
-    mb: {
-      '@initial': 'x2',
-      '@1024': 'x0',
-    },
-  }),
-])
-
 export const responsiveRow = style([
   {
     alignItems: 'flex-start',
@@ -240,10 +214,19 @@ export const nounishAuctionRow = style([
 
 export const transactionEventWrapper = style([
   {
-    gridTemplateColumns: '1fr 125px',
+    gridTemplateColumns: 'auto 125px',
   },
   atoms({
     w: '100%',
+  }),
+])
+
+export const transactionBidder = style([
+  {
+    gridTemplateColumns: `${space.x12} auto`,
+  },
+  atoms({
+    gap: 'x3',
   }),
 ])
 
@@ -255,10 +238,16 @@ export const auctionEventRow = style([
         display: 'block',
         position: 'relative',
         width: '100%',
-        height: space.x6,
+        height: space.x5,
         borderLeft: `2px solid ${color.black10}`,
-        margin: `${space.x2} 0 ${space.x2}`,
+        margin: `${space.x1} 0 ${space.x1}`,
         transform: `translateX(calc(${space.x6} - 1px))`,
+        '@media': {
+          [media.min1024]: {
+            height: space.x6,
+            margin: `${space.x2} 0 ${space.x2}`,
+          },
+        },
       },
       '&:last-of-type:after': {
         display: 'none',
@@ -279,14 +268,62 @@ export const lightFont = style({
 })
 
 /* Thumbnail */
-export const nounishThumbnail = style([
+export const tokenInfoWrapper = style([
   {
-    boxShadow: '0 0 20px rgba(0, 0, 0, 0.05)',
-    aspectRatio: '1/1',
+    gridColumn: '1 / 3',
+    borderBottom: `1px solid ${color.black10}`,
+    gridTemplateColumns: '68px auto',
+    gridTemplateRows: '68px',
+    '@media': {
+      [media.min1024]: {
+        maxWidth: 350,
+        gridColumn: 'auto',
+        borderBottom: 'none',
+      },
+    },
   },
+  atoms({
+    w: '100%',
+    gap: 'x3',
+    display: 'grid',
+    pb: {
+      '@initial': 'x4',
+      '@1024': 'x0',
+    },
+    mb: {
+      '@initial': 'x2',
+      '@1024': 'x0',
+    },
+  }),
+])
+
+export const nounishThumbnail = style([
   atoms({
     backgroundColor: 'tertiary',
     position: 'relative',
     overflow: 'hidden',
+    h: '100%',
+    w: '100%',
   }),
+])
+
+export const nounishThumbnailImage = style([
+  atoms({
+    inset: 'x0',
+    position: 'absolute',
+    w: '100%',
+    h: '100%',
+    objectFit: 'cover',
+  }),
+])
+
+export const pixelate = style([
+  {
+    '@supports': {
+      '(filter: url("#mosaic"))': {
+        filter: 'url("#mosaic")',
+        transform: 'scale(.65)',
+      },
+    },
+  },
 ])

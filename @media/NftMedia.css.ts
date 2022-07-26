@@ -37,6 +37,13 @@ export const cardWrapper = style([
 export const cardImageWrapper = style([
   {
     aspectRatio: '1/1',
+    '@supports': {
+      'not (aspect-ratio: 1/1)': {
+        width: '100%',
+        height: '0',
+        paddingBottom: '100%',
+      },
+    },
   },
   atoms({
     w: '100%',
@@ -70,8 +77,13 @@ export const titleHeading = style([
 /* Thumbnail */
 export const nftThumbnail = style([
   {
-    boxShadow: '0 0 20px rgba(0, 0, 0, 0.05)',
     aspectRatio: '1/1',
+    '@supports': {
+      'not (aspect-ratio: 1/1)': {
+        width: '0',
+        paddingRight: '100%',
+      },
+    },
   },
   atoms({
     backgroundColor: 'tertiary',

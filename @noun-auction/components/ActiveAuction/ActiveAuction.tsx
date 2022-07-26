@@ -112,15 +112,17 @@ export function ActiveAuction({
 
   return (
     <>
-      <TokenInfo
-        thumbnailSize={thumbnailSize}
-        hideThumbnail={hideThumbnail}
-        hideTitle={hideTitle}
-        hideCollectionTitle={hideCollectionTitle}
-        routePrefix={routePrefix}
-        tokenId={tokenId}
-        contractAddress={daoConfig?.contractAddress}
-      />
+      {layout !== 'sideBarBid' && (
+        <TokenInfo
+          thumbnailSize={thumbnailSize}
+          hideThumbnail={hideThumbnail}
+          hideTitle={hideTitle}
+          hideCollectionTitle={hideCollectionTitle}
+          routePrefix={routePrefix}
+          tokenId={tokenId}
+          contractAddress={daoConfig?.contractAddress}
+        />
+      )}
       {layout !== 'sideBarBid' ? rowLayout : sideBarTop}
       {!isComplete && !noAuctionHistory && (
         <Flex
