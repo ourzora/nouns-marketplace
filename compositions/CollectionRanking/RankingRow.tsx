@@ -1,22 +1,20 @@
 import { useMemo, useState } from 'react'
-import {
-  Grid,
-  Flex,
-  Label,
-  Icon,
-  Stack,
-  StackProps,
-  Separator,
-  Box,
-} from '@zoralabs/zord'
+import { Grid, Flex, Label, Stack, Box, StackProps } from '@zoralabs/zord'
 import { CollectionsData } from 'hooks/zdk/useCollections'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { rankingRow, rankingStats } from './CollectionRanking.css'
+import {
+  rankingRow,
+  rankingStats,
+  rankingRowInfo,
+  rankingRowLink,
+} from './CollectionRanking.css'
 import { clickAnimation } from 'styles/styles.css'
 import { Link } from 'components/Link'
 import { roundTwoDecimals } from 'utils/math'
 import { useAggregate } from 'hooks/zdk/useAggregate'
 import { numberFormatter } from 'utils/numbers'
+
+import { CollectionLink } from '@shared'
 
 /* todo: add a skeleton or some kind of loading state */
 
@@ -25,7 +23,6 @@ interface RankingRowProps extends StackProps {
 }
 
 export function RankingRow({ collection, ...props }: RankingRowProps) {
-  const [tokenNo, updateTokenNo] = useState('1')
   const { aggregate } = useAggregate(collection.address)
 
   const collectionPriceData = useMemo(() => {
@@ -47,11 +44,11 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
   return (
     <Stack {...props}>
       <Link href={`/collections/${collection.address}`} passHref>
-        <Grid className={[rankingRow, clickAnimation]} gap="x4" w="100%">
-          <Flex align="center" gap="x4">
+        <Grid className={[rankingRow, clickAnimation]}>
+          <Flex className={[rankingRowInfo, 'collection-row__collection-info']}>
             <CollectionThumbnail
               collectionAddress={collection.address}
-              tokenId={tokenNo}
+              tokenId="1"
               radius="round"
               size="sm"
             />
@@ -59,7 +56,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
               {collection.name}
             </Label>
           </Flex>
-          <Grid className={rankingStats}>
+          <Grid className={[rankingStats, 'collection-row__stats']}>
             <Label size="lg" as="span" align="right">
               {aggregate ? (
                 <>{numberFormatter(collectionPriceData?.volume || 0)} Ξ</>
@@ -87,10 +84,17 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
             <Label size="lg" as="span" align="right">
               {numberFormatter(aggregate?.aggregateStat?.ownerCount || '0')}
             </Label>
-            <Flex justify="flex-end" pr="x2">
-              <Icon id="ChevronRight" color="tertiary" />
-            </Flex>
           </Grid>
+          <Box className={rankingRowLink}>
+            <CollectionLink
+              variant="secondary"
+              contractAddress={collection.address}
+              borderRadius="curved"
+              style={{ height: 42 }}
+            >
+              View
+            </CollectionLink>
+          </Box>
         </Grid>
       </Link>
     </Stack>
