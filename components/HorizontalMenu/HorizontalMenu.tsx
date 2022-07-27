@@ -42,7 +42,9 @@ export function HorizontalMenu({
           }
         >
           <Flex>
-            <Box as="span">{item.label}</Box>
+            <Box as="span" color="primary">
+              {item.label}
+            </Box>
             {item.count && (
               <Box as="span" className={lightFont} color="tertiary">
                 &nbsp;{item.count}

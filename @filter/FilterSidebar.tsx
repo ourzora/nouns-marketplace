@@ -17,6 +17,7 @@ import { FilterPriceRange } from './FilterPriceRange'
 import { FilterProperties } from './FilterProperties'
 import { FilterOwnerCollections } from './FilterOwnerCollections'
 import { ClearFilters } from './ClearFilters'
+import { MobileFiltersFooter } from './MobileFiltersFooter'
 
 import { useWindowWidth } from 'hooks'
 import { Modal, ModalContent, useModal } from '@modal'
@@ -111,18 +112,22 @@ export function FilterSidebar() {
             <FilterProperties collectionAddress={contractAddress} />
           ) : null}
           {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
-          {useSidebarClearButton ? <ClearFilters mt="x2" /> : null}
+          {useSidebarClearButton ? (
+            <ClearFilters
+              mt="x2"
+              display={{
+                '@initial': 'none',
+                '@1024': 'block',
+              }}
+            />
+          ) : null}
         </Box>
       </Stack>
     </>
   )
 
   const sideBarMobile = (
-    <Modal
-      open={showFilters}
-      onOpenChange={requestClose}
-      // modalOverlayOverrides={modalOverlayOverrides}
-    >
+    <Modal open={showFilters} onOpenChange={requestClose}>
       <ModalContent
         title="modal"
         showClose={false}
@@ -140,6 +145,7 @@ export function FilterSidebar() {
             </Button>
           </Flex>
           {sidebarComposition}
+          <MobileFiltersFooter />
         </Stack>
       </ModalContent>
     </Modal>

@@ -86,6 +86,10 @@ export function SelectedFilters() {
       w="100%"
       style={{ height: FILTER_HEADER_HEIGHT }}
       pl={`${showFilters ? 'x0' : 'x2'}`}
+      display={{
+        '@initial': 'none',
+        '@1024': 'flex',
+      }}
     >
       <Flex align="center" gap="x2">
         <Flex>
@@ -113,6 +117,7 @@ export function SelectedFilters() {
           <Button
             variant="unset"
             className={[textButton, textSmall]}
+            color="primary"
             onClick={clearFilters}
           >
             Clear All

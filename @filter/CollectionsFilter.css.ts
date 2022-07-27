@@ -1,8 +1,10 @@
 import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, textVariants, fontWeight, vars } from '@zoralabs/zord'
-import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE } from 'styles/style-constants'
+import { atoms, textVariants, fontWeight, vars, media } from '@zoralabs/zord'
+import { HEADER_HEIGHT } from 'styles/style-constants'
+
+export const borderStyle = `2px solid ${vars.color.border.tertiary}`
 
 export const homepageGrid = style({
   '@media': {
@@ -83,15 +85,31 @@ export const filterOpen = style({
   gridTemplateColumns: `${FILTER_SIDEBAR_WIDTH + 32}px 1fr`,
 })
 
-export const filterHeader = style({
-  height: FILTER_HEADER_HEIGHT,
-  zIndex: 1,
-})
+export const filterHeader = style([
+  {
+    zIndex: 1,
+    '@media': {
+      [media.min1024]: {
+        height: FILTER_HEADER_HEIGHT,
+      },
+    },
+  },
+  atoms({
+    position: 'sticky',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    px: 'x4',
+    py: {
+      '@initial': 'x4',
+      '@1024': 'x0',
+    },
+  }),
+])
 
 export const stickyFilterHeader = style({
   top: `0px`,
-  backdropFilter: 'blur(20px)',
-  backgroundColor: 'rgba(255, 255, 255, 0.92)',
+  //backdropFilter: 'blur(20px)',
+  //backgroundColor: 'rgba(255, 255, 255, 0.92)',
 })
 
 export const avatarPadding = style({
@@ -125,7 +143,7 @@ export const filterSidebar = style([
 ])
 
 export const sideBarSeparator = style({
-  borderTop: `2px solid ${vars.color.border.tertiary}`,
+  borderTop: borderStyle,
   position: 'relative',
   width: 'calc(100% - 32px)',
   zIndex: 100,
@@ -326,5 +344,26 @@ export const filterSidebarModalBackground = style([
     height: '100vh',
     padding: 'x0',
     inset: 'x0',
+  }),
+])
+
+export const mobileFiltersFooter = style([
+  {
+    borderTop: borderStyle,
+    zIndex: 30,
+    gridTemplateColumns: 'repeat(2, 1fr)',
+  },
+  atoms({
+    display: {
+      '@initial': 'grid',
+      '@1024': 'none',
+    },
+    pos: 'absolute',
+    bottom: 'x0',
+    left: 'x0',
+    p: 'x4',
+    gap: 'x4',
+    backgroundColor: 'primary',
+    w: '100%',
   }),
 ])
