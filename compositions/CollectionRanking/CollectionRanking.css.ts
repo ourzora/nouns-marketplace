@@ -1,5 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, color, media, radii, ease, transitions } from '@zoralabs/zord'
+import { atoms, color, media, radii } from '@zoralabs/zord'
 import { MAX_WIDTH } from 'styles/style-constants'
 
 export const rankingWrapper = style([
@@ -11,17 +11,49 @@ export const rankingWrapper = style([
     w: '100%',
     m: 'auto',
     gap: 'x4',
+    pt: {
+      '@initial': 'x4',
+      '@1024': 'x14',
+    },
+  }),
+])
+
+export const rankingHeader = style([
+  {
+    zIndex: 100,
+    backdropFilter: 'blur(5px)',
+    backgroundColor: 'rgba(255,255,255,0.5)',
+    paddingTop: 20,
+    paddingBottom: 0,
+    position: 'sticky',
+    '@media': {
+      [media.min1024]: {
+        paddingTop: 0,
+        paddingBottom: 0,
+        borderBottom: 0,
+        backdropFilter: 'blur(0px)',
+        backgroundColor: 'transparent',
+        position: 'relative',
+      },
+    },
+  },
+  atoms({
+    top: 'x0',
   }),
 ])
 
 export const rankingRow = style([
   {
-    gridTemplateColumns: '1fr 3fr',
-    overflowX: 'scroll',
-    alignItems: 'center',
+    gridTemplateColumns: '2fr 1fr',
+    gridTemplateRows: 'auto',
+    borderRadius: radii.phat,
+    border: `2px solid ${color.black10}`,
     '@media': {
       [media.min1024]: {
-        gridTemplateColumns: '1fr 3.75fr auto',
+        gridTemplateColumns: '1fr 3.75fr 100px',
+        gridTemplateRows: '1fr',
+        borderRadius: 0,
+        border: 'none',
       },
       '(hover: hover)': {
         overflow: 'visible',
@@ -50,9 +82,16 @@ export const rankingRow = style([
     },
   },
   atoms({
-    gap: 'x4',
     w: '100%',
     pos: 'relative',
+    gap: {
+      '@initial': 'x3',
+      '@1024': 'x4',
+    },
+    p: {
+      '@initial': 'x4',
+      '@1024': 'x0',
+    },
   }),
 ])
 
@@ -63,43 +102,32 @@ globalStyle(`${rankingRow} span`, {
 export const rankingRowInfo = style([
   {
     zIndex: '10',
+    gridArea: '1',
   },
   atoms({
     alignItems: 'center',
-    gap: 'x4',
-  }),
-])
-
-export const rankingHeader = style([
-  {
-    zIndex: 100,
-    backdropFilter: 'blur(5px)',
-    backgroundColor: 'rgba(255,255,255,0.5)',
-    paddingTop: 20,
-    paddingBottom: 0,
-    position: 'sticky',
-    '@media': {
-      [media.min1024]: {
-        paddingTop: 0,
-        paddingBottom: 0,
-        borderBottom: 0,
-        backdropFilter: 'blur(0px)',
-        backgroundColor: 'transparent',
-        position: 'relative',
-      },
+    gap: {
+      '@initial': 'x3',
+      '@1024': 'x4',
     },
-  },
-  atoms({
-    top: 'x0',
   }),
 ])
 
 export const rankingRowLink = style([
   {
     zIndex: '10',
+    gridArea: '1',
+    '@media': {
+      [media.min1024]: {
+        gridArea: '1',
+        gridColumn: '3',
+      },
+    },
   },
   atoms({
     pos: 'relative',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   }),
 ])
 
@@ -107,9 +135,23 @@ export const rankingStats = style([
   {
     gridTemplateColumns: 'repeat(4, 1fr) 64px',
     zIndex: '10',
+    gridArea: '2',
+    gridColumn: '1 / 3',
+    borderTop: `2px solid ${color.black5}`,
+    '@media': {
+      [media.min1024]: {
+        gridArea: '1',
+        gridColumn: '2',
+        borderTop: 'none',
+      },
+    },
   },
   atoms({
     gap: 'x6',
     alignItems: 'center',
+    pt: {
+      '@initial': 'x4',
+      '@1024': 'x0',
+    },
   }),
 ])

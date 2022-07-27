@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Grid, Flex, Label, Stack, Box, StackProps } from '@zoralabs/zord'
+import { Grid, Flex, Label, Stack, StackProps } from '@zoralabs/zord'
 import { CollectionsData } from 'hooks/zdk/useCollections'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import {
@@ -85,7 +85,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
               {numberFormatter(aggregate?.aggregateStat?.ownerCount || '0')}
             </Label>
           </Grid>
-          <Box className={rankingRowLink}>
+          <Flex className={rankingRowLink}>
             <CollectionLink
               variant="secondary"
               contractAddress={collection.address}
@@ -94,7 +94,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
             >
               View
             </CollectionLink>
-          </Box>
+          </Flex>
         </Grid>
       </Link>
     </Stack>
