@@ -350,7 +350,7 @@ export const filterSidebarModalBackground = style([
 export const mobileFiltersFooter = style([
   {
     borderTop: borderStyle,
-    zIndex: 30,
+    zIndex: 100,
     gridTemplateColumns: 'repeat(2, 1fr)',
   },
   atoms({
@@ -358,7 +358,7 @@ export const mobileFiltersFooter = style([
       '@initial': 'grid',
       '@1024': 'none',
     },
-    pos: 'absolute',
+    pos: 'fixed',
     bottom: 'x0',
     left: 'x0',
     p: 'x4',

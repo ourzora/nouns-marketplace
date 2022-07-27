@@ -21,10 +21,6 @@ export function FilterHeader({
 
   return (
     <Flex
-      position="sticky"
-      justify="flex-start"
-      align="center"
-      px="x4"
       className={[
         filterHeader,
         {
