@@ -8,6 +8,7 @@ import { Collections, CollectionActivityHeader } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
 import { Stack } from '@zoralabs/zord'
 import { useCollection } from '@filter/hooks/useCollection'
+import { useWindowWidth } from 'hooks'
 
 const Collection = ({
   initialPage,
@@ -17,6 +18,10 @@ const Collection = ({
   collection,
 }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
+
+  const { isLarge } = useWindowWidth()
+
+  console.log(isLarge)
 
   useEffect(() => {
     if (collection && collection?.name) {
@@ -39,10 +44,10 @@ const Collection = ({
       {contractAddress && (
         <CollectionFilterProvider
           useSidebarClearButton
-          filtersVisible
+          filtersVisible={isLarge ? true : false}
           contractAddress={contractAddress}
           initialPage={initialPage}
-          useMarketStatus
+          // useMarketStatus
           useCollectionProperties={{
             header: 'Traits',
             selector: 'nouns-market-traits',

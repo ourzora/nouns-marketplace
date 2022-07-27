@@ -94,6 +94,10 @@ export function useFilterStore(
     }
   }, [])
 
+  useEffect(() => {
+    setShowFilters(filtersVisible)
+  }, [filtersVisible])
+
   const setPriceRange = useCallback(() => {
     setFilters({
       ...filters,
