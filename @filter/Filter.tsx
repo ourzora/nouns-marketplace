@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Stack, Icon } from '@zoralabs/zord'
+import { Box, Flex, Grid, Stack } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { SortDropdown } from './SortDropdown'
 import {

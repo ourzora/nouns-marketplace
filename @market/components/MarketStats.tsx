@@ -50,6 +50,10 @@ export function MarketStats({
     <Flex
       justify="center"
       w="100%"
+      px={{
+        '@initial': 'x4',
+        '@1024': 'x0',
+      }}
       mb={{
         '@initial': 'x2',
         '@1024': 'x0',

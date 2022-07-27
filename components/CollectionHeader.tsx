@@ -15,7 +15,7 @@ export function CollectionHeader({
   aggregateStats: CollectionStatsAggregateQuery
 }) {
   return (
-    <Stack align="center" w="100%" px="x4">
+    <Stack align="center" w="100%">
       <PageHeader
         headline={collection.name}
         copy={`${aggregateStats.aggregateStat.nftCount} NFTs`}

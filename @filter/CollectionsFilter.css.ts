@@ -102,18 +102,27 @@ export const filterCounter = style({
   whiteSpace: 'nowrap',
 })
 
-export const filterSidebar = style({
-  overflowY: 'scroll',
-  height: `calc(100% - ${HEADER_HEIGHT}px)`,
-  '@media': {
-    'screen and (max-width: 768px)': {
-      position: 'fixed',
-      background: vars.color.background.primary,
-      width: '100vw',
-      paddingRight: '32px',
+export const filterSidebar = style([
+  {
+    overflowY: 'scroll',
+    height: `calc(100% - ${HEADER_HEIGHT}px)`,
+    '@media': {
+      'screen and (max-width: 768px)': {
+        position: 'relative',
+        background: vars.color.background.primary,
+        width: '100%',
+        paddingRight: '0',
+        height: '100%',
+      },
     },
   },
-})
+  atoms({
+    pl: {
+      '@initial': 'x0',
+      '@1024': 'x4',
+    },
+  }),
+])
 
 export const sideBarSeparator = style({
   borderTop: `2px solid ${vars.color.border.tertiary}`,
@@ -296,3 +305,26 @@ export const symbolText = recipe({
     }),
   ],
 })
+
+export const filterSidebarModalContent = style([
+  {
+    transform: 'none',
+  },
+  atoms({
+    position: 'fixed',
+    inset: 'x0',
+  }),
+])
+
+export const filterSidebarModalBackground = style([
+  {
+    borderRadius: 0,
+    maxHeight: '100vh',
+  },
+  atoms({
+    position: 'fixed',
+    height: '100vh',
+    padding: 'x0',
+    inset: 'x0',
+  }),
+])

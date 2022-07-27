@@ -21,7 +21,7 @@ export function NFTGrid({
   return (
     <>
       <Stack gap="x14" pb="x10">
-        <Grid gap="x4" className={nftGridWrapper}>
+        <Grid className={nftGridWrapper}>
           {items.map((nft) => (
             <NFTCard
               key={`${nft?.nft?.contract.address}-${nft?.nft?.tokenId}`}

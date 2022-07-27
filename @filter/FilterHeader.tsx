@@ -24,6 +24,7 @@ export function FilterHeader({
       justify="flex-start"
       backgroundColor="primary"
       align="center"
+      px="x4"
       className={[
         filterHeader,
         {

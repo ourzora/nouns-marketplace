@@ -1,4 +1,4 @@
-import { Box, Stack } from '@zoralabs/zord'
+import { Box, Stack, Heading, Button, Icon, Flex } from '@zoralabs/zord'
 import { useRef, useState } from 'react'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { useCollectionFilters } from '@filter/providers'
@@ -7,6 +7,8 @@ import {
   filterSidebar,
   filterSidebarScrolled,
   sideBarSeparator,
+  filterSidebarModalContent,
+  filterSidebarModalBackground,
 } from './CollectionsFilter.css'
 import { CollectionsFilterList } from './CollectionsFilterList'
 import { FilterHeader } from './FilterHeader'
@@ -16,9 +18,21 @@ import { FilterProperties } from './FilterProperties'
 import { FilterOwnerCollections } from './FilterOwnerCollections'
 import { ClearFilters } from './ClearFilters'
 
+import { useWindowWidth } from 'hooks'
+import { Modal, ModalContent, useModal } from '@modal'
+
 export function FilterSidebar() {
+  const { modalType, requestClose, requestOpen } = useModal()
+
   const {
-    filterStore: { showFilters, setMarketStatus, setMediaType, setOwnerStatus, filters },
+    filterStore: {
+      showFilters,
+      setMarketStatus,
+      setMediaType,
+      setOwnerStatus,
+      filters,
+      toggleShowFilters,
+    },
     ownerAddress,
     contractAddress,
     useMarketStatus,
@@ -47,18 +61,10 @@ export function FilterSidebar() {
     parentRef
   )
 
-  return (
-    <Box h="100%" w="100%" position="sticky" display={showFilters ? 'block' : 'none'}>
-      <FilterHeader />
-      <Box
-        position="relative"
-        className={[
-          sideBarSeparator,
-          {
-            [filterSidebarScrolled]: scrolled,
-          },
-        ]}
-      />
+  const { isLarge } = useWindowWidth()
+
+  const sidebarComposition = (
+    <>
       <Stack
         gap="x2"
         w="100%"
@@ -108,6 +114,56 @@ export function FilterSidebar() {
           {useSidebarClearButton ? <ClearFilters mt="x2" /> : null}
         </Box>
       </Stack>
-    </Box>
+    </>
+  )
+
+  const sideBarMobile = (
+    <Modal
+      open={showFilters}
+      onOpenChange={requestClose}
+      // modalOverlayOverrides={modalOverlayOverrides}
+    >
+      <ModalContent
+        title="modal"
+        showClose={false}
+        removePadding
+        modalContentOverrides={filterSidebarModalContent}
+        modalBackgroundOverrides={filterSidebarModalBackground}
+      >
+        <Stack px="x4" pt="x8">
+          <Flex w="100%" justify="space-between" pb="x6">
+            <Heading as="h1" size="sm">
+              Filters
+            </Heading>
+            <Button onClick={toggleShowFilters} variant="unset">
+              <Icon id="Close" size="md" />
+            </Button>
+          </Flex>
+          {sidebarComposition}
+        </Stack>
+      </ModalContent>
+    </Modal>
+  )
+
+  return (
+    <>
+      {isLarge ? (
+        <Box h="100%" w="100%" position="sticky" display={showFilters ? 'block' : 'none'}>
+          <FilterHeader />
+          <Box
+            position="relative"
+            className={[
+              sideBarSeparator,
+              {
+                [filterSidebarScrolled]: scrolled,
+              },
+            ]}
+          />
+          {sidebarComposition}
+        </Box>
+      ) : (
+        sideBarMobile
+      )}
+    </>
   )
 }
