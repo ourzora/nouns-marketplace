@@ -95,10 +95,6 @@ export const rankingRow = style([
   }),
 ])
 
-globalStyle(`${rankingRow} span`, {
-  whiteSpace: 'nowrap',
-})
-
 export const rankingRowInfo = style([
   {
     zIndex: '10',
@@ -131,15 +127,25 @@ export const rankingRowLink = style([
   }),
 ])
 
+globalStyle(`${rankingRow} span`, {
+  whiteSpace: 'nowrap',
+  '@media': {
+    [media.min1024]: {
+      textAlign: 'right',
+    },
+  },
+})
+
 export const rankingStats = style([
   {
-    gridTemplateColumns: 'repeat(4, 1fr) 64px',
+    gridTemplateColumns: 'repeat(2, 1fr)',
     zIndex: '10',
     gridArea: '2',
     gridColumn: '1 / 3',
     borderTop: `2px solid ${color.black5}`,
     '@media': {
       [media.min1024]: {
+        gridTemplateColumns: 'repeat(4, 1fr)',
         gridArea: '1',
         gridColumn: '2',
         borderTop: 'none',
@@ -147,7 +153,10 @@ export const rankingStats = style([
     },
   },
   atoms({
-    gap: 'x6',
+    gap: {
+      '@initial': 'x4',
+      '@1024': 'x6',
+    },
     alignItems: 'center',
     pt: {
       '@initial': 'x4',

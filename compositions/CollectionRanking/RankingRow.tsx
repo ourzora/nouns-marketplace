@@ -57,33 +57,73 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
             </Label>
           </Flex>
           <Grid className={[rankingStats, 'collection-row__stats']}>
-            <Label size="lg" as="span" align="right">
-              {aggregate ? (
-                <>{numberFormatter(collectionPriceData?.volume || 0)} Ξ</>
-              ) : (
-                '...'
-              )}
-            </Label>
-            <Label size="lg" as="span" align="right">
-              {numberFormatter(aggregate?.aggregateStat?.nftCount || 0)}
-            </Label>
-            <Label size="lg" as="span" align="right">
-              {aggregate ? (
-                <>
-                  {collectionPriceData?.floor &&
-                  collectionPriceData.floor.includes('NaN') ? (
-                    <>{numberFormatter(collectionPriceData?.floor)} Ξ</>
-                  ) : (
-                    <>n/a</>
-                  )}
-                </>
-              ) : (
-                '...'
-              )}
-            </Label>
-            <Label size="lg" as="span" align="right">
-              {numberFormatter(aggregate?.aggregateStat?.ownerCount || '0')}
-            </Label>
+            <Stack as="p">
+              <Label
+                size="md"
+                as="span"
+                color="tertiary"
+                display={{ '@initial': 'inline', '@1024': 'none' }}
+              >
+                Volume
+              </Label>
+              <Label size="md" as="span">
+                {aggregate ? (
+                  <>{numberFormatter(collectionPriceData?.volume || 0)} ETH</>
+                ) : (
+                  '...'
+                )}
+              </Label>
+            </Stack>
+            <Stack as="p">
+              <Label
+                size="md"
+                as="span"
+                color="tertiary"
+                display={{ '@initial': 'inline', '@1024': 'none' }}
+              >
+                Items
+              </Label>
+              <Label size="md" as="span">
+                {numberFormatter(aggregate?.aggregateStat?.nftCount || 0)}
+              </Label>
+            </Stack>
+            <Stack as="p">
+              <Label
+                size="md"
+                as="span"
+                color="tertiary"
+                display={{ '@initial': 'inline', '@1024': 'none' }}
+              >
+                Floor price
+              </Label>
+              <Label size="md" as="span">
+                {aggregate ? (
+                  <>
+                    {collectionPriceData?.floor &&
+                    collectionPriceData.floor.includes('NaN') ? (
+                      <>{numberFormatter(collectionPriceData?.floor)} ETH</>
+                    ) : (
+                      <>n/a</>
+                    )}
+                  </>
+                ) : (
+                  '...'
+                )}
+              </Label>
+            </Stack>
+            <Stack as="p">
+              <Label
+                size="md"
+                as="span"
+                color="tertiary"
+                display={{ '@initial': 'inline', '@1024': 'none' }}
+              >
+                Owners
+              </Label>
+              <Label size="md" as="span">
+                {numberFormatter(aggregate?.aggregateStat?.ownerCount || '0')}
+              </Label>
+            </Stack>
           </Grid>
           <Flex className={rankingRowLink}>
             <CollectionLink
