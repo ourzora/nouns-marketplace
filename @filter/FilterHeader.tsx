@@ -6,6 +6,7 @@ import {
 } from './CollectionsFilter.css'
 import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
 import { Button, Flex, Text } from '@zoralabs/zord'
+import { ActiveFilterCounter } from './ActiveFilterCounter'
 
 export function FilterHeader({
   children,
@@ -15,16 +16,11 @@ export function FilterHeader({
   itemCount?: number
 }) {
   const {
-    filterStore: { toggleShowFilters, showFilters },
+    filterStore: { toggleShowFilters, showFilters, activeFilterCount },
   } = useCollectionFilters()
 
   return (
     <Flex
-      position="sticky"
-      justify="flex-start"
-      backgroundColor="primary"
-      align="center"
-      px="x4"
       className={[
         filterHeader,
         {
@@ -34,7 +30,7 @@ export function FilterHeader({
     >
       <Flex align="center" gap="x2">
         <Button
-          variant="secondary"
+          variant={activeFilterCount > 0 ? 'primary' : 'secondary'}
           borderRadius="round"
           size="sm"
           icon={showFilters ? 'ChevronLeft' : undefined}
@@ -42,6 +38,7 @@ export function FilterHeader({
           onClick={toggleShowFilters}
         >
           Filters
+          <ActiveFilterCounter />
         </Button>
         {itemCount > 0 && (
           <Text

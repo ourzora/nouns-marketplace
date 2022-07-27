@@ -121,3 +121,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+button {
+  margin: 0;
+}
+html {
+  -webkit-font-smoothing: antialiased;
+}
