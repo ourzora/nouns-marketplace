@@ -19,6 +19,11 @@ export const nftGridWrapper = style([
   atoms({
     w: '100%',
     margin: 'auto',
+    gap: 'x4',
+    px: {
+      '@initial': 'x4',
+      '@1024': 'x4',
+    },
   }),
 ])
 

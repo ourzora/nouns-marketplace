@@ -37,7 +37,7 @@ const Collection = ({
   const { data } = useCollection(contractAddress)
 
   return (
-    <PageWrapper p="x4" direction="column" gap="x4">
+    <PageWrapper direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
       <CollectionHeader collection={collection} aggregateStats={aggregateStats} />
       <MarketStats aggregateStats={aggregateStats} />

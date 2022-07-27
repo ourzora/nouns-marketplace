@@ -26,7 +26,12 @@ export function CollectionActivityHeader() {
   ]
 
   return (
-    <Stack mt="x6">
+    <Stack
+      mt={{
+        '@initial': 'x0',
+        '@1024': 'x6',
+      }}
+    >
       <HorizontalMenu
         items={items}
         useCustomHandler
