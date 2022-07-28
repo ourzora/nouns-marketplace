@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { Stack, Box, Flex, Heading, Separator } from '@zoralabs/zord'
 import { Link } from 'components/Link'
-import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTCardMarket } from '@market'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 import { useTitleWithFallback } from 'hooks'
@@ -14,40 +13,46 @@ import {
 } from '@media/NftMedia.css'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ImageWithNounFallback } from 'components'
+import { useNFTProvider } from '@shared'
 
-export function NFTCard({ nftData }: { nftData: NFTObject }) {
-  const { metadata, media, nft } = nftData
-  const { image } = useRawImageTransform(media?.thumbnail?.uri)
+export function NFTCard() {
+  const {
+    hooksData: { data },
+    contractAddress,
+    tokenId,
+  } = useNFTProvider()
 
-  if (!nft || !nft?.contract?.address || !nft?.tokenId) return null
+  if (!data || !contractAddress || !tokenId) return null
+
+  const { image } = useRawImageTransform(data?.media?.thumbnail?.uri)
 
   const { fallbackTitle } = useTitleWithFallback(
-    nft?.contract?.address,
-    nft?.tokenId,
-    metadata?.name
+    contractAddress,
+    tokenId,
+    data?.metadata?.name
   )
 
   const srcImg = useMemo(() => {
-    if (media?.mimeType === 'image/svg+xml') {
-      return media?.image?.uri
+    if (data?.media?.mimeType === 'image/svg+xml') {
+      return data?.media?.image?.uri
     } else {
-      return media?.poster?.uri
+      return data?.media?.poster?.uri
     }
-  }, [image, media])
+  }, [image, data?.media])
 
   const useTitleScroll = useMemo(() => {
-    if (metadata && metadata?.name) {
-      return metadata?.name.split('').length > 25
+    if (data?.metadata && data?.metadata?.name) {
+      return data?.metadata?.name.split('').length > 25
     }
-  }, [metadata])
+  }, [data?.metadata])
 
   return (
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
-      <Link href={`/collections/${nft?.contract.address}/${nft?.tokenId}`}>
+      <Link href={`/collections/${contractAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
           <ImageWithNounFallback
-            tokenContract={nft?.contract.address}
-            tokenId={nft?.tokenId}
+            tokenContract={contractAddress}
+            tokenId={tokenId}
             srcImg={srcImg}
           />
         </Box>
@@ -65,19 +70,19 @@ export function NFTCard({ nftData }: { nftData: NFTObject }) {
           </Heading>
         </Flex>
         <Flex align="center" gap="x2" justify="space-between">
-          <Link href={`/collections/${nft?.contract.address}`}>
+          <Link href={`/collections/${contractAddress}`}>
             <Flex align="center" gap="x2">
               <CollectionThumbnail
-                collectionAddress={nft?.contract.address}
+                collectionAddress={contractAddress}
                 radius="round"
                 size="xs"
               />
-              <Heading size="xs">{nft?.contract.name}</Heading>
+              <Heading size="xs">{data?.nft?.contract.name}</Heading>
             </Flex>
           </Link>
         </Flex>
         <Separator mt="x1" />
-        <NFTCardMarket nftData={nftData} />
+        <NFTCardMarket nftData={data} />
       </Stack>
     </Stack>
   )

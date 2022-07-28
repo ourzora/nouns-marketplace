@@ -16,7 +16,6 @@ export function HeaderComposition() {
   const { isLarge } = useWindowWidth()
   return (
     <Grid as="header" className={headerWrapper}>
-      {/*<HeaderNav />*/}
       <NounsLink />
       {isLarge && <BetaTag />}
       <Flex className={collectionTriggerWrapper}>

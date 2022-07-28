@@ -1,14 +1,15 @@
-import { Grid, Stack } from '@zoralabs/zord'
+import { Grid, Stack, GridProps } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { NFTCard } from '../NFTCard/NFTCard'
 import { NFTGridLoadMore } from './NFTGridLoadMore'
 import { nftGridWrapper } from '../NftMedia.css'
+import { NFTProvider } from '@shared'
 
-export type NFTGridProps = {
+export interface NFTGridProps extends GridProps {
   items: NFTObject[]
   isValidating: boolean
   isReachingEnd: boolean | undefined
   handleLoadMore?: () => void
+  nftRenderer: JSX.Element
 }
 
 export function NFTGrid({
@@ -16,17 +17,22 @@ export function NFTGrid({
   isValidating,
   isReachingEnd,
   handleLoadMore,
+  nftRenderer,
+  ...props
 }: NFTGridProps) {
-  // console.log('NFTS', items)
   return (
     <>
       <Stack gap="x14" pb="x10">
-        <Grid className={nftGridWrapper}>
+        <Grid {...props}>
           {items.map((nft) => (
-            <NFTCard
+            <NFTProvider
               key={`${nft?.nft?.contract.address}-${nft?.nft?.tokenId}`}
-              nftData={nft}
-            />
+              contractAddress={nft?.nft?.contract.address}
+              tokenId={nft?.nft?.tokenId}
+              initialData={nft}
+            >
+              {nftRenderer}
+            </NFTProvider>
           ))}
         </Grid>
       </Stack>

@@ -4,12 +4,17 @@ import { ActiveFilterCounter } from './ActiveFilterCounter'
 
 export function ClearFilters({ ...props }: ButtonProps) {
   const {
-    filterStore: { clearFilters },
+    filterStore: { clearFilters, hasFilters },
   } = useCollectionFilters()
 
   return (
-    <Button {...props} onClick={clearFilters}>
-      <Flex align="center" gap="x2">
+    <Button
+      {...props}
+      onClick={clearFilters}
+      disabled={!hasFilters}
+      style={{ opacity: `${!hasFilters ? '.1' : '1'}` }}
+    >
+      <Flex align="center" gap="x2" justify="center">
         Clear filters
         <ActiveFilterCounter />
       </Flex>

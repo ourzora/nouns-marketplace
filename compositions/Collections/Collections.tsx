@@ -1,8 +1,16 @@
 import { Filter, useCollectionFilters } from '@filter'
 import { NFTGrid } from '@media/NFTGrid'
-import { useEffect } from 'react'
+import { NFTCard } from '@media/NFTCard'
+import { useEffect, useMemo } from 'react'
+import { nftGridWrapper } from '@media/NftMedia.css'
+import { NounishActivityRow } from './NounishActivityRow'
 
-export function Collections({ collectionAddress }: { collectionAddress?: string }) {
+export type CollectionsProps = {
+  collectionAddress?: string
+  view?: 'activity' | 'nfts' | string
+}
+
+export function Collections({ collectionAddress, view = 'nfts' }: CollectionsProps) {
   const {
     filterStore: { clearFilters },
     items,
@@ -15,6 +23,17 @@ export function Collections({ collectionAddress }: { collectionAddress?: string 
     clearFilters()
   }, [collectionAddress])
 
+  const renderer = useMemo(() => {
+    switch (view) {
+      case 'nfts':
+        return <NFTCard />
+      case 'activity':
+        return <NounishActivityRow />
+      default:
+        return <NFTCard />
+    }
+  }, [view])
+
   return (
     <Filter
       grid={
@@ -23,6 +42,8 @@ export function Collections({ collectionAddress }: { collectionAddress?: string 
           handleLoadMore={handleLoadMore}
           isReachingEnd={isReachingEnd}
           isValidating={isValidating}
+          nftRenderer={renderer}
+          className={view === 'nfts' ? nftGridWrapper : ''}
         />
       }
     />
