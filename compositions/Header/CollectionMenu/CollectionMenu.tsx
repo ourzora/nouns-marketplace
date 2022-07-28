@@ -47,8 +47,16 @@ export function CollectionMenu() {
           align="center"
           borderRadius="curved"
           backgroundColor="tertiary"
+          justify="space-between"
           m="auto"
-          px="x6"
+          px={{
+            '@initial': 'x4',
+            '@768': 'x6',
+          }}
+          w={{
+            '@initial': '100%',
+            '@768': 'auto',
+          }}
         >
           <Label
             py={{
@@ -68,6 +76,10 @@ export function CollectionMenu() {
               className={[lightFont, noTextWrap]}
               color="tertiary"
               size="lg"
+              display={{
+                '@initial': 'none',
+                '@1024': 'inline',
+              }}
             >
               &nbsp;{currentCollectionCount}
             </Label>

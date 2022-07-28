@@ -8,7 +8,7 @@ import { CollectionFilterProvider } from '@filter'
 
 const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
   return (
-    <PageWrapper p="x4" direction="column" gap="x4">
+    <PageWrapper direction="column" gap="x4">
       <Seo title={`Manage | ${ownerAddress}`}></Seo>
       <ManageHeader ownerAddress={ownerAddress} />
       {ownerAddress && (

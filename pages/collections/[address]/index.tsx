@@ -29,7 +29,7 @@ const Collection = ({
       setCurrentCollectionCount(`${aggregateStats.aggregateStat.nftCount} NFTs`)
     }
     return () => {
-      setCurrentCollection('Explore Collections...')
+      setCurrentCollection('Explore...')
       setCurrentCollectionCount(undefined)
     }
   }, [aggregateStats, collection, setCurrentCollection, setCurrentCollectionCount])

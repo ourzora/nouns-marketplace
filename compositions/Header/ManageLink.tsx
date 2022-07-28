@@ -1,32 +1,31 @@
-import { Box, Label } from '@zoralabs/zord'
-import { Link } from 'components/Link'
+import NextLink from 'next/link'
+import { Label } from '@zoralabs/zord'
 import { useAccount } from 'wagmi'
-import { collectionTrigger } from './Header.css'
+import { collectionTrigger, manageButton } from './Header.css'
 import { clickAnimation, noTextWrap } from 'styles/styles.css'
 
 export function ManageLink() {
   const { address } = useAccount()
 
-  return (
-    <Box>
-      {address && (
-        <Link href={`/manage/${address}`}>
-          <Label
-            className={[collectionTrigger, noTextWrap, clickAnimation]}
-            display="flex"
-            align="center"
-            h="100%"
-            size="lg"
-            backgroundColor="tertiary"
-            py={{
-              '@initial': 'x1',
-              '@1024': 'x2',
-            }}
-          >
-            Manage
-          </Label>
-        </Link>
-      )}
-    </Box>
-  )
+  if (address) {
+    return (
+      <NextLink href={`/manage/${address}`} passHref>
+        <Label
+          as="a"
+          className={[
+            collectionTrigger,
+            noTextWrap,
+            clickAnimation,
+            manageButton,
+            'collection-trigger',
+          ]}
+          size="lg"
+        >
+          Manage
+        </Label>
+      </NextLink>
+    )
+  } else {
+    return null
+  }
 }
