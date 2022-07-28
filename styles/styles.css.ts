@@ -192,3 +192,11 @@ export const pageHeaderWrapper = recipe({
     }),
   ]),
 })
+
+export const hideMobile = style({
+  '@media': {
+    '(max-width: 500px)': {
+      display: 'none',
+    },
+  },
+})

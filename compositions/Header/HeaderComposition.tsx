@@ -10,7 +10,7 @@ import {
 } from './Header.css'
 import { useWindowWidth } from 'hooks'
 import { ManageLink } from './ManageLink'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { ConnectButton } from './ConnectButton'
 
 export function HeaderComposition() {
   const { isLarge } = useWindowWidth()
@@ -26,7 +26,7 @@ export function HeaderComposition() {
         <ManageLink />
       </Flex>
       <Flex className={connectWrapper}>
-        <ConnectButton showBalance={false} />
+        <ConnectButton />
       </Flex>
     </Grid>
   )

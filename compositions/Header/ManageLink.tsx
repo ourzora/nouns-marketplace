@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import { Label } from '@zoralabs/zord'
+import { Button } from '@zoralabs/zord'
 import { useAccount } from 'wagmi'
 import { collectionTrigger, manageButton } from './Header.css'
 import { clickAnimation, noTextWrap } from 'styles/styles.css'
@@ -10,19 +10,20 @@ export function ManageLink() {
   if (address) {
     return (
       <NextLink href={`/manage/${address}`} passHref>
-        <Label
+        <Button
           as="a"
-          className={[
-            collectionTrigger,
-            noTextWrap,
-            clickAnimation,
-            manageButton,
-            'collection-trigger',
-          ]}
-          size="lg"
+          size="md"
+          variant="secondary"
+          borderRadius="curved"
+          className="collection-trigger"
+          style={{
+            height: 42,
+            paddingLeft: 20,
+            paddingRight: 20,
+          }}
         >
           Manage
-        </Label>
+        </Button>
       </NextLink>
     )
   } else {

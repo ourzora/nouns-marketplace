@@ -44,9 +44,12 @@ export function BetaTag() {
           '@1024': 'auto',
         }}
         className={clickAnimation}
-        style={{ opacity: `${hideOnScroll ? 1 : 1}` }}
+        style={{
+          opacity: `${hideOnScroll ? 1 : 1}`,
+          height: 42,
+        }}
       >
-        <Box h="x8" w="x8">
+        <Box h="x7" w="x7">
           <Box
             w="100%"
             h="100%"
