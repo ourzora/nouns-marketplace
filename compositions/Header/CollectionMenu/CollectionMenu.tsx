@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Icon, Flex, Label, Stack, color } from '@zoralabs/zord'
+import { Box, Icon, Button, Label, Stack, color } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { modalWrapper } from '../Header.css'
@@ -43,37 +43,40 @@ export function CollectionMenu() {
     <ModalComposition
       modalName={`collections-menu`}
       trigger={
-        <Flex
-          align="center"
+        <Button
+          as="div"
+          size="md"
+          variant="secondary"
           borderRadius="curved"
-          backgroundColor="tertiary"
+          justify="space-between"
           m="auto"
-          px="x6"
+          w={{
+            '@initial': '100%',
+            '@768': 'auto',
+          }}
+          style={{
+            height: 42,
+            paddingLeft: 20,
+            paddingRight: 20,
+          }}
         >
-          <Label
-            py={{
-              '@initial': 'x1',
-              '@1024': 'x2',
-            }}
-            as="span"
-            size="lg"
-            color="secondary"
-            className={[noTextWrap]}
-          >
-            {currentCollection}
-          </Label>
+          {currentCollection}
           {currentCollectionCount ? (
             <Label
               as="span"
               className={[lightFont, noTextWrap]}
               color="tertiary"
               size="lg"
+              display={{
+                '@initial': 'none',
+                '@1024': 'inline',
+              }}
             >
               &nbsp;{currentCollectionCount}
             </Label>
           ) : null}
           <Icon id="ChevronDown" size="md" color="secondary" ml="x2" />
-        </Flex>
+        </Button>
       }
       content={
         <Box p="x8">

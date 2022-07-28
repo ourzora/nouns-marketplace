@@ -1,20 +1,33 @@
-import { Flex } from '@zoralabs/zord'
-import { HeaderNav } from './HeaderNav'
-import { headerWrapper } from './Header.css'
+import { Grid, Flex } from '@zoralabs/zord'
+import { BetaTag } from './BetaTag'
+import { NounsLink } from './NounsLink'
+import { CollectionMenu } from './CollectionMenu'
+import {
+  collectionTriggerWrapper,
+  connectWrapper,
+  headerWrapper,
+  manageButtonWrapper,
+} from './Header.css'
+import { useWindowWidth } from 'hooks'
+import { ManageLink } from './ManageLink'
+import { ConnectButton } from './ConnectButton'
 
 export function HeaderComposition() {
+  const { isLarge } = useWindowWidth()
   return (
-    <Flex
-      as="header"
-      w="100%"
-      p={{
-        '@initial': 'x4',
-        '@1024': 'x10',
-      }}
-      position="relative"
-      className={headerWrapper}
-    >
-      <HeaderNav />
-    </Flex>
+    <Grid as="header" className={headerWrapper}>
+      {/*<HeaderNav />*/}
+      <NounsLink />
+      {isLarge && <BetaTag />}
+      <Flex className={collectionTriggerWrapper}>
+        <CollectionMenu />
+      </Flex>
+      <Flex className={manageButtonWrapper}>
+        <ManageLink />
+      </Flex>
+      <Flex className={connectWrapper}>
+        <ConnectButton />
+      </Flex>
+    </Grid>
   )
 }

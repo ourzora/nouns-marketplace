@@ -23,7 +23,7 @@ const CollectionsContext = createContext<{
   daos: [],
   collectionAmount: collectionAddresses.length,
   daosAmount: daoAddresses.length,
-  currentCollection: 'Explore Collections...',
+  currentCollection: 'Explore...',
   setCurrentCollection: () => {},
   currentCollectionCount: undefined,
   setCurrentCollectionCount: () => {},
