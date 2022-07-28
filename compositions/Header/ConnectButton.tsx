@@ -26,7 +26,15 @@ export const ConnectButton = () => {
             {(() => {
               if (!mounted || !account || !chain) {
                 return (
-                  <Button size="sm" px="x4" onClick={openConnectModal}>
+                  <Button
+                    size="sm"
+                    px="x4"
+                    onClick={openConnectModal}
+                    borderRadius="curved"
+                    style={{
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
                     Connect Wallet
                   </Button>
                 )
