@@ -7,7 +7,7 @@ import { NounishActivityRow } from './NounishActivityRow'
 
 export type CollectionsProps = {
   collectionAddress?: string
-  view: 'activity' | 'nfts' | string
+  view?: 'activity' | 'nfts' | string
 }
 
 export function Collections({ collectionAddress, view = 'nfts' }: CollectionsProps) {

@@ -2,12 +2,20 @@ import { NFTObject } from '@zoralabs/nft-hooks'
 import { Heading, Box } from '@zoralabs/zord'
 import { RawDisplayer } from 'components/utils'
 import { NFTCard } from '@media/NFTCard'
+import { NFTProvider } from '@shared'
 
 export function TestNftData({ data }: { data: NFTObject }) {
   return (
     <>
       <Heading>{data?.metadata?.name}</Heading>
-      <Box style={{ width: '400px' }}>{data && <NFTCard nftData={data} />}</Box>
+      <NFTProvider
+        key={`${data?.nft?.contract.address}-${data?.nft?.tokenId}`}
+        contractAddress={data?.nft?.contract.address}
+        tokenId={data?.nft?.tokenId}
+        initialData={data}
+      >
+        <Box style={{ width: '400px' }}>{data && <NFTCard />}</Box>
+      </NFTProvider>
       <Heading>Last Refresh Time</Heading>
       <RawDisplayer data={data?.rawData?.APIIndexer?.lastRefreshTime} />
       <Heading>Markets</Heading>
