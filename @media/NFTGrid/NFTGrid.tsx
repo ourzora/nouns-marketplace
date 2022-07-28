@@ -18,11 +18,12 @@ export function NFTGrid({
   isReachingEnd,
   handleLoadMore,
   nftRenderer,
+  ...props
 }: NFTGridProps) {
   return (
     <>
       <Stack gap="x14" pb="x10">
-        <Grid className={nftGridWrapper}>
+        <Grid {...props}>
           {items.map((nft) => (
             <NFTProvider
               key={`${nft?.nft?.contract.address}-${nft?.nft?.tokenId}`}

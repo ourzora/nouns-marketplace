@@ -1,4 +1,4 @@
-import { Stack, Heading, Separator } from '@zoralabs/zord'
+import { Stack, Heading } from '@zoralabs/zord'
 import { NounishAuction } from '@noun-auction'
 import { daos } from 'constants/collection-addresses'
 import { daosWrapper } from './Daos.css'

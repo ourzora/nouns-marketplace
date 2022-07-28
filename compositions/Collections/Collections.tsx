@@ -2,6 +2,8 @@ import { Filter, useCollectionFilters } from '@filter'
 import { NFTGrid } from '@media/NFTGrid'
 import { NFTCard } from '@media/NFTCard'
 import { useEffect, useMemo } from 'react'
+import { nftGridWrapper } from '@media/NftMedia.css'
+import { NounishActivityRow } from './NounishActivityRow'
 
 export type CollectionsProps = {
   collectionAddress?: string
@@ -26,7 +28,7 @@ export function Collections({ collectionAddress, view = 'nfts' }: CollectionsPro
       case 'nfts':
         return <NFTCard />
       case 'activity':
-        return <div>NFT Activity</div>
+        return <NounishActivityRow />
       default:
         return <NFTCard />
     }
@@ -41,6 +43,7 @@ export function Collections({ collectionAddress, view = 'nfts' }: CollectionsPro
           isReachingEnd={isReachingEnd}
           isValidating={isValidating}
           nftRenderer={renderer}
+          className={view === 'nfts' ? nftGridWrapper : ''}
         />
       }
     />
