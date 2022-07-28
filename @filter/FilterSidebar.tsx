@@ -115,6 +115,8 @@ export function FilterSidebar() {
           {useSidebarClearButton ? (
             <ClearFilters
               mt="x2"
+              borderRadius="curved"
+              w="100%"
               display={{
                 '@initial': 'none',
                 '@1024': 'block',

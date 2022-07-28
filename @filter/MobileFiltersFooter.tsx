@@ -14,11 +14,7 @@ export function MobileFiltersFooter() {
 
   return (
     <Grid className={[mobileFiltersFooter, 'zora-mobileFilterFooter']}>
-      <ClearFilters
-        disabled={!hasFilters}
-        style={{ opacity: `${!hasFilters ? '.15' : '1'}` }}
-        borderRadius="curved"
-      />
+      <ClearFilters borderRadius="curved" />
       <Button onClick={toggleShowFilters} borderRadius="curved">
         Done
       </Button>

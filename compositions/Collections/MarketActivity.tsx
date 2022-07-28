@@ -1,21 +1,20 @@
 import { RawDisplayer } from 'components/utils'
 import { useCollectionFilters } from '@filter'
+import { NFTGrid } from '@media/NFTGrid'
 import { Stack } from '@zoralabs/zord'
 
-export function MarketActivity() {
+export function ActivityRow() {
   const {
-    filterStore: { filters, setMarketStatus },
+    filterStore: { clearFilters },
     items,
+    isValidating,
+    isReachingEnd,
+    handleLoadMore,
   } = useCollectionFilters()
 
-  return (
-    <Stack>
-      {items.map((nft) => (
-        <RawDisplayer
-          key={`${nft?.nft?.contract.address}-${nft?.nft?.tokenId}`}
-          data={nft}
-        />
-      ))}
-    </Stack>
-  )
+  return <RawDisplayer data={nft} />
+}
+
+export function MarketActivity() {
+  return <NFTGrid />
 }
