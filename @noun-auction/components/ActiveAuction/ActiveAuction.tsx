@@ -4,7 +4,6 @@ import { Flex, Separator, Stack } from '@zoralabs/zord'
 import { TokenInfoConfig } from '../NounishAuction'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import {
-  AuctionCountdown,
   AuctionBidder,
   AuctionHighBid,
   TokenInfo,
@@ -12,16 +11,16 @@ import {
 } from '../DataRenderers'
 import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
 import {
-  auctionWrapperVariants,
   responsiveRow,
   sidebarBidWrapper,
   rowButtonWrapper,
 } from '@noun-auction/styles/NounishStyles.css'
 
+import { AuctionCountdown } from './AuctionCountdown'
+
 export interface ActiveAuctionProps extends TokenInfoConfig {
   useModal?: boolean
   showLabels?: boolean
-  layout: keyof typeof auctionWrapperVariants['layout']
   useErrorMsg?: boolean
   /* View Config */
   showTopBid?: boolean

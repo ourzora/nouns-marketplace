@@ -3,6 +3,8 @@ import { NounishAuctionProvider } from '@noun-auction/providers'
 import { ActiveAuction } from './ActiveAuction'
 import { AuctionHistory } from './AuctionHistory'
 import { AuctionDebugger } from './Debuggers'
+import { AuctionRow } from './AuctionRow'
+import { ActiveAuctionRow } from './ActiveAuction/ActiveAuctionRow'
 import {
   auctionWrapper,
   auctionWrapperVariants,
@@ -67,18 +69,19 @@ export function NounishAuction({
     >
       <NounishAuctionProvider daoConfig={daoConfig} tokenId={tokenId} layout={layout}>
         {showAuctionRow && (
-          <ActiveAuction
-            layout={layout}
-            hideThumbnail={hideThumbnail}
-            hideTitle={hideTitle}
-            hideCollectionTitle={hideCollectionTitle}
-            thumbnailSize={thumbnailSize}
-            routePrefix={routePrefix}
-            useModal={!useInlineBid}
-            showLabels={showLabels}
-            useErrorMsg={useErrorMsg}
-            showTopBid={showTopBid}
-          />
+          <>
+            <AuctionRow
+              auctionDataComponent={<div>AUCTION DATA</div>}
+              activeAuctionComponent={
+                <ActiveAuctionRow
+                  routePrefix={routePrefix}
+                  useModal={!useInlineBid}
+                  showLabels={showLabels}
+                  showTopBid={showTopBid}
+                />
+              }
+            />
+          </>
         )}
         {showBidHistory && (
           <AuctionHistory className={bidHistoryWrapper} mb="x2">

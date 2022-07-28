@@ -13,7 +13,7 @@ export const useCountdown = (start: string, end: string) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setNow(new Date())
-    }, 1000)
+    }, 500)
 
     return () => clearInterval(interval)
   })

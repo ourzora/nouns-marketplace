@@ -15,11 +15,11 @@ export function FallbackThumbnail({
   ...props
 }: FallbackThumbnailProps) {
   const { tokenData } = useNounsToken(tokenContract, tokenId)
-
+  /*
   useEffect(() => {
     console.log('Metadata Fallback ::', returnDao(tokenContract)?.name, tokenId)
   }, [tokenData])
-
+  */
   if (!tokenData) return null
 
   return (
