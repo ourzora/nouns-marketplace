@@ -1,5 +1,6 @@
 import { Filter, useCollectionFilters } from '@filter'
 import { NFTGrid } from '@media/NFTGrid'
+import { NFTCard } from '@media/NFTCard'
 import { useEffect } from 'react'
 
 export function Collections({ collectionAddress }: { collectionAddress?: string }) {
@@ -23,6 +24,7 @@ export function Collections({ collectionAddress }: { collectionAddress?: string 
           handleLoadMore={handleLoadMore}
           isReachingEnd={isReachingEnd}
           isValidating={isValidating}
+          nftRenderer={<NFTCard />}
         />
       }
     />
