@@ -19,7 +19,7 @@ import {
 import { AuctionCountdown } from './AuctionCountdown'
 import { RPCTokenInfo } from './RPCTokenInfo'
 
-export interface ActiveAuctionProps extends TokenInfoConfig {
+export interface ActiveAuctionRowProps extends TokenInfoConfig {
   useModal?: boolean
   showLabels?: boolean
   useErrorMsg?: boolean
@@ -38,7 +38,7 @@ export function ActiveAuctionRow({
   routePrefix,
   useErrorMsg,
   showTopBid,
-}: ActiveAuctionProps) {
+}: ActiveAuctionRowProps) {
   const {
     isComplete,
     noAuctionHistory,
