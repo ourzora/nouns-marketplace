@@ -41,6 +41,7 @@ export function AuctionBidder({
       as="a"
       href={buildTxLink}
       target="_blank"
+      gap={layoutDirection === 'row' ? 'x2' : 'x0'}
       rel="noreferrer"
       align={layoutDirection === 'row' ? 'center' : 'flex-start'}
       wrap="wrap"
@@ -71,9 +72,9 @@ export function AuctionBidder({
         >
           {auctionData?.rpcData?.bidder !== AddressZero ? (
             <Flex gap="x2" align="center">
-              <Flex gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
+              <Label size="md" gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
                 {ensName ? ensName : shortAddress}
-              </Flex>
+              </Label>
               {useAvatar && (
                 <>
                   {layout !== 'sideBarBid' ? (

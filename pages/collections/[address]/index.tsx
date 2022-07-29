@@ -2,12 +2,12 @@ import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
 import { useEffect, useState } from 'react'
 import { MarketStats } from '@market/components/MarketStats'
-import { CollectionHeader, Seo } from 'components'
+import { Seo } from 'components'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import {
   Collections,
   CollectionActivityHeader,
-  CollectionsProps,
+  CollectionHeader,
 } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
 import { Stack, color } from '@zoralabs/zord'
@@ -15,6 +15,7 @@ import { useCollection } from '@filter/hooks/useCollection'
 import { useWindowWidth } from 'hooks'
 import { HorizontalMenu, HorizontalMenuProps } from 'components'
 import { returnDao } from 'constants/collection-addresses'
+import { ActiveAuctionCard } from '@noun-auction'
 
 const Collection = ({
   // initialPage,
@@ -27,7 +28,7 @@ const Collection = ({
   const [menuSelection, setMenuSelection] = useState<string>('nfts')
   const { isLarge } = useWindowWidth()
 
-  const isDao = returnDao(contractAddress) !== undefined
+  const dao = returnDao(contractAddress)
 
   const items: HorizontalMenuProps['items'] = [
     {
@@ -58,8 +59,14 @@ const Collection = ({
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
-      <CollectionHeader collection={collection} aggregateStats={aggregateStats} />
-      <MarketStats aggregateStats={aggregateStats} />
+      <CollectionHeader
+        collection={collection}
+        aggregateStats={aggregateStats}
+        layout={dao ? 'dao' : 'collection'}
+        currentAuction={dao ? <ActiveAuctionCard daoConfig={dao} /> : null}
+      >
+        <MarketStats aggregateStats={aggregateStats} />
+      </CollectionHeader>
       {contractAddress && (
         <CollectionFilterProvider
           useSidebarClearButton
@@ -83,7 +90,7 @@ const Collection = ({
           }}
         >
           <Stack>
-            {isDao ? (
+            {dao ? (
               <HorizontalMenu
                 items={items}
                 setId={setMenuSelection}

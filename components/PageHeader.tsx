@@ -1,11 +1,5 @@
 import { Stack, Text, Paragraph, FlexProps } from '@zoralabs/zord'
-import {
-  lightFont,
-  textCenter,
-  maxWidthSm,
-  pageHeadline,
-  pageHeaderWrapper,
-} from 'styles/styles.css'
+import { lightFont, textCenter, pageHeadline, pageHeaderWrapper } from 'styles/styles.css'
 import { Maybe } from '@zoralabs/nft-hooks/dist/backends/zora-indexer-v1/zora-indexer-types'
 
 export interface PageHeaderProps extends FlexProps {
@@ -15,14 +9,7 @@ export interface PageHeaderProps extends FlexProps {
 
 export function PageHeader({ headline, copy, ...props }: PageHeaderProps) {
   return (
-    <Stack
-      as="article"
-      align="center"
-      className={[maxWidthSm, pageHeaderWrapper({ variant: 'topBorder' })]}
-      gap="x4"
-      px="x4"
-      {...props}
-    >
+    <Stack as="article" className={[pageHeaderWrapper()]} {...props}>
       {headline ? (
         <Text
           className={[textCenter, pageHeadline]}

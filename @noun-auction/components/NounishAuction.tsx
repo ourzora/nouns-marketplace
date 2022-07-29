@@ -57,8 +57,6 @@ export function NounishAuction({
   showLabels,
   ...props
 }: NounishAuctionProps) {
-  console.log(showLabels)
-
   return (
     <Grid
       className={[

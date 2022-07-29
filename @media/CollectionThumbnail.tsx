@@ -1,4 +1,4 @@
-import { Box, Flex, Label, BoxProps, mixins } from '@zoralabs/zord'
+import { Box, Flex, Label, BoxProps } from '@zoralabs/zord'
 import { nftThumbnail } from './NftMedia.css'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { useRawImageTransform } from './hooks/useRawImageTransform'

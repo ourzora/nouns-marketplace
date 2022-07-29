@@ -147,14 +147,14 @@ export const pageHeadline = [
     lineHeight: '40px',
     '@media': {
       [media.min1024]: {
-        lineHeight: '85px',
+        lineHeight: '50px',
       },
     },
   },
   atoms({
     fontSize: {
       '@initial': '48px',
-      '@1024': '80px',
+      '@1024': typography.size[1],
     },
   }),
 ]
@@ -163,7 +163,7 @@ export const pageHeaderVariants = {
   variant: {
     topBorder: [
       {
-        borderTop: `2px solid ${color.black10}`,
+        // borderTop: `2px solid ${color.black10}`,
         '@media': {
           [media.min1024]: {
             borderTop: 0,
@@ -189,6 +189,10 @@ export const pageHeaderWrapper = recipe({
     atoms({
       width: '100%',
       margin: 'auto',
+      pt: {
+        '@initial': 'x6',
+        '@1024': 'x0',
+      },
     }),
   ]),
 })
@@ -200,3 +204,29 @@ export const hideMobile = style({
     },
   },
 })
+
+export const collectionHeaderWrapper = style([
+  {
+    maxWidth: MAX_WIDTH.LG,
+  },
+  atoms({
+    w: '100vw',
+    overflowX: 'hidden',
+    // px: 'x4',
+    m: 'auto',
+  }),
+])
+
+export const daoHeaderWrapper = style([
+  {
+    gridTemplateColumns: '1fr',
+    '@media': {
+      [media.min1024]: {
+        gridTemplateColumns: '1fr 1fr',
+      },
+    },
+  },
+  atoms({
+    pb: 'x6',
+  }),
+])

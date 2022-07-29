@@ -1,5 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, media } from '@zoralabs/zord'
+import { atoms, media, color } from '@zoralabs/zord'
 import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, HEADER_Z } from 'styles/style-constants'
 
 export const headerWrapper = style([
@@ -10,10 +10,12 @@ export const headerWrapper = style([
     alignItems: 'center',
     gridTemplateColumns: 'repeat(2, 1fr)',
     gridTemplateRows: 'auto',
+    borderBottom: `2px solid ${color.black10}`,
     '@media': {
       [media.min1024]: {
         height: HEADER_HEIGHT,
         gridTemplateColumns: 'repeat(24, 1fr)',
+        borderBottom: 'none',
       },
     },
   },
@@ -62,7 +64,7 @@ export const collectionTriggerWrapper = style([
     gridColumn: '1',
     gridRow: '2',
     '@media': {
-      [`(min-width: 1240px)`]: {
+      [media.min1024]: {
         gridColumn: '3',
         gridRow: '1',
       },
@@ -74,21 +76,6 @@ export const collectionTriggerWrapper = style([
   }),
 ])
 
-globalStyle(
-  `
-  ${collectionTriggerWrapper} .zora-modal-trigger-wrapper,
-  ${collectionTriggerWrapper} button
-`,
-  {
-    width: '100%',
-    '@media': {
-      [media.min768]: {
-        width: 'auto',
-      },
-    },
-  }
-)
-
 export const modalWrapper = style({
   overflowY: 'scroll',
   height: 400,
@@ -99,7 +86,7 @@ export const manageButtonWrapper = style([
     gridColumn: '2',
     gridRow: '2',
     '@media': {
-      [`(min-width: 1240px)`]: {
+      [media.min1024]: {
         gridColumn: '23',
         gridRow: '1',
       },
@@ -133,7 +120,7 @@ export const connectWrapper = style([
     gridColumn: '2',
     gridRow: '1',
     '@media': {
-      [`(min-width: 1240px)`]: {
+      [media.min1024]: {
         gridColumn: '24',
         gridRow: '1',
       },

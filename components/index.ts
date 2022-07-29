@@ -1,4 +1,3 @@
-export * from './CollectionHeader'
 export * from './Link'
 export * from './ManageHeader'
 export * from './PageHeader'

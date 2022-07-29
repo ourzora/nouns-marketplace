@@ -85,17 +85,6 @@ export function Collections({ collectionAddress, view = 'nfts' }: CollectionsPro
     clearFilters()
   }, [collectionAddress])
 
-  const renderer = useMemo(() => {
-    switch (view) {
-      case 'nfts':
-        return <NFTCard />
-      case 'activity':
-        return <NounishActivityRow />
-      default:
-        return <NFTCard />
-    }
-  }, [view])
-
   if (!dao) {
     return <CollectionGrid />
   } else {

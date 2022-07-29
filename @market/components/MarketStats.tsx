@@ -1,10 +1,14 @@
 import { useMemo } from 'react'
-import { Flex, Text, Stack } from '@zoralabs/zord'
+import { Flex, Text, Stack, FlexProps, Box } from '@zoralabs/zord'
 import { CollectionStatsAggregateQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { lightFont } from 'styles/styles.css'
 import { marketStatsWrapper, stat } from './MarketComponents.css'
 import { roundFourDecimals, roundTwoDecimals } from 'utils/math'
 import { numberFormatter } from 'utils/numbers'
+
+export interface MarketStatesProps extends FlexProps {
+  aggregateStats: CollectionStatsAggregateQuery
+}
 
 export function StatBlock({
   statType,
@@ -14,7 +18,13 @@ export function StatBlock({
   statValue: string | number | null | undefined
 }) {
   return (
-    <Stack p="x4" backgroundColor="tertiary" borderRadius="phat">
+    <Stack
+      p="x4"
+      borderColor="tertiary"
+      borderStyle="solid"
+      borderWidth="thin"
+      borderRadius="phat"
+    >
       <Text
         /* @ts-ignore */
         variant={['heading-xs, heading-xl']}
@@ -30,11 +40,7 @@ export function StatBlock({
   )
 }
 
-export function MarketStats({
-  aggregateStats,
-}: {
-  aggregateStats: CollectionStatsAggregateQuery
-}) {
+export function MarketStats({ aggregateStats, ...props }: MarketStatesProps) {
   const { aggregateStat } = aggregateStats
 
   const volume = useMemo(
@@ -47,19 +53,7 @@ export function MarketStats({
   )
 
   return (
-    <Flex
-      justify="center"
-      w="100%"
-      px={{
-        '@initial': 'x4',
-        '@1024': 'x0',
-      }}
-      mb={{
-        '@initial': 'x2',
-        '@1024': 'x0',
-      }}
-      className={marketStatsWrapper}
-    >
+    <Flex className={marketStatsWrapper} {...props}>
       <Flex
         gap="x4"
         w="100%"
@@ -84,6 +78,15 @@ export function MarketStats({
         />
         <StatBlock statType="Volume" statValue={`${volume} ETH`} />
         <StatBlock statType="USDC Volume" statValue={`$${usdcPrice}`} />
+        <Box
+          style={{ paddingLeft: '1px' }}
+          h="100%"
+          position="relative"
+          display={{
+            '@initial': 'block',
+            '@1024': 'none',
+          }}
+        />
       </Flex>
     </Flex>
   )
