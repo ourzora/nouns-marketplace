@@ -30,27 +30,9 @@ export interface ActiveAuctionRowProps extends TokenInfoConfig {
 export function ActiveAuctionRow({
   useModal,
   showLabels = false,
-  /* TokenInfo Props */
-  thumbnailSize,
-  hideThumbnail,
-  hideTitle,
-  hideCollectionTitle,
-  routePrefix,
   useErrorMsg,
-  showTopBid,
 }: ActiveAuctionRowProps) {
-  const {
-    isComplete,
-    noAuctionHistory,
-    daoConfig,
-    tokenId,
-    timerComplete,
-    auctionData,
-    layout,
-    rpcAuctionData,
-  } = useNounishAuctionProvider()
-
-  // if (!auctionData || !tokenId) return null
+  const { daoConfig, tokenId, timerComplete, layout } = useNounishAuctionProvider()
 
   const rowLayout = (
     <>

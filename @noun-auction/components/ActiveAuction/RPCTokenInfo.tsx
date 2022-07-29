@@ -1,4 +1,4 @@
-import { Stack, Flex, Heading, Label, Box } from '@zoralabs/zord'
+import { Stack, Flex, Heading, Label, Box, Button } from '@zoralabs/zord'
 import { useNFT } from '@zoralabs/nft-hooks'
 import NextLink from 'next/link'
 import { returnDao } from 'constants/collection-addresses'
@@ -24,11 +24,13 @@ export function RPCTokenInfo({
   return (
     <Flex className={['nounish-auction__token-info', tokenInfoWrapper]} {...props}>
       <NextLink href={`/collections/${contractAddress}/${tokenId}`} passHref>
-        <NounishThumbnail
-          image={data?.media?.image?.uri}
-          tokenContract={contractAddress}
-          tokenId={tokenId}
-        />
+        <Button as="a" variant="unset">
+          <NounishThumbnail
+            image={data?.media?.image?.uri}
+            tokenContract={contractAddress}
+            tokenId={tokenId}
+          />
+        </Button>
       </NextLink>
       <Stack justify="space-between">
         <Heading size="sm" as="h3">

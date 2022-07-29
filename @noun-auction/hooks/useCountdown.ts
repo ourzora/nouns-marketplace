@@ -18,8 +18,10 @@ export const useCountdown = (start: string, end: string) => {
     return () => clearInterval(interval)
   })
 
-  /* @ts-ignore */
-  const endTime = fromUnixTime(end)
+  const endTime = useMemo(() => {
+    /* @ts-ignore */
+    return fromUnixTime(end)
+  }, [end])
 
   const countdownText = useMemo(() => {
     if (!start) return ''
@@ -32,7 +34,11 @@ export const useCountdown = (start: string, end: string) => {
     return [hours + 'h', minutes + 'm', seconds + 's'].join(' ')
   }, [start, now])
 
-  const isEnded = useMemo(() => getUnixTime(now) >= parseInt(end), [end, now])
+  const isEnded = useMemo(() => {
+    // console.log(getUnixTime(now) >= parseInt(end))
+    return getUnixTime(now) >= parseInt(end)
+  }, [end, now])
+
   const text = (ready && countdownText) || '...'
 
   return {

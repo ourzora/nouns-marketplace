@@ -1,4 +1,9 @@
-import { NounishAuction, useActiveNounishAuctionQuery } from '@noun-auction'
+import { useMemo } from 'react'
+import {
+  NounishAuction,
+  useActiveNounishAuctionQuery,
+  useAuctionRPC,
+} from '@noun-auction'
 import { NFTCardMarket } from '@market'
 import { returnDao } from 'constants/collection-addresses'
 import { NFTObject } from '@zoralabs/nft-hooks'
@@ -27,12 +32,11 @@ export function MarketUi({
 
   if (!dao) return marketComponent
 
-  const { activeToken } = useActiveNounishAuctionQuery({
-    marketType: dao.marketType,
-    contractAddress: contractAddress,
-  })
+  const { data: rpcData } = useAuctionRPC(dao.auctionContractAddress)
 
-  if (tokenId === activeToken) {
+  const isActiveToken = useMemo(() => rpcData?.auction?.nounId === tokenId, [rpcData])
+
+  if (isActiveToken) {
     return (
       <NounishAuction
         daoConfig={dao}
