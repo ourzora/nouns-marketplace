@@ -1,4 +1,4 @@
-import { vars, atoms, color } from '@zoralabs/zord'
+import { vars, atoms, color, size } from '@zoralabs/zord'
 import { style, globalStyle } from '@vanilla-extract/css'
 
 export const errorBox = style([
@@ -38,7 +38,18 @@ export const marketStatsWrapper = style([
     overflowX: 'scroll',
   },
   atoms({
-    w: '100%',
+    w: {
+      '@initial': '100vw',
+      '@1024': 'auto',
+    },
+    px: {
+      '@initial': 'x4',
+      '@1024': 'x0',
+    },
+    mb: {
+      '@initial': 'x2',
+      '@1024': 'x0',
+    },
   }),
 ])
 

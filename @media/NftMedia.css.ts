@@ -1,31 +1,47 @@
 import { style } from '@vanilla-extract/css'
 import { atoms, media } from '@zoralabs/zord'
+import { recipe } from '@vanilla-extract/recipes'
 
-export const nftGridWrapper = style([
-  {
-    gridTemplateColumns: 'repeat(1, 1fr)',
-    '@media': {
-      [media.min576]: {
-        gridTemplateColumns: 'repeat(2, 1fr)',
+export const nftGridWrapperVariants = {
+  layout: {
+    grid: [
+      {
+        gridTemplateColumns: 'repeat(1, 1fr)',
+        '@media': {
+          [media.min576]: {
+            gridTemplateColumns: 'repeat(2, 1fr)',
+          },
+          [`(min-width: 1240px)`]: {
+            gridTemplateColumns: 'repeat(3, 1fr)',
+          },
+          [`(min-width: 2000px)`]: {
+            gridTemplateColumns: 'repeat(4, 1fr)',
+          },
+        },
       },
-      [`(min-width: 1240px)`]: {
-        gridTemplateColumns: 'repeat(3, 1fr)',
-      },
-      [`(min-width: 2000px)`]: {
-        gridTemplateColumns: 'repeat(4, 1fr)',
-      },
-    },
+    ],
+    activityRows: [{}],
   },
-  atoms({
-    w: '100%',
-    margin: 'auto',
-    gap: 'x4',
-    px: {
-      '@initial': 'x4',
-      '@1024': 'x4',
-    },
-  }),
-])
+}
+
+export const nftGridWrapper = recipe({
+  variants: nftGridWrapperVariants,
+  base: style([
+    atoms({
+      w: '100%',
+      pos: 'relative',
+      margin: 'auto',
+      gap: 'x4',
+      px: {
+        '@initial': 'x4',
+        '@1024': 'x4',
+      },
+    }),
+  ]),
+  defaultVariants: {
+    layout: 'grid',
+  },
+})
 
 /* Card */
 export const cardWrapper = style([

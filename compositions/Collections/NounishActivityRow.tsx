@@ -1,6 +1,8 @@
 import { NounishAuction } from '@noun-auction'
 import { useNFTProvider } from '@shared'
 import { returnDao } from 'constants/collection-addresses'
+import { useWindowWidth } from 'hooks'
+
 export function NounishActivityRow() {
   const {
     hooksData: { data },
@@ -18,6 +20,7 @@ export function NounishActivityRow() {
     <NounishAuction
       key={`${contractAddress}`}
       daoConfig={dao}
+      showLabels
       hideCollectionTitle={false}
       borderRadius="curved"
       borderColor="tertiary"

@@ -48,16 +48,16 @@ export function CollectionMenu() {
           size="md"
           variant="secondary"
           borderRadius="curved"
-          justify="space-between"
-          m="auto"
+          display="flex"
           w={{
-            '@initial': '100%',
+            '@initial': 'auto',
             '@768': 'auto',
           }}
           style={{
             height: 42,
-            paddingLeft: 20,
-            paddingRight: 20,
+            paddingLeft: 16,
+            paddingRight: 16,
+            gridGap: 10,
           }}
         >
           {currentCollection}
@@ -72,10 +72,10 @@ export function CollectionMenu() {
                 '@1024': 'inline',
               }}
             >
-              &nbsp;{currentCollectionCount}
+              {currentCollectionCount}
             </Label>
           ) : null}
-          <Icon id="ChevronDown" size="md" color="secondary" ml="x2" />
+          <Icon id="ChevronDown" size="md" color="secondary" />
         </Button>
       }
       content={

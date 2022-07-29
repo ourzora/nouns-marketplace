@@ -4,24 +4,46 @@ import { NFTCard } from '@media/NFTCard'
 import { useEffect, useMemo } from 'react'
 import { nftGridWrapper } from '@media/NftMedia.css'
 import { NounishActivityRow } from './NounishActivityRow'
+import { returnDao } from 'constants/collection-addresses'
+
+import { useAuctionRPC } from '@noun-auction'
 
 export type CollectionsProps = {
   collectionAddress?: string
   view?: 'activity' | 'nfts' | string
 }
 
-export function Collections({ collectionAddress, view = 'nfts' }: CollectionsProps) {
-  const {
-    filterStore: { clearFilters },
-    items,
-    isValidating,
-    isReachingEnd,
-    handleLoadMore,
-  } = useCollectionFilters()
+export function CollectionGrid() {
+  const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
 
-  useEffect(() => {
-    clearFilters()
-  }, [collectionAddress])
+  return (
+    <Filter
+      grid={
+        <NFTGrid
+          items={items}
+          handleLoadMore={handleLoadMore}
+          isReachingEnd={isReachingEnd}
+          isValidating={isValidating}
+          nftRenderer={<NFTCard />}
+          className={nftGridWrapper()}
+        />
+      }
+    />
+  )
+}
+
+export function DaoGrid({ dao, view }: { dao: any; view: CollectionsProps['view'] }) {
+  const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
+
+  const { data: auctionData } = useAuctionRPC(dao?.auctionContractAddress)
+
+  const filteredItems = useMemo(() => {
+    try {
+      return items.filter((item) => auctionData?.auction?.nounId !== item?.nft?.tokenId)
+    } catch (err) {
+      return items
+    }
+  }, [dao, items, auctionData?.auction?.nounId])
 
   const renderer = useMemo(() => {
     switch (view) {
@@ -38,14 +60,34 @@ export function Collections({ collectionAddress, view = 'nfts' }: CollectionsPro
     <Filter
       grid={
         <NFTGrid
-          items={items}
+          items={filteredItems}
           handleLoadMore={handleLoadMore}
           isReachingEnd={isReachingEnd}
           isValidating={isValidating}
           nftRenderer={renderer}
-          className={view === 'nfts' ? nftGridWrapper : ''}
+          className={nftGridWrapper({
+            layout: view === 'nfts' ? 'grid' : 'activityRows',
+          })}
         />
       }
     />
   )
+}
+
+export function Collections({ collectionAddress, view = 'nfts' }: CollectionsProps) {
+  const {
+    filterStore: { clearFilters },
+  } = useCollectionFilters()
+
+  const dao = returnDao(collectionAddress)
+
+  useEffect(() => {
+    clearFilters()
+  }, [collectionAddress])
+
+  if (!dao) {
+    return <CollectionGrid />
+  } else {
+    return <DaoGrid dao={dao} view={view} />
+  }
 }

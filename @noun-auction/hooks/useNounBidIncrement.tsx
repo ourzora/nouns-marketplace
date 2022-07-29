@@ -15,7 +15,7 @@ export function useNounBidIncrement(
   })
   */
   const computeMinBid = useMemo(() => {
-    const reserveBn = new BigNumber(reservePrice.toString())
+    // const reserveBn = new BigNumber(reservePrice.toString())
 
     if (!minBidIncrementPercentage || !rawCurrentBidAmount) {
       return {

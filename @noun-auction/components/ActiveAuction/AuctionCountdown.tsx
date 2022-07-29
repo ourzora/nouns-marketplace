@@ -11,7 +11,7 @@ import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from 'styles/styles.css'
 
 export function AuctionCountdown({
-  showLabels = true,
+  showLabels,
   endedCopy = 'Bidding & Settling',
   label = 'Ends in',
   layoutDirection = 'row',
@@ -26,12 +26,6 @@ export function AuctionCountdown({
     rpcAuctionData?.endTime
   )
 
-  /*
-  useEffect(() => {
-    console.log(rpcAuctionData)
-  }, [rpcAuctionData])
-  */
-
   useEffect(() => {
     if (isEnded) {
       setTimerComplete(true)
@@ -41,7 +35,12 @@ export function AuctionCountdown({
   }, [isEnded, rpcAuctionData, rpcAuctionData?.startTime, rpcAuctionData?.endTime])
 
   return (
-    <Flex direction={layoutDirection} wrap="wrap" {...props}>
+    <Flex
+      direction={layoutDirection}
+      wrap="wrap"
+      gap={layoutDirection === 'row' ? 'x2' : 'x0'}
+      {...props}
+    >
       {showLabels && (
         <Label
           size="md"

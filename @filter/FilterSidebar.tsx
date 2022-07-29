@@ -23,7 +23,7 @@ import { useWindowWidth } from 'hooks'
 import { Modal, ModalContent, useModal } from '@modal'
 
 export function FilterSidebar() {
-  const { modalType, requestClose, requestOpen } = useModal()
+  const { requestClose } = useModal()
 
   const {
     filterStore: {

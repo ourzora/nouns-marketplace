@@ -2,11 +2,8 @@ import { Stack, Heading } from '@zoralabs/zord'
 import { NounishAuction } from '@noun-auction'
 import { daos } from 'constants/collection-addresses'
 import { daosWrapper } from './Daos.css'
-import { useWindowWidth } from 'hooks'
 
 export function DaoTable({ routePrefix }: { routePrefix?: string }) {
-  const { isLarge } = useWindowWidth()
-
   return (
     <Stack className={daosWrapper}>
       <Heading as="h2" size="lg">
@@ -19,8 +16,7 @@ export function DaoTable({ routePrefix }: { routePrefix?: string }) {
             daoConfig={dao}
             hideCollectionTitle={false}
             routePrefix={routePrefix}
-            showLabels={!isLarge}
-            showTopBid={isLarge}
+            showLabels
           />
         ))}
       </Stack>
