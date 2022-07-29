@@ -1,8 +1,6 @@
 import NextLink from 'next/link'
 import { Button } from '@zoralabs/zord'
 import { useAccount } from 'wagmi'
-import { collectionTrigger, manageButton } from './Header.css'
-import { clickAnimation, noTextWrap } from 'styles/styles.css'
 
 export function ManageLink() {
   const { address } = useAccount()

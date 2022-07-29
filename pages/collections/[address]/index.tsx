@@ -17,7 +17,7 @@ import { HorizontalMenu, HorizontalMenuProps } from 'components'
 import { returnDao } from 'constants/collection-addresses'
 
 const Collection = ({
-  initialPage,
+  // initialPage,
   contractAddress,
   seo,
   aggregateStats,
@@ -65,7 +65,7 @@ const Collection = ({
           useSidebarClearButton
           filtersVisible={isLarge ? true : false}
           contractAddress={contractAddress}
-          initialPage={initialPage}
+          // initialPage={initialPage}
           // useMarketStatus
           useCollectionProperties={{
             header: 'Traits',

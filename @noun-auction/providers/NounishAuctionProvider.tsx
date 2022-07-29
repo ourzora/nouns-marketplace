@@ -34,11 +34,15 @@ const NounsAuctionContext = createContext<{
   auctionData?: any
   setTimerComplete: Dispatch<SetStateAction<boolean>>
   layout?: keyof typeof auctionWrapperVariants['layout']
+  activeAuctionId: string | undefined
+  rpcAuctionData: any
 }>({
   daoConfig: defaultDaoConfig,
   timerComplete: false,
   auctionData: undefined,
+  activeAuctionId: undefined,
   setTimerComplete: () => {},
+  rpcAuctionData: undefined,
 })
 
 export function useNounishAuctionProvider() {
@@ -129,7 +133,9 @@ export function NounishAuctionProvider({
         noAuctionHistory,
         timerComplete,
         tokenId: tokenId ? tokenId : auctionData?.auction?.nounId,
+        activeAuctionId: auctionData ? auctionData?.auction?.nounId : undefined,
         daoConfig: daoConfig,
+        rpcAuctionData: auctionData?.auction,
         setTimerComplete,
         layout,
         auctionData: normalizedAuctionData,

@@ -10,7 +10,7 @@ export const daos: DaoConfigProps[] = [
     abi: nounsAbi,
   },
   {
-    name: 'LilNouns',
+    name: 'LilNoun',
     contractAddress: '0x4b10701Bfd7BFEdc47d50562b76b436fbB5BdB3B',
     auctionContractAddress: '0x55e0F7A3bB39a28Bd7Bcc458e04b3cF00Ad3219E',
     marketType: 'LIL_NOUNS_AUCTION',

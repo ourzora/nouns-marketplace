@@ -31,13 +31,9 @@ export function AuctionBidder({
   const shortAddress = useShortAddress(auctionData?.rpcData?.bidder)
 
   const buildTxLink = useMemo(
-    () => `https://etherscan.io/tx/${auctionData.bidder.txHash}`,
-    [auctionData.bidder.txHash]
+    () => `https://etherscan.io/tx/${auctionData?.bidder.txHash}`,
+    [auctionData?.bidder.txHash]
   )
-
-  useEffect(() => {
-    auctionData
-  }, [auctionData])
 
   return (
     <Flex

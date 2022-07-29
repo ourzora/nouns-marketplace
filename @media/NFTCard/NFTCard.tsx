@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import { Stack, Box, Flex, Heading, Separator } from '@zoralabs/zord'
 import { Link } from 'components/Link'
 import { NFTCardMarket } from '@market'
-import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 import { useTitleWithFallback } from 'hooks'
 import {
   cardWrapper,
@@ -24,8 +23,6 @@ export function NFTCard() {
 
   if (!data || !contractAddress || !tokenId) return null
 
-  const { image } = useRawImageTransform(data?.media?.thumbnail?.uri)
-
   const { fallbackTitle } = useTitleWithFallback(
     contractAddress,
     tokenId,
@@ -38,7 +35,7 @@ export function NFTCard() {
     } else {
       return data?.media?.poster?.uri
     }
-  }, [image, data?.media])
+  }, [data?.media])
 
   const useTitleScroll = useMemo(() => {
     if (data?.metadata && data?.metadata?.name) {

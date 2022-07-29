@@ -327,3 +327,18 @@ export const pixelate = style([
     },
   },
 ])
+
+export const rowLoader = style([
+  {
+    height: 68,
+    width: 68,
+  },
+  atoms({
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 'curved',
+    backgroundColor: 'tertiary',
+    pos: 'relative',
+    overflow: 'hidden',
+  }),
+])
