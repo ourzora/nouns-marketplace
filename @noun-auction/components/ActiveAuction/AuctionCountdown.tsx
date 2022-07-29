@@ -11,7 +11,7 @@ import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from 'styles/styles.css'
 
 export function AuctionCountdown({
-  showLabels = true,
+  showLabels,
   endedCopy = 'Bidding & Settling',
   label = 'Ends in',
   layoutDirection = 'row',
