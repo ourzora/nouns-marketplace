@@ -24,8 +24,6 @@ export function useNounBidIncrement(
       }
     }
 
-    console.log('reserv bn', reserveBn.toString())
-
     const minBidIncrement = new BigNumber(minBidIncrementPercentage.toString())
     const currentBid = new BigNumber(rawCurrentBidAmount)
 

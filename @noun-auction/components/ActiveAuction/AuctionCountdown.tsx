@@ -26,9 +26,11 @@ export function AuctionCountdown({
     rpcAuctionData?.endTime
   )
 
+  /*
   useEffect(() => {
     console.log(rpcAuctionData)
   }, [rpcAuctionData])
+  */
 
   useEffect(() => {
     if (isEnded) {

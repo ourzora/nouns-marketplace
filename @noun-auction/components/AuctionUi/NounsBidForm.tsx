@@ -58,8 +58,6 @@ export function NounsBidForm({
 
   if (!abi || !auctionContractAddress) return null
 
-  console.log(auctionData?.rpcData?.amount)
-
   const { minBidAmount } = useNounBidIncrement(
     auctionData?.rpcData?.amount,
     minBidIncrementPercentage,
