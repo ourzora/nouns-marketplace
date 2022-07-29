@@ -1,4 +1,4 @@
-import { Stack, Flex, Heading, Label, Box, Button } from '@zoralabs/zord'
+import { Stack, Flex, Heading, Label, Box, Button, Icon } from '@zoralabs/zord'
 import { useNFT } from '@zoralabs/nft-hooks'
 import NextLink from 'next/link'
 import { returnDao } from 'constants/collection-addresses'

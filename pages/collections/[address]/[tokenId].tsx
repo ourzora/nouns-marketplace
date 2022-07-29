@@ -16,8 +16,16 @@ import { NFTProvider } from '@shared/providers/NFTProvider'
 import { NounishAuctionProvider } from '@noun-auction'
 import { returnDao } from 'constants/collection-addresses'
 
-const NFT = ({ nft }: { nft: NFTObject }) => {
-  const dao = returnDao(nft?.nft?.contract?.address)
+const NFT = ({
+  nft,
+  tokenAddress,
+  tokenId,
+}: {
+  nft: NFTObject | undefined
+  tokenAddress: string
+  tokenId: string
+}) => {
+  const dao = returnDao(tokenAddress)
 
   return (
     <PageWrapper direction="column">
@@ -26,11 +34,7 @@ const NFT = ({ nft }: { nft: NFTObject }) => {
         description={nft?.metadata?.description}
         ogImage={nft?.media?.poster?.uri}
       />
-      <NFTProvider
-        initialData={nft}
-        contractAddress={nft?.nft?.contract?.address}
-        tokenId={nft?.nft?.tokenId}
-      >
+      <NFTProvider initialData={nft} contractAddress={tokenAddress} tokenId={tokenId}>
         <Grid className={nftPageWrapper}>
           <NFTPageHero />
           {dao ? (

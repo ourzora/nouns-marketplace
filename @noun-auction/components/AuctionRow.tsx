@@ -1,6 +1,6 @@
-import { useEffect, useMemo } from 'react'
-import { ActiveAuction } from './ActiveAuction'
+import { useMemo } from 'react'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
+import { RowLoader } from './RowLoader'
 
 export function AuctionRow({
   auctionDataComponent,
@@ -11,11 +11,7 @@ export function AuctionRow({
 }) {
   const { tokenId, activeAuctionId } = useNounishAuctionProvider()
 
-  if (!activeAuctionId) return null
-
-  useEffect(() => {
-    console.log('activeAuctionId', activeAuctionId, tokenId)
-  }, [activeAuctionId])
+  if (!activeAuctionId) return <RowLoader />
 
   const auctionComponent = useMemo(() => {
     if (activeAuctionId === tokenId) {

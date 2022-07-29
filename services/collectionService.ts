@@ -43,6 +43,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
 
   try {
     let resp
+    /*
     try {
       resp = await zdk.tokens({
         where: {
@@ -50,7 +51,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
         },
         filter: {},
         pagination: {
-          limit: 9,
+          limit: 1,
         },
         includeFullDetails: true,
       })
@@ -60,7 +61,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
           collectionAddresses: [tokenAddress],
         },
         pagination: {
-          limit: 9,
+          limit: 1,
         },
       })
     }
@@ -68,7 +69,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
     const initialPage = resp.tokens.nodes
       .map((token) => transformNFTZDK(token, { rawData: token }))
       .map(prepareJson)
-
+    */
     const networkInput = {
       chain: Chain.Mainnet, // TODO: enable additional chains
       network: Network.Ethereum,
@@ -77,7 +78,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
     const collection = await zdk.collection({
       address: tokenAddress,
       network: networkInput,
-      includeFullDetails: true,
+      includeFullDetails: false,
     })
 
     if (!collection) {
@@ -99,7 +100,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
     return {
       props: {
         contractAddress: tokenAddress,
-        initialPage,
+        // initialPage,
         aggregateStats,
         collection,
         seo,

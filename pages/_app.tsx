@@ -89,6 +89,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                       stopDelayMs={200}
                       height={2}
                       showOnShallow={true}
+                      options={{ showSpinner: false }}
                     />
                     <Component {...pageProps} />
                     <FooterComposition />

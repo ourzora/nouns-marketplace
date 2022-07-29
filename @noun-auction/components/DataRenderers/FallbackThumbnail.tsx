@@ -1,7 +1,6 @@
 import { Box, BoxProps } from '@zoralabs/zord'
 import { useNounsToken } from '@noun-auction/hooks/useNounsToken'
-import { returnDao } from 'constants/collection-addresses'
-import { useEffect } from 'react'
+import { ImageElement } from 'components'
 import { nounishThumbnailImage } from '@noun-auction/styles/NounishStyles.css'
 
 export interface FallbackThumbnailProps extends BoxProps {
@@ -15,19 +14,14 @@ export function FallbackThumbnail({
   ...props
 }: FallbackThumbnailProps) {
   const { tokenData } = useNounsToken(tokenContract, tokenId)
-  /*
-  useEffect(() => {
-    console.log('Metadata Fallback ::', returnDao(tokenContract)?.name, tokenId)
-  }, [tokenData])
-  */
+
   if (!tokenData) return null
 
   return (
-    <Box
-      as="img"
+    <ImageElement
       className={[nounishThumbnailImage, 'nouns-fallback-image']}
-      {...props}
       src={tokenData?.image}
+      {...props}
     />
   )
 }

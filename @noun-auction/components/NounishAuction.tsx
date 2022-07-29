@@ -1,6 +1,5 @@
-import { Accordion, Separator, Stack, BoxProps, Grid } from '@zoralabs/zord'
+import { Accordion, Separator, Stack, BoxProps, Grid, Icon } from '@zoralabs/zord'
 import { NounishAuctionProvider } from '@noun-auction/providers'
-import { ActiveAuction } from './ActiveAuction'
 import { AuctionHistory } from './AuctionHistory'
 import { AuctionDebugger } from './Debuggers'
 import { AuctionRow } from './AuctionRow'

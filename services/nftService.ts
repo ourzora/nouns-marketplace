@@ -18,14 +18,27 @@ export interface NFTParamsProps extends GetServerSideProps<NFTProps> {
 export async function nftService({ params }: NFTParamsProps) {
   assert(params, 'Page template must provide a params object')
 
-  const nft = prepareJson(await zdkFetchStrategy.fetchNFT(params.address, params.tokenId))
+  const tokenAddress = params ? params.address : undefined
+  const tokenId = params ? params.tokenId : undefined
 
-  if (!nft) {
+  if (!tokenAddress || !tokenId) return false
+
+  try {
+    const nft = prepareJson(await zdkFetchStrategy.fetchNFT(tokenAddress, tokenId))
     return {
-      notFound: true,
-      revalidate: 600,
+      props: {
+        nft,
+        tokenAddress: tokenAddress,
+        tokenId: tokenId,
+      },
+    }
+  } catch (err) {
+    return {
+      props: {
+        nft: undefined,
+        tokenAddress: tokenAddress,
+        tokenId: tokenId,
+      },
     }
   }
-
-  return { props: { nft } }
 }
