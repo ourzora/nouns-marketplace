@@ -29,7 +29,7 @@ export interface ActiveAuctionRowProps extends TokenInfoConfig {
 
 export function ActiveAuctionRow({
   useModal,
-  showLabels = false,
+  showLabels,
   useErrorMsg,
 }: ActiveAuctionRowProps) {
   const { daoConfig, tokenId, timerComplete, layout } = useNounishAuctionProvider()

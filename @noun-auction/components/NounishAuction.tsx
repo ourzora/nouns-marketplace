@@ -54,9 +54,11 @@ export function NounishAuction({
   hideCollectionTitle = false,
   routePrefix = 'collections',
   thumbnailSize = '100%',
-  showLabels = false,
+  showLabels,
   ...props
 }: NounishAuctionProps) {
+  console.log(showLabels)
+
   return (
     <Grid
       className={[

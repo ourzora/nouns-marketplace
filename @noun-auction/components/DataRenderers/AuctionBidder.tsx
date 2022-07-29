@@ -44,6 +44,10 @@ export function AuctionBidder({
       rel="noreferrer"
       align={layoutDirection === 'row' ? 'center' : 'flex-start'}
       wrap="wrap"
+      display={{
+        '@initial': `${layout === 'row' ? 'none' : 'flex'}`,
+        '@1024': 'flex',
+      }}
       {...props}
     >
       {showLabels && (
