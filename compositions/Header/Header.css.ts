@@ -37,6 +37,7 @@ export const nounsGlassesLink = style([
   atoms({
     cursor: 'pointer',
     pos: 'relative',
+    h: '100%',
   }),
 ])
 
