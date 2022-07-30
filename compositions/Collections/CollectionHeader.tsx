@@ -9,6 +9,7 @@ import {
   clickAnimation,
   collectionHeaderWrapper,
   daoHeaderWrapper,
+  collectionNameThumbDao,
 } from 'styles/styles.css'
 import { MAX_WIDTH } from 'styles/style-constants'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
@@ -37,7 +38,13 @@ export function CollectionHeader({
       ]}
       {...props}
     >
-      <Stack align={layout === 'collection' ? 'center' : 'flex-start'} gap="x4">
+      <Stack
+        align={{
+          '@initial': 'center',
+          '@1024': layout === 'collection' ? 'center' : 'flex-start',
+        }}
+        gap="x4"
+      >
         <Stack
           gap="x2"
           px={{
@@ -46,9 +53,12 @@ export function CollectionHeader({
           }}
         >
           <Grid
-            style={{ gridTemplateColumns: layout === 'dao' ? '80px auto' : '1fr' }}
+            className={[layout === 'dao' ? collectionNameThumbDao : '']}
             align="center"
-            gap="x4"
+            pt={{
+              '@initial': 'x6',
+              '@1024': 'x0',
+            }}
           >
             <CollectionThumbnail
               collectionAddress={collection.address}
@@ -58,11 +68,20 @@ export function CollectionHeader({
             <PageHeader
               headline={collection.name}
               copy={`${aggregateStats.aggregateStat.nftCount} NFTs`}
-              align={layout === 'collection' ? 'center' : 'flex-start'}
+              align={{
+                '@initial': 'center',
+                '@1024': layout === 'collection' ? 'center' : 'flex-start',
+              }}
               px={layout === 'collection' ? 'x4' : 'x0'}
             />
           </Grid>
-          <Flex w="100%" justify={layout === 'dao' ? 'flex-start' : 'center'}>
+          <Flex
+            w="100%"
+            justify={{
+              '@initial': 'center',
+              '@1024': layout === 'dao' ? 'flex-start' : 'center',
+            }}
+          >
             <AddressWithLink
               address={collection.address}
               useEns={false}
@@ -79,7 +98,15 @@ export function CollectionHeader({
             <Paragraph>{collection.description}</Paragraph>
           )}
         </Stack>
-        <Flex w="100%">{children}</Flex>
+        <Flex
+          w="100%"
+          justify={{
+            '@initial': 'center',
+            '@1024': layout === 'dao' ? 'flex-start' : 'center',
+          }}
+        >
+          {children}
+        </Flex>
       </Stack>
       {currentAuction && (
         <Flex

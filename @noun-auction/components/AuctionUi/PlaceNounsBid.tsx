@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react'
-import { Stack, Label } from '@zoralabs/zord'
+import { Stack, Label, Button } from '@zoralabs/zord'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { NounsBidForm } from './NounsBidForm'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
@@ -33,14 +33,15 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
         <ModalComposition
           modalName={`nouns-bid-${tokenId}`}
           trigger={
-            <Label
-              className={placeBidTrigger}
+            <Button
               as="span"
+              className={placeBidTrigger}
               size="md"
+              variant={layout === 'sideBarBid' ? 'secondary' : 'primary'}
               w={layout === 'sideBarBid' || layout === 'row' ? '100%' : 'auto'}
             >
               Place Bid
-            </Label>
+            </Button>
           }
           content={
             <Stack p="x8">

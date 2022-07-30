@@ -16,8 +16,9 @@ import {
 } from '@noun-auction/providers'
 import { DaoConfigProps } from '@noun-auction/typings'
 import { SettleAuction, PlaceNounsBid } from './AuctionUi'
+import { activeAuctionCardData } from '@noun-auction/styles/NounishStyles.css'
 
-export function CardContents({ ...props }) {
+function CardContents() {
   const {
     daoConfig: { contractAddress },
     tokenId,
@@ -71,7 +72,7 @@ export function CardContents({ ...props }) {
           {timerComplete ? <SettleAuction /> : <PlaceNounsBid useModal />}
         </Flex>
         <Separator mt="x1" />
-        <Grid style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+        <Grid className={activeAuctionCardData}>
           <AuctionCountdown showLabels align="flex-start" direction="column" />
           <AuctionHighBid showLabels align="flex-start" direction="column" />
           <AuctionBidder
@@ -86,12 +87,7 @@ export function CardContents({ ...props }) {
   )
 }
 
-export function ActiveAuctionCard({
-  daoConfig,
-  ...props
-}: {
-  daoConfig: DaoConfigProps
-}) {
+export function ActiveAuctionCard({ daoConfig }: { daoConfig: DaoConfigProps }) {
   return (
     <NounishAuctionProvider daoConfig={daoConfig}>
       <CardContents />

@@ -28,6 +28,7 @@ globalStyle('*', {
 
 globalStyle('h1, h2, h3', {
   fontFamily: "'Londrina Solid', cursive!important",
+  lineHeight: '1.125!important',
 })
 
 globalStyle('light-font', {
@@ -190,7 +191,7 @@ export const pageHeaderWrapper = recipe({
       width: '100%',
       margin: 'auto',
       pt: {
-        '@initial': 'x6',
+        '@initial': 'x4',
         '@1024': 'x0',
       },
     }),
@@ -228,5 +229,22 @@ export const daoHeaderWrapper = style([
   },
   atoms({
     pb: 'x6',
+  }),
+])
+
+export const collectionNameThumbDao = style([
+  {
+    gridTemplateColumns: '1fr',
+    '@media': {
+      [media.min1024]: {
+        gridTemplateColumns: '80px auto',
+      },
+    },
+  },
+  atoms({
+    gap: {
+      '@initial': 'x0',
+      '@1024': 'x4',
+    },
   }),
 ])

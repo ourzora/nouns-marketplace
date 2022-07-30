@@ -47,7 +47,7 @@ export function AuctionCountdown({
           className={[layout === 'sideBarBid' && sideBarUpperLabel, lightFont]}
           color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
           style={{ lineHeight: '1.15' }}
-          align="right"
+          align={{ '@initial': 'left', '@1024': 'right' }}
         >
           {!isEnded ? label : 'Status'}&nbsp;
         </Label>
@@ -56,7 +56,7 @@ export function AuctionCountdown({
         <Label
           size="md"
           style={{ lineHeight: '1.15' }}
-          align="right"
+          align={{ '@initial': 'left', '@1024': 'right' }}
           className={[layout === 'sideBarBid' && sideBarUpperLabel]}
         >
           {text}
@@ -65,7 +65,7 @@ export function AuctionCountdown({
         <Label
           size="md"
           style={{ lineHeight: '1.15' }}
-          align="right"
+          align={{ '@initial': 'left', '@1024': 'right' }}
           className={[layout === 'sideBarBid' && sideBarUpperLabel]}
         >
           {endedCopy}

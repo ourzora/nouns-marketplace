@@ -342,3 +342,20 @@ export const rowLoader = style([
     overflow: 'hidden',
   }),
 ])
+
+export const activeAuctionCardData = style([
+  {
+    gridTemplateColumns: '1fr',
+    '@media': {
+      [media.min1024]: {
+        gridTemplateColumns: 'repeat(3, 1fr)',
+      },
+    },
+  },
+  atoms({
+    gap: {
+      '@initial': 'x3',
+      '@1024': 'x3',
+    },
+  }),
+])
