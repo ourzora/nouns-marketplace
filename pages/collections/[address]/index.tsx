@@ -10,7 +10,7 @@ import {
   CollectionHeader,
 } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
-import { Stack, color } from '@zoralabs/zord'
+import { Stack, color, Separator } from '@zoralabs/zord'
 import { useCollection } from '@filter/hooks/useCollection'
 import { useWindowWidth } from 'hooks'
 import { HorizontalMenu, HorizontalMenuProps } from 'components'
@@ -91,16 +91,19 @@ const Collection = ({
         >
           <Stack>
             {dao ? (
-              <HorizontalMenu
-                items={items}
-                setId={setMenuSelection}
-                currentId={menuSelection}
-                useCustomHandler
-                style={{
-                  borderBottom: `1px solid ${color.black10}`,
-                  zIndex: 100,
-                }}
-              />
+              <>
+                {/*<HorizontalMenu
+                  items={items}
+                  setId={setMenuSelection}
+                  currentId={menuSelection}
+                  useCustomHandler
+                  style={{
+                    borderBottom: `1px solid ${color.black10}`,
+                    zIndex: 100,
+                  }}
+                />*/}
+                <Separator />
+              </>
             ) : (
               <CollectionActivityHeader />
             )}

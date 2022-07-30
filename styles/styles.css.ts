@@ -228,7 +228,10 @@ export const daoHeaderWrapper = style([
     },
   },
   atoms({
-    pb: 'x6',
+    pb: {
+      '@initial': 'x2',
+      '@1024': 'x6',
+    },
   }),
 ])
 
