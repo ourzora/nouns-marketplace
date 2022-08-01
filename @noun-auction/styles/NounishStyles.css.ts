@@ -11,14 +11,14 @@ export const auctionWrapperVariants = {
         gridAutoFlow: 'row',
         borderRadius: radii.phat,
         border: `2px solid ${color.black10}`,
-        height: '232px',
+        height: '244px',
         '@media': {
           [media.min1024]: {
             gridTemplateColumns: '250px repeat(2, 1fr) 1.25fr 155px',
-            height: '85px',
+            height: '68px',
             borderRadius: 0,
             border: 'none',
-            borderTop: `2px solid ${color.black10}`,
+            zIndex: '20',
           },
         },
       },
@@ -27,13 +27,17 @@ export const auctionWrapperVariants = {
           '@initial': 'x3',
           '@1024': 'x4',
         },
-        p: {
+        px: {
+          '@initial': 'x4',
+          '@1024': 'x0',
+        },
+        pb: {
           '@initial': 'x4',
           '@1024': 'x0',
         },
         pt: {
           '@initial': 'x4',
-          '@1024': 'x4',
+          '@1024': 'x0',
         },
       }),
     ],
@@ -72,6 +76,40 @@ export const auctionWrapper = recipe({
     layout: 'row',
   },
 })
+
+export const wrapperHover = style([
+  {
+    '@media': {
+      '(hover: hover)': {
+        overflow: 'visible',
+        zIndex: '10',
+        selectors: {
+          '&:after': {
+            content: '',
+            width: 'calc(100% + 30px)',
+            height: 'calc(100% + 20px)',
+            transform: 'translateX(-15px) translateY(-10px)',
+            backgroundColor: color.black5,
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            borderRadius: radii.phat,
+            zIndex: '1',
+            pointerEvents: 'none',
+            opacity: 0,
+            transition: 'opacity 0.2s ease-out',
+          },
+          '&:hover&:after': {
+            opacity: 0.5,
+          },
+        },
+      },
+    },
+  },
+  atoms({
+    pos: 'relative',
+  }),
+])
 
 export const responsiveRow = style([
   {
@@ -357,5 +395,45 @@ export const activeAuctionCardData = style([
       '@initial': 'x3',
       '@1024': 'x3',
     },
+  }),
+])
+
+export const activeAuctionRowWrapper = style([
+  {
+    '@media': {
+      [media.min1024]: {
+        gridTemplateColumns: '1fr 3.75fr 100px',
+        gridTemplateRows: '1fr',
+        borderRadius: 0,
+        border: 'none',
+      },
+      '(hover: hover)': {
+        overflow: 'visible',
+        zIndex: '10',
+        selectors: {
+          '&:after': {
+            content: '',
+            width: 'calc(100% + 30px)',
+            height: 'calc(100% + 20px)',
+            transform: 'translateX(-15px) translateY(-10px)',
+            backgroundColor: color.black5,
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            borderRadius: radii.phat,
+            zIndex: '1',
+            pointerEvents: 'none',
+            opacity: 0,
+            transition: 'opacity 0.2s ease-out',
+          },
+          '&:hover&:after': {
+            opacity: 0.5,
+          },
+        },
+      },
+    },
+  },
+  atoms({
+    pos: 'relative',
   }),
 ])

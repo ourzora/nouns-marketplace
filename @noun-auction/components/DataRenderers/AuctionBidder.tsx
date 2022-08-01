@@ -18,10 +18,11 @@ export function AuctionBidder({
   layoutDirection = 'row',
   showLabels,
   useAvatar = true,
+  useTxLink = false,
   ...props
 }: {
   useAvatar?: boolean
-} & SharedDataRendererProps) {
+} & SharedDataRendererProps & { useTxLink?: boolean }) {
   const { layout, auctionData } = useNounishAuctionProvider()
 
   const { data: ensName } = useEnsName({
@@ -38,8 +39,8 @@ export function AuctionBidder({
   return (
     <Flex
       direction={layoutDirection}
-      as="a"
-      href={buildTxLink}
+      as={useTxLink ? 'a' : 'div'}
+      href={useTxLink ? buildTxLink : ''}
       target="_blank"
       gap={layoutDirection === 'row' ? 'x2' : 'x0'}
       rel="noreferrer"
@@ -49,6 +50,7 @@ export function AuctionBidder({
         '@initial': `${layout === 'row' ? 'none' : 'flex'}`,
         '@1024': 'flex',
       }}
+      pointerEvents={useTxLink ? 'all' : 'none'}
       {...props}
     >
       {showLabels && (
