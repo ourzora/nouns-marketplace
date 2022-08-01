@@ -1,4 +1,4 @@
-import { Icon, Flex, Box } from '.yalc/@zoralabs/zord/dist'
+import { Icon, Flex, Box } from '@zoralabs/zord'
 import { rowLoader } from '@noun-auction/styles/NounishStyles.css'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 
