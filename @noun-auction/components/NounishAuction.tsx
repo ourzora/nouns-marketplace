@@ -1,4 +1,4 @@
-import { Accordion, Separator, Stack, BoxProps, Grid, Icon } from '@zoralabs/zord'
+import { Accordion, Separator, Stack, BoxProps, Grid, Box } from '@zoralabs/zord'
 import { NounishAuctionProvider } from '@noun-auction/providers'
 import { AuctionHistory } from './AuctionHistory'
 import { AuctionDebugger } from './Debuggers'
@@ -9,6 +9,7 @@ import {
   auctionWrapperVariants,
   bidHistoryWrapper,
   debugWrapper,
+  wrapperHover,
 } from '@noun-auction/styles/NounishStyles.css'
 import { DaoConfigProps } from '@noun-auction/typings'
 
@@ -58,44 +59,45 @@ export function NounishAuction({
   ...props
 }: NounishAuctionProps) {
   return (
-    <Grid
-      className={[
-        'nounish-auction__auction-data-wrapper',
-        `nounish-auction__${layout}`,
-        auctionWrapper({ layout: layout }),
-      ]}
-      {...props}
-    >
-      <NounishAuctionProvider daoConfig={daoConfig} tokenId={tokenId} layout={layout}>
-        {showAuctionRow && (
-          <>
-            <AuctionRow
-              auctionDataComponent={<div>AUCTION DATA</div>}
-              activeAuctionComponent={
-                <ActiveAuctionRow
-                  routePrefix={routePrefix}
-                  useModal={!useInlineBid}
-                  showLabels={showLabels}
-                  showTopBid={showTopBid}
-                />
-              }
-            />
-          </>
-        )}
-        {showBidHistory && (
-          <AuctionHistory className={bidHistoryWrapper} mb="x2">
-            {showAuctionRow && <Separator mt="x4" mb="x3" />}
-          </AuctionHistory>
-        )}
-        {debug && (
-          <Stack className={debugWrapper} py="x2" mb="x2">
-            <Separator mb="x4" />
-            <Accordion label="Api Data">
-              <AuctionDebugger />
-            </Accordion>
-          </Stack>
-        )}
-      </NounishAuctionProvider>
-    </Grid>
+    <Box className={layout === 'row' && wrapperHover} {...props}>
+      <Grid
+        className={[
+          'nounish-auction__auction-data-wrapper',
+          `nounish-auction__${layout}`,
+          auctionWrapper({ layout: layout }),
+        ]}
+      >
+        <NounishAuctionProvider daoConfig={daoConfig} tokenId={tokenId} layout={layout}>
+          {showAuctionRow && (
+            <>
+              <AuctionRow
+                auctionDataComponent={<div>AUCTION DATA</div>}
+                activeAuctionComponent={
+                  <ActiveAuctionRow
+                    routePrefix={routePrefix}
+                    useModal={!useInlineBid}
+                    showLabels={showLabels}
+                    showTopBid={showTopBid}
+                  />
+                }
+              />
+            </>
+          )}
+          {showBidHistory && (
+            <AuctionHistory className={bidHistoryWrapper} mb="x2">
+              {showAuctionRow && <Separator mt="x4" mb="x3" />}
+            </AuctionHistory>
+          )}
+          {debug && (
+            <Stack className={debugWrapper} py="x2" mb="x2">
+              <Separator mb="x4" />
+              <Accordion label="Api Data">
+                <AuctionDebugger />
+              </Accordion>
+            </Stack>
+          )}
+        </NounishAuctionProvider>
+      </Grid>
+    </Box>
   )
 }

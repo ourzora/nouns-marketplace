@@ -1,4 +1,4 @@
-import { Stack, Flex, Heading, Label, Box, Button, Icon } from '@zoralabs/zord'
+import { Stack, Flex, Heading, Label, Box, Button, BoxProps } from '@zoralabs/zord'
 import { useNFT } from '@zoralabs/nft-hooks'
 import NextLink from 'next/link'
 import { returnDao } from 'constants/collection-addresses'
@@ -8,14 +8,12 @@ import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
 // @shared (or zord)
 import { lightFont } from 'styles/styles.css'
 
-export function RPCTokenInfo({
-  contractAddress,
-  tokenId,
-  ...props
-}: {
+export interface RPCTokenInfoProps extends BoxProps {
   contractAddress: string | undefined
   tokenId: string | undefined
-}) {
+}
+
+export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInfoProps) {
   if (!tokenId || !contractAddress) return null
 
   const dao = returnDao(contractAddress)
