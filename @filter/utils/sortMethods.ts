@@ -39,9 +39,6 @@ export function sortMethodToSortParams(
   sortMethod: SortMethodType,
   marketStatus: MarketStatusFilter
 ): TokenSortInput | undefined {
-  // @BJ Todo: reconcile w/ Dain, newest + oldest both has same SortDirection
-  // --> also couldn't sort by mint date without a market being defined.
-
   const sortNewest = {
     sortDirection: SortDirection.Desc,
     sortKey: TokenSortKey.Minted,
