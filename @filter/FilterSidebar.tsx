@@ -65,67 +65,61 @@ export function FilterSidebar() {
   const { isLarge } = useWindowWidth()
 
   const sidebarComposition = (
-    <>
-      <Stack
-        gap="x2"
-        w="100%"
-        pb="x8"
-        // pr={{
-        //   '@initial': 'x4',
-        //   '@1024': 'x4',
-        // }}
-        position="absolute"
-        className={[filterSidebar, 'zora-filterSidebar']}
-        ref={parentRef}
-      >
-        <Box position="relative" ref={childRef}>
-          {useMarketStatus && (
-            <FilterOptions
-              label="Market Status"
-              options={marketStatusOptions}
-              selectedOption={filters.marketStatus}
-              setOption={setMarketStatus}
-              showCheckbox
-            />
-          )}
-          {useOwnerStatus && ownerAddress && (
-            <FilterOptions
-              label="Owner Status"
-              options={ownerStatusOptions}
-              selectedOption={filters.ownerStatus[0]}
-              setOption={setOwnerStatus}
-              showCheckbox
-            />
-          )}
-          {useMediaTypes && (
-            <FilterOptions
-              label="Media Type"
-              options={mediaTypeOptions}
-              selectedOption={filters.mediaType}
-              setOption={setMediaType}
-              showCheckbox
-            />
-          )}
-          {ownerAddress && useFilterOwnerCollections && <FilterOwnerCollections />}
-          {usePriceRange && <FilterPriceRange />}
-          {contractAddress && useCollectionProperties && (
-            <FilterProperties collectionAddress={contractAddress} />
-          )}
-          {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
-          {useSidebarClearButton ? (
-            <ClearFilters
-              mt="x2"
-              borderRadius="curved"
-              w="100%"
-              display={{
-                '@initial': 'none',
-                '@1024': 'block',
-              }}
-            />
-          ) : null}
-        </Box>
-      </Stack>
-    </>
+    <Stack
+      gap="x2"
+      w="100%"
+      pb="x8"
+      position="absolute"
+      className={[filterSidebar, 'zora-filterSidebar']}
+      ref={parentRef}
+    >
+      <Box position="relative" ref={childRef}>
+        {useMarketStatus && (
+          <FilterOptions
+            label="Market Status"
+            options={marketStatusOptions}
+            selectedOption={filters.marketStatus}
+            setOption={setMarketStatus}
+            showCheckbox
+          />
+        )}
+        {useOwnerStatus && ownerAddress && (
+          <FilterOptions
+            label="Owner Status"
+            options={ownerStatusOptions}
+            selectedOption={filters.ownerStatus[0]}
+            setOption={setOwnerStatus}
+            showCheckbox
+          />
+        )}
+        {useMediaTypes && (
+          <FilterOptions
+            label="Media Type"
+            options={mediaTypeOptions}
+            selectedOption={filters.mediaType}
+            setOption={setMediaType}
+            showCheckbox
+          />
+        )}
+        {ownerAddress && useFilterOwnerCollections && <FilterOwnerCollections />}
+        {usePriceRange && <FilterPriceRange />}
+        {contractAddress && useCollectionProperties && (
+          <FilterProperties collectionAddress={contractAddress} />
+        )}
+        {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
+        {useSidebarClearButton ? (
+          <ClearFilters
+            mt="x2"
+            borderRadius="curved"
+            w="100%"
+            display={{
+              '@initial': 'none',
+              '@1024': 'block',
+            }}
+          />
+        ) : null}
+      </Box>
+    </Stack>
   )
 
   const sideBarMobile = (
