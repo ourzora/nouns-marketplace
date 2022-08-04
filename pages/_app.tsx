@@ -11,7 +11,8 @@ import 'styles/styles.css'
 
 import * as gtag from 'lib/gtag'
 import { createClient, chain, configureChains, WagmiConfig } from 'wagmi'
-import { infuraProvider } from 'wagmi/providers/infura'
+import { alchemyProvider } from 'wagmi/providers/alchemy'
+import { publicProvider } from 'wagmi/providers/public'
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 import { ModalContextProvider } from '@modal'
@@ -27,11 +28,11 @@ import NextNProgress from 'nextjs-progressbar'
 import { HeaderComposition } from 'compositions/Header'
 import { FooterComposition } from 'compositions/Footer'
 
-const infuraId = process.env.NEXT_PUBLIC_INFURA_ID
+const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 
 const { chains, provider } = configureChains(
   [chain.mainnet],
-  [infuraProvider({ infuraId })]
+  [alchemyProvider({ alchemyId: alchemyKey }), publicProvider()]
 )
 
 const { connectors } = getDefaultWallets({
