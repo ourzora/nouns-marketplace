@@ -52,6 +52,7 @@ export interface TokenQueryReturnTypes extends FilterContextInputProps {
   isValidating: boolean
   isReachingEnd: boolean | undefined
   isEmpty: boolean
+  hasActiveMarkets: boolean
   handleLoadMore: () => void
 }
 

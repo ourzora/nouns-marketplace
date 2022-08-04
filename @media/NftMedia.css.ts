@@ -32,10 +32,10 @@ export const nftGridWrapper = recipe({
       pos: 'relative',
       margin: 'auto',
       gap: 'x4',
-      px: {
-        '@initial': 'x4',
-        '@1024': 'x4',
-      },
+      // px: {
+      //   '@initial': 'x4',
+      //   '@1024': 'x4',
+      // },
     }),
   ]),
   defaultVariants: {

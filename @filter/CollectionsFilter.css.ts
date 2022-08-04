@@ -8,7 +8,7 @@ export const borderStyle = `2px solid ${vars.color.border.tertiary}`
 
 export const homepageGrid = style({
   '@media': {
-    'screen and (min-width: 768px)': {
+    [media.min768]: {
       gridTemplateColumns: `1fr`,
     },
   },
@@ -41,17 +41,13 @@ export const filtersButton = style([
   }),
 ])
 
-export const activityButton = style([
-  {
-    gap: 12,
-    whiteSpace: 'nowrap',
-  },
-  atoms({
-    flexDirection: 'row-reverse',
-    pl: 'x4',
-    pr: 'x3',
-  }),
-])
+export const activityButton = atoms({
+  gap: 'x3',
+  whiteSpace: 'nowrap',
+  flexDirection: 'row-reverse',
+  pl: 'x4',
+  pr: 'x3',
+})
 
 export const filterWrapper = style({
   top: `var(--filter-offset-desktop)`,
@@ -96,9 +92,9 @@ export const filterHeader = style([
   },
   atoms({
     position: 'sticky',
-    justifyContent: 'flex-start',
+    justifyContent: { '@initial': 'space-between', '@1024': 'flex-start' },
     alignItems: 'center',
-    px: 'x4',
+    // px: 'x4',
     py: {
       '@initial': 'x4',
       '@1024': 'x0',
@@ -134,12 +130,12 @@ export const filterSidebar = style([
       },
     },
   },
-  atoms({
-    pl: {
-      '@initial': 'x0',
-      '@1024': 'x4',
-    },
-  }),
+  // atoms({
+  //   pl: {
+  //     '@initial': 'x0',
+  //     '@1024': 'x4',
+  //   },
+  // }),
 ])
 
 export const sideBarSeparator = style({

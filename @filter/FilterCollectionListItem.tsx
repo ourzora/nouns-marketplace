@@ -7,7 +7,7 @@ import {
 } from './CollectionsFilter.css'
 import { FilterProperties } from './FilterProperties'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
-import { Button, Flex, Stack, Text, Box } from '@zoralabs/zord'
+import { mixins, Button, Flex, Stack, Text, Box } from '@zoralabs/zord'
 import { useMemo } from 'react'
 import { shortenAddress } from '@shared/utils/format'
 import { numberFormatter } from 'utils/numbers'
@@ -23,6 +23,7 @@ export function FilterCollectionListItem({
   count?: number
 }) {
   const {
+    useCollectionProperties,
     filterStore: {
       setTokenContracts,
       filters: { tokenContracts },
@@ -47,16 +48,20 @@ export function FilterCollectionListItem({
           pb="x1"
           w="100%"
         >
-          <Flex gap="x3" className={collectionBlockContent}>
+          <Flex w="100%" gap="x3" className={collectionBlockContent}>
             <Box>
               <Zorb size={48} address={tokenAddress} />
             </Box>
             <Flex
               direction="column"
-              className={[collectionBlockMeta, 'zora-collectionListMeta']}
+              className={[
+                collectionBlockMeta,
+                'zora-collectionListMeta',
+                mixins({ ellipsis: true }),
+              ]}
             >
-              <Box overflowX="hidden">
-                <Text style={{ whiteSpace: 'nowrap' }} variant="label-sm">
+              <Box className={mixins({ ellipsis: true })}>
+                <Text variant="label-sm" className={mixins({ ellipsis: true })}>
                   {tokenName || shortenAddress(tokenAddress)}
                 </Text>
               </Box>
@@ -74,7 +79,9 @@ export function FilterCollectionListItem({
           )}
         </Flex>
       </Button>
-      {isSelected && <FilterProperties collectionAddress={tokenAddress} />}
+      {isSelected && useCollectionProperties && (
+        <FilterProperties collectionAddress={tokenAddress} />
+      )}
     </Stack>
   )
 }

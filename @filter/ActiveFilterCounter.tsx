@@ -16,7 +16,11 @@ export function ActiveFilterCounter() {
         align="center"
         justify="center"
       >
-        <Text variant="label-sm" color="primary" style={{ paddingTop: 0 }}>
+        <Text
+          variant="label-sm"
+          color="primary"
+          //  style={{ paddingTop: 0 }} // This should be okay w/o explicit padding because zord now has a padding/margin reset
+        >
           {activeFilterCount}
         </Text>
       </Flex>

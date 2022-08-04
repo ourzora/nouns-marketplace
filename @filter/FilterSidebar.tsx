@@ -70,10 +70,10 @@ export function FilterSidebar() {
         gap="x2"
         w="100%"
         pb="x8"
-        pr={{
-          '@initial': 'x4',
-          '@1024': 'x4',
-        }}
+        // pr={{
+        //   '@initial': 'x4',
+        //   '@1024': 'x4',
+        // }}
         position="absolute"
         className={[filterSidebar, 'zora-filterSidebar']}
         ref={parentRef}
@@ -108,9 +108,9 @@ export function FilterSidebar() {
           )}
           {ownerAddress && useFilterOwnerCollections && <FilterOwnerCollections />}
           {usePriceRange && <FilterPriceRange />}
-          {contractAddress && useCollectionProperties ? (
+          {contractAddress && useCollectionProperties && (
             <FilterProperties collectionAddress={contractAddress} />
-          ) : null}
+          )}
           {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
           {useSidebarClearButton ? (
             <ClearFilters

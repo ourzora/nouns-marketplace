@@ -25,7 +25,7 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
           className={!useCollectionProperties?.hideBorder && filterOptionsWrapper}
         >
           <Accordion label={property.traitType ? property.traitType : ''}>
-            <Stack pb="x4" gap="x2">
+            <Stack pb="x4" gap="x5">
               {property.valueMetrics.map((valueMetric) => (
                 <FilterPropertySelect
                   key={valueMetric.value}
