@@ -94,7 +94,6 @@ export const filterHeader = style([
     position: 'sticky',
     justifyContent: { '@initial': 'space-between', '@1024': 'flex-start' },
     alignItems: 'center',
-    // px: 'x4',
     py: {
       '@initial': 'x4',
       '@1024': 'x0',
