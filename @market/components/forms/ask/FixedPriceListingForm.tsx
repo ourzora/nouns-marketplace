@@ -52,6 +52,7 @@ export function FixedPriceListingForm({
       values: FixedPriceListingFormState,
       { setSubmitting }: FormikHelpers<FixedPriceListingFormState>
     ) => {
+      console.log(values)
       try {
         if (!address || !AsksV11) {
           throw new Error('V3AskContract is not ready, please try again.')
@@ -107,6 +108,7 @@ export function FixedPriceListingForm({
             txStatus={txStatus}
             txInProgress={txInProgress}
             disabled={!isValid}
+            type="submit"
           >
             List
           </TransactionSubmitButton>
