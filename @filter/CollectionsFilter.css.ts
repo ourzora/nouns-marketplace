@@ -129,12 +129,6 @@ export const filterSidebar = style([
       },
     },
   },
-  // atoms({
-  //   pl: {
-  //     '@initial': 'x0',
-  //     '@1024': 'x4',
-  //   },
-  // }),
 ])
 
 export const sideBarSeparator = style({
