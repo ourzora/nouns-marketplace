@@ -26,7 +26,7 @@ export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[]
   } = useCollectionFilters()
 
   return (
-    <Stack>
+    <Stack px="x4">
       {!showFilters && useSidebarFilter && (
         <FilterHeader>
           <>
@@ -38,6 +38,7 @@ export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[]
       <Grid
         w="100%"
         position="sticky"
+        gap="x8"
         className={[
           filterWrapperContainer,
           'zora-collectionsFilterWrapperContainer',

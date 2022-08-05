@@ -39,13 +39,33 @@ export function sortMethodToSortParams(
   sortMethod: SortMethodType,
   marketStatus: MarketStatusFilter
 ): TokenSortInput | undefined {
+  const sortNewest = {
+    sortDirection: SortDirection.Desc,
+    sortKey: TokenSortKey.Minted,
+    sortAxis: marketStatusToSortAxis(marketStatus),
+  }
+
+  const sortOldest = {
+    sortDirection: SortDirection.Asc,
+    sortKey: TokenSortKey.Minted,
+    sortAxis: marketStatusToSortAxis(marketStatus),
+  }
+
   if (!marketStatus) {
-    return {
-      sortDirection: SortDirection.Desc,
-      sortKey: TokenSortKey.None,
-      sortAxis: null,
+    switch (sortMethod) {
+      case 'newest':
+        return sortNewest
+      case 'oldest':
+        return sortOldest
+      default:
+        return {
+          sortDirection: SortDirection.Desc,
+          sortKey: TokenSortKey.None,
+          sortAxis: null,
+        }
     }
   }
+
   switch (sortMethod) {
     case 'highest-price':
       return {
@@ -66,17 +86,9 @@ export function sortMethodToSortParams(
         sortAxis: marketStatusToSortAxis(marketStatus),
       }
     case 'newest':
-      return {
-        sortDirection: SortDirection.Asc,
-        sortKey: TokenSortKey.Minted,
-        sortAxis: marketStatusToSortAxis(marketStatus),
-      }
+      return sortNewest
     case 'oldest':
-      return {
-        sortDirection: SortDirection.Asc,
-        sortKey: TokenSortKey.Minted,
-        sortAxis: marketStatusToSortAxis(marketStatus),
-      }
+      return sortOldest
   }
 }
 

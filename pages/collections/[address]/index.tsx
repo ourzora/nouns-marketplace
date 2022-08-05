@@ -72,6 +72,7 @@ const Collection = ({
           useSidebarClearButton
           filtersVisible={isLarge ? true : false}
           contractAddress={contractAddress}
+          useSortDropdown
           // initialPage={initialPage}
           // useMarketStatus
           useCollectionProperties={{

@@ -1,7 +1,7 @@
 import { filterPropertySelect } from './CollectionsFilter.css'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 import { CollectionAttributeValue } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Button, Checkbox } from '@zoralabs/zord'
+import { Button, Checkbox, Paragraph } from '@zoralabs/zord'
 import { useCallback, useMemo } from 'react'
 
 export function FilterPropertySelect({
@@ -28,15 +28,11 @@ export function FilterPropertySelect({
   }, [setCollectionAttributes, traitType, valueMetric.value])
 
   return (
-    <Button
-      variant="unset"
-      display="flex"
-      w="100%"
-      className={filterPropertySelect}
-      onClick={setValue}
-    >
+    <Button variant="unset" w="100%" className={filterPropertySelect} onClick={setValue}>
       <Checkbox name={valueMetric.value} id={valueMetric.value} checked={isSelected} />
-      {valueMetric.value}
+      <Paragraph ml="x2" size="sm">
+        {valueMetric.value}
+      </Paragraph>
     </Button>
   )
 }

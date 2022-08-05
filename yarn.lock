@@ -1833,12 +1833,13 @@
     graphql-tag "^2.12.6"
     tslib "^2.2.0"
 
-"@zoralabs/zord@^0.0.2-alpha":
-  version "0.0.2-alpha"
-  resolved "https://registry.yarnpkg.com/@zoralabs/zord/-/zord-0.0.2-alpha.tgz#d8a14d67c9a780829f44c6799f2d3fa50d2b3648"
-  integrity sha512-aGb2ZjFU+goMR/nxb4k4HyFEOwgtrR3u6W6yhf+A80jBlvOTy9LD14lzLdEh7uaYpLm/y/TWNZNuI6/yqJNsQg==
+"@zoralabs/zord@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@zoralabs/zord/-/zord-0.1.0.tgz#d317c2eb9172145cbb740cdfd13c0e8fee5974f7"
+  integrity sha512-4F1vYTYwogdKBmmvxIXH4ru3Rj3hz4kLDqXLreRWbZJ3ACE+fMZA4R7YKE9o368qcJ2DfnOGJxrfQENnug0m6Q==
   dependencies:
     "@radix-ui/react-switch" "^0.1.5"
+    uuid "^8.3.2"
 
 abbrev@1:
   version "1.1.1"
@@ -7639,6 +7640,11 @@ uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
+
+uuid@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 v8-compile-cache@^2.0.3:
   version "2.3.0"

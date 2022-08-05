@@ -1,4 +1,4 @@
-import { useCallback, Dispatch, SetStateAction } from 'react'
+import { useCallback, MouseEvent, Dispatch, SetStateAction } from 'react'
 import { Flex, FlexProps, Button, Box } from '@zoralabs/zord'
 import { horizontalMenuButton } from './HorizontalMenu.css'
 import { lightFont } from 'styles/styles.css'
@@ -27,6 +27,7 @@ export function HorizontalMenu({
       e.preventDefault()
       !useCustomHandler && setId ? setId(category) : console.log(e)
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setId]
   )
 
@@ -38,7 +39,9 @@ export function HorizontalMenu({
           variant="unset"
           className={[currentId === item.id && 'active', horizontalMenuButton]}
           onClick={
-            !useCustomHandler ? (e: MouseEvent) => setCategory(e, item.id) : item.handler
+            !useCustomHandler
+              ? (e: MouseEvent<HTMLButtonElement>) => setCategory(e, item.id)
+              : item.handler
           }
         >
           <Flex>

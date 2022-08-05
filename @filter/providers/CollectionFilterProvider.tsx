@@ -1,5 +1,5 @@
 import { initialFilterStore, useFilterStore } from '@filter/state/filterStore'
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useMemo } from 'react'
 import { useTokensQuery } from '@filter/hooks/useTokensQuery'
 import {
   sortMethodToSortParams,
@@ -7,6 +7,7 @@ import {
   priceRangeToQueryParams,
   marketTypeToFilterParams,
 } from '@filter'
+import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { stringDefaults, themeDefaults } from '@filter/constants'
 import {
   CollectionFilterContextTypes,
@@ -20,6 +21,7 @@ const CollectionFilterContext = createContext<CollectionFilterContextTypes>({
   isReachingEnd: false,
   isEmpty: true,
   handleLoadMore: () => {},
+  hasActiveMarkets: false,
   contractWhiteList: undefined,
   contractAddress: undefined,
   ownerAddress: undefined,
@@ -87,6 +89,17 @@ export function CollectionFilterProvider({
     },
   })
 
+  // - Allows us to adjust the options available to users when sorting (eg. no sorting by price when there are no prices!)
+  const tokensHaveActiveMarkets = useMemo(
+    () =>
+      items.filter((token) =>
+        token.markets?.map((mkt) =>
+          [MARKET_INFO_STATUSES.ACTIVE, MARKET_INFO_STATUSES.PENDING].includes(mkt.status)
+        )
+      ).length > 0,
+    [items]
+  )
+
   return (
     <CollectionFilterContext.Provider
       value={{
@@ -98,6 +111,7 @@ export function CollectionFilterProvider({
         handleLoadMore,
         contractAddress,
         ownerAddress,
+        hasActiveMarkets: tokensHaveActiveMarkets,
         useMarketStatus,
         useOwnerStatus,
         useMediaTypes,

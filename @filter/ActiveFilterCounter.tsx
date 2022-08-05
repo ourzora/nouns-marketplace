@@ -16,7 +16,7 @@ export function ActiveFilterCounter() {
         align="center"
         justify="center"
       >
-        <Text variant="label-sm" color="primary" style={{ paddingTop: 0 }}>
+        <Text variant="label-sm" color="primary">
           {activeFilterCount}
         </Text>
       </Flex>
