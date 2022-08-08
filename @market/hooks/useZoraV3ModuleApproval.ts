@@ -3,6 +3,10 @@ import { useAccount } from 'wagmi'
 import { useContractContext } from './useContractContext'
 import useSWR from 'swr'
 
+/**
+ * Hook to fetch approval status for zora V3 modules
+ */
+
 export function useZoraV3ModuleApproval(address: string) {
   const { address: account } = useAccount()
   const { ModuleManager, isReadOnly } = useContractContext()

@@ -1,6 +1,6 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
-import { Stack, Button, Heading, Paragraph } from '@zoralabs/zord'
+import { Stack, Button, Paragraph } from '@zoralabs/zord'
 import {
   ERC721ContractApprovalForm,
   FixedPriceListingForm,
@@ -14,7 +14,7 @@ import {
   ASKS_V1_APPROVAL_COPY,
   ASKS_V1_LISTED_COPY,
 } from '@market/wizards/common'
-import { useZoraERC721Approvals, useZoraV3ModuleApprovals } from '@market/hooks'
+import { useZoraERC721Approvals, useZoraV3ModuleApproval } from '@market/hooks'
 import { ASKS_V11_ADDRESS, ERC721_TRANSFER_HELPER_ADDRESS } from '@market/utils'
 import { NFTObject } from '@zoralabs/nft-hooks'
 
@@ -38,7 +38,7 @@ export function List({
   previewURL?: string
   nftData: NFTObject
 }) {
-  const { asksV1 } = useZoraV3ModuleApprovals()
+  const { approved: asksV1 } = useZoraV3ModuleApproval(ASKS_V11_ADDRESS)
   const { transferHelper } = useZoraERC721Approvals(tokenAddress)
 
   const [wizardStep, setWizardStep] = useState<ListNFTStep>('SelectType')
