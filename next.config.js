@@ -12,6 +12,24 @@ const nextConfig = {
       'zora-dev.mypinata.cloud',
     ],
   },
+
+  webpack: (config, options) => {
+    config.module.rules.push({
+      test: /\.(ts)?$/,
+      use: [
+        {
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+            experimentalWatchApi: true,
+            onlyCompileBundledFiles: true,
+          },
+        },
+      ],
+    })
+
+    return config
+  },
 }
 
 module.exports = withVanillaExtract(nextConfig)
