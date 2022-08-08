@@ -27,7 +27,7 @@ globalStyle('*', {
 })
 
 globalStyle('h1, h2, h3', {
-  fontFamily: "'Londrina Solid', cursive!important",
+  fontFamily: "'Londrina Solid', Verdana, Geneva, sans-serif!important",
   lineHeight: '1.125!important',
 })
 
@@ -78,6 +78,9 @@ export const pageWrapper = style([
       },
     },
   },
+  atoms({
+    justifyContent: 'flex-start',
+  }),
 ])
 
 export const maxWidthSm = style([
@@ -142,7 +145,7 @@ export const clickAnimation = style({
 })
 
 /* PAGE HEADER */
-export const pageHeadline = [
+export const pageHeadline = style([
   {
     fontWeight: fontWeight.display,
     lineHeight: '40px',
@@ -158,27 +161,7 @@ export const pageHeadline = [
       '@1024': typography.size[1],
     },
   }),
-]
-
-export const pageHeaderVariants = {
-  variant: {
-    topBorder: [
-      {
-        '@media': {
-          [media.min1024]: {
-            borderTop: 0,
-          },
-        },
-      },
-      atoms({
-        pt: {
-          '@initial': 'x6',
-          '@1024': 'x0',
-        },
-      }),
-    ],
-  },
-}
+])
 
 export const pageHeaderWrapper = style([
   {
@@ -186,13 +169,14 @@ export const pageHeaderWrapper = style([
   },
   atoms({
     width: '100%',
-    margin: 'auto',
+    mx: 'auto',
+    my: 'x0',
+    px: 'x4',
+    gap: 'x3',
     pt: {
       '@initial': 'x8',
       '@1024': 'x0',
     },
-    px: 'x4',
-    gap: 'x3',
     mb: {
       '@initial': 'x0',
       '@1024': 'x8',
