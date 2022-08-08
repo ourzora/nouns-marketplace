@@ -9,12 +9,7 @@ const Home = () => {
   return (
     <PageWrapper direction="column" gap="x6">
       <Seo />
-      <PageHeader
-        headline="The Nouns Marketplace"
-        copy={COLLECTIONS_INDEX_COPY}
-        px="x4"
-        gap="x4"
-      />
+      <PageHeader headline="The Nouns Marketplace" />
       <Stack px="x4">
         <DaoTable />
         <CollectionRanking />

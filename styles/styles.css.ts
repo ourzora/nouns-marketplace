@@ -164,7 +164,6 @@ export const pageHeaderVariants = {
   variant: {
     topBorder: [
       {
-        // borderTop: `2px solid ${color.black10}`,
         '@media': {
           [media.min1024]: {
             borderTop: 0,
@@ -181,22 +180,25 @@ export const pageHeaderVariants = {
   },
 }
 
-export const pageHeaderWrapper = recipe({
-  variants: pageHeaderVariants,
-  base: style([
-    {
-      maxWidth: MAX_WIDTH.SM,
+export const pageHeaderWrapper = style([
+  {
+    maxWidth: MAX_WIDTH.SM,
+  },
+  atoms({
+    width: '100%',
+    margin: 'auto',
+    pt: {
+      '@initial': 'x8',
+      '@1024': 'x0',
     },
-    atoms({
-      width: '100%',
-      margin: 'auto',
-      pt: {
-        '@initial': 'x4',
-        '@1024': 'x0',
-      },
-    }),
-  ]),
-})
+    px: 'x4',
+    gap: 'x3',
+    mb: {
+      '@initial': 'x0',
+      '@1024': 'x8',
+    },
+  }),
+])
 
 export const hideMobile = style({
   '@media': {
@@ -213,7 +215,6 @@ export const collectionHeaderWrapper = style([
   atoms({
     w: '100vw',
     overflowX: 'hidden',
-    // px: 'x4',
     m: 'auto',
   }),
 ])
