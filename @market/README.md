@@ -31,4 +31,3 @@ Peer Dependencies
 ## Hooks / Providers
 
 - useRelevantMarkets
-- useZoraV3Context / ZoraV3Provider

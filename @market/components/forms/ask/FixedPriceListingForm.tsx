@@ -1,11 +1,9 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { ContractTransaction } from '@ethersproject/contracts'
 import { BigNumber } from 'ethers'
 import { Flex, Label } from '@zoralabs/zord'
-
 import { TransactionSubmitButton, PrintError, BigNumberField } from '@market/components'
-
 import { useAuth, useContractContext, useContractTransaction } from '@market/hooks'
 
 import {
@@ -33,8 +31,6 @@ const initialValues: FixedPriceListingFormState = {
   amount: BigNumber.from(0),
   findersFeeBps: 0,
 }
-
-// TODO - add royalty
 
 export function FixedPriceListingForm({
   tokenId,

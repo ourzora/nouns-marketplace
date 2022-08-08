@@ -1,20 +1,21 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { Paragraph, Text, Box, Separator, Flex } from '@zoralabs/zord'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useAccount } from 'wagmi'
 import { AddressZero } from '@ethersproject/constants'
+import { Paragraph, Text, Box, Separator, Flex } from '@zoralabs/zord'
 import {
   TransactionSubmitButton,
   ContractInteractionStatus,
   NftInfo,
   PrintError,
 } from '@market/components'
-
-import { useContractTransaction } from '../../hooks/useContractTransaction'
-import { useCurrencyBalance } from '../../hooks/useCurrencyBalance'
-import { useERC20TokenAllowance } from '../../hooks/useERC20TokenAllowance'
-import { useZoraV3Context } from '../../hooks/useZoraV3Context'
+import {
+  useContractTransaction,
+  useCurrencyBalance,
+  useERC20TokenAllowance,
+  useContractContext,
+} from '@market/hooks'
 import { ERC20_TRANSFER_HELPER_ADDRESS } from '../../utils/addresses'
 import { isAddressMatch } from '../../utils/validators'
-import { useAccount } from 'wagmi'
 
 type FillAskProps = {
   tokenId: string
@@ -41,7 +42,7 @@ export function FillAsk({
   cancelButton,
 }: FillAskProps) {
   const { address } = useAccount()
-  const { AsksV11 } = useZoraV3Context()
+  const { AsksV11 } = useContractContext()
   const { tx, txStatus, handleTx, txInProgress } = useContractTransaction()
 
   const [balance, sufficientBalance, refetchBalance] = useCurrencyBalance(
