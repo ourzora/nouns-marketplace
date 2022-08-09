@@ -33,6 +33,9 @@ export const VULNERABLE_ASKS_V1_ADDRESS =
 export const ASKS_V11_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? mainnetV3.AsksV1_1 : rinkebyV3.AsksV1_1
 
+export const PRIVATE_ASKS_ADDRESS =
+  NETWORK_CHAIN_ID === 1 ? mainnetV3.AsksPrivateEth : 'TODO:ADDME_FOR_GORLI'
+
 export const ERC721_TRANSFER_HELPER_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? mainnetV3.ERC721TransferHelper : rinkebyV3.ERC721TransferHelper
 

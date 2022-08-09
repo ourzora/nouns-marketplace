@@ -23,7 +23,9 @@
     "**/*.ts",
     "**/*.tsx",
     "@noun-auction/data/nounishAuctionQueryiests",
-    "@noun-auction/abis/lil-nouns-abi.js"
+    "@noun-auction/abis/lil-nouns-abi.js",
+    "node_modules/@zoralabs/v3/dist/typechain/*.ts",
+    "node_modules/@ethersproject/providers/*.ts"
   ],
   "exclude": []
 }
