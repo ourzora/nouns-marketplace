@@ -1,4 +1,5 @@
 export type ListingType = 'FIXED_PRICE' | 'RESERVE_AUCTION'
+
 export const AUCTION_HOUSE_APPROVAL_COPY =
   'To list your NFTs using the ZORA Auction House you first need to approve permission for the protocol to use your NFTs'
 export const TRANSFER_HELPER_APPROVAL_COPY =

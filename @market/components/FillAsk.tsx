@@ -14,8 +14,8 @@ import {
   useERC20TokenAllowance,
   useContractContext,
 } from '@market/hooks'
-import { ERC20_TRANSFER_HELPER_ADDRESS } from '../../utils/addresses'
-import { isAddressMatch } from '../../utils/validators'
+import { ERC20_TRANSFER_HELPER_ADDRESS } from '../utils/addresses'
+import { isAddressMatch } from '../utils/validators'
 
 type FillAskProps = {
   tokenId: string

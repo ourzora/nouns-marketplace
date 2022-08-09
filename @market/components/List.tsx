@@ -13,7 +13,7 @@ import {
   TRANSFER_HELPER_APPROVAL_COPY,
   ASKS_V1_APPROVAL_COPY,
   ASKS_V1_LISTED_COPY,
-} from '@market/wizards/common'
+} from '@market/constants/common'
 import { useZoraERC721Approvals, useZoraV3ModuleApproval } from '@market/hooks'
 import { ASKS_V11_ADDRESS, ERC721_TRANSFER_HELPER_ADDRESS } from '@market/utils'
 import { NFTObject } from '@zoralabs/nft-hooks'

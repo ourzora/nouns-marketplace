@@ -1,15 +1,12 @@
-import { Text, Box, Flex, Stack, FlexProps } from '@zoralabs/zord'
-import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { useRelevantMarket } from '../../hooks/useRelevantMarket'
-import { ModalComposition } from '@modal'
-import { FillAsk } from '../../wizards/FillAsk'
-import { lightFont } from '../MarketComponents.css'
+import { Text, Box, Flex, Stack, FlexProps, Button } from '@zoralabs/zord'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { NFTOwner } from '../NFTOwner'
-import { CardMarketTrigger } from './CardMarketTrigger'
+import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
+import { useRelevantMarket } from '@market/hooks'
+import { FillAsk, NFTOwner } from '@market/components'
+import { ModalComposition, useModal } from '@modal'
+
+import { lightFont } from '../MarketComponents.css'
 import { useIsOwner } from '@market/hooks/useIsOwner'
-import { ManageOwnedToken } from './ManageOwnedToken'
-import { useModal } from '@modal'
 
 export interface V3AskProps extends FlexProps {
   nftData: NFTObject
@@ -48,7 +45,17 @@ export function V3Ask({ nftData, ...props }: V3AskProps) {
           {!isOwner ? (
             <ModalComposition
               modalName={`buy-${nft.contract.address}-${nft.tokenId}`}
-              trigger={<CardMarketTrigger cta="Buy" />}
+              trigger={
+                <Button
+                  as="span"
+                  variant="secondary"
+                  size="sm"
+                  borderRadius="round"
+                  className="zora-market-cardMarketTrigger"
+                >
+                  Buy
+                </Button>
+              }
               content={
                 <Box p="x8">
                   {ask.amount && (
@@ -67,7 +74,9 @@ export function V3Ask({ nftData, ...props }: V3AskProps) {
               }
             />
           ) : (
-            <ManageOwnedToken />
+            <Button disabled borderRadius="curved" size="md">
+              Manage
+            </Button>
           )}
         </Flex>
       ) : (

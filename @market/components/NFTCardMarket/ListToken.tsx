@@ -1,11 +1,9 @@
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Box, FlexProps, Stack } from '@zoralabs/zord'
+import { Box, FlexProps, Stack, Button } from '@zoralabs/zord'
 import { NFTOwner } from '../NFTOwner'
-import { ModalComposition } from '@modal'
-import { List } from '@market/wizards'
-import { CardMarketTrigger } from './CardMarketTrigger'
+import { ModalComposition, useModal } from '@modal'
+import { List } from '@market/components'
 import { useIsOwner } from '@market/hooks/useIsOwner'
-import { useModal } from '@modal'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 
 export interface ListTokenProps extends FlexProps {
@@ -28,7 +26,17 @@ export function ListToken({ nftData, ...props }: ListTokenProps) {
       {isOwner ? (
         <ModalComposition
           modalName={`list-${nft.tokenId}${nft.contract.address}`}
-          trigger={<CardMarketTrigger cta="List" />}
+          trigger={
+            <Button
+              as="span"
+              variant="secondary"
+              size="sm"
+              borderRadius="round"
+              className="zora-market-cardMarketTrigger"
+            >
+              List
+            </Button>
+          }
           content={
             <Box p="x8" {...props}>
               <List
