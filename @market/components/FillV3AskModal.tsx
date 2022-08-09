@@ -1,10 +1,10 @@
 import { Text, Box, Flex, Stack, FlexProps, Button } from '@zoralabs/zord'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
+import { lightFont } from '@shared'
+import { ModalComposition, useModal } from '@modal'
 import { useRelevantMarket } from '@market/hooks'
 import { FillV3AskWizard, NFTOwner } from '@market/components'
-import { ModalComposition, useModal } from '@modal'
-import { lightFont } from '@market/components/MarketComponents.css'
 import { useIsOwner } from '@market/hooks/useIsOwner'
 
 export interface FillV3AskModalProps extends FlexProps {

@@ -27,7 +27,7 @@ import {
 } from '@noun-auction'
 
 // Imports from @markets
-import { PrintError } from '@market/components'
+import { PrintError } from '@shared'
 
 interface NounsBidFormProps extends BoxProps {
   tokenAddress: string

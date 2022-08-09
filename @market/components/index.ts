@@ -23,5 +23,3 @@ export * from './NftInfo'
 export * from './NFTOwner'
 export * from './WalletBalace'
 export * from './BigNumberField'
-
-export * from './PrintError'

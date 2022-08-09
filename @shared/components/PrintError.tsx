@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Box, BoxProps } from '@zoralabs/zord'
-import { errorBox } from './MarketComponents.css'
+import { errorBox } from '../SharedStyles.css'
 
 interface PrintErrorProps extends BoxProps {
   errorMessage: any

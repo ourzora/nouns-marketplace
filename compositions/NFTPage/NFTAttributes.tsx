@@ -1,5 +1,4 @@
 import { Grid, Heading, Label, Stack, Box, BoxProps } from '@zoralabs/zord'
-import { lightFont } from 'styles/styles.css'
 import {
   nftMarketWrapper,
   nftAttributesWrapper,
@@ -7,6 +6,8 @@ import {
   nftAttributes,
 } from './NFTPage.css'
 import { useNFTProvider } from '@shared/providers/NFTProvider'
+
+import { lightFont } from '@shared'
 
 export interface NFTAttributesProps extends BoxProps {}
 

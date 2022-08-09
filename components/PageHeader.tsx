@@ -1,6 +1,8 @@
 import { Stack, Text, Paragraph, FlexProps } from '@zoralabs/zord'
-import { lightFont, textCenter, pageHeadline, pageHeaderWrapper } from 'styles/styles.css'
+import { textCenter, pageHeadline, pageHeaderWrapper } from 'styles/styles.css'
 import { Maybe } from '@zoralabs/nft-hooks/dist/backends/zora-indexer-v1/zora-indexer-types'
+
+import { lightFont } from '@shared'
 
 export interface PageHeaderProps extends FlexProps {
   headline: Maybe<string> | undefined

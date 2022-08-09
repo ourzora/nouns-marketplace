@@ -3,12 +3,14 @@ import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { FillV3AskInfo } from '@market'
 import { useIsOwner } from '@market/hooks'
 import { Link } from 'components'
-import { clickAnimation, lightFont } from 'styles/styles.css'
+import { clickAnimation } from 'styles/styles.css'
 import { useNFTProvider } from '@shared/providers/NFTProvider'
 import { nftInfoSidebar, nftInfoSidebarWrapper, askInfoWrapper } from './NFTPage.css'
 import { MarketUi } from './MarketUi'
 import { useNounishAuctionProvider } from '@noun-auction'
 import { useTitleWithFallback } from 'hooks'
+
+import { lightFont } from '@shared'
 
 export interface NFTInfoSidebar extends BoxProps {}
 

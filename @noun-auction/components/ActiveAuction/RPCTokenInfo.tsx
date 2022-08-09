@@ -6,7 +6,7 @@ import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
 
 // @shared (or zord)
-import { lightFont } from 'styles/styles.css'
+import { lightFont } from '@shared'
 
 export interface RPCTokenInfoProps extends BoxProps {
   contractAddress: string | undefined

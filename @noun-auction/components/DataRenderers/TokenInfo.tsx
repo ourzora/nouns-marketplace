@@ -4,11 +4,11 @@ import { Stack, Flex, Heading, Button, Box } from '@zoralabs/zord'
 import { useNFT } from '@zoralabs/nft-hooks'
 
 import { TokenInfoConfig } from '../NounishAuction'
-import { NounishThumbnail, returnThumbnailSize } from './NounishThumbnail'
+import { NounishThumbnail } from './NounishThumbnail'
 import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
 
 // @shared (or zord)
-import { lightFont } from 'styles/styles.css'
+import { lightFont } from '@shared'
 
 export interface TokenInfoProps extends TokenInfoConfig {
   contractAddress: string

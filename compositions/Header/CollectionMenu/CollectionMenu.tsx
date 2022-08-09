@@ -3,9 +3,11 @@ import { Box, Icon, Button, Label, Stack, color } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { modalWrapper } from '../Header.css'
-import { lightFont, noTextWrap } from 'styles/styles.css'
+import { noTextWrap } from 'styles/styles.css'
 import { CollectionNavList } from './CollectionNavList'
 import { HorizontalMenu } from 'components'
+
+import { lightFont } from '@shared'
 
 enum tabs {
   DAOS = 'Daos',

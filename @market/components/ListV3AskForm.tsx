@@ -3,7 +3,8 @@ import { Form, Formik, FormikHelpers } from 'formik'
 import { ContractTransaction } from '@ethersproject/contracts'
 import { BigNumber } from 'ethers'
 import { Flex, Label, Grid } from '@zoralabs/zord'
-import { TransactionSubmitButton, PrintError, BigNumberField } from '@market/components'
+import { PrintError } from '@shared'
+import { TransactionSubmitButton, BigNumberField } from '@market/components'
 import { useAuth, useContractContext, useContractTransaction } from '@market/hooks'
 
 import {

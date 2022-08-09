@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { GridProps, Flex, Grid, Stack, Label } from '@zoralabs/zord'
 import { useEnsName } from 'wagmi'
 import { EnsAvatar } from './EnsAvatar'
@@ -6,10 +5,11 @@ import { EthAmount } from './EthAmount'
 import { useShortAddress } from 'hooks'
 import {
   transactionEventWrapper,
-  lightFont,
   transactionBidder,
 } from '@noun-auction/styles/NounishStyles.css'
 import { TxTimestamp } from './TxTimestamp'
+
+import { lightFont } from '@shared'
 
 export interface BidTransactionEventProps extends GridProps {
   transactionInfo: {

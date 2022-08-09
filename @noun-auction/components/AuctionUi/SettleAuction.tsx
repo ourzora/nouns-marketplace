@@ -3,7 +3,7 @@ import { useContractWrite } from 'wagmi'
 import { useEffect, useState } from 'react'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
-import { PrintError } from '@market'
+import { PrintError } from '@shared'
 
 export interface SettleAuctionProps extends StackProps {
   useErrorMsg?: boolean

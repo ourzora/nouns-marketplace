@@ -7,7 +7,7 @@ import { SharedDataRendererProps } from '@noun-auction/typings'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 
 // @shared
-import { lightFont } from 'styles/styles.css'
+import { lightFont } from '@shared'
 import { roundFourDecimals } from 'utils/math'
 
 export function WalletBalance({
