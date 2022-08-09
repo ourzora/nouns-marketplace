@@ -1,4 +1,3 @@
-import { useUser } from './useUser'
 import { useEffect, useState } from 'react'
 import { shortenAddress } from '../utils/format'
 import { NETWORK_CHAIN_ID } from '../utils/connectors'
@@ -9,13 +8,20 @@ import {
   useProvider,
   useSigner,
   useBalance,
+  useEnsName,
+  useEnsAvatar,
 } from 'wagmi'
 
 export function useAuth() {
   const provider = useProvider()
   const { data: signer } = useSigner()
   const { address, isConnecting } = useAccount()
-  const { user } = useUser(address)
+  const { data: ensName } = useEnsName({
+    address: address,
+  })
+  const { data: ensAvatar } = useEnsAvatar({
+    addressOrName: address,
+  })
   const { disconnect } = useDisconnect()
   const { chain } = useNetwork()
   const [incorrectChain, setIncorrectChain] = useState(false)
@@ -29,12 +35,12 @@ export function useAuth() {
     provider,
     incorrectChain,
     signer,
-    user: user?.address ? user : { address: address },
-    displayName: user?.displayName || shortenAddress(address),
-    ensAvatar: user?.ensAvatar,
-    address: user?.address || address || '',
+    address: address,
+    ensName: ensName || shortenAddress(address),
+    ensAvatar: ensAvatar,
+    displayName: ensName || shortenAddress(address),
+    balance: balance,
     loading: isConnecting,
     logout: disconnect,
-    balance: balance,
   }
 }

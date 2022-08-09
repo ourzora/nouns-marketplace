@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { formatUnits, parseUnits } from '@ethersproject/units'
 import { usePrevious } from '@reach/utils'
-import { Input, InputField } from '@zoralabs/zord'
+import { Input } from '@zoralabs/zord'
 import { useField } from 'formik'
 import { FieldValidator } from 'formik/dist/types'
 import React, { useCallback, useEffect, useState } from 'react'

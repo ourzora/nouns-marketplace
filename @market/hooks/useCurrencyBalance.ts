@@ -12,24 +12,24 @@ export function useCurrencyBalance(
   tokenAddress?: string,
   amountRequired?: string
 ): [BigNumber | undefined, boolean, () => Promise<void>] {
-  const { user: account, provider, signer } = useAuth()
+  const { address, provider, signer } = useAuth()
   const [balance, setBalance] = useState<BigNumber | undefined>()
   const previousAddress = usePrevious(tokenAddress)
   const contract = useBaseERC20(tokenAddress, signer || undefined)
 
   const fetchAndUpdateBalance = useCallback(async () => {
-    if (!account || !account.address) {
+    if (!address) {
       return
     }
     if (tokenAddress && isAddressMatch(tokenAddress, AddressZero)) {
-      const balance = await provider.getBalance(account?.address)
+      const balance = await provider.getBalance(address)
       setBalance(balance)
       return
     } else {
-      const balance = await contract?.balanceOf(account?.address)
+      const balance = await contract?.balanceOf(address)
       setBalance(balance)
     }
-  }, [account, contract, provider, tokenAddress])
+  }, [address, contract, provider, tokenAddress])
 
   useInterval(async () => {
     await fetchAndUpdateBalance()
