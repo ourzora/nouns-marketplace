@@ -1,22 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { AddressZero } from '@ethersproject/constants'
-import { Paragraph, Text, Box, Separator, Flex } from '@zoralabs/zord'
+import { Box, Separator, Flex } from '@zoralabs/zord'
 import {
   TransactionSubmitButton,
   ContractInteractionStatus,
   NftInfo,
   PrintError,
 } from '@market/components'
-import {
-  useContractTransaction,
-  useCurrencyBalance,
-  useERC20TokenAllowance,
-  useContractContext,
-  useAuth,
-} from '@market/hooks'
+import { useContractTransaction, useContractContext, useAuth } from '@market/hooks'
 
 /* @shared */
-import { ERC20_TRANSFER_HELPER_ADDRESS } from '../utils/addresses'
 import { isAddressMatch } from '../utils/validators'
 
 type FillAskProps = {
@@ -43,27 +36,17 @@ export function FillAsk({
   onClose,
   cancelButton,
 }: FillAskProps) {
-  const { address } = useAuth()
+  const { address, balance: walletBalance } = useAuth()
   const { AsksV11 } = useContractContext()
   const { tx, txStatus, handleTx, txInProgress } = useContractTransaction()
 
-  const [balance, sufficientBalance, refetchBalance] = useCurrencyBalance(
-    askCurrency,
-    askPrice
-  )
-  const allowance = useERC20TokenAllowance(
-    askCurrency,
-    ERC20_TRANSFER_HELPER_ADDRESS,
-    askPrice
+  const sufficientFunds = useMemo(
+    () => walletBalance?.value.gte(askPrice),
+    [askPrice, walletBalance, walletBalance?.value]
   )
 
   const [wizardStep, setWizardStep] = useState<FillAskStep>('ReviewDetails')
   const [error, setError] = useState<string>()
-
-  const needsERC20Approval = useMemo(
-    () => !isAddressMatch(askCurrency, AddressZero) && !allowance.approved,
-    [allowance, askCurrency]
-  )
 
   const handleFillAsk = useCallback(async () => {
     try {
@@ -89,28 +72,6 @@ export function FillAsk({
     }
   }, [AsksV11, address, askCurrency, askPrice, handleTx, tokenAddress, tokenId])
 
-  const handleApproveERC20 = useCallback(async () => {
-    try {
-      setError('')
-      const promise = allowance.approve()
-      await handleTx(promise)
-      await allowance.mutate()
-    } catch (e: any) {
-      setError(e.message)
-      await allowance.mutate()
-    }
-  }, [allowance, handleTx])
-
-  useEffect(() => {
-    refetchBalance()
-    if (wizardStep === 'ConnectWallet' && address) {
-      setWizardStep('ReviewDetails')
-    }
-    if (!address) {
-      setWizardStep('ConnectWallet')
-    }
-  }, [address, refetchBalance, wizardStep])
-
   return (
     <Box w="100%">
       {wizardStep !== 'Confirmation' && (
@@ -133,40 +94,17 @@ export function FillAsk({
         />
       ) : (
         <>
-          {balance && sufficientBalance && needsERC20Approval && (
-            <Paragraph size="sm">
-              You must first approve ZORA V3 to use your {/*rate?.symbol*/}
-              <Text
-                as="a"
-                variant="link"
-                href="https://help.zora.co/en/articles/5882367-approving-tokens-to-zora-v3"
-                target="_blank"
-                rel="noreferer"
-              >
-                What is an approval?
-              </Text>{' '}
-              <Paragraph as="sup" top="x0" size="sm">
-                ↗
-              </Paragraph>
-            </Paragraph>
-          )}
           {error && <PrintError errorMessage={error} />}
           <Flex>
             {cancelButton}
             <TransactionSubmitButton
-              disabled={!balance || !sufficientBalance}
+              disabled={!sufficientFunds}
               txInProgress={txInProgress}
               txStatus={txStatus}
               variant="secondary"
-              onClick={
-                balance && sufficientBalance && needsERC20Approval
-                  ? handleApproveERC20
-                  : handleFillAsk
-              }
+              onClick={handleFillAsk}
             >
-              {balance && sufficientBalance && needsERC20Approval
-                ? 'Approve Token Contract'
-                : 'Buy now'}
+              {!sufficientFunds ? 'Insufficient Balance' : 'Buy now'}
             </TransactionSubmitButton>
           </Flex>
         </>
