@@ -1,9 +1,11 @@
-import { ModalTitleAndDescription } from '../../ModalTitleAndDescription'
-import { TransactionSubmitButton } from '../../TransactionSubmitButton'
-import { PrintError } from '../../PrintError'
-import { useContractTransaction, useERC721TokenApproval } from '@market/hooks'
+import { useCallback, useEffect, useState } from 'react'
 import { Box, Button, Paragraph, Text, Stack } from '@zoralabs/zord'
-import React, { useCallback, useEffect, useState } from 'react'
+import {
+  TransactionSubmitButton,
+  ModalTitleAndDescription,
+  PrintError,
+} from '@market/components'
+import { useContractTransaction, useERC721TokenApproval } from '@market/hooks'
 
 interface ContractApprovalFormProps {
   title: string
