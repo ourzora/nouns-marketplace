@@ -1,8 +1,7 @@
 import { useMemo } from 'react'
 import { Flex, Text, Stack, FlexProps, Box } from '@zoralabs/zord'
 import { CollectionStatsAggregateQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { lightFont } from 'styles/styles.css'
-import { marketStatsWrapper, stat } from './MarketComponents.css'
+import { marketStatsWrapper, stat, lightFont } from 'styles/styles.css'
 import { roundFourDecimals, roundTwoDecimals } from 'utils/math'
 import { numberFormatter } from 'utils/numbers'
 

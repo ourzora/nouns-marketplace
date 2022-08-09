@@ -1,6 +1,5 @@
 export * from './AddressWithLink'
 export * from './ContractInteractionStatus'
-export * from './MarketStats'
 export * from './ModalTitleAndDescription'
 export * from './NFTCardMarket'
 export * from './NftInfo'
