@@ -12,9 +12,8 @@ import {
 import React from 'react'
 import { shortenTxHash } from '../utils/format'
 import { ETHERSCAN_BASE_URL } from '../utils/transactions'
-import { getCurrency, Currency } from '@market/utils/currencies'
+import { getCurrency } from '@market/utils/currencies'
 import { formatCryptoVal } from '@market/utils/numbers'
-import { RawDisplayer } from 'components/utils'
 
 interface ContractInteractionStatusProps {
   title: string
