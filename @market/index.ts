@@ -1,3 +1,3 @@
-export * from './providers/ContractProvider'
+export * from './providers'
 export * from './hooks'
 export * from './components'

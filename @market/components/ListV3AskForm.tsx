@@ -5,7 +5,8 @@ import { BigNumber } from 'ethers'
 import { Flex, Label, Grid } from '@zoralabs/zord'
 import { PrintError } from '@shared'
 import { TransactionSubmitButton, BigNumberField } from '@market/components'
-import { useAuth, useContractContext, useContractTransaction } from '@market/hooks'
+import { useAuth, useContractTransaction } from '@market/hooks'
+import { useContractContext } from '@market/providers'
 
 import {
   Currency,

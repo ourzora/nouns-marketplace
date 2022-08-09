@@ -4,7 +4,7 @@ import { ZoraModuleManager as ZoraModuleManagerInterface } from '@zoralabs/v3/di
 // import { AsksV1__factory } from '@zoralabs/v3/dist/typechain/factories/AsksV1__factory'
 import { AsksV1_1__factory } from '@zoralabs/v3/dist/typechain/factories/AsksV1_1__factory'
 import { ZoraModuleManager__factory as ModuleManagerFactory } from '@zoralabs/v3/dist/typechain/factories/ZoraModuleManager__factory'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState, useContext } from 'react'
 import {
   ASKS_V11_ADDRESS,
   AUCTION_HOUSE_ADDRESS,
@@ -53,6 +53,10 @@ export const ContractCtx = createContext<ContractContext>({
   ZoraMarket: defaultZoraMarket,
   isReadOnly: true,
 })
+
+export function useContractContext(): ContractContext {
+  return useContext(ContractCtx)
+}
 
 const ContractProvider: React.FC = ({ children }) => {
   const { address } = useAccount()

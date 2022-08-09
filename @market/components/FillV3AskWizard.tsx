@@ -7,7 +7,8 @@ import {
   ContractInteractionStatus,
   NftInfo,
 } from '@market/components'
-import { useContractTransaction, useContractContext, useAuth } from '@market/hooks'
+import { useContractTransaction, useAuth } from '@market/hooks'
+import { useContractContext } from '@market/providers'
 
 /* @shared */
 import { isAddressMatch } from '../utils/validators'
