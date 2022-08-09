@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useAccount } from 'wagmi'
 import { AddressZero } from '@ethersproject/constants'
 import { Paragraph, Text, Box, Separator, Flex } from '@zoralabs/zord'
 import {
@@ -13,7 +12,10 @@ import {
   useCurrencyBalance,
   useERC20TokenAllowance,
   useContractContext,
+  useAuth,
 } from '@market/hooks'
+
+/* @shared */
 import { ERC20_TRANSFER_HELPER_ADDRESS } from '../utils/addresses'
 import { isAddressMatch } from '../utils/validators'
 
@@ -41,7 +43,7 @@ export function FillAsk({
   onClose,
   cancelButton,
 }: FillAskProps) {
-  const { address } = useAccount()
+  const { address } = useAuth()
   const { AsksV11 } = useContractContext()
   const { tx, txStatus, handleTx, txInProgress } = useContractTransaction()
 

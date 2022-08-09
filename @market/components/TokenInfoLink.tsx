@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Icon, Flex } from '@zoralabs/zord'
+import { Flex } from '@zoralabs/zord'
 
 export function TokenInfoLink({
   contractAddress,

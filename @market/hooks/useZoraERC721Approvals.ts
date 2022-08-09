@@ -6,7 +6,7 @@ import {
 
 /**
  * Hook to fetch approval status for all zora protocol contracts
- * for a particular ERC721 / ERC1155??(I think) tokenAddress
+ * for a particular ERC721 tokenAddress
  * @param tokenAddress
  */
 export function useZoraERC721Approvals(tokenAddress: string) {

@@ -2,7 +2,14 @@ import { useUser } from './useUser'
 import { useEffect, useState } from 'react'
 import { shortenAddress } from '../utils/format'
 import { NETWORK_CHAIN_ID } from '../utils/connectors'
-import { useAccount, useDisconnect, useNetwork, useProvider, useSigner } from 'wagmi'
+import {
+  useAccount,
+  useDisconnect,
+  useNetwork,
+  useProvider,
+  useSigner,
+  useBalance,
+} from 'wagmi'
 
 export function useAuth() {
   const provider = useProvider()
@@ -12,6 +19,7 @@ export function useAuth() {
   const { disconnect } = useDisconnect()
   const { chain } = useNetwork()
   const [incorrectChain, setIncorrectChain] = useState(false)
+  const { data: balance } = useBalance({ addressOrName: address })
 
   useEffect(() => {
     setIncorrectChain(chain ? chain.id !== NETWORK_CHAIN_ID : false)
@@ -27,5 +35,6 @@ export function useAuth() {
     address: user?.address || address || '',
     loading: isConnecting,
     logout: disconnect,
+    balance: balance,
   }
 }

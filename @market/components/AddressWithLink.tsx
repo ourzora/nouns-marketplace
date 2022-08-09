@@ -1,6 +1,8 @@
 import { useMemo } from 'react'
 import { Label, Icon, Flex, FlexProps } from '@zoralabs/zord'
 import { useEnsName } from 'wagmi'
+
+/* @shared */
 import { useShortAddress } from 'hooks/useShortAddress'
 
 interface AddressWithLinkProps extends FlexProps {

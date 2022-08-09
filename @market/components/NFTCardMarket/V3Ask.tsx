@@ -24,7 +24,7 @@ export function V3Ask({ nftData, ...props }: V3AskProps) {
   }
 
   return (
-    <>
+    <Stack flex="1">
       {ask && ask.status === MARKET_INFO_STATUSES.ACTIVE ? (
         <Flex
           id="v3-ask-active"
@@ -48,9 +48,8 @@ export function V3Ask({ nftData, ...props }: V3AskProps) {
               trigger={
                 <Button
                   as="span"
-                  variant="secondary"
-                  size="sm"
-                  borderRadius="round"
+                  size="md"
+                  borderRadius="curved"
                   className="zora-market-cardMarketTrigger"
                 >
                   Buy
@@ -74,8 +73,15 @@ export function V3Ask({ nftData, ...props }: V3AskProps) {
               }
             />
           ) : (
-            <Button disabled borderRadius="curved" size="md">
-              Manage
+            <Button
+              disabled
+              borderRadius="curved"
+              size="md"
+              variant="outline"
+              borderColor="secondary"
+              color="tertiary"
+            >
+              On Sale
             </Button>
           )}
         </Flex>
@@ -102,6 +108,6 @@ export function V3Ask({ nftData, ...props }: V3AskProps) {
           )}
         </>
       )}
-    </>
+    </Stack>
   )
 }

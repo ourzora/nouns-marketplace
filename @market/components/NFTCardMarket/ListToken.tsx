@@ -22,16 +22,15 @@ export function ListToken({ nftData, ...props }: ListTokenProps) {
   }
 
   return (
-    <Stack {...props}>
+    <Stack {...props} flex="1" justify="flex-end">
       {isOwner ? (
         <ModalComposition
           modalName={`list-${nft.tokenId}${nft.contract.address}`}
           trigger={
             <Button
               as="span"
-              variant="secondary"
-              size="sm"
-              borderRadius="round"
+              size="md"
+              borderRadius="curved"
               className="zora-market-cardMarketTrigger"
             >
               List

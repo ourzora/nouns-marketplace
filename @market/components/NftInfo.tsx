@@ -1,10 +1,11 @@
 import { useMemo } from 'react'
 import { useNFT } from '@zoralabs/nft-hooks'
-import { useAccount } from 'wagmi'
-import { Flex, Stack, Separator } from '@zoralabs/zord'
-import { ModalTitleAndDescription } from '@market/components/ModalTitleAndDescription'
+import { Flex, Stack } from '@zoralabs/zord'
+import { FillAskInfo, ModalTitleAndDescription } from '@market/components'
+import { useAuth } from '@market/hooks'
+
+/* @shared */
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { FillAskInfo } from './FillAskInfo'
 import { useTitleWithFallback } from 'hooks'
 
 /* integrate market types */
@@ -29,7 +30,7 @@ export function NftInfo({
   modalType?: 'fillAsk' | 'list' | 'auction'
 }) {
   const { data } = useNFT(collectionAddress, tokenId)
-  const { address } = useAccount()
+  const { address } = useAuth()
 
   if (!collectionAddress || !tokenId) return null
 

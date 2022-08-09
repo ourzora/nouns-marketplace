@@ -1,7 +1,7 @@
+import { useMemo, useState } from 'react'
 import { WalletCallStatus } from '../typings/transactions'
 import { formatContractError } from '../utils/errors'
 import { ContractTransaction } from '@ethersproject/contracts'
-import { useMemo, useState } from 'react'
 
 export function useContractTransaction(confirmations: number = 1) {
   const [txStatus, setState] = useState<WalletCallStatus>(WalletCallStatus.INITIAL)
