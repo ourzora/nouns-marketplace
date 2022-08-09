@@ -1,14 +1,13 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { Stack, Button, Paragraph } from '@zoralabs/zord'
 import {
   ERC721ContractApprovalForm,
-  FixedPriceListingForm,
+  ListV3AskForm,
   V3ApprovalForm,
   ContractInteractionStatus,
   NftInfo,
 } from '@market/components'
 import {
-  ListingType,
   TRANSFER_HELPER_APPROVAL_COPY,
   ASKS_V1_APPROVAL_COPY,
   ASKS_V1_LISTED_COPY,
@@ -16,37 +15,35 @@ import {
 
 import { useZoraERC721Approvals, useZoraV3ModuleApproval } from '@market/hooks'
 import { ASKS_V11_ADDRESS, ERC721_TRANSFER_HELPER_ADDRESS } from '@market/utils'
-import { NFTObject } from '@zoralabs/nft-hooks'
 
 type ListNFTStep =
-  | 'SelectType'
+  | 'CheckApprovals'
   | 'ApproveTransferHelper'
   | 'ApproveAskModule'
   | 'ListingDetails'
   | 'Confirmation'
 
-export function List({
-  tokenId,
-  tokenAddress,
-  onClose,
-  nftData,
-  previewURL,
-}: {
+export type ListV3AskWizardProps = {
   tokenId: string
   tokenAddress: string
   onClose?: () => void
   previewURL?: string
-  nftData: NFTObject
-}) {
+  cancelButton?: JSX.Element
+}
+
+export function ListV3AskWizard({
+  tokenId,
+  tokenAddress,
+  onClose,
+  previewURL,
+  cancelButton,
+}: ListV3AskWizardProps) {
   const { approved: asksV1 } = useZoraV3ModuleApproval(ASKS_V11_ADDRESS)
   const { transferHelper } = useZoraERC721Approvals(tokenAddress)
 
-  const [wizardStep, setWizardStep] = useState<ListNFTStep>('SelectType')
-  const [listingType, setListingType] = useState<ListingType>('FIXED_PRICE')
+  const [wizardStep, setWizardStep] = useState<ListNFTStep>('CheckApprovals')
   const [txHash, setTxHash] = useState<string>()
   const [askState, setAskState] = useState<{ amount: string; currency: string }>()
-
-  const { metadata } = nftData
 
   const handleConfirmType = useCallback(() => {
     setWizardStep(
@@ -56,7 +53,7 @@ export function List({
           : 'ApproveAskModule'
         : 'ApproveTransferHelper'
     )
-  }, [asksV1, listingType, transferHelper])
+  }, [asksV1, transferHelper])
 
   const handleOnConfirmation = useCallback(
     (hash: string, amount: string, currency: string) => {
@@ -72,11 +69,11 @@ export function List({
       {wizardStep !== 'Confirmation' && (
         <NftInfo collectionAddress={tokenAddress} tokenId={tokenId} modalType="list" />
       )}
-      {wizardStep === 'SelectType' ? (
+      {wizardStep === 'CheckApprovals' ? (
         <Stack gap="x4">
           <Paragraph size="lg">
-            Click continue to list {metadata?.name} for a fixed price with zoraV3. We will
-            check if any approvals are needed before commencing.
+            Click continue to list this NFT for a fixed price with zoraV3. We will check
+            if any approvals are needed before commencing.
           </Paragraph>
           <Button width="100%" variant="primary" onClick={handleConfirmType}>
             Continue
@@ -90,7 +87,7 @@ export function List({
           approvalCopy={TRANSFER_HELPER_APPROVAL_COPY}
           buttonCopy="Approve NFT"
           onApproval={() => setWizardStep('ApproveAskModule')}
-          onBack={() => setWizardStep('SelectType')}
+          onBack={() => setWizardStep('CheckApprovals')}
         />
       ) : wizardStep === 'ApproveAskModule' ? (
         <V3ApprovalForm
@@ -99,16 +96,15 @@ export function List({
           approvalCopy={ASKS_V1_APPROVAL_COPY}
           buttonCopy="Approve Module"
           onApproval={() => setWizardStep('ListingDetails')}
-          onBack={() => setWizardStep('SelectType')}
+          onBack={() => setWizardStep('CheckApprovals')}
         />
       ) : wizardStep === 'ListingDetails' ? (
-        listingType === 'FIXED_PRICE' && (
-          <FixedPriceListingForm
-            tokenId={tokenId}
-            tokenAddress={tokenAddress}
-            onConfirmation={handleOnConfirmation}
-          />
-        )
+        <ListV3AskForm
+          tokenId={tokenId}
+          tokenAddress={tokenAddress}
+          onConfirmation={handleOnConfirmation}
+          cancelButton={cancelButton}
+        />
       ) : wizardStep === 'Confirmation' && txHash ? (
         <ContractInteractionStatus
           title="Your NFT will be listed shortly"

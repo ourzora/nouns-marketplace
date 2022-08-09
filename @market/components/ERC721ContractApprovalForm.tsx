@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Box, Button, Paragraph, Text, Stack } from '@zoralabs/zord'
+import { Box, Button, Paragraph, Text, Grid } from '@zoralabs/zord'
 import {
   TransactionSubmitButton,
   ModalTitleAndDescription,
@@ -69,8 +69,11 @@ export function ERC721ContractApprovalForm({
           </Paragraph>
         </a>
       </Box>
-      {error && <PrintError errorMessage={error} />}
-      <Stack gap="x2">
+      {error && <PrintError errorMessage={error} mb="x4" />}
+      <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x2">
+        <Button disabled={txInProgress} variant="secondary" w="100%" onClick={onBack}>
+          Go back
+        </Button>
         <TransactionSubmitButton
           txInProgress={txInProgress}
           txStatus={txStatus}
@@ -78,10 +81,7 @@ export function ERC721ContractApprovalForm({
         >
           {buttonCopy}
         </TransactionSubmitButton>
-        <Button disabled={txInProgress} variant="secondary" w="100%" onClick={onBack}>
-          Go back
-        </Button>
-      </Stack>
+      </Grid>
     </Box>
   )
 }

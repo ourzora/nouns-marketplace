@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { ContractTransaction } from '@ethersproject/contracts'
 import { BigNumber } from 'ethers'
-import { Flex, Label } from '@zoralabs/zord'
+import { Flex, Label, Grid } from '@zoralabs/zord'
 import { TransactionSubmitButton, PrintError, BigNumberField } from '@market/components'
 import { useAuth, useContractContext, useContractTransaction } from '@market/hooks'
 
@@ -13,31 +13,33 @@ import {
   fixedPriceSchema,
 } from '@market/utils'
 
-type FixedPriceListingFormProps = {
+type ListV3AskFormProps = {
   tokenId: string
   tokenAddress: string
   isUpdate?: boolean
   onConfirmation: (txHash: string, amount: string, currencyAddress: string) => void
+  cancelButton?: JSX.Element
 }
 
-type FixedPriceListingFormState = {
+type ListV3AskFormState = {
   currency: Currency
   amount: BigNumber
   findersFeeBps: number
 }
 
-const initialValues: FixedPriceListingFormState = {
+const initialValues: ListV3AskFormState = {
   currency: ETH_CURRENCY_SHIM,
   amount: BigNumber.from(0),
   findersFeeBps: 0,
 }
 
-export function FixedPriceListingForm({
+export function ListV3AskForm({
   tokenId,
   tokenAddress,
   onConfirmation,
   isUpdate = false,
-}: FixedPriceListingFormProps) {
+  cancelButton,
+}: ListV3AskFormProps) {
   const { address } = useAuth()
   const [error, setError] = useState<string>()
   const { AsksV11 } = useContractContext()
@@ -45,8 +47,8 @@ export function FixedPriceListingForm({
 
   const handleOnSubmit = useCallback(
     async (
-      values: FixedPriceListingFormState,
-      { setSubmitting }: FormikHelpers<FixedPriceListingFormState>
+      values: ListV3AskFormState,
+      { setSubmitting }: FormikHelpers<ListV3AskFormState>
     ) => {
       console.log(values)
       try {
@@ -99,15 +101,21 @@ export function FixedPriceListingForm({
               decimals={values.currency.decimals}
             />
           </Flex>
-          {error && <PrintError errorMessage={error} />}
-          <TransactionSubmitButton
-            txStatus={txStatus}
-            txInProgress={txInProgress}
-            disabled={!isValid}
-            type="submit"
+          {error && <PrintError errorMessage={error} mb="x4" />}
+          <Grid
+            style={{ gridTemplateColumns: cancelButton ? '1fr 1fr' : '1fr' }}
+            gap="x2"
           >
-            List
-          </TransactionSubmitButton>
+            {cancelButton}
+            <TransactionSubmitButton
+              txStatus={txStatus}
+              txInProgress={txInProgress}
+              disabled={!isValid}
+              type="submit"
+            >
+              List
+            </TransactionSubmitButton>
+          </Grid>
         </Form>
       )}
     </Formik>

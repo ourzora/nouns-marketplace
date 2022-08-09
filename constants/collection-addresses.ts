@@ -52,6 +52,7 @@ const collections: string[] = [
   '0x494715b2a3c75dadd24929835b658a1c19bd4552',
   '0x70b44ea398a33593af1cb348f3837b89a85d4f91',
   '0x9e1f32b2BBeDe1a544b69e5403860Bba8542962B',
+  '0xae5eca28f681b753129cda38d8b4edf7ac7618d6',
 ]
 
 export const collectionAddresses = collections.map((collection) =>

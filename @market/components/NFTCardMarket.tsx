@@ -3,9 +3,9 @@ import {
   MARKET_INFO_STATUSES,
   NFTObject,
 } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { useRelevantMarket } from '../../hooks/useRelevantMarket'
-import { ListToken } from './ListToken'
-import { V3Ask } from './V3Ask'
+import { useRelevantMarket } from '@market/hooks'
+import { ListV3AskModal } from './ListV3AskModal'
+import { FillV3AskModal } from './FillV3AskModal'
 import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTCardMarketProps extends FlexProps {
@@ -24,9 +24,9 @@ export function NFTCardMarket({ nftData, ...props }: NFTCardMarketProps) {
         (ask && ask.status === MARKET_INFO_STATUSES.ACTIVE) ||
         ask?.status === MARKET_INFO_STATUSES.COMPLETE
       )
-        return <V3Ask nftData={nftData} {...props} />
-      else return <ListToken nftData={nftData} {...props} />
-    } else return <ListToken nftData={nftData} {...props} />
+        return <FillV3AskModal nftData={nftData} {...props} />
+      else return <ListV3AskModal nftData={nftData} {...props} />
+    } else return <ListV3AskModal nftData={nftData} {...props} />
   }, [ask, auction, markets])
 
   return marketComponent

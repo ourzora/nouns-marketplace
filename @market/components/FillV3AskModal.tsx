@@ -2,17 +2,16 @@ import { Text, Box, Flex, Stack, FlexProps, Button } from '@zoralabs/zord'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useRelevantMarket } from '@market/hooks'
-import { FillAsk, NFTOwner } from '@market/components'
+import { FillV3AskWizard, NFTOwner } from '@market/components'
 import { ModalComposition, useModal } from '@modal'
-
-import { lightFont } from '../MarketComponents.css'
+import { lightFont } from '@market/components/MarketComponents.css'
 import { useIsOwner } from '@market/hooks/useIsOwner'
 
-export interface V3AskProps extends FlexProps {
+export interface FillV3AskModalProps extends FlexProps {
   nftData: NFTObject
 }
 
-export function V3Ask({ nftData, ...props }: V3AskProps) {
+export function FillV3AskModal({ nftData, ...props }: FillV3AskModalProps) {
   const { nft, metadata, markets } = nftData
   const { ask } = useRelevantMarket(markets)
 
@@ -58,7 +57,7 @@ export function V3Ask({ nftData, ...props }: V3AskProps) {
               content={
                 <Box p="x8">
                   {ask.amount && (
-                    <FillAsk
+                    <FillV3AskWizard
                       marketSummary={markets}
                       tokenAddress={nft.contract.address}
                       tokenId={nft.tokenId}
@@ -67,6 +66,16 @@ export function V3Ask({ nftData, ...props }: V3AskProps) {
                       askPrice={ask.amount.amount.raw}
                       nftData={nftData}
                       onClose={requestClose}
+                      cancelButton={
+                        <Button
+                          onClick={requestClose}
+                          w="100%"
+                          variant="secondary"
+                          borderRadius="curved"
+                        >
+                          Cancel
+                        </Button>
+                      }
                     />
                   )}
                 </Box>

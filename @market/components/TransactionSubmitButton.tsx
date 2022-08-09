@@ -36,8 +36,7 @@ export function TransactionSubmitButton({
       loading={isLoading}
       disabled={isDisabled}
       w="100%"
-      mt="x4"
-      mb="x1"
+      borderRadius="curved"
       {...props}
     >
       {txStatus === WalletCallStatus.ERRORED ? (

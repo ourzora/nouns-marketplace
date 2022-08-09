@@ -1,16 +1,16 @@
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Box, FlexProps, Stack, Button } from '@zoralabs/zord'
-import { NFTOwner } from '../NFTOwner'
+import { NFTOwner } from './NFTOwner'
 import { ModalComposition, useModal } from '@modal'
-import { List } from '@market/components'
+import { ListV3AskWizard } from '@market/components'
 import { useIsOwner } from '@market/hooks/useIsOwner'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 
-export interface ListTokenProps extends FlexProps {
+export interface ListV3AskModalProps extends FlexProps {
   nftData: NFTObject
 }
 
-export function ListToken({ nftData, ...props }: ListTokenProps) {
+export function ListV3AskModal({ nftData, ...props }: ListV3AskModalProps) {
   const { nft, metadata } = nftData
   const { isOwner } = useIsOwner(nftData)
   const { requestClose } = useModal()
@@ -38,12 +38,21 @@ export function ListToken({ nftData, ...props }: ListTokenProps) {
           }
           content={
             <Box p="x8" {...props}>
-              <List
+              <ListV3AskWizard
                 tokenAddress={nft.contract.address}
                 tokenId={nft.tokenId}
-                nftData={nftData}
                 onClose={requestClose}
                 previewURL={image}
+                cancelButton={
+                  <Button
+                    onClick={requestClose}
+                    w="100%"
+                    variant="secondary"
+                    borderRadius="curved"
+                  >
+                    Cancel
+                  </Button>
+                }
               />
             </Box>
           }

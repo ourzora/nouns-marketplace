@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { AddressZero } from '@ethersproject/constants'
-import { Box, Separator, Flex } from '@zoralabs/zord'
+import { Box, Separator, Flex, Grid } from '@zoralabs/zord'
 import {
   TransactionSubmitButton,
   ContractInteractionStatus,
@@ -12,7 +12,7 @@ import { useContractTransaction, useContractContext, useAuth } from '@market/hoo
 /* @shared */
 import { isAddressMatch } from '../utils/validators'
 
-type FillAskProps = {
+export type FillV3AskWizardProps = {
   tokenId: string
   tokenAddress: string
   tokenName?: string
@@ -25,9 +25,9 @@ type FillAskProps = {
   cancelButton?: JSX.Element
 }
 
-type FillAskStep = 'ConnectWallet' | 'ReviewDetails' | 'Confirmation'
+type FillV3AskWizardStep = 'ConnectWallet' | 'ReviewDetails' | 'Confirmation'
 
-export function FillAsk({
+export function FillV3AskWizard({
   tokenAddress,
   tokenId,
   askPrice,
@@ -35,7 +35,7 @@ export function FillAsk({
   previewURL,
   onClose,
   cancelButton,
-}: FillAskProps) {
+}: FillV3AskWizardProps) {
   const { address, balance: walletBalance } = useAuth()
   const { AsksV11 } = useContractContext()
   const { tx, txStatus, handleTx, txInProgress } = useContractTransaction()
@@ -45,7 +45,7 @@ export function FillAsk({
     [askPrice, walletBalance, walletBalance?.value]
   )
 
-  const [wizardStep, setWizardStep] = useState<FillAskStep>('ReviewDetails')
+  const [wizardStep, setWizardStep] = useState<FillV3AskWizardStep>('ReviewDetails')
   const [error, setError] = useState<string>()
 
   const handleFillAsk = useCallback(async () => {
@@ -94,19 +94,21 @@ export function FillAsk({
         />
       ) : (
         <>
-          {error && <PrintError errorMessage={error} />}
-          <Flex>
+          {error && <PrintError errorMessage={error} mb="x4" />}
+          <Grid
+            style={{ gridTemplateColumns: cancelButton ? '1fr 1fr' : '1fr' }}
+            gap="x2"
+          >
             {cancelButton}
             <TransactionSubmitButton
               disabled={!sufficientFunds}
               txInProgress={txInProgress}
               txStatus={txStatus}
-              variant="secondary"
               onClick={handleFillAsk}
             >
               {!sufficientFunds ? 'Insufficient Balance' : 'Buy now'}
             </TransactionSubmitButton>
-          </Flex>
+          </Grid>
         </>
       )}
     </Box>

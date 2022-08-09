@@ -1,21 +1,19 @@
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { useMemo } from 'react'
-import { useAccount } from 'wagmi'
-import { Flex, Label, Stack, Heading } from '@zoralabs/zord'
+import { Flex, Label, Stack, Heading, BoxProps } from '@zoralabs/zord'
 import { AddressWithLink } from '@market/components/AddressWithLink'
 import { formatCryptoVal } from '@market/utils/numbers'
 import { WalletBalance } from '@market/components/WalletBalace'
+import { useAuth } from '@market/hooks'
 
-export function FillAskInfo({
-  nft,
-  askPrice,
-  showBalance = true,
-}: {
+export interface FillV3AskInfoProps extends BoxProps {
   nft: NFTObject
   askPrice?: string
   showBalance?: boolean
-}) {
-  const { address } = useAccount()
+}
+
+export function FillV3AskInfo({ nft, askPrice, showBalance = true }: FillV3AskInfoProps) {
+  const { address } = useAuth()
 
   const cryptoVal = useMemo(() => {
     if (askPrice) return `${formatCryptoVal(parseFloat(askPrice))} ETH`

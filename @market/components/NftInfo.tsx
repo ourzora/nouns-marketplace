@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { Flex, Stack } from '@zoralabs/zord'
-import { FillAskInfo, ModalTitleAndDescription } from '@market/components'
+import { FillV3AskInfo, ModalTitleAndDescription } from '@market/components'
 import { useAuth } from '@market/hooks'
 
 /* @shared */
@@ -61,7 +61,7 @@ export function NftInfo({
         <CollectionThumbnail collectionAddress={collectionAddress} tokenId={tokenId} />
       </Flex>
       {data && modalType === 'fillAsk' && askPrice && (
-        <FillAskInfo nft={data} askPrice={askPrice} />
+        <FillV3AskInfo nft={data} askPrice={askPrice} />
       )}
     </Stack>
   )
