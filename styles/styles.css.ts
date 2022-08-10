@@ -1,13 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css'
-import {
-  atoms,
-  media,
-  typography,
-  colorTheme,
-  radii,
-  fontWeight,
-  color,
-} from '@zoralabs/zord'
+import { atoms, media, typography, colorTheme, radii, fontWeight } from '@zoralabs/zord'
 import {
   FOOTER_HEIGHT,
   FOOTER_HEIGHT_MOBILE,
@@ -15,7 +7,6 @@ import {
   HEADER_HEIGHT_MOBILE,
   MAX_WIDTH,
 } from './style-constants'
-import { recipe } from '@vanilla-extract/recipes'
 
 globalStyle('html, body', {
   margin: 0,
@@ -237,25 +228,21 @@ export const collectionNameThumbDao = style([
   }),
 ])
 
-export const marketStatsWrapper = style([
-  {
-    overflowX: 'scroll',
+export const marketStatsWrapper = atoms({
+  overflowX: 'scroll',
+  w: {
+    '@initial': '100vw',
+    '@1024': 'auto',
   },
-  atoms({
-    w: {
-      '@initial': '100vw',
-      '@1024': 'auto',
-    },
-    px: {
-      '@initial': 'x4',
-      '@1024': 'x0',
-    },
-    mb: {
-      '@initial': 'x2',
-      '@1024': 'x0',
-    },
-  }),
-])
+  px: {
+    '@initial': 'x4',
+    '@1024': 'x0',
+  },
+  mb: {
+    '@initial': 'x2',
+    '@1024': 'x0',
+  },
+})
 
 export const stat = style({
   whiteSpace: 'nowrap',

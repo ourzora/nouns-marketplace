@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react'
-import { Stack, Label, Button } from '@zoralabs/zord'
+import { Stack, Button } from '@zoralabs/zord'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { NounsBidForm } from './NounsBidForm'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'

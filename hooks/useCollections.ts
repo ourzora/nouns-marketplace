@@ -9,11 +9,12 @@ export function useCollections() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<any>(undefined)
   const [collections, setCollections] = useState<Collection[] | undefined>(undefined)
-  const [daos, setDaos] = useState<any>(undefined)
+  const [daos, setDaos] = useState<Collection[] | undefined>(undefined)
 
   useEffect(() => {
     const fetchCollections = async () => {
       try {
+        setLoading(true)
         /* @ts-ignore */
         const data = await zdk.collections({
           where: { collectionAddresses: collectionAddresses },
@@ -31,11 +32,13 @@ export function useCollections() {
   useEffect(() => {
     const fetchDaos = async () => {
       try {
+        setLoading(true)
         /* @ts-ignore */
         const data = await zdk.collections({
           where: { collectionAddresses: daoAddresses },
         })
         setDaos(data?.collections?.nodes)
+        setLoading(false)
       } catch (err) {
         console.error(err)
       }

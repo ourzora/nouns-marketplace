@@ -7,7 +7,7 @@ import {
   SetStateAction,
 } from 'react'
 import { collectionAddresses, daoAddresses } from 'constants/collection-addresses'
-import { CollectionsData } from 'hooks/zdk/useCollections'
+import { CollectionsData } from 'hooks'
 
 const CollectionsContext = createContext<{
   collections: CollectionsData[] | []

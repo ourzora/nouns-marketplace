@@ -19,11 +19,11 @@ export const linkButton = style([
 export const errorBox = style([
   {
     textAlign: 'start',
-    overflowX: 'scroll',
     backgroundColor: color.black10,
   },
   atoms({
     w: '100%',
+    overflowX: 'scroll',
     px: 'x3',
     py: 'x2',
     borderRadius: 'curved',

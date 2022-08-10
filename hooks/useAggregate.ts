@@ -1,11 +1,6 @@
 import { zdk } from '@shared'
 import useSWR from 'swr'
-import { Chain, Network } from '@zoralabs/zdk/dist/queries/queries-sdk'
-
-const networkInput = {
-  chain: Chain.Mainnet,
-  network: Network.Ethereum,
-}
+import { NetworkInput } from 'utils/network'
 
 export function useAggregate(collectionAddress: string) {
   const { data, error } = useSWR(
@@ -13,7 +8,7 @@ export function useAggregate(collectionAddress: string) {
     (_, collectionAddress) =>
       zdk.collectionStatsAggregate({
         collectionAddress: collectionAddress,
-        network: networkInput,
+        network: NetworkInput,
       })
   )
 
