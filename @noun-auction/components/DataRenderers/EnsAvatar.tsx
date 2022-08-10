@@ -1,7 +1,8 @@
 import { Flex, FlexProps, Box } from '@zoralabs/zord'
 import { useEnsAvatar } from 'wagmi'
-import { nounishThumbnailImage, pixelate } from '@noun-auction/styles/NounishStyles.css'
 import { Zorb } from '@zora-brand'
+import { pixelate } from '@noun-auction/styles/NounishStyles.css'
+import { ImageElement, fullSizeImage } from '@shared'
 
 export interface EnsAvatarProps extends FlexProps {
   address: string
@@ -23,9 +24,9 @@ export function EnsAvatar({ address, ...props }: EnsAvatarProps) {
       {...props}
     >
       {ensAvatar ? (
-        <Box as="img" src={ensAvatar} className={nounishThumbnailImage} />
+        <ImageElement src={ensAvatar} />
       ) : (
-        <Box className={[nounishThumbnailImage, pixelate]}>
+        <Box className={[fullSizeImage, pixelate]}>
           <Zorb size="100%" address={address} />
         </Box>
       )}

@@ -40,3 +40,13 @@ globalStyle(`${errorBox} pre`, {
 export const lightFont = style({
   fontWeight: 300,
 })
+
+export const fullSizeImage = style([
+  atoms({
+    inset: 'x0',
+    position: 'absolute',
+    w: '100%',
+    h: '100%',
+    objectFit: 'cover',
+  }),
+])

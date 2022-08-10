@@ -345,16 +345,6 @@ export const nounishThumbnail = style([
   }),
 ])
 
-export const nounishThumbnailImage = style([
-  atoms({
-    inset: 'x0',
-    position: 'absolute',
-    w: '100%',
-    h: '100%',
-    objectFit: 'cover',
-  }),
-])
-
 export const pixelate = style([
   {
     '@supports': {

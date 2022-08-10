@@ -1,9 +1,7 @@
 import { Box, BoxProps } from '@zoralabs/zord'
-import {
-  nounishThumbnail,
-  nounishThumbnailImage,
-} from '@noun-auction/styles/NounishStyles.css'
+import { nounishThumbnail } from '@noun-auction/styles/NounishStyles.css'
 import { FallbackThumbnail } from './FallbackThumbnail'
+import { ImageElement } from '@shared'
 
 export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
 
@@ -51,11 +49,7 @@ export function NounishThumbnail({
       {...props}
     >
       {image ? (
-        <Box
-          as="img"
-          className={[nounishThumbnailImage, 'nouns-fallback-image']}
-          src={image}
-        />
+        <ImageElement className="nouns-fallback-image" src={image} />
       ) : (
         <FallbackThumbnail tokenContract={tokenContract} tokenId={tokenId} />
       )}

@@ -1,7 +1,6 @@
-import { Box, BoxProps } from '@zoralabs/zord'
+import { BoxProps } from '@zoralabs/zord'
 import { useNounsToken } from '@noun-auction/hooks/useNounsToken'
-import { ImageElement } from 'components'
-import { nounishThumbnailImage } from '@noun-auction/styles/NounishStyles.css'
+import { ImageElement } from '@shared'
 
 export interface FallbackThumbnailProps extends BoxProps {
   tokenId: string
@@ -18,10 +17,6 @@ export function FallbackThumbnail({
   if (!tokenData) return null
 
   return (
-    <ImageElement
-      className={[nounishThumbnailImage, 'nouns-fallback-image']}
-      src={tokenData?.image}
-      {...props}
-    />
+    <ImageElement className="nouns-fallback-image" src={tokenData?.image} {...props} />
   )
 }

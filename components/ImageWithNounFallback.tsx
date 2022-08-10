@@ -1,7 +1,6 @@
-import { Box } from '@zoralabs/zord'
-import { returnDao } from 'constants/collection-addresses'
 import { FallbackThumbnail } from '@noun-auction'
-import { ImageElement } from './ImageElement'
+import { ImageElement } from '@shared'
+import { returnDao } from 'constants/collection-addresses'
 
 export function ImageWithNounFallback({
   srcImg,
@@ -17,25 +16,11 @@ export function ImageWithNounFallback({
   return (
     <>
       {!isDao && srcImg ? (
-        <ImageElement
-          src={srcImg}
-          w="100%"
-          h="100%"
-          position="absolute"
-          inset="x0"
-          objectFit="cover"
-        />
+        <ImageElement src={srcImg} />
       ) : (
         <>
           {srcImg ? (
-            <ImageElement
-              src={srcImg}
-              w="100%"
-              h="100%"
-              position="absolute"
-              inset="x0"
-              objectFit="cover"
-            />
+            <ImageElement src={srcImg} />
           ) : (
             <FallbackThumbnail
               tokenContract={tokenContract}
