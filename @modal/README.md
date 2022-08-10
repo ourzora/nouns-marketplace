@@ -1,15 +1,15 @@
 # Zora Modal Provider
 
-Pretty thin wrapper over the Modal already in Zord = perhaps we should just include thr provider and hook in zord?
+Thin wrapper over the Modal already included in Zord. Usage example below:
 
 ```
 <ModalComposition
-  modalName={nft?.metadata?.name}
+  modalName={'unique-modal-identifier'}
   trigger={
-    <div>YOUR BUTTON STUFF</div>
+    <div>What you trigger the modal with</div>
   }
   content={
-    <div>WHATS IN THE MODAL</div>
+    <div>What the modal contains</div>
   }
 />
 
