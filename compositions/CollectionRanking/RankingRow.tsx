@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Grid, Flex, Label, Stack, StackProps } from '@zoralabs/zord'
 import { CollectionsData } from 'hooks/zdk/useCollections'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
@@ -10,9 +10,8 @@ import {
 } from './CollectionRanking.css'
 import { clickAnimation } from 'styles/styles.css'
 import { Link } from 'components/Link'
-import { roundTwoDecimals } from '@shared'
 import { useAggregate } from 'hooks/zdk/useAggregate'
-import { numberFormatter } from '@shared'
+import { roundTwoDecimals, numberFormatter } from '@shared'
 
 import { CollectionLink } from '@shared'
 

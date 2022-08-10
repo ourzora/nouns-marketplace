@@ -1,14 +1,13 @@
 import {
-  Chain,
   Collection,
   CollectionStatsAggregateQuery,
-  Network,
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { GetServerSideProps } from 'next'
 import { zdk } from '@shared'
 import { buildCollectionSEO, SeoProps } from 'utils/seo'
 import { allAddresses } from 'constants/collection-addresses'
+import { NetworkInput } from 'utils/network'
 
 export type CollectionServiceProps = {
   initialPage: NFTObject[]
@@ -40,14 +39,9 @@ export async function collectionService({ params }: CollectionParamsProps) {
   }
 
   try {
-    const networkInput = {
-      chain: Chain.Mainnet,
-      network: Network.Ethereum,
-    }
-
     const collection = await zdk.collection({
       address: tokenAddress,
-      network: networkInput,
+      network: NetworkInput,
       includeFullDetails: false,
     })
 
@@ -62,7 +56,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
 
     const aggregateStats = await zdk.collectionStatsAggregate({
       collectionAddress: tokenAddress,
-      network: networkInput,
+      network: NetworkInput,
     })
 
     const seo = await buildCollectionSEO(name, symbol)

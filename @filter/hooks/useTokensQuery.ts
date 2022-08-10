@@ -1,8 +1,9 @@
 import { getAddress } from '@ethersproject/address'
+import { zdk } from '@shared/utils/zdk'
 import { transformNFTZDK } from '@zoralabs/nft-hooks/dist/backends'
 import { prepareJson } from '@zoralabs/nft-hooks/dist/fetcher/NextUtils'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { TokensQueryArgs, ZDK } from '@zoralabs/zdk'
+import { TokensQueryArgs } from '@zoralabs/zdk'
 import {
   TokenSortInput,
   TokensQueryFilter,
@@ -23,11 +24,6 @@ export interface UseTokenQueryProps {
   filter?: TokensQueryFilter
   where?: TokensQueryInput
 }
-
-const zdk = new ZDK({
-  endpoint: 'https://api.zora.co/graphql',
-  apiKey: process.env.NEXT_PUBLIC_ZORA_API_KEY,
-})
 
 type GetNFTReturnType = {
   tokens: NFTObject[]

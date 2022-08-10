@@ -1,14 +1,9 @@
-import { Chain, Network } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Collection, AggregateStat } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { zdk } from '@shared'
 import useSWR from 'swr'
 import { collectionAddresses } from 'constants/collection-addresses'
 import { useEffect } from 'react'
-
-const networkInput = {
-  chain: Chain.Mainnet,
-  network: Network.Ethereum,
-}
+import { NetworkInput } from 'utils/network'
 
 export type CollectionsData = {
   collectionInfo: Collection
@@ -27,7 +22,7 @@ const mergeCollectionFetch = async (address: string) => {
   const statsResponse = await zdk
     .collectionStatsAggregate({
       collectionAddress: address,
-      network: networkInput,
+      network: NetworkInput,
     })
     .then((res) => {
       return res
