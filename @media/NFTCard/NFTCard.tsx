@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import { Stack, Box, Flex, Heading, Separator } from '@zoralabs/zord'
 import { Link } from 'components/Link'
 import { NFTCardMarket } from '@market'
-import { useTitleWithFallback } from 'hooks'
 import {
   cardWrapper,
   titleWrapper,
@@ -12,7 +11,7 @@ import {
 } from '@media/NftMedia.css'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ImageWithNounFallback } from 'components'
-import { useNFTProvider } from '@shared'
+import { useNFTProvider, useTitleWithFallback } from '@shared'
 
 export function NFTCard() {
   const {

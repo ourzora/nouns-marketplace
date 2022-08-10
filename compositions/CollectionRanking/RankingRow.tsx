@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { Grid, Flex, Label, Stack, StackProps } from '@zoralabs/zord'
-import { CollectionsData } from 'hooks/zdk/useCollections'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import {
   rankingRow,
@@ -10,10 +9,8 @@ import {
 } from './CollectionRanking.css'
 import { clickAnimation } from 'styles/styles.css'
 import { Link } from 'components/Link'
-import { useAggregate } from 'hooks/zdk/useAggregate'
-import { roundTwoDecimals, numberFormatter } from '@shared'
-
-import { CollectionLink } from '@shared'
+import { useAggregate, CollectionsData } from 'hooks'
+import { roundTwoDecimals, CollectionLink, numberFormatter } from '@shared'
 
 /* todo: add a skeleton or some kind of loading state */
 
