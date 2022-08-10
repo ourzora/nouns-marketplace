@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Box,
   Button,
@@ -13,9 +12,9 @@ import { ModalTitleAndDescription } from '@market/components'
 
 /* @shared */
 import { getCurrency } from '@market/utils/currencies'
+import { formatCryptoVal } from '@market/utils/numbers'
 import { ETHERSCAN_BASE_URL } from '../utils/transactions'
 import { shortenTxHash } from '../utils/format'
-import { formatCryptoVal } from '@market/utils/numbers'
 
 interface ContractInteractionStatusProps {
   title: string

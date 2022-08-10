@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react'
+import { useCallback, useState } from 'react'
 import { Stack, Button, Paragraph } from '@zoralabs/zord'
 import {
   ERC721ContractApprovalForm,
@@ -7,12 +7,6 @@ import {
   ContractInteractionStatus,
   NftInfo,
 } from '@market/components'
-import {
-  TRANSFER_HELPER_APPROVAL_COPY,
-  ASKS_V1_APPROVAL_COPY,
-  ASKS_V1_LISTED_COPY,
-} from '@market/constants/common'
-
 import { useZoraERC721Approvals, useZoraV3ModuleApproval } from '@market/hooks'
 import { ASKS_V11_ADDRESS, ERC721_TRANSFER_HELPER_ADDRESS } from '@market/utils'
 
@@ -84,7 +78,7 @@ export function ListV3AskWizard({
           title="Allow ZORA V3 to Use Your NFT"
           tokenAddress={tokenAddress}
           spenderAddress={ERC721_TRANSFER_HELPER_ADDRESS}
-          approvalCopy={TRANSFER_HELPER_APPROVAL_COPY}
+          approvalCopy="You must first approve ZORA V3 to use your NFT"
           buttonCopy="Approve NFT"
           onApproval={() => setWizardStep('ApproveAskModule')}
           onBack={() => setWizardStep('CheckApprovals')}
@@ -93,7 +87,7 @@ export function ListV3AskWizard({
         <V3ApprovalForm
           title="Allow Asks Module to Use Your Assets"
           spenderAddress={ASKS_V11_ADDRESS}
-          approvalCopy={ASKS_V1_APPROVAL_COPY}
+          approvalCopy="To enable the Buy Now feature you must approve the ZORA V3 Asks Module"
           buttonCopy="Approve Module"
           onApproval={() => setWizardStep('ListingDetails')}
           onBack={() => setWizardStep('CheckApprovals')}
@@ -108,7 +102,7 @@ export function ListV3AskWizard({
       ) : wizardStep === 'Confirmation' && txHash ? (
         <ContractInteractionStatus
           title="Your NFT will be listed shortly"
-          description={ASKS_V1_LISTED_COPY}
+          description="Once your transaction has been processed, your NFT will be active in the marketplace. In the meanwhile, you can close this window."
           tokenId={tokenId}
           tokenAddress={tokenAddress}
           previewURL={previewURL}

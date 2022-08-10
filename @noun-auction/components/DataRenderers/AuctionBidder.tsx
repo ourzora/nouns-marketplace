@@ -10,8 +10,7 @@ import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 
 // @shared
-import { useShortAddress } from 'hooks/useShortAddress'
-import { lightFont } from '@shared'
+import { lightFont, useShortAddress } from '@shared'
 
 export function AuctionBidder({
   label = 'Top bidder',

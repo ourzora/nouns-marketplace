@@ -4,8 +4,7 @@ import {
   NFTObject,
 } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useRelevantMarket } from '@market/hooks'
-import { ListV3AskModal } from './ListV3AskModal'
-import { FillV3AskModal } from './FillV3AskModal'
+import { ListV3AskModal, FillV3AskModal } from '@market/components'
 import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTCardMarketProps extends FlexProps {

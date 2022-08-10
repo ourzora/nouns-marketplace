@@ -4,7 +4,7 @@ import { Flex, Label, Stack, Heading, BoxProps } from '@zoralabs/zord'
 import { AddressWithLink } from '@market/components/AddressWithLink'
 import { formatCryptoVal } from '@market/utils/numbers'
 import { WalletBalance } from '@market/components/WalletBalace'
-import { useAuth } from '@market/hooks'
+import { useAuth } from '@shared'
 
 export interface FillV3AskInfoProps extends BoxProps {
   nft: NFTObject

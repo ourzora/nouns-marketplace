@@ -2,14 +2,12 @@ import { GridProps, Flex, Grid, Stack, Label } from '@zoralabs/zord'
 import { useEnsName } from 'wagmi'
 import { EnsAvatar } from './EnsAvatar'
 import { EthAmount } from './EthAmount'
-import { useShortAddress } from 'hooks'
+import { TxTimestamp } from './TxTimestamp'
 import {
   transactionEventWrapper,
   transactionBidder,
 } from '@noun-auction/styles/NounishStyles.css'
-import { TxTimestamp } from './TxTimestamp'
-
-import { lightFont } from '@shared'
+import { lightFont, useShortAddress } from '@shared'
 
 export interface BidTransactionEventProps extends GridProps {
   transactionInfo: {

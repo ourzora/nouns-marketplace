@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { shortenAddress } from '../utils/format'
-import { NETWORK_CHAIN_ID } from '../utils/connectors'
+import { shortenAddress } from '@shared/utils/format'
+import { NETWORK_CHAIN_ID } from '@shared/utils/connectors'
 import {
   useAccount,
   useDisconnect,

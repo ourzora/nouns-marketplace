@@ -1,13 +1,12 @@
 import { useCallback, useMemo, useState } from 'react'
 import { AddressZero } from '@ethersproject/constants'
 import { Box, Separator, Grid } from '@zoralabs/zord'
-import { PrintError } from '@shared'
+import { PrintError, useContractTransaction, useAuth } from '@shared'
 import {
   TransactionSubmitButton,
   ContractInteractionStatus,
   NftInfo,
 } from '@market/components'
-import { useContractTransaction, useAuth } from '@market/hooks'
 import { useContractContext } from '@market/providers'
 
 /* @shared */
