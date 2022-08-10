@@ -22,7 +22,7 @@ import { ContractProvider } from '@market'
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
 
 import { CollectionsProvider } from 'providers/CollectionsProvider'
-import { useCollections } from 'hooks/zdk/useCollections'
+import { useCollections } from 'hooks'
 
 import { SWRConfig } from 'swr'
 import NextNProgress from 'nextjs-progressbar'

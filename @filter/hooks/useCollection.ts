@@ -1,5 +1,5 @@
+import { zdk } from '@shared/utils/zdk'
 import useSWR from 'swr'
-import { zdk } from '@filter/utils/zdk'
 
 export function useCollection(address: string) {
   return useSWR(['collectionInfo', address], (_, address) =>

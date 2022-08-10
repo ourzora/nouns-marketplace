@@ -3,8 +3,7 @@ import { useModal } from '@modal'
 import { Link } from 'components/Link'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { lightGreyType, leadingTight } from 'styles/styles.css'
-import { CollectionsData } from 'hooks/zdk/useCollections'
-import { useAggregate } from 'hooks/zdk/useAggregate'
+import { useAggregate, CollectionsData } from 'hooks'
 
 import { lightFont } from '@shared'
 
