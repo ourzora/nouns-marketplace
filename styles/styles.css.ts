@@ -236,3 +236,27 @@ export const collectionNameThumbDao = style([
     },
   }),
 ])
+
+export const marketStatsWrapper = style([
+  {
+    overflowX: 'scroll',
+  },
+  atoms({
+    w: {
+      '@initial': '100vw',
+      '@1024': 'auto',
+    },
+    px: {
+      '@initial': 'x4',
+      '@1024': 'x0',
+    },
+    mb: {
+      '@initial': 'x2',
+      '@1024': 'x0',
+    },
+  }),
+])
+
+export const stat = style({
+  whiteSpace: 'nowrap',
+})

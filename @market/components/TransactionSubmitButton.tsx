@@ -1,6 +1,6 @@
-import { WalletCallStatus } from '../typings/transactions'
+import { useMemo } from 'react'
 import { Box, Button, ButtonProps } from '@zoralabs/zord'
-import React, { useMemo } from 'react'
+import { WalletCallStatus } from '@shared'
 
 /**
  * Render a button that will submit a transaction to the blockchain.
@@ -36,8 +36,7 @@ export function TransactionSubmitButton({
       loading={isLoading}
       disabled={isDisabled}
       w="100%"
-      mt="x4"
-      mb="x1"
+      borderRadius="curved"
       {...props}
     >
       {txStatus === WalletCallStatus.ERRORED ? (

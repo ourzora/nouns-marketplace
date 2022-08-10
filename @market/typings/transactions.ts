@@ -1,7 +1,0 @@
-export enum WalletCallStatus {
-  INITIAL = 'INITIAL',
-  PROMPTED = 'PROMPTED',
-  CONFIRMING = 'CONFIRMING',
-  CONFIRMED = 'CONFIRMED',
-  ERRORED = 'ERRORED',
-}

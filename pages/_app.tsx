@@ -9,18 +9,20 @@ import '../styles/globals.css'
 import '../styles/reset.css'
 import 'styles/styles.css'
 
-import * as gtag from 'lib/gtag'
+import * as gtag from 'utils/gtag'
 import { createClient, chain, configureChains, WagmiConfig } from 'wagmi'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
+
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 import { ModalContextProvider } from '@modal'
-import { V3Provider } from '@market'
+import { ContractProvider } from '@market'
+
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
+
 import { CollectionsProvider } from 'providers/CollectionsProvider'
 import { useCollections } from 'hooks/zdk/useCollections'
-import { ContractProvider } from '@market/providers/ContractProvider'
 
 import { SWRConfig } from 'swr'
 import NextNProgress from 'nextjs-progressbar'
@@ -79,25 +81,23 @@ function MyApp({ Component, pageProps }: AppProps) {
               borderRadius: 'large',
             })}
           >
-            <V3Provider>
-              <CollectionsProvider collections={collections} daos={daos}>
-                <ModalContextProvider>
-                  <ContractProvider>
-                    <HeaderComposition />
-                    <NextNProgress
-                      color="rgba(0,0,0,.5)"
-                      startPosition={0.125}
-                      stopDelayMs={200}
-                      height={2}
-                      showOnShallow={true}
-                      options={{ showSpinner: false }}
-                    />
-                    <Component {...pageProps} />
-                    <FooterComposition />
-                  </ContractProvider>
-                </ModalContextProvider>
-              </CollectionsProvider>
-            </V3Provider>
+            <CollectionsProvider collections={collections} daos={daos}>
+              <ModalContextProvider>
+                <ContractProvider>
+                  <HeaderComposition />
+                  <NextNProgress
+                    color="rgba(0,0,0,.5)"
+                    startPosition={0.125}
+                    stopDelayMs={200}
+                    height={2}
+                    showOnShallow={true}
+                    options={{ showSpinner: false }}
+                  />
+                  <Component {...pageProps} />
+                  <FooterComposition />
+                </ContractProvider>
+              </ModalContextProvider>
+            </CollectionsProvider>
           </RainbowKitProvider>
         </NFTFetchConfiguration>
       </SWRConfig>

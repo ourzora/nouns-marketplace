@@ -23,7 +23,8 @@
     "**/*.ts",
     "**/*.tsx",
     "@noun-auction/data/nounishAuctionQueryiests",
-    "@noun-auction/abis/lil-nouns-abi.js"
+    "@noun-auction/abis/lil-nouns-abi.js",
+    "@shared/typings/Currency"
   ],
   "exclude": []
 }

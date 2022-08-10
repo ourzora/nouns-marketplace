@@ -7,7 +7,7 @@ import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { sidebarHighBid } from '@noun-auction/styles/NounishStyles.css'
 
 // @shared
-import { lightFont } from 'styles/styles.css'
+import { lightFont } from '@shared'
 
 export function AuctionHighBid({
   label = 'Current bid',

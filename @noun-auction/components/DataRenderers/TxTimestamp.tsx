@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { FlexProps, Flex, Stack, Label, Icon } from '@zoralabs/zord'
-import { lightFont } from '@noun-auction/styles/NounishStyles.css'
+import { lightFont } from '@shared'
 import { format } from 'date-fns'
 
 export interface TxTimestampProps extends FlexProps {

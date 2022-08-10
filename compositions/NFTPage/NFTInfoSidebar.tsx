@@ -1,14 +1,15 @@
 import { Heading, Stack, Flex, Paragraph, Box, BoxProps } from '@zoralabs/zord'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { FillAskInfo } from '@market'
-import { useIsOwner } from '@market/hooks'
+import { FillV3AskInfo } from '@market'
+import { useNFTProvider, useIsOwner } from '@shared'
+import { useTitleWithFallback } from 'hooks'
 import { Link } from 'components'
-import { clickAnimation, lightFont } from 'styles/styles.css'
-import { useNFTProvider } from '@shared/providers/NFTProvider'
+import { clickAnimation } from 'styles/styles.css'
 import { nftInfoSidebar, nftInfoSidebarWrapper, askInfoWrapper } from './NFTPage.css'
 import { MarketUi } from './MarketUi'
 import { useNounishAuctionProvider } from '@noun-auction'
-import { useTitleWithFallback } from 'hooks'
+
+import { lightFont } from '@shared'
 
 export interface NFTInfoSidebar extends BoxProps {}
 
@@ -53,7 +54,7 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
         )}
         {!isOwner && isComplete && (
           <Stack className={askInfoWrapper}>
-            <FillAskInfo showBalance={false} nft={nft} />
+            <FillV3AskInfo showBalance={false} nft={nft} />
           </Stack>
         )}
         {nft?.nft && (

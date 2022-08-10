@@ -1,8 +1,6 @@
 import { Label, LabelProps } from '@zoralabs/zord'
 import { useMemo } from 'react'
-
-// @shared
-import { formatCryptoVal } from '@market/utils'
+import { formatCryptoVal } from '@shared'
 
 interface EthAmountProps extends LabelProps {
   ethAmount: string

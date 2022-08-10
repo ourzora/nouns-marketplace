@@ -1,5 +1,5 @@
 import { Text, Stack } from '@zoralabs/zord'
-import { lightFont } from './MarketComponents.css'
+import { lightFont } from '@shared'
 import { AddressWithLink } from './AddressWithLink'
 
 export function NFTOwner({
@@ -15,7 +15,11 @@ export function NFTOwner({
   }
 
   return (
-    <Stack align={align === 'left' ? 'flex-start' : 'flex-end'} justify="space-between">
+    <Stack
+      align={align === 'left' ? 'flex-start' : 'flex-end'}
+      justify="space-between"
+      flex="1"
+    >
       <Text variant="label-lg" align={align} className={lightFont} color="tertiary">
         Owned by
       </Text>

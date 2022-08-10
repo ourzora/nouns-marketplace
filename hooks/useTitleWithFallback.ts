@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { useNFT } from '@zoralabs/nft-hooks'
-import { returnDao } from 'constants/collection-addresses'
 
 export function useTitleWithFallback(
   tokenContract: string,

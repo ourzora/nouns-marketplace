@@ -1,7 +1,7 @@
 import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
 import { useEffect, useState } from 'react'
-import { MarketStats } from '@market/components/MarketStats'
+import { MarketStats } from 'components/MarketStats'
 import { Seo } from 'components'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import {
@@ -10,11 +10,11 @@ import {
   CollectionHeader,
 } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
-import { Stack, color, Separator } from '@zoralabs/zord'
+import { Stack, Separator } from '@zoralabs/zord'
 import { useCollection } from '@filter/hooks/useCollection'
-import { useWindowWidth } from 'hooks'
-import { HorizontalMenu, HorizontalMenuProps } from 'components'
+import { HorizontalMenuProps } from 'components'
 import { returnDao } from 'constants/collection-addresses'
+import { useWindowWidth } from '@shared'
 import { ActiveAuctionCard } from '@noun-auction'
 
 const Collection = ({

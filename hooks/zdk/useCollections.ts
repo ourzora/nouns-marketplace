@@ -1,5 +1,5 @@
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { zdk } from '@shared/utils/zdk'
+import { zdk } from '@shared'
 import { useEffect, useState } from 'react'
 import { collectionAddresses, daoAddresses } from 'constants/collection-addresses'
 

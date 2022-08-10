@@ -11,8 +11,7 @@ import { useNounishAuctionQuery, useAuctionRPC } from '@noun-auction/hooks'
 import { DaoConfigProps } from '@noun-auction/typings'
 import { defaultDaoConfig } from '@noun-auction/constants'
 import { useContractRead } from 'wagmi'
-import { numberFormatter } from '@market/utils'
-import { roundTwoDecimals } from 'utils/math'
+import { numberFormatter, roundTwoDecimals } from '@shared'
 import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
 
 export type NounishAuctionProviderProps = {

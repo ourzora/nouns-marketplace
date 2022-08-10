@@ -1,10 +1,8 @@
 import { ConnectButton as RKConnectButton } from '@rainbow-me/rainbowkit'
 import { Button, Flex, Box, Icon } from '@zoralabs/zord'
 import { hideMobile } from 'styles/styles.css'
-import { Zorb } from '@zora-brand/Zorb'
 import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
-
-import { useWindowWidth } from 'hooks'
+import { useWindowWidth } from '@shared'
 
 export const ConnectButton = () => {
   const {} = useWindowWidth()

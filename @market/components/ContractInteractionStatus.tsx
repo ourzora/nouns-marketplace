@@ -1,4 +1,3 @@
-import { ModalTitleAndDescription } from '@market/components'
 import {
   Box,
   Button,
@@ -9,12 +8,8 @@ import {
   Stack,
   Separator,
 } from '@zoralabs/zord'
-import React from 'react'
-import { shortenTxHash } from '../utils/format'
-import { ETHERSCAN_BASE_URL } from '../utils/transactions'
-import { getCurrency, Currency } from '@market/utils/currencies'
-import { formatCryptoVal } from '@market/utils/numbers'
-import { RawDisplayer } from 'components/utils'
+import { ModalTitleAndDescription } from '@market/components'
+import { formatCryptoVal, shortenTxHash, ETHERSCAN_BASE_URL } from '@shared'
 
 interface ContractInteractionStatusProps {
   title: string
@@ -39,7 +34,6 @@ export function ContractInteractionStatus({
   txHash,
   previewURL,
 }: ContractInteractionStatusProps) {
-  const currency = currencyAddress && getCurrency({ address: currencyAddress })
   const prettyAmount = amount && formatCryptoVal(amount)
 
   return (
@@ -49,8 +43,7 @@ export function ContractInteractionStatus({
         <>
           <Separator />
           <Label mt="x2" mb="x4">
-            {/** @ts-ignore */}
-            Listed for: {prettyAmount} {currency?.symbol}
+            Listed for: {prettyAmount} ETH
           </Label>
         </>
       )}
