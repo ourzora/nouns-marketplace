@@ -1,12 +1,8 @@
 import * as styles from './CollectionsFilter.css'
-import { isAddressMatch } from '@shared/utils/validators'
+import { isAddressMatch } from '@shared'
 import { Box, BoxComponentProps, Select, Text } from '@zoralabs/zord'
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react'
-import { Currency } from '@shared/constants/currencies'
-
-/**
- * Index select element, previously named `CurrencyField`
- */
+import { Currency } from '@shared'
 
 export interface CurrencySelectProps extends BoxComponentProps<'select'> {
   autoFocus?: boolean

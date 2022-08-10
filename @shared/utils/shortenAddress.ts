@@ -1,12 +1,4 @@
-import { getAddress } from '@ethersproject/address'
-
-export function isAddress(value: any): string | false {
-  try {
-    return getAddress(value)
-  } catch {
-    return false
-  }
-}
+import { isAddress } from './isAddress'
 
 export function shortenAddress(address?: string, chars = 4): string {
   if (!address) {

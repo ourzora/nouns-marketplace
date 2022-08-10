@@ -9,9 +9,8 @@ import { FilterProperties } from './FilterProperties'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 import { mixins, Button, Flex, Stack, Text, Box } from '@zoralabs/zord'
 import { useMemo } from 'react'
-import { shortenAddress } from '@shared/utils/format'
-import { numberFormatter } from 'utils/numbers'
-import { isAddressMatch } from '@shared/utils/validators'
+import { shortenAddress, isAddressMatch } from '@shared'
+import { numberFormatter } from '@shared'
 
 export function FilterCollectionListItem({
   tokenAddress,

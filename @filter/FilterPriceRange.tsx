@@ -2,7 +2,7 @@ import { Accordion, Box, Button, Stack } from '@zoralabs/zord'
 import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { PriceRangeSelector } from './PriceRangeSelector'
 import { useCollectionFilters } from '@filter/providers'
-import { ETH_CURRENCY_SHIM } from '@shared/constants/currencies'
+import { ETH_CURRENCY_SHIM } from '@shared'
 
 export function FilterPriceRange() {
   const {

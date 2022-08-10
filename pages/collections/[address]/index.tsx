@@ -12,9 +12,9 @@ import {
 import { CollectionFilterProvider } from '@filter'
 import { Stack, Separator } from '@zoralabs/zord'
 import { useCollection } from '@filter/hooks/useCollection'
-import { useWindowWidth } from 'hooks'
 import { HorizontalMenuProps } from 'components'
 import { returnDao } from 'constants/collection-addresses'
+import { useWindowWidth } from '@shared'
 import { ActiveAuctionCard } from '@noun-auction'
 
 const Collection = ({

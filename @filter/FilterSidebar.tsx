@@ -19,7 +19,7 @@ import { FilterOwnerCollections } from './FilterOwnerCollections'
 import { ClearFilters } from './ClearFilters'
 import { MobileFiltersFooter } from './MobileFiltersFooter'
 
-import { useWindowWidth } from 'hooks'
+import { useWindowWidth } from '@shared'
 import { Modal, ModalContent, useModal } from '@modal'
 
 export function FilterSidebar() {

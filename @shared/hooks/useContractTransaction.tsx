@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
-import { formatContractError } from '../../@market/utils/errors'
 import { ContractTransaction } from '@ethersproject/contracts'
+import { formatContractError } from '@shared'
 
 export enum WalletCallStatus {
   INITIAL = 'INITIAL',

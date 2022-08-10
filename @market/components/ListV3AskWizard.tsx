@@ -7,8 +7,8 @@ import {
   ContractInteractionStatus,
   NftInfo,
 } from '@market/components'
-import { useZoraERC721Approvals, useZoraV3ModuleApproval } from '@market/hooks'
-import { ASKS_V11_ADDRESS, ERC721_TRANSFER_HELPER_ADDRESS } from '@market/utils'
+import { ASKS_V11_ADDRESS, ERC721_TRANSFER_HELPER_ADDRESS } from '@shared'
+import { useERC721TokenApproval, useZoraV3ModuleApproval } from '@market/hooks'
 
 type ListNFTStep =
   | 'CheckApprovals'
@@ -33,7 +33,10 @@ export function ListV3AskWizard({
   cancelButton,
 }: ListV3AskWizardProps) {
   const { approved: asksV1 } = useZoraV3ModuleApproval(ASKS_V11_ADDRESS)
-  const { transferHelper } = useZoraERC721Approvals(tokenAddress)
+  const { approved: transferHelper } = useERC721TokenApproval(
+    tokenAddress,
+    ERC721_TRANSFER_HELPER_ADDRESS
+  )
 
   const [wizardStep, setWizardStep] = useState<ListNFTStep>('CheckApprovals')
   const [txHash, setTxHash] = useState<string>()

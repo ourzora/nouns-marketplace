@@ -1,8 +1,7 @@
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { GetServerSideProps } from 'next'
 import { assert } from 'console'
-import { defaultProvider } from '@market/utils/connectors'
-import { isAddress } from 'utils/address'
+import { defaultProvider, isAddress } from '@shared'
 
 export type ManageNFTsServiceProps = {
   ownerAddress: string

@@ -1,18 +1,25 @@
+import * as Yup from 'yup'
 import { useCallback, useState } from 'react'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { ContractTransaction } from '@ethersproject/contracts'
 import { BigNumber } from 'ethers'
 import { Flex, Label, Grid } from '@zoralabs/zord'
-import { PrintError, useAuth, useContractTransaction } from '@shared'
+import {
+  PrintError,
+  useAuth,
+  useContractTransaction,
+  ETH_CURRENCY_SHIM,
+  Currency,
+} from '@shared'
 import { TransactionSubmitButton, BigNumberField } from '@market/components'
 import { useContractContext } from '@market/providers'
 
-import {
-  Currency,
-  ETH_CURRENCY_SHIM,
-  INITIAL_VALUE_ZERO,
-  fixedPriceSchema,
-} from '@market/utils'
+export const fixedPriceSchema = Yup.object().shape({
+  currency: Yup.object().required(),
+  amount: Yup.number().required('List price is a required value'),
+  listingFeePercentage: Yup.number().optional(),
+  findersFeeBps: Yup.number().min(0).max(10),
+})
 
 type ListV3AskFormProps = {
   tokenId: string
@@ -98,7 +105,7 @@ export function ListV3AskForm({
               pattern="[0-9.]*"
               name="amount"
               min={'0'}
-              placeholder={INITIAL_VALUE_ZERO}
+              placeholder="0.00"
               decimals={values.currency.decimals}
             />
           </Flex>

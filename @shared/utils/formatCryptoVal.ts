@@ -1,40 +1,6 @@
 import { BigNumberish } from '@ethersproject/bignumber'
 import BigNumber from 'bignumber.js'
 
-/**
- * @NOTE: amountFormatter deprecated-pages, use formatCryptoVal instead
- */
-export function amountFormatter(
-  amount: BigNumber | BigNumberish | string,
-  baseDecimals = 18,
-  displayDecimals = 2,
-  format: boolean = false
-) {
-  const raw = typeof amount === 'string' ? amount : amount.toString()
-  const parsedAmount = new BigNumber(raw)
-    .shiftedBy(baseDecimals > 0 ? baseDecimals * -1 : 0)
-    .dp(displayDecimals)
-  return !format ? parsedAmount.toString() : parsedAmount.toFormat()
-}
-
-export function formatCollectionStats(number: number) {
-  if (number > 1000) {
-    const num = Math.round((number / 1000) * 100 + Number.EPSILON) / 100
-    return `${num}K`
-  }
-  return Number(number.toFixed(2))
-}
-
-export function numberFormatter(number: number | string) {
-  const parsed =
-    typeof number === 'string'
-      ? number.includes('.')
-        ? parseFloat(number)
-        : parseInt(number, 10)
-      : number
-  return new Intl.NumberFormat('en-US').format(parsed)
-}
-
 const ONE_QUADRILLION = new BigNumber(1000000000000000)
 const ONE_TRILLION = new BigNumber(1000000000000)
 const ONE_BILLION = new BigNumber(1000000000)

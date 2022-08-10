@@ -9,12 +9,7 @@ import {
   Separator,
 } from '@zoralabs/zord'
 import { ModalTitleAndDescription } from '@market/components'
-
-/* @shared */
-import { getCurrency } from '@market/utils/currencies'
-import { formatCryptoVal } from '@market/utils/numbers'
-import { ETHERSCAN_BASE_URL } from '../utils/transactions'
-import { shortenTxHash } from '../utils/format'
+import { formatCryptoVal, shortenTxHash, ETHERSCAN_BASE_URL } from '@shared'
 
 interface ContractInteractionStatusProps {
   title: string
@@ -39,7 +34,6 @@ export function ContractInteractionStatus({
   txHash,
   previewURL,
 }: ContractInteractionStatusProps) {
-  const currency = currencyAddress && getCurrency({ address: currencyAddress })
   const prettyAmount = amount && formatCryptoVal(amount)
 
   return (
@@ -49,8 +43,7 @@ export function ContractInteractionStatus({
         <>
           <Separator />
           <Label mt="x2" mb="x4">
-            {/** @ts-ignore */}
-            Listed for: {prettyAmount} {currency?.symbol}
+            Listed for: {prettyAmount} ETH
           </Label>
         </>
       )}

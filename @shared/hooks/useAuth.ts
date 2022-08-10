@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import { shortenAddress } from '@shared/utils/format'
-import { NETWORK_CHAIN_ID } from '@shared/utils/connectors'
 import {
   useAccount,
   useDisconnect,
@@ -11,6 +9,7 @@ import {
   useEnsName,
   useEnsAvatar,
 } from 'wagmi'
+import { shortenAddress, NETWORK_CHAIN_ID } from '@shared'
 
 export function useAuth() {
   const provider = useProvider()

@@ -10,9 +10,9 @@ import {
 } from './CollectionRanking.css'
 import { clickAnimation } from 'styles/styles.css'
 import { Link } from 'components/Link'
-import { roundTwoDecimals } from 'utils/math'
+import { roundTwoDecimals } from '@shared'
 import { useAggregate } from 'hooks/zdk/useAggregate'
-import { numberFormatter } from 'utils/numbers'
+import { numberFormatter } from '@shared'
 
 import { CollectionLink } from '@shared'
 

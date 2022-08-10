@@ -9,7 +9,7 @@ import '../styles/globals.css'
 import '../styles/reset.css'
 import 'styles/styles.css'
 
-import * as gtag from 'lib/gtag'
+import * as gtag from 'utils/gtag'
 import { createClient, chain, configureChains, WagmiConfig } from 'wagmi'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'

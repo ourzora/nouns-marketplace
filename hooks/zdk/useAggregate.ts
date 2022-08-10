@@ -1,4 +1,4 @@
-import { zdk } from '@shared/utils/zdk'
+import { zdk } from '@shared'
 import useSWR from 'swr'
 import { Chain, Network } from '@zoralabs/zdk/dist/queries/queries-sdk'
 

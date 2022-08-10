@@ -1,16 +1,13 @@
 import { useCallback, useMemo, useState } from 'react'
 import { AddressZero } from '@ethersproject/constants'
 import { Box, Separator, Grid } from '@zoralabs/zord'
-import { PrintError, useContractTransaction, useAuth } from '@shared'
+import { PrintError, useContractTransaction, useAuth, isAddressMatch } from '@shared'
 import {
   TransactionSubmitButton,
   ContractInteractionStatus,
   NftInfo,
 } from '@market/components'
 import { useContractContext } from '@market/providers'
-
-/* @shared */
-import { isAddressMatch } from '../utils/validators'
 
 export type FillV3AskWizardProps = {
   tokenId: string

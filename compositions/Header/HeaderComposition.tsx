@@ -8,7 +8,7 @@ import {
   headerWrapper,
   manageButtonWrapper,
 } from './Header.css'
-import { useWindowWidth } from 'hooks'
+import { useWindowWidth } from '@shared'
 import { ManageLink } from './ManageLink'
 import { ConnectButton } from './ConnectButton'
 

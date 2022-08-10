@@ -1,7 +1,7 @@
 import { NounishAuction } from '@noun-auction'
 import { useNFTProvider } from '@shared'
 import { returnDao } from 'constants/collection-addresses'
-import { useWindowWidth } from 'hooks'
+import { useWindowWidth } from '@shared'
 
 export function NounishActivityRow() {
   const {
