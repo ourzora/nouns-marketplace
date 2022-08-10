@@ -117,7 +117,7 @@ You may notice that there are a number of directories prefixed with the @ symbol
 - @noun-auction: Componentry, provider, hooks designed for interaction and display of nounish auction activity.
 - @market: Zora Protocol market interaction componente / providers / hooks. Currently supporting Zora V3 Asks (list / buy). Along with module approvals. More functionality on the roadmap!
 - @media: NFT display componentry.
-- @zora-common: Catch all for util functions, hooks, constants and components used both in the primary apps and the above (more tightly scoped) pieces of functionality.
+- @shared: Catch all for util functions, hooks, constants and components used both in the primary apps and the above (more tightly scoped) pieces of functionality.
 
 # Code of Conduct:
 
