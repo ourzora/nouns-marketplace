@@ -1,4 +1,6 @@
-# Nounish Auction Hooks / Queries / Provider & Componentry
+# NounishAuction
+
+Componentry, provider, hooks designed for interaction and display of nounish auction activity.
 
 ## Dao Config Object:
 
