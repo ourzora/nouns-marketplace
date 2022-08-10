@@ -38,7 +38,7 @@ const { chains, provider } = configureChains(
 )
 
 const { connectors } = getDefaultWallets({
-  appName: 'Contract Manager',
+  appName: 'Noun Market',
   chains,
 })
 
