@@ -79,7 +79,7 @@ First and foremost this is a [Next.js](https://nextjs.org/) App. Additionally th
 
 This project levereges the [zora-api](https://api.zora.co/) for most data fetching. We are actively integrating additional noun specific functionality into our endpoints. Integrations will be tracked in this project's changelog.
 
-Direct message [@ZORAEngineering](https://twitter.com/ZORAEngineering) on Twitter for an API key if your needs require greater than 30 requests per mintue. To access the API with a key, add a header in your requests with the key X-API-KEY.
+Direct message [@ZORAEngineering](https://twitter.com/ZORAEngineering) on Twitter for an API key if your needs require greater than 30 requests per minute. To access the API with a key, add a header in your requests with the key X-API-KEY.
 
 #### Packages:
 
