@@ -27,7 +27,16 @@ const nextConfig = {
         },
       ],
     })
-
+    config.module.rules.push({
+      test: /\.(md|mdx)?$/,
+      use: [
+        {
+          loader: '@mdx-js/loader',
+          /** @type {import('@mdx-js/loader').Options} */
+          options: {},
+        },
+      ],
+    })
     return config
   },
 }

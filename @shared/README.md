@@ -1,5 +1,3 @@
-# ZORA Shared
+# Zora Common
 
-constants, hooks, and utils shared accross packages.
-
-TODO: consolidate the files, split out util functions into smaller chunks
+A collection of constants, hooks, react components, and utility functions shared between **_packages_**.

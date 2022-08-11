@@ -1,5 +1,7 @@
 # Zora Collection Filter Composition
 
+Component suite designed to accomplish NFT display and filtering.
+
 Filter NFTs
 
 ```
@@ -26,5 +28,3 @@ Filter NFTs
   <Collections />
 </CollectionFilterProvider>
 ```
-
-String Config
