@@ -1,9 +1,7 @@
 import { Label, Stack } from '@zoralabs/zord'
-import { PageWrapper } from 'components/PageWrapper'
 import { Link } from 'components'
-import { MAX_WIDTH } from 'styles/style-constants'
+import { TestPageWrapper, MDXComponents } from 'components'
 import Readme from './../../README.md'
-import { TestPageWrapper } from 'components/utils/TestPageWrapper'
 
 const pageLinks = [
   {
@@ -23,10 +21,10 @@ const pageLinks = [
 export default function TestPages() {
   return (
     <TestPageWrapper useBackButton={false} title="About ⌐◨-◨">
-      <Stack>
-        <Readme />
+      <Stack gap="x4">
+        <Readme components={{ ...MDXComponents }} />
       </Stack>
-      <Stack p="x6" w="100%" mx="auto" style={{ maxWidth: MAX_WIDTH.MED }}>
+      <Stack p="x6" w="100%">
         {pageLinks.map((link) => (
           <Link key={link.url} href={`/test/${link.url}`}>
             <Label>{link.name}</Label>

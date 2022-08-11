@@ -17,8 +17,8 @@ globalStyle('*', {
   fontFamily: "'ptBold', Arial, Helvetica, sans-serif!important",
 })
 
-globalStyle('h1, h2, h3', {
-  fontFamily: "'Londrina Solid', Verdana, Geneva, sans-serif!important",
+globalStyle('h1, h2, h3, h4, h5', {
+  fontFamily: 'var(--display-font)!important',
   lineHeight: '1.125!important',
 })
 
