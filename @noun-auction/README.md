@@ -1,4 +1,4 @@
-# NounishAuction
+# Noun Auction
 
 Componentry, provider, hooks designed for interaction and display of nounish auction activity.
 

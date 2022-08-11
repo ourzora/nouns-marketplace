@@ -14,7 +14,7 @@ export interface TestPageWrapperProps extends PageWrapperProps {
 
 export function TestPageWrapper({
   children,
-  title = 'Test Page',
+  title,
   description,
   maxWidth,
   useBackButton = true,
@@ -26,25 +26,28 @@ export function TestPageWrapper({
       mx="auto"
       style={{ maxWidth: maxWidth ? maxWidth : MAX_WIDTH.MED }}
     >
-      <Stack p="x6" w="100%" mx="auto" gap="x6">
-        <Flex id="test-page-header" justify="space-between">
-          <Heading>{title}</Heading>
-          {useBackButton && (
-            <Link href="/test">
-              <Flex
-                align="center"
-                gap="x2"
-                px="x4"
-                py="x2"
-                backgroundColor="tertiary"
-                borderRadius="phat"
-              >
-                <Icon id="ChevronLeft" />
-                <Label>Back</Label>
-              </Flex>
-            </Link>
-          )}
-        </Flex>
+      <Stack px="x6" w="100%" mx="auto" gap="x6">
+        {title ||
+          (useBackButton && (
+            <Flex id="test-page-header" justify="space-between">
+              {title && <Heading>{title}</Heading>}
+              {useBackButton && (
+                <Link href="/test">
+                  <Flex
+                    align="center"
+                    gap="x2"
+                    px="x4"
+                    py="x2"
+                    backgroundColor="tertiary"
+                    borderRadius="phat"
+                  >
+                    <Icon id="ChevronLeft" />
+                    <Label>Back</Label>
+                  </Flex>
+                </Link>
+              )}
+            </Flex>
+          ))}
         {description && <Paragraph>{description}</Paragraph>}
         {children}
       </Stack>

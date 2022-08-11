@@ -22,7 +22,6 @@ export const code = {
 export const codeSelector = style([
   {
     ...code,
-    whiteSpace: 'pre-line',
   },
 ])
 
