@@ -6,9 +6,29 @@ import {
   ulSelector,
   aSelector,
   hrSelector,
+  h1Selector,
 } from './UtilStyles.css'
 
-export const H1 = ({ ...props }) => <Heading as="h1" size="xl" {...props} />
+export function slugify(string?: string) {
+  if (string) {
+    return string
+      .toString()
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '')
+  } else {
+    return null
+  }
+}
+
+export const H1 = ({ ...props }) => {
+  const id = props?.children ? slugify(props?.children) : ''
+  return <Heading id={id} as="h1" size="xl" {...props} className={[h1Selector]} />
+}
 
 export const H2 = ({ ...props }) => <Heading as="h2" size="md" {...props} />
 
@@ -32,16 +52,19 @@ export const BlockQuote = ({ ...props }) => (
 
 export const UL = ({ ...props }) => <Box as="ul" {...props} className={[ulSelector]} />
 
-export const A = ({ ...props }) => (
-  <Paragraph
-    as="a"
-    size="md"
-    {...props}
-    className={[aSelector]}
-    target="_blank"
-    rel="noreferrer"
-  />
-)
+export const A = ({ ...props }) => {
+  const isLink = props?.href.startsWith('http')
+  return (
+    <Paragraph
+      as="a"
+      size="md"
+      {...props}
+      className={[aSelector]}
+      target={isLink ? '_blank' : '_self'}
+      rel={isLink ? 'noreferrer' : 'noopener'}
+    />
+  )
+}
 
 export const EM = ({ ...props }) => (
   <Heading

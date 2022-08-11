@@ -101,11 +101,11 @@ We have created this [playground](https://zord-playroom.vercel.app/#?code=N4Igxg
 
 The codebase is configured to use [Alchemy](https://www.alchemy.com/) as the RPC provider.
 
-In general we use [Wagmi](https://wagmi.sh/docs/providers/configuring-chains) as a convenience for interacting with Etherium.
+In general we use [Wagmi](https://wagmi.sh/docs/providers/configuring-chains) as a convenience for interacting with Ethereum.
 
 [RainbowKit](https://www.rainbowkit.com/) for wallet connect UI.
 
-[Ethers.js](https://docs.ethers.io/v5/) for more specific Etherium interactions.
+[Ethers.js](https://docs.ethers.io/v5/) for more specific Ethereum interactions.
 
 # Codebase Structure:
 
@@ -119,7 +119,7 @@ You may notice that there are a number of directories prefixed with the @ symbol
 - @media: NFT display componentry.
 - @shared: Catch all for util functions, hooks, constants and components used both in the primary apps and the above (more tightly scoped) pieces of functionality.
 
-# Code of Conduct:
+# How to Contribute:
 
 - Before making contributions please study the codebase and follow the code patterns present as closely as possible.
 - Do not add additional dependencies amidst other work, please propose dependency additions in advance as an issue.

@@ -36,7 +36,7 @@ Componentry, provider, hooks designed for interaction and display of nounish auc
   hideThumbnail?: boolean
   hideTitle?: boolean
   hideCollectionTitle?: boolean
-  thumbnailSize?: 'lg' | 'xxs' | 'xs' | 'sm' | 'md' | '100%' | undefined
+  thumbnailSize?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | '100%' | undefined
   routePrefix?: string
 
   showAuctionRow?: boolean
