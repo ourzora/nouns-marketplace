@@ -21,7 +21,7 @@ export function BetaTag() {
   )
 
   return (
-    <Link href="/test">
+    <Link href="/docs">
       <Flex
         ref={childRef}
         backgroundColor="tertiary"

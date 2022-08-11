@@ -1,18 +1,23 @@
 import { useState } from 'react'
-import { Heading, Stack, color, Flex, Icon } from '@zoralabs/zord'
-import { Link } from 'components'
-import { TestPageWrapper, MDXComponents, HorizontalMenu } from 'components'
+import { Heading, Stack, color, Button, Icon } from '@zoralabs/zord'
+import Link from 'next/link'
+import { DocsPageWrapper, MDXComponents, HorizontalMenu } from 'components'
 
 import Readme from './../../README.md'
 import NounishAuctionReadme from '../../@noun-auction/README.md'
 import ZoraCommonReadme from '../../@shared/README.md'
 import ZoraMarketReadme from '../../@market/README.md'
 import NFTFilterReadme from '../../@filter/README.md'
+import ZordReadme from '../../docs/zord.md'
 
 const pageLinks = [
   {
-    name: 'Active Noun Auction',
-    url: 'active-noun-auction',
+    name: 'Nounish Auction Component',
+    url: 'nounish-auction-component',
+  },
+  {
+    name: 'Zord Components',
+    url: 'zord-components',
   },
 ]
 
@@ -21,6 +26,7 @@ enum tabs {
   NOUNISH_AUCTION = 'Nounish Auction',
   ZORA_COMMON = 'Zora Common',
   ZORA_MARKET = 'Zora Market',
+  ZORD = 'Zord',
   NFT_FILTER = 'NFT Filter',
   EXAMPLES = 'Examples',
 }
@@ -36,7 +42,7 @@ export default function TestPages() {
   const [tab, setTab] = useState<string>(menuItems[0].id)
 
   return (
-    <TestPageWrapper useBackButton={false}>
+    <DocsPageWrapper useBackButton={false}>
       <HorizontalMenu
         items={menuItems}
         setId={setTab}
@@ -62,20 +68,28 @@ export default function TestPages() {
         {tab === tabs.ZORA_MARKET && (
           <ZoraMarketReadme components={{ ...MDXComponents }} />
         )}
+        {tab === tabs.ZORD && <ZordReadme components={{ ...MDXComponents }} />}
         {tab === tabs.NFT_FILTER && <NFTFilterReadme components={{ ...MDXComponents }} />}
         {tab === tabs.EXAMPLES && (
-          <Stack w="100%">
+          <Stack w="100%" gap="x4">
             {pageLinks.map((link) => (
-              <Link key={link.url} href={`/test/${link.url}`}>
-                <Flex align="center" gap="x3">
-                  <Heading size="xs">{link.name}</Heading>
+              <Link key={link.url} href={`/docs/${link.url}`} passHref>
+                <Button
+                  borderRadius="curved"
+                  as="a"
+                  align="center"
+                  gap="x3"
+                  display="flex"
+                  alignItems="center"
+                >
+                  {link.name}
                   <Icon id="ArrowRight" size="lg" />
-                </Flex>
+                </Button>
               </Link>
             ))}
           </Stack>
         )}
       </Stack>
-    </TestPageWrapper>
+    </DocsPageWrapper>
   )
 }

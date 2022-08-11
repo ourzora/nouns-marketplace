@@ -1,11 +1,16 @@
 import { NounishAuction } from '@noun-auction'
 import { daos } from 'constants/collection-addresses'
-import { TestPageWrapper } from 'components/utils/TestPageWrapper'
+import { DocsPageWrapper } from 'components/utils/DocsPageWrapper'
 import { Grid, Heading, Stack } from '@zoralabs/zord'
 
 export default function NounsAuctionHistory() {
   return (
-    <TestPageWrapper title="Active Noun Auction" width="100%" maxWidth="960px">
+    <DocsPageWrapper
+      title="Active Noun Auction"
+      width="100%"
+      maxWidth="960px"
+      useBackButton
+    >
       <Grid style={{ gridTemplateColumns: '1fr' }} gap="x4">
         {daos.map((dao) => {
           return (
@@ -122,6 +127,6 @@ export default function NounsAuctionHistory() {
           p="x4"
         />
       </Stack>
-    </TestPageWrapper>
+    </DocsPageWrapper>
   )
 }
