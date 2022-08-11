@@ -2,6 +2,8 @@ import { Label, Stack } from '@zoralabs/zord'
 import { PageWrapper } from 'components/PageWrapper'
 import { Link } from 'components'
 import { MAX_WIDTH } from 'styles/style-constants'
+import Readme from './../../README.md'
+import { TestPageWrapper } from 'components/utils/TestPageWrapper'
 
 const pageLinks = [
   {
@@ -20,7 +22,10 @@ const pageLinks = [
 
 export default function TestPages() {
   return (
-    <PageWrapper>
+    <TestPageWrapper useBackButton={false} title="About ⌐◨-◨">
+      <Stack>
+        <Readme />
+      </Stack>
       <Stack p="x6" w="100%" mx="auto" style={{ maxWidth: MAX_WIDTH.MED }}>
         {pageLinks.map((link) => (
           <Link key={link.url} href={`/test/${link.url}`}>
@@ -28,6 +33,6 @@ export default function TestPages() {
           </Link>
         ))}
       </Stack>
-    </PageWrapper>
+    </TestPageWrapper>
   )
 }

@@ -11,6 +11,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@mdx-js/loader": "^2.1.2",
     "@n8tb1t/use-scroll-position": "^2.0.3",
     "@radix-ui/react-accordion": "^0.1.6",
     "@radix-ui/react-checkbox": "^0.1.5",

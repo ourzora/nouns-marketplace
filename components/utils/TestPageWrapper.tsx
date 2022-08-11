@@ -9,6 +9,7 @@ export interface TestPageWrapperProps extends PageWrapperProps {
   title?: string
   description?: string
   maxWidth?: string
+  useBackButton?: boolean
 }
 
 export function TestPageWrapper({
@@ -16,6 +17,7 @@ export function TestPageWrapper({
   title = 'Test Page',
   description,
   maxWidth,
+  useBackButton = true,
   ...props
 }: TestPageWrapperProps) {
   return (
@@ -27,19 +29,21 @@ export function TestPageWrapper({
       <Stack p="x6" w="100%" mx="auto" gap="x6">
         <Flex id="test-page-header" justify="space-between">
           <Heading>{title}</Heading>
-          <Link href="/test">
-            <Flex
-              align="center"
-              gap="x2"
-              px="x4"
-              py="x2"
-              backgroundColor="tertiary"
-              borderRadius="phat"
-            >
-              <Icon id="ChevronLeft" />
-              <Label>Back</Label>
-            </Flex>
-          </Link>
+          {useBackButton && (
+            <Link href="/test">
+              <Flex
+                align="center"
+                gap="x2"
+                px="x4"
+                py="x2"
+                backgroundColor="tertiary"
+                borderRadius="phat"
+              >
+                <Icon id="ChevronLeft" />
+                <Label>Back</Label>
+              </Flex>
+            </Link>
+          )}
         </Flex>
         {description && <Paragraph>{description}</Paragraph>}
         {children}
