@@ -33,20 +33,20 @@ A Nouns marketplace for originals and derivatives projects.
 > Clone the repo
 
 ```
-  git clone https://github.com/ourzora/nouns-marketplace.git
+git clone https://github.com/ourzora/nouns-marketplace.git
 ```
 
 > Install dependencies
 
 ```
-  cd nouns-marketplace
-  yarn
+cd nouns-marketplace
+yarn
 ```
 
 > Run locally on port 3000
 
 ```
-  yarn dev
+yarn dev
 ```
 
 # Environment Variables
@@ -54,21 +54,21 @@ A Nouns marketplace for originals and derivatives projects.
 ### Public (Included in repo):
 
 ```
-  NEXT_PUBLIC_SITE_TITLE='Your App Name'
-  NEXT_PUBLIC_SITE_DESCRIPTION='Your app description'
-  NEXT_PUBLIC_TWITTER_HANDLE='Your twitter handle'
-  NEXT_PUBLIC_WEBSITE_URL='http://localhost:3000' (modify this VAR in your deployment to reflect the Public URL)
-  NEXT_PUBLIC_NETWORK_URL=1 (Mainnet - thats what we're working with here)
-  NEXT_PUBLIC_GA_TRACKING_ID= IF you want to add this sort of thing.
-  NEXT_PUBLIC_GALACTUS_BASE_URL=https://api.zora.co/graphql
+NEXT_PUBLIC_SITE_TITLE='Your App Name'
+NEXT_PUBLIC_SITE_DESCRIPTION='Your app description'
+NEXT_PUBLIC_TWITTER_HANDLE='Your twitter handle'
+NEXT_PUBLIC_WEBSITE_URL='http://localhost:3000' (modify this VAR in your deployment to reflect the Public URL)
+NEXT_PUBLIC_NETWORK_URL=1 (Mainnet - thats what we're working with here)
+NEXT_PUBLIC_GA_TRACKING_ID= IF you want to add this sort of thing.
+NEXT_PUBLIC_GALACTUS_BASE_URL=https://api.zora.co/graphql
 ```
 
 ### Private (Don't commit to repo, reference .env.local.example) - .env.local
 
 ```
-  NEXT_PUBLIC_ZORA_API_KEY=
-  NEXT_PUBLIC_INFURA_ID=
-  NEXT_PUBLIC_RPC_URL=
+NEXT_PUBLIC_ZORA_API_KEY=
+NEXT_PUBLIC_INFURA_ID=
+NEXT_PUBLIC_RPC_URL=
 ```
 
 # Dependencies:

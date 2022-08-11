@@ -7,6 +7,7 @@ import {
   aSelector,
   hrSelector,
   h1Selector,
+  pSelector,
 } from './UtilStyles.css'
 
 export function slugify(string?: string) {
@@ -38,7 +39,9 @@ export const H4 = ({ ...props }) => <Heading as="h4" size="xs" {...props} />
 
 export const H5 = ({ ...props }) => <Heading as="h5" size="sm" {...props} />
 
-export const P = ({ ...props }) => <Paragraph as="p" size="md" {...props} />
+export const P = ({ ...props }) => (
+  <Paragraph as="p" size="md" {...props} className={pSelector} />
+)
 
 export const Pre = ({ ...props }) => <Box as="pre" {...props} className={codeWrapper} />
 
@@ -89,6 +92,6 @@ export const MDXComponents = {
   code: Code,
   blockquote: BlockQuote,
   ul: UL,
-  em: EM,
+  // em: EM,
   hr: HR,
 }

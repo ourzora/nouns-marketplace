@@ -1,4 +1,4 @@
-# Noun Auction
+# Noun Auction Components
 
 Componentry, provider, hooks designed for interaction and display of nounish auction activity.
 
@@ -30,7 +30,7 @@ Componentry, provider, hooks designed for interaction and display of nounish auc
   # NOTE the classifier prefix on LilNoun - zora's api prefixes the auction type for the specific aution contract.
 ```
 
-### PROPS:
+### Props:
 
 ```
   hideThumbnail?: boolean

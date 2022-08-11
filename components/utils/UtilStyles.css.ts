@@ -82,3 +82,13 @@ export const hrSelector = style([
     h: 'x0',
   }),
 ])
+
+export const pSelector = style({})
+
+globalStyle(`${pSelector} em`, {
+  fontStyle: 'italic',
+})
+
+globalStyle(`${pSelector} strong, ${pSelector} strong em`, {
+  fontFamily: 'var(--display-font)!important',
+})

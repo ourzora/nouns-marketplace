@@ -23,10 +23,10 @@ const pageLinks = [
 
 enum tabs {
   ABOUT = 'About',
+  ZORD = 'Zord',
   NOUNISH_AUCTION = 'Nounish Auction',
   ZORA_COMMON = 'Zora Common',
   ZORA_MARKET = 'Zora Market',
-  ZORD = 'Zord',
   NFT_FILTER = 'NFT Filter',
   EXAMPLES = 'Examples',
 }

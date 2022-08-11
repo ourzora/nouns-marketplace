@@ -179,18 +179,6 @@ export const filterGridHeader = style([
 
 ```
 
-**_In Props_**
-
-```
-
-```
-
-- in atoms
-- in styles
-- in props
-
-## Shorthands
-
 ## Spacing
 
 You'll notice that the Box component above `height='x10'`
