@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Heading, Stack, color, Button, Icon } from '@zoralabs/zord'
+import { Stack, color, Button, Icon } from '@zoralabs/zord'
 import Link from 'next/link'
 import { DocsPageWrapper, MDXComponents, HorizontalMenu } from 'components'
 
