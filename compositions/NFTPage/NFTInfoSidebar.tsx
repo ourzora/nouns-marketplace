@@ -25,8 +25,6 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
   )
   const { isComplete, activeAuctionId } = useNounishAuctionProvider()
 
-  console.log(isComplete, activeAuctionId)
-
   return (
     <Box id="nft-info-sidebar" className={nftInfoSidebar} {...props}>
       <Stack className={nftInfoSidebarWrapper}>
