@@ -2,9 +2,9 @@
 
 Easily add UI to interact with Noun & LilNoun live auctions. Configuration via component props allows you to display various auction related UI including placing a bid, settling a completed auction & displaying auction history for a given token.
 
-Currently we are using a proxy route in the next.js application to poll the token's associated auction contract. This will soon be deprecated in favor of using the Zora Api for this realtime data.
+Currently we are using a proxy route in the next.js application to poll the token's associated auction contract. This will soon be deprecated in favor of using the [Zora API](https://api.zora.co/) for this realtime data.
 
-We also want to open this up to accept all NounsDao style contracts, as of now the below functionality is coupled to Nouns & LilNouns.
+We also want to open this up to accept all NounsDao style contracts. As of now the below functionality is coupled to Nouns & LilNouns.
 
 [Click here](https://noun.market/docs/nounish-auction-component) see the component with various config options in action.
 
@@ -12,13 +12,13 @@ We also want to open this up to accept all NounsDao style contracts, as of now t
 
 # Usage:
 
-First off the only required prop is the `daoConfig` object, we need to know the NFT contract address, and the auction contract address along with the zora api market type and the auction contract abi:
+First off the only required prop is the `daoConfig` object, we need to know the NFT contract address, and the auction contract address along with the Zora API market type and the auction contract abi:
 
 ### DaoConfig Prop:
 
 > Nouns
 
-```
+```tsx
 {
   name: 'Nouns',
   contractAddress: '0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03',
@@ -31,9 +31,9 @@ First off the only required prop is the `daoConfig` object, we need to know the 
 
 > LilNouns
 
-Relatively simple for Nouns, Lil Nouns has it's own classifier in the zora api and so we need to indicate that in the config object's `marketType` & `classifierPrefix` keys:
+Relatively simple for Nouns, Lil Nouns has its own classifier in the Zora API and so we need to indicate that in the config object's `marketType` & `classifierPrefix` keys:
 
-```
+```tsx
 {
   name: 'LilNoun',
   contractAddress: '0x4b10701Bfd7BFEdc47d50562b76b436fbB5BdB3B',
@@ -53,7 +53,7 @@ Relatively simple for Nouns, Lil Nouns has it's own classifier in the zora api a
 
 > To render a live auction, add this component to your layout:
 
-```
+```tsx
 import { NounishAuction } from '@noun-auction'
 ...
 <NounishAuction daoConfig={dao} />
@@ -61,13 +61,13 @@ import { NounishAuction } from '@noun-auction'
 
 > To render auction history of a specific token:
 
-```
+```tsx
 <NounishAuction
   daoConfig={dao}
   showAuctionRow={false} \* We don't want to show the live auction *\
-  tokenId={tokenId} \* lets pass in a dynamic tokenId *\
+  tokenId={tokenId} \* let's pass in a dynamic tokenId *\
   showBidHistory
-  layout="historyOnly" \* Spec the css variant for the desired layout *\
+  layout="historyOnly" \* Spec the CSS variant for the desired layout *\
 />
 ```
 
@@ -75,7 +75,7 @@ import { NounishAuction } from '@noun-auction'
 
 # Auction / Token Data:
 
-> To access the auction / token data via react's provider + hook pattern:
+> To access the auction / token data via React's provider + hook pattern:
 
 ```
 import { NounishAuctionProvider } from '@noun-auction'
@@ -87,7 +87,7 @@ import { NounishAuctionProvider } from '@noun-auction'
 </NounishAuctionProvider>
 ```
 
-> For a specific token pass in a token Id (expects a string):
+> For a specific token pass in a tokenId (expects a string):
 
 ```
 <NounishAuctionProvider daoConfig={dao} tokenId='200'>
@@ -95,7 +95,7 @@ import { NounishAuctionProvider } from '@noun-auction'
 </NounishAuctionProvider>
 ```
 
-> Usage in child component, lets check for the active auction token id for LilNouns:
+> Usage in child component, let's check for the active auction tokenId for LilNouns:
 
 ```
 import { useNounishAuctionProvider } from '@noun-auction'
@@ -106,7 +106,7 @@ const { activeAuctionId  } = useNounishAuctionProvider()
 ```
 
 > FUN TIP 🎨:  
-> Because we are using `@zoralabs/zord` You can add additional styles to the wrapper component via atom props:
+> Because we are using `@zoralabs/zord` you can add additional styles to the wrapper component via atom props:
 
 ```
 <NounishAuction
