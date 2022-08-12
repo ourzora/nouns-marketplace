@@ -1,6 +1,6 @@
 # NFT Filter
 
-Component suite designed to accomplish NFT display and filtering, using the [Zora API](https://api.zora.co/) for nft & collection data. The layout includes a sidebar with a variety of filtering options which you can expose via props.
+Component suite designed to accomplish NFT display and filtering, using the [Zora API](https://api.zora.co/) for NFT & collection data. The layout includes a sidebar with a variety of filtering options which you can expose via props.
 
 Leverages [SWR](https://swr.vercel.app/) under the hood for data fetching.
 [Zora ZDK](https://zdk.zora.co/) for requests, check the [repo](https://github.com/ourzora/zdk) for return types.
@@ -49,7 +49,7 @@ const {
 />
 ```
 
-The `Filter` Component provides UI for filtering, but your don't need to use it. All of the functions and data are exposed via hooks. Items will return an array of Nfts in the shape defined [here](https://github.com/ourzora/nft-hooks/blob/main/src/types/NFTInterface.ts#L253-L315) in our nft-hooks library
+The `Filter` Component provides UI for filtering, but you don't need to use it. All of the functions and data are exposed via hooks. Items will return an array of NFTs in the shape defined [here](https://github.com/ourzora/nft-hooks/blob/main/src/types/NFTInterface.ts#L253-L315) in our nft-hooks library
 
 > Reading and Interacting with the Filtered NFTS:
 
@@ -61,7 +61,7 @@ isEmpty /* Boolean - no nfts available */
 handleLoadMore /* Move to next page index */
 ```
 
-> Initial Filter Store State (parameters by which nfts will be filtered by):
+> Initial Filter Store State (parameters by which NFTs will be filtered by):
 
 ```
 export const initialFilterState: FilterState = {
