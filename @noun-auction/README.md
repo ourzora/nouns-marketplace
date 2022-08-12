@@ -131,12 +131,14 @@ const { activeAuctionId  } = useNounishAuctionProvider()
 # Props:
 
 ```
+  daoConfig: DaoConfigProps
+  tokenId?: string
+
+  /* Layout element configuration */
   hideThumbnail?: boolean
   hideTitle?: boolean
   hideCollectionTitle?: boolean
   thumbnailSize?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | '100%' | undefined
-  routePrefix?: string
-
   showAuctionRow?: boolean
   showBidHistory?: boolean
   useInlineBid?: boolean
@@ -144,9 +146,8 @@ const { activeAuctionId  } = useNounishAuctionProvider()
   useErrorMsg?: boolean
   showTopBid?: boolean
   showLabels?: boolean
+  routePrefix?: string
 
-  daoConfig: DaoConfigProps
-  tokenId?: string
   /* Theming */
   layout?: keyof typeof auctionWrapperVariants['layout']
 ```
