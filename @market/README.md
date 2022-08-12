@@ -1,33 +1,15 @@
 # Zora Marketplace Components
 
-Suite of components and hooks refactored out of the .co codebase with some design modifications.
+Suite of UI Components and hooks for interacting with [Zora's V3 market contracts](https://docs.zora.co/docs/v3-overview):
 
-Peer Dependencies (Zora)
+#### Currently supported:
 
-````@zoralabs/zord
-@zoralabs/zdk
-@zoralabs/v3```
-
-Peer Dependencies
-```wagmi + ethers
-````
-
-## Interactions
+[V3 Asks V1.1](https://docs.zora.co/docs/smart-contracts/modules/Asks/zora-v3-asks-v1.1)
 
 - Fill Ask
 - Create Ask
 
-## Display
+[V3 Approvals](https://docs.zora.co/docs/guides/v3-approvals)
 
-- Collection Stats
-
-## Utility
-
-- WalletBalance
-- Contract Interaction Status
-- ErrorRenderer
-- TransactionSubmit Button
-
-## Hooks / Providers
-
-- useRelevantMarkets
+- Approve Transfer Helper
+- Module Manager -> V3 Asks
