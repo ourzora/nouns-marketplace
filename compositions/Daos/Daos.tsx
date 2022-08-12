@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import { Stack, Heading, Box, color } from '@zoralabs/zord'
+import { Stack, Heading, Box } from '@zoralabs/zord'
 import { NounishAuction } from '@noun-auction'
 import { daos } from 'constants/collection-addresses'
 import { daosWrapper, daosRow } from './Daos.css'
@@ -13,12 +12,7 @@ export function DaoTable({ routePrefix }: { routePrefix?: string }) {
       <Stack className="nounish-auction_dao-rows" gap="x4">
         {daos.map((dao) => (
           <Box className={daosRow} key={dao.contractAddress}>
-            <NounishAuction
-              daoConfig={dao}
-              hideCollectionTitle={false}
-              routePrefix={routePrefix}
-              showLabels
-            />
+            <NounishAuction daoConfig={dao} showLabels />
           </Box>
         ))}
       </Stack>

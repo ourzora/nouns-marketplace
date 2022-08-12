@@ -28,7 +28,6 @@ export function NFTHistory({ ...props }: NFTHistoryProps) {
           daoConfig={dao}
           tokenId={tokenId}
           showBidHistory
-          showLabels
           layout="historyOnly"
         />
       </Stack>
