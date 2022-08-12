@@ -2,11 +2,11 @@
 
 ## Getting Started
 
-Adding to your project boils down to;
+Adding to your project boils down to:
 
-1. Add zord stylesheet from `@zoralabs/zord/index.css`
+1. Add Zord stylesheet from `@zoralabs/zord/index.css`
 2. Set up webfonts
-3. Add zord root component
+3. Add Zord root component
 4. Add peer dependencies (we're working on making this easier!)
 
 **_Current Dependencies_**
