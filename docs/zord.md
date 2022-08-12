@@ -7,6 +7,23 @@ Adding to your project boils down to;
 1. Add zord stylesheet from `@zoralabs/zord/index.css`
 2. Set up webfonts
 3. Add zord root component
+4. Add peer dependencies (we're working on making this easier!)
+
+**_Current Dependencies_**
+
+```
+  "@radix-ui/react-accordion": "^0.1.5",
+  "@radix-ui/react-checkbox": "^0.1.5",
+  "@radix-ui/react-dialog": "^0.1.5",
+  "@radix-ui/react-icons": "^1.1.0",
+  "@radix-ui/react-radio-group": "^0.1.5",
+  "@radix-ui/react-separator": "^0.1.4",
+  "@radix-ui/react-slider": "^0.1.4",
+  "@vanilla-extract/css": "^1.6.8",
+  "@vanilla-extract/recipes": "^0.2.3",
+  "@vanilla-extract/sprinkles": "^1.4.0",
+  "clsx": "^1.1.1",
+```
 
 ### Usage with Next.js
 
