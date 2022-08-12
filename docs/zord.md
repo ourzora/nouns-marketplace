@@ -1,10 +1,10 @@
 # Zord Documentation
 
-Zord uses a heavily-adapted styling implementation based on the Vanilla Extract styling framework. At Zora, we've found that this system allows us to develop front-end code rapidly with a core set of design primitives that can be customized using a large set of pre-defined CSS properties that adhere to Zora's theme specs. At its core, Zord makes extensive use of Vanilla Extract's [Sprinkles](https://vanilla-extract.style/documentation/packages/sprinkles/) package to statically generate CSS classes that can be re-used without continually adding to an app's CSS footprint.
+Zord uses a heavily-adapted styling implementation based on the Vanilla Extract styling framework. At Zora, we've found that this system allows us to develop front-end code rapidly using design primitives that can be customized using a large set of pre-defined CSS properties that adhere to Zora's theme specifications. At its core, Zord makes extensive use of Vanilla Extract's [Sprinkles](https://vanilla-extract.style/documentation/packages/sprinkles/) package to statically generate CSS classes that can be re-used without continually adding to an app's CSS footprint.
 
 ## Themes
 
-Theming with Zord is done by defining an object known as a "_Theme Contract_", a term for a common interface of consistent design tokens defined in a central theme file and then used throughout a site's components. Themes are most commonly used to define theme colors, but can also be used to specify typefaces, spacing conventions, borders, animation standards, and more.
+Theming with Zord is done by defining an object known as a "_Theme Contract_", a common interface of consistent design tokens defined in a central theme file and then used throughout a site's components. Themes are most commonly used to define theme colors, but can also be used to specify typefaces, spacing conventions, borders, animation standards, and more.
 
 Multiple implementations of a Theme Contract can exist on a single site, and the themes can be swapped in + out to enable, for example, dark and light theme variations, or themes designed to assist users who are visually impaired.
 
@@ -17,19 +17,34 @@ TODO: How can we easily let people customize themes?
 - spacing
 - breakpoints
 
+## Basic styles
+
+```
+// Container.css.ts
+import { atoms } from '../atoms'
+import { style } from '@vanilla-extract/css'
+
+export const container = style({
+  width: '100%',
+  height: '200px',
+  backgroundColor: '#DEDEDE'
+})
+```
+
+The most familiar way of styling a component is using the style() function in an external CSS file. `style` writes to a .css file on build, and `container` is exported as a className that can be applied elements in markup: `<div className={styles.container}>`
+
 ## Atoms
 
-At the heart of Zord are a broad set of the most commonly-used CSS properties, which we call atoms, which enable a developer to apply styles to components in a number of ways:
+At the heart of Zord are a broad set of atoms, a selection of the most commonly-used CSS properties. Atoms enable a developer to take advantage of the filesize efficiencies gained by pre-defined classes while applying styles to components in a number of ways:
 
 - in a separate stylesheet
 - as props
-- directly into a className attribute using the atoms() function
+- directly into a className attribute using the atoms() function (handy for applying styles to non-Zord components!)
 
-**Separate Stylesheets**
-
-**_Stylesheet_**
+**_Separate Stylesheets:_**
 
 ```
+// Box.css.ts
 import { atoms } from '../atoms'
 import { style } from '@vanilla-extract/css'
 
@@ -39,13 +54,20 @@ export const box = atoms({
 })
 ```
 
-You can also combine atoms with styles that aren't included in the atomic presets:
+```
+// Box.tsx
+import * as styles from 'Box.css.ts'
+<Box className={styles.box} />
+```
+
+You can also add atomic styles to style declarations alongside styles that aren't included in the atomic presets:
 
 ```
+// Box.css.ts
 export const box = style([
   {
     boxSizing: 'border-box',
-    backgroundImage: url("paper.gif")
+    backgroundImage: url("zora-is-nice.gif")
   },
   atoms({
    width: '100%',
@@ -54,36 +76,64 @@ export const box = style([
 ])
 ```
 
-So in the above example, the styles defined within atoms() will apply the pre-existing static styles, and not add to the size of the stylesheet.
+So in the above example, the styles defined within `atoms()` will apply the pre-generated static styles, and not add to the size of the stylesheet.
 
-**_Markup_**
-
-```
-import * as styles from 'Box.css.ts'
-<Box className={styles.box} />
-```
-
-**Atoms As Props**
+**_Atoms as props:_**
 
 ```
+// Box.tsx
 <Box
   width='100%'
   height='x10'
 />
 ```
 
-**In className attributes**
+**_In className attributes (handy for adding atomic styles to non-Zord-based components):_**
 
 ```
-<Box className={atoms({
+// GenericContainer.tsx
+<div className={atoms({
   width: '100%',
   height: 'x10'
 })} />
 ```
 
+## Spacing
+
+You'll notice that the Box component above specifies height as `height='x10'`.
+
+Zora implements a spacing system based on 4px increments:
+
+```
+export const space = {
+  n2: '-8px',
+  n1: '-4px',
+  x0: '0px',
+  x1: '4px',
+  x2: '8px',
+  x3: '12px',
+  x4: '16px',
+  x5: '20px'
+  ... (+ many more)
+}
+```
+
+These spacing increments can be applied to the following atomic properties:
+
+```
+padding (p, paddingTop, paddingBottom, paddingLeft, paddingRight, pt, pb, pl, pr, px, py)
+margin (m, marginTop, marginBottom, marginLeft, marginRight, mt, mb, ml, mr, m, mx, my)
+gap
+top
+left
+bottom
+right
+inset
+```
+
 ## Shorthands
 
-Zord also allows the use of a small set of shorthand convenience properties that are often found in other styling systems. They can be especially useful for defining multiple properties at once, eg. `py='x4'` sets both paddingTop and paddingBottom to 16px.
+Zord has a small set of shorthand convenience properties that may look familiar if you've used other popular styling systems. They can be especially useful for defining multiple properties at once, eg. `py='x4'` sets both paddingTop and paddingBottom to 16px.
 
 ```
   shorthands: {
@@ -133,11 +183,12 @@ const conditions = {
 } as const
 ```
 
-There are a few ways of applying styles using the breakpoints:
+There are a few ways of applying responsive styles:
 
 **_In Props_**
 
 ```
+// Stack.tsx
  <Stack
    px="x4"
    py={{
@@ -151,6 +202,7 @@ There are a few ways of applying styles using the breakpoints:
 **_In Stylesheets_**
 
 ```
+// ComponentName.css.ts
 import { atoms, media } from '@zoralabs/zord'
 
 export const marginTop = atoms({
@@ -179,22 +231,59 @@ export const filterGridHeader = style([
 
 ```
 
-## Spacing
+Note the different methods used to apply media queries inside the normal `style({})` block vs. inside of the `atoms({})` block.
 
-You'll notice that the Box component above `height='x10'`
+## Box Component
 
-Zora implements spacing increment
+The functionality above is all encapsulated into the Box component, a polymorphic component that defaults to a `<div>` element but can take on the form of other elements by specifying an `as`. This allows us to build any kind of component with Box and inherit all of the useful styling behavior for free.
+
+Let's have a look at an example.
 
 ```
-export const space = {
-  n2: '-8px',
-  n1: '-4px',
-  x0: '0px',
-  x1: '4px',
-  x2: '8px',
-  x3: '12px',
-  x4: '16px',
-  x5: '20px'
-  ... (+ many more)
+// UserCard.tsx
+
+export interface UserCardProps extends BoxProps {
+  user: User
+  as?: React.ElementType
+}
+
+export function UserCard({
+  user,
+  className,
+  as,
+}: UserCardProps) {
+ return (
+  <Box as={as} className={['zora-usercard', styles.card, className]}>
+   <Heading as="h3" size="lg">{user.name}</Heading>
+   <Paragraph size="md">{user.bio}</Paragraph>
+  </Box>
+ )
 }
 ```
+
+There are a few things going on here.
+
+First, let's have a look at `<Heading>`, a general-purpose component. Heading has a number of size variants. By separating the style implementation from the semantic element used, we have full control over how semantic HTML is applied in different contexts. Here, we implement the heading `as='h3'`, but in other contexts we might want a heading with `size="lg"` to be implemented `as="h1"`.
+
+UserCard accepts `as` props and is wrapped by a `Box` that implements it: `as={as}`. So UserCard can take context-specific semantic HTML based on usage: `<UserCard as="div" user={user} />` in the default case, `<UserCard as="li" user={user} />` for use inside of an `<ul>`, and so on.
+
+One more thing to point out: className takes an array: `className={['zora-usercard', styles.card, className]}`. Under the hood, Box is using _clsx_, a super-lightweight package for constructing className strings conditionally. It's similar to the popular _classNames_ package. Any component inheriting BoxProps from Box can receive styles as an array without the need to explicitly use `clsx()`.
+
+## Text Component
+
+In the `<UserCard>` code block above, we discussed `<Header>` briefly. It's worth going into more detail. Under the hood, `<Header>` is based on a generic `<Text>` component, which inherits its behaviour from `<Box>`. `<Text>` has a large number of variants with custom fontSize, fontWeight, lineHeight. Rather than exposing this large set of variants as a single complex `<Text>` component, Zord creates a number of convenient text components to reflect these presets:
+
+```
+<Display>
+<Heading>
+<Paragraph>
+<Eyebrow>
+<MenuText>
+<Label>
+```
+
+These text components can generally receive one or more size props: `xs | sm | md | lg | xl`
+
+## Mixins
+
+-- todo
