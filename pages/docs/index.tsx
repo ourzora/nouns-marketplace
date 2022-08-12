@@ -26,8 +26,8 @@ enum tabs {
   ZORD = 'Zord',
   NOUNISH_AUCTION = 'Nounish Auction',
   // ZORA_COMMON = 'Zora Common',
-  ZORA_MARKET = 'Zora Market',
   NFT_FILTER = 'NFT Filter',
+  ZORA_MARKET = 'Zora Market',
   EXAMPLES = 'Examples',
 }
 
