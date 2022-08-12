@@ -23,7 +23,7 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
     tokenId,
     nft?.metadata?.name
   )
-  const { isComplete } = useNounishAuctionProvider()
+  const { isComplete, activeAuctionId } = useNounishAuctionProvider()
 
   return (
     <Box id="nft-info-sidebar" className={nftInfoSidebar} {...props}>

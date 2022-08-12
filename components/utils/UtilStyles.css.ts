@@ -1,5 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, color, typography } from '@zoralabs/zord'
+import { atoms, color, radii, space, typography } from '@zoralabs/zord'
 
 export const codeWrapper = style([
   atoms({
@@ -87,6 +87,15 @@ export const pSelector = style({})
 
 globalStyle(`${pSelector} em`, {
   fontStyle: 'italic',
+})
+
+globalStyle(`${pSelector} code`, {
+  paddingLeft: space.x2,
+  paddingRight: space.x2,
+  paddingTop: space.x1,
+  paddingBottom: space.x1,
+  backgroundColor: color.black5,
+  borderRadius: radii.small,
 })
 
 globalStyle(`${pSelector} strong, ${pSelector} strong em`, {

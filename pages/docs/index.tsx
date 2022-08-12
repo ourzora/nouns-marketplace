@@ -25,7 +25,7 @@ enum tabs {
   ABOUT = 'About',
   ZORD = 'Zord',
   NOUNISH_AUCTION = 'Nounish Auction',
-  ZORA_COMMON = 'Zora Common',
+  // ZORA_COMMON = 'Zora Common',
   ZORA_MARKET = 'Zora Market',
   NFT_FILTER = 'NFT Filter',
   EXAMPLES = 'Examples',
@@ -62,9 +62,9 @@ export default function TestPages() {
         {tab === tabs.NOUNISH_AUCTION && (
           <NounishAuctionReadme components={{ ...MDXComponents }} />
         )}
-        {tab === tabs.ZORA_COMMON && (
+        {/*tab === tabs.ZORA_COMMON && (
           <ZoraCommonReadme components={{ ...MDXComponents }} />
-        )}
+        )*/}
         {tab === tabs.ZORA_MARKET && (
           <ZoraMarketReadme components={{ ...MDXComponents }} />
         )}
