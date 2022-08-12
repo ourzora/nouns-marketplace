@@ -13,3 +13,7 @@ Suite of UI Components and hooks for interacting with [Zora's V3 market contract
 
 - Approve Transfer Helper
 - Module Manager -> V3 Asks
+
+### Coming Soon:
+
+- Edit / Cancel listings

@@ -1,4 +1,4 @@
-import { Flex } from '@zoralabs/zord'
+import { Flex, Stack, Label, Separator, Icon } from '@zoralabs/zord'
 import { PoweredByZora } from '@zora-brand'
 import { footerWrapper } from './Footer.css'
 import { useWindowWidth } from '@shared'
@@ -8,7 +8,22 @@ export function FooterComposition() {
 
   return (
     <Flex as="footer" className={footerWrapper}>
-      <PoweredByZora size={isLarge ? 48 : 32} />
+      <Stack align="center" gap="x3">
+        <PoweredByZora size={isLarge ? 48 : 32} />
+        <Separator />
+        <Flex align="center" gap="x2">
+          <Label
+            as="a"
+            size="lg"
+            href="https://github.com/ourzora/nouns-marketplace"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Github
+          </Label>
+          <Icon id="ArrowRightAngle" size="sm" />
+        </Flex>
+      </Stack>
     </Flex>
   )
 }
