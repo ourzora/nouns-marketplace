@@ -32,6 +32,11 @@ export const background = style([
     maxHeight: 'calc(100vh - 30px)',
     overflowY: 'auto',
     background: 'white',
+    msOverflowStyle: 'none',
+    scrollbarWidth: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
   },
   atoms({ borderRadius: 'normal' }),
 ])
