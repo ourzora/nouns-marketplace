@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { color, space, atoms } from '@zoralabs/zord'
+import { color, space, atoms, media } from '@zoralabs/zord'
 
 export const horizontalMenuButton = style([
   {
@@ -16,4 +16,19 @@ export const horizontalMenuButton = style([
     pb: 'x2',
     color: 'primary',
   }),
+])
+
+export const horizontalMenuWrapper = style([
+  {
+    overflowX: 'scroll',
+    '@media': {
+      [media.min768]: {
+        msOverflowStyle: 'none',
+        scrollbarWidth: 'none',
+        '::-webkit-scrollbar': {
+          display: 'none',
+        },
+      },
+    },
+  },
 ])

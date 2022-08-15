@@ -1,6 +1,6 @@
 import { useCallback, MouseEvent, Dispatch, SetStateAction } from 'react'
 import { Flex, FlexProps, Button, Box } from '@zoralabs/zord'
-import { horizontalMenuButton } from './HorizontalMenu.css'
+import { horizontalMenuButton, horizontalMenuWrapper } from './HorizontalMenu.css'
 import { lightFont } from '@shared'
 
 export interface HorizontalMenuProps extends FlexProps {
@@ -31,7 +31,7 @@ export function HorizontalMenu({
   )
 
   return (
-    <Flex gap="x6" justify="center" overflowX="scroll" {...props}>
+    <Flex className={horizontalMenuWrapper} gap="x6" justify="center" {...props}>
       {items.map((item) => (
         <Button
           key={item.label}
