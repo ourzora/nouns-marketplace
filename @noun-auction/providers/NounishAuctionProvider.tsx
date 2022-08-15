@@ -13,6 +13,7 @@ import { defaultDaoConfig } from '@noun-auction/constants'
 import { useContractRead } from 'wagmi'
 import { numberFormatter, roundTwoDecimals } from '@shared'
 import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
+import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
 
 export type NounishAuctionProviderProps = {
   tokenId?: string
@@ -35,6 +36,7 @@ const NounsAuctionContext = createContext<{
   layout?: keyof typeof auctionWrapperVariants['layout']
   activeAuctionId: string | undefined
   rpcAuctionData: any
+  apiAuctionData: any
 }>({
   daoConfig: defaultDaoConfig,
   timerComplete: false,
@@ -42,6 +44,7 @@ const NounsAuctionContext = createContext<{
   activeAuctionId: undefined,
   setTimerComplete: () => {},
   rpcAuctionData: undefined,
+  apiAuctionData: undefined,
 })
 
 export function useNounishAuctionProvider() {
@@ -58,6 +61,8 @@ export function NounishAuctionProvider({
     daoConfig
 
   const { data: auctionData } = useAuctionRPC(daoConfig.auctionContractAddress)
+
+  const { data: activeAuction } = useActiveNounishAuction()
 
   const { data: minBidIncrementPercentage } = useContractRead({
     addressOrName: auctionContractAddress,
@@ -135,6 +140,7 @@ export function NounishAuctionProvider({
         activeAuctionId: auctionData ? auctionData?.auction?.nounId : undefined,
         daoConfig: daoConfig,
         rpcAuctionData: auctionData?.auction,
+        apiAuctionData: activeAuction,
         setTimerComplete,
         layout,
         auctionData: normalizedAuctionData,

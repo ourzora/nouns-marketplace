@@ -94,3 +94,70 @@ export type NormalizedAuctionData = {
   }
   rpcData: ContractAuctionData
 }
+
+export type ActiveNounishAuctionResponse =
+  | {
+      /**
+       * Nounish NFT address
+       */
+      collectionAddress: string
+      /**
+       * Nounish Auction Contract Address
+       */
+      marketAddress: string
+      /**
+       * Zora API Market Type Classifier
+       */
+      marketType: 'ACTIVE_LIL_NOUNS_AUCTION' | 'ACTIVE_NOUNS_AUCTION'
+      properties: {
+        /**
+         * Auction ID = Token ID
+         */
+        auctionId: string
+        /**
+         * ID of Token/NFT up for auction
+         */
+        tokenId: string
+        /**
+         * Currency used for AUCTION. Curreny ETH (0 Address)
+         */
+        auctionCurrency: string
+        /**
+         * Unix TimeStamp
+         */
+        startTime: string
+        /**
+         * Unix TimeStamp
+         */
+        endTime: string
+        /**
+         * Numerical String
+         */
+        duration: string
+        /**
+         * Date object: 2022-08-15T17:33:54+00:00
+         */
+        estimatedDurationTime: string
+        /**
+         * Date object: 2022-08-15T17:33:54+00:00
+         */
+        firstBidTime: string
+        /**
+         * null - should be numerical string
+         */
+        minBidIncrementPercentage: null
+        /**
+         * null?
+         */
+        timeBuffer: null
+        /**
+         * ETH Wallet Address
+         */
+        highestBidder: string | null
+        /**
+         * ETH Wallet Address
+         */
+        winner: string | null
+      }
+    }
+  | undefined
