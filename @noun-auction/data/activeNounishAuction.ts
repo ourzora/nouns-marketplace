@@ -1,11 +1,15 @@
-export function activeNounishAuction() {
+import { returnMarketProps } from '@noun-auction/constants'
+import { NounishMarketTypes } from '@noun-auction/typings'
+
+export function activeNounishAuction(marketType?: string) {
+  const marketProps = returnMarketProps(marketType as NounishMarketTypes)
   return `{
-    market(where: {marketType: ACTIVE_LIL_NOUNS_AUCTION}) {
+    market(where: {marketType: ${marketProps?.activeAuctionType}}) {
       collectionAddress
       marketAddress
       marketType
       properties {
-        ... on LilNounsAuction {
+        ... on ${marketProps?.propertyType} {
           auctionId
           tokenId
           auctionCurrency
@@ -18,6 +22,16 @@ export function activeNounishAuction() {
           timeBuffer
           highestBidder
           winner
+          highestBidPrice {
+            chainTokenPrice {
+              decimal
+              raw
+            }
+            usdcPrice {
+              decimal
+              raw
+            }
+          }
         }
       }
     }

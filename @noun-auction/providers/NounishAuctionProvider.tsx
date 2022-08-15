@@ -8,7 +8,7 @@ import {
   SetStateAction,
 } from 'react'
 import { useNounishAuctionQuery, useAuctionRPC } from '@noun-auction/hooks'
-import { DaoConfigProps } from '@noun-auction/typings'
+import { DaoConfigProps, ActiveNounishAuctionResponse } from '@noun-auction/typings'
 import { defaultDaoConfig } from '@noun-auction/constants'
 import { useContractRead } from 'wagmi'
 import { numberFormatter, roundTwoDecimals } from '@shared'
@@ -35,15 +35,15 @@ const NounsAuctionContext = createContext<{
   setTimerComplete: Dispatch<SetStateAction<boolean>>
   layout?: keyof typeof auctionWrapperVariants['layout']
   activeAuctionId: string | undefined
-  rpcAuctionData: any
-  apiAuctionData: any
+  // rpcAuctionData: any
+  apiAuctionData: ActiveNounishAuctionResponse
 }>({
   daoConfig: defaultDaoConfig,
   timerComplete: false,
   auctionData: undefined,
   activeAuctionId: undefined,
   setTimerComplete: () => {},
-  rpcAuctionData: undefined,
+  // rpcAuctionData: undefined,
   apiAuctionData: undefined,
 })
 
@@ -61,8 +61,7 @@ export function NounishAuctionProvider({
     daoConfig
 
   const { data: auctionData } = useAuctionRPC(daoConfig.auctionContractAddress)
-
-  const { data: activeAuction } = useActiveNounishAuction()
+  const { data: activeAuction } = useActiveNounishAuction(daoConfig.marketType)
 
   const { data: minBidIncrementPercentage } = useContractRead({
     addressOrName: auctionContractAddress,
@@ -136,10 +135,9 @@ export function NounishAuctionProvider({
         isComplete,
         noAuctionHistory,
         timerComplete,
-        tokenId: tokenId ? tokenId : auctionData?.auction?.nounId,
-        activeAuctionId: auctionData ? auctionData?.auction?.nounId : undefined,
+        tokenId: tokenId ? tokenId : activeAuction?.properties?.tokenId,
+        activeAuctionId: auctionData ? activeAuction?.properties?.tokenId : undefined,
         daoConfig: daoConfig,
-        rpcAuctionData: auctionData?.auction,
         apiAuctionData: activeAuction,
         setTimerComplete,
         layout,

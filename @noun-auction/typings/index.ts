@@ -95,6 +95,11 @@ export type NormalizedAuctionData = {
   rpcData: ContractAuctionData
 }
 
+export type TokenPrice = {
+  decimal: number
+  raw: string
+}
+
 export type ActiveNounishAuctionResponse =
   | {
       /**
@@ -158,6 +163,10 @@ export type ActiveNounishAuctionResponse =
          * ETH Wallet Address
          */
         winner: string | null
+        highestBidPrice: {
+          chainTokenPrice: TokenPrice | null
+          usdcPrice: TokenPrice | null
+        }
       }
     }
   | undefined

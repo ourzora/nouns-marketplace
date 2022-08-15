@@ -19,16 +19,14 @@ export function AuctionCountdown({
 }: {
   endedCopy?: string
 } & SharedDataRendererProps) {
-  const { setTimerComplete, layout, rpcAuctionData, apiAuctionData } =
-    useNounishAuctionProvider()
+  const { setTimerComplete, layout, apiAuctionData } = useNounishAuctionProvider()
 
   const { text, isEnded } = useCountdown(
-    rpcAuctionData?.startTime,
-    rpcAuctionData?.endTime
+    apiAuctionData?.properties?.startTime,
+    apiAuctionData?.properties?.endTime
   )
 
   useEffect(() => {
-    console.log(apiAuctionData)
     if (isEnded) {
       setTimerComplete(true)
     } else {
@@ -36,10 +34,9 @@ export function AuctionCountdown({
     }
   }, [
     isEnded,
-    rpcAuctionData,
-    rpcAuctionData?.startTime,
-    rpcAuctionData?.endTime,
     apiAuctionData,
+    apiAuctionData?.properties?.startTime,
+    apiAuctionData?.properties?.endTime,
   ])
 
   return (

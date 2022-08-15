@@ -54,7 +54,7 @@ export function SortDropdown() {
 
   const activitySelectHandler = useCallback(
     (option) => {
-      console.log('OPTION', option)
+      // console.log('OPTION', option)
       setSortMethod(option)
       closeDropdown()
     },
