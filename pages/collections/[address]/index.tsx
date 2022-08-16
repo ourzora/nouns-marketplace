@@ -30,6 +30,7 @@ const Collection = ({
 
   const dao = returnDao(contractAddress)
 
+  /*
   const items: HorizontalMenuProps['items'] = [
     {
       id: 'nfts',
@@ -42,6 +43,7 @@ const Collection = ({
       handler: () => setMenuSelection('activity'),
     },
   ]
+  */
 
   useEffect(() => {
     if (collection && collection?.name) {

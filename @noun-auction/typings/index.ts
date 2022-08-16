@@ -79,22 +79,6 @@ export type ContractAuctionData = {
     | undefined
 }
 
-export type NormalizedAuctionData = {
-  countdown: {
-    startTime: string
-    endTime: string
-  }
-  highBid: {
-    ethValue: string
-    usdcValue: string
-  }
-  bidder: {
-    address: string
-    txHash: string
-  }
-  rpcData: ContractAuctionData
-}
-
 export type TokenPrice = {
   decimal: number
   raw: string
