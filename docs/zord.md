@@ -383,6 +383,32 @@ export const filterGridHeader = style([
 
 Note the different methods used to apply media queries inside the normal `style({})` block vs. inside of the `atoms({})` block.
 
+## Selectors
+
+[Vanilla Extract' Styling API](https://github.com/seek-oss/vanilla-extract#styling-api) requires that special selectors like ':hover' and '&[data-state="checked"]&:hover&:not([disabled])' must be nested inside of a `selectors:{}` object, and there are rules about targeting with which you should familiarize yourself.
+
+```ts
+export const link = style([
+  {
+    outline: 'none',
+    textDecoration: 'none',
+    selectors: {
+      // <-- Nested selectors object
+      '&:focus, &:hover': {
+        '@media': {
+          [media.min768]: {
+            backgroundColor: vars.color.background.tertiary,
+          },
+        },
+      },
+    },
+  },
+  atoms({
+    color: 'primary',
+  }),
+])
+```
+
 ## Box Component
 
 The functionality above is all encapsulated into the Box component, a polymorphic component that defaults to a `<div>` element but can take on the form of other elements by specifying an `as`. This allows us to build any kind of component with Box and inherit all of the useful styling behavior for free.
