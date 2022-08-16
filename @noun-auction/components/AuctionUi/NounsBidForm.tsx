@@ -53,15 +53,15 @@ export function NounsBidForm({
     daoConfig: { auctionContractAddress, abi },
     tokenId,
     contract: { minBidIncrementPercentage, reservePrice },
-    auctionData,
+    activeAuction,
   } = useNounishAuctionProvider()
 
-  if (!abi || !auctionContractAddress) return null
+  if (!abi || !auctionContractAddress || !activeAuction) return null
 
   const { minBidAmount } = useNounBidIncrement(
-    auctionData?.rpcData?.amount,
     minBidIncrementPercentage,
-    reservePrice
+    reservePrice,
+    activeAuction?.properties?.highestBidPrice?.chainTokenPrice?.raw
   )
 
   const { data: signer } = useSigner()

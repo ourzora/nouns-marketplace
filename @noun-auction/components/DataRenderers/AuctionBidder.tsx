@@ -17,29 +17,26 @@ export function AuctionBidder({
   layoutDirection = 'row',
   showLabels,
   useAvatar = true,
-  useTxLink = false,
   ...props
 }: {
   useAvatar?: boolean
-} & SharedDataRendererProps & { useTxLink?: boolean }) {
-  const { layout, auctionData } = useNounishAuctionProvider()
+} & SharedDataRendererProps) {
+  const { layout, activeAuction } = useNounishAuctionProvider()
 
   const { data: ensName } = useEnsName({
-    address: auctionData?.rpcData?.bidder,
+    address: activeAuction?.properties?.highestBidder || undefined,
   })
 
-  const shortAddress = useShortAddress(auctionData?.rpcData?.bidder)
+  const shortAddress = useShortAddress(activeAuction?.properties?.highestBidder)
 
-  const buildTxLink = useMemo(
-    () => `https://etherscan.io/tx/${auctionData?.bidder.txHash}`,
-    [auctionData?.bidder.txHash]
+  const highestBidder = useMemo(
+    () => activeAuction?.properties?.highestBidder,
+    [activeAuction, activeAuction?.properties?.highestBidder]
   )
 
   return (
     <Flex
       direction={layoutDirection}
-      as={useTxLink ? 'a' : 'div'}
-      href={useTxLink ? buildTxLink : ''}
       target="_blank"
       gap={layoutDirection === 'row' ? 'x2' : 'x0'}
       rel="noreferrer"
@@ -49,7 +46,6 @@ export function AuctionBidder({
         '@initial': `${layout === 'row' ? 'none' : 'flex'}`,
         '@1024': 'flex',
       }}
-      pointerEvents={useTxLink ? 'all' : 'none'}
       {...props}
     >
       {showLabels && (
@@ -69,17 +65,17 @@ export function AuctionBidder({
           style={{ lineHeight: '1.15' }}
           align="right"
           className={[sideBarUpperLabel]}
-          color={auctionData?.rpcData?.bidder !== AddressZero ? 'primary' : 'tertiary'}
+          color={highestBidder !== AddressZero ? 'primary' : 'tertiary'}
         >
-          {auctionData?.rpcData?.bidder !== AddressZero ? (
+          {highestBidder !== AddressZero ? (
             <Flex gap="x2" align="center">
               <Label size="md" gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
                 {ensName ? ensName : shortAddress}
               </Label>
               {useAvatar && (
                 <>
-                  {layout !== 'sideBarBid' ? (
-                    <EnsAvatar address={auctionData?.rpcData?.bidder} />
+                  {layout !== 'sideBarBid' && highestBidder ? (
+                    <EnsAvatar address={highestBidder} />
                   ) : (
                     <Icon id="ArrowRightAngle" />
                   )}

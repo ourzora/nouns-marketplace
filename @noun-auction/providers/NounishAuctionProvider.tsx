@@ -27,7 +27,6 @@ const NounsAuctionContext = createContext<{
   error?: any
   daoConfig: DaoConfigProps
   tokenId?: string
-  isComplete?: boolean
   noAuctionHistory?: boolean
   contract?: any
   timerComplete: boolean
@@ -35,16 +34,14 @@ const NounsAuctionContext = createContext<{
   setTimerComplete: Dispatch<SetStateAction<boolean>>
   layout?: keyof typeof auctionWrapperVariants['layout']
   activeAuctionId: string | undefined
-  // rpcAuctionData: any
-  apiAuctionData: ActiveNounishAuctionResponse
+  activeAuction: ActiveNounishAuctionResponse
 }>({
   daoConfig: defaultDaoConfig,
   timerComplete: false,
   auctionData: undefined,
   activeAuctionId: undefined,
   setTimerComplete: () => {},
-  // rpcAuctionData: undefined,
-  apiAuctionData: undefined,
+  activeAuction: undefined,
 })
 
 export function useNounishAuctionProvider() {
@@ -57,10 +54,10 @@ export function NounishAuctionProvider({
   layout,
   children,
 }: NounishAuctionProviderProps) {
-  const { marketType, contractAddress, classifierPrefix, abi, auctionContractAddress } =
-    daoConfig
+  const { marketType, contractAddress, abi, auctionContractAddress } = daoConfig
 
-  const { data: auctionData } = useAuctionRPC(daoConfig.auctionContractAddress)
+  const [timerComplete, setTimerComplete] = useState(false)
+
   const { data: activeAuction } = useActiveNounishAuction(daoConfig.marketType)
 
   const { data: minBidIncrementPercentage } = useContractRead({
@@ -78,25 +75,8 @@ export function NounishAuctionProvider({
   const { data, error } = useNounishAuctionQuery({
     marketType: marketType,
     contractAddress: contractAddress,
-    tokenId: tokenId ? tokenId : auctionData?.auction?.nounId,
+    tokenId: tokenId ? tokenId : activeAuction?.properties?.tokenId,
   })
-
-  const [timerComplete, setTimerComplete] = useState(false)
-
-  const isComplete = useMemo(() => {
-    if (!data) {
-      return false
-    } else if (data?.token?.markets.length) {
-      return (
-        data?.token?.markets[0]?.status === 'COMPLETED' ||
-        Object.values(data?.events?.nodes[0]?.properties).includes(
-          `${classifierPrefix?.typePrefix}NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT`
-        )
-      )
-    } else {
-      return false
-    }
-  }, [data])
 
   const noAuctionHistory = useMemo(() => {
     if (data) return data?.events?.nodes.length === 0
@@ -122,26 +102,25 @@ export function NounishAuctionProvider({
           address: marketProperties?.highestBidder,
           txHash: marketData?.transactionInfo.transactionHash,
         },
-        rpcData: auctionData?.auction,
+        rpcData: activeAuction,
       }
     }
-  }, [data, auctionData])
+  }, [data, activeAuction])
 
   return (
     <NounsAuctionContext.Provider
       value={{
         data,
         error,
-        isComplete,
         noAuctionHistory,
         timerComplete,
         tokenId: tokenId ? tokenId : activeAuction?.properties?.tokenId,
-        activeAuctionId: auctionData ? activeAuction?.properties?.tokenId : undefined,
+        activeAuctionId: activeAuction ? activeAuction?.properties?.tokenId : undefined,
         daoConfig: daoConfig,
-        apiAuctionData: activeAuction,
+        activeAuction: activeAuction,
+        auctionData: normalizedAuctionData,
         setTimerComplete,
         layout,
-        auctionData: normalizedAuctionData,
         contract: {
           minBidIncrementPercentage: minBidIncrementPercentage,
           isPaused: isPaused,

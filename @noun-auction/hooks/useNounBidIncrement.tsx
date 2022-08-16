@@ -3,20 +3,11 @@ import BigNumber from 'bignumber.js'
 import { utils, BigNumber as EthersBN, BigNumberish } from 'ethers'
 
 export function useNounBidIncrement(
-  rawCurrentBidAmount: string,
   minBidIncrementPercentage: number,
-  reservePrice: BigNumberish
+  reservePrice: BigNumberish,
+  rawCurrentBidAmount?: string
 ) {
-  /*
-  console.log({
-    minBidIncrementPercentage: minBidIncrementPercentage,
-    raw: reservePrice.valueOf(),
-    pretty: reservePrice.toString(),
-  })
-  */
   const computeMinBid = useMemo(() => {
-    // const reserveBn = new BigNumber(reservePrice.toString())
-
     if (!minBidIncrementPercentage || !rawCurrentBidAmount) {
       return {
         raw: reservePrice.valueOf(),

@@ -17,7 +17,7 @@ export function AuctionHighBid({
 }: {
   useUsdc?: boolean
 } & SharedDataRendererProps) {
-  const { layout, auctionData } = useNounishAuctionProvider()
+  const { layout, timerComplete, activeAuction } = useNounishAuctionProvider()
 
   return (
     <Flex
@@ -34,16 +34,16 @@ export function AuctionHighBid({
           color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
           mb={layout === 'sideBarBid' ? 'x2' : 'x0'}
         >
-          {label}
+          {timerComplete ? 'Winning bid' : label}
         </Label>
       )}
-      {auctionData?.rpcData?.amount && (
+      {activeAuction?.properties?.highestBidPrice?.chainTokenPrice?.raw && (
         <EthAmount
           style={{ lineHeight: '1.15' }}
           size="md"
           align={layout === 'sideBarBid' ? 'left' : 'right'}
           className={layout === 'sideBarBid' && sidebarHighBid}
-          ethAmount={auctionData?.rpcData?.amount}
+          ethAmount={activeAuction?.properties?.highestBidPrice?.chainTokenPrice?.raw}
         />
       )}
     </Flex>

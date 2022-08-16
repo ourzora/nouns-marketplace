@@ -1,9 +1,6 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { ethers } from 'ethers'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { daos } from 'constants/collection-addresses'
-// import { ContractAuctionData } from '@noun-auction'
-import { nounsTokenAbi } from '@noun-auction'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   const { contract, id } = req.query
