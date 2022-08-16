@@ -1,14 +1,15 @@
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import { Flex, Text, Stack, FlexProps, Box } from '@zoralabs/zord'
-import { CollectionStatsAggregateQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { marketStatsWrapper, stat } from 'styles/styles.css'
 import { roundFourDecimals, roundTwoDecimals } from '@shared'
 import { numberFormatter } from '@shared'
+import { useAggregate } from 'hooks'
 
 import { lightFont } from '@shared'
+import { RawDisplayer } from './utils'
 
 export interface MarketStatesProps extends FlexProps {
-  aggregateStats: CollectionStatsAggregateQuery
+  contractAddress: string
 }
 
 export function StatBlock({
@@ -41,16 +42,24 @@ export function StatBlock({
   )
 }
 
-export function MarketStats({ aggregateStats, ...props }: MarketStatesProps) {
-  const { aggregateStat } = aggregateStats
+export function MarketStats({ contractAddress, ...props }: MarketStatesProps) {
+  const { aggregate } = useAggregate(contractAddress)
 
   const volume = useMemo(
-    () => numberFormatter(roundFourDecimals(aggregateStat?.salesVolume?.chainTokenPrice)),
-    [aggregateStat?.salesVolume?.chainTokenPrice]
+    () =>
+      numberFormatter(
+        roundFourDecimals(
+          aggregate?.aggregateStat?.salesVolume?.chainTokenPrice as number
+        )
+      ),
+    [aggregate?.aggregateStat?.salesVolume?.chainTokenPrice]
   )
   const usdcPrice = useMemo(
-    () => numberFormatter(roundTwoDecimals(aggregateStat?.salesVolume?.usdcPrice)),
-    [aggregateStat?.salesVolume?.usdcPrice]
+    () =>
+      numberFormatter(
+        roundTwoDecimals(aggregate?.aggregateStat?.salesVolume?.usdcPrice as number)
+      ),
+    [aggregate?.aggregateStat?.salesVolume?.usdcPrice]
   )
 
   return (
@@ -65,16 +74,18 @@ export function MarketStats({ aggregateStats, ...props }: MarketStatesProps) {
       >
         <StatBlock
           statType="Owners"
-          statValue={numberFormatter(aggregateStat?.ownerCount)}
+          statValue={numberFormatter(aggregate?.aggregateStat?.ownerCount as number)}
         />
         <StatBlock
           statType="Items"
-          statValue={numberFormatter(aggregateStat?.nftCount)}
+          statValue={numberFormatter(aggregate?.aggregateStat?.nftCount as number)}
         />
         <StatBlock
           statType="Floor Price"
           statValue={`${
-            aggregateStat?.floorPrice === null ? '0' : aggregateStat.floorPrice
+            aggregate?.aggregateStat?.floorPrice === null
+              ? '0'
+              : aggregate?.aggregateStat.floorPrice
           } ETH`}
         />
         <StatBlock statType="Volume" statValue={`${volume} ETH`} />
@@ -89,6 +100,7 @@ export function MarketStats({ aggregateStats, ...props }: MarketStatesProps) {
           }}
         />
       </Flex>
+      <RawDisplayer data={aggregate} />
     </Flex>
   )
 }

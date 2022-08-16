@@ -16,17 +16,13 @@ import { HorizontalMenuProps } from 'components'
 import { returnDao } from 'constants/collection-addresses'
 import { useWindowWidth } from '@shared'
 import { ActiveAuctionCard } from '@noun-auction'
+import { useAggregate } from 'hooks'
 
-const Collection = ({
-  // initialPage,
-  contractAddress,
-  seo,
-  aggregateStats,
-  collection,
-}: CollectionServiceProps) => {
+const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
   const [menuSelection, setMenuSelection] = useState<string>('nfts')
   const { isLarge } = useWindowWidth()
+  const { aggregate } = useAggregate(contractAddress)
 
   const dao = returnDao(contractAddress)
 
@@ -46,13 +42,13 @@ const Collection = ({
   useEffect(() => {
     if (collection && collection?.name) {
       setCurrentCollection(collection.name)
-      setCurrentCollectionCount(`${aggregateStats.aggregateStat.nftCount} NFTs`)
+      setCurrentCollectionCount(`${aggregate?.aggregateStat.nftCount} NFTs`)
     }
     return () => {
       setCurrentCollection('Explore...')
       setCurrentCollectionCount(undefined)
     }
-  }, [aggregateStats, collection, setCurrentCollection, setCurrentCollectionCount])
+  }, [aggregate, collection, setCurrentCollection, setCurrentCollectionCount])
 
   const { data } = useCollection(contractAddress)
 
@@ -61,11 +57,10 @@ const Collection = ({
       <Seo title={seo.title} description={seo.description} />
       <CollectionHeader
         collection={collection}
-        aggregateStats={aggregateStats}
         layout={dao ? 'dao' : 'collection'}
         currentAuction={dao ? <ActiveAuctionCard daoConfig={dao} /> : null}
       >
-        <MarketStats aggregateStats={aggregateStats} />
+        <MarketStats contractAddress={contractAddress} />
       </CollectionHeader>
       {contractAddress && (
         <CollectionFilterProvider

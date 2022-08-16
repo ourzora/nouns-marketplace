@@ -4,8 +4,8 @@ import {
   ContractMarketProps,
   nounAuctionQuery,
   activeAuction,
-  zoraApiFetcher,
 } from '@noun-auction/data'
+import { zoraApiFetcher } from '@shared'
 
 export function useActiveNounishAuctionQuery(params: ContractMarketProps) {
   const { data: response, error } = useSWR(

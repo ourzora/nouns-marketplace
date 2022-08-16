@@ -1,8 +1,5 @@
 import { Stack, Paragraph, GridProps, Grid, Flex } from '@zoralabs/zord'
-import {
-  Collection,
-  CollectionStatsAggregateQuery,
-} from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { AddressWithLink } from '@market'
 import { PageHeader } from '../../components/PageHeader'
 import {
@@ -11,12 +8,11 @@ import {
   daoHeaderWrapper,
   collectionNameThumbDao,
 } from 'styles/styles.css'
-import { MAX_WIDTH } from 'styles/style-constants'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { useAggregate } from 'hooks'
 
 export interface CollectionHeaderProps extends GridProps {
   collection: Collection
-  aggregateStats: CollectionStatsAggregateQuery
   children?: JSX.Element
   currentAuction?: JSX.Element | null
   layout?: 'dao' | 'collection'
@@ -24,12 +20,13 @@ export interface CollectionHeaderProps extends GridProps {
 
 export function CollectionHeader({
   collection,
-  aggregateStats,
   children,
   currentAuction,
   layout = 'collection',
   ...props
 }: CollectionHeaderProps) {
+  const { aggregate } = useAggregate(collection.address)
+
   return (
     <Grid
       className={[
@@ -67,7 +64,11 @@ export function CollectionHeader({
             />
             <PageHeader
               headline={collection.name}
-              copy={`${aggregateStats.aggregateStat.nftCount} NFTs`}
+              copy={`${
+                aggregate?.aggregateStat?.nftCount
+                  ? aggregate?.aggregateStat?.nftCount
+                  : '...'
+              } NFTs`}
               align={{
                 '@initial': 'center',
                 '@1024': layout === 'collection' ? 'center' : 'flex-start',
