@@ -54,17 +54,9 @@ export type ActiveNounishAuctionResponse =
       marketType: 'ACTIVE_LIL_NOUNS_AUCTION' | 'ACTIVE_NOUNS_AUCTION'
       properties: {
         /**
-         * Auction ID = Token ID
-         */
-        auctionId: string
-        /**
          * ID of Token/NFT up for auction
          */
         tokenId: string
-        /**
-         * Currency used for AUCTION. Curreny ETH (0 Address)
-         */
-        auctionCurrency: string
         /**
          * Unix TimeStamp
          */
@@ -74,25 +66,9 @@ export type ActiveNounishAuctionResponse =
          */
         endTime: string
         /**
-         * Numerical String
-         */
-        duration: string
-        /**
-         * Date object: 2022-08-15T17:33:54+00:00
-         */
-        estimatedDurationTime: string
-        /**
-         * Date object: 2022-08-15T17:33:54+00:00
-         */
-        firstBidTime: string
-        /**
          * null - should be numerical string
          */
         minBidIncrementPercentage: null
-        /**
-         * null?
-         */
-        timeBuffer: null
         /**
          * ETH Wallet Address
          */
@@ -102,6 +78,10 @@ export type ActiveNounishAuctionResponse =
          */
         winner: string | null
         highestBidPrice: {
+          chainTokenPrice: TokenPrice | null
+          usdcPrice: TokenPrice | null
+        }
+        reservePrice: {
           chainTokenPrice: TokenPrice | null
           usdcPrice: TokenPrice | null
         }

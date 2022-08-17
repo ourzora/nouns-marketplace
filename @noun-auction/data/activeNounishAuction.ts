@@ -10,24 +10,23 @@ export function activeNounishAuction(marketType?: string) {
       marketType
       properties {
         ... on ${marketProps?.propertyType} {
-          auctionId
           tokenId
-          auctionCurrency
           startTime
           endTime
-          duration
-          estimatedDurationTime
-          firstBidTime
           minBidIncrementPercentage
-          timeBuffer
           highestBidder
-          winner
           highestBidPrice {
             chainTokenPrice {
               decimal
               raw
             }
             usdcPrice {
+              decimal
+              raw
+            }
+          }
+          reservePrice {
+            chainTokenPrice {
               decimal
               raw
             }

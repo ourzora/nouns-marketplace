@@ -56,8 +56,6 @@ export function NounsBidForm({
     activeAuction,
   } = useNounishAuctionProvider()
 
-  if (!abi || !auctionContractAddress || !activeAuction) return null
-
   const { minBidAmount } = useNounBidIncrement(
     minBidIncrementPercentage,
     reservePrice,
@@ -109,11 +107,6 @@ export function NounsBidForm({
     },
     [bidAmount]
   )
-
-  useEffect(() => {
-    // console.log('successMsg', successMsg, minBidAmount?.pretty)
-    // successMsg?.hash / successMsg?.value (BigNumber) / successMsg?.gasPrice (BigNumber)
-  }, [isSuccess, successMsg])
 
   return (
     <Box {...props}>

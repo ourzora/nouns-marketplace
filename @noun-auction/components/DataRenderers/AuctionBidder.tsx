@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useEnsName } from 'wagmi'
 import { Flex, Label, Icon } from '@zoralabs/zord'
 import { AddressZero } from '@ethersproject/constants'
@@ -10,7 +10,7 @@ import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 
 // @shared
-import { lightFont, useShortAddress } from '@shared'
+import { lightFont, useShortAddress, isAddressMatch } from '@shared'
 
 export function AuctionBidder({
   label = 'Top bidder',
@@ -30,7 +30,10 @@ export function AuctionBidder({
   const shortAddress = useShortAddress(activeAuction?.properties?.highestBidder)
 
   const highestBidder = useMemo(
-    () => activeAuction?.properties?.highestBidder,
+    () =>
+      activeAuction?.properties?.highestBidder
+        ? activeAuction?.properties?.highestBidder
+        : undefined,
     [activeAuction, activeAuction?.properties?.highestBidder]
   )
 
@@ -65,9 +68,9 @@ export function AuctionBidder({
           style={{ lineHeight: '1.15' }}
           align="right"
           className={[sideBarUpperLabel]}
-          color={highestBidder !== AddressZero ? 'primary' : 'tertiary'}
+          color={!isAddressMatch(highestBidder, AddressZero) ? 'primary' : 'tertiary'}
         >
-          {highestBidder !== AddressZero ? (
+          {!isAddressMatch(highestBidder, AddressZero) ? (
             <Flex gap="x2" align="center">
               <Label size="md" gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
                 {ensName ? ensName : shortAddress}

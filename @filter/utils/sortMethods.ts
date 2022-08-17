@@ -95,7 +95,6 @@ export function sortMethodToSortParams(
 export function marketTypeToFilterParams(
   marketType: MarketStatusFilter
 ): TokensQueryFilter | undefined {
-  // console.log('TokensQueryFilter', marketType)
   switch (marketType) {
     case 'buy-now':
       return {

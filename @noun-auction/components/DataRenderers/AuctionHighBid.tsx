@@ -19,6 +19,8 @@ export function AuctionHighBid({
 } & SharedDataRendererProps) {
   const { layout, timerComplete, activeAuction } = useNounishAuctionProvider()
 
+  const highestBid = activeAuction?.properties?.highestBidPrice?.chainTokenPrice?.raw
+
   return (
     <Flex
       direction={layoutDirection}
@@ -37,13 +39,13 @@ export function AuctionHighBid({
           {timerComplete ? 'Winning bid' : label}
         </Label>
       )}
-      {activeAuction?.properties?.highestBidPrice?.chainTokenPrice?.raw && (
+      {highestBid && (
         <EthAmount
           style={{ lineHeight: '1.15' }}
           size="md"
           align={layout === 'sideBarBid' ? 'left' : 'right'}
           className={layout === 'sideBarBid' && sidebarHighBid}
-          ethAmount={activeAuction?.properties?.highestBidPrice?.chainTokenPrice?.raw}
+          ethAmount={highestBid}
         />
       )}
     </Flex>

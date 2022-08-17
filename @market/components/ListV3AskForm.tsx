@@ -58,7 +58,6 @@ export function ListV3AskForm({
       values: ListV3AskFormState,
       { setSubmitting }: FormikHelpers<ListV3AskFormState>
     ) => {
-      // console.log(values)
       try {
         if (!address || !AsksV11) {
           throw new Error('V3AskContract is not ready, please try again.')
