@@ -43,13 +43,13 @@ export const nounsGlassesLink = style([
   }),
 ])
 
-export const nounsGlasses = style([
-  atoms({
-    w: '100%',
-    h: '100%',
-    inset: 'x0',
-  }),
-])
+// export const nounsGlasses = style([
+//   atoms({
+//     w: '100%',
+//     h: '100%',
+//     inset: 'x0',
+//   }),
+// ])
 
 export const collectionTrigger = style([
   atoms({

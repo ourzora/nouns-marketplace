@@ -2,7 +2,7 @@ import { NFTObject } from '@zoralabs/nft-hooks'
 import { useMemo } from 'react'
 import { Flex, Label, Stack, Heading, BoxProps } from '@zoralabs/zord'
 import { AddressWithLink } from '@market/components/AddressWithLink'
-import { WalletBalance } from '@market/components/WalletBalace'
+import { WalletBalance } from '@market/components/WalletBalance'
 import { useAuth, formatCryptoVal } from '@shared'
 
 export interface FillV3AskInfoProps extends BoxProps {

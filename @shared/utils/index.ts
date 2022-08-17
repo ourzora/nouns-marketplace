@@ -1,4 +1,5 @@
 export * from './validateCurrency'
+export * from './validateENSAddress'
 export * from './zdk'
 export * from './connectors'
 export * from './formatContractError'

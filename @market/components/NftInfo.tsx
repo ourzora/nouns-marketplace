@@ -11,7 +11,7 @@ export enum MODAL_TYPES {
   auction = 'auction',
 }
 
-export function NftInfo({
+export function NFTInfo({
   collectionAddress,
   tokenId,
   askPrice,

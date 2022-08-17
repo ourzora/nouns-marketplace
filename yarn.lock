@@ -1261,7 +1261,16 @@
   resolved "https://registry.yarnpkg.com/@rari-capital/solmate/-/solmate-6.4.0.tgz#c6ee4110c8075f14b415e420b13bd8bdbbc93d9e"
   integrity sha512-BXWIHHbG5Zbgrxi0qVYe0Zs+bfx+XgOciVUACjuIApV0KzC0kY8XdO1higusIei/ZKCC+GUKdcdQZflxYPUTKQ==
 
-"@reach/utils@^0.17.0":
+"@reach/portal@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@reach/portal/-/portal-0.17.0.tgz#1dd69ffc8ffc8ba3e26dd127bf1cc4b15f0c6bdc"
+  integrity sha512-+IxsgVycOj+WOeNPL2NdgooUdHPSY285wCtj/iWID6akyr4FgGUK7sMhRM9aGFyrGpx2vzr+eggbUmAVZwOz+A==
+  dependencies:
+    "@reach/utils" "0.17.0"
+    tiny-warning "^1.0.3"
+    tslib "^2.3.0"
+
+"@reach/utils@0.17.0", "@reach/utils@^0.17.0":
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/@reach/utils/-/utils-0.17.0.tgz#3d1d2ec56d857f04fe092710d8faee2b2b121303"
   integrity sha512-M5y8fCBbrWeIsxedgcSw6oDlAMQDkl5uv3VnMVJ7guwpf4E48Xlh1v66z/1BgN/WYe2y8mB/ilFD2nysEfdGeA==
@@ -1788,7 +1797,7 @@
   dependencies:
     ethers "^5.0.19"
 
-"@zoralabs/nft-hooks@^1.1.7":
+"@zoralabs/nft-hooks@^1.1.8":
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/@zoralabs/nft-hooks/-/nft-hooks-1.1.8.tgz#24bc707be3555afd2e70dce68fdfa9a55982383f"
   integrity sha512-AKXc/ym1BR2UIitDgRc/ud0QHwJVvuoKGjmGsco0Sh6CqzFswy4nBbjBM7UiuuL/84QcArI82KwHMCW5SG1PLA==
@@ -1837,10 +1846,10 @@
     graphql-tag "^2.12.6"
     tslib "^2.2.0"
 
-"@zoralabs/zord@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@zoralabs/zord/-/zord-0.1.0.tgz#d317c2eb9172145cbb740cdfd13c0e8fee5974f7"
-  integrity sha512-4F1vYTYwogdKBmmvxIXH4ru3Rj3hz4kLDqXLreRWbZJ3ACE+fMZA4R7YKE9o368qcJ2DfnOGJxrfQENnug0m6Q==
+"@zoralabs/zord@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@zoralabs/zord/-/zord-0.1.1.tgz#0a5338f9d57b3b09a7c28aedf643b7095e441938"
+  integrity sha512-KDRlQpNcEJDRPP4X1Pn10TXK85yfl5ItZjEU+YEqp+GR21jg1G7d9HSqHRTRsZsJYgGtongJjAaJenMngBWkrg==
   dependencies:
     "@radix-ui/react-switch" "^0.1.5"
     uuid "^8.3.2"
