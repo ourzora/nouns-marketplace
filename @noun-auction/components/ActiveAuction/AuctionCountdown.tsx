@@ -19,11 +19,11 @@ export function AuctionCountdown({
 }: {
   endedCopy?: string
 } & SharedDataRendererProps) {
-  const { setTimerComplete, layout, rpcAuctionData } = useNounishAuctionProvider()
+  const { setTimerComplete, layout, activeAuction } = useNounishAuctionProvider()
 
   const { text, isEnded } = useCountdown(
-    rpcAuctionData?.startTime,
-    rpcAuctionData?.endTime
+    activeAuction?.properties?.startTime,
+    activeAuction?.properties?.endTime
   )
 
   useEffect(() => {
@@ -32,7 +32,12 @@ export function AuctionCountdown({
     } else {
       setTimerComplete(false)
     }
-  }, [isEnded, rpcAuctionData, rpcAuctionData?.startTime, rpcAuctionData?.endTime])
+  }, [
+    isEnded,
+    activeAuction,
+    activeAuction?.properties?.startTime,
+    activeAuction?.properties?.endTime,
+  ])
 
   return (
     <Flex
