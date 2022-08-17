@@ -22,7 +22,7 @@ export const horizontalMenuWrapper = style([
   {
     overflowX: 'scroll',
     '@media': {
-      [media.min768]: {
+      [media.min576]: {
         msOverflowStyle: 'none',
         scrollbarWidth: 'none',
         '::-webkit-scrollbar': {
