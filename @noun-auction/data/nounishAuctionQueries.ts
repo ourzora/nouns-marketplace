@@ -10,28 +10,6 @@ export interface NounAuctionQueryProps extends ContractMarketProps {
   tokenId?: string
 }
 
-export function activeAuction({ marketType, contractAddress }: ContractMarketProps) {
-  return `{
-    markets(
-      filter: {
-        marketFilters: {
-          marketType: ${marketType},
-          statuses: ACTIVE
-        }
-      }, 
-      where: {
-        collectionAddresses: "${contractAddress}"
-      })
-    {
-      nodes {
-        market {
-          tokenId
-        }
-      }
-    }
-  }`
-}
-
 export function nounAuctionQuery({
   contractAddress,
   tokenId,

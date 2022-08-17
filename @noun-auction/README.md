@@ -151,3 +151,127 @@ const { activeAuctionId  } = useNounishAuctionProvider()
   /* Theming */
   layout?: keyof typeof auctionWrapperVariants['layout']
 ```
+
+---
+
+# Queries:
+
+> Full Active Auction Query:
+
+```
+query ActiveNounsAuctionQuery {
+  market(where: {marketType: ACTIVE_NOUNS_AUCTION}) {
+    collectionAddress
+    marketAddress
+    marketType
+    properties {
+      ... on NounsAuction {
+        auctionId
+        tokenId
+        auctionCurrency
+        startTime
+        endTime
+        duration
+        estimatedDurationTime
+        firstBidTime
+        minBidIncrementPercentage
+        timeBuffer
+        highestBidder
+        winner
+        highestBidPrice {
+          chainTokenPrice {
+            decimal
+            raw
+            currency {
+              address
+              decimals
+              name
+            }
+          }
+          usdcPrice {
+            decimal
+            raw
+            currency {
+              address
+              decimals
+              name
+            }
+          }
+          blockNumber
+          nativePrice {
+            currency {
+              address
+              decimals
+              name
+            }
+            decimal
+            raw
+          }
+        }
+        collectionAddress
+        address
+        amount {
+          blockNumber
+          chainTokenPrice {
+            currency {
+              address
+              decimals
+              name
+            }
+            decimal
+            raw
+          }
+          nativePrice {
+            currency {
+              address
+              decimals
+              name
+            }
+            decimal
+            raw
+          }
+          usdcPrice {
+            currency {
+              address
+              decimals
+              name
+            }
+            decimal
+            raw
+          }
+        }
+        reservePrice {
+          blockNumber
+          chainTokenPrice {
+            currency {
+              address
+              decimals
+              name
+            }
+            decimal
+            raw
+          }
+          nativePrice {
+            currency {
+              address
+              decimals
+              name
+            }
+            decimal
+            raw
+          }
+          usdcPrice {
+            currency {
+              address
+              decimals
+              name
+            }
+            decimal
+            raw
+          }
+        }
+      }
+    }
+  }
+}
+```

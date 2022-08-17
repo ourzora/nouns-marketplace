@@ -26,6 +26,7 @@ const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps
 
   const dao = returnDao(contractAddress)
 
+  /*
   const items: HorizontalMenuProps['items'] = [
     {
       id: 'nfts',
@@ -38,6 +39,7 @@ const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps
       handler: () => setMenuSelection('activity'),
     },
   ]
+  */
 
   useEffect(() => {
     if (collection && collection?.name) {

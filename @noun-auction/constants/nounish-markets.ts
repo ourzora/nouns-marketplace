@@ -8,11 +8,13 @@ export type NounishMarketTypesProps = {
   type: NounishMarketTypes
   propertyType: string
   event: string
+  activeAuctionType: string
   eventNodes: {
     properties: string
     propertiesType: string
     eventPropertiesId: string
     bidProperties: string
+    auctionProperties: string
   }
 }
 
@@ -21,27 +23,31 @@ export const nounishMarketTypesLookup: NounishMarketTypesProps[] = [
     type: 'NOUNS_AUCTION',
     propertyType: 'NounsAuction',
     event: 'NOUNS_AUCTION_EVENT',
+    activeAuctionType: 'ACTIVE_NOUNS_AUCTION',
     eventNodes: {
       properties: 'NounsAuctionEvent',
       propertiesType: 'nounsAuctionEventType',
       eventPropertiesId: 'nounId',
       bidProperties: 'NounsAuctionBidEventProperties',
+      auctionProperties: 'NounsAuction',
     },
   },
   {
     type: 'LIL_NOUNS_AUCTION',
     propertyType: 'LilNounsAuction',
     event: 'LIL_NOUNS_AUCTION_EVENT',
+    activeAuctionType: 'ACTIVE_LIL_NOUNS_AUCTION',
     eventNodes: {
       properties: 'LilNounsAuctionEvent',
       propertiesType: 'lilNounsAuctionEventType',
       eventPropertiesId: 'lilNounId',
       bidProperties: 'LilNounsAuctionBidEventProperties',
+      auctionProperties: 'LilNounsAuction',
     },
   },
 ]
 
-export function returnMarketProps(marketType: NounishMarketTypes) {
+export function returnMarketProps(marketType?: NounishMarketTypes) {
   return nounishMarketTypesLookup.find((market) => market.type === marketType)
 }
 
