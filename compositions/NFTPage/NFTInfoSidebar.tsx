@@ -50,11 +50,6 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
             {nft?.metadata?.description}
           </Paragraph>
         )}
-        {!isOwner && (
-          <Stack className={askInfoWrapper}>
-            <FillV3AskInfo showBalance={false} nft={nft} />
-          </Stack>
-        )}
         {nft?.nft && (
           <MarketUi
             contractAddress={nft.nft.contract.address}
