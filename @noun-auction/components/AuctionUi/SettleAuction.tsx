@@ -1,4 +1,4 @@
-import { Button, Icon, Grid, Box, Stack, StackProps, color } from '@zoralabs/zord'
+import { Button, Icon, Box, Stack, StackProps, color } from '@zoralabs/zord'
 import { useContractWrite } from 'wagmi'
 import { useEffect, useState } from 'react'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
@@ -15,7 +15,6 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
   const {
     daoConfig: { abi, auctionContractAddress },
     layout,
-    contract: { isPaused },
   } = useNounishAuctionProvider()
 
   const {
@@ -40,7 +39,6 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
           variant="reverse"
           className={placeBidTrigger}
           w={layout === 'sideBarBid' ? '100%' : 'auto'}
-          disabled={isPaused}
           loading={isLoading}
         >
           Settle Auction

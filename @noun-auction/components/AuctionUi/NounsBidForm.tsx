@@ -52,14 +52,15 @@ export function NounsBidForm({
   const {
     daoConfig: { auctionContractAddress, abi },
     tokenId,
-    contract: { minBidIncrementPercentage, reservePrice },
+    minBidIncrementPercentage,
+    reservePrice,
     activeAuction,
   } = useNounishAuctionProvider()
 
   const { minBidAmount } = useNounBidIncrement(
-    minBidIncrementPercentage,
     reservePrice,
-    activeAuction?.properties?.highestBidPrice?.chainTokenPrice?.raw
+    activeAuction?.properties?.highestBidPrice?.chainTokenPrice?.raw,
+    minBidIncrementPercentage
   )
 
   const { data: signer } = useSigner()
@@ -85,7 +86,6 @@ export function NounsBidForm({
     isError,
     isLoading,
     isSuccess,
-    data: successMsg,
     error: writeContractError,
     write: placeBid,
   } = useContractWrite({

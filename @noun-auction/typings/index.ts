@@ -68,7 +68,7 @@ export type ActiveNounishAuctionResponse =
         /**
          * null - should be numerical string
          */
-        minBidIncrementPercentage: null
+        minBidIncrementPercentage: number
         /**
          * ETH Wallet Address
          */

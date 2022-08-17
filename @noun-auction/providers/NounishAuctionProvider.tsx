@@ -10,7 +10,6 @@ import {
 import { useNounishAuctionQuery } from '@noun-auction/hooks'
 import { DaoConfigProps, ActiveNounishAuctionResponse } from '@noun-auction/typings'
 import { defaultDaoConfig } from '@noun-auction/constants'
-import { useContractRead } from 'wagmi'
 import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
 import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
 
@@ -28,6 +27,8 @@ const NounsAuctionContext = createContext<{
   tokenId?: string
   noAuctionHistory?: boolean
   contract?: any
+  minBidIncrementPercentage?: number
+  reservePrice: string
   timerComplete: boolean
   setTimerComplete: Dispatch<SetStateAction<boolean>>
   layout?: keyof typeof auctionWrapperVariants['layout']
@@ -39,6 +40,7 @@ const NounsAuctionContext = createContext<{
   activeAuctionId: undefined,
   setTimerComplete: () => {},
   activeAuction: undefined,
+  reservePrice: '0.01',
 })
 
 export function useNounishAuctionProvider() {
@@ -51,23 +53,11 @@ export function NounishAuctionProvider({
   layout,
   children,
 }: NounishAuctionProviderProps) {
-  const { marketType, contractAddress, abi, auctionContractAddress } = daoConfig
+  const { marketType, contractAddress } = daoConfig
 
   const [timerComplete, setTimerComplete] = useState(false)
 
   const { data: activeAuction } = useActiveNounishAuction(daoConfig.marketType)
-
-  const { data: minBidIncrementPercentage } = useContractRead({
-    addressOrName: auctionContractAddress,
-    contractInterface: abi,
-    functionName: 'minBidIncrementPercentage',
-  })
-
-  const { data: isPaused } = useContractRead({
-    addressOrName: auctionContractAddress,
-    contractInterface: abi,
-    functionName: 'paused',
-  })
 
   const { data, error } = useNounishAuctionQuery({
     marketType: marketType,
@@ -92,11 +82,8 @@ export function NounishAuctionProvider({
         activeAuction: activeAuction,
         setTimerComplete,
         layout,
-        contract: {
-          minBidIncrementPercentage: minBidIncrementPercentage,
-          isPaused: isPaused,
-          reservePrice: '0.01',
-        },
+        minBidIncrementPercentage: activeAuction?.properties?.minBidIncrementPercentage,
+        reservePrice: '0.01',
       }}
     >
       {children}
