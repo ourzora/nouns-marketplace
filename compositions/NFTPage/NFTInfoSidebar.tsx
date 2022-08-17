@@ -13,6 +13,8 @@ import { PrivateAskModal } from '@market/components/PrivateAsk'
 import { PrivateAskProvider } from '@market/providers/PrivateAskProvider'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types'
 import { useMemo } from 'react'
+import { useAskTokenHelper } from '@market/hooks/useAskTokenHelper'
+import { PrivateAskSidebar } from '@market/components/PrivateAsk/PrivateAskSidebar'
 
 export interface NFTInfoSidebar extends BoxProps {}
 
@@ -20,6 +22,8 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
   const { initialData: nft, tokenId, contractAddress } = useNFTProvider()
 
   if (!nft || !tokenId || !contractAddress) return null
+
+  console.log('NFT', nft)
 
   const { isOwner } = useIsOwner(nft)
   const { fallbackTitle } = useTitleWithFallback(
@@ -29,11 +33,8 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
   )
   const { isComplete, activeAuctionId } = useNounishAuctionProvider()
 
-  const { ask } = useRelevantMarket(nft.markets)
-  const hasActiveAsk = useMemo(
-    () => ask && ask.status === MARKET_INFO_STATUSES.ACTIVE,
-    []
-  )
+  // const { ask } = useRelevantMarket(nft.markets)
+  // const { hasActiveAsk, isPrivateAsk, hasAsk } = useAskTokenHelper(ask)
 
   // export declare enum MARKET_INFO_STATUSES {
   //   PENDING = 'pending',
@@ -75,16 +76,8 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
             <FillV3AskInfo showBalance={false} nft={nft} />
           </Stack>
         )}
-        {isOwner && (
-          // <Stack className={askInfoWrapper}>
-          <PrivateAskProvider>
-            <PrivateAskModal
-              nft={nft}
-              header={<NounsGlasses w="x13" mb="x4" mt="x1" />}
-            />
-          </PrivateAskProvider>
-          // </Stack>
-        )}
+
+        {isOwner && <PrivateAskSidebar nft={nft} />}
         {nft?.nft && (
           <MarketUi
             contractAddress={nft.nft.contract.address}

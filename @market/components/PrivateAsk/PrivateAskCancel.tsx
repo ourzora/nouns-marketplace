@@ -3,6 +3,7 @@ import {
   Button,
   Eyebrow,
   Flex,
+  Heading,
   Icon,
   Label,
   Paragraph,
@@ -11,18 +12,59 @@ import {
   Tag,
   Well,
 } from '@zoralabs/zord'
-import { MotionStack } from '@shared'
-import React from 'react'
+import { MotionStack, useContractTransaction } from '@shared'
+import React, { useCallback, useState } from 'react'
 
 import { LearnMoreButton } from './LearnMoreButton'
 import * as styles from './PrivateAskListForSale.css'
+import { TransactionSubmitButton } from '../TransactionSubmitButton'
+import { Field, FieldProps, Form, Formik, FormikHelpers } from 'formik'
+import { ContractTransaction } from 'ethers'
+import { usePrivateAskContext } from '@market/providers/PrivateAskProvider'
+import { useContractContext } from '@market/providers'
 
-interface PrivateAskListForSaleProps extends StackProps {
+interface PrivateAskCancelProps extends StackProps {
   nft: NFTObject
   onNext: () => void
 }
 
-export function PrivateAskListForSale({ onNext, ...props }: PrivateAskListForSaleProps) {
+interface Values {
+  buyeraddress?: string
+  amount?: string
+}
+
+export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
+  const { PrivateAsks } = useContractContext() // Should this all be moved to usePrivateAskContext?
+  const { txStatus, handleTx, txInProgress } = useContractTransaction()
+  const [txError, setTxError] = useState<string>('')
+  const [isSubmitting, setSubmitting] = useState<boolean>(false)
+  const { nft } = props.nft
+
+  const handleSubmit = useCallback(async () => {
+    try {
+      if (!nft || !PrivateAsks) {
+        throw new Error('V3AskContract is not ready, please try again.')
+      }
+
+      setSubmitting(true)
+      console.log('SUBMITTED!')
+      const promise: Promise<ContractTransaction> = PrivateAsks.cancelAsk(
+        nft?.contract.address!,
+        nft?.tokenId!
+      )
+      const tx = await handleTx(promise)
+      console.log('promise', promise)
+      console.log('tx.hash', tx.hash)
+
+      tx && onNext && onNext()
+    } catch (err: any) {
+      setTxError(err?.message || "There's been an error, please try again.")
+    } finally {
+      console.log('FINALLY')
+      setSubmitting(false)
+    }
+  }, [PrivateAsks, handleTx, nft, onNext])
+
   return (
     <MotionStack
       gap="x5"
@@ -32,35 +74,31 @@ export function PrivateAskListForSale({ onNext, ...props }: PrivateAskListForSal
       transition={{ duration: 0.2 }}
       {...props}
     >
-      <Stack gap="x2">
-        <Eyebrow>Sale type</Eyebrow>
+      <Heading size="xs">Cancel Private Sale</Heading>
 
-        <Button className={styles.button} variant="unset" align="center" onClick={onNext}>
-          <Well display="grid" className={styles.grid}>
-            <Stack gap="x1">
-              <Flex gap="x2" justify="flex-start" align="flex-start">
-                <Label align="left">Create a Private Ask</Label>
-                <Tag className={styles.offsetY}>New</Tag>
-              </Flex>
-              <Paragraph className={styles.textColor} size="sm" align="left">
-                Sell to a specific buyer. It&apos;s like an escrow contract but much
-                better
-              </Paragraph>
-            </Stack>
+      <Stack gap="x5">
+        <Paragraph>
+          Cancel the private sale. This action can not be reversed, but you will be able
+          to list the NFT for sale again.
+        </Paragraph>
 
-            <Flex w="x13" justify="flex-end" align="center">
-              <Icon id="ChevronRight" color="tertiary" size="md" />
-            </Flex>
-          </Well>
-        </Button>
+        {txError && (
+          <Paragraph size="xs" color="destructive">
+            {txError}
+          </Paragraph>
+        )}
+
+        <TransactionSubmitButton
+          type="submit"
+          txStatus={txStatus}
+          txInProgress={txInProgress}
+          onClick={handleSubmit}
+          loading={isSubmitting}
+          disabled={isSubmitting}
+        >
+          Cancel Private Sale
+        </TransactionSubmitButton>
       </Stack>
-
-      <LearnMoreButton
-        href="https://support.zora.co/en/articles/5878598-what-s-an-approval"
-        target="_blank"
-      >
-        Learn more about selling on Zora
-      </LearnMoreButton>
     </MotionStack>
   )
 }

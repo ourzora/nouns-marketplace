@@ -78,7 +78,6 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
   const { setFinalizedPrivateAskTx } = usePrivateAskContext()
   const { txStatus, handleTx, txInProgress } = useContractTransaction()
   const [txError, setTxError] = useState<string>('')
-  // const nf
   const { nft } = props.nft
   // const { tokenId, contract } = nft
   // const
@@ -90,7 +89,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
       console.log('VALUES', values)
 
       try {
-        if (!nft || !values.buyeraddress || !values.amount || !nft || !PrivateAsks) {
+        if (!nft || !values.buyeraddress || !values.amount || !PrivateAsks) {
           throw new Error('V3AskContract is not ready, please try again.')
         }
 
@@ -135,7 +134,15 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
         //   status?: number
         // }
 
-        setFinalizedPrivateAskTx(tx)
+        // setFinalizedPrivateAskTx(tx)
+
+        // if(tx.){
+
+        setFinalizedPrivateAskTx({
+          price: values.amount,
+          buyerAddress: values.buyeraddress,
+        })
+        // }
 
         tx && onNext && onNext()
       } catch (err: any) {
@@ -179,9 +186,6 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
             <Stack gap="x1">
               <Field name="amount" onChange={handleChange}>
                 {({ field, meta: { touched, error } }: FieldProps) => {
-                  console.log('amt touched', touched)
-                  console.log('amt error', error)
-
                   return (
                     <InputField
                       label="NFT Price"
@@ -209,8 +213,6 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
 
               <Field name="buyeraddress">
                 {({ field, meta: { touched, error } }: FieldProps) => {
-                  console.log('buyer touched', touched)
-                  console.log('buyer error', error)
                   return (
                     <InputField
                       label="Buyer"

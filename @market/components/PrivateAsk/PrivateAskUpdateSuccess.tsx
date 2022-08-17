@@ -12,7 +12,6 @@ import {
   Stack,
   StackProps,
 } from '@zoralabs/zord'
-import { ethers } from 'ethers'
 // import { MotionStack } from 'components/Motion'
 import React, { useEffect, useMemo } from 'react'
 
@@ -20,31 +19,20 @@ import { LearnMoreButton } from './LearnMoreButton'
 
 // @TODO: Add ask details from private ask
 
-interface PrivateAskSuccessProps extends StackProps {
+interface PrivateAskUpdateSuccessProps extends StackProps {
   nft: NFTObject
   onNext: () => void
 }
 
-export function PrivateAskSuccess({
-  nft: nftData,
+export function PrivateAskUpdateSuccess({
   onNext,
   ...props
-}: PrivateAskSuccessProps) {
+}: PrivateAskUpdateSuccessProps) {
   const { PrivateAsks } = useContractContext() // Should this all be moved to usePrivateAskContext?
   const { finalizedPrivateAskTx } = usePrivateAskContext()
   const { toast, showToast } = useToast()
-  // const askPrice = useMemo(
-  //   () =>
-  //     finalizedPrivateAskTx
-  //       ? ethers.utils.formatUnits(finalizedPrivateAskTx?.value, 'ether')
-  //       : 'UNKNOWN TX VAL',
-  //   [finalizedPrivateAskTx]
-  // )
-  const { nft } = nftData
 
   console.log('finalizedPrivateAskTx', finalizedPrivateAskTx)
-
-  // finalizedPrivateAskTx?.to
 
   const askDetails = useMemo(
     () => [
@@ -60,28 +48,28 @@ export function PrivateAskSuccess({
       },
       {
         label: 'Token contract',
-        value: shortenAddress(nft?.contract.address),
-        copyValue: nft?.contract.address,
+        value: '0х44J8...GHH7',
+        copyValue: '0х44J8...GHH7',
         url: {
-          href: `https://etherscan.io/address/${nft?.contract.address}`,
+          href: 'https://zora.co',
           target: '_blank',
           rel: 'noreferrer',
         },
       },
       {
         label: 'Token ID',
-        value: nft?.tokenId,
-        copyValue: nft?.tokenId,
+        value: '0х24O8...JKQ9',
+        copyValue: '0х24O8...JKQ9',
         url: {
-          href: `https://zora.co/collections/${nft?.contract.address}/${nft?.tokenId}`,
+          href: 'https://zora.co',
           target: '_blank',
           rel: 'noreferrer',
         },
       },
       {
         label: 'Price',
-        value: finalizedPrivateAskTx?.price,
-        copyValue: finalizedPrivateAskTx?.price,
+        value: '3 ETH',
+        copyValue: '3 ETH',
         url: {
           href: '',
           target: '_blank',
@@ -90,27 +78,21 @@ export function PrivateAskSuccess({
       },
       {
         label: 'Buyer',
-        value: shortenAddress(finalizedPrivateAskTx?.buyerAddress),
-        copyValue: finalizedPrivateAskTx?.buyerAddress,
+        value: 'miley7777.eth',
+        copyValue: 'miley7777.eth',
         url: {
-          href: `https://zora.co/${finalizedPrivateAskTx?.buyerAddress}`,
+          href: 'https://zora.co',
           target: '_blank',
           rel: 'noreferrer',
         },
-        address: finalizedPrivateAskTx?.buyerAddress,
+        address: '0x17cd072cBd45031EFc21Da538c783E0ed3b25DCc',
       },
     ],
-    [
-      PrivateAsks.address,
-      finalizedPrivateAskTx?.price,
-      finalizedPrivateAskTx?.buyerAddress,
-      nft?.contract.address,
-      nft?.tokenId,
-    ]
+    []
   )
 
   const copyValue = useMemo(
-    () => askDetails.map(({ label, copyValue }) => `${label}: ${copyValue}`).join('\r\n'),
+    () => askDetails.map(({ label, value }) => `${label}: ${value}`).join('\r\n'),
     [askDetails]
   )
 
@@ -134,7 +116,7 @@ export function PrivateAskSuccess({
         transition={{ duration: 0.2 }}
         {...props}
       > */}
-        <Heading size="xs">Private Ask Created</Heading>
+        <Heading size="xs">Private Ask Updated</Heading>
 
         <Stack gap="x3">
           <Eyebrow>Sale data</Eyebrow>

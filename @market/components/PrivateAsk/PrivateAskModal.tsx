@@ -4,6 +4,9 @@ import {
   LIST,
   RESET,
   SUCCESS,
+  UPDATE,
+  CANCEL,
+  CANCEL_SUCCESS,
   usePrivateAskContext,
 } from '@market/providers/PrivateAskProvider'
 import useToggle from '@shared/hooks/useToggle'
@@ -18,6 +21,11 @@ import {
   PrivateAskCreate,
   PrivateAskListForSale,
   PrivateAskSuccess,
+  PrivateAskUpdate,
+  // PrivateAskUpdateSuccess,
+  PrivateAskCancel,
+  PrivateAskCancelSuccess,
+  PrivateAskTrigger,
 } from '@market/components/PrivateAsk'
 import * as styles from './PrivateAskModal.css'
 
@@ -26,6 +34,10 @@ const componentMap = {
   [APPROVE]: PrivateAskApproveModule,
   [CREATE]: PrivateAskCreate,
   [SUCCESS]: PrivateAskSuccess,
+  [UPDATE]: PrivateAskUpdate,
+  // [UPDATE_SUCCESS]: PrivateAskUpdateSuccess,
+  [CANCEL]: PrivateAskCancel,
+  [CANCEL_SUCCESS]: PrivateAskCancelSuccess,
 }
 
 interface PrivateAskModalProps {
@@ -42,12 +54,8 @@ export function PrivateAskModal({ header, nft }: PrivateAskModalProps) {
 
   const handleNext = useCallback(() => {
     if (next) {
-      console.log('NEXT', next)
       if (dispatch) {
-        console.log('DISPATCHING')
         dispatch({ type: next })
-      } else {
-        console.log('NO DISPATCH')
       }
     } else {
       toggleModalOpen(false)
@@ -55,14 +63,14 @@ export function PrivateAskModal({ header, nft }: PrivateAskModalProps) {
     }
   }, [dispatch, next, toggleModalOpen])
 
+  const handleClose = useCallback(() => toggleModalOpen(), [toggleModalOpen])
+
   return (
     <Modal
       open={isOpen}
       onOpenChange={toggleModalOpen}
       trigger={
-        <Button w="100%" onClick={toggleModalOpen}>
-          Private Ask
-        </Button>
+        <PrivateAskTrigger nft={nft} openModal={toggleModalOpen} dispatch={dispatch} />
       }
     >
       <ModalContent className={clsx(styles.content, styles.modalBackground)}>
@@ -71,7 +79,12 @@ export function PrivateAskModal({ header, nft }: PrivateAskModalProps) {
             {header}
           </Flex>
           <AnimatePresence exitBeforeEnter={isOpen}>
-            <Component key={state.status} nft={nft} onNext={handleNext} />
+            <Component
+              key={state.status}
+              nft={nft}
+              onNext={handleNext}
+              handleClose={handleClose}
+            />
           </AnimatePresence>
         </>
       </ModalContent>
