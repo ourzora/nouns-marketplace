@@ -11,6 +11,7 @@ import {
 import { useWindowWidth } from '@shared'
 import { ManageLink } from './ManageLink'
 import { ConnectButton } from './ConnectButton'
+import { UnstoppableDomainbtn } from './UnstoppableDomainbtn'
 
 export function HeaderComposition() {
   const { isLarge } = useWindowWidth()
@@ -26,6 +27,7 @@ export function HeaderComposition() {
       </Flex>
       <Flex className={connectWrapper}>
         <ConnectButton />
+        <UnstoppableDomainbtn />
       </Flex>
     </Grid>
   )
