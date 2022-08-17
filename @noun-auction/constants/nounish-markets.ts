@@ -47,7 +47,7 @@ export const nounishMarketTypesLookup: NounishMarketTypesProps[] = [
   },
 ]
 
-export function returnMarketProps(marketType: NounishMarketTypes) {
+export function returnMarketProps(marketType?: NounishMarketTypes) {
   return nounishMarketTypesLookup.find((market) => market.type === marketType)
 }
 
