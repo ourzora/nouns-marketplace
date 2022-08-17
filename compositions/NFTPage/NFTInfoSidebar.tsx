@@ -1,12 +1,10 @@
 import { Heading, Stack, Flex, Paragraph, Box, BoxProps } from '@zoralabs/zord'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { FillV3AskInfo } from '@market'
-import { useNFTProvider, useIsOwner, useTitleWithFallback } from '@shared'
+import { useNFTProvider, useTitleWithFallback } from '@shared'
 import { Link } from 'components'
 import { clickAnimation } from 'styles/styles.css'
-import { nftInfoSidebar, nftInfoSidebarWrapper, askInfoWrapper } from './NFTPage.css'
+import { nftInfoSidebar, nftInfoSidebarWrapper } from './NFTPage.css'
 import { MarketUi } from './MarketUi'
-import { useNounishAuctionProvider } from '@noun-auction'
 
 import { lightFont } from '@shared'
 
@@ -17,7 +15,6 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
 
   if (!nft || !tokenId || !contractAddress) return null
 
-  const { isOwner } = useIsOwner(nft)
   const { fallbackTitle } = useTitleWithFallback(
     contractAddress,
     tokenId,
