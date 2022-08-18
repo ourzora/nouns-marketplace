@@ -1,23 +1,22 @@
 export interface NounishAuctionVolumeQueryProps {
-  salesType: 'NOUNS_AUCTION_SALE' | 'LIL_NOUNS_AUCTION_SALE'
-  /**
-   * Nounish Token Contract
-   */
+  salesType?: 'NOUNS_AUCTION_SALE' | 'LIL_NOUNS_AUCTION_SALE'
   contractAddress: string
 }
 
-export function nounishAuctionVolume({
-  salesType,
-  contractAddress,
-}: NounishAuctionVolumeQueryProps) {
+export function nounishAuctionVolume(
+  salesType?: 'NOUNS_AUCTION_SALE' | 'LIL_NOUNS_AUCTION_SALE',
+  contractAddress?: string
+) {
+  console.log(salesType, contractAddress)
+  if (!salesType) return
   return `{
     aggregateStat {
       salesVolume(
         where: {
-          collectionAddresses: ${contractAddress}
+          collectionAddresses: "${contractAddress}"
         },
         filter: {
-          saleTypes: NOUNS_AUCTION_SALE
+          saleTypes: ${salesType}
         }
       ) {
         chainTokenPrice

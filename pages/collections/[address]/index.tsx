@@ -1,7 +1,7 @@
 import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
-import { useEffect, useState } from 'react'
-import { MarketStats } from 'components/MarketStats'
+import { useEffect } from 'react'
+import { MarketStats } from 'components/MarketStats/MarketStats'
 import { Seo } from 'components'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import {
@@ -12,7 +12,6 @@ import {
 import { CollectionFilterProvider } from '@filter'
 import { Stack, Separator } from '@zoralabs/zord'
 import { useCollection } from '@filter/hooks/useCollection'
-import { HorizontalMenuProps } from 'components'
 import { returnDao } from 'constants/collection-addresses'
 import { useWindowWidth } from '@shared'
 import { ActiveAuctionCard } from '@noun-auction'
@@ -20,26 +19,10 @@ import { useAggregate } from 'hooks'
 
 const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const [menuSelection, setMenuSelection] = useState<string>('nfts')
   const { isLarge } = useWindowWidth()
   const { aggregate } = useAggregate(contractAddress)
 
   const dao = returnDao(contractAddress)
-
-  /*
-  const items: HorizontalMenuProps['items'] = [
-    {
-      id: 'nfts',
-      label: 'NFTs',
-      handler: () => setMenuSelection('nfts'),
-    },
-    {
-      id: 'activity',
-      label: 'Activity',
-      handler: () => setMenuSelection('activity'),
-    },
-  ]
-  */
 
   useEffect(() => {
     if (collection && collection?.name) {
@@ -70,8 +53,6 @@ const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps
           filtersVisible={isLarge ? true : false}
           contractAddress={contractAddress}
           useSortDropdown
-          // initialPage={initialPage}
-          // useMarketStatus
           useCollectionProperties={{
             header: 'Traits',
             selector: 'nouns-market-traits',
@@ -88,24 +69,8 @@ const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps
           }}
         >
           <Stack>
-            {dao ? (
-              <>
-                {/*<HorizontalMenu
-                  items={items}
-                  setId={setMenuSelection}
-                  currentId={menuSelection}
-                  useCustomHandler
-                  style={{
-                    borderBottom: `1px solid ${color.black10}`,
-                    zIndex: 100,
-                  }}
-                />*/}
-                <Separator />
-              </>
-            ) : (
-              <CollectionActivityHeader />
-            )}
-            <Collections collectionAddress={contractAddress} view={menuSelection} />
+            {dao ? <Separator /> : <CollectionActivityHeader />}
+            <Collections collectionAddress={contractAddress} />
           </Stack>
         </CollectionFilterProvider>
       )}
