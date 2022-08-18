@@ -5,8 +5,7 @@ import { useEffect, useMemo } from 'react'
 import { nftGridWrapper } from '@media/NftMedia.css'
 import { NounishActivityRow } from './NounishActivityRow'
 import { returnDao } from 'constants/collection-addresses'
-
-import { useAuctionRPC } from '@noun-auction'
+import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
 
 export type CollectionsProps = {
   collectionAddress?: string
@@ -34,16 +33,17 @@ export function CollectionGrid() {
 
 export function DaoGrid({ dao, view }: { dao: any; view: CollectionsProps['view'] }) {
   const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
-
-  const { data: auctionData } = useAuctionRPC(dao?.auctionContractAddress)
+  const { data: activeAuction } = useActiveNounishAuction(dao?.marketType)
 
   const filteredItems = useMemo(() => {
     try {
-      return items.filter((item) => auctionData?.auction?.nounId !== item?.nft?.tokenId)
+      return items.filter(
+        (item) => activeAuction?.properties?.tokenId !== item?.nft?.tokenId
+      )
     } catch (err) {
       return items
     }
-  }, [dao, items, auctionData?.auction?.nounId])
+  }, [dao, items, activeAuction?.properties?.tokenId])
 
   const renderer = useMemo(() => {
     switch (view) {

@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react'
 import { intervalToDuration, fromUnixTime, getUnixTime } from 'date-fns'
 
-export const useCountdown = (start: string, end: string) => {
+export const useCountdown = (start?: string, end?: string) => {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
@@ -24,7 +24,8 @@ export const useCountdown = (start: string, end: string) => {
   }, [end])
 
   const isEnded = useMemo(() => {
-    // console.log(getUnixTime(now) >= parseInt(end))
+    if (!end) return true
+
     return getUnixTime(now) >= parseInt(end)
   }, [end, now])
 
