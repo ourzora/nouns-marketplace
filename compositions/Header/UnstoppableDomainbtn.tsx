@@ -9,7 +9,6 @@ import { useState, useEffect } from 'react'
 const uauth = new UAuth({
   clientID: '1c690135-3701-47c4-9b25-78fa847ca188',
   redirectUri: 'https://nouns-marketplace-eight.vercel.app/',
-  scope: 'openid wallet',
 })
 
 export const UnstoppableDomainbtn = () => {
