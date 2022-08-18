@@ -43,7 +43,6 @@ export function CollectionHeader({
         gap="x4"
       >
         <Stack
-          gap="x2"
           px={{
             '@initial': 'x4',
             '@1024': 'x0',
@@ -56,12 +55,24 @@ export function CollectionHeader({
               '@initial': 'x6',
               '@1024': 'x0',
             }}
+            gap={{
+              '@initial': 'x0',
+              '@1024': layout === 'dao' ? 'x0' : 'x3',
+            }}
           >
-            <CollectionThumbnail
-              collectionAddress={collection.address}
-              radius="round"
-              m="auto"
-            />
+            <Stack
+              h={layout === 'dao' ? '100%' : 'auto'}
+              align={layout === 'dao' ? 'center' : 'flex-start'}
+              w="100%"
+              position="relative"
+            >
+              <CollectionThumbnail
+                collectionAddress={collection.address}
+                radius="round"
+                m="auto"
+                size="lg"
+              />
+            </Stack>
             <PageHeader
               headline={collection.name}
               copy={`${
@@ -74,6 +85,10 @@ export function CollectionHeader({
                 '@1024': layout === 'collection' ? 'center' : 'flex-start',
               }}
               px={layout === 'collection' ? 'x4' : 'x0'}
+              py={{
+                '@initial': 'x0',
+                '@1024': layout === 'dao' ? 'x4' : 'x0',
+              }}
             />
           </Grid>
           <Flex
