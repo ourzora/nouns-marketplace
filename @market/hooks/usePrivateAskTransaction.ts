@@ -40,13 +40,7 @@ export const usePrivateAskTransaction = ({
     price?: string,
     buyerAddress?: string
   ) {
-    const IS_VALID_CREATE = txType === CREATE_ASK && price && buyerAddress
-
-    console.log({
-      contractAddress: nft?.contract.address!,
-      tokenId: nft?.tokenId!,
-      // 'buyerAddress': buyerAddress
-    })
+    const hasValidCreateParams = txType === CREATE_ASK && price && buyerAddress
 
     try {
       if (!nft || !PrivateAsks) {
@@ -58,18 +52,6 @@ export const usePrivateAskTransaction = ({
 
       const priceAsGWEI = parseUnits(price?.toString() || '0', 'ether') // Convert from human-readable number to GWEI
 
-      if (IS_VALID_CREATE) {
-        console.log(`${buyerAddress} ${price}`)
-        console.log(
-          'CREEEEATING',
-          nft?.contract.address!,
-          nft?.tokenId!,
-          price,
-          priceAsGWEI,
-          buyerAddress!
-        )
-      }
-
       setSubmitting(true)
 
       let promise: Promise<ContractTransaction>
@@ -79,7 +61,9 @@ export const usePrivateAskTransaction = ({
           promise = PrivateAsks.cancelAsk(nft?.contract.address, nft?.tokenId)
           break
         case FILL_ASK:
-          console.log('-----> FILL ASK ATTEMPT')
+          console.log(
+            `-----> PrivateAsks.fillAsk(${nft?.contract.address},${nft?.tokenId})`
+          )
           promise = PrivateAsks.fillAsk(nft?.contract.address, nft?.tokenId)
           break
         case CREATE_ASK:
@@ -91,14 +75,14 @@ export const usePrivateAskTransaction = ({
           )
           break
         default:
-          throw new Error('txType not defined')
+          throw new Error('PrivateAsk txType not defined')
       }
 
       const tx = await handleTx(promise)
       console.log('promise', promise)
       console.log('tx.hash', tx.hash)
 
-      IS_VALID_CREATE &&
+      hasValidCreateParams &&
         setFinalizedPrivateAskDetails({ price: price, buyerAddress: buyerAddress })
 
       tx && onNext && onNext()
