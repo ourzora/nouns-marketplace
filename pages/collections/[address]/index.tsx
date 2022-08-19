@@ -27,7 +27,11 @@ const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps
   useEffect(() => {
     if (collection && collection?.name) {
       setCurrentCollection(collection.name)
-      setCurrentCollectionCount(`${aggregate?.aggregateStat.nftCount} NFTs`)
+      setCurrentCollectionCount(
+        aggregate?.aggregateStat.nftCount
+          ? `${aggregate?.aggregateStat.nftCount} NFTs`
+          : '... NFTs'
+      )
     }
     return () => {
       setCurrentCollection('Explore...')

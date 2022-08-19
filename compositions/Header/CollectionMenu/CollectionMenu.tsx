@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Box, Icon, Button, Label, Stack, color } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
-import { modalWrapper } from '../Header.css'
+import { modalWrapper, collectionTrigger } from '../Header.css'
 import { noTextWrap } from 'styles/styles.css'
 import { CollectionNavList } from './CollectionNavList'
 import { HorizontalMenu } from 'components'
@@ -61,6 +61,7 @@ export function CollectionMenu() {
             paddingRight: 16,
             gridGap: 10,
           }}
+          className={[collectionTrigger, noTextWrap]}
         >
           {currentCollection}
           {currentCollectionCount ? (
@@ -74,7 +75,7 @@ export function CollectionMenu() {
                 '@1024': 'inline',
               }}
             >
-              {currentCollectionCount}
+              {currentCollectionCount ?? '...'}
             </Label>
           ) : null}
           <Icon id="ChevronDown" size="md" color="secondary" />
