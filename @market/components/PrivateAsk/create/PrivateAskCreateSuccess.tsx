@@ -1,55 +1,33 @@
 import { useContractContext } from '@market/providers'
 import { usePrivateAskContext } from '@market/providers/PrivateAskProvider'
-import { DataTable, shortenAddress, useToast } from '@shared'
+import { DataTable, MotionStack, shortenAddress, useToast } from '@shared'
 import { CopyStatus, useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import {
-  Button,
-  Eyebrow,
-  Heading,
-  Paragraph,
-  Separator,
-  Stack,
-  StackProps,
-} from '@zoralabs/zord'
-import { ethers } from 'ethers'
-// import { MotionStack } from 'components/Motion'
+import { Button, Eyebrow, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import React, { useEffect, useMemo } from 'react'
 
-import { LearnMoreButton } from './LearnMoreButton'
+import { LearnMoreButton } from '../LearnMoreButton'
+import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
 // @TODO: Add ask details from private ask
 
-interface PrivateAskSuccessProps extends StackProps {
-  nft: NFTObject
-  onNext: () => void
-}
+interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
 
-export function PrivateAskSuccess({
+export function PrivateAskCreateSuccess({
   nft: nftData,
   onNext,
   ...props
-}: PrivateAskSuccessProps) {
+}: PrivateAskCreateSuccessProps) {
   const { PrivateAsks } = useContractContext() // Should this all be moved to usePrivateAskContext?
-  const { finalizedPrivateAskTx } = usePrivateAskContext()
+  const { finalizedPrivateAskDetails } = usePrivateAskContext()
   const { toast, showToast } = useToast()
-  // const askPrice = useMemo(
-  //   () =>
-  //     finalizedPrivateAskTx
-  //       ? ethers.utils.formatUnits(finalizedPrivateAskTx?.value, 'ether')
-  //       : 'UNKNOWN TX VAL',
-  //   [finalizedPrivateAskTx]
-  // )
   const { nft } = nftData
 
-  console.log('finalizedPrivateAskTx', finalizedPrivateAskTx)
-
-  // finalizedPrivateAskTx?.to
+  console.log('finalizedPrivateAskDetails', finalizedPrivateAskDetails)
 
   const askDetails = useMemo(
     () => [
       {
-        label: 'Private asks contract address',
+        label: 'Private Asks contract address',
         value: shortenAddress(PrivateAsks.address),
         copyValue: PrivateAsks.address,
         url: {
@@ -80,8 +58,8 @@ export function PrivateAskSuccess({
       },
       {
         label: 'Price',
-        value: finalizedPrivateAskTx?.price,
-        copyValue: finalizedPrivateAskTx?.price,
+        value: `${finalizedPrivateAskDetails?.price} ETH`,
+        copyValue: `${finalizedPrivateAskDetails?.price} ETH`,
         url: {
           href: '',
           target: '_blank',
@@ -90,20 +68,20 @@ export function PrivateAskSuccess({
       },
       {
         label: 'Buyer',
-        value: shortenAddress(finalizedPrivateAskTx?.buyerAddress),
-        copyValue: finalizedPrivateAskTx?.buyerAddress,
+        value: shortenAddress(finalizedPrivateAskDetails?.buyerAddress),
+        copyValue: finalizedPrivateAskDetails?.buyerAddress,
         url: {
-          href: `https://zora.co/${finalizedPrivateAskTx?.buyerAddress}`,
+          href: `https://zora.co/${finalizedPrivateAskDetails?.buyerAddress}`,
           target: '_blank',
           rel: 'noreferrer',
         },
-        address: finalizedPrivateAskTx?.buyerAddress,
+        address: finalizedPrivateAskDetails?.buyerAddress,
       },
     ],
     [
       PrivateAsks.address,
-      finalizedPrivateAskTx?.price,
-      finalizedPrivateAskTx?.buyerAddress,
+      finalizedPrivateAskDetails?.price,
+      finalizedPrivateAskDetails?.buyerAddress,
       nft?.contract.address,
       nft?.tokenId,
     ]
@@ -125,15 +103,15 @@ export function PrivateAskSuccess({
 
   return (
     <>
-      <Stack gap="x5">
-        {/* <MotionStack
+      {/* <Stack gap="x5"> */}
+      <MotionStack
         gap="x5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
         {...props}
-      > */}
+      >
         <Heading size="xs">Private Ask Created</Heading>
 
         <Stack gap="x3">
@@ -155,8 +133,8 @@ export function PrivateAskSuccess({
         <Button onClick={onNext}>Done</Button>
 
         <LearnMoreButton>Learn more about private asks</LearnMoreButton>
-        {/* </MotionStack> */}
-      </Stack>
+      </MotionStack>
+      {/* </Stack> */}
       {toast}
     </>
   )

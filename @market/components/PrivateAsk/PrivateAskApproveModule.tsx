@@ -1,24 +1,13 @@
-// import { useZoraV3ModuleApproval } from 'hooks/useZoraV3ModuleApproval'
-import {
-  // useContractTransaction,
-  // useToggleOnce,
-  useZoraV3ModuleApproval,
-} from '@market/hooks'
+import { useZoraV3ModuleApproval } from '@market/hooks'
 import { useContractContext } from '@market/providers'
 import { MotionStack, useContractTransaction, useToggleOnce } from '@shared'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { Button, Heading, Paragraph, Spinner, Stack, StackProps } from '@zoralabs/zord'
-// import { MotionStack } from 'components/Motion'
-// import { useContractContext } from 'hooks/useContractContext'
-// import { useZoraV3ModuleApproval } from 'hooks/useZoraV3ModuleApproval'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { Button, Heading, Paragraph, Spinner, Stack } from '@zoralabs/zord'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { LearnMoreButton } from './LearnMoreButton'
+import { CommonPrivateAskComponentProps } from './PrivateAskModal'
 
-interface PrivateAskApproveModuleProps extends StackProps {
-  nft: NFTObject
-  onNext: () => void
-}
+interface PrivateAskApproveModuleProps extends CommonPrivateAskComponentProps {}
 
 export function PrivateAskApproveModule({
   onNext,
@@ -28,11 +17,8 @@ export function PrivateAskApproveModule({
   const [error, setError] = useState<string>()
 
   const { txStatus, handleTx, txInProgress } = useContractTransaction()
-  // const { approved, approve, mutate } = useZoraV3ModuleApproval(spenderAddress)
   const { approved, approve, mutate } = useZoraV3ModuleApproval(PrivateAsks.address)
   const [initialized, toggleInitialized] = useToggleOnce(false)
-
-  // const [balance] = useCurrencyBalance(currencyAddress)
 
   console.log('in PrivateAskApproveModule...')
 

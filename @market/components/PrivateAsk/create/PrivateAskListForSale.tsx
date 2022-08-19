@@ -1,4 +1,3 @@
-import { NFTObject } from '@zoralabs/nft-hooks'
 import {
   Button,
   Eyebrow,
@@ -7,20 +6,17 @@ import {
   Label,
   Paragraph,
   Stack,
-  StackProps,
   Tag,
   Well,
 } from '@zoralabs/zord'
 import { MotionStack } from '@shared'
 import React from 'react'
 
-import { LearnMoreButton } from './LearnMoreButton'
-import * as styles from './PrivateAskListForSale.css'
+import * as styles from '../PrivateAskFlow.css'
+import { LearnMoreButton } from '../LearnMoreButton'
+import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
-interface PrivateAskListForSaleProps extends StackProps {
-  nft: NFTObject
-  onNext: () => void
-}
+interface PrivateAskListForSaleProps extends CommonPrivateAskComponentProps {}
 
 export function PrivateAskListForSale({ onNext, ...props }: PrivateAskListForSaleProps) {
   return (

@@ -37,7 +37,7 @@ export function FillV3AskWizard({
   const { AsksV11 } = useContractContext()
   const { tx, txStatus, handleTx, txInProgress } = useContractTransaction()
 
-  const sufficientFunds = useMemo(
+  const hasSufficientFunds = useMemo(
     () => walletBalance?.value.gte(askPrice),
     [askPrice, walletBalance, walletBalance?.value]
   )
@@ -98,12 +98,12 @@ export function FillV3AskWizard({
           >
             {cancelButton}
             <TransactionSubmitButton
-              disabled={!sufficientFunds}
+              disabled={!hasSufficientFunds}
               txInProgress={txInProgress}
               txStatus={txStatus}
               onClick={handleFillAsk}
             >
-              {!sufficientFunds ? 'Insufficient Balance' : 'Buy now'}
+              {!hasSufficientFunds ? 'Insufficient Balance' : 'Buy now'}
             </TransactionSubmitButton>
           </Grid>
         </>

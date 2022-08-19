@@ -1,30 +1,31 @@
 import {
   APPROVE,
   CREATE,
+  CREATE_SUCCESS,
   LIST,
   RESET,
-  SUCCESS,
-  UPDATE,
   CANCEL,
   CANCEL_SUCCESS,
+  FILLASK,
+  FILLASK_SUCCESS,
   usePrivateAskContext,
 } from '@market/providers/PrivateAskProvider'
 import useToggle from '@shared/hooks/useToggle'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Button, Flex, Modal, ModalContent } from '@zoralabs/zord'
+import { Flex, Modal, ModalContent, StackProps } from '@zoralabs/zord'
 import clsx from 'clsx'
 import { AnimatePresence } from 'framer-motion'
 import React, { useCallback } from 'react'
 
 import {
   PrivateAskApproveModule,
-  PrivateAskCreate,
   PrivateAskListForSale,
-  PrivateAskSuccess,
-  PrivateAskUpdate,
-  // PrivateAskUpdateSuccess,
+  PrivateAskCreate,
+  PrivateAskCreateSuccess,
   PrivateAskCancel,
   PrivateAskCancelSuccess,
+  PrivateAskFillAsk,
+  PrivateAskFillAskSuccess,
   PrivateAskTrigger,
 } from '@market/components/PrivateAsk'
 import * as styles from './PrivateAskModal.css'
@@ -33,16 +34,22 @@ const componentMap = {
   [LIST]: PrivateAskListForSale,
   [APPROVE]: PrivateAskApproveModule,
   [CREATE]: PrivateAskCreate,
-  [SUCCESS]: PrivateAskSuccess,
-  [UPDATE]: PrivateAskUpdate,
-  // [UPDATE_SUCCESS]: PrivateAskUpdateSuccess,
+  [CREATE_SUCCESS]: PrivateAskCreateSuccess,
   [CANCEL]: PrivateAskCancel,
   [CANCEL_SUCCESS]: PrivateAskCancelSuccess,
+  [FILLASK]: PrivateAskFillAsk,
+  [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
 }
 
 interface PrivateAskModalProps {
   header: React.ReactNode
   nft: NFTObject
+}
+
+export interface CommonPrivateAskComponentProps extends StackProps {
+  nft: NFTObject
+  onNext?: () => void
+  handleClose?: () => void
 }
 
 export function PrivateAskModal({ header, nft }: PrivateAskModalProps) {

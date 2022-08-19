@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { vars } from '@zoralabs/zord'
+import { atoms, vars } from '@zoralabs/zord'
 
 export const grid = style([
   {
@@ -23,4 +23,8 @@ export const button = style({
 
 export const textColor = style({
   color: vars.color.foreground.tertiary,
+})
+
+export const summary = atoms({
+  textAlign: 'right',
 })

@@ -9,12 +9,7 @@ import { MarketUi } from './MarketUi'
 import { useNounishAuctionProvider } from '@noun-auction'
 
 import { lightFont } from '@shared'
-import { PrivateAskModal } from '@market/components/PrivateAsk'
-import { PrivateAskProvider } from '@market/providers/PrivateAskProvider'
-import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types'
-import { useMemo } from 'react'
-import { useAskTokenHelper } from '@market/hooks/useAskTokenHelper'
-import { PrivateAskSidebar } from '@market/components/PrivateAsk/PrivateAskSidebar'
+import { PrivateAskSidebar } from '@market/components/PrivateAsk/'
 
 export interface NFTInfoSidebar extends BoxProps {}
 
@@ -23,7 +18,7 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
 
   if (!nft || !tokenId || !contractAddress) return null
 
-  console.log('NFT', nft)
+  // console.log('NFT', nft)
 
   const { isOwner } = useIsOwner(nft)
   const { fallbackTitle } = useTitleWithFallback(
@@ -32,18 +27,6 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
     nft?.metadata?.name
   )
   const { isComplete, activeAuctionId } = useNounishAuctionProvider()
-
-  // const { ask } = useRelevantMarket(nft.markets)
-  // const { hasActiveAsk, isPrivateAsk, hasAsk } = useAskTokenHelper(ask)
-
-  // export declare enum MARKET_INFO_STATUSES {
-  //   PENDING = 'pending',
-  //   ACTIVE = 'active',
-  //   COMPLETE = 'complete',
-  //   CANCELED = 'canceled',
-  //   UNKNOWN = 'unknown',
-  //   INVALID = 'invalid',
-  // }
 
   return (
     <Box id="nft-info-sidebar" className={nftInfoSidebar} {...props}>
@@ -77,7 +60,7 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
           </Stack>
         )}
 
-        {isOwner && <PrivateAskSidebar nft={nft} />}
+        <PrivateAskSidebar nft={nft} />
         {nft?.nft && (
           <MarketUi
             contractAddress={nft.nft.contract.address}

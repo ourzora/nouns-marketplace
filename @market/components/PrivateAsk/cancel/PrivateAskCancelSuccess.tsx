@@ -1,36 +1,19 @@
 import { useContractContext } from '@market/providers'
-import { usePrivateAskContext } from '@market/providers/PrivateAskProvider'
-// import { DataTable, shortenAddress, useToast } from '@shared'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import {
-  Button,
-  // Eyebrow,
-  Heading,
-  Paragraph,
-  // Separator,
-  Stack,
-  StackProps,
-} from '@zoralabs/zord'
+import { Button, Heading, Paragraph, Stack, StackProps } from '@zoralabs/zord'
 // import { MotionStack } from 'components/Motion'
 import React, { useEffect } from 'react'
-
-// import { LearnMoreButton } from './LearnMoreButton'
+import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
 // @TODO: Add ask details from private ask
 
-interface PrivateAskCancelSuccessProps extends StackProps {
-  nft: NFTObject
-  // onNext: () => void
-  handleClose?: () => void
-}
-
+interface PrivateAskCancelSuccessProps extends CommonPrivateAskComponentProps {}
 export function PrivateAskCancelSuccess({
   // onNext,
   handleClose,
   ...props
 }: PrivateAskCancelSuccessProps) {
   const { PrivateAsks } = useContractContext() // Should this all be moved to usePrivateAskContext?
-  // const { finalizedPrivateAskTx } = usePrivateAskContext()
+  // const { finalizedPrivateAskDetails } = usePrivateAskContext()
   // const { toast, showToast } = useToast()
 
   // useEffect(() => {

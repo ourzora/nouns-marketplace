@@ -8,6 +8,7 @@ interface AskTokenHelperProps {
 
 export const useAskTokenHelper = ({ ask }: AskTokenHelperProps) => {
   const isPrivateAsk = useMemo(() => ask?.raw?.properties?.buyer || false, [ask])
+  const buyerAddress = useMemo(() => ask?.raw?.properties?.buyer, [ask])
   const hasActiveAsk = useMemo(
     () => (ask && ask.status === MARKET_INFO_STATUSES.ACTIVE) || false,
     [ask]
@@ -18,5 +19,6 @@ export const useAskTokenHelper = ({ ask }: AskTokenHelperProps) => {
     hasAsk,
     isPrivateAsk,
     hasActiveAsk,
+    buyerAddress,
   }
 }
