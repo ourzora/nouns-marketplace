@@ -39,7 +39,7 @@ export const ConnectButton = ({ ...props }: ConnectButtonProps) => {
                   )
                 }
                 return (
-                  <Flex gap="x3">
+                  <Flex>
                     <Button
                       size="md"
                       variant="secondary"

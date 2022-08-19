@@ -9,7 +9,6 @@ export const headerWrapper = style([
     alignItems: 'center',
     gridTemplateColumns: 'repeat(2, 1fr)',
     gridTemplateRows: 'auto',
-    justifyContent: 'start',
     borderBottom: `2px solid ${color.black10}`,
     '@media': {
       [media.min1024]: {
@@ -57,8 +56,8 @@ export const manageButton = style([
     gridColumn: '2',
     gridRow: '2',
     height: 42,
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: space.x5,
+    paddingRight: space.x5,
     '@media': {
       [media.min1024]: {
         gridColumn: '23',
