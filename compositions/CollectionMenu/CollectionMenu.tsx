@@ -49,31 +49,19 @@ export function CollectionMenu() {
           as="div"
           size="md"
           variant="secondary"
-          borderRadius="curved"
-          display="flex"
-          w={{
-            '@initial': 'auto',
-            '@768': 'auto',
-          }}
-          style={{
-            height: 42,
-            paddingLeft: 16,
-            paddingRight: 16,
-            gridGap: 10,
-          }}
           className={[collectionTrigger, noTextWrap]}
         >
           {currentCollection}
           {currentCollectionCount ? (
             <Label
               as="span"
-              className={[lightFont, noTextWrap]}
               color="tertiary"
-              size="lg"
+              size="md"
               display={{
                 '@initial': 'none',
                 '@1024': 'inline',
               }}
+              className={[lightFont, noTextWrap]}
             >
               {currentCollectionCount ?? '...'}
             </Label>
