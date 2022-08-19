@@ -1,5 +1,5 @@
-import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, media, color } from '@zoralabs/zord'
+import { style } from '@vanilla-extract/css'
+import { atoms, media, color, space } from '@zoralabs/zord'
 import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, HEADER_Z } from 'styles/style-constants'
 
 export const headerWrapper = style([
@@ -52,28 +52,6 @@ export const nounsGlasses = style([
   }),
 ])
 
-export const collectionTrigger = style([
-  {
-    gridColumn: '1',
-    gridRow: '2',
-    '@media': {
-      [media.min1024]: {
-        gridColumn: '3',
-        gridRow: '1',
-      },
-    },
-  },
-  atoms({
-    w: '100%',
-    justifyContent: 'flex-start',
-  }),
-])
-
-export const modalWrapper = style({
-  overflowY: 'scroll',
-  height: 400,
-})
-
 export const manageButton = style([
   {
     gridColumn: '2',
@@ -116,5 +94,18 @@ export const connectButton = style([
       '@initial': 'flex-end',
       '@1024': 'flex-start',
     },
+  }),
+])
+
+export const docsLink = style([
+  {
+    height: 42,
+    paddingLeft: space.x1,
+    paddingRight: space.x3,
+    gap: space.x3,
+  },
+  atoms({
+    borderRadius: 'curved',
+    position: 'relative',
   }),
 ])

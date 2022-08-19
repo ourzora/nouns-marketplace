@@ -1,7 +1,7 @@
-import { Grid, Flex } from '@zoralabs/zord'
-import { BetaTag } from './BetaTag'
+import { Grid } from '@zoralabs/zord'
+import { DocsLink } from './DocsLink'
 import { NounsLink } from './NounsLink'
-import { CollectionMenu } from './CollectionMenu'
+import { CollectionMenu } from '../CollectionMenu'
 import { headerWrapper } from './Header.css'
 import { useWindowWidth } from '@shared'
 import { ManageLink } from './ManageLink'
@@ -13,7 +13,7 @@ export function HeaderComposition() {
   return (
     <Grid as="header" className={headerWrapper}>
       <NounsLink />
-      {isLarge && <BetaTag />}
+      {isLarge && <DocsLink />}
       <CollectionMenu />
       <ManageLink />
       <ConnectButton />
