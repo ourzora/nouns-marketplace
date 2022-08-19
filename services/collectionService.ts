@@ -54,18 +54,11 @@ export async function collectionService({ params }: CollectionParamsProps) {
 
     const { name, symbol } = collection
 
-    const aggregateStats = await zdk.collectionStatsAggregate({
-      collectionAddress: tokenAddress,
-      network: NetworkInput,
-    })
-
     const seo = await buildCollectionSEO(name, symbol)
 
     return {
       props: {
         contractAddress: tokenAddress,
-        // initialPage,
-        aggregateStats,
         collection,
         seo,
       },

@@ -1,9 +1,6 @@
 import useSWR from 'swr'
-import {
-  NounAuctionQueryProps,
-  nounAuctionQuery,
-  zoraApiFetcher,
-} from '@noun-auction/data'
+import { NounAuctionQueryProps, nounAuctionQuery } from '@noun-auction/data'
+import { zoraApiFetcher } from '@shared'
 
 export function useNounishAuctionQuery(params: NounAuctionQueryProps) {
   const { data: response, error } = useSWR(

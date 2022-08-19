@@ -19,7 +19,7 @@ export const returnThumbnailSize = (size: SizeProps) => {
     case 'md':
       return 'x20'
     case 'lg':
-      return 'x30'
+      return 'x24'
     default:
       return '100%'
   }
