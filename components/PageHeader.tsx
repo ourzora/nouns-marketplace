@@ -11,7 +11,7 @@ export interface PageHeaderProps extends FlexProps {
 
 export function PageHeader({ headline, copy, ...props }: PageHeaderProps) {
   return (
-    <Stack as="article" className={[pageHeaderWrapper, 'page-header-wrapper']} {...props}>
+    <Stack className={[pageHeaderWrapper, 'page-header-wrapper']} {...props}>
       {headline ? (
         <Text
           className={[textCenter, pageHeadline]}

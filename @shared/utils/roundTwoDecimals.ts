@@ -1,1 +1,2 @@
-export const roundTwoDecimals = (value: number) => Math.round(value * 100) / 100
+export const roundTwoDecimals = (value?: number) =>
+  value ? Math.round(value * 100) / 100 : 0

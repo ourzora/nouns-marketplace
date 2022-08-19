@@ -6,7 +6,7 @@ Adding to your project boils down to:
 
 1. Add Zord stylesheet from `@zoralabs/zord/index.css`
 2. Set up webfonts
-3. Add Zord root component
+3. Add Zord ThemeProvider and theme
 4. Add peer dependencies (we're working on making this easier!)
 
 **_Current Dependencies_**
@@ -47,11 +47,114 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
 ## Themes
 
-Theming with Zord is done by defining an object known as a "_Theme Contract_", a common interface of consistent design tokens defined in a central theme file and then used throughout a site's components. Themes are most commonly used to define theme colors, but can also be used to specify typefaces, spacing conventions, borders, animation standards, and more.
+Theming with Zord is done by defining an object known as a "_Theme Contract_", a common interface of consistent design tokens defined in a central theme file and then used throughout a site's components.
 
-Multiple implementations of a Theme Contract can exist on a single site, and the themes can be swapped in + out to enable, for example, dark and light theme variations, or themes designed to assist users who are visually impaired.
+```ts
+export const colorTheme = createThemeContract({
+  foreground: {
+    primary: '',
+    secondary: '',
+    tertiary: '',
+    success: '',
+    destructive: '',
+    warning: '',
+    reverse: '',
+    transparent: '',
+  },
+  background: {
+    primary: '',
+    secondary: '',
+    tertiary: '',
+    success: '',
+    warning: '',
+    destructive: '',
+    reverse: '',
+    transparent: '',
+  },
+  border: {
+    primary: '',
+    secondary: '',
+    tertiary: '',
+    success: '',
+    warning: '',
+    destructive: '',
+    transparent: '',
+  },
+  text: {
+    primary: '',
+    secondary: '',
+    tertiary: '',
+    success: '',
+    warning: '',
+    destructive: '',
+    primaryInverse: '',
+    transparent: '',
+  },
+  error: {
+    light: '',
+    default: '',
+    dark: '',
+    background: '',
+  },
+  success: {
+    light: '',
+    default: '',
+    dark: '',
+    background: '',
+  },
+  warning: {
+    light: '',
+    default: '',
+    dark: '',
+    background: '',
+  },
+})
+```
 
-Zora's standard theme defines colors, borders + radii, container sizing, animation easing, and spacing increments.
+Multiple implementations of a ThemeContract can exist on a single site, and the themes can be swapped in + out to enable, for example, dark and light theme variations, or themes designed to assist users who are visually impaired.
+
+Each theme maps 1-1 with the ThemeContract:
+
+```ts
+export const lightTheme = createTheme(colorTheme, {
+  foreground: {
+    primary: color.black100,
+    secondary: color.black70,
+    tertiary: color.black50,
+    success: color.successDefault,
+    warning: color.warningDefault,
+    destructive: color.errorDefault,
+    reverse: color.white100,
+    transparent: 'transparent',
+  },
+  background: {
+    primary: color.white100,
+    secondary: color.black10,
+    tertiary: color.black5,
+    success: color.successBackground,
+    warning: color.warningBackground,
+    destructive: color.errorDefault,
+    reverse: color.black100,
+    transparent: 'transparent',
+  },
+  ... (+ all other tokens)
+}
+```
+
+Themes are most commonly used to define theme colors, but can also be used to specify typefaces, spacing conventions, borders, animation standards, and more.
+
+Zora's standard theme defines colors, borders + radii, container sizing, animation easing, and spacing increments:
+
+```ts
+export const [baseTheme, vars] = createTheme({
+  color: colorTheme,
+  space,
+  size,
+  radii,
+  border,
+  ease,
+})
+```
 
 TODO: How can we easily let people customize themes?
 
@@ -62,7 +165,7 @@ TODO: How can we easily let people customize themes?
 
 ## Styling with Zord
 
-Zord uses a heavily-adapted styling implementation based on the Vanilla Extract styling framework. At Zora, we've found that this system allows us to develop front-end code rapidly using design primitives that can be customized using a large set of pre-defined CSS properties that adhere to Zora's theme specifications. At its core, Zord makes extensive use of Vanilla Extract's [Sprinkles](https://vanilla-extract.style/documentation/packages/sprinkles/) package to statically generate CSS classes that can be re-used without continually adding to an app's CSS footprint.
+Zord uses a heavily-adapted styling implementation based on the Vanilla Extract styling framework. At Zora, we've found that this system allows us to develop front-end code rapidly using design primitives that can be customized using a large set of pre-defined CSS properties that adhere to Zora's theme specifications. At its core, Zord makes extensive use of Vanilla Extract's [Sprinkles](https://vanilla-extract.style/documentation/packages/sprinkles/) package to statically generate CSS classes that can be re-used without continually adding to an app's CSS footprint. The Zord implementation renames Sprinkles as Atoms.
 
 ## Basic styles
 
@@ -279,6 +382,32 @@ export const filterGridHeader = style([
 ```
 
 Note the different methods used to apply media queries inside the normal `style({})` block vs. inside of the `atoms({})` block.
+
+## Selectors
+
+[Vanilla Extract' Styling API](https://github.com/seek-oss/vanilla-extract#styling-api) requires that special selectors like ':hover' and '&[data-state="checked"]&:hover&:not([disabled])' must be nested inside of a `selectors:{}` object, and there are rules about targeting with which you should familiarize yourself.
+
+```ts
+export const link = style([
+  {
+    outline: 'none',
+    textDecoration: 'none',
+    selectors: {
+      // <-- Nested selectors object
+      '&:focus, &:hover': {
+        '@media': {
+          [media.min768]: {
+            backgroundColor: vars.color.background.tertiary,
+          },
+        },
+      },
+    },
+  },
+  atoms({
+    color: 'primary',
+  }),
+])
+```
 
 ## Box Component
 

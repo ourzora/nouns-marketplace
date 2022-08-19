@@ -7,12 +7,11 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react'
-import { useNounishAuctionQuery, useAuctionRPC } from '@noun-auction/hooks'
-import { DaoConfigProps } from '@noun-auction/typings'
+import { useNounishAuctionQuery } from '@noun-auction/hooks'
+import { DaoConfigProps, ActiveNounishAuctionResponse } from '@noun-auction/typings'
 import { defaultDaoConfig } from '@noun-auction/constants'
-import { useContractRead } from 'wagmi'
-import { numberFormatter, roundTwoDecimals } from '@shared'
 import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
+import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
 
 export type NounishAuctionProviderProps = {
   tokenId?: string
@@ -26,22 +25,22 @@ const NounsAuctionContext = createContext<{
   error?: any
   daoConfig: DaoConfigProps
   tokenId?: string
-  isComplete?: boolean
   noAuctionHistory?: boolean
   contract?: any
+  minBidIncrementPercentage?: number
+  reservePrice: string
   timerComplete: boolean
-  auctionData?: any
   setTimerComplete: Dispatch<SetStateAction<boolean>>
   layout?: keyof typeof auctionWrapperVariants['layout']
   activeAuctionId: string | undefined
-  rpcAuctionData: any
+  activeAuction: ActiveNounishAuctionResponse
 }>({
   daoConfig: defaultDaoConfig,
   timerComplete: false,
-  auctionData: undefined,
   activeAuctionId: undefined,
   setTimerComplete: () => {},
-  rpcAuctionData: undefined,
+  activeAuction: undefined,
+  reservePrice: '0.01',
 })
 
 export function useNounishAuctionProvider() {
@@ -54,95 +53,37 @@ export function NounishAuctionProvider({
   layout,
   children,
 }: NounishAuctionProviderProps) {
-  const { marketType, contractAddress, classifierPrefix, abi, auctionContractAddress } =
-    daoConfig
+  const { marketType, contractAddress } = daoConfig
 
-  const { data: auctionData } = useAuctionRPC(daoConfig.auctionContractAddress)
+  const [timerComplete, setTimerComplete] = useState(false)
 
-  const { data: minBidIncrementPercentage } = useContractRead({
-    addressOrName: auctionContractAddress,
-    contractInterface: abi,
-    functionName: 'minBidIncrementPercentage',
-  })
-
-  const { data: isPaused } = useContractRead({
-    addressOrName: auctionContractAddress,
-    contractInterface: abi,
-    functionName: 'paused',
-  })
+  const { data: activeAuction } = useActiveNounishAuction(daoConfig.marketType)
 
   const { data, error } = useNounishAuctionQuery({
     marketType: marketType,
     contractAddress: contractAddress,
-    tokenId: tokenId ? tokenId : auctionData?.auction?.nounId,
+    tokenId: tokenId ? tokenId : activeAuction?.properties?.tokenId,
   })
-
-  const [timerComplete, setTimerComplete] = useState(false)
-
-  const isComplete = useMemo(() => {
-    if (!data) {
-      return false
-    } else if (data?.token?.markets.length) {
-      return (
-        data?.token?.markets[0]?.status === 'COMPLETED' ||
-        Object.values(data?.events?.nodes[0]?.properties).includes(
-          `${classifierPrefix?.typePrefix}NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT`
-        )
-      )
-    } else {
-      return false
-    }
-  }, [data])
 
   const noAuctionHistory = useMemo(() => {
     if (data) return data?.events?.nodes.length === 0
   }, [data])
-
-  const normalizedAuctionData = useMemo(() => {
-    if (data && data.markets?.nodes.length) {
-      const marketData = data.markets?.nodes[0]?.market
-      const marketProperties = marketData?.properties
-
-      return {
-        countdown: {
-          startTime: marketProperties?.startTime,
-          endTime: marketProperties?.endTime,
-        },
-        highBid: {
-          ethValue: marketProperties?.highestBidPrice?.chainTokenPrice?.raw,
-          usdcValue: numberFormatter(
-            roundTwoDecimals(marketProperties?.highestBidPrice?.usdcPrice?.decimal)
-          ),
-        },
-        bidder: {
-          address: marketProperties?.highestBidder,
-          txHash: marketData?.transactionInfo.transactionHash,
-        },
-        rpcData: auctionData?.auction,
-      }
-    }
-  }, [data, auctionData])
 
   return (
     <NounsAuctionContext.Provider
       value={{
         data,
         error,
-        isComplete,
         noAuctionHistory,
         timerComplete,
-        tokenId: tokenId ? tokenId : auctionData?.auction?.nounId,
-        activeAuctionId: auctionData ? auctionData?.auction?.nounId : undefined,
+        tokenId: tokenId ? tokenId : activeAuction?.properties?.tokenId,
+        activeAuctionId: activeAuction ? activeAuction?.properties?.tokenId : undefined,
         daoConfig: daoConfig,
-        rpcAuctionData: auctionData?.auction,
+        activeAuction: activeAuction,
         setTimerComplete,
         layout,
-        auctionData: normalizedAuctionData,
-        contract: {
-          minBidIncrementPercentage: minBidIncrementPercentage,
-          isPaused: isPaused,
-          reservePrice: '0.01',
-        },
+        minBidIncrementPercentage: activeAuction?.properties?.minBidIncrementPercentage,
+        reservePrice: '0.01',
       }}
     >
       {children}

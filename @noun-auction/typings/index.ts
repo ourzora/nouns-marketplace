@@ -1,25 +1,9 @@
 import { FlexProps } from '@zoralabs/zord'
 
-export type FetchDataTypes = {
-  loading?: boolean
-  error?: boolean
-  errorMsg?: any
-}
-
 export interface SharedDataRendererProps extends FlexProps {
   label?: string | boolean
   layoutDirection?: 'column' | 'row'
   showLabels?: boolean
-}
-
-export type NounAuctionHistoryProps = {
-  tokenId: string
-  contractAddress: string
-  marketType: 'NOUN_AUCTION'
-}
-
-export enum NounEventTypes {
-  NOUNS_AUCTION_EVENT = 'NOUNS_AUCTION_EVENT',
 }
 
 export type ClassifierPrefixProps = {
@@ -40,23 +24,6 @@ export enum NounsAuctionEventTypes {
   NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED = 'NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED',
 }
 
-export enum NounishAuctionEventTypes {
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT',
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT',
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_EXTENDED_EVENT = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_EXTENDED_EVENT',
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT',
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_TIME_BUFFER_UPDATED_EVENT = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_TIME_BUFFER_UPDATED_EVENT',
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_RESERVE_PRICE_UPDATED_EVENT = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_RESERVE_PRICE_UPDATED_EVENT',
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED',
-  NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT = 'NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT',
-  NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT = 'NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT',
-  NOUNS_AUCTION_HOUSE_AUCTION_EXTENDED_EVENT = 'NOUNS_AUCTION_HOUSE_AUCTION_EXTENDED_EVENT',
-  NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT = 'NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT',
-  NOUNS_AUCTION_HOUSE_AUCTION_TIME_BUFFER_UPDATED_EVENT = 'NOUNS_AUCTION_HOUSE_AUCTION_TIME_BUFFER_UPDATED_EVENT',
-  NOUNS_AUCTION_HOUSE_AUCTION_RESERVE_PRICE_UPDATED_EVENT = 'NOUNS_AUCTION_HOUSE_AUCTION_RESERVE_PRICE_UPDATED_EVENT',
-  NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED = 'NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED',
-}
-
 export type DaoConfigProps = {
   name: string
   contractAddress: string
@@ -66,31 +33,58 @@ export type DaoConfigProps = {
   abi: any
 }
 
-export type ContractAuctionData = {
-  auction:
-    | {
-        nounId: string
-        amount: string
-        startTime: string
-        endTime: string
-        bidder: string
-        settled: boolean
-      }
-    | undefined
+export type TokenPrice = {
+  decimal: number
+  raw: string
 }
 
-export type NormalizedAuctionData = {
-  countdown: {
-    startTime: string
-    endTime: string
-  }
-  highBid: {
-    ethValue: string
-    usdcValue: string
-  }
-  bidder: {
-    address: string
-    txHash: string
-  }
-  rpcData: ContractAuctionData
-}
+export type ActiveNounishAuctionResponse =
+  | {
+      /**
+       * Nounish NFT address
+       */
+      collectionAddress: string
+      /**
+       * Nounish Auction Contract Address
+       */
+      marketAddress: string
+      /**
+       * Zora API Market Type Classifier
+       */
+      marketType: 'ACTIVE_LIL_NOUNS_AUCTION' | 'ACTIVE_NOUNS_AUCTION'
+      properties: {
+        /**
+         * ID of Token/NFT up for auction
+         */
+        tokenId: string
+        /**
+         * Unix TimeStamp
+         */
+        startTime: string
+        /**
+         * Unix TimeStamp
+         */
+        endTime: string
+        /**
+         * null - should be numerical string
+         */
+        minBidIncrementPercentage: number
+        /**
+         * ETH Wallet Address
+         */
+        highestBidder: string | null
+        /**
+         * ETH Wallet Address
+         */
+        winner: string | null
+        highestBidPrice: {
+          chainTokenPrice: TokenPrice | null
+          usdcPrice: TokenPrice | null
+        }
+        reservePrice: {
+          chainTokenPrice: TokenPrice | null
+          usdcPrice: TokenPrice | null
+        }
+      }
+    }
+  | undefined
