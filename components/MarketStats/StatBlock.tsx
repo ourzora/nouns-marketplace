@@ -18,7 +18,6 @@ export function StatBlock({
       borderRadius="phat"
     >
       <Text
-        /* @ts-ignore */
         variant={['heading-xs, heading-xl']}
         color="secondary"
         className={[lightFont, stat]}

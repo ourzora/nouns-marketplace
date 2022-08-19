@@ -7,7 +7,6 @@ export function nounishAuctionVolume(
   salesType?: 'NOUNS_AUCTION_SALE' | 'LIL_NOUNS_AUCTION_SALE',
   contractAddress?: string
 ) {
-  console.log(salesType, contractAddress)
   if (!salesType) return
   return `{
     aggregateStat {

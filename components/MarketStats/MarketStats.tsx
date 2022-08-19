@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { Flex, FlexProps, Box } from '@zoralabs/zord'
 import { marketStatsWrapper } from 'styles/styles.css'
 import { numberFormatter } from '@shared'
@@ -16,6 +15,10 @@ export function MarketStats({ contractAddress, ...props }: MarketStatesProps) {
   const { aggregate } = useAggregate(contractAddress)
   const dao = returnDao(contractAddress)
 
+  const ownerCount = numberFormatter(aggregate?.aggregateStat?.ownerCount)
+  const nftCount = numberFormatter(aggregate?.aggregateStat?.nftCount)
+  const floorPrice = aggregate?.aggregateStat?.floorPrice ?? '0'
+
   return (
     <Flex className={marketStatsWrapper} {...props}>
       <Flex
@@ -26,22 +29,9 @@ export function MarketStats({ contractAddress, ...props }: MarketStatesProps) {
           '@1024': 'center',
         }}
       >
-        <StatBlock
-          statType="Owners"
-          statValue={numberFormatter(aggregate?.aggregateStat?.ownerCount as number)}
-        />
-        <StatBlock
-          statType="Items"
-          statValue={numberFormatter(aggregate?.aggregateStat?.nftCount as number)}
-        />
-        <StatBlock
-          statType="Floor Price"
-          statValue={`${
-            aggregate?.aggregateStat?.floorPrice === null
-              ? '0'
-              : aggregate?.aggregateStat.floorPrice
-          } ETH`}
-        />
+        <StatBlock statType="Owners" statValue={ownerCount} />
+        <StatBlock statType="Items" statValue={nftCount} />
+        <StatBlock statType="Floor Price" statValue={`${floorPrice} ETH`} />
         {dao ? (
           <DaoStats contractAddress={contractAddress} />
         ) : (
