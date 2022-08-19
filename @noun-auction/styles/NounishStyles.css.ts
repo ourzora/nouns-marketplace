@@ -162,6 +162,7 @@ globalStyle(
 `,
   {
     width: '50%',
+    textAlign: 'center',
     '@media': {
       [media.min1024]: {
         width: '100%',
