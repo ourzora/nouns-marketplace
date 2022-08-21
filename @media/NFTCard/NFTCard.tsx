@@ -20,8 +20,6 @@ export function NFTCard() {
     tokenId,
   } = useNFTProvider()
 
-  if (!data || !contractAddress || !tokenId) return null
-
   const { fallbackTitle } = useTitleWithFallback(
     contractAddress,
     tokenId,
@@ -42,15 +40,19 @@ export function NFTCard() {
     }
   }, [data?.metadata])
 
+  if (!data) return null
+
   return (
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
       <Link href={`/collections/${contractAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
-          <ImageWithNounFallback
-            tokenContract={contractAddress}
-            tokenId={tokenId}
-            srcImg={srcImg}
-          />
+          {contractAddress && tokenId && (
+            <ImageWithNounFallback
+              tokenContract={contractAddress}
+              tokenId={tokenId}
+              srcImg={srcImg}
+            />
+          )}
         </Box>
       </Link>
       <Stack gap="x2" mt="x2" px="x4" pb="x4" flex="1">
