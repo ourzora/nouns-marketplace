@@ -9,6 +9,7 @@ interface PrivateAskSidebarProps extends StackProps {
 }
 
 export function PrivateAskSidebar({ nft, ...props }: PrivateAskSidebarProps) {
+  // @BJ todo: enable passing of trigger from outside of the PrivateAskModal component?
   return (
     <Stack {...props}>
       <PrivateAskProvider>

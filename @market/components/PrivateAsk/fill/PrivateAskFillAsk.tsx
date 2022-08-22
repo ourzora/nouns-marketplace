@@ -1,10 +1,7 @@
 import { Eyebrow, Flex, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import {
-  MotionStack,
-  numberFormatter,
-  roundTwoDecimals,
+  // MotionStack,
   useAuth,
-  // useContractTransaction,
 } from '@shared'
 import React, { useMemo } from 'react'
 import * as styles from '../PrivateAskFlow.css'
@@ -12,31 +9,27 @@ import { TransactionSubmitButton } from '@market/components/TransactionSubmitBut
 import { usePrivateAskTransaction, useRelevantMarket } from '@market/hooks'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
+import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { useAskTokenHelper } from '@market/hooks/useAskTokenHelper'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
 
-export function PrivateAskFillAsk({ onNext, nft, ...props }: PrivateAskFillAskProps) {
-  const { ask } = useRelevantMarket(nft.markets)
+export function PrivateAskFillAsk({
+  onNext,
+  nft: nftObj,
+  ...props
+}: PrivateAskFillAskProps) {
+  const { markets, nft } = nftObj
+  const { ask } = useRelevantMarket(markets)
   const { balance: walletBalance } = useAuth()
-  // const { txStatus, txInProgress, txError } = useContractTransaction()
-  const rawAmount = useMemo(() => ask.amount?.amount.raw.toString(), [ask])
-  const prettyAmount = useMemo(() => ask.amount?.amount.value.toString(), [ask])
-  const usdAmount = useMemo(
-    () =>
-      ask?.amount?.usd?.value
-        ? numberFormatter(roundTwoDecimals(ask?.amount?.usd?.value))
-        : '...',
-    [ask]
-  )
-  const hasSufficientFunds = useMemo(
-    () => (rawAmount ? walletBalance?.value.gte(rawAmount) : false),
-    [rawAmount, walletBalance?.value]
-  )
   const { isSubmitting, txError, txInProgress, txStatus, fillAsk } =
     usePrivateAskTransaction({
-      nft,
+      nft: nftObj,
       onNext,
     })
+  const { displayAskAmount, usdAskAmount, hasSufficientFunds } = useAskTokenHelper({
+    ask,
+  })
 
   useMemo(() => console.log('ASK', ask), [ask])
 
@@ -51,13 +44,17 @@ export function PrivateAskFillAsk({ onNext, nft, ...props }: PrivateAskFillAskPr
     // >
     <Stack gap="x5">
       <Flex w="100%" justify="space-between" className={[styles.summary]}>
-        <>NFT</>
-        {prettyAmount && (
+        {/* <>NFT</> */}
+        <CollectionThumbnail
+          collectionAddress={nft?.contract.address}
+          tokenId={nft?.tokenId}
+        />
+        {displayAskAmount && (
           <PriceWithLabel
             label="Private Sale"
-            cryptoAmount={prettyAmount}
+            cryptoAmount={displayAskAmount}
             symbol="ETH"
-            usdAmount={usdAmount}
+            usdAmount={usdAskAmount}
           />
         )}
       </Flex>

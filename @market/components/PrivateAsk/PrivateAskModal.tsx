@@ -1,7 +1,6 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
 import clsx from 'clsx'
 import {
-  // APPROVE,
   APPROVE_FOR_FILL,
   APPROVE_FOR_CREATE,
   CREATE,
@@ -14,16 +13,6 @@ import {
   FILLASK_SUCCESS,
   usePrivateAskContext,
 } from '@market/providers/PrivateAskProvider'
-// import // PrivateAskApproveModule,
-// // PrivateAskListForSale,
-// // PrivateAskCreate,
-// // PrivateAskCreateSuccess,
-// // PrivateAskCancel,
-// // PrivateAskCancelSuccess,
-// // PrivateAskFillAsk,
-// // PrivateAskFillAskSuccess,
-// // PrivateAskTrigger,
-// '@market/components/PrivateAsk'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
 import { PrivateAskCreate } from './create/PrivateAskCreate'
 import { PrivateAskCreateSuccess } from './create/PrivateAskCreateSuccess'
@@ -75,12 +64,18 @@ export function PrivateAskModal({ header, nft }: PrivateAskModalProps) {
 
   const Component = componentMap[state.status]
 
-  useMemo(() => {
-    console.log('isZoraV3ModuleApproved', isZoraV3ModuleApproved)
-    console.log('state.status', state.status)
-    state.status && console.log('typeof componentMap[state.status]', typeof Component) // <-- PrivateAskApproveModule was undefined
-    console.log(Component)
-  }, [Component, isZoraV3ModuleApproved, state.status])
+  // useMemo(() => {
+  //   console.log('initiallyOpen?', initialOpen)
+  //   console.log('isOpen?', isOpen)
+  //   // console.log('isZoraV3ModuleApproved', isZoraV3ModuleApproved)
+  //   // console.log('state.status', state.status)
+  //   // state.status && console.log('typeof componentMap[state.status]', typeof Component) // <-- PrivateAskApproveModule was undefined
+  //   // console.log(Component)
+  // }, [
+  //   // Component, isZoraV3ModuleApproved, state.status,
+  //   initialOpen,
+  //   isOpen,
+  // ])
 
   const next = state.next as string | undefined
 
