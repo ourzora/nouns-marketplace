@@ -103,15 +103,15 @@ export function PrivateAskCreateSuccess({
 
   return (
     <>
-      {/* <Stack gap="x5"> */}
-      <MotionStack
+      {/* <MotionStack
         gap="x5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
         {...props}
-      >
+      > */}
+      <Stack gap="x5">
         <Heading size="xs">Private Ask Created</Heading>
 
         <Stack gap="x3">
@@ -133,8 +133,8 @@ export function PrivateAskCreateSuccess({
         <Button onClick={onNext}>Done</Button>
 
         <LearnMoreButton>Learn more about private asks</LearnMoreButton>
-      </MotionStack>
-      {/* </Stack> */}
+        {/* </MotionStack> */}
+      </Stack>
       {toast}
     </>
   )

@@ -1,6 +1,6 @@
 import { useZoraV3ModuleApproval } from '@market/hooks'
 import { useContractContext } from '@market/providers'
-import { MotionStack, useContractTransaction, useToggleOnce } from '@shared'
+import { useContractTransaction, useToggleOnce } from '@shared'
 import { Button, Heading, Paragraph, Spinner, Stack } from '@zoralabs/zord'
 import React, { useCallback, useEffect, useState } from 'react'
 
@@ -22,6 +22,7 @@ export function PrivateAskApproveModule({
 
   console.log('in PrivateAskApproveModule...')
 
+  // @BJ TODO: move into an Approval hook?
   const handleApproveModule = useCallback(async () => {
     // @TODO: Add approve module logic
     console.log('in handleApproveModule()...')
@@ -50,10 +51,6 @@ export function PrivateAskApproveModule({
     // approved && onNext && onNext()
   }, [approved, onNext, toggleInitialized])
 
-  // useMemo(() => {
-  //   toggleInitialized()
-  // }, [toggleInitialized])
-
   return !initialized ? (
     <Spinner />
   ) : (
@@ -77,7 +74,6 @@ export function PrivateAskApproveModule({
       >
         Learn more about selling on Zora
       </LearnMoreButton>
-      {/* </MotionStack> */}
     </Stack>
   )
 }

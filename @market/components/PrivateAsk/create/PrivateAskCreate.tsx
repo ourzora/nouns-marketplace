@@ -64,14 +64,15 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
   })
 
   return (
-    <MotionStack
-      gap="x5"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      {...props}
-    >
+    // <MotionStack
+    //   gap="x5"
+    //   initial={{ opacity: 0 }}
+    //   animate={{ opacity: 1 }}
+    //   exit={{ opacity: 0 }}
+    //   transition={{ duration: 0.2 }}
+    //   {...props}
+    // >
+    <Stack gap="x5" {...props}>
       <Heading size="xs">Create a Private Ask</Heading>
 
       <Formik
@@ -145,6 +146,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
           </Form>
         )}
       </Formik>
-    </MotionStack>
+    </Stack>
+    // </MotionStack>
   )
 }

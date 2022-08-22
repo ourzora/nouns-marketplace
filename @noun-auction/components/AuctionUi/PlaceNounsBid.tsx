@@ -6,7 +6,7 @@ import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { ModalComposition } from '@modal'
 
 // Imports from @markets
-import { NftInfo } from '@market'
+import { NFTInfo } from '@market'
 
 export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
   const { data, tokenId, layout } = useNounishAuctionProvider()
@@ -45,7 +45,7 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
           }
           content={
             <Stack p="x8">
-              <NftInfo
+              <NFTInfo
                 collectionAddress={tokenInfo.collectionAddress}
                 tokenId={tokenId}
               />

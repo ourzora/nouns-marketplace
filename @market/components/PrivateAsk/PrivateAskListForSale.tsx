@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   Button,
   Eyebrow,
@@ -9,23 +10,23 @@ import {
   Tag,
   Well,
 } from '@zoralabs/zord'
-import { MotionStack } from '@shared'
-import React from 'react'
+// import { MotionStack } from '@shared'
 
-import * as styles from '../PrivateAskFlow.css'
-import { LearnMoreButton } from '../LearnMoreButton'
-import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
+import * as styles from './PrivateAskFlow.css'
+import { LearnMoreButton } from './LearnMoreButton'
+import { CommonPrivateAskComponentProps } from './PrivateAskModal'
 
 interface PrivateAskListForSaleProps extends CommonPrivateAskComponentProps {}
 
 export function PrivateAskListForSale({ onNext, ...props }: PrivateAskListForSaleProps) {
   return (
-    <MotionStack
+    // <MotionStack
+    <Stack
       gap="x5"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0 }}
+      // transition={{ duration: 0.2 }}
       {...props}
     >
       <Stack gap="x2">
@@ -54,9 +55,8 @@ export function PrivateAskListForSale({ onNext, ...props }: PrivateAskListForSal
       <LearnMoreButton
         href="https://support.zora.co/en/articles/5878598-what-s-an-approval"
         target="_blank"
-      >
-        Learn more about selling on Zora
-      </LearnMoreButton>
-    </MotionStack>
+      />
+      {/* </MotionStack> */}
+    </Stack>
   )
 }

@@ -27,7 +27,7 @@ export function HorizontalMenu({
       e.preventDefault()
       !useCustomHandler && setId ? setId(category) : console.log(e)
     },
-    [setId]
+    [setId, useCustomHandler]
   )
 
   return (

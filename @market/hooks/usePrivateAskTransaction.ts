@@ -5,6 +5,7 @@ import { NFTObject } from '@zoralabs/nft-hooks'
 import { ContractTransaction } from 'ethers'
 import { parseUnits } from '@ethersproject/units'
 import { usePrivateAskContext } from '@market/providers/PrivateAskProvider'
+import { useRelevantMarket } from './useRelevantMarket'
 
 export const CREATE_ASK: string = 'createPrivateAsk'
 export const CANCEL_ASK: string = 'cancelPrivateAsk'
@@ -33,7 +34,10 @@ export const usePrivateAskTransaction = ({
   const [isSubmitting, setSubmitting] = useState<boolean>(false)
   const { setFinalizedPrivateAskDetails } = usePrivateAskContext()
   const [txError, setTxError] = useState<string>('')
-  const { nft } = nftData
+  const { nft, markets } = nftData
+
+  const { ask } = useRelevantMarket(markets)
+  console.log('ASK PRICE', ask.amount)
 
   async function makeAskTransaction(
     txType: PrivateAskTransaction,
