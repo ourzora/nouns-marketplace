@@ -39,7 +39,12 @@ export function ModalComposition({
   return (
     <>
       <Box className="zora-modal-trigger-wrapper">
-        <Button variant="unset" onClick={modalHandler} className="zora-modal-trigger">
+        <Button
+          variant="unset"
+          onClick={modalHandler}
+          className="zora-modal-trigger"
+          display="block"
+        >
           {trigger}
         </Button>
       </Box>

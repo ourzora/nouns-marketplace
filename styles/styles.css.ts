@@ -162,16 +162,6 @@ export const pageHeaderWrapper = style([
     width: '100%',
     mx: 'auto',
     my: 'x0',
-    px: 'x4',
-    gap: 'x3',
-    pt: {
-      '@initial': 'x8',
-      '@1024': 'x0',
-    },
-    mb: {
-      '@initial': 'x0',
-      '@1024': 'x8',
-    },
   }),
 ])
 
@@ -216,7 +206,7 @@ export const collectionNameThumbDao = style([
     gridTemplateColumns: '1fr',
     '@media': {
       [media.min1024]: {
-        gridTemplateColumns: '80px auto',
+        gridTemplateColumns: '100px auto',
       },
     },
   },

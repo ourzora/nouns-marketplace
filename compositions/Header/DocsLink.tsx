@@ -1,55 +1,12 @@
-import { useRef, useState } from 'react'
-import { Label, Flex, Box } from '@zoralabs/zord'
-import { useScrollPosition } from '@n8tb1t/use-scroll-position'
-import { Link } from 'components'
-import { clickAnimation } from 'styles/styles.css'
+import Link from 'next/link'
+import { Label, Button, Box } from '@zoralabs/zord'
+import { docsLink } from './Header.css'
 
-export function BetaTag() {
-  const [hideOnScroll, setHideOnScroll] = useState(true)
-  const childRef = useRef<HTMLDivElement>(null)
-
-  useScrollPosition(
-    ({ currPos }) => {
-      setHideOnScroll(currPos.y > 400)
-    },
-    [hideOnScroll],
-    // @ts-ignore-next-line
-    childRef,
-    false,
-    500,
-    false
-  )
-
+export function DocsLink() {
   return (
-    <Link href="/docs">
-      <Flex
-        ref={childRef}
-        backgroundColor="tertiary"
-        py="x2"
-        pr="x5"
-        pl="x2"
-        borderRadius="curved"
-        align="center"
-        gap="x3"
-        position={{
-          '@initial': 'fixed',
-          '@1024': 'relative',
-        }}
-        bottom={{
-          '@initial': 'x4',
-          '@1024': 'auto',
-        }}
-        right={{
-          '@initial': 'x4',
-          '@1024': 'auto',
-        }}
-        className={clickAnimation}
-        style={{
-          opacity: `${hideOnScroll ? 1 : 1}`,
-          height: 42,
-        }}
-      >
-        <Box h="x7" w="x7">
+    <Link href="/docs" passHref>
+      <Button as="a" variant="secondary" className={docsLink}>
+        <Box h="x7" w="x7" position="relative">
           <Box
             w="100%"
             h="100%"
@@ -60,7 +17,7 @@ export function BetaTag() {
           />
         </Box>
         <Label size="sm">Docs</Label>
-      </Flex>
+      </Button>
     </Link>
   )
 }

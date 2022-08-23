@@ -1,7 +1,7 @@
 import { PageWrapper } from 'components/PageWrapper'
 import { collectionService, CollectionServiceProps } from 'services/collectionService'
-import { useEffect, useState } from 'react'
-import { MarketStats } from 'components/MarketStats'
+import { useEffect } from 'react'
+import { MarketStats } from 'components/MarketStats/MarketStats'
 import { Seo } from 'components'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import {
@@ -12,47 +12,32 @@ import {
 import { CollectionFilterProvider } from '@filter'
 import { Stack, Separator } from '@zoralabs/zord'
 import { useCollection } from '@filter/hooks/useCollection'
-import { HorizontalMenuProps } from 'components'
 import { returnDao } from 'constants/collection-addresses'
 import { useWindowWidth } from '@shared'
 import { ActiveAuctionCard } from '@noun-auction'
+import { useAggregate } from 'hooks'
 
-const Collection = ({
-  // initialPage,
-  contractAddress,
-  seo,
-  aggregateStats,
-  collection,
-}: CollectionServiceProps) => {
+const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const [menuSelection, setMenuSelection] = useState<string>('nfts')
   const { isLarge } = useWindowWidth()
+  const { aggregate } = useAggregate(contractAddress)
 
   const dao = returnDao(contractAddress)
-
-  const items: HorizontalMenuProps['items'] = [
-    {
-      id: 'nfts',
-      label: 'NFTs',
-      handler: () => setMenuSelection('nfts'),
-    },
-    {
-      id: 'activity',
-      label: 'Activity',
-      handler: () => setMenuSelection('activity'),
-    },
-  ]
 
   useEffect(() => {
     if (collection && collection?.name) {
       setCurrentCollection(collection.name)
-      setCurrentCollectionCount(`${aggregateStats.aggregateStat.nftCount} NFTs`)
+      setCurrentCollectionCount(
+        aggregate?.aggregateStat.nftCount
+          ? `${aggregate?.aggregateStat.nftCount} NFTs`
+          : '... NFTs'
+      )
     }
     return () => {
       setCurrentCollection('Explore...')
       setCurrentCollectionCount(undefined)
     }
-  }, [aggregateStats, collection, setCurrentCollection, setCurrentCollectionCount])
+  }, [aggregate, collection, setCurrentCollection, setCurrentCollectionCount])
 
   const { data } = useCollection(contractAddress)
 
@@ -61,11 +46,10 @@ const Collection = ({
       <Seo title={seo.title} description={seo.description} />
       <CollectionHeader
         collection={collection}
-        aggregateStats={aggregateStats}
         layout={dao ? 'dao' : 'collection'}
         currentAuction={dao ? <ActiveAuctionCard daoConfig={dao} /> : null}
       >
-        <MarketStats aggregateStats={aggregateStats} />
+        <MarketStats contractAddress={contractAddress} />
       </CollectionHeader>
       {contractAddress && (
         <CollectionFilterProvider
@@ -73,8 +57,6 @@ const Collection = ({
           filtersVisible={isLarge ? true : false}
           contractAddress={contractAddress}
           useSortDropdown
-          // initialPage={initialPage}
-          // useMarketStatus
           useCollectionProperties={{
             header: 'Traits',
             selector: 'nouns-market-traits',
@@ -91,24 +73,8 @@ const Collection = ({
           }}
         >
           <Stack>
-            {dao ? (
-              <>
-                {/*<HorizontalMenu
-                  items={items}
-                  setId={setMenuSelection}
-                  currentId={menuSelection}
-                  useCustomHandler
-                  style={{
-                    borderBottom: `1px solid ${color.black10}`,
-                    zIndex: 100,
-                  }}
-                />*/}
-                <Separator />
-              </>
-            ) : (
-              <CollectionActivityHeader />
-            )}
-            <Collections collectionAddress={contractAddress} view={menuSelection} />
+            {dao ? <Separator /> : <CollectionActivityHeader />}
+            <Collections collectionAddress={contractAddress} />
           </Stack>
         </CollectionFilterProvider>
       )}
