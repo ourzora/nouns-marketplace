@@ -76,16 +76,6 @@ export const collectionTriggerWrapper = style([
   }),
 ])
 
-export const modalWrapper = style({
-  overflowY: 'scroll',
-  msOverflowStyle: 'none',
-  scrollbarWidth: 'none',
-  '::-webkit-scrollbar': {
-    display: 'none',
-  },
-  height: 400,
-})
-
 export const manageButtonWrapper = style([
   {
     gridColumn: '2',
