@@ -5,7 +5,6 @@ export const horizontalMenuButton = style([
   {
     borderRadius: 0,
     borderBottom: `2px solid transparent`,
-    paddingBottom: space.x2,
     selectors: {
       '&.active': {
         borderBottom: `2px solid ${color.black70}`,
@@ -14,6 +13,7 @@ export const horizontalMenuButton = style([
   },
   atoms({
     color: 'primary',
+    pb: 'x2',
   }),
 ])
 
