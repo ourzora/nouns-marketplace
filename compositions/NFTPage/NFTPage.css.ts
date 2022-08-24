@@ -128,26 +128,6 @@ export const nftMarketWrapper = style([
   }),
 ])
 
-export const askInfoWrapper = style([
-  atoms({
-    w: '100%',
-    gap: 'x2',
-  }),
-])
-
-globalStyle(
-  `
-  ${askInfoWrapper} .zora-market-fillAskInfo-label, 
-  ${askInfoWrapper} .zora-market-addressWithLink
-`,
-  { fontSize: `${typography.size[9]}` }
-)
-
-globalStyle(`${askInfoWrapper} .zora-market-fillAskInfo-label`, {
-  fontWeight: 300,
-  fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
-})
-
 export const nftAttributes = style([
   {
     '@media': {

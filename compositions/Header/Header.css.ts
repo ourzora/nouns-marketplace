@@ -1,12 +1,11 @@
-import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, media, color } from '@zoralabs/zord'
+import { style } from '@vanilla-extract/css'
+import { atoms, media, color, space } from '@zoralabs/zord'
 import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, HEADER_Z } from 'styles/style-constants'
 
 export const headerWrapper = style([
   {
     height: HEADER_HEIGHT_MOBILE,
     zIndex: HEADER_Z,
-    alignContent: 'center',
     alignItems: 'center',
     gridTemplateColumns: 'repeat(2, 1fr)',
     gridTemplateRows: 'auto',
@@ -33,6 +32,7 @@ export const headerWrapper = style([
 export const nounsGlassesLink = style([
   {
     gridColumn: '1',
+    gridRow: '1',
     aspectRatio: '70 / 24',
     maxHeight: '30px',
   },
@@ -51,28 +51,28 @@ export const nounsGlasses = style([
   }),
 ])
 
-export const collectionTrigger = style([
-  atoms({
-    borderRadius: 'curved',
-    gap: 'x2',
-    px: 'x4',
-  }),
-])
-
-export const collectionTriggerWrapper = style([
+export const manageButton = style([
   {
-    gridColumn: '1',
+    gridColumn: '2',
     gridRow: '2',
+    height: 42,
+    paddingLeft: space.x5,
+    paddingRight: space.x5,
     '@media': {
       [media.min1024]: {
-        gridColumn: '3',
+        gridColumn: '23',
         gridRow: '1',
       },
     },
   },
   atoms({
-    w: '100%',
-    justifyContent: 'flex-start',
+    w: 'auto',
+    ml: 'auto',
+    borderRadius: 'curved',
+    justifyContent: {
+      '@initial': 'center',
+      '@1024': 'center',
+    },
   }),
 ])
 
@@ -86,41 +86,7 @@ export const modalWrapper = style({
   height: 400,
 })
 
-export const manageButtonWrapper = style([
-  {
-    gridColumn: '2',
-    gridRow: '2',
-    '@media': {
-      [media.min1024]: {
-        gridColumn: '23',
-        gridRow: '1',
-      },
-    },
-  },
-  atoms({
-    w: '100%',
-    justifyContent: 'flex-end',
-  }),
-])
-
-export const manageButton = style([
-  {
-    width: 130,
-  },
-  atoms({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    h: '100%',
-    backgroundColor: 'tertiary',
-    py: {
-      '@initial': 'x1',
-      '@1024': 'x2',
-    },
-  }),
-])
-
-export const connectWrapper = style([
+export const connectButton = style([
   {
     gridColumn: '2',
     gridRow: '1',
@@ -133,6 +99,22 @@ export const connectWrapper = style([
   },
   atoms({
     w: '100%',
-    justifyContent: 'flex-end',
+    justifyContent: {
+      '@initial': 'flex-end',
+      '@1024': 'flex-start',
+    },
+  }),
+])
+
+export const docsLink = style([
+  {
+    height: 42,
+    paddingLeft: space.x1,
+    paddingRight: space.x3,
+    gap: space.x3,
+  },
+  atoms({
+    borderRadius: 'curved',
+    position: 'relative',
   }),
 ])

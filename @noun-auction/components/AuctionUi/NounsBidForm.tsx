@@ -52,16 +52,15 @@ export function NounsBidForm({
   const {
     daoConfig: { auctionContractAddress, abi },
     tokenId,
-    contract: { minBidIncrementPercentage, reservePrice },
-    auctionData,
+    minBidIncrementPercentage,
+    reservePrice,
+    activeAuction,
   } = useNounishAuctionProvider()
 
-  if (!abi || !auctionContractAddress) return null
-
   const { minBidAmount } = useNounBidIncrement(
-    auctionData?.rpcData?.amount,
-    minBidIncrementPercentage,
-    reservePrice
+    reservePrice,
+    activeAuction?.properties?.highestBidPrice?.chainTokenPrice?.raw,
+    minBidIncrementPercentage
   )
 
   const { data: signer } = useSigner()
@@ -87,7 +86,6 @@ export function NounsBidForm({
     isError,
     isLoading,
     isSuccess,
-    data: successMsg,
     error: writeContractError,
     write: placeBid,
   } = useContractWrite({
@@ -109,11 +107,6 @@ export function NounsBidForm({
     },
     [bidAmount]
   )
-
-  useEffect(() => {
-    // console.log('successMsg', successMsg, minBidAmount?.pretty)
-    // successMsg?.hash / successMsg?.value (BigNumber) / successMsg?.gasPrice (BigNumber)
-  }, [isSuccess, successMsg])
 
   return (
     <Box {...props}>

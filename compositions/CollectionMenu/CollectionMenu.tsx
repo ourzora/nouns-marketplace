@@ -1,7 +1,7 @@
 import { Box, Icon, Button, Label, Stack } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
-import { modalWrapper } from '../Header.css'
+import { modalWrapper, collectionTrigger } from './CollectionMenu.css'
 import { noTextWrap } from 'styles/styles.css'
 import { CollectionNavList } from './CollectionNavList'
 import { lightFont } from '@shared'
@@ -51,32 +51,21 @@ export function CollectionMenu() {
           as="div"
           size="md"
           variant="secondary"
-          borderRadius="curved"
-          display="flex"
-          w={{
-            '@initial': 'auto',
-            '@768': 'auto',
-          }}
-          style={{
-            height: 42,
-            paddingLeft: 16,
-            paddingRight: 16,
-            gridGap: 10,
-          }}
+          className={[collectionTrigger, noTextWrap]}
         >
           {currentCollection}
           {currentCollectionCount ? (
             <Label
               as="span"
-              className={[lightFont, noTextWrap]}
               color="tertiary"
-              size="lg"
+              size="md"
               display={{
                 '@initial': 'none',
                 '@1024': 'inline',
               }}
+              className={[lightFont, noTextWrap]}
             >
-              {currentCollectionCount}
+              {currentCollectionCount ?? '...'}
             </Label>
           ) : null}
           <Icon id="ChevronDown" size="md" color="secondary" />

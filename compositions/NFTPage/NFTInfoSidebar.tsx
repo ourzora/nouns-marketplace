@@ -1,30 +1,22 @@
 import { Heading, Stack, Flex, Paragraph, Box, BoxProps, Button } from '@zoralabs/zord'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { FillV3AskInfo } from '@market'
-import { useNFTProvider, useIsOwner, useTitleWithFallback } from '@shared'
+import { useIsOwner, useNFTProvider, useTitleWithFallback } from '@shared'
 import { Link } from 'components'
 import { clickAnimation } from 'styles/styles.css'
-import {
-  nftInfoSidebar,
-  nftInfoSidebarWrapper,
-  askInfoWrapper,
-  nftNextButton,
-} from './NFTPage.css'
-import {} from './NFTPage.css'
+import { nftInfoSidebarWrapper, nftNextButton, nftInfoSidebar } from './NFTPage.css'
 import { MarketUi } from './MarketUi'
-import { useNounishAuctionProvider } from '@noun-auction'
 
 import { lightFont } from '@shared'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useNounishAuctionProvider } from '@noun-auction'
 
 export interface NFTInfoSidebar extends BoxProps {}
 
 export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
   const router = useRouter()
   const { initialData: nft, tokenId, contractAddress } = useNFTProvider()
-  const { isOwner } = useIsOwner(nft!)
-  const { isComplete, activeAuctionId } = useNounishAuctionProvider()
+  const { activeAuctionId } = useNounishAuctionProvider()
 
   const hasNextNft = useMemo(() => {
     return tokenId && activeAuctionId
@@ -99,11 +91,6 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
           <Paragraph size="lg" className={lightFont}>
             {nft?.metadata?.description}
           </Paragraph>
-        )}
-        {!isOwner && isComplete && (
-          <Stack className={askInfoWrapper}>
-            <FillV3AskInfo showBalance={false} nft={nft} />
-          </Stack>
         )}
         {nft?.nft && (
           <MarketUi
