@@ -1,13 +1,23 @@
-import { useState } from 'react'
-import { Box, Icon, Button, Label, Stack, color } from '@zoralabs/zord'
+import { Box, Icon, Button, Label, Stack } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
-import { modalWrapper, collectionTrigger } from './CollectionMenu.css'
 import { noTextWrap } from 'styles/styles.css'
 import { CollectionNavList } from './CollectionNavList'
-import { HorizontalMenu } from 'components'
-
 import { lightFont } from '@shared'
+import * as TabsPrimitive from '@radix-ui/react-tabs'
+import {
+  label,
+  tabsButton,
+  tabsList,
+  modalWrapper,
+  collectionTrigger,
+} from './CollectionMenu.css'
+
+// Exports
+export const Tabs = TabsPrimitive.Root
+export const TabsList = TabsPrimitive.List
+export const TabsTrigger = TabsPrimitive.Trigger
+export const TabsContent = TabsPrimitive.Content
 
 enum tabs {
   DAOS = 'Daos',
@@ -23,9 +33,6 @@ export function CollectionMenu() {
     currentCollection,
     currentCollectionCount,
   } = useCollectionsContext()
-
-  const [tab, setTab] = useState<string>(tabs.DAOS)
-
   const menuCategories = [
     {
       id: tabs.DAOS,
@@ -70,29 +77,30 @@ export function CollectionMenu() {
         </Button>
       }
       content={
-        <Box p="x8">
-          <Stack as="menu" gap="x6" className={modalWrapper}>
-            <HorizontalMenu
-              items={menuCategories}
-              setId={setTab}
-              currentId={tab}
-              position="sticky"
-              top="x0"
-              backgroundColor="primary"
-              style={{
-                borderBottom: `1px solid ${color.black10}`,
-                zIndex: 100,
-              }}
-            />
-            {menuCategories.map((category) => (
-              <CollectionNavList
-                key={category.id}
-                items={category.items}
-                display={category.id === tab ? 'flex' : 'none'}
-              />
-            ))}
-          </Stack>
-        </Box>
+        <Stack as="menu" gap="x6" className={modalWrapper}>
+          <Tabs defaultValue={tabs.DAOS} data-orientation="horizontal">
+            <TabsList aria-label="Choose your menu" className={tabsList}>
+              <TabsTrigger value={tabs.DAOS} className={tabsButton}>
+                <Box as="span" className={label}>
+                  {tabs.DAOS}
+                </Box>
+                &nbsp;&nbsp;{daosAmount}
+              </TabsTrigger>
+              <TabsTrigger value={tabs.COLLECTIONS} className={tabsButton}>
+                <Box as="span" className={label}>
+                  {tabs.COLLECTIONS}
+                </Box>
+                &nbsp;&nbsp;{collectionAmount}
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value={tabs.DAOS}>
+              <CollectionNavList items={daos} pt="x22" p="x6" />
+            </TabsContent>
+            <TabsContent value={tabs.COLLECTIONS}>
+              <CollectionNavList items={collections} pt="x22" p="x6" />
+            </TabsContent>
+          </Tabs>
+        </Stack>
       }
     />
   )
