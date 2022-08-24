@@ -31,7 +31,7 @@ export function HorizontalMenu({
   )
 
   return (
-    <Flex className={horizontalMenuWrapper} gap="x6" justify="center" {...props}>
+    <Flex className={horizontalMenuWrapper} {...props}>
       {items.map((item) => (
         <Button
           key={item.label}
