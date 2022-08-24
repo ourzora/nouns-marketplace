@@ -31,12 +31,14 @@ export const tabsButton = style([
 
 export const tabsList = style([
   {
-    display: 'flex',
-    position: 'absolute',
-    width: '100%',
     borderBottom: `2px solid ${color.black10}`,
     zIndex: 4,
   },
+  atoms({
+    display: 'flex',
+    position: 'absolute',
+    width: '100%',
+  })
 ])
 
 export const label = style({
@@ -64,12 +66,15 @@ export const collectionTrigger = style([
   }),
 ])
 
-export const modalWrapper = style({
-  overflowY: 'scroll',
+export const modalWrapper = style([{
   msOverflowStyle: 'none',
   scrollbarWidth: 'none',
   '::-webkit-scrollbar': {
     display: 'none',
   },
   height: 400,
+},
+atoms({
+  overflowY: 'scroll',
 })
+])
