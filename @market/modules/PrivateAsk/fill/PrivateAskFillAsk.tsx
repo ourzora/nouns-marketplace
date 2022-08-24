@@ -1,16 +1,18 @@
 import { Eyebrow, Flex, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import {
+  PrintError,
   // MotionStack,
   useAuth,
 } from '@shared'
 import React, { useMemo } from 'react'
 import * as styles from '../PrivateAskFlow.css'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { usePrivateAskTransaction, useRelevantMarket } from '@market/hooks'
+import { useRelevantMarket } from '@market/hooks'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { useAskTokenHelper } from '@market/hooks/useAskTokenHelper'
+import { usePrivateAskFillAskTransaction } from '../hooks'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
 
@@ -22,14 +24,14 @@ export function PrivateAskFillAsk({
   const { markets, nft } = nftObj
   const { ask } = useRelevantMarket(markets)
   const { balance: walletBalance } = useAuth()
-  const { isSubmitting, txError, txInProgress, txStatus, fillAsk } =
-    usePrivateAskTransaction({
-      nft: nftObj,
-      onNext,
-    })
   const { displayAskAmount, usdAskAmount, hasSufficientFunds } = useAskTokenHelper({
     ask,
   })
+  const { isLoading, txError, txInProgress, txStatus, fillAsk } =
+    usePrivateAskFillAskTransaction({
+      nft: nftObj,
+      onNext,
+    })
 
   useMemo(() => console.log('ASK', ask), [ask])
 
@@ -44,7 +46,6 @@ export function PrivateAskFillAsk({
     // >
     <Stack gap="x5">
       <Flex w="100%" justify="space-between" className={[styles.summary]}>
-        {/* <>NFT</> */}
         <CollectionThumbnail
           collectionAddress={nft?.contract.address}
           tokenId={nft?.tokenId}
@@ -70,19 +71,15 @@ export function PrivateAskFillAsk({
         </Eyebrow>
       </Flex>
 
-      {txError && (
-        <Paragraph size="xs" color="destructive">
-          {txError}
-        </Paragraph>
-      )}
+      {txError && <PrintError errorMessage={txError} />}
 
       <TransactionSubmitButton
         type="submit"
         txStatus={txStatus}
         txInProgress={txInProgress}
-        onClick={fillAsk}
-        loading={isSubmitting}
-        disabled={isSubmitting || !hasSufficientFunds}
+        onClick={() => fillAsk?.()} // Yes, this looks weird, but it's a contractWrite thing
+        loading={isLoading}
+        disabled={!fillAsk || txInProgress || !hasSufficientFunds || !displayAskAmount}
       >
         {hasSufficientFunds ? `Buy NFT` : 'Insufficient Funds'}
       </TransactionSubmitButton>

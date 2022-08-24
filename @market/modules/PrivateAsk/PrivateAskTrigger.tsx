@@ -1,15 +1,13 @@
 import {
   CANCEL,
   PrivateAskAction,
-  // FILLASK,
-  APPROVE_FOR_FILL,
-} from '@market/providers/PrivateAskProvider'
+  APPROVE_MODULE_FOR_FILL,
+} from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Button } from '@zoralabs/zord'
 import React from 'react'
 
-import { useRelevantMarket } from '@market/hooks'
-import { useAskTokenHelper } from '@market/hooks/useAskTokenHelper'
+import { useRelevantMarket, useAskTokenHelper } from '@market/hooks'
 import { isAddressMatch, useAuth, useIsOwner } from '@shared'
 
 interface PrivateAskTriggerProps {
@@ -50,8 +48,7 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
       <Button
         w="100%"
         onClick={() => {
-          // dispatch && dispatch({ type: FILLASK })
-          dispatch && dispatch({ type: APPROVE_FOR_FILL })
+          dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL })
           openModal()
         }}
       >

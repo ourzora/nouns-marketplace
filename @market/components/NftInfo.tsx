@@ -21,7 +21,7 @@ export function NFTInfo({
   tokenId: string | undefined
   askPrice?: string
   /** Additional NFT info to display based on use context */
-  modalType?: 'fillAsk' | 'list' | 'auction'
+  modalType?: MODAL_TYPES.fillAsk | MODAL_TYPES.list | MODAL_TYPES.auction
 }) {
   const { data } = useNFT(collectionAddress, tokenId)
   const { address } = useAuth()

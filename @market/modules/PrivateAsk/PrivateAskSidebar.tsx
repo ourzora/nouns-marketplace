@@ -1,9 +1,10 @@
-import { PrivateAskProvider } from '@market/providers/PrivateAskProvider'
+import { PrivateAskProvider } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Stack, StackProps } from '@zoralabs/zord'
 import { NounsGlasses } from 'components'
 import React from 'react'
 import { PrivateAskModal } from './PrivateAskModal'
+
 interface PrivateAskSidebarProps extends StackProps {
   nft: NFTObject
 }

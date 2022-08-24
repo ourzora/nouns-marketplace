@@ -9,8 +9,9 @@ type PrivateAskTxDetails = {
 }
 
 export const LIST: string = 'listForSale'
-export const APPROVE_FOR_CREATE: string = 'approveModuleForSale'
-export const APPROVE_FOR_FILL: string = 'approveModuleForFill'
+export const APPROVE_MODULE_FOR_CREATE: string = 'approveModuleForSale'
+export const APPROVE_MODULE_FOR_FILL: string = 'approveModuleForFill'
+export const APPROVE_TRANSFER: string = 'approveTransferHelper'
 export const CREATE: string = 'createPrivateAsk'
 export const CREATE_SUCCESS: string = 'privateAskCreateSuccess'
 export const CANCEL: string = 'cancelPrivateAsk'
@@ -20,7 +21,7 @@ export const FILLASK_SUCCESS: string = 'fillPrivateAskSuccess'
 export const RESET: string = 'resetPrivateAsk'
 
 export const initialState = {
-  next: APPROVE_FOR_CREATE,
+  next: APPROVE_MODULE_FOR_CREATE,
   status: LIST,
 }
 
@@ -31,12 +32,13 @@ interface State {
 
 export type PrivateAskAction =
   | { type: typeof LIST }
-  | { type: typeof APPROVE_FOR_CREATE }
+  | { type: typeof APPROVE_MODULE_FOR_CREATE }
+  | { type: typeof APPROVE_TRANSFER }
   | { type: typeof CREATE }
   | { type: typeof CREATE_SUCCESS }
   | { type: typeof CANCEL }
   | { type: typeof CANCEL_SUCCESS }
-  | { type: typeof APPROVE_FOR_FILL }
+  | { type: typeof APPROVE_MODULE_FOR_FILL }
   | { type: typeof FILLASK }
   | { type: typeof FILLASK_SUCCESS }
   | { type: typeof RESET }
@@ -46,8 +48,10 @@ export function reducer(_state: State, action: PrivateAskAction): State {
     case RESET:
     case LIST:
       return initialState
-    case APPROVE_FOR_CREATE:
-      return { status: APPROVE_FOR_CREATE, next: CREATE }
+    case APPROVE_MODULE_FOR_CREATE:
+      return { status: APPROVE_MODULE_FOR_CREATE, next: APPROVE_TRANSFER }
+    case APPROVE_TRANSFER:
+      return { status: APPROVE_TRANSFER, next: CREATE }
     case CREATE:
       return { status: CREATE, next: CREATE_SUCCESS }
     case CREATE_SUCCESS:
@@ -56,8 +60,8 @@ export function reducer(_state: State, action: PrivateAskAction): State {
       return { status: CANCEL, next: CANCEL_SUCCESS }
     case CANCEL_SUCCESS:
       return { status: CANCEL_SUCCESS }
-    case APPROVE_FOR_FILL:
-      return { status: APPROVE_FOR_FILL, next: FILLASK }
+    case APPROVE_MODULE_FOR_FILL:
+      return { status: APPROVE_MODULE_FOR_FILL, next: FILLASK }
     case FILLASK:
       return { status: FILLASK, next: FILLASK_SUCCESS }
     case FILLASK_SUCCESS:

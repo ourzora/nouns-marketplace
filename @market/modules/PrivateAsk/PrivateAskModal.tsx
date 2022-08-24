@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react'
 import clsx from 'clsx'
 import {
-  APPROVE_FOR_FILL,
-  APPROVE_FOR_CREATE,
+  APPROVE_MODULE_FOR_FILL,
+  APPROVE_MODULE_FOR_CREATE,
+  APPROVE_TRANSFER,
   CREATE,
   CREATE_SUCCESS,
   LIST,
@@ -12,8 +13,9 @@ import {
   FILLASK,
   FILLASK_SUCCESS,
   usePrivateAskContext,
-} from '@market/providers/PrivateAskProvider'
+} from '@market/modules/PrivateAsk/providers/'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
+import { PrivateAskApproveTransferHelper } from './PrivateAskApproveTransferHelper'
 import { PrivateAskCreate } from './create/PrivateAskCreate'
 import { PrivateAskCreateSuccess } from './create/PrivateAskCreateSuccess'
 import { PrivateAskCancel } from './cancel/PrivateAskCancel'
@@ -33,12 +35,13 @@ import { useZoraV3ModuleApproval } from '@market/hooks'
 
 const componentMap = {
   [LIST]: PrivateAskListForSale,
-  [APPROVE_FOR_CREATE]: PrivateAskApproveModule,
+  [APPROVE_MODULE_FOR_CREATE]: PrivateAskApproveModule,
+  [APPROVE_TRANSFER]: PrivateAskApproveTransferHelper,
   [CREATE]: PrivateAskCreate,
   [CREATE_SUCCESS]: PrivateAskCreateSuccess,
   [CANCEL]: PrivateAskCancel,
   [CANCEL_SUCCESS]: PrivateAskCancelSuccess,
-  [APPROVE_FOR_FILL]: PrivateAskApproveModule,
+  [APPROVE_MODULE_FOR_FILL]: PrivateAskApproveModule,
   [FILLASK]: PrivateAskFillAsk,
   [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
 }
@@ -57,26 +60,8 @@ export interface CommonPrivateAskComponentProps extends StackProps {
 export function PrivateAskModal({ header, nft }: PrivateAskModalProps) {
   const [isOpen, toggleModalOpen] = useToggle()
   const { state, dispatch } = usePrivateAskContext()
-  const { PrivateAsks } = useContractContext() // Should this all be moved to usePrivateAskContext?
-  const { approved: isZoraV3ModuleApproved } = useZoraV3ModuleApproval(
-    PrivateAsks.address
-  )
 
   const Component = componentMap[state.status]
-
-  // useMemo(() => {
-  //   console.log('initiallyOpen?', initialOpen)
-  //   console.log('isOpen?', isOpen)
-  //   // console.log('isZoraV3ModuleApproved', isZoraV3ModuleApproved)
-  //   // console.log('state.status', state.status)
-  //   // state.status && console.log('typeof componentMap[state.status]', typeof Component) // <-- PrivateAskApproveModule was undefined
-  //   // console.log(Component)
-  // }, [
-  //   // Component, isZoraV3ModuleApproved, state.status,
-  //   initialOpen,
-  //   isOpen,
-  // ])
-
   const next = state.next as string | undefined
 
   const handleNext = useCallback(() => {
@@ -105,9 +90,7 @@ export function PrivateAskModal({ header, nft }: PrivateAskModalProps) {
           <Flex justify="center" mb="x4" mt="x1" width="100%">
             {header}
           </Flex>
-          <Paragraph size="xs">
-            isZoraV3ModuleApproved? {isZoraV3ModuleApproved ? 'YES' : 'NO'}
-          </Paragraph>
+
           {/* <AnimatePresence exitBeforeEnter={isOpen}> */}
           <Component
             key={state.status}

@@ -1,10 +1,11 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
-import { TransactionSubmitButton, usePrivateAskTransaction } from '@market'
+import { TransactionSubmitButton } from '@market'
 import { isAddress, MotionStack, validateCurrency, validateENSAddress } from '@shared'
 import { Heading, InputField, Paragraph, Stack } from '@zoralabs/zord'
 import { Field, FieldProps, Form, Formik } from 'formik'
 import React from 'react'
+import { usePrivateAskTransaction } from '../hooks'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
 interface PrivateAskCreateProps extends CommonPrivateAskComponentProps {}

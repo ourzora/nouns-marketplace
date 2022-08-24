@@ -1,5 +1,5 @@
 import { useContractContext } from '@market/providers'
-import { usePrivateAskContext } from '@market/providers/PrivateAskProvider'
+import { usePrivateAskContext } from '@market/modules/PrivateAsk/'
 import { DataTable, MotionStack, shortenAddress, useToast } from '@shared'
 import { CopyStatus, useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
 import { Button, Eyebrow, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
@@ -7,8 +7,6 @@ import React, { useEffect, useMemo } from 'react'
 
 import { LearnMoreButton } from '../LearnMoreButton'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
-
-// @TODO: Add ask details from private ask
 
 interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
 

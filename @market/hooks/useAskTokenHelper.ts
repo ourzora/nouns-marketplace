@@ -17,8 +17,8 @@ export const useAskTokenHelper = ({ ask }: AskTokenHelperProps) => {
   )
   const hasAsk = useMemo(() => ask !== undefined, [ask])
 
-  const rawAskAmount = useMemo(() => ask.amount?.amount.raw.toString(), [ask])
-  const displayAskAmount = useMemo(() => ask.amount?.amount.value.toString(), [ask])
+  const rawAskAmount = useMemo(() => ask?.amount?.amount.raw.toString(), [ask])
+  const displayAskAmount = useMemo(() => ask?.amount?.amount.value.toString(), [ask])
   const usdAskAmount = useMemo(
     () =>
       ask?.amount?.usd?.value

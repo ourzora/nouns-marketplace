@@ -8,7 +8,7 @@ import { nftInfoSidebar, nftInfoSidebarWrapper } from './NFTPage.css'
 import { MarketUi } from './MarketUi'
 
 import { lightFont } from '@shared'
-import { PrivateAskSidebar } from '@market/components/PrivateAsk/'
+import { PrivateAskSidebar } from '@market/modules/PrivateAsk'
 
 export interface NFTInfoSidebar extends BoxProps {}
 
