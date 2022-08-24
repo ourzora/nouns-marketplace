@@ -28,6 +28,7 @@ export const content = style([
 
 export const background = style([
   {
+    borderRadius: 'normal',
     maxHeight: 'calc(100vh - 30px)',
     background: 'white',
     msOverflowStyle: 'none',
@@ -37,7 +38,6 @@ export const background = style([
     },
   },
   atoms({ 
-    borderRadius: 'normal',
     overflowY: 'auto',
     width: '100%',
   }),
