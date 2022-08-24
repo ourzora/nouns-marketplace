@@ -26,13 +26,13 @@ export function NFTCard() {
     data?.metadata?.name
   )
 
-  const srcImg = useMemo(() => {
-    if (data?.media?.mimeType === 'image/svg+xml') {
-      return data?.media?.image?.uri
-    } else {
-      return data?.media?.poster?.uri
-    }
-  }, [data?.media])
+  const srcImg = useMemo(
+    () =>
+      data?.media?.mimeType === 'image/svg+xml'
+        ? data?.media?.image?.uri
+        : data?.media?.poster?.uri,
+    [data?.media]
+  )
 
   const useTitleScroll = useMemo(() => {
     if (data?.metadata && data?.metadata?.name) {
