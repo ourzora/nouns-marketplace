@@ -28,9 +28,7 @@ export const content = style([
 
 export const background = style([
   {
-    width: '100%',
     maxHeight: 'calc(100vh - 30px)',
-    overflowY: 'auto',
     background: 'white',
     msOverflowStyle: 'none',
     scrollbarWidth: 'none',
@@ -38,7 +36,11 @@ export const background = style([
       display: 'none',
     },
   },
-  atoms({ borderRadius: 'normal' }),
+  atoms({ 
+    borderRadius: 'normal',
+    overflowY: 'auto',
+    width: '100%',
+  }),
 ])
 
 export const customContent = style([
@@ -49,7 +51,6 @@ export const customContent = style([
 
 export const customBackground = style([
   {
-    overflowY: 'scroll',
     background: vars.color.background.primary,
     borderRadius: 40,
     boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
@@ -58,18 +59,21 @@ export const customBackground = style([
       '100%': { opacity: 1, transform: 'scale(1)' },
     })}`,
   },
+  atoms({
+    overflowY: 'scroll',
+  }),
 ])
 
 export const close = style([
   {
-    top: 0,
-    right: 0,
     border: 'none',
     background: 'none',
-    cursor: 'pointer',
   },
   atoms({
     position: 'absolute',
+    top: 'x0',
+    right: 'x0',
     p: 'x3',
+    cursor: 'pointer',
   }),
 ])
