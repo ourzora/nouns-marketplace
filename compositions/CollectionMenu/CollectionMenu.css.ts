@@ -7,7 +7,7 @@ export const collectionTrigger = style([
     gridColumn: '1',
     gridRow: '2',
     height: 42,
-    gridGap: 'x2',
+    gridGap: space.x2,
     '@media': {
       [media.min1024]: {
         gridColumn: '3',
