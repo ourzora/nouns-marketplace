@@ -5,3 +5,4 @@ export const HEADER_LAYER = 10
 export const SECONDARY_LAYER = 2
 export const PRIMARY_LAYER = 1
 export const BASE_LAYER = 0
+export const MODAL_TAB_LAYER = 4
