@@ -16,8 +16,8 @@ interface Values {
 }
 
 const validate = (values: Values) => {
-  console.log('FORMIK VALIDATION........')
-  console.log(values.amount)
+  // console.log('FORMIK VALIDATION........')
+  // console.log(values.amount)
 
   let newValue: BigNumber
   try {
@@ -73,7 +73,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
     //   transition={{ duration: 0.2 }}
     //   {...props}
     // >
-    <Stack gap="x5" {...props}>
+    <Stack gap="x6" {...props}>
       <Heading size="xs">Create a Private Ask</Heading>
 
       <Formik
@@ -88,7 +88,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
       >
         {({ values, isValid, isSubmitting }) => (
           <Form>
-            <Stack gap="x1">
+            <Stack gap="x2">
               <Field name="amount">
                 {({ field, meta: { touched, error } }: FieldProps) => {
                   return (

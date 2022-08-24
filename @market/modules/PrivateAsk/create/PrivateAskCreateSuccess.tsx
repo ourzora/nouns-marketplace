@@ -109,7 +109,7 @@ export function PrivateAskCreateSuccess({
         transition={{ duration: 0.2 }}
         {...props}
       > */}
-      <Stack gap="x5">
+      <Stack gap="x6">
         <Heading size="xs">Private Ask Created</Heading>
 
         <Stack gap="x3">

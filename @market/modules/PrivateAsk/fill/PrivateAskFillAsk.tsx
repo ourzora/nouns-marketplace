@@ -44,7 +44,7 @@ export function PrivateAskFillAsk({
     //   transition={{ duration: 0.2 }}
     //   {...props}
     // >
-    <Stack gap="x5">
+    <Stack gap="x6">
       <Flex w="100%" justify="space-between" className={[styles.summary]}>
         <CollectionThumbnail
           collectionAddress={nft?.contract.address}

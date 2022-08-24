@@ -24,10 +24,10 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
     //   transition={{ duration: 0.2 }}
     //   {...props}
     // >
-    <Stack gap="x5" {...props}>
+    <Stack gap="x6" {...props}>
       <Heading size="xs">Cancel Private Sale</Heading>
 
-      <Stack gap="x5">
+      <Stack gap="x2">
         <Paragraph>
           Cancel the private sale. This action can not be reversed, but you will be able
           to list the NFT for sale again.

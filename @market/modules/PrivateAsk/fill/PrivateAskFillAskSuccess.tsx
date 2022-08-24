@@ -6,7 +6,6 @@ import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}
 
 export function PrivateAskFillAskSuccess({
-  // onNext,
   handleClose,
   ...props
 }: PrivateAskFillAskSuccessProps) {
@@ -20,11 +19,12 @@ export function PrivateAskFillAskSuccess({
 
   return (
     <>
-      <Stack gap="x5">
-        <Heading size="xs">Private Sale Completed</Heading>
+      <Stack gap="x6">
+        <Stack gap="x2">
+          <Heading size="xs">Private Sale Completed</Heading>
 
-        <Paragraph size="sm">You bought the NFT</Paragraph>
-
+          <Paragraph size="sm">You bought the NFT</Paragraph>
+        </Stack>
         <Button onClick={handleClose}>Close</Button>
       </Stack>
       {/* {toast} */}

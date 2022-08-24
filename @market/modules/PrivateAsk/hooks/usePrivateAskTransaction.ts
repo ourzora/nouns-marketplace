@@ -1,18 +1,13 @@
 import { useContractTransaction, WalletCallStatus } from '@shared'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useContractContext } from '@market/providers'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { ContractTransaction } from 'ethers'
 import { parseUnits } from '@ethersproject/units'
 import { usePrivateAskContext } from '@market/modules/PrivateAsk/'
 import { useRelevantMarket } from '@market/hooks'
-
 import PrivateAsksABI from '@zoralabs/v3/dist/artifacts/AsksPrivateEth.sol/AsksPrivateEth.json'
-import {
-  usePrepareContractWrite,
-  // useWaitForTransaction
-  useContractWrite,
-} from 'wagmi'
+import { usePrepareContractWrite, useContractWrite } from 'wagmi'
 
 export const CREATE_ASK: string = 'createPrivateAsk'
 export const CANCEL_ASK: string = 'cancelPrivateAsk'
@@ -53,14 +48,11 @@ export const usePrivateAskFillAskTransaction = ({
 
   const { config, error: prepareError } = usePrepareContractWrite({
     addressOrName: PrivateAsks.address,
-    contractInterface: PrivateAsksABI.abi, // or ['function fillAsk()']
+    contractInterface: PrivateAsksABI.abi,
     functionName: 'fillAsk',
     args: [nft?.contract.address, nft?.tokenId],
     overrides: { value: ask.amount?.amount.raw },
   })
-
-  // console.log('PrivateAsksABI.abi', PrivateAsksABI.abi)
-  // console.log('CONFIG', config)
 
   const {
     data,
@@ -71,44 +63,16 @@ export const usePrivateAskFillAskTransaction = ({
     error,
     write: directFillAsk,
   } = useContractWrite(config)
-  // } = useContractWrite({
-  //   addressOrName: PrivateAsks.address,
-  //   contractInterface: PrivateAsksABI.abi, // or ['function fillAsk()']
-  //   functionName: 'fillAsk',
-  //   args: [nft?.contract.address, nft?.tokenId],
-  //   overrides: {value: ask.amount?.amount.raw},
-  //   mode: 'recklesslyUnprepared', // Use this if we aren't using usePrepareContractWrite
-  // })
+
   const walletStatus = statusMap[status]
 
-  // const { isLoading, isSuccess } = useWaitForTransaction({ // Seems this functionality has been moved into useContractWrite?
-  //   hash: data?.hash,
-  // })
-
-  useMemo(() => {
-    // console.log(`FILL_ASK ${ask?.amount?.amount.raw}`)
-    // console.log(`PrivateAsksABI.methodIdentifiers ${PrivateAsksABI.methodIdentifiers['fillAsk(address,uint256)']}`)
-    // console.log(`PrivateAsksABI.methodIdentifiers ${['function fillAsk()']}`)
-    // console.log('CONFIG', config)
-    // if (prepareError) console.log('PREPARE_ERROR: ', prepareError)
-    if (isError) console.log('ERROR: ', error)
-    console.log('fillAsk defined?', directFillAsk)
-  }, [
-    error,
-    isError,
-    // prepareError,
-    directFillAsk,
-  ])
-
   isSuccess && onNext && onNext()
-
-  data?.hash
 
   return {
     fillAskData: data,
     txStatus: walletStatus,
     txInProgress: isLoading, // @BJ is this mapping weird?
-    txError: error,
+    txError: error ?? prepareError,
     isError,
     isSuccess,
     isLoading,
@@ -125,10 +89,7 @@ export const usePrivateAskTransaction = ({
   const [isSubmitting, setSubmitting] = useState<boolean>(false)
   const { setFinalizedPrivateAskDetails } = usePrivateAskContext()
   const [txError, setTxError] = useState<string>('')
-  const { nft, markets } = nftData
-  const { ask } = useRelevantMarket(markets)
-  console.log('ASK PRICE', ask.amount)
-  // ask.amount?.amount.raw
+  const { nft } = nftData
 
   async function makeAskTransaction(
     txType: PrivateAskTransaction,
@@ -145,7 +106,7 @@ export const usePrivateAskTransaction = ({
         throw new Error('createAsk missing price or buyerAddress')
       }
 
-      const priceAsGWEI = parseUnits(price?.toString() || '0', 'ether') // Convert from human-readable number to GWEI
+      const bignumberPrice = parseUnits(price?.toString() || '0', 'ether') // Convert from human-readable number to GWEI
 
       setSubmitting(true)
 
@@ -172,7 +133,7 @@ export const usePrivateAskTransaction = ({
           promise = PrivateAsks.createAsk(
             nft?.contract.address,
             nft?.tokenId,
-            priceAsGWEI,
+            bignumberPrice,
             buyerAddress!
           )
           break
