@@ -6,18 +6,20 @@ import { manageButton } from './Header.css'
 export function ManageLink() {
   const { address } = useAccount()
 
-  if (!address) return null
-
-  return (
-    <Link href={`/manage/${address}`} passHref>
-      <Button
-        as="a"
-        size="md"
-        variant="secondary"
-        className={[manageButton, 'zora-manage-link']}
-      >
-        Manage
-      </Button>
-    </Link>
-  )
+  if (address) {
+    return (
+      <Link href={`/manage/${address}`} passHref>
+        <Button
+          as="a"
+          size="md"
+          variant="secondary"
+          className={[manageButton, 'zora-manage-link']}
+        >
+          Manage
+        </Button>
+      </Link>
+    )
+  } else {
+    return null
+  }
 }

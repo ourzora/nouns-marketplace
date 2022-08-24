@@ -30,21 +30,10 @@ import {
 import { PrintError } from '@shared'
 
 interface NounsBidFormProps extends BoxProps {
-  tokenAddress: string
-  isUpdate?: boolean
-  currentBidAmount?: any
-  rawCurrentBidAmount: string
-  onConfirmation: (txHash: string, amount: string, currencyAddress: string) => void
+  onConfirmation?: (txHash: string, amount: string, currencyAddress: string) => void
 }
 
-export function NounsBidForm({
-  tokenAddress,
-  onConfirmation,
-  currentBidAmount,
-  rawCurrentBidAmount,
-  isUpdate = false,
-  ...props
-}: NounsBidFormProps) {
+export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
   const { requestClose } = useModal()
 
   const [bidAmount, setBidAmount] = useState<string | '0'>('0')

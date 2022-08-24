@@ -18,15 +18,14 @@ export function FooterComposition() {
               Docs
             </Label>
           </Link>
-          |
-          <Flex align="center" gap="x2">
-            <Label
-              as="a"
-              size="lg"
-              href="https://github.com/ourzora/nouns-marketplace"
-              target="_blank"
-              rel="noreferrer"
-            >
+          <Flex
+            align="center"
+            gap="x2"
+            as="a"
+            href="https://github.com/ourzora/nouns-marketplace"
+            target="_blank"
+          >
+            <Label size="lg" rel="noreferrer">
               Github
             </Label>
             <Icon id="ArrowRightAngle" size="sm" />
