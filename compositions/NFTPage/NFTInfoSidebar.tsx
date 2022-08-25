@@ -25,7 +25,7 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
   }, [activeAuctionId, tokenId])
 
   const hasPrevoiusNft = useMemo(() => {
-    return tokenId && parseInt(tokenId) >= 0
+    return !!tokenId && parseInt(tokenId) >= 0
   }, [tokenId])
 
   const handleNext = useCallback(() => {
@@ -71,7 +71,7 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
           <Flex w="x20">
             <Button
               className={[nftNextButton]}
-              disabled={hasPrevoiusNft}
+              disabled={!hasPrevoiusNft}
               onClick={handlePrev}
               variant="circle"
             >
