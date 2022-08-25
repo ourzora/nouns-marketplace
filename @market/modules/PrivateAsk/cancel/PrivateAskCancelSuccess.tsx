@@ -19,13 +19,15 @@ export function PrivateAskCancelSuccess({
   return (
     <>
       <Stack gap="x5">
-        <Heading size="xs">Private Sale Cancelled</Heading>
+        <Stack gap="x2">
+          <Heading size="xs">Private Sale Cancelled</Heading>
 
-        <Paragraph size="sm">
-          The sale will no longer be available to the buyer.
-        </Paragraph>
+          <Paragraph size="sm">
+            The sale will no longer be available to the buyer.
+          </Paragraph>
 
-        <Button onClick={handleClose}>Close</Button>
+          <Button onClick={handleClose}>Close</Button>
+        </Stack>
       </Stack>
       {/* {toast} */}
     </>

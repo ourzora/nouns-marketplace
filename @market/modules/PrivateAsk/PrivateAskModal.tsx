@@ -30,8 +30,6 @@ import { Flex, Modal, ModalContent, StackProps } from '@zoralabs/zord'
 // import { AnimatePresence } from 'framer-motion'
 
 import * as styles from './PrivateAskModal.css'
-// import { useContractContext } from '@market/providers'
-// import { useZoraV3ModuleApproval } from '@market/hooks'
 
 const componentMap = {
   [LIST]: PrivateAskListForSale,

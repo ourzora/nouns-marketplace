@@ -22,7 +22,6 @@ export function PrivateAskFillAskSuccess({
       <Stack gap="x6">
         <Stack gap="x2">
           <Heading size="xs">Private Sale Completed</Heading>
-
           <Paragraph size="sm">You bought the NFT</Paragraph>
         </Stack>
         <Button onClick={handleClose}>Close</Button>

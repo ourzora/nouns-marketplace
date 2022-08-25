@@ -27,11 +27,6 @@ const validate = (values: Values) => {
     return
   }
 
-  // const invalidValue = (min && newValue.lt(min)) || (max && newValue.gt(max))
-  // if (invalidValue) {
-  //   return
-  // }
-
   // console.log(`value: ' ${value}, newValue: ${newValue.toString()}`)
   console.log(`newValue: ${newValue.toString()}`)
 
@@ -105,12 +100,10 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
                       // headerElement={ // TODO: Add ExchangeValueAmount with updated useExchangeValue hook once we find a path forward (removal of zora-api-three needed)
                       //   <ExchangeValueAmount amount={values.amount.toString() || '0'} />
                       // }
-                      min={0} // ok
-                      max={2}
-                      // pattern="[0-9.]*"// ok
+                      min={0}
                       inputMode="decimal"
                       error={(touched && error) || undefined}
-                      {...field} // ok
+                      {...field}
                     />
                   )
                 }}
@@ -133,17 +126,16 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
               </Field>
 
               {txError && <Paragraph size="xs">{txError}</Paragraph>}
-
-              <TransactionSubmitButton
-                type="submit"
-                txStatus={txStatus}
-                txInProgress={txInProgress}
-                loading={isSubmitting}
-                disabled={!isValid}
-              >
-                Create Private Ask
-              </TransactionSubmitButton>
             </Stack>
+            <TransactionSubmitButton
+              type="submit"
+              txStatus={txStatus}
+              txInProgress={txInProgress}
+              loading={isSubmitting}
+              disabled={!isValid}
+            >
+              Create Private Ask
+            </TransactionSubmitButton>
           </Form>
         )}
       </Formik>

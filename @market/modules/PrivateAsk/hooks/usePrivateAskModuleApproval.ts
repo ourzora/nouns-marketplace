@@ -24,13 +24,11 @@ export function usePrivateAskModuleApproval() {
     console.log('APPROVED?', isApproved)
 
     try {
-      console.log('in TRY')
       setError('')
       const promise = approve()
       await handleTx(promise)
       await mutate()
     } catch (e: any) {
-      console.log('in CATCH', e.message)
       setError(e.message)
       await mutate()
     }
