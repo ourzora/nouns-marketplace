@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { color, space, atoms, vars } from '@zoralabs/zord'
+import { color, space, atoms, vars, media } from '@zoralabs/zord'
 
 export const tabsButton = style([
   {
@@ -31,14 +31,51 @@ export const tabsButton = style([
 
 export const tabsList = style([
   {
-    display: 'flex',
-    position: 'absolute',
-    width: '100%',
     borderBottom: `2px solid ${color.black10}`,
     zIndex: 4,
   },
+  atoms({
+    display: 'flex',
+    position: 'absolute',
+    width: '100%',
+  }),
 ])
 
 export const label = style({
   color: vars.color.text.primary,
 })
+
+export const collectionTrigger = style([
+  {
+    gridColumn: '1',
+    gridRow: '2',
+    height: 42,
+    gridGap: space.x2,
+    '@media': {
+      [media.min1024]: {
+        gridColumn: '3',
+        gridRow: '1',
+      },
+    },
+  },
+  atoms({
+    w: '100%',
+    justifyContent: 'flex-start',
+    borderRadius: 'curved',
+    display: 'flex',
+  }),
+])
+
+export const modalWrapper = style([
+  {
+    msOverflowStyle: 'none',
+    scrollbarWidth: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
+    height: 400,
+  },
+  atoms({
+    overflowY: 'scroll',
+  }),
+])

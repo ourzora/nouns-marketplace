@@ -30,7 +30,11 @@ export function AuctionHistory({ children, ...props }: BidHistoryProps) {
       {children}
       {data.events.nodes.length &&
         data.events.nodes.map((event: any) => (
-          <Box as="li" className={auctionEventRow}>
+          <Box
+            as="li"
+            className={auctionEventRow}
+            key={event?.transactionInfo?.transactionHash}
+          >
             <AuctionEvents
               key={`${event.transactionInfo.transactionHash}-${
                 event.properties[`${auctionEventTypeKey()}`]

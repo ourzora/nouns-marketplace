@@ -1,12 +1,17 @@
 import { Box, Icon, Button, Label, Stack } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
-import { modalWrapper, collectionTrigger } from './CollectionMenu.css'
 import { noTextWrap } from 'styles/styles.css'
 import { CollectionNavList } from './CollectionNavList'
 import { lightFont } from '@shared'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
-import { label, tabsButton, tabsList } from './CollectionMenu.css'
+import {
+  label,
+  tabsButton,
+  tabsList,
+  modalWrapper,
+  collectionTrigger,
+} from './CollectionMenu.css'
 
 // Exports
 export const Tabs = TabsPrimitive.Root

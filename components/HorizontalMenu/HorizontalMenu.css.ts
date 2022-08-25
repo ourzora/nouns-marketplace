@@ -4,7 +4,6 @@ import { color, space, atoms, media } from '@zoralabs/zord'
 export const horizontalMenuButton = style([
   {
     borderRadius: 0,
-    paddingBottom: space.x2,
     borderBottom: `2px solid transparent`,
     selectors: {
       '&.active': {
@@ -13,14 +12,13 @@ export const horizontalMenuButton = style([
     },
   },
   atoms({
-    pb: 'x2',
     color: 'primary',
+    pb: 'x2',
   }),
 ])
 
 export const horizontalMenuWrapper = style([
   {
-    overflowX: 'scroll',
     '@media': {
       [media.min576]: {
         msOverflowStyle: 'none',
@@ -31,4 +29,8 @@ export const horizontalMenuWrapper = style([
       },
     },
   },
+  atoms({
+    overflowX: 'scroll',
+    gap: 'x6',
+  }),
 ])

@@ -26,13 +26,13 @@ export function NFTCard() {
     defaultTitle: data?.metadata?.name,
   })
 
-  const srcImg = useMemo(() => {
-    if (data?.media?.mimeType === 'image/svg+xml') {
-      return data?.media?.image?.uri
-    } else {
-      return data?.media?.poster?.uri
-    }
-  }, [data?.media])
+  const srcImg = useMemo(
+    () =>
+      data?.media?.mimeType === 'image/svg+xml'
+        ? data?.media?.image?.uri
+        : data?.media?.poster?.uri,
+    [data?.media]
+  )
 
   const useTitleScroll = useMemo(() => {
     if (data?.metadata && data?.metadata?.name) {
@@ -46,11 +46,13 @@ export function NFTCard() {
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
       <Link href={`/collections/${contractAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
-          <ImageWithNounFallback
-            tokenContract={contractAddress}
-            tokenId={tokenId}
-            srcImg={srcImg}
-          />
+          {contractAddress && tokenId && (
+            <ImageWithNounFallback
+              tokenContract={contractAddress}
+              tokenId={tokenId}
+              srcImg={srcImg}
+            />
+          )}
         </Box>
       </Link>
       <Stack gap="x2" mt="x2" px="x4" pb="x4" flex="1">
