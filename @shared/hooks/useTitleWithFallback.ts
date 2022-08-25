@@ -7,14 +7,11 @@ export function useTitleWithFallback(
   defaultTitle?: string
 ) {
   const { data } = useNFT(tokenContract, tokenId)
-
-  const placeHolder = defaultTitle ? defaultTitle : '...'
+  const placeHolder = defaultTitle ?? '...'
 
   const title = useMemo(() => {
     if (data)
-      return data?.metadata?.name
-        ? data?.metadata?.name
-        : `${data?.nft?.contract?.name} ${data?.nft?.tokenId}`
+      return data?.metadata?.name ?? `${data?.nft?.contract?.name} ${data?.nft?.tokenId}`
   }, [data])
 
   return {

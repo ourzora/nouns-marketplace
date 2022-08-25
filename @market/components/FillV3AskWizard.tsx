@@ -5,7 +5,8 @@ import { PrintError, useContractTransaction, useAuth, isAddressMatch } from '@sh
 import {
   TransactionSubmitButton,
   ContractInteractionStatus,
-  NFTInfo,
+  NFTSummary,
+  MODAL_TYPES,
 } from '@market/components'
 import { useContractContext } from '@market/providers'
 
@@ -72,11 +73,11 @@ export function FillV3AskWizard({
   return (
     <Box w="100%">
       {wizardStep !== 'Confirmation' && (
-        <NFTInfo
+        <NFTSummary
           collectionAddress={tokenAddress}
           tokenId={tokenId}
           askPrice={askPrice}
-          modalType="fillAsk"
+          modalType={MODAL_TYPES.fillAsk}
         />
       )}
       <Separator mt="x3" mb="x4" />

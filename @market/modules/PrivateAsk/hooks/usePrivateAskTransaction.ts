@@ -1,10 +1,12 @@
 import { useContractTransaction, WalletCallStatus } from '@shared'
 import { useState } from 'react'
-import { useContractContext } from '@market/providers'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { ContractTransaction } from 'ethers'
 import { parseUnits } from '@ethersproject/units'
-import { usePrivateAskContext } from '@market/modules/PrivateAsk/'
+import {
+  usePrivateAskStateContext,
+  usePrivateAskContractContext,
+} from '@market/modules/PrivateAsk/'
 import { useRelevantMarket } from '@market/hooks'
 import PrivateAsksABI from '@zoralabs/v3/dist/artifacts/AsksPrivateEth.sol/AsksPrivateEth.json'
 import { usePrepareContractWrite, useContractWrite } from 'wagmi'
@@ -42,7 +44,7 @@ export const usePrivateAskFillAskTransaction = ({
   nft: nftData,
   onNext,
 }: usePrivateAskTransactionProps) => {
-  const { PrivateAsks } = useContractContext() // Should this all be moved to usePrivateAskContext?
+  const { PrivateAsks } = usePrivateAskContractContext()
   const { nft, markets } = nftData
   const { ask } = useRelevantMarket(markets)
 
@@ -84,10 +86,10 @@ export const usePrivateAskTransaction = ({
   nft: nftData,
   onNext,
 }: usePrivateAskTransactionProps) => {
-  const { PrivateAsks } = useContractContext() // Should this all be moved to usePrivateAskContext?
+  const { PrivateAsks } = usePrivateAskContractContext()
   const { txStatus, handleTx, txInProgress } = useContractTransaction()
   const [isSubmitting, setSubmitting] = useState<boolean>(false)
-  const { setFinalizedPrivateAskDetails } = usePrivateAskContext()
+  const { setFinalizedPrivateAskDetails } = usePrivateAskStateContext()
   const [txError, setTxError] = useState<string>('')
   const { nft } = nftData
 
@@ -106,7 +108,7 @@ export const usePrivateAskTransaction = ({
         throw new Error('createAsk missing price or buyerAddress')
       }
 
-      const bignumberPrice = parseUnits(price?.toString() || '0', 'ether') // Convert from human-readable number to GWEI
+      const bignumberPrice = parseUnits(price?.toString() || '0', 'ether') // Convert from human-readable number to WEI
 
       setSubmitting(true)
 

@@ -59,7 +59,7 @@ export function ERC721ContractApprovalForm({
           rel="noreferrer"
         >
           <Text as="span" variant="link">
-            What's an approval?
+            What&apos;s an approval?
           </Text>{' '}
           <Paragraph as="sup" top="x0" size="sm">
             ↗

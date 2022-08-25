@@ -12,7 +12,7 @@ import {
   CANCEL_SUCCESS,
   FILLASK,
   FILLASK_SUCCESS,
-  usePrivateAskContext,
+  usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/providers/'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
 import { PrivateAskApproveTransferHelper } from './PrivateAskApproveTransferHelper'
@@ -26,12 +26,12 @@ import { PrivateAskListForSale } from './PrivateAskListForSale'
 import { PrivateAskTrigger } from './PrivateAskTrigger'
 import useToggle from '@shared/hooks/useToggle'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Flex, Modal, ModalContent, Paragraph, StackProps } from '@zoralabs/zord'
+import { Flex, Modal, ModalContent, StackProps } from '@zoralabs/zord'
 // import { AnimatePresence } from 'framer-motion'
 
 import * as styles from './PrivateAskModal.css'
-import { useContractContext } from '@market/providers'
-import { useZoraV3ModuleApproval } from '@market/hooks'
+// import { useContractContext } from '@market/providers'
+// import { useZoraV3ModuleApproval } from '@market/hooks'
 
 const componentMap = {
   [LIST]: PrivateAskListForSale,
@@ -59,7 +59,7 @@ export interface CommonPrivateAskComponentProps extends StackProps {
 
 export function PrivateAskModal({ header, nft }: PrivateAskModalProps) {
   const [isOpen, toggleModalOpen] = useToggle()
-  const { state, dispatch } = usePrivateAskContext()
+  const { state, dispatch } = usePrivateAskStateContext()
 
   const Component = componentMap[state.status]
   const next = state.next as string | undefined

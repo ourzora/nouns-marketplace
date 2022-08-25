@@ -1,5 +1,4 @@
-import { useContractContext } from '@market/providers'
-import { usePrivateAskContext } from '@market/modules/PrivateAsk/'
+import { usePrivateAskStateContext } from '@market/modules/PrivateAsk/'
 import { DataTable, MotionStack, shortenAddress, useToast } from '@shared'
 import { CopyStatus, useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
 import { Button, Eyebrow, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
@@ -7,6 +6,7 @@ import React, { useEffect, useMemo } from 'react'
 
 import { LearnMoreButton } from '../LearnMoreButton'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
+import { usePrivateAskContractContext } from '../providers/PrivateAskContractProvider'
 
 interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
 
@@ -15,8 +15,8 @@ export function PrivateAskCreateSuccess({
   onNext,
   ...props
 }: PrivateAskCreateSuccessProps) {
-  const { PrivateAsks } = useContractContext() // Should this all be moved to usePrivateAskContext?
-  const { finalizedPrivateAskDetails } = usePrivateAskContext()
+  const { PrivateAsks } = usePrivateAskContractContext()
+  const { finalizedPrivateAskDetails } = usePrivateAskStateContext()
   const { toast, showToast } = useToast()
   const { nft } = nftData
 

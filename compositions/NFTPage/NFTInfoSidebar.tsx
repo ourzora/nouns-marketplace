@@ -1,12 +1,10 @@
 import { Heading, Stack, Flex, Paragraph, Box, BoxProps } from '@zoralabs/zord'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { FillV3AskInfo, useRelevantMarket } from '@market'
-import { useNFTProvider, useIsOwner, useTitleWithFallback } from '@shared'
-import { Link, NounsGlasses } from 'components'
+import { useNFTProvider, useTitleWithFallback } from '@shared'
+import { Link } from 'components'
 import { clickAnimation } from 'styles/styles.css'
 import { nftInfoSidebar, nftInfoSidebarWrapper } from './NFTPage.css'
 import { MarketUi } from './MarketUi'
-
 import { lightFont } from '@shared'
 import { PrivateAskSidebar } from '@market/modules/PrivateAsk'
 
@@ -15,15 +13,13 @@ export interface NFTInfoSidebar extends BoxProps {}
 export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
   const { initialData: nft, tokenId, contractAddress } = useNFTProvider()
 
-  if (!nft || !tokenId || !contractAddress) return null
-
-  // console.log('NFT', nft)
-
   const { fallbackTitle } = useTitleWithFallback(
     contractAddress,
     tokenId,
     nft?.metadata?.name
   )
+
+  if (!nft || !tokenId || !contractAddress) return null
 
   return (
     <Box id="nft-info-sidebar" className={nftInfoSidebar} {...props}>

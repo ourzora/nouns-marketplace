@@ -1,16 +1,10 @@
 import { useZoraV3ModuleApproval } from '@market/hooks'
-import { useContractContext } from '@market/providers'
 import { useContractTransaction, useToggleOnce } from '@shared'
-// import { Button, Heading, Paragraph, Spinner, Stack } from '@zoralabs/zord'
 import { useCallback, useState } from 'react'
-
-// import { LearnMoreButton } from './LearnMoreButton'
-// import { CommonPrivateAskComponentProps } from './PrivateAskModal'
-
-// interface PrivateAskApproveModuleProps extends CommonPrivateAskComponentProps {}
+import { usePrivateAskContractContext } from '../providers/PrivateAskContractProvider'
 
 export function usePrivateAskModuleApproval() {
-  const { PrivateAsks } = useContractContext() // Should this all be moved to usePrivateAskContext?
+  const { PrivateAsks } = usePrivateAskContractContext()
   const [error, setError] = useState<string>()
 
   const { txStatus, handleTx, txInProgress } = useContractTransaction()
@@ -35,22 +29,12 @@ export function usePrivateAskModuleApproval() {
       const promise = approve()
       await handleTx(promise)
       await mutate()
-
-      //   isApproved && onNext && onNext()
     } catch (e: any) {
       console.log('in CATCH', e.message)
       setError(e.message)
       await mutate()
     }
-    console.log('APPROVED?', isApproved)
-    // isApproved && onNext && onNext()
-  }, [
-    approve,
-    isApproved,
-    handleTx,
-    mutate,
-    //  onNext
-  ])
+  }, [approve, isApproved, handleTx, mutate])
 
   return {
     txStatus,

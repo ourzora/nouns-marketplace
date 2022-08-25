@@ -78,14 +78,14 @@ export interface PrivateAskProviderState {
   setFinalizedPrivateAskDetails: (value: PrivateAskTxDetails) => void
 }
 
-export const PrivateAskContext = createContext<PrivateAskProviderState>({
+export const PrivateAskStateContext = createContext<PrivateAskProviderState>({
   state: initialState,
   dispatch: (_action: PrivateAskAction) => {},
   finalizedPrivateAskDetails: undefined,
   setFinalizedPrivateAskDetails: (_value: PrivateAskTxDetails) => {},
 } as PrivateAskProviderState)
 
-export function PrivateAskProvider({ children }: PrivateAskProps) {
+export function PrivateAskStateProvider({ children }: PrivateAskProps) {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [finalizedPrivateAskDetails, setFinalizedPrivateAskDetails] = useState<
     PrivateAskTxDetails | undefined
@@ -101,10 +101,10 @@ export function PrivateAskProvider({ children }: PrivateAskProps) {
   )
 
   return (
-    <PrivateAskContext.Provider value={{ ...value, dispatch }}>
+    <PrivateAskStateContext.Provider value={{ ...value, dispatch }}>
       {children}
-    </PrivateAskContext.Provider>
+    </PrivateAskStateContext.Provider>
   )
 }
 
-export const usePrivateAskContext = () => useContext(PrivateAskContext)
+export const usePrivateAskStateContext = () => useContext(PrivateAskStateContext)

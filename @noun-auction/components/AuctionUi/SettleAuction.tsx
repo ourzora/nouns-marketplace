@@ -1,5 +1,5 @@
 import { Button, Icon, Box, Stack, StackProps, color } from '@zoralabs/zord'
-import { useContractWrite } from 'wagmi'
+import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { useEffect, useState } from 'react'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
@@ -17,15 +17,17 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
     layout,
   } = useNounishAuctionProvider()
 
-  const {
-    isLoading,
-    error: writeContractError,
-    write: settleAuction,
-  } = useContractWrite({
+  const { config, error: prepareError } = usePrepareContractWrite({
     addressOrName: auctionContractAddress as string,
     contractInterface: abi,
     functionName: 'settleCurrentAndCreateNewAuction',
   })
+
+  const {
+    isLoading,
+    error: writeContractError,
+    write: settleAuction,
+  } = useContractWrite(config)
 
   useEffect(() => {
     if (writeContractError) setShowError(true)

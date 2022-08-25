@@ -1,4 +1,4 @@
-import { PrivateAskProvider } from '@market/modules/PrivateAsk/'
+import { PrivateAskStateProvider } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Stack, StackProps } from '@zoralabs/zord'
 import { NounsGlasses } from 'components'
@@ -13,9 +13,9 @@ export function PrivateAskSidebar({ nft, ...props }: PrivateAskSidebarProps) {
   // @BJ todo: enable passing of trigger from outside of the PrivateAskModal component?
   return (
     <Stack {...props}>
-      <PrivateAskProvider>
+      <PrivateAskStateProvider>
         <PrivateAskModal nft={nft} header={<NounsGlasses w="x13" mb="x4" mt="x1" />} />
-      </PrivateAskProvider>
+      </PrivateAskStateProvider>
     </Stack>
   )
 }

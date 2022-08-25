@@ -11,7 +11,7 @@ export enum MODAL_TYPES {
   auction = 'auction',
 }
 
-export function NFTInfo({
+export function NFTSummary({
   collectionAddress,
   tokenId,
   askPrice,
@@ -25,38 +25,38 @@ export function NFTInfo({
 }) {
   const { data } = useNFT(collectionAddress, tokenId)
   const { address } = useAuth()
-
-  if (!collectionAddress || !tokenId) return null
+  const hasAsk = useMemo(
+    () => data && modalType === MODAL_TYPES.fillAsk && askPrice,
+    [askPrice, data, modalType]
+  )
 
   const { fallbackTitle } = useTitleWithFallback(collectionAddress, tokenId)
+  const noWallet = useMemo(() => address === null, [address])
+  const modalTitle = useMemo(
+    () =>
+      noWallet
+        ? 'Connect your Wallet'
+        : `${
+            modalType === MODAL_TYPES.fillAsk
+              ? 'Buy'
+              : modalType === MODAL_TYPES.list
+              ? 'List'
+              : MODAL_TYPES.auction
+              ? 'Bid on'
+              : ''
+          } ${data && data.metadata?.name ? data.metadata.name : fallbackTitle}`,
+    [data, fallbackTitle, modalType, noWallet]
+  )
 
-  const noWallet = useMemo(() => {
-    return address === null ? true : false
-  }, [address])
+  if (!collectionAddress || !tokenId) return null
 
   return (
     <Stack gap="x4">
       <Flex justify="space-between" align="flex-start">
-        <ModalTitleAndDescription
-          title={
-            noWallet
-              ? 'Connect your Wallet'
-              : `${
-                  modalType === MODAL_TYPES.fillAsk
-                    ? 'Buy'
-                    : modalType === MODAL_TYPES.list
-                    ? 'List'
-                    : MODAL_TYPES.auction
-                    ? 'Bid on'
-                    : ''
-                } ${data && data.metadata?.name ? data.metadata.name : fallbackTitle}`
-          }
-        />
+        <ModalTitleAndDescription title={modalTitle} />
         <CollectionThumbnail collectionAddress={collectionAddress} tokenId={tokenId} />
       </Flex>
-      {data && modalType === 'fillAsk' && askPrice && (
-        <FillV3AskInfo nft={data} askPrice={askPrice} />
-      )}
+      {hasAsk && <FillV3AskInfo nft={data!} askPrice={askPrice} />}
     </Stack>
   )
 }

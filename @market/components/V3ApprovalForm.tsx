@@ -49,7 +49,7 @@ export function V3ApprovalForm({
       <Box mb="x4">
         <a>
           <Text as="span" variant="link">
-            What's an approval?
+            What&apos;s an approval?
           </Text>{' '}
           <Paragraph as="sup" top="x0" size="sm">
             ↗

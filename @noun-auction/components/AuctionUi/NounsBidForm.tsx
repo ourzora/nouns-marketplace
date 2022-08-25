@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { parseUnits } from '@ethersproject/units'
-import { useContractWrite, useSigner, useAccount } from 'wagmi'
+import { useContractWrite, useSigner, useAccount, usePrepareContractWrite } from 'wagmi'
 import { BigNumber as EthersBN } from 'ethers'
 import {
   Flex,
@@ -52,7 +52,6 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
     minBidIncrementPercentage
   )
 
-  const { data: signer } = useSigner()
   const { address } = useAccount()
 
   const handleOnUpdate = useCallback(
@@ -70,17 +69,9 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
     [setBidAmount]
   )
 
-  /* @ts-ignore */
-  const {
-    isError,
-    isLoading,
-    isSuccess,
-    error: writeContractError,
-    write: placeBid,
-  } = useContractWrite({
+  const { config, error: prepareError } = usePrepareContractWrite({
     addressOrName: auctionContractAddress as string,
     contractInterface: abi,
-    signerOrProvider: signer,
     functionName: 'createBid',
     overrides: {
       from: address,
@@ -89,10 +80,19 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
     args: [tokenId],
   })
 
+  /* @ts-ignore */
+  const {
+    isError,
+    isLoading,
+    isSuccess,
+    error: writeContractError,
+    write: placeBid,
+  } = useContractWrite(config)
+
   const handleOnSubmit = useCallback(
     (event) => {
       event.preventDefault()
-      placeBid()
+      placeBid && placeBid()
     },
     [bidAmount]
   )
@@ -137,7 +137,12 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
           )}
           <Separator />
         </Stack>
-        {isError && <PrintError errorMessage={writeContractError?.message} mb="x4" />}
+        {isError && (
+          <PrintError
+            errorMessage={writeContractError?.message ?? prepareError?.message}
+            mb="x4"
+          />
+        )}
         {!isSuccess ? (
           <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x2">
             <Button
@@ -159,7 +164,7 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
             variant="secondary"
             borderRadius="curved"
           >
-            You're bid has been placed!
+            Your bid has been placed!
           </Button>
         )}
       </form>

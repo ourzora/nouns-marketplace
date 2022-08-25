@@ -1,1 +1,2 @@
-export * from './PrivateAskProvider'
+export * from './PrivateAskStateProvider'
+export * from './PrivateAskContractProvider'

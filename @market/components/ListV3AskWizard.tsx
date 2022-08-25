@@ -5,7 +5,8 @@ import {
   ListV3AskForm,
   V3ApprovalForm,
   ContractInteractionStatus,
-  NFTInfo,
+  NFTSummary,
+  MODAL_TYPES,
 } from '@market/components'
 import { ASKS_V11_ADDRESS, ERC721_TRANSFER_HELPER_ADDRESS } from '@shared'
 import { useERC721TokenApproval, useZoraV3ModuleApproval } from '@market/hooks'
@@ -64,7 +65,11 @@ export function ListV3AskWizard({
   return (
     <Stack w="100%" gap="x4" p="x4">
       {wizardStep !== 'Confirmation' && (
-        <NFTInfo collectionAddress={tokenAddress} tokenId={tokenId} modalType="list" />
+        <NFTSummary
+          collectionAddress={tokenAddress}
+          tokenId={tokenId}
+          modalType={MODAL_TYPES.list}
+        />
       )}
       {wizardStep === 'CheckApprovals' ? (
         <Stack gap="x4">

@@ -29,12 +29,13 @@ import NextNProgress from 'nextjs-progressbar'
 
 import { HeaderComposition } from 'compositions/Header'
 import { FooterComposition } from 'compositions/Footer'
+import { PrivateAskContractProvider } from '@market/modules/PrivateAsk/providers/PrivateAskContractProvider'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 
 const { chains, provider } = configureChains(
   [chain.mainnet],
-  [alchemyProvider({ alchemyId: alchemyKey }), publicProvider()]
+  [alchemyProvider({ apiKey: alchemyKey }), publicProvider()]
 )
 
 const { connectors } = getDefaultWallets({
@@ -84,17 +85,19 @@ function MyApp({ Component, pageProps }: AppProps) {
             <CollectionsProvider collections={collections} daos={daos}>
               <ModalContextProvider>
                 <ContractProvider>
-                  <HeaderComposition />
-                  <NextNProgress
-                    color="rgba(0,0,0,.5)"
-                    startPosition={0.125}
-                    stopDelayMs={200}
-                    height={2}
-                    showOnShallow={true}
-                    options={{ showSpinner: false }}
-                  />
-                  <Component {...pageProps} />
-                  <FooterComposition />
+                  <PrivateAskContractProvider>
+                    <HeaderComposition />
+                    <NextNProgress
+                      color="rgba(0,0,0,.5)"
+                      startPosition={0.125}
+                      stopDelayMs={200}
+                      height={2}
+                      showOnShallow={true}
+                      options={{ showSpinner: false }}
+                    />
+                    <Component {...pageProps} />
+                    <FooterComposition />
+                  </PrivateAskContractProvider>
                 </ContractProvider>
               </ModalContextProvider>
             </CollectionsProvider>
