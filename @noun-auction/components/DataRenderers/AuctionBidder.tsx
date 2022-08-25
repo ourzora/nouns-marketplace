@@ -57,7 +57,6 @@ export function AuctionBidder({
           className={[layout === 'sideBarBid' && sideBarUpperLabel, lightFont]}
           color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
           style={{ lineHeight: '1.15' }}
-          textAlign="right"
         >
           {label}&nbsp;
         </Label>
