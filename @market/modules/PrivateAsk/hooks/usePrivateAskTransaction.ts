@@ -1,4 +1,9 @@
-import { useContractTransaction, WalletCallStatus } from '@shared'
+import {
+  defaultProvider,
+  isAddress,
+  useContractTransaction,
+  WalletCallStatus,
+} from '@shared'
 import { useState } from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { ContractTransaction } from 'ethers'
@@ -22,7 +27,8 @@ interface AskTxValues {
 }
 
 interface CreateAskTxValues extends AskTxValues {
-  buyerAddress?: string
+  buyerAddress: string
+  rawBuyerAddress: string // unresolved: possibly ENS address or 0xAddress
 }
 
 interface usePrivateAskTransactionProps {
@@ -96,9 +102,11 @@ export const usePrivateAskTransaction = ({
   async function makeAskTransaction(
     txType: PrivateAskTransaction,
     price?: string,
-    buyerAddress?: string
+    buyerAddress?: string,
+    rawBuyerAddress?: string
   ) {
-    const hasValidCreateParams = txType === CREATE_ASK && price && buyerAddress
+    const hasValidCreateParams =
+      txType === CREATE_ASK && price && buyerAddress && rawBuyerAddress
 
     try {
       if (!nft || !PrivateAsks) {
@@ -148,7 +156,8 @@ export const usePrivateAskTransaction = ({
       console.log('tx.hash', tx.hash)
 
       hasValidCreateParams &&
-        setFinalizedPrivateAskDetails({ price: price, buyerAddress: buyerAddress })
+        tx?.hash &&
+        setFinalizedPrivateAskDetails({ price, buyerAddress, rawBuyerAddress })
 
       tx && onNext && onNext()
     } catch (err: any) {
@@ -158,8 +167,9 @@ export const usePrivateAskTransaction = ({
     }
   }
 
-  async function createAsk({ price, buyerAddress }: CreateAskTxValues) {
-    makeAskTransaction(CREATE_ASK, price, buyerAddress)
+  async function createAsk({ price, buyerAddress, rawBuyerAddress }: CreateAskTxValues) {
+    console.log('BUYER: ', buyerAddress)
+    makeAskTransaction(CREATE_ASK, price, buyerAddress, rawBuyerAddress)
   }
   async function cancelAsk() {
     makeAskTransaction(CANCEL_ASK)

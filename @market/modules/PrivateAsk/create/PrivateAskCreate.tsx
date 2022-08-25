@@ -1,7 +1,14 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market'
-import { isAddress, MotionStack, validateCurrency, validateENSAddress } from '@shared'
+import {
+  isAddress,
+  MotionStack,
+  PrintError,
+  validateCurrency,
+  validateENSAddress,
+} from '@shared'
+import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
 import { Heading, InputField, Paragraph, Stack } from '@zoralabs/zord'
 import { Field, FieldProps, Form, Formik } from 'formik'
 import React from 'react'
@@ -60,45 +67,45 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
     //   transition={{ duration: 0.2 }}
     //   {...props}
     // >
-    <Stack gap="x6" {...props}>
-      <Heading size="xs">Create a Private Ask</Heading>
 
-      <Formik
-        initialValues={{ buyeraddress: '', amount: '' }}
-        validate={validate}
-        onSubmit={(values) =>
-          createAsk({
-            price: values.amount,
-            buyerAddress: values.buyeraddress,
-          })
-        }
-      >
-        {({ values, isValid, isSubmitting }) => (
-          <Form>
+    <Formik
+      initialValues={{ buyeraddress: '', amount: '' }}
+      validate={validate}
+      onSubmit={async (values) => {
+        const resolvedBuyerAddress = await resolvePossibleENSAddress(values.buyeraddress)
+        createAsk({
+          price: values.amount,
+          buyerAddress: resolvedBuyerAddress!,
+          rawBuyerAddress: values.buyeraddress,
+        })
+      }}
+    >
+      {({ values, isValid, isSubmitting }) => (
+        <Form>
+          <Stack gap="x6" {...props}>
+            <Heading size="xs">Create a Private Ask</Heading>
             <Stack gap="x2">
               <Field name="amount">
-                {({ field, meta: { touched, error } }: FieldProps) => {
-                  return (
-                    <InputField
-                      label="NFT Price"
-                      indentFields={false}
-                      affix="ETH"
-                      variant="lg"
-                      type="number"
-                      canError
-                      pattern="[0-9]+([\.,][0-9]+)?"
-                      step={0.000001}
-                      placeholder="0"
-                      // headerElement={ // TODO: Add ExchangeValueAmount with updated useExchangeValue hook once we find a path forward (removal of zora-api-three needed)
-                      //   <ExchangeValueAmount amount={values.amount.toString() || '0'} />
-                      // }
-                      min={0}
-                      inputMode="decimal"
-                      error={(touched && error) || undefined}
-                      {...field}
-                    />
-                  )
-                }}
+                {({ field, meta: { touched, error } }: FieldProps) => (
+                  <InputField
+                    label="NFT Price"
+                    indentFields={false}
+                    affix="ETH"
+                    variant="lg"
+                    type="number"
+                    canError
+                    pattern="[0-9]+([\.,][0-9]+)?"
+                    step={0.000001}
+                    placeholder="0"
+                    // headerElement={ // TODO: Add ExchangeValueAmount with updated useExchangeValue hook once we find a path forward (removal of zora-api-three needed)
+                    //   <ExchangeValueAmount amount={values.amount.toString() || '0'} />
+                    // }
+                    min={0}
+                    inputMode="decimal"
+                    error={(touched && error) || undefined}
+                    {...field}
+                  />
+                )}
               </Field>
 
               <Field name="buyeraddress">
@@ -117,7 +124,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
                 }}
               </Field>
 
-              {txError && <Paragraph size="xs">{txError}</Paragraph>}
+              {txError && <PrintError errorMessage={txError} />}
             </Stack>
             <TransactionSubmitButton
               type="submit"
@@ -128,10 +135,10 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
             >
               Create Private Ask
             </TransactionSubmitButton>
-          </Form>
-        )}
-      </Formik>
-    </Stack>
+          </Stack>
+        </Form>
+      )}
+    </Formik>
     // </MotionStack>
   )
 }

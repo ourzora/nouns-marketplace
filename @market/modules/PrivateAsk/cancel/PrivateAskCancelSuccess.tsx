@@ -25,9 +25,8 @@ export function PrivateAskCancelSuccess({
           <Paragraph size="sm">
             The sale will no longer be available to the buyer.
           </Paragraph>
-
-          <Button onClick={handleClose}>Close</Button>
         </Stack>
+        <Button onClick={handleClose}>Close</Button>
       </Stack>
       {/* {toast} */}
     </>

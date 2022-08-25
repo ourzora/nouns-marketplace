@@ -6,6 +6,7 @@ interface PrivateAskProps {
 type PrivateAskTxDetails = {
   price: string
   buyerAddress: string
+  rawBuyerAddress: string
 }
 
 export const LIST: string = 'listForSale'
