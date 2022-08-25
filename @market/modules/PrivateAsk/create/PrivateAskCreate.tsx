@@ -16,9 +16,6 @@ interface Values {
 }
 
 const validate = (values: Values) => {
-  // console.log('FORMIK VALIDATION........')
-  // console.log(values.amount)
-
   let newValue: BigNumber
   try {
     newValue = parseUnits(values.amount.toString() || '0', 'ether')
@@ -26,9 +23,6 @@ const validate = (values: Values) => {
     // don't update the input on invalid values
     return
   }
-
-  // console.log(`value: ' ${value}, newValue: ${newValue.toString()}`)
-  console.log(`newValue: ${newValue.toString()}`)
 
   const errors = {}
 
@@ -47,8 +41,6 @@ const validate = (values: Values) => {
     // @ts-ignore
     errors.buyeraddress = 'Buyer address not valid'
   }
-
-  console.log(errors)
 
   return errors
 }
