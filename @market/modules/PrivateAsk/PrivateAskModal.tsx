@@ -47,7 +47,7 @@ const componentMap = {
 interface PrivateAskModalProps {
   header: React.ReactNode
   nft: NFTObject
-  open?: boolean
+  // open?: boolean
 }
 
 export interface CommonPrivateAskComponentProps extends StackProps {
@@ -56,8 +56,12 @@ export interface CommonPrivateAskComponentProps extends StackProps {
   handleClose?: () => void
 }
 
-export function PrivateAskModal({ header, nft, open }: PrivateAskModalProps) {
-  const [isOpen, toggleModalOpen] = useToggle(open)
+export function PrivateAskModal({
+  header,
+  nft,
+}: // open
+PrivateAskModalProps) {
+  const [isOpen, toggleModalOpen] = useToggle()
   const { state, dispatch } = usePrivateAskStateContext()
 
   const Component = componentMap[state.status]
@@ -76,9 +80,13 @@ export function PrivateAskModal({ header, nft, open }: PrivateAskModalProps) {
 
   const handleClose = useCallback(() => toggleModalOpen(), [toggleModalOpen])
 
+  // console.log('OPEN?', open)
+  // console.log('IS_OPEN?', isOpen)
+
   return (
     <Modal
       open={isOpen}
+      // open={open}
       onOpenChange={toggleModalOpen}
       trigger={
         <PrivateAskTrigger nft={nft} openModal={toggleModalOpen} dispatch={dispatch} />

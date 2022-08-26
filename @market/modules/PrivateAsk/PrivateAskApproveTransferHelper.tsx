@@ -20,6 +20,8 @@ export function PrivateAskApproveTransferHelper({
 
   const awaitApprovalCheck = useMemo(() => isApproved === undefined, [isApproved])
 
+  console.log('isApproved', isApproved)
+
   useEffect(() => {
     isApproved && onNext && onNext()
   }, [isApproved, onNext])

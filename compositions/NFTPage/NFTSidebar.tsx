@@ -4,13 +4,12 @@ import { useNFTProvider, useTitleWithFallback } from '@shared'
 import { Link } from 'components'
 import { clickAnimation } from 'styles/styles.css'
 import { nftInfoSidebar, nftInfoSidebarWrapper } from './NFTPage.css'
-import { MarketUi } from './MarketUi'
+import { NFTMarket } from './NFTMarket'
 import { lightFont } from '@shared'
-import { PrivateAskSidebar } from '@market/modules/PrivateAsk'
 
-export interface NFTInfoSidebar extends BoxProps {}
+export interface NFTSidebarProps extends BoxProps {}
 
-export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
+export function NFTSidebar({ ...props }: NFTSidebarProps) {
   const { initialData: nft, tokenId, contractAddress } = useNFTProvider()
 
   const { fallbackTitle } = useTitleWithFallback(
@@ -48,9 +47,8 @@ export function NFTInfoSidebar({ ...props }: NFTInfoSidebar) {
           </Paragraph>
         )}
 
-        <PrivateAskSidebar nft={nft} />
         {nft?.nft && (
-          <MarketUi
+          <NFTMarket
             contractAddress={nft.nft.contract.address}
             tokenId={nft.nft.tokenId}
             nft={nft}

@@ -1,4 +1,5 @@
 export * from './NFTPageHero'
-export * from './NFTInfoSidebar'
+export * from './NFTSidebar'
+export * from './NFTMarket'
 export * from './NFTAttributes'
 export * from './NFTHistory'

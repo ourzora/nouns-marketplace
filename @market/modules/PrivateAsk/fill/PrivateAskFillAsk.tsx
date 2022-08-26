@@ -11,7 +11,7 @@ import { useRelevantMarket } from '@market/hooks'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { useAskTokenHelper } from '@market/hooks/useAskTokenHelper'
+import { useAskHelper } from '@market/hooks/useAskHelper'
 import { usePrivateAskFillAskTransaction } from '../hooks'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
@@ -24,7 +24,7 @@ export function PrivateAskFillAsk({
   const { markets, nft } = nftObj
   const { ask } = useRelevantMarket(markets)
   const { balance: walletBalance } = useAuth()
-  const { displayAskAmount, usdAskAmount, hasSufficientFunds } = useAskTokenHelper({
+  const { displayAskAmount, usdAskAmount, hasSufficientFunds } = useAskHelper({
     ask,
   })
   const { isLoading, txError, txInProgress, txStatus, fillAsk } =
@@ -53,8 +53,8 @@ export function PrivateAskFillAsk({
         {displayAskAmount && (
           <PriceWithLabel
             label="Private Sale"
-            cryptoAmount={displayAskAmount}
             symbol="ETH"
+            cryptoAmount={displayAskAmount}
             usdAmount={usdAskAmount}
           />
         )}

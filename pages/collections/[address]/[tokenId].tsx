@@ -1,12 +1,7 @@
 import { PageWrapper, Seo } from 'components'
 import { nftService } from 'services/nftService'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import {
-  NFTPageHero,
-  NFTInfoSidebar,
-  NFTAttributes,
-  NFTHistory,
-} from 'compositions/NFTPage'
+import { NFTPageHero, NFTSidebar, NFTAttributes, NFTHistory } from 'compositions/NFTPage'
 import { Grid, Stack } from '@zoralabs/zord'
 import {
   attributesHistoryWrapper,
@@ -39,10 +34,10 @@ const NFT = ({
           <NFTPageHero />
           {dao ? (
             <NounishAuctionProvider daoConfig={dao} tokenId={nft?.nft?.tokenId}>
-              <NFTInfoSidebar />
+              <NFTSidebar />
             </NounishAuctionProvider>
           ) : (
-            <NFTInfoSidebar />
+            <NFTSidebar />
           )}
           <Stack className={attributesHistoryWrapper}>
             <NFTHistory />

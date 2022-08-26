@@ -3,13 +3,13 @@ import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market'
 import {
   isAddress,
-  MotionStack,
+  // MotionStack,
   PrintError,
   validateCurrency,
   validateENSAddress,
 } from '@shared'
 import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
-import { Heading, InputField, Paragraph, Stack } from '@zoralabs/zord'
+import { Heading, InputField, Stack } from '@zoralabs/zord'
 import { Field, FieldProps, Form, Formik } from 'formik'
 import React from 'react'
 import { usePrivateAskTransaction } from '../hooks'
