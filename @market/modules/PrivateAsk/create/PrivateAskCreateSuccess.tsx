@@ -41,8 +41,7 @@ export function PrivateAskCreateSuccess({
 
         <Stack gap="x3">
           <Eyebrow>Sale data</Eyebrow>
-
-          {formattedAskDetails && <DataTable items={formattedAskDetails} />}
+          <DataTable items={formattedAskDetails} />
         </Stack>
 
         <Button variant="secondary" onClick={handleCopy}>
