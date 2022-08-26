@@ -1,10 +1,11 @@
 import { TransactionSubmitButton } from '@market/components'
-import { PrintError, useToggleOnce } from '@shared'
-import { Heading, Paragraph, Spinner, Stack } from '@zoralabs/zord'
-import React, { useEffect } from 'react'
+import { PrintError } from '@shared'
+import { Heading, Paragraph, Stack } from '@zoralabs/zord'
+import React, { useEffect, useMemo } from 'react'
 import { usePrivateAskTransferHelperApproval } from './hooks'
 
 import { LearnMoreButton } from './LearnMoreButton'
+import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
 import { CommonPrivateAskComponentProps } from './PrivateAskModal'
 
 interface PrivateAskApproveTransferHelperProps extends CommonPrivateAskComponentProps {}
@@ -14,16 +15,17 @@ export function PrivateAskApproveTransferHelper({
   nft,
   ...props
 }: PrivateAskApproveTransferHelperProps) {
-  const [initialized, toggleInitialized] = useToggleOnce(false)
   const { txStatus, txInProgress, isApproved, error, handleApproveERC721ForSpender } =
     usePrivateAskTransferHelperApproval({ contractAddress: nft.nft?.contract.address })
 
-  useEffect(() => {
-    isApproved ? onNext && onNext() : toggleInitialized()
-  }, [isApproved, onNext, toggleInitialized])
+  const awaitApprovalCheck = useMemo(() => isApproved === undefined, [isApproved])
 
-  return !initialized ? (
-    <Spinner />
+  useEffect(() => {
+    isApproved && onNext && onNext()
+  }, [isApproved, onNext])
+
+  return awaitApprovalCheck ? (
+    <PrivateAskCheckApprovalSpinner text="Checking Zora Transfer Helper Approval" />
   ) : (
     <Stack gap="x6">
       <Stack gap="x2">

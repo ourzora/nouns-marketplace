@@ -1,10 +1,10 @@
-import { PrintError, useToggleOnce } from '@shared'
-import { Heading, Paragraph, Spinner, Stack } from '@zoralabs/zord'
-import React, { useEffect } from 'react'
+import { PrintError } from '@shared'
+import { Heading, Paragraph, Stack } from '@zoralabs/zord'
+import React, { useEffect, useMemo } from 'react'
 import { TransactionSubmitButton } from '@market/components/'
 import { usePrivateAskModuleApproval } from './hooks/usePrivateAskModuleApproval'
-import { LearnMoreButton } from './LearnMoreButton'
 import { CommonPrivateAskComponentProps } from './PrivateAskModal'
+import { PrivateAskCheckApprovalSpinner, LearnMoreButton } from './'
 
 interface PrivateAskApproveModuleProps extends CommonPrivateAskComponentProps {}
 
@@ -12,16 +12,16 @@ export function PrivateAskApproveModule({
   onNext,
   ...props
 }: PrivateAskApproveModuleProps) {
-  const [initialized, toggleInitialized] = useToggleOnce(false)
   const { isApproved, error, txStatus, txInProgress, handleApproveModule } =
     usePrivateAskModuleApproval()
+  const awaitApprovalCheck = useMemo(() => isApproved === undefined, [isApproved])
 
   useEffect(() => {
-    isApproved ? onNext && onNext() : toggleInitialized()
-  }, [isApproved, onNext, toggleInitialized])
+    isApproved && onNext && onNext()
+  }, [isApproved, onNext])
 
-  return !initialized ? (
-    <Spinner />
+  return awaitApprovalCheck ? (
+    <PrivateAskCheckApprovalSpinner text="Checking Private Ask Module Approval" />
   ) : (
     <Stack gap="x6">
       <Stack gap="x2">

@@ -1,5 +1,6 @@
 export * from './PrivateAskModal'
 export * from './PrivateAskApproveModule'
+export * from './PrivateAskCheckApprovalSpinner'
 export * from './PrivateAskApproveTransferHelper'
 export * from './fill'
 export * from './hooks'

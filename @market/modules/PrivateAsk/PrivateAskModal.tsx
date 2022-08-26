@@ -26,7 +26,7 @@ import { PrivateAskListForSale } from './PrivateAskListForSale'
 import { PrivateAskTrigger } from './PrivateAskTrigger'
 import useToggle from '@shared/hooks/useToggle'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Flex, Modal, ModalContent, StackProps } from '@zoralabs/zord'
+import { Flex, Modal, ModalContent, Stack, StackProps } from '@zoralabs/zord'
 // import { AnimatePresence } from 'framer-motion'
 
 import * as styles from './PrivateAskModal.css'
@@ -84,7 +84,7 @@ export function PrivateAskModal({ header, nft }: PrivateAskModalProps) {
       }
     >
       <ModalContent className={clsx(styles.content, styles.modalBackground)}>
-        <>
+        <Stack justify="center">
           <Flex justify="center" mb="x4" mt="x1" width="100%">
             {header}
           </Flex>
@@ -97,7 +97,7 @@ export function PrivateAskModal({ header, nft }: PrivateAskModalProps) {
             handleClose={handleClose}
           />
           {/* </AnimatePresence> */}
-        </>
+        </Stack>
       </ModalContent>
     </Modal>
   )
