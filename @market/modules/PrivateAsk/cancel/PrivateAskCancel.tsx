@@ -26,10 +26,10 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
     // >
     <Stack gap="x6" {...props}>
       <Stack gap="x2">
-        <Heading size="xs">Cancel Private Sale</Heading>
+        <Heading size="xs">Cancel Private Listing</Heading>
         <Paragraph>
-          Cancel the private sale. This action can not be reversed, but you will be able
-          to list the NFT for sale again.
+          Cancel the private listing. This action can not be reversed, but you will be
+          able to list the NFT for sale again.
         </Paragraph>
 
         {txError && (
@@ -46,7 +46,7 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
         loading={isSubmitting}
         disabled={isSubmitting}
       >
-        Cancel Private Sale
+        Cancel Private Listing
       </TransactionSubmitButton>
     </Stack>
     // {/* </MotionStack> */}

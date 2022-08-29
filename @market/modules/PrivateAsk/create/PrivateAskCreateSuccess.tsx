@@ -37,7 +37,7 @@ export function PrivateAskCreateSuccess({
         {...props}
       > */}
       <Stack gap="x6">
-        <Heading size="xs">Private Ask Created</Heading>
+        <Heading size="xs">Private Listing Created</Heading>
 
         <Stack gap="x3">
           <Eyebrow>Sale data</Eyebrow>
@@ -56,7 +56,7 @@ export function PrivateAskCreateSuccess({
 
         <Button onClick={onNext}>Done</Button>
 
-        <LearnMoreButton>Learn more about private asks</LearnMoreButton>
+        <LearnMoreButton>Learn more about private listings</LearnMoreButton>
         {/* </MotionStack> */}
       </Stack>
       {toast}

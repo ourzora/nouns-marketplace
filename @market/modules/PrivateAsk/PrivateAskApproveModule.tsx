@@ -14,7 +14,7 @@ export function PrivateAskApproveModule({
 }: PrivateAskApproveModuleProps) {
   const { isApproved, error, txStatus, txInProgress, handleApproveModule } =
     usePrivateAskModuleApproval()
-  const awaitApprovalCheck = useMemo(() => isApproved === undefined, [isApproved])
+  const awaitApprovalCheck = useMemo(() => isApproved === undefined, [isApproved]) // Must be undef, not false
 
   useEffect(() => {
     isApproved && onNext && onNext()

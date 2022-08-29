@@ -40,11 +40,11 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
             openModal()
           }}
         >
-          Cancel Private Sale
+          Cancel Private Listing
         </Button>
       ) : (
         <Button w="100%" onClick={openModal}>
-          List for Private Sale
+          Create Private Listing
         </Button>
       )}
     </>
@@ -53,7 +53,7 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
       <Well gap="x6">
         {displayAskAmount && (
           <PriceWithLabel
-            label="Private Sale"
+            label="Private Listing"
             symbol="ETH"
             cryptoAmount={displayAskAmount}
             usdAmount={usdAskAmount}

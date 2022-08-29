@@ -32,7 +32,10 @@ export function PrivateAskFillAsk({
       nft: nftObj,
       onNext,
     })
-
+  const isDisabled = useMemo(
+    () => !fillAsk || txInProgress || !hasSufficientFunds || !displayAskAmount,
+    [displayAskAmount, fillAsk, hasSufficientFunds, txInProgress]
+  )
   useMemo(() => console.log('ASK', ask), [ask])
 
   return (
@@ -52,7 +55,7 @@ export function PrivateAskFillAsk({
         />
         {displayAskAmount && (
           <PriceWithLabel
-            label="Private Sale"
+            label="Private Listing"
             symbol="ETH"
             cryptoAmount={displayAskAmount}
             usdAmount={usdAskAmount}
@@ -79,7 +82,7 @@ export function PrivateAskFillAsk({
         txInProgress={txInProgress}
         onClick={() => fillAsk?.()} // Yes, this looks weird, but it's a contractWrite thing
         loading={isLoading}
-        disabled={!fillAsk || txInProgress || !hasSufficientFunds || !displayAskAmount}
+        disabled={isDisabled}
       >
         {hasSufficientFunds ? `Buy NFT` : 'Insufficient Funds'}
       </TransactionSubmitButton>

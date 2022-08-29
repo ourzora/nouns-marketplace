@@ -36,7 +36,7 @@ export function PrivateAskListForSale({ onNext, ...props }: PrivateAskListForSal
           <Well display="grid" className={styles.grid}>
             <Stack gap="x1">
               <Flex gap="x2" justify="flex-start" align="flex-start">
-                <Label align="left">Create a Private Ask</Label>
+                <Label align="left">Create a Private Listing</Label>
                 <Tag className={styles.offsetY}>New</Tag>
               </Flex>
               <Paragraph className={styles.textColor} size="sm" align="left">

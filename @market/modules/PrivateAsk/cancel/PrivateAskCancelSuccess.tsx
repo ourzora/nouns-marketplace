@@ -20,7 +20,7 @@ export function PrivateAskCancelSuccess({
     <>
       <Stack gap="x5">
         <Stack gap="x2">
-          <Heading size="xs">Private Sale Cancelled</Heading>
+          <Heading size="xs">Private Listing Cancelled</Heading>
 
           <Paragraph size="sm">
             The sale will no longer be available to the buyer.

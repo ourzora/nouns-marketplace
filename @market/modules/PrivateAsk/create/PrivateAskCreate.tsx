@@ -83,7 +83,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
       {({ values, isValid, isSubmitting }) => (
         <Form>
           <Stack gap="x6" {...props}>
-            <Heading size="xs">Create a Private Ask</Heading>
+            <Heading size="xs">Create a Private Listing</Heading>
             <Stack gap="x2">
               <Field name="amount">
                 {({ field, meta: { touched, error } }: FieldProps) => (
@@ -133,7 +133,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
               loading={isSubmitting}
               disabled={!isValid}
             >
-              Create Private Ask
+              Create Private Listing
             </TransactionSubmitButton>
           </Stack>
         </Form>

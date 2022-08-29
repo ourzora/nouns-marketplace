@@ -1,4 +1,4 @@
-import { shortenAddress } from '@shared'
+import { isAddress, shortenAddress } from '@shared'
 import { useMemo } from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import {
@@ -14,6 +14,14 @@ export const useFormattedPrivateAskInfo = ({ nft: nftData }: PrivateAskInfoProps
   const { PrivateAsks } = usePrivateAskContractContext()
   const { finalizedPrivateAskDetails } = usePrivateAskStateContext()
   const { nft } = nftData
+
+  const buyerAddy = useMemo(
+    () =>
+      isAddress(finalizedPrivateAskDetails?.rawBuyerAddress)
+        ? shortenAddress(finalizedPrivateAskDetails?.rawBuyerAddress)
+        : finalizedPrivateAskDetails?.rawBuyerAddress,
+    [finalizedPrivateAskDetails?.rawBuyerAddress]
+  )
 
   const formattedAskDetails = useMemo(
     () => [
@@ -59,7 +67,7 @@ export const useFormattedPrivateAskInfo = ({ nft: nftData }: PrivateAskInfoProps
       },
       {
         label: 'Buyer',
-        value: finalizedPrivateAskDetails?.rawBuyerAddress,
+        value: buyerAddy,
         copyValue: finalizedPrivateAskDetails?.rawBuyerAddress,
         url: {
           href: `https://zora.co/${finalizedPrivateAskDetails?.rawBuyerAddress}`,
@@ -71,6 +79,7 @@ export const useFormattedPrivateAskInfo = ({ nft: nftData }: PrivateAskInfoProps
     ],
     [
       PrivateAsks.address,
+      buyerAddy,
       finalizedPrivateAskDetails?.buyerAddress,
       finalizedPrivateAskDetails?.price,
       finalizedPrivateAskDetails?.rawBuyerAddress,
