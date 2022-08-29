@@ -16,12 +16,8 @@ import { usePrivateAskFillAskTransaction } from '../hooks'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
 
-export function PrivateAskFillAsk({
-  onNext,
-  nft: nftObj,
-  ...props
-}: PrivateAskFillAskProps) {
-  const { markets, nft } = nftObj
+export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) {
+  const { markets, nft } = props.nft
   const { ask } = useRelevantMarket(markets)
   const { balance: walletBalance } = useAuth()
   const { displayAskAmount, usdAskAmount, hasSufficientFunds } = useAskHelper({
@@ -29,7 +25,7 @@ export function PrivateAskFillAsk({
   })
   const { isLoading, txError, txInProgress, txStatus, fillAsk } =
     usePrivateAskFillAskTransaction({
-      nft: nftObj,
+      nft: props.nft,
       onNext,
     })
   const isDisabled = useMemo(

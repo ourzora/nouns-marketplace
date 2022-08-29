@@ -1,5 +1,6 @@
 import {
   CANCEL,
+  UPDATE,
   PrivateAskAction,
   APPROVE_MODULE_FOR_FILL,
 } from '@market/modules/PrivateAsk/'
@@ -28,20 +29,31 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
     () => hasActivePrivateAsk && isAddressMatch(userAddress, buyerAddress),
     [buyerAddress, hasActivePrivateAsk, userAddress]
   )
-  // console.log('ASK', ask)
 
   return isOwner ? (
     <>
       {hasActivePrivateAsk ? (
-        <Button
-          w="100%"
-          onClick={() => {
-            dispatch && dispatch({ type: CANCEL })
-            openModal()
-          }}
-        >
-          Cancel Private Listing
-        </Button>
+        <Stack gap="x2">
+          <Button
+            w="100%"
+            onClick={() => {
+              dispatch && dispatch({ type: UPDATE })
+              openModal()
+            }}
+          >
+            Update Private Listing
+          </Button>
+          <Button
+            variant="destructive"
+            w="100%"
+            onClick={() => {
+              dispatch && dispatch({ type: CANCEL })
+              openModal()
+            }}
+          >
+            Cancel Private Listing
+          </Button>
+        </Stack>
       ) : (
         <Button w="100%" onClick={openModal}>
           Create Private Listing

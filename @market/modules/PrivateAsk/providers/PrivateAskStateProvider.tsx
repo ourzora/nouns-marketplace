@@ -14,7 +14,9 @@ export const APPROVE_MODULE_FOR_CREATE: string = 'approveModuleForSale'
 export const APPROVE_MODULE_FOR_FILL: string = 'approveModuleForFill'
 export const APPROVE_TRANSFER: string = 'approveTransferHelper'
 export const CREATE: string = 'createPrivateAsk'
-export const CREATE_SUCCESS: string = 'privateAskCreateSuccess'
+export const CREATE_SUCCESS: string = 'createPrivateAskSuccess'
+export const UPDATE: string = 'updatePrivateAsk'
+export const UPDATE_SUCCESS: string = 'updatePrivateAskSuccess'
 export const CANCEL: string = 'cancelPrivateAsk'
 export const CANCEL_SUCCESS: string = 'cancelPrivateAskSuccess'
 export const FILLASK: string = 'fillPrivateAsk'
@@ -37,6 +39,8 @@ export type PrivateAskAction =
   | { type: typeof APPROVE_TRANSFER }
   | { type: typeof CREATE }
   | { type: typeof CREATE_SUCCESS }
+  | { type: typeof UPDATE }
+  | { type: typeof UPDATE_SUCCESS }
   | { type: typeof CANCEL }
   | { type: typeof CANCEL_SUCCESS }
   | { type: typeof APPROVE_MODULE_FOR_FILL }
@@ -57,6 +61,10 @@ export function reducer(_state: State, action: PrivateAskAction): State {
       return { status: CREATE, next: CREATE_SUCCESS }
     case CREATE_SUCCESS:
       return { status: CREATE_SUCCESS }
+    case UPDATE:
+      return { status: UPDATE, next: UPDATE_SUCCESS }
+    case UPDATE_SUCCESS:
+      return { status: UPDATE_SUCCESS }
     case CANCEL:
       return { status: CANCEL, next: CANCEL_SUCCESS }
     case CANCEL_SUCCESS:
