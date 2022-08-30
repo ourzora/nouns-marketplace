@@ -3,7 +3,7 @@ import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { ListV3AskModal, FillV3AskModal } from '@market/components'
 import { FlexProps } from '@zoralabs/zord'
-import { PrivateAskSidebar } from '@market/modules'
+import { PrivateAskSidebar } from '@market/modules/PrivateAsk'
 
 export interface NFTAskProps extends FlexProps {
   nftData: NFTObject
