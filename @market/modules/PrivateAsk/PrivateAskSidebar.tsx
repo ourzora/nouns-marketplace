@@ -12,10 +12,10 @@ interface PrivateAskSidebarProps extends StackProps {
 export function PrivateAskSidebar({ nft, ...props }: PrivateAskSidebarProps) {
   return (
     <Stack {...props}>
-      <PrivateAskStateProvider>
-        <p>test</p>
-        {/* <PrivateAskModal nft={nft} header={<NounsGlasses w="x13" mb="x4" mt="x1" />} /> */}
-      </PrivateAskStateProvider>
+      {/* <PrivateAskStateProvider> */}
+      <p>test</p>
+      {/* <PrivateAskModal nft={nft} header={<NounsGlasses w="x13" mb="x4" mt="x1" />} /> */}
+      {/* </PrivateAskStateProvider> */}
     </Stack>
   )
 }
