@@ -1,8 +1,7 @@
 import { DataTable } from '@shared/components/DataTable'
-import { CopyStatus, useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
-// import { useToast } from '@shared/hooks/useToast'
+import { useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
 import { Button, Eyebrow, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useFormattedPrivateAskInfo } from '../hooks/useFormattedPrivateAskInfo'
 
 import { LearnMoreButton } from '../LearnMoreButton'
