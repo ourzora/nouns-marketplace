@@ -21,15 +21,14 @@ export function NFTAsks({ nftData, ...props }: NFTAskProps) {
   const marketComponent = useMemo(() => {
     if (hasRelevantAsk) {
       return isPrivateAsk ? (
-        // <PrivateAskSidebar nft={nftData} />
-        <></>
+        <PrivateAskSidebar nft={nftData} />
       ) : (
         <FillV3AskModal nftData={nftData} {...props} />
       )
     } else {
       return (
         <>
-          {/* <PrivateAskSidebar nft={nftData} /> */}
+          <PrivateAskSidebar nft={nftData} />
           <ListV3AskModal nftData={nftData} {...props} />
         </>
       )

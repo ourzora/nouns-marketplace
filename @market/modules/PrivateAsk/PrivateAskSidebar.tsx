@@ -4,7 +4,7 @@ import useToggle from '@shared/hooks/useToggle'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Button, Stack, StackProps } from '@zoralabs/zord'
 import { NounsGlasses } from 'components'
-import React, { useState } from 'react'
+import React from 'react'
 import { PrivateAskModal } from './PrivateAskModal'
 
 interface PrivateAskSidebarProps extends StackProps {
@@ -12,8 +12,6 @@ interface PrivateAskSidebarProps extends StackProps {
 }
 
 export function PrivateAskSidebar({ nft, ...props }: PrivateAskSidebarProps) {
-  // @BJ todo: enable passing of trigger from outside of the PrivateAskModal component?
-
   return (
     <Stack {...props}>
       <PrivateAskStateProvider>
