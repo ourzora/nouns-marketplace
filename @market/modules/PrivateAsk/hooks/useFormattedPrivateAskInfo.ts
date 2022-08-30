@@ -1,10 +1,8 @@
 import { isAddress, shortenAddress } from '@shared'
 import { useMemo } from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import {
-  usePrivateAskStateContext,
-  usePrivateAskContractContext,
-} from '@market/modules/PrivateAsk/'
+import { usePrivateAskContractContext } from '../providers/PrivateAskContractProvider'
+import { usePrivateAskStateContext } from '../providers/PrivateAskStateProvider'
 
 interface PrivateAskInfoProps {
   nft: NFTObject

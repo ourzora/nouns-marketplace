@@ -1,6 +1,6 @@
 import { DataTable } from '@shared/components/DataTable'
 import { CopyStatus, useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
-import { useToast } from '@shared/hooks/useToast'
+// import { useToast } from '@shared/hooks/useToast'
 import { Button, Eyebrow, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import React, { useEffect } from 'react'
 import { useFormattedPrivateAskInfo } from '../hooks/useFormattedPrivateAskInfo'
@@ -15,16 +15,16 @@ export function PrivateAskUpdateSuccess({
   onNext,
   ...props
 }: PrivateAskCreateSuccessProps) {
-  const { toast, showToast } = useToast()
+  // const { toast, showToast } = useToast()
   const { formattedAskDetails, copyableValue } = useFormattedPrivateAskInfo({ nft })
   const [status, handleCopy] = useCopyToClipboard(copyableValue)
-  const copied = status === CopyStatus.COPIED
+  // const copied = status === CopyStatus.COPIED
 
-  useEffect(() => {
-    if (copied) {
-      showToast('Address copied to clipboard')
-    }
-  }, [copied, showToast])
+  // useEffect(() => {
+  //   if (copied) {
+  //     showToast('Address copied to clipboard')
+  //   }
+  // }, [copied, showToast])
 
   return (
     <>
@@ -59,7 +59,7 @@ export function PrivateAskUpdateSuccess({
         <LearnMoreButton>Learn more about private listings</LearnMoreButton>
         {/* </MotionStack> */}
       </Stack>
-      {toast}
+      {/* {toast} */}
     </>
   )
 }
