@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
-import { TransactionSubmitButton } from '@market'
+import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import {
   isAddress,
   // MotionStack,
@@ -12,7 +12,8 @@ import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddre
 import { Heading, InputField, Stack } from '@zoralabs/zord'
 import { Field, FieldProps, Form, Formik } from 'formik'
 import React from 'react'
-import { usePrivateAskTransaction } from '../hooks'
+// import { usePrivateAskTransaction } from '../hooks'
+import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
 interface PrivateAskCreateProps extends CommonPrivateAskComponentProps {}
