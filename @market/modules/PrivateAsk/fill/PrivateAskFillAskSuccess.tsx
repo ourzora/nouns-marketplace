@@ -1,6 +1,5 @@
 import { Button, Heading, Paragraph, Stack } from '@zoralabs/zord'
-// import { MotionStack } from 'components/Motion'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
 interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}

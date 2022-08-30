@@ -4,7 +4,8 @@ import React, { useEffect, useMemo } from 'react'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { usePrivateAskModuleApproval } from './hooks/usePrivateAskModuleApproval'
 import { CommonPrivateAskComponentProps } from './PrivateAskModal'
-import { PrivateAskCheckApprovalSpinner, LearnMoreButton } from './'
+import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
+import { LearnMoreButton } from './LearnMoreButton'
 
 interface PrivateAskApproveModuleProps extends CommonPrivateAskComponentProps {}
 

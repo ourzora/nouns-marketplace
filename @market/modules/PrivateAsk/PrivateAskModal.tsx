@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import clsx from 'clsx'
 import {
-  // APPROVE_MODULE_FOR_FILL,
+  APPROVE_MODULE_FOR_FILL,
   APPROVE_MODULE_FOR_CREATE,
   APPROVE_TRANSFER,
   CREATE,
@@ -12,8 +12,8 @@ import {
   RESET,
   CANCEL,
   CANCEL_SUCCESS,
-  // FILLASK,
-  // FILLASK_SUCCESS,
+  FILLASK,
+  FILLASK_SUCCESS,
   usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
@@ -24,8 +24,8 @@ import { PrivateAskUpdate } from './update/PrivateAskUpdate'
 import { PrivateAskUpdateSuccess } from './update/PrivateAskUpdateSuccess'
 import { PrivateAskCancel } from './cancel/PrivateAskCancel'
 import { PrivateAskCancelSuccess } from './cancel/PrivateAskCancelSuccess'
-// import { PrivateAskFillAsk } from './fill/PrivateAskFillAsk'
-// import { PrivateAskFillAskSuccess } from './fill/PrivateAskFillAskSuccess'
+import { PrivateAskFillAsk } from './fill/PrivateAskFillAsk'
+import { PrivateAskFillAskSuccess } from './fill/PrivateAskFillAskSuccess'
 import { PrivateAskListForSale } from './PrivateAskListForSale'
 import { PrivateAskTrigger } from './PrivateAskTrigger'
 import { useToggle } from '@shared/hooks/useToggle'
@@ -45,9 +45,9 @@ const componentMap = {
   [UPDATE_SUCCESS]: PrivateAskUpdateSuccess,
   [CANCEL]: PrivateAskCancel,
   [CANCEL_SUCCESS]: PrivateAskCancelSuccess,
-  // [APPROVE_MODULE_FOR_FILL]: PrivateAskApproveModule,
-  // [FILLASK]: PrivateAskFillAsk,
-  // [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
+  [APPROVE_MODULE_FOR_FILL]: PrivateAskApproveModule,
+  [FILLASK]: PrivateAskFillAsk,
+  [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
 }
 
 interface PrivateAskModalProps {
