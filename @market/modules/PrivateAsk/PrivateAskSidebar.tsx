@@ -1,8 +1,8 @@
-import { PrivateAskStateProvider } from './providers'
+import React from 'react'
+// import { PrivateAskStateProvider } from './providers'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Stack, StackProps } from '@zoralabs/zord'
 // import { NounsGlasses } from 'components'
-import React from 'react'
 // import { PrivateAskModal } from './PrivateAskModal'
 
 interface PrivateAskSidebarProps extends StackProps {
