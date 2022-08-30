@@ -197,17 +197,19 @@ export const nftAttribute = style([
 
 export const nftNextButton = style([
   {
-    borderRadius: '50%',
-    padding: 0,
     marginLeft: '.5rem',
-    display: 'inline-block',
     width: '2rem',
     height: '2rem',
-    backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     fontSize: 'large',
-    fontWeight: 700,
+    padding: 0,
     fontFamily:
       '-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif!important',
   },
+  atoms({
+    backgroundSize: 'contain',
+    display: 'inline-block',
+    borderRadius: 'round',
+    fontWeight: 700,
+  }),
 ])
