@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
 
 import * as styles from './DataTableItem.css'
-import useToggle from '@shared/hooks/useToggle'
+import { useToggle } from '@shared/hooks/'
 
 /**
  * Line item in a data table, handles links and copy to clipboard button

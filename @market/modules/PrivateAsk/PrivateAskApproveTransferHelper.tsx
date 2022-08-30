@@ -17,10 +17,7 @@ export function PrivateAskApproveTransferHelper({
 }: PrivateAskApproveTransferHelperProps) {
   const { txStatus, txInProgress, isApproved, error, handleApproveERC721ForSpender } =
     usePrivateAskTransferHelperApproval({ contractAddress: nft.nft?.contract.address })
-
-  const awaitApprovalCheck = useMemo(() => isApproved === undefined, [isApproved])
-
-  console.log('isApproved', isApproved)
+  const awaitApprovalCheck = useMemo(() => isApproved === undefined, [isApproved]) // Must be undef, not false
 
   useEffect(() => {
     isApproved && onNext && onNext()

@@ -29,7 +29,7 @@ import NextNProgress from 'nextjs-progressbar'
 
 import { HeaderComposition } from 'compositions/Header'
 import { FooterComposition } from 'compositions/Footer'
-import { PrivateAskContractProvider } from '@market/modules/PrivateAsk/providers/PrivateAskContractProvider'
+import { PrivateAskContractProvider } from '@market/modules/PrivateAsk/providers/'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 

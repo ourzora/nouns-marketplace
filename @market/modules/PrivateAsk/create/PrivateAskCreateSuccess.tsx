@@ -1,8 +1,12 @@
-import { DataTable, MotionStack, useToast } from '@shared'
+import {
+  DataTable,
+  //  MotionStack,
+  useToast,
+} from '@shared'
 import { CopyStatus, useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
 import { Button, Eyebrow, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import React, { useEffect } from 'react'
-import { useFormattedPrivateAskInfo } from '../hooks/useFormattedPrivateAskInfo'
+import { useFormattedPrivateAskInfo } from '../hooks/'
 
 import { LearnMoreButton } from '../LearnMoreButton'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'

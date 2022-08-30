@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 
-function useToggle(
+export function useToggle(
   initialValue: boolean = false
 ): [boolean, (value?: boolean | any) => void] {
   const [value, internalSetValue] = useState(initialValue)
@@ -28,5 +28,3 @@ export function useToggleOnce(
   }, [toggle])
   return [on, callback]
 }
-
-export default useToggle
