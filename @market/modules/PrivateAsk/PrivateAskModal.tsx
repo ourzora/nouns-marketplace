@@ -73,9 +73,6 @@ PrivateAskModalProps) {
   const Component = componentMap[state.status]
   const next = state.next as string | undefined
 
-  console.log('Component?', Component)
-  console.log('next?', next)
-
   const handleNext = useCallback(() => {
     if (next) {
       if (dispatch) {
@@ -89,13 +86,9 @@ PrivateAskModalProps) {
 
   const handleClose = useCallback(() => toggleModalOpen(), [toggleModalOpen])
 
-  // console.log('OPEN?', open)
-  // console.log('IS_OPEN?', isOpen)
-
   return (
     <Modal
       open={isOpen}
-      // open={open}
       onOpenChange={toggleModalOpen}
       trigger={
         <PrivateAskTrigger nft={nft} openModal={toggleModalOpen} dispatch={dispatch} />

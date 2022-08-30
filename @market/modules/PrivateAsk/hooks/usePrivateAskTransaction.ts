@@ -1,9 +1,4 @@
-import {
-  defaultProvider,
-  isAddress,
-  useContractTransaction,
-  WalletCallStatus,
-} from '@shared'
+import { useContractTransaction, WalletCallStatus } from '@shared'
 import { useState } from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { ContractTransaction } from 'ethers'
@@ -151,9 +146,9 @@ export const usePrivateAskTransaction = ({
         //   // )
         //   break
         case UPDATE_ASK:
-          console.log(
-            `-----> PrivateAsks.setAskPrice(${nft?.contract.address},${nft?.tokenId},${priceAsBigNumber})`
-          )
+          // console.log(
+          //   `-----> PrivateAsks.setAskPrice(${nft?.contract.address},${nft?.tokenId},${priceAsBigNumber})`
+          // )
           promise = PrivateAsks.setAskPrice(
             nft?.contract.address,
             nft?.tokenId,
@@ -173,8 +168,6 @@ export const usePrivateAskTransaction = ({
       }
 
       const tx = await handleTx(promise)
-      console.log('promise', promise)
-      console.log('tx.hash', tx.hash)
 
       hasValidWriteParams &&
         tx?.hash &&

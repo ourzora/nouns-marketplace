@@ -9,7 +9,7 @@ import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
 interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
 
-export function PrivateAskCreateSuccess({
+export function PrivateAskUpdateSuccess({
   nft,
   onNext,
   ...props
@@ -37,7 +37,7 @@ export function PrivateAskCreateSuccess({
         {...props}
       > */}
       <Stack gap="x6">
-        <Heading size="xs">Private Listing Created</Heading>
+        <Heading size="xs">Private Listing Updated</Heading>
 
         <Stack gap="x3">
           <Eyebrow>Sale data</Eyebrow>
