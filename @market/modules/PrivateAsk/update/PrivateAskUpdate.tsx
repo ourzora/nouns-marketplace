@@ -1,6 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
-import { TransactionSubmitButton, useRelevantMarket } from '@market'
+import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
+import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import {
   // MotionStack,
   PrintError,
@@ -10,7 +11,7 @@ import { reverseLookupAddress } from '@shared/utils/reverseLookupAddress'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
 import { Field, FieldProps, Form, Formik } from 'formik'
 import React, { useMemo } from 'react'
-import { usePrivateAskTransaction } from '../hooks'
+import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
 interface PrivateAskUpdateProps extends CommonPrivateAskComponentProps {}
