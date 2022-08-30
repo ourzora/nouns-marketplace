@@ -2,12 +2,9 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
-import {
-  // MotionStack,
-  PrintError,
-  validateCurrency,
-} from '@shared'
+import { PrintError } from '@shared/components/PrintError'
 import { reverseLookupAddress } from '@shared/utils/reverseLookupAddress'
+import { validateCurrency } from '@shared/utils/validateCurrency'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
 import { Field, FieldProps, Form, Formik } from 'formik'
 import React, { useMemo } from 'react'
@@ -50,8 +47,6 @@ export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
   })
   const buyerAddress = useMemo<string>(() => ask.raw.properties.buyer, [ask])
 
-  useMemo(() => console.log('ASK', ask), [ask])
-
   return (
     // <MotionStack
     //   gap="x5"
@@ -61,7 +56,6 @@ export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
     //   transition={{ duration: 0.2 }}
     //   {...props}
     // >
-
     <Formik
       initialValues={{ amount: '' }}
       validate={validate}

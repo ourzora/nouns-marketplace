@@ -17,7 +17,6 @@ export function PrivateAskUpdateSuccess({
 }: PrivateAskCreateSuccessProps) {
   const { toast, showToast } = useToast()
   const { formattedAskDetails, copyableValue } = useFormattedPrivateAskInfo({ nft })
-
   const [status, handleCopy] = useCopyToClipboard(copyableValue)
   const copied = status === CopyStatus.COPIED
 
