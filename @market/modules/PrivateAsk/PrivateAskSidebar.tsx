@@ -1,4 +1,4 @@
-import { PrivateAskStateProvider } from '@market/modules/PrivateAsk/'
+import { PrivateAskStateProvider } from './providers'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Stack, StackProps } from '@zoralabs/zord'
 // import { NounsGlasses } from 'components'
