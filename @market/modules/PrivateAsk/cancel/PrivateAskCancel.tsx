@@ -1,9 +1,5 @@
 import React from 'react'
 import { Heading, Paragraph, Stack } from '@zoralabs/zord'
-import {
-  // MotionStack,
-  useContractTransaction,
-} from '@shared'
 
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
@@ -12,11 +8,11 @@ import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {}
 
 export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
-  const { txStatus, txInProgress, txError } = useContractTransaction()
-  const { isSubmitting, cancelAsk } = usePrivateAskTransaction({
-    nft: props.nft,
-    onNext,
-  })
+  const { isSubmitting, cancelAsk, txStatus, txInProgress, txError } =
+    usePrivateAskTransaction({
+      nft: props.nft,
+      onNext,
+    })
 
   return (
     // <MotionStack

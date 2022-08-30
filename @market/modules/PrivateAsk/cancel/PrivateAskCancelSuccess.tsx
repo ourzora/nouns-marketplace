@@ -1,6 +1,6 @@
+import React from 'react'
 import { Button, Heading, Paragraph, Stack } from '@zoralabs/zord'
 // import { MotionStack } from 'components/Motion'
-import React, { useEffect } from 'react'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
 interface PrivateAskCancelSuccessProps extends CommonPrivateAskComponentProps {}
