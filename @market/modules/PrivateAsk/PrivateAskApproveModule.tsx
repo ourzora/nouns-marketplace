@@ -1,7 +1,7 @@
 import { PrintError } from '@shared'
 import { Heading, Paragraph, Stack } from '@zoralabs/zord'
 import React, { useEffect, useMemo } from 'react'
-import { TransactionSubmitButton } from '@market/components/'
+import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { usePrivateAskModuleApproval } from './hooks/usePrivateAskModuleApproval'
 import { CommonPrivateAskComponentProps } from './PrivateAskModal'
 import { PrivateAskCheckApprovalSpinner, LearnMoreButton } from './'
