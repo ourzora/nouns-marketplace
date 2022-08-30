@@ -15,7 +15,7 @@ import {
   FILLASK,
   FILLASK_SUCCESS,
   usePrivateAskStateContext,
-} from '@market/modules/PrivateAsk/providers/'
+} from './providers/'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
 import { PrivateAskApproveTransferHelper } from './PrivateAskApproveTransferHelper'
 import { PrivateAskCreate, PrivateAskCreateSuccess } from './create/'

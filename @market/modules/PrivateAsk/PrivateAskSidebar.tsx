@@ -13,7 +13,7 @@ export function PrivateAskSidebar({ nft, ...props }: PrivateAskSidebarProps) {
   return (
     <Stack {...props}>
       <PrivateAskStateProvider>
-        <PrivateAskModal nft={nft} header={<NounsGlasses w="x13" mb="x4" mt="x1" />} />
+        {/* <PrivateAskModal nft={nft} header={<NounsGlasses w="x13" mb="x4" mt="x1" />} /> */}
       </PrivateAskStateProvider>
     </Stack>
   )
