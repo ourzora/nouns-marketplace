@@ -10,8 +10,8 @@ import {
   // UPDATE_SUCCESS,
   LIST,
   RESET,
-  // CANCEL,
-  // CANCEL_SUCCESS,
+  CANCEL,
+  CANCEL_SUCCESS,
   // FILLASK,
   // FILLASK_SUCCESS,
   usePrivateAskStateContext,
@@ -22,8 +22,8 @@ import { PrivateAskCreate } from './create/PrivateAskCreate'
 import { PrivateAskCreateSuccess } from './create/PrivateAskCreateSuccess'
 // import { PrivateAskUpdate } from './update/PrivateAskUpdate'
 // import { PrivateAskUpdateSuccess } from './update/PrivateAskUpdateSuccess'
-// import { PrivateAskCancel } from './cancel/PrivateAskCancel'
-// import { PrivateAskCancelSuccess } from './cancel/PrivateAskCancelSuccess'
+import { PrivateAskCancel } from './cancel/PrivateAskCancel'
+import { PrivateAskCancelSuccess } from './cancel/PrivateAskCancelSuccess'
 // import { PrivateAskFillAsk } from './fill/PrivateAskFillAsk'
 // import { PrivateAskFillAskSuccess } from './fill/PrivateAskFillAskSuccess'
 import { PrivateAskListForSale } from './PrivateAskListForSale'
@@ -43,8 +43,8 @@ const componentMap = {
   [CREATE_SUCCESS]: PrivateAskCreateSuccess,
   // [UPDATE]: PrivateAskUpdate,
   // [UPDATE_SUCCESS]: PrivateAskUpdateSuccess,
-  // [CANCEL]: PrivateAskCancel,
-  // [CANCEL_SUCCESS]: PrivateAskCancelSuccess,
+  [CANCEL]: PrivateAskCancel,
+  [CANCEL_SUCCESS]: PrivateAskCancelSuccess,
   // [APPROVE_MODULE_FOR_FILL]: PrivateAskApproveModule,
   // [FILLASK]: PrivateAskFillAsk,
   // [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
