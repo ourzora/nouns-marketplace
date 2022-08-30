@@ -1,10 +1,13 @@
 import React from 'react'
 import { Heading, Paragraph, Stack } from '@zoralabs/zord'
-import { MotionStack, useContractTransaction } from '@shared'
+import {
+  // MotionStack,
+  useContractTransaction,
+} from '@shared'
 
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { usePrivateAskTransaction } from '../hooks'
+import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 
 interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {}
 
