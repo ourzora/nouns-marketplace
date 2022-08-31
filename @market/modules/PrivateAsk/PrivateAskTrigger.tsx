@@ -3,13 +3,14 @@ import {
   UPDATE,
   PrivateAskAction,
   APPROVE_MODULE_FOR_FILL,
+  useFormattedPrivateAskInfo,
 } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Button, Paragraph, Stack, Well } from '@zoralabs/zord'
-import React, { useMemo } from 'react'
+import { Button, Separator, Stack, Well } from '@zoralabs/zord'
+import React from 'react'
 
 import { useRelevantMarket, useAskHelper } from '@market/hooks'
-import { isAddressMatch, useAuth, useIsOwner } from '@shared'
+import { DataTable, useIsOwner } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 
 interface PrivateAskTriggerProps {
@@ -20,15 +21,11 @@ interface PrivateAskTriggerProps {
 
 export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTriggerProps) {
   const { ask } = useRelevantMarket(nft.markets)
-  const { isActiveAsk, isPrivateAsk, buyerAddress, displayAskAmount, usdAskAmount } =
+  const { hasActivePrivateAsk, displayAskAmount, usdAskAmount, isValidBuyer } =
     useAskHelper({ ask })
   const { isOwner } = useIsOwner(nft)
-  const { address: userAddress } = useAuth()
-  const hasActivePrivateAsk = isActiveAsk && isPrivateAsk
-  const isValidBuyer = useMemo(
-    () => hasActivePrivateAsk && isAddressMatch(userAddress, buyerAddress),
-    [buyerAddress, hasActivePrivateAsk, userAddress]
-  )
+
+  const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft })
 
   return isOwner ? (
     <>
@@ -72,9 +69,8 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
           />
         )}
 
-        <Paragraph size="xs">
-          You have a private offer of sale from {nft.nft?.owner?.address}
-        </Paragraph>
+        <Separator />
+        <DataTable items={formattedAskDetails} />
 
         <Button
           w="100%"

@@ -1,8 +1,10 @@
-import { isAddress, shortenAddress } from '@shared'
+import { isAddress, resolvePossibleENSAddress, shortenAddress } from '@shared'
 import { useMemo } from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { usePrivateAskContractContext } from '../providers/PrivateAskContractProvider'
 import { usePrivateAskStateContext } from '../providers/PrivateAskStateProvider'
+import { DataTableItemProps } from '@shared/components/DataTable/DataTable'
+import { useRelevantMarket } from '@market/hooks'
 
 interface PrivateAskInfoProps {
   nft: NFTObject
@@ -11,17 +13,36 @@ interface PrivateAskInfoProps {
 export const useFormattedPrivateAskInfo = ({ nft: nftData }: PrivateAskInfoProps) => {
   const { PrivateAsks } = usePrivateAskContractContext()
   const { finalizedPrivateAskDetails } = usePrivateAskStateContext()
-  const { nft } = nftData
+  const { nft, markets } = nftData
 
-  const buyerAddy = useMemo(
-    () =>
-      isAddress(finalizedPrivateAskDetails?.rawBuyerAddress)
-        ? shortenAddress(finalizedPrivateAskDetails?.rawBuyerAddress)
-        : finalizedPrivateAskDetails?.rawBuyerAddress,
-    [finalizedPrivateAskDetails?.rawBuyerAddress]
+  // Prioritize data from a just-created ask, or fall back to the relevant ask in the NFT's market obj
+  const { ask } = useRelevantMarket(markets)
+  const nftPrice = useMemo(
+    () => finalizedPrivateAskDetails?.price ?? ask.amount?.eth?.value,
+    [ask.amount?.eth, finalizedPrivateAskDetails]
+  )
+  const possibleENSBuyerAddress = useMemo(
+    () => finalizedPrivateAskDetails?.rawBuyerAddress ?? ask.raw.properties.buyer,
+    [ask.raw.properties.buyer, finalizedPrivateAskDetails]
   )
 
-  const formattedAskDetails = useMemo(
+  // Format data for use as an address + for clean output
+  const buyerAddressAsAddress = useMemo(
+    () =>
+      isAddress(possibleENSBuyerAddress)
+        ? possibleENSBuyerAddress
+        : resolvePossibleENSAddress(possibleENSBuyerAddress),
+    [possibleENSBuyerAddress]
+  )
+  const buyerAsENSorShortenedAddress = useMemo(
+    () =>
+      isAddress(possibleENSBuyerAddress)
+        ? shortenAddress(buyerAddressAsAddress)
+        : possibleENSBuyerAddress,
+    [buyerAddressAsAddress, possibleENSBuyerAddress]
+  )
+
+  const formattedAskDetails = useMemo<DataTableItemProps[]>(
     () => [
       {
         label: 'Private Asks contract address',
@@ -36,7 +57,7 @@ export const useFormattedPrivateAskInfo = ({ nft: nftData }: PrivateAskInfoProps
       {
         label: 'Token contract',
         value: shortenAddress(nft?.contract.address),
-        copyValue: nft?.contract.address,
+        copyValue: nft?.contract.address!,
         url: {
           href: `https://etherscan.io/address/${nft?.contract.address}`,
           target: '_blank',
@@ -45,8 +66,8 @@ export const useFormattedPrivateAskInfo = ({ nft: nftData }: PrivateAskInfoProps
       },
       {
         label: 'Token ID',
-        value: nft?.tokenId,
-        copyValue: nft?.tokenId,
+        value: nft?.tokenId!,
+        copyValue: nft?.tokenId!,
         url: {
           href: `https://zora.co/collections/${nft?.contract.address}/${nft?.tokenId}`,
           target: '_blank',
@@ -55,8 +76,8 @@ export const useFormattedPrivateAskInfo = ({ nft: nftData }: PrivateAskInfoProps
       },
       {
         label: 'Price',
-        value: `${finalizedPrivateAskDetails?.price} ETH`,
-        copyValue: `${finalizedPrivateAskDetails?.price} ETH`,
+        value: `${nftPrice} ETH`,
+        copyValue: `${nftPrice} ETH`,
         url: {
           href: '',
           target: '_blank',
@@ -65,24 +86,25 @@ export const useFormattedPrivateAskInfo = ({ nft: nftData }: PrivateAskInfoProps
       },
       {
         label: 'Buyer',
-        value: buyerAddy,
-        copyValue: finalizedPrivateAskDetails?.rawBuyerAddress,
+        value: buyerAsENSorShortenedAddress!,
+        copyValue: possibleENSBuyerAddress,
         url: {
-          href: `https://zora.co/${finalizedPrivateAskDetails?.rawBuyerAddress}`,
+          href: `https://zora.co/${possibleENSBuyerAddress}`,
           target: '_blank',
           rel: 'noreferrer',
         },
         address: finalizedPrivateAskDetails?.buyerAddress,
       },
+      // @BJ TODO: Should we also add seller data to this table?
     ],
     [
       PrivateAsks.address,
-      buyerAddy,
+      buyerAsENSorShortenedAddress,
       finalizedPrivateAskDetails?.buyerAddress,
-      finalizedPrivateAskDetails?.price,
-      finalizedPrivateAskDetails?.rawBuyerAddress,
       nft?.contract.address,
       nft?.tokenId,
+      nftPrice,
+      possibleENSBuyerAddress,
     ]
   )
 

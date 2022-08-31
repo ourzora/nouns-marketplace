@@ -74,7 +74,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
         type="submit"
         txStatus={txStatus}
         txInProgress={txInProgress}
-        onClick={() => fillAsk?.()} // Yes, this looks weird, but it's a contractWrite thing
+        onClick={() => fillAsk?.()}
         loading={isLoading}
         disabled={isDisabled}
       >

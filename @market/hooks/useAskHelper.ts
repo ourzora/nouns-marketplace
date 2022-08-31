@@ -1,4 +1,4 @@
-import { numberFormatter, roundTwoDecimals, useAuth } from '@shared'
+import { isAddressMatch, numberFormatter, roundTwoDecimals, useAuth } from '@shared'
 import { FixedPriceLike, MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types'
 import { useMemo } from 'react'
 
@@ -7,19 +7,22 @@ interface AskHelperProps {
 }
 
 export const useAskHelper = ({ ask }: AskHelperProps) => {
-  const { balance: walletBalance } = useAuth()
-  const isPrivateAsk = useMemo(() => ask?.raw?.properties?.buyer || false, [ask])
+  const { balance: walletBalance, address: userAddress } = useAuth()
   const buyerAddress = useMemo(() => ask?.raw?.properties?.buyer, [ask])
+  const isPrivateAsk = useMemo(() => buyerAddress || false, [buyerAddress])
   const isActiveAsk = useMemo(
     () => (ask && ask.status === MARKET_INFO_STATUSES.ACTIVE) || false,
     [ask]
+  )
+  const hasActivePrivateAsk = useMemo(
+    () => isActiveAsk && isPrivateAsk,
+    [isActiveAsk, isPrivateAsk]
   )
   const isCompletedAsk = useMemo(
     () => ask?.status === MARKET_INFO_STATUSES.COMPLETE || false,
     [ask]
   )
   const hasAsk = useMemo(() => ask !== undefined, [ask])
-
   const rawAskAmount = useMemo(() => ask?.amount?.amount.raw.toString(), [ask])
   const displayAskAmount = useMemo(() => ask?.amount?.amount.value.toString(), [ask])
   const usdAskAmount = useMemo(
@@ -29,18 +32,23 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
         : '...',
     [ask]
   )
-
   const hasSufficientFunds = useMemo(
     () => (rawAskAmount ? walletBalance?.value.gte(rawAskAmount) : false),
     [rawAskAmount, walletBalance?.value]
+  )
+  const isValidBuyer = useMemo(
+    () => hasActivePrivateAsk && isAddressMatch(userAddress, buyerAddress),
+    [buyerAddress, hasActivePrivateAsk, userAddress]
   )
 
   return {
     hasAsk,
     isPrivateAsk,
     isActiveAsk,
+    hasActivePrivateAsk,
     isCompletedAsk,
     buyerAddress,
+    isValidBuyer,
     rawAskAmount,
     displayAskAmount,
     usdAskAmount,
