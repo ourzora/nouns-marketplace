@@ -21,7 +21,7 @@ interface PrivateAskTriggerProps {
 
 export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTriggerProps) {
   const { ask } = useRelevantMarket(nft.markets)
-  const { hasActivePrivateAsk, displayAskAmount, usdAskAmount, isValidBuyer } =
+  const { hasActivePrivateAsk, displayAskAmount, usdAskAmount, isValidPrivateAskBuyer } =
     useAskHelper({ ask })
   const { isOwner } = useIsOwner(nft)
 
@@ -58,7 +58,7 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
       )}
     </>
   ) : (
-    isValidBuyer && (
+    isValidPrivateAskBuyer && (
       <Well gap="x6">
         {displayAskAmount && (
           <PriceWithLabel

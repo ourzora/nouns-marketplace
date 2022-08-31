@@ -36,7 +36,7 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
     () => (rawAskAmount ? walletBalance?.value.gte(rawAskAmount) : false),
     [rawAskAmount, walletBalance?.value]
   )
-  const isValidBuyer = useMemo(
+  const isValidPrivateAskBuyer = useMemo(
     () => hasActivePrivateAsk && isAddressMatch(userAddress, buyerAddress),
     [buyerAddress, hasActivePrivateAsk, userAddress]
   )
@@ -48,7 +48,7 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
     hasActivePrivateAsk,
     isCompletedAsk,
     buyerAddress,
-    isValidBuyer,
+    isValidPrivateAskBuyer,
     rawAskAmount,
     displayAskAmount,
     usdAskAmount,
