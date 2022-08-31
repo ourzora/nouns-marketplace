@@ -1,17 +1,7 @@
-import { useERC721TokenApproval, useZoraV3ModuleApproval } from '@market/hooks'
-import { useContractContext } from '@market/providers'
-import {
-  ERC721_TRANSFER_HELPER_ADDRESS,
-  useContractTransaction,
-  useToggleOnce,
-} from '@shared'
-// import { Button, Heading, Paragraph, Spinner, Stack } from '@zoralabs/zord'
-import { useCallback, useState } from 'react'
-
-// import { LearnMoreButton } from './LearnMoreButton'
-// import { CommonPrivateAskComponentProps } from './PrivateAskModal'
-
-// interface PrivateAskApproveModuleProps extends CommonPrivateAskComponentProps {}
+import { useCallback, useMemo, useState } from 'react'
+import { useERC721TokenApproval } from '@market/hooks/useERC721TokenApproval'
+import { useContractTransaction } from '@shared/hooks/useContractTransaction'
+import { ERC721_TRANSFER_HELPER_ADDRESS } from '@shared/constants'
 
 interface TransferHelperApprovalProps {
   contractAddress?: string
@@ -19,22 +9,14 @@ interface TransferHelperApprovalProps {
 
 export function usePrivateAskTransferHelperApproval({
   contractAddress,
-}: // spenderAddress
-TransferHelperApprovalProps) {
+}: TransferHelperApprovalProps) {
   const [error, setError] = useState<string>()
-  // const { approved: transferHelper } = useERC721TokenApproval(
-  //   tokenAddress,
-  //   ERC721_TRANSFER_HELPER_ADDRESS
-  // )
   const {
     approved: isApproved,
     approve,
     mutate,
-  } = useERC721TokenApproval(
-    contractAddress,
-    ERC721_TRANSFER_HELPER_ADDRESS
-    // spenderAddress
-  )
+  } = useERC721TokenApproval(contractAddress, ERC721_TRANSFER_HELPER_ADDRESS)
+  const isAwaitingApprovalCheck = useMemo(() => isApproved === undefined, [isApproved]) // If approval status is not yet available, this lets us show an await state
   const { txStatus, handleTx, txInProgress } = useContractTransaction()
 
   const handleApproveERC721ForSpender = useCallback(async () => {
@@ -53,6 +35,7 @@ TransferHelperApprovalProps) {
     txStatus,
     txInProgress,
     isApproved,
+    isAwaitingApprovalCheck,
     error,
     handleApproveERC721ForSpender,
   }

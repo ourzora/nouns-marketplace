@@ -1,10 +1,7 @@
-import { useZoraV3ModuleApproval } from '@market/hooks'
-import {
-  useContractTransaction,
-  // useToggleOnce
-} from '@shared'
-import { useCallback, useState } from 'react'
-import { usePrivateAskContractContext } from '../providers/'
+import { useCallback, useMemo, useState } from 'react'
+import { useZoraV3ModuleApproval } from '@market/hooks/useZoraV3ModuleApproval'
+import { useContractTransaction } from '@shared/hooks/useContractTransaction'
+import { usePrivateAskContractContext } from '../providers/PrivateAskContractProvider'
 
 export function usePrivateAskModuleApproval() {
   const { PrivateAsks } = usePrivateAskContractContext()
@@ -16,9 +13,8 @@ export function usePrivateAskModuleApproval() {
     approve,
     mutate,
   } = useZoraV3ModuleApproval(PrivateAsks.address)
-  //   const [initialized, toggleInitialized] = useToggleOnce(false)
 
-  // console.log('in PrivateAskApproveModule...')
+  const isAwaitingApprovalCheck = useMemo(() => isApproved === undefined, [isApproved]) // If approval status is not yet available, this lets us show an await state
 
   // @BJ TODO: move into an Approval hook?
   const handleApproveModule = useCallback(async () => {
@@ -41,6 +37,7 @@ export function usePrivateAskModuleApproval() {
     txStatus,
     txInProgress,
     isApproved,
+    isAwaitingApprovalCheck,
     error,
     handleApproveModule,
   }

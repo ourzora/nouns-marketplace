@@ -1,8 +1,7 @@
-import { TransactionSubmitButton } from '@market/components'
-import { PrintError } from '@shared'
+import React, { useEffect } from 'react'
 import { Heading, Paragraph, Stack } from '@zoralabs/zord'
-import React, { useEffect, useMemo } from 'react'
-import { usePrivateAskTransferHelperApproval } from './hooks'
+import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
+import { usePrivateAskTransferHelperApproval } from './hooks/usePrivateAskTransferHelperApproval'
 
 import { LearnMoreButton } from './LearnMoreButton'
 import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
@@ -15,15 +14,20 @@ export function PrivateAskApproveTransferHelper({
   nft,
   ...props
 }: PrivateAskApproveTransferHelperProps) {
-  const { txStatus, txInProgress, isApproved, error, handleApproveERC721ForSpender } =
-    usePrivateAskTransferHelperApproval({ contractAddress: nft.nft?.contract.address })
-  const awaitApprovalCheck = useMemo(() => isApproved === undefined, [isApproved]) // Must be undef, not false
+  const {
+    txStatus,
+    txInProgress,
+    isApproved,
+    isAwaitingApprovalCheck,
+    error,
+    handleApproveERC721ForSpender,
+  } = usePrivateAskTransferHelperApproval({ contractAddress: nft.nft?.contract.address })
 
   useEffect(() => {
     isApproved && onNext && onNext()
   }, [isApproved, onNext])
 
-  return awaitApprovalCheck ? (
+  return isAwaitingApprovalCheck ? (
     <PrivateAskCheckApprovalSpinner text="Checking Zora Transfer Helper Approval" />
   ) : (
     <Stack gap="x6">

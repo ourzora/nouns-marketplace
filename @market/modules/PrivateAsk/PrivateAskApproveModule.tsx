@@ -1,6 +1,6 @@
-import { PrintError } from '@shared'
 import { Heading, Paragraph, Stack } from '@zoralabs/zord'
 import React, { useEffect, useMemo } from 'react'
+import { PrintError } from '@shared'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { usePrivateAskModuleApproval } from './hooks/usePrivateAskModuleApproval'
 import { CommonPrivateAskComponentProps } from './PrivateAskModal'
@@ -13,15 +13,20 @@ export function PrivateAskApproveModule({
   onNext,
   ...props
 }: PrivateAskApproveModuleProps) {
-  const { isApproved, error, txStatus, txInProgress, handleApproveModule } =
-    usePrivateAskModuleApproval()
-  const awaitApprovalCheck = useMemo(() => isApproved === undefined, [isApproved]) // Must be undef, not false
+  const {
+    isApproved,
+    isAwaitingApprovalCheck,
+    error,
+    txStatus,
+    txInProgress,
+    handleApproveModule,
+  } = usePrivateAskModuleApproval()
 
   useEffect(() => {
     isApproved && onNext && onNext()
   }, [isApproved, onNext])
 
-  return awaitApprovalCheck ? (
+  return isAwaitingApprovalCheck ? (
     <PrivateAskCheckApprovalSpinner text="Checking Private Ask Module Approval" />
   ) : (
     <Stack gap="x6">
