@@ -1,6 +1,5 @@
 import { CopyButton, AvatarImage } from '@shared'
 import { Flex, FlexProps, Icon, mixins, Paragraph } from '@zoralabs/zord'
-import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
 
 import * as styles from './DataTableItem.css'
@@ -41,20 +40,11 @@ export function DataTableItem({
       </Paragraph>
 
       <Flex gap="x2" align="center">
-        <AnimatePresence>
-          {showCopied && (
-            <motion.div
-              key="copied"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <Paragraph size="xs" color="tertiary">
-                Copied
-              </Paragraph>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {showCopied && (
+          <Paragraph size="xs" color="tertiary">
+            Copied
+          </Paragraph>
+        )}
 
         {!!address && <AvatarImage address={address} size="24" variant="hairlineLight" />}
 
