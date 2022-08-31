@@ -68,7 +68,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
         </Eyebrow>
       </Flex>
 
-      {txError && <PrintError errorMessage={txError} />}
+      {txError && <PrintError errorMessage={txError.message} />}
 
       <TransactionSubmitButton
         type="submit"
