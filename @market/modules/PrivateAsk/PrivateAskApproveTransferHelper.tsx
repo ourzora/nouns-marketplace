@@ -6,6 +6,7 @@ import { usePrivateAskTransferHelperApproval } from './hooks/usePrivateAskTransf
 import { LearnMoreButton } from './LearnMoreButton'
 import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
 import { CommonPrivateAskComponentProps } from './PrivateAskModal'
+import { PrintError } from '@shared/components/PrintError'
 
 interface PrivateAskApproveTransferHelperProps extends CommonPrivateAskComponentProps {}
 
