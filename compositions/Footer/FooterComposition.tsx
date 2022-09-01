@@ -26,7 +26,7 @@ export function FooterComposition() {
             target="_blank"
           >
             <Label size="lg" rel="noreferrer">
-              Github
+              GitHub
             </Label>
             <Icon id="ArrowRightAngle" size="sm" />
           </Flex>
