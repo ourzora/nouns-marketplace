@@ -28,7 +28,7 @@ A Nouns marketplace for originals and derivatives projects.
 
 # Getting started:
 
-(note: This is a github template - so all you need to do is click on the BIG GREEN "Use this template" Button to create a new repo under your GH account - we recommend using [▲ Vercel](https://vercel.com/) for deployment)
+(note: This is a GitHub template - so all you need to do is click on the BIG GREEN "Use this template" Button to create a new repo under your GH account - we recommend using [▲ Vercel](https://vercel.com/) for deployment)
 
 > Clone the repo
 
