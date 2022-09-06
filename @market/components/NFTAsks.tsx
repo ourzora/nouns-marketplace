@@ -12,11 +12,7 @@ export interface NFTAskProps extends FlexProps {
 export function NFTAsks({ nftData, ...props }: NFTAskProps) {
   const { markets } = nftData
   const { ask } = useRelevantMarket(markets)
-  const { hasAsk, isCompletedAsk, isActiveAsk, isPrivateAsk } = useAskHelper({ ask })
-  const hasRelevantAsk = useMemo(
-    () => hasAsk && (isCompletedAsk || isActiveAsk),
-    [hasAsk, isActiveAsk, isCompletedAsk]
-  )
+  const { hasRelevantAsk, isPrivateAsk } = useAskHelper({ ask })
 
   const marketComponent = useMemo(() => {
     if (hasRelevantAsk) {

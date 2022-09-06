@@ -23,6 +23,12 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
     [ask]
   )
   const hasAsk = useMemo(() => ask !== undefined, [ask])
+
+  const hasRelevantAsk = useMemo(
+    () => hasAsk && (isCompletedAsk || isActiveAsk),
+    [hasAsk, isActiveAsk, isCompletedAsk]
+  )
+
   const rawAskAmount = useMemo(() => ask?.amount?.amount.raw.toString(), [ask])
   const displayAskAmount = useMemo(() => ask?.amount?.amount.value.toString(), [ask])
   const usdAskAmount = useMemo(
@@ -43,6 +49,7 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
 
   return {
     hasAsk,
+    hasRelevantAsk,
     isPrivateAsk,
     isActiveAsk,
     hasActivePrivateAsk,
