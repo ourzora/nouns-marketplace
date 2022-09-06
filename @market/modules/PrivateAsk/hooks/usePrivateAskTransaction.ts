@@ -1,4 +1,4 @@
-import { useContractTransaction, WalletCallStatus } from '@shared'
+import { useContractTransaction } from '@shared'
 import { useState } from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { ContractTransaction } from 'ethers'
@@ -7,9 +7,6 @@ import {
   usePrivateAskStateContext,
   usePrivateAskContractContext,
 } from '@market/modules/PrivateAsk/'
-import { useRelevantMarket } from '@market/hooks'
-import PrivateAsksABI from '@zoralabs/v3/dist/artifacts/AsksPrivateEth.sol/AsksPrivateEth.json'
-import { usePrepareContractWrite, useContractWrite } from 'wagmi'
 
 export const CREATE_ASK: string = 'createPrivateAsk'
 export const CANCEL_ASK: string = 'cancelPrivateAsk'
@@ -23,12 +20,12 @@ type PrivateAskTransaction =
   | typeof UPDATE_ASK
 
 interface AskTxValues {
-  price?: string
+  price?: string // as user-facing display value (eg. 0.0001 ETH), not raw BigNumber
 }
 
 interface WriteAskTxValues extends AskTxValues {
   buyerAddress: string
-  rawBuyerAddress: string // unresolved: possibly ENS address or 0xAddress
+  rawBuyerAddress: string // Pre-resolution: possibly ENS address or 0xAddress
 }
 
 interface usePrivateAskTransactionProps {
@@ -36,56 +33,6 @@ interface usePrivateAskTransactionProps {
   collectionAddress?: string
   tokenId?: string
   onNext?: () => void
-}
-
-const statusMap = {
-  // Map Wagmi error statuses to WalletCallStatus
-  ['error']: WalletCallStatus.ERRORED,
-  ['success']: WalletCallStatus.CONFIRMED,
-  ['idle']: WalletCallStatus.INITIAL,
-  ['loading']: WalletCallStatus.PROMPTED, // ambiguous: could also be WalletCallStatus.CONFIRMING?
-}
-
-export const usePrivateAskFillAskTransaction = ({
-  nft: nftData,
-  onNext,
-}: usePrivateAskTransactionProps) => {
-  const { PrivateAsks } = usePrivateAskContractContext()
-  const { nft, markets } = nftData
-  const { ask } = useRelevantMarket(markets)
-
-  const { config, error: prepareError } = usePrepareContractWrite({
-    addressOrName: PrivateAsks.address,
-    contractInterface: PrivateAsksABI.abi,
-    functionName: 'fillAsk',
-    args: [nft?.contract.address, nft?.tokenId],
-    overrides: { value: ask.amount?.amount.raw },
-  })
-
-  const {
-    data,
-    isLoading,
-    isSuccess,
-    status,
-    isError,
-    error,
-    write: directFillAsk,
-  } = useContractWrite(config)
-
-  const walletStatus = statusMap[status]
-
-  isSuccess && onNext && onNext()
-
-  return {
-    fillAskData: data,
-    txStatus: walletStatus,
-    txInProgress: isLoading, // @BJ is this mapping weird?
-    txError: error ?? prepareError,
-    isError,
-    isSuccess,
-    isLoading,
-    fillAsk: directFillAsk,
-  }
 }
 
 export const usePrivateAskTransaction = ({
@@ -101,11 +48,11 @@ export const usePrivateAskTransaction = ({
 
   async function makeAskTransaction(
     txType: PrivateAskTransaction,
-    price?: string,
+    price?: string, // as user-facing display value (eg. 0.0001 ETH), not raw BigNumber
     buyerAddress?: string,
     rawBuyerAddress?: string
   ) {
-    const hasValidWriteParams =
+    const isValidWrite =
       [CREATE_ASK, UPDATE_ASK].includes(txType) &&
       price &&
       buyerAddress &&
@@ -115,11 +62,11 @@ export const usePrivateAskTransaction = ({
       if (!nft || !PrivateAsks) {
         throw new Error('V3AskContract is not ready, please try again.')
       }
-      if (txType === CREATE_ASK && (!price || !buyerAddress)) {
-        throw new Error('Create Listing: missing price or buyerAddress')
+      if ([CREATE_ASK, UPDATE_ASK, FILL_ASK].includes(txType) && !price) {
+        throw new Error('Missing/Invalid price')
       }
-      if (txType === UPDATE_ASK && !price) {
-        throw new Error('Update Listing: missing/invalid price')
+      if (txType === CREATE_ASK && !buyerAddress) {
+        throw new Error('Missing/Invalid buyerAddress')
       }
 
       const priceAsBigNumber = parseUnits(price?.toString() || '0', 'ether') // Convert from human-readable number to WEI
@@ -132,23 +79,12 @@ export const usePrivateAskTransaction = ({
         case CANCEL_ASK:
           promise = PrivateAsks.cancelAsk(nft?.contract.address, nft?.tokenId)
           break
-        // case FILL_ASK:
-        //   console.log(
-        //     `-----> PrivateAsks.fillAsk(${nft?.contract.address},${nft?.tokenId})`
-        //   )
-        //   promise = await directContractWritefillAsk()
-        //   // promise = PrivateAsks.fillAsk(
-        //   //   nft?.contract.address,
-        //   //   nft?.tokenId,
-        //   //   overrides: {
-        //   //     value: price
-        //   //   }
-        //   // )
-        //   break
+        case FILL_ASK:
+          promise = PrivateAsks.fillAsk(nft?.contract.address, nft?.tokenId, {
+            value: priceAsBigNumber, // optional override param actually required :)
+          })
+          break
         case UPDATE_ASK:
-          // console.log(
-          //   `-----> PrivateAsks.setAskPrice(${nft?.contract.address},${nft?.tokenId},${priceAsBigNumber})`
-          // )
           promise = PrivateAsks.setAskPrice(
             nft?.contract.address,
             nft?.tokenId,
@@ -169,7 +105,7 @@ export const usePrivateAskTransaction = ({
 
       const tx = await handleTx(promise)
 
-      hasValidWriteParams &&
+      isValidWrite &&
         tx?.hash &&
         setFinalizedPrivateAskDetails({ price, buyerAddress, rawBuyerAddress })
 
@@ -186,21 +122,20 @@ export const usePrivateAskTransaction = ({
     makeAskTransaction(CREATE_ASK, price, buyerAddress, rawBuyerAddress)
   }
   async function updateAsk({ price, buyerAddress, rawBuyerAddress }: WriteAskTxValues) {
-    // console.log('BUYER: ', buyerAddress)
     makeAskTransaction(UPDATE_ASK, price, buyerAddress, rawBuyerAddress)
   }
   async function cancelAsk() {
     makeAskTransaction(CANCEL_ASK)
   }
-  // async function fillAsk({ price }: AskTxValues) {
-  //   makeAskTransaction(FILL_ASK, price)
-  // }
+  async function fillAsk({ price }: AskTxValues) {
+    makeAskTransaction(FILL_ASK, price)
+  }
 
   return {
     createAsk,
     cancelAsk,
     updateAsk,
-    // fillAsk,
+    fillAsk,
     setSubmitting,
     isSubmitting,
     txStatus,

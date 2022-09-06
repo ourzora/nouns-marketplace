@@ -6,7 +6,7 @@ import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { useAskHelper } from '@market/hooks/useAskHelper'
-import { usePrivateAskFillAskTransaction } from '../hooks/usePrivateAskTransaction'
+import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 import { PrintError } from '@shared/components/PrintError'
 import { useAuth } from '@shared/hooks/useAuth'
 
@@ -21,16 +21,14 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
   const { displayAskAmount, usdAskAmount, hasSufficientFunds } = useAskHelper({
     ask,
   })
-  const { isLoading, txError, txInProgress, txStatus, fillAsk } =
-    usePrivateAskFillAskTransaction({
-      nft: props.nft,
-      onNext,
-    })
+  const { txStatus, txInProgress, txError, fillAsk } = usePrivateAskTransaction({
+    nft: props.nft,
+    onNext,
+  })
   const isDisabled = useMemo(
     () => !fillAsk || txInProgress || !hasSufficientFunds || !displayAskAmount,
     [displayAskAmount, fillAsk, hasSufficientFunds, txInProgress]
   )
-  // useMemo(() => console.log('ASK', ask), [ask])
 
   return (
     // <MotionStack
@@ -68,14 +66,13 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
         </Eyebrow>
       </Flex>
 
-      {txError && <PrintError errorMessage={txError.message} />}
+      {txError && <PrintError errorMessage={txError} />}
 
       <TransactionSubmitButton
         type="submit"
         txStatus={txStatus}
         txInProgress={txInProgress}
-        onClick={() => fillAsk?.()}
-        loading={isLoading}
+        onClick={() => fillAsk({ price: displayAskAmount })}
         disabled={isDisabled}
       >
         {hasSufficientFunds ? `Buy NFT` : 'Insufficient Funds'}
