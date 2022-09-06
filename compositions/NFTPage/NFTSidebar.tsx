@@ -12,7 +12,7 @@ import { useNounishAuctionProvider } from '@noun-auction'
 
 export interface NFTSidebarProps extends BoxProps {}
 
-export function NFTInfoSidebar({ ...props }: NFTSidebarProps) {
+export function NFTSidebar({ ...props }: NFTSidebarProps) {
   const router = useRouter()
   const { initialData: nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
   const { data } = useNounishAuctionProvider()
