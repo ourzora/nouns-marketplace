@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, color, media, space, vars } from '@zoralabs/zord'
+import { color, space, atoms, vars, media } from '@zoralabs/zord'
 import { MODAL_TAB_LAYER } from '../../constants/layers'
 
 export const collectionTrigger = style([

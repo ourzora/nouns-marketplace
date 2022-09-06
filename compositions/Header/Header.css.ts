@@ -76,6 +76,20 @@ export const manageButton = style([
   }),
 ])
 
+export const modalWrapper = style([
+  {
+    msOverflowStyle: 'none',
+    scrollbarWidth: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
+    height: 400,
+  },
+  atoms({
+    overflowY: 'scroll',
+  }),
+])
+
 export const connectButton = style([
   {
     gridColumn: '2',
