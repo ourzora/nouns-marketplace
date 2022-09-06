@@ -51,31 +51,6 @@ export const nounsGlasses = style([
   }),
 ])
 
-export const manageButton = style([
-  {
-    gridColumn: '2',
-    gridRow: '2',
-    height: 42,
-    paddingLeft: space.x5,
-    paddingRight: space.x5,
-    '@media': {
-      [media.min1024]: {
-        gridColumn: '23',
-        gridRow: '1',
-      },
-    },
-  },
-  atoms({
-    w: 'auto',
-    ml: 'auto',
-    borderRadius: 'curved',
-    justifyContent: {
-      '@initial': 'center',
-      '@1024': 'center',
-    },
-  }),
-])
-
 export const connectButton = style([
   {
     gridColumn: '2',
@@ -96,15 +71,16 @@ export const connectButton = style([
   }),
 ])
 
-export const docsLink = style([
+export const nounsCenterLink = style([
   {
-    height: 42,
-    paddingLeft: space.x1,
-    paddingRight: space.x3,
-    gap: space.x3,
+    gridColumn: '23',
+    gridRow: '1',
+    aspectRatio: '100 / 24',
+    maxHeight: '24px',
   },
   atoms({
-    borderRadius: 'curved',
-    position: 'relative',
+    cursor: 'pointer',
+    pos: 'relative',
+    h: '100%',
   }),
 ])
