@@ -26,13 +26,16 @@ export function NftInfo({
   const { data } = useNFT(collectionAddress, tokenId)
   const { address } = useAuth()
 
-  if (!collectionAddress || !tokenId) return null
-
-  const { fallbackTitle } = useTitleWithFallback(collectionAddress, tokenId)
+  const { fallbackTitle } = useTitleWithFallback({
+    contractAddress: collectionAddress,
+    tokenId,
+  })
 
   const noWallet = useMemo(() => {
     return address === null ? true : false
   }, [address])
+
+  if (!collectionAddress || !tokenId) return null
 
   return (
     <Stack gap="x4">

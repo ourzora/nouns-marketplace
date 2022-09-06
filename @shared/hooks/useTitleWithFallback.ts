@@ -1,12 +1,16 @@
 import { useMemo } from 'react'
 import { useNFT } from '@zoralabs/nft-hooks'
 
-export function useTitleWithFallback(
-  tokenContract?: string,
-  tokenId?: string,
+export function useTitleWithFallback({
+  contractAddress,
+  tokenId,
+  defaultTitle,
+}: {
+  contractAddress?: string
+  tokenId?: string
   defaultTitle?: string
-) {
-  const { data } = useNFT(tokenContract, tokenId)
+}) {
+  const { data } = useNFT(contractAddress, tokenId)
 
   const placeHolder = defaultTitle ? defaultTitle : '...'
 

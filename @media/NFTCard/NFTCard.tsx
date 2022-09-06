@@ -20,11 +20,11 @@ export function NFTCard() {
     tokenId,
   } = useNFTProvider()
 
-  const { fallbackTitle } = useTitleWithFallback(
+  const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
     tokenId,
-    data?.metadata?.name
-  )
+    defaultTitle: data?.metadata?.name,
+  })
 
   const srcImg = useMemo(
     () =>
@@ -40,7 +40,7 @@ export function NFTCard() {
     }
   }, [data?.metadata])
 
-  if (!data) return null
+  if (!data || !contractAddress || !tokenId) return null
 
   return (
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>

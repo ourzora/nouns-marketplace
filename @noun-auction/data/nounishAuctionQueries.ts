@@ -109,6 +109,20 @@ export function nounAuctionQuery({
         }
       }
     }
+    hasTokenWithIdOfZero: token(token: 
+      {
+        address: "${contractAddress}",
+        tokenId: "0",
+      },
+      network: {chain: MAINNET}
+    ) {
+      token {
+        tokenId
+      }
+    }
+    numberOfTokens: aggregateStat {
+      nftCount(where: {collectionAddresses: "${contractAddress}"}) 
+    }
     events(
       filter: {
         eventTypes: ${marketProps?.event}
