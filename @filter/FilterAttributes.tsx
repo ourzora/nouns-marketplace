@@ -13,14 +13,15 @@ const FilterAttributes = ({ property }: any) => {
           <InputField
             icon="Search"
             name="search"
-            placeholder="Search"
+            placeholder={`Search ${property.traitType.toLowerCase()}...`}
             value={query}
-            /* @ts-ignore */
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setQuery(e.target.value)
+            }
           />
         </Box>
         <Box className={attributeBox} mb="x4">
-          <Stack gap="x5">
+          <Stack gap="x3">
             {property.valueMetrics
               .filter(
                 (vm) =>
