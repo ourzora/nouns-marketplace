@@ -3,6 +3,7 @@ import { keyframes, style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 import { atoms, textVariants, fontWeight, vars, media, color } from '@zoralabs/zord'
 import { HEADER_HEIGHT } from 'styles/style-constants'
+import { FilterPropertySelect } from './FilterPropertySelect'
 
 const slideUp = keyframes({
   from: { transform: 'translate3d(0px,100%,0px)' },
@@ -251,8 +252,10 @@ export const activityModal = style([
 
 export const filterPropertySelect = style([
   {
-    textAlign: 'left',
-    justifyContent: 'flex-start',
+    display: 'flex',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 ])
 
