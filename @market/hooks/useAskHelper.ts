@@ -23,7 +23,6 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
     [ask]
   )
   const hasAsk = useMemo(() => ask !== undefined, [ask])
-
   const hasRelevantAsk = useMemo(
     () => hasAsk && (isCompletedAsk || isActiveAsk),
     [hasAsk, isActiveAsk, isCompletedAsk]
