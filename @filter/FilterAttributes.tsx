@@ -5,7 +5,7 @@ import { attributeBox } from './CollectionsFilter.css'
 import { FilterPropertySelect } from './FilterPropertySelect'
 
 const FilterAttributes = ({ property }: any) => {
-  const [filter, setFilter] = useState<string>('')
+  const [query, setQuery] = useState<string>('')
   return (
     <>
       <Accordion label={property.traitType ? property.traitType : ''}>
@@ -14,15 +14,18 @@ const FilterAttributes = ({ property }: any) => {
             icon="Search"
             name="search"
             placeholder="Search"
-            value={filter}
+            value={query}
             /* @ts-ignore */
-            onChange={(e) => setFilter(e.target.value)}
+            onChange={(e) => setQuery(e.target.value)}
           />
         </Box>
         <Box className={attributeBox} mb="x4">
           <Stack gap="x5">
             {property.valueMetrics
-              .filter((vm) => vm.value.includes(filter) || filter === '')
+              .filter(
+                (vm) =>
+                  vm.value.toLowerCase().includes(query.toLowerCase()) || query === ''
+              )
               .map((valueMetric) => (
                 <FilterPropertySelect
                   key={valueMetric.value}
