@@ -1,8 +1,18 @@
 import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
-import { style } from '@vanilla-extract/css'
+import { keyframes, style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 import { atoms, textVariants, fontWeight, vars, media } from '@zoralabs/zord'
 import { HEADER_HEIGHT } from 'styles/style-constants'
+
+const slideUp = keyframes({
+  from: { transform: 'translate3d(0px,100%,0px)' },
+  to: { transform: 'translate3d(0px,0px,0px)' },
+})
+
+const slideDown = keyframes({
+  '0%': { transform: 'translate3d(0px,100%,0px)' },
+  '100%': { transform: 'translate3d(0px,0px,0px)' },
+})
 
 export const borderStyle = `2px solid ${vars.color.border.tertiary}`
 
@@ -117,7 +127,6 @@ export const filterCounter = style({
 
 export const filterSidebar = style([
   {
-    overflowY: 'scroll',
     height: `calc(100% - ${HEADER_HEIGHT}px)`,
     '@media': {
       'screen and (max-width: 768px)': {
@@ -129,6 +138,9 @@ export const filterSidebar = style([
       },
     },
   },
+  atoms({
+    overflowY: 'scroll',
+  }),
 ])
 
 export const sideBarSeparator = style({
@@ -327,6 +339,7 @@ export const filterSidebarModalBackground = style([
   {
     borderRadius: 0,
     maxHeight: '100vh',
+    animation: `${slideUp} 300ms ease-in`,
   },
   atoms({
     position: 'fixed',
