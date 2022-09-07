@@ -127,6 +127,11 @@ export const filterCounter = style({
 
 export const filterSidebar = style([
   {
+    msOverflowStyle: 'none',
+    scrollbarWidth: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
     height: `calc(100% - ${HEADER_HEIGHT}px)`,
     '@media': {
       'screen and (max-width: 768px)': {
