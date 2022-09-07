@@ -1,32 +1,23 @@
 import { isAddress, resolvePossibleENSAddress, shortenAddress } from '@shared'
 import { useMemo } from 'react'
-// import { NFTObject } from '@zoralabs/nft-hooks'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import { usePrivateAskContractContext } from '../providers/PrivateAskContractProvider'
 import { usePrivateAskStateContext } from '../providers/PrivateAskStateProvider'
 import { DataTableItemProps } from '@shared/components/DataTable/DataTable'
-// import { useRelevantMarket } from '@market/hooks'
-import { FixedPriceLike } from '@zoralabs/nft-hooks/dist/types'
+import { useRelevantMarket } from '@market/hooks'
 
 interface PrivateAskInfoProps {
-  // nft: NFTObject
-  ask: FixedPriceLike
-  tokenId: string
+  nft: NFTObject
 }
 
-// export const useFormattedPrivateAskInfo = ({ nft: nftData }: PrivateAskInfoProps) => {
-export const useFormattedPrivateAskInfo = ({ ask, tokenId }: PrivateAskInfoProps) => {
+export const useFormattedPrivateAskInfo = ({ nft: nftData }: PrivateAskInfoProps) => {
   const { PrivateAsks } = usePrivateAskContractContext()
   const { finalizedPrivateAskDetails } = usePrivateAskStateContext()
-  const contractAddress = useMemo(
-    () => ask?.raw.collectionAddress,
-    [ask?.raw.collectionAddress]
-  )
-
-  // const { nft, markets } = nftData
+  const { nft, markets } = nftData
 
   // Prioritize data from a just-created ask, or fall back to the relevant ask in the NFT's market obj
-  // const { ask } = useRelevantMarket(markets)
-  // console.log('ASK', ask)
+  const { ask } = useRelevantMarket(markets)
+  console.log('ASK', ask)
   const nftPrice = useMemo(
     () => finalizedPrivateAskDetails?.price ?? ask?.amount?.eth?.value,
     [ask?.amount?.eth, finalizedPrivateAskDetails]
@@ -68,20 +59,20 @@ export const useFormattedPrivateAskInfo = ({ ask, tokenId }: PrivateAskInfoProps
             },
             {
               label: 'Token contract',
-              value: shortenAddress(contractAddress),
-              copyValue: contractAddress,
+              value: shortenAddress(nft?.contract.address),
+              copyValue: nft?.contract.address!,
               url: {
-                href: `https://etherscan.io/address/${contractAddress}`,
+                href: `https://etherscan.io/address/${nft?.contract.address}`,
                 target: '_blank',
                 rel: 'noreferrer',
               },
             },
             {
               label: 'Token ID',
-              value: tokenId,
-              copyValue: tokenId,
+              value: nft?.tokenId!,
+              copyValue: nft?.tokenId!,
               url: {
-                href: `https://zora.co/collections/${contractAddress}/${tokenId}`,
+                href: `https://zora.co/collections/${nft?.contract.address}/${nft?.tokenId}`,
                 target: '_blank',
                 rel: 'noreferrer',
               },
@@ -111,14 +102,14 @@ export const useFormattedPrivateAskInfo = ({ ask, tokenId }: PrivateAskInfoProps
           ]
         : null,
     [
-      ask,
       PrivateAsks.address,
-      contractAddress,
-      tokenId,
-      nftPrice,
+      ask,
       buyerAsENSorShortenedAddress,
-      possibleENSBuyerAddress,
       finalizedPrivateAskDetails?.buyerAddress,
+      nft?.contract.address,
+      nft?.tokenId,
+      nftPrice,
+      possibleENSBuyerAddress,
     ]
   )
 

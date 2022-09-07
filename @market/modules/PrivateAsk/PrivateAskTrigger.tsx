@@ -28,11 +28,7 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
   console.log('ASK', ask)
   console.log('HAS ACTIVE', hasActivePrivateAsk)
 
-  const { formattedAskDetails } = useFormattedPrivateAskInfo({
-    ask: ask,
-    tokenId: nft.nft?.tokenId!,
-  })
-  // const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft })
+  const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft })
 
   return isOwner ? (
     <>
@@ -77,7 +73,7 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
         )}
 
         <Separator />
-        {/* {formattedAskDetails && <DataTable items={formattedAskDetails} />} */}
+        {formattedAskDetails && <DataTable items={formattedAskDetails} />}
 
         <Button
           w="100%"
