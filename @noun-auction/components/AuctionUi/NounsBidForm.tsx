@@ -159,7 +159,7 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
             variant="secondary"
             borderRadius="curved"
           >
-            You're bid has been placed!
+            Your bid has been placed!
           </Button>
         )}
       </form>
