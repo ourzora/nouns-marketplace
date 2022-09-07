@@ -1,7 +1,7 @@
 import { filterPropertySelect } from './CollectionsFilter.css'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 import { CollectionAttributeValue } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Box, Button, Checkbox, Flex, Paragraph } from '@zoralabs/zord'
+import { Box, Button, Checkbox, Flex, Paragraph, Stack, fontWeight } from '@zoralabs/zord'
 import { useCallback, useMemo } from 'react'
 
 export function FilterPropertySelect({
@@ -45,14 +45,14 @@ export function FilterPropertySelect({
             {valueMetric.value}
           </Paragraph>
         </Flex>
-        <Flex direction="column" gap="x0">
-          <Paragraph size="sm" align="right">
+        <Stack gap="x0">
+          <Paragraph size="sm" align="right" fontWeight="label">
             {valueMetric.count}
           </Paragraph>
           <Paragraph size="xs" fontWeight="label">
             ({valueMetric.percent}%)
           </Paragraph>
-        </Flex>
+        </Stack>
       </Box>
     </Button>
   )
