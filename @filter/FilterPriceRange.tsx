@@ -16,7 +16,7 @@ export function FilterPriceRange() {
         label={usePriceRange?.label || 'Price Range'}
         defaultState={usePriceRange?.defaultState}
       >
-        <Stack gap="x4" pb="x4">
+        <Stack gap="x4" py="x4">
           <PriceRangeSelector
             onSelect={priceRangeSelection}
             currencyOptions={[ETH_CURRENCY_SHIM]}
