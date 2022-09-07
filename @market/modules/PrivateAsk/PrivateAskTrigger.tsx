@@ -24,10 +24,6 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
   const { hasActivePrivateAsk, displayAskAmount, usdAskAmount, isValidPrivateAskBuyer } =
     useAskHelper({ ask })
   const { isOwner } = useIsOwner(nft)
-
-  console.log('ASK', ask)
-  console.log('HAS ACTIVE', hasActivePrivateAsk)
-
   const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft })
 
   return isOwner ? (
