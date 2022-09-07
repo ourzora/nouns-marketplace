@@ -1,8 +1,9 @@
 import { filterOptionsWrapper } from './CollectionsFilter.css'
-import { FilterPropertySelect } from './FilterPropertySelect'
 import { useCollection } from './hooks/useCollection'
-import { Accordion, Box, Stack, Label } from '@zoralabs/zord'
+import { Stack, Label } from '@zoralabs/zord'
 import { useCollectionFilters } from '@filter/providers'
+import FilterPropertyItem from './FilterAttributes'
+import FilterAttributes from './FilterAttributes'
 
 export function FilterProperties({ collectionAddress }: { collectionAddress: string }) {
   const { data } = useCollection(collectionAddress)
@@ -20,22 +21,11 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
         </Label>
       )}
       {data?.attributes.map((property) => (
-        <Box
+        <FilterAttributes
           key={property.traitType}
           className={!useCollectionProperties?.hideBorder && filterOptionsWrapper}
-        >
-          <Accordion label={property.traitType ? property.traitType : ''}>
-            <Stack pb="x4" gap="x5">
-              {property.valueMetrics.map((valueMetric) => (
-                <FilterPropertySelect
-                  key={valueMetric.value}
-                  traitType={property.traitType || ''}
-                  valueMetric={valueMetric}
-                />
-              ))}
-            </Stack>
-          </Accordion>
-        </Box>
+          property={property}
+        />
       ))}
     </Stack>
   )
