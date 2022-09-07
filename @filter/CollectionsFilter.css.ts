@@ -1,7 +1,7 @@
 import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
 import { keyframes, style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, textVariants, fontWeight, vars, media } from '@zoralabs/zord'
+import { atoms, textVariants, fontWeight, vars, media, color } from '@zoralabs/zord'
 import { HEADER_HEIGHT } from 'styles/style-constants'
 
 const slideUp = keyframes({
@@ -372,5 +372,31 @@ export const mobileFiltersFooter = style([
     gap: 'x4',
     backgroundColor: 'primary',
     w: '100%',
+  }),
+])
+
+export const attributeBox = style([
+  {
+    maxHeight: 300,
+    msOverflowStyle: 'none',
+    scrollbarWidth: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
+    // Below background are a CSS trick to display and hide scroll hints within the Box
+    background: [
+      `linear-gradient(${color.white100}, ${color.white100})`,
+      `linear-gradient(${color.white100}, ${color.white100}) 0 100%`,
+      `linear-gradient(${color.black10}, ${color.black10})`,
+      `linear-gradient(${color.black10}, ${color.black10}) 0 100%`,
+    ].join(','),
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 2px, 100% 2px, 100% 1px, 100% 1px',
+    backgroundPosition: 'top center, bottom center, top center, bottom center',
+    backgroundAttachment: 'local, local, scroll, scroll',
+  },
+  atoms({
+    position: 'relative',
+    overflowY: 'auto',
   }),
 ])
