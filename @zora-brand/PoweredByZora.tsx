@@ -11,15 +11,14 @@ export function PoweredByZora({ ...props }: ZorbProps) {
       href="https://zora.co"
       target="_blank"
       rel="noreferrer"
+      alignItems="center"
     >
-      <Flex gap="x1">
-        <Label size="lg" className={[zoraTagline, 'light-font']}>
-          Powered by
-        </Label>
-        <Label size="lg" textTransform="uppercase" className={zoraBrand}>
-          Zora
-        </Label>
-      </Flex>
+      <Label size="lg" className={[zoraTagline, 'light-font']}>
+        Powered by
+      </Label>
+      <Label size="lg" textTransform="uppercase" className={zoraBrand}>
+        Zora
+      </Label>
       <Zorb {...props} />
     </Flex>
   )

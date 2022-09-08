@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css'
 
 export const zoraTagline = style({
   fontFamily: 'ptRegular',
-  fontWeight: 300,
+  fontWeight: 100,
   color: '#666666',
 })
 
