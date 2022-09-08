@@ -57,7 +57,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
               <Label
                 size="md"
                 as="span"
-                color="tertiary"
+                color="text3"
                 display={{ '@initial': 'inline', '@1024': 'none' }}
               >
                 Volume
@@ -74,7 +74,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
               <Label
                 size="md"
                 as="span"
-                color="tertiary"
+                color="text3"
                 display={{ '@initial': 'inline', '@1024': 'none' }}
               >
                 Items
@@ -87,7 +87,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
               <Label
                 size="md"
                 as="span"
-                color="tertiary"
+                color="text3"
                 display={{ '@initial': 'inline', '@1024': 'none' }}
               >
                 Floor price
@@ -111,7 +111,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
               <Label
                 size="md"
                 as="span"
-                color="tertiary"
+                color="text3"
                 display={{ '@initial': 'inline', '@1024': 'none' }}
               >
                 Owners

@@ -36,15 +36,15 @@ export const avatar = recipe({
 export const borderVariants = {
   variant: {
     hairlineDark: style({
-      boxShadow: `inset 0 0 0 1px ${vars.color.foreground.tertiary}`,
+      boxShadow: `inset 0 0 0 1px ${vars.color.accentDisabled}`,
       opacity: 0.7,
     }),
     hairlineLight: style({
-      boxShadow: `inset 0 0 0 1px ${vars.color.foreground.primary}`,
+      boxShadow: `inset 0 0 0 1px ${vars.color.accent}`,
       opacity: 0.03,
     }),
     thickLight: style({
-      boxShadow: `inset 0 0 0 3px ${vars.color.background.primary}`,
+      boxShadow: `inset 0 0 0 3px ${vars.color.background1}`,
     }),
   },
 }

@@ -30,10 +30,10 @@ export function TxTimestamp({ transactionInfo }: TxTimestampProps) {
         align="center"
         gap="x1"
       >
-        <Label className={lightFont} color="tertiary">
+        <Label className={lightFont} color="text3">
           {timeStamp}
         </Label>
-        <Icon id="ArrowRightAngle" color="tertiary" />
+        <Icon id="ArrowRightAngle" color="text3" />
       </Flex>
     </Stack>
   )

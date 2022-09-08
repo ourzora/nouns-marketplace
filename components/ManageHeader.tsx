@@ -30,7 +30,7 @@ export function ManageHeader({ ownerAddress }: { ownerAddress: string }) {
       <AddressWithLink
         address={ownerAddress}
         useEns={false}
-        backgroundColor="secondary"
+        backgroundColor="background2"
         px="x4"
         py="x2"
         borderRadius="curved"

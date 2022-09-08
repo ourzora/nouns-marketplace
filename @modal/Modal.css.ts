@@ -51,7 +51,7 @@ export const customContent = style([
 
 export const customBackground = style([
   {
-    background: vars.color.background.primary,
+    background: vars.color.background1,
     borderRadius: 40,
     boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
     animation: `0.3s cubic-bezier(0.65, 0, 0.35, 1), ${keyframes({

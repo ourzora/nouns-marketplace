@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { color, space, atoms, vars, media } from '@zoralabs/zord'
+import { color, space, atoms, vars, media, typography } from '@zoralabs/zord'
 import { MODAL_TAB_LAYER } from '../../constants/layers'
 
 export const collectionTrigger = style([
@@ -40,15 +40,18 @@ export const modalWrapper = style([
 export const tabsButton = style([
   {
     zIndex: MODAL_TAB_LAYER,
-    backgroundColor: `${color.white100}`,
+    // backgroundColor: `${color.white100}`,
+    backgroundColor: `${color.background1}`,
+    fontSize: typography.fontSize[20],
     borderBottom: `2px solid transparent`,
     selectors: {
       '&:first-child': { borderTopLeftRadius: space.x10 },
       '&:last-child': { borderTopRightRadius: space.x10 },
-      '&:hover': { borderBottom: `2px solid ${color.black30}` },
+      '&:hover': { borderBottom: `2px solid ${color.accentHover}` }, // previously 0.3, maybe should use accentActive
       '&[data-state="active"]': {
-        color: vars.color.text.primary,
-        borderBottom: `2px solid ${color.black70}`,
+        color: vars.color.text1,
+        // borderBottom: `2px solid ${color.black70}`,
+        borderBottom: `2px solid ${color.neutralActive}`,
       },
     },
   },
@@ -56,7 +59,7 @@ export const tabsButton = style([
     borderColor: 'transparent',
     color: 'tertiary',
     paddingBottom: 'x2',
-    fontSize: '20px',
+    // fontSize: '20px',
     padding: 'x5',
     width: '100%',
     cursor: 'pointer',
@@ -68,7 +71,8 @@ export const tabsButton = style([
 
 export const tabsList = style([
   {
-    borderBottom: `2px solid ${color.black10}`,
+    // borderBottom: `2px solid ${color.black10}`,
+    borderBottom: `2px solid ${color.background2}`,
     zIndex: MODAL_TAB_LAYER,
   },
   atoms({
@@ -79,5 +83,5 @@ export const tabsList = style([
 ])
 
 export const label = style({
-  color: vars.color.text.primary,
+  color: vars.color.text1,
 })

@@ -1,13 +1,12 @@
 ```
 <Flex direction="column" gap="x3">
-  <Well style={{ gridColumn: "2/span 6" }} label="Colors">
+  <Well style={{ gridColumn: '2/span 6' }} label="Colors">
     <Flex gap="x4">
-      <Box w="x8" h="x8" backgroundColor="primary" />
-      <Box w="x8" h="x8" backgroundColor="secondary" />
-      <Box w="x8" h="x8" backgroundColor="tertiary" />
-      <Box w="x8" h="x8" backgroundColor="reverse" />
-      <Box w="x8" h="x8" backgroundColor="destructive" />
-      <Box w="x8" h="x8" backgroundColor="success" />
+      <Box w="x8" h="x8" backgroundColor="background1" />
+      <Box w="x8" h="x8" backgroundColor="background2" />
+      <Box w="x8" h="x8" backgroundColor="accent" />
+      <Box w="x8" h="x8" backgroundColor="negative" />
+      <Box w="x8" h="x8" backgroundColor="positive" />
       <Box w="x8" h="x8" backgroundColor="warning" />
     </Flex>
     <Flex gap="x4">
@@ -16,35 +15,35 @@
         h="x8"
         borderWidth="normal"
         borderStyle="solid"
-        borderColor="primary"
+        borderColor="background1"
       />
       <Box
         w="x8"
         h="x8"
         borderWidth="normal"
         borderStyle="solid"
-        borderColor="secondary"
+        borderColor="border"
       />
       <Box
         w="x8"
         h="x8"
         borderWidth="normal"
         borderStyle="solid"
-        borderColor="tertiary"
+        borderColor="accent"
       />
       <Box
         w="x8"
         h="x8"
         borderWidth="normal"
         borderStyle="solid"
-        borderColor="destructive"
+        borderColor="negative"
       />
       <Box
         w="x8"
         h="x8"
         borderWidth="normal"
         borderStyle="solid"
-        borderColor="success"
+        borderColor="positive"
       />
       <Box
         w="x8"
@@ -55,30 +54,27 @@
       />
     </Flex>
     <Flex gap="x4">
-      <Box w="x8" h="x8" color="primary">
+      <Box w="x8" h="x8" color="background1">
         xox
       </Box>
-      <Box w="x8" h="x8" color="secondary">
+      <Box w="x8" h="x8" color="text4">
         xox
       </Box>
-      <Box w="x8" h="x8" color="tertiary">
+      <Box w="x8" h="x8" color="accent">
         xox
       </Box>
-      <Box w="x8" h="x8" color="destructive">
+      <Box w="x8" h="x8" color="negative">
         xox
       </Box>
-      <Box w="x8" h="x8" color="success">
+      <Box w="x8" h="x8" color="positive">
         xox
       </Box>
       <Box w="x8" h="x8" color="warning">
         xox
       </Box>
-      <Box w="x8" h="x8" color="reverse">
-        xox
-      </Box>
     </Flex>
   </Well>
-  <Well style={{ gridColumn: "2/span 6" }} label="Typography">
+  <Well style={{ gridColumn: '2/span 6' }} label="Typography">
     <Flex direction="column">
       <Eyebrow>Display</Eyebrow>
       <Display size="lg">Display lg</Display>
@@ -118,15 +114,12 @@
     </Flex>
     <Flex direction="column">
       <Eyebrow>Responsive Text</Eyebrow>
-      <Text
-        fontWeight="display"
-        fontSize={{ "@initial": "48px", "@576": "65px" }}
-      >
+      <Text fontWeight="display" fontSize={{ '@initial': '48', '@576': '65' }}>
         Custom size which gets smaller at 576px breakpoint
       </Text>
     </Flex>
   </Well>
-  <Well style={{ gridColumn: "2/span 10" }} label="Inputs">
+  <Well style={{ gridColumn: '2/span 10' }} label="Inputs">
     <Flex align="end" gap="x2">
       <Flex direction="column" align="end">
         <InputField
@@ -139,7 +132,7 @@
     </Flex>
   </Well>
 
-  <Well style={{ gridColumn: "8/span 4" }} label="Icons">
+  <Well style={{ gridColumn: '8/span 4' }} label="Icons">
     <Flex gap="x4">
       <Box>
         <Eyebrow>Small</Eyebrow>
@@ -288,7 +281,7 @@
     </Flex>
   </Well>
 
-  <Well style={{ gridColumn: "2/span 10" }} label="Buttons">
+  <Well style={{ gridColumn: '2/span 10' }} label="Buttons">
     <Eyebrow>Primary</Eyebrow>
     <Flex align="center" gap="x2">
       <Button variant="primary" icon="Bell">
@@ -409,19 +402,19 @@
     </Flex>
     <Eyebrow>Inherit currentColor</Eyebrow>
     <Flex align="center">
-      <Button icon="Bell" style={{ color: "#9999ff" }}>
+      <Button icon="Bell" style={{ color: '#9999ff' }}>
         Button
       </Button>
     </Flex>
   </Well>
-  <Well style={{ gridColumn: "2/span 10" }} label="Spinner">
+  <Well style={{ gridColumn: '2/span 10' }} label="Spinner">
     <Spinner />
     <Eyebrow>Size: md</Eyebrow>
     <Spinner size="md" />
     <Eyebrow>Size: lg</Eyebrow>
     <Spinner size="lg" />
   </Well>
-  <Well style={{ gridColumn: "2/span 10" }} label="SpinnerOG">
+  <Well style={{ gridColumn: '2/span 10' }} label="SpinnerOG">
     <SpinnerOG />
     <Eyebrow>Size: 20</Eyebrow>
     <SpinnerOG size={20} />
@@ -429,128 +422,128 @@
     <SpinnerOG size={50} />
   </Well>
 
-<Well style={{ gridColumn: "2/span 10" }} label="Inputs">
-  <Flex align="end" gap="x2">
-    <Flex direction="column">
-      <Eyebrow>Base Input</Eyebrow>
-      <Input
-        name="basic"
-        size="lg"
-        placeholder="Basic Input"
-        className="basicinput"
-      />
+  <Well style={{ gridColumn: '2/span 10' }} label="Inputs">
+    <Flex align="end" gap="x2">
+      <Flex direction="column">
+        <Eyebrow>Base Input</Eyebrow>
+        <Input
+          name="basic"
+          size="lg"
+          placeholder="Basic Input"
+          className="basicinput"
+        />
+      </Flex>
     </Flex>
-  </Flex>
-  <Flex align="end" gap="x2">
-    <Flex direction="column">
-      <InputField
-        name="basic"
-        placeholder="InputField + Label"
-        label="Input w/ Label"
-        className="basicinput"
-      />
+    <Flex align="end" gap="x2">
+      <Flex direction="column">
+        <InputField
+          name="basic"
+          placeholder="InputField + Label"
+          label="Input w/ Label"
+          className="basicinput"
+        />
+      </Flex>
+      <Flex direction="column" align="end">
+        <InputField
+          name="nolabel"
+          placeholder="No Label"
+          className="inputnolabel"
+        />
+      </Flex>
+      <Flex direction="column">
+        <InputField
+          name="basic"
+          placeholder="Disabled"
+          label="Disabled"
+          className="disabledinput"
+          disabled
+        />
+      </Flex>
+      <Flex direction="column">
+        <InputField
+          name="icon"
+          placeholder="With Icon"
+          label="With Icon"
+          className="iconinput"
+          icon="Search"
+        />
+      </Flex>
     </Flex>
-    <Flex direction="column" align="end">
-      <InputField
-        name="nolabel"
-        placeholder="No Label"
-        className="inputnolabel"
-      />
+    <Flex gap="x2">
+      <Flex direction="column">
+        <InputField
+          name="basic"
+          placeholder="InputField + Error"
+          label="Input w/ Error"
+          className="basicinput"
+          error="Oh no it's an error"
+        />
+      </Flex>
+      <Flex direction="column">
+        <InputField
+          name="basic"
+          placeholder="InputField + Desc"
+          label="Input w/ Desc"
+          className="basicinput"
+          description="Oh wow it's a description"
+        />
+      </Flex>
+      <Flex direction="column">
+        <InputField
+          name="affix"
+          placeholder="With affix"
+          label="With affix"
+          className="iconaffix"
+          affix=".eth"
+        />
+      </Flex>
+      <Flex direction="column">
+        <InputField
+          name="number"
+          placeholder="Number"
+          label="Number"
+          type="number"
+          className="number"
+          min={0}
+          step={0.5}
+          max={10}
+        />
+      </Flex>
     </Flex>
-    <Flex direction="column">
-      <InputField
-        name="basic"
-        placeholder="Disabled"
-        label="Disabled"
-        className="disabledinput"
-        disabled
-      />
+    <Flex gap="x2">
+      <Flex direction="column">
+        <TextArea
+          name="basic"
+          placeholder="TextArea"
+          label="TextArea"
+          className="basicinput"
+          description="This is the textarea description"
+        />
+      </Flex>
+      <Flex direction="column">
+        <TextArea
+          name="basic"
+          placeholder="TextArea"
+          label="TextArea w/ Error"
+          className="basicinput"
+          error="Oh no something bad happened"
+          description="This is another textarea description"
+        />
+      </Flex>
     </Flex>
-    <Flex direction="column">
-      <InputField
-        name="icon"
-        placeholder="With Icon"
-        label="With Icon"
-        className="iconinput"
-        icon="Search"
-      />
-    </Flex>
-  </Flex>
-  <Flex gap="x2">
-    <Flex direction="column">
-      <InputField
-        name="basic"
-        placeholder="InputField + Error"
-        label="Input w/ Error"
-        className="basicinput"
-        error="Oh no it's an error"
-      />
-    </Flex>
-    <Flex direction="column">
-      <InputField
-        name="basic"
-        placeholder="InputField + Desc"
-        label="Input w/ Desc"
-        className="basicinput"
-        description="Oh wow it's a description"
-      />
-    </Flex>
-    <Flex direction="column">
-      <InputField
-        name="affix"
-        placeholder="With affix"
-        label="With affix"
-        className="iconaffix"
-        affix=".eth"
-      />
-    </Flex>
-    <Flex direction="column">
-      <InputField
-        name="number"
-        placeholder="Number"
-        label="Number"
-        type="number"
-        className="number"
-        min={0}
-        step={0.5}
-        max={10}
-      />
-    </Flex>
-  </Flex>
-  <Flex gap="x2">
-    <Flex direction="column">
-      <TextArea
-        name="basic"
-        placeholder="TextArea"
-        label="TextArea"
-        className="basicinput"
-        description="This is the textarea description"
-      />
-    </Flex>
-    <Flex direction="column">
-      <TextArea
-        name="basic"
-        placeholder="TextArea"
-        label="TextArea w/ Error"
-        className="basicinput"
-        error="Oh no something bad happened"
-        description="This is another textarea description"
-      />
-    </Flex>
-  </Flex>
-</Well>
+  </Well>
 
-<Well style={{ gridColumn: "2/span 10" }} label="Select">
-  <Stack gap="x3">
-    <Flex direction="column">
-      <Eyebrow>Select</Eyebrow>
-      <Box p="x2">
-        <Select defaultValue="2">
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-        </Select>
-      </Box>
+  <Well style={{ gridColumn: '2/span 10' }} label="Select">
+    <Stack gap="x3">
+      <Flex direction="column">
+        <Eyebrow>Select</Eyebrow>
+        <Box p="x2">
+          <Select defaultValue="2">
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </Select>
+        </Box>
       </Flex>
       {/*
             <Flex direction="column">
@@ -576,7 +569,7 @@
       </Flex>
     </Stack>
   </Well>
-  <Well style={{ gridColumn: "2/span 10" }} label="Switch">
+  <Well style={{ gridColumn: '2/span 10' }} label="Switch">
     <Stack gap="x3">
       <Flex direction="column">
         <Box p="x2">
@@ -585,18 +578,18 @@
       </Flex>
     </Stack>
   </Well>
-  <Well style={{ gridColumn: "2/span 10" }} label="Collection Filters">
+  <Well style={{ gridColumn: '2/span 10' }} label="Collection Filters">
     <Flex direction="row" gap="x3">
       <Flex direction="column">
         <Eyebrow>RadioButtonGroup (DS version)</Eyebrow>
         <Box p="x2">
           <RadioButtonGroup
             items={[
-              { label: "Default", value: "1-default" },
-              { label: "Compact", value: "2-compact" },
-              { label: "Comfortable", value: "3-comfortable" },
-              { value: "4-nolabel" },
-              { label: "Disabled", value: "5-disabled", disabled: true },
+              { label: 'Default', value: '1-default' },
+              { label: 'Compact', value: '2-compact' },
+              { label: 'Comfortable', value: '3-comfortable' },
+              { value: '4-nolabel' },
+              { label: 'Disabled', value: '5-disabled', disabled: true },
             ]}
             name="zord-test-checkbox"
           />
@@ -650,10 +643,10 @@
           enableDeselectAll
           defaultState="open"
           onDeselectAll={(e) => {
-            e.stopPropagation();
-            alert("deselect all");
+            e.stopPropagation()
+            alert('deselect all')
           }}
-          style={{ width: "325px" }}
+          style={{ width: '325px' }}
         >
           <Flex direction="column" align="stretch" gap="x4" pt="x4">
             <InputField
@@ -667,7 +660,7 @@
       </Flex>
     </Flex>
   </Well>
-  <Well style={{ gridColumn: "2/span 6" }} label="Slider">
+  <Well style={{ gridColumn: '2/span 6' }} label="Slider">
     <Flex direction="column" gap="x4">
       <Slider
         defaultValue={[1]}
@@ -681,11 +674,11 @@
       />
     </Flex>
   </Well>
-  <Well style={{ gridColumn: "2/span 6" }} label="Buttons in Forms">
+  <Well style={{ gridColumn: '2/span 6' }} label="Buttons in Forms">
     <form
       onSubmit={() => {
-        alert("submitted");
-        return false;
+        alert('submitted')
+        return false
       }}
     >
       <Flex direction="column" gap="x4">
@@ -694,7 +687,7 @@
       </Flex>
     </form>
   </Well>
-  <Well style={{ gridColumn: "2/span 10" }} label="Tag">
+  <Well style={{ gridColumn: '2/span 10' }} label="Tag">
     <Stack gap="x3">
       <Flex direction="column">
         <Eyebrow>Default tag</Eyebrow>
@@ -722,7 +715,7 @@
       </Flex>
     </Stack>
   </Well>
-  <Well style={{ gridColumn: "8/span 4" }} label="PopUps">
+  <Well style={{ gridColumn: '8/span 4' }} label="PopUps">
     <Stack gap="x2">
       <Eyebrow>PopUp</Eyebrow>
       <PopUp>
@@ -742,7 +735,7 @@
       </PopUp>
     </Stack>
   </Well>
-  <Well style={{ gridColumn: "8/span 4" }} label="Example GridCol 8/span 4">
+  <Well style={{ gridColumn: '8/span 4' }} label="Example GridCol 8/span 4">
     <Text>test 2</Text>
     <Modal trigger={<Button>Open modal</Button>}>
       <ModalContent title="This is a modal">

@@ -45,7 +45,7 @@ export function NFTCard() {
   return (
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
       <Link href={`/collections/${contractAddress}/${tokenId}`}>
-        <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
+        <Box w="100%" className={cardImageWrapper} backgroundColor="background2">
           {contractAddress && tokenId && (
             <ImageWithNounFallback
               tokenContract={contractAddress}

@@ -25,7 +25,7 @@ export function FillV3AskInfo({ nft, askPrice, showBalance = true }: FillV3AskIn
   return (
     <>
       <Flex justify="space-between">
-        <Label className="zora-market-fillAskInfo-label" color="tertiary">
+        <Label className="zora-market-fillAskInfo-label" color="text3">
           Owned by
         </Label>
         {nft?.nft?.owner?.address ? (
@@ -35,7 +35,7 @@ export function FillV3AskInfo({ nft, askPrice, showBalance = true }: FillV3AskIn
         )}
       </Flex>
       <Flex justify="space-between">
-        <Label className="zora-market-fillAskInfo-label" color="tertiary">
+        <Label className="zora-market-fillAskInfo-label" color="text3">
           Minted by
         </Label>
         {nft?.nft?.minted?.address ? (
@@ -47,7 +47,7 @@ export function FillV3AskInfo({ nft, askPrice, showBalance = true }: FillV3AskIn
       <Stack align="flex-end">
         {askPrice && (
           <Flex justify="space-between" align="center" w="100%">
-            <Label className="zora-market-fillAskInfo-label" color="tertiary">
+            <Label className="zora-market-fillAskInfo-label" color="text3">
               Price:
             </Label>
             <Heading size="md">{cryptoVal}</Heading>

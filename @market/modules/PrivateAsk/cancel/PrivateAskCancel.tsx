@@ -30,7 +30,7 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
         </Paragraph>
 
         {txError && (
-          <Paragraph size="xs" color="destructive">
+          <Paragraph size="xs" color="negative">
             {txError}
           </Paragraph>
         )}

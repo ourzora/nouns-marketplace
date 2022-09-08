@@ -71,7 +71,7 @@ export function NFTSidebar({ ...props }: NFTSidebarProps) {
               radius="round"
               p="x2"
               pr="x5"
-              backgroundColor="tertiary"
+              backgroundColor="background2"
               borderRadius="round"
               className={clickAnimation}
             />

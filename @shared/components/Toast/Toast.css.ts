@@ -6,6 +6,6 @@ export const toast = style([
   {
     left: 'calc(50% - 125px);',
     zIndex: MODAL_FOREGROUND_LAYER,
-    backgroundColor: vars.color.foreground.primary,
+    backgroundColor: vars.color.accent,
   },
 ])

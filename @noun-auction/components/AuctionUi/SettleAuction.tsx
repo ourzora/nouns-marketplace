@@ -38,7 +38,8 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
       <Stack w={layout === 'sideBarBid' ? '100%' : 'auto'} {...props}>
         <Button
           onClick={settleAuction}
-          variant="reverse"
+          // variant="reverse"
+          variant="secondary"
           className={placeBidTrigger}
           w={layout === 'sideBarBid' ? '100%' : 'auto'}
           loading={isLoading}
@@ -54,7 +55,7 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
           alignItems="center"
           justifyContent="center"
           w="100%"
-          style={{ backgroundColor: color.black10 }}
+          style={{ backgroundColor: color.background2 }}
         >
           <PrintError w="100%" mt="x0" errorMessage={writeContractError.message} />
           <Box pr="x2">

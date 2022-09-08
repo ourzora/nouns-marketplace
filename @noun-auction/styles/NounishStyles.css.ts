@@ -10,7 +10,7 @@ export const auctionWrapperVariants = {
         gridTemplateRows: 'auto',
         gridAutoFlow: 'row',
         borderRadius: radii.phat,
-        border: `2px solid ${color.black10}`,
+        border: `2px solid ${color.background2}`,
         height: '244px',
         '@media': {
           [media.min1024]: {
@@ -89,7 +89,7 @@ export const wrapperHover = style([
             width: 'calc(100% + 30px)',
             height: 'calc(100% + 20px)',
             transform: 'translateX(-15px) translateY(-10px)',
-            backgroundColor: color.black5,
+            backgroundColor: color.background2, // should be black 5
             position: 'absolute',
             top: '0',
             left: '0',
@@ -182,7 +182,7 @@ globalStyle(`${rowButtonWrapper} .zora-modal-trigger`, {
 
 export const sidebarBidWrapper = style([
   {
-    backgroundColor: color.black100,
+    backgroundColor: color.accent,
   },
   atoms({
     p: 'x4',
@@ -194,17 +194,20 @@ export const sidebarBidWrapper = style([
 
 export const sidebarHighBid = style([
   {
-    fontSize: typography.size[5],
+    // fontSize: typography.size[5],
+    fontSize: '5px',
     fontFamily: "'Londrina Solid', cursive!important",
     fontWeight: 400,
   },
   atoms({
-    color: 'reverse',
+    // color: 'reverse',
+    color: 'onAccent',
   }),
 ])
 
 export const sideBarUpperLabel = style({
-  fontSize: typography.size[9],
+  // fontSize: typography.size[9],
+  fontSize: '9px',
 })
 
 export const bidHistoryWrapper = style([
@@ -235,8 +238,6 @@ export const placeBidTrigger = style([
     px: 'x4',
     py: 'x2',
     justifyContent: 'center',
-    backgroundColor: 'tertiary',
-    color: 'primary',
   }),
 ])
 
@@ -278,7 +279,8 @@ export const auctionEventRow = style([
         position: 'relative',
         width: '100%',
         height: space.x5,
-        borderLeft: `2px solid ${color.black10}`,
+        // borderLeft: `2px solid ${color.black10}`,
+        borderLeft: `2px solid ${color.background2}`,
         margin: `${space.x1} 0 ${space.x1}`,
         transform: `translateX(calc(${space.x6} - 1px))`,
         '@media': {
@@ -310,7 +312,7 @@ export const lightFont = style({
 export const tokenInfoWrapper = style([
   {
     gridColumn: '1 / 3',
-    borderBottom: `1px solid ${color.black10}`,
+    borderBottom: `1px solid ${color.background2}`,
     gridTemplateColumns: '68px auto',
     gridTemplateRows: '68px',
     '@media': {
@@ -417,7 +419,8 @@ export const activeAuctionRowWrapper = style([
             width: 'calc(100% + 30px)',
             height: 'calc(100% + 20px)',
             transform: 'translateX(-15px) translateY(-10px)',
-            backgroundColor: color.black5,
+            // backgroundColor: color.black5,
+            backgroundColor: color.background2,
             position: 'absolute',
             top: '0',
             left: '0',

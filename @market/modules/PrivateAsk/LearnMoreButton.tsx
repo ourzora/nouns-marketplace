@@ -9,7 +9,7 @@ interface LearnMoreButtonProps extends ButtonProps, Hyperlink {}
 export function LearnMoreButton(props: LearnMoreButtonProps) {
   return (
     <Button as="a" variant="unset" className={mixins({ hoverFadeOut: true })} {...props}>
-      <Paragraph className={styles.textColor} size="sm" color="tertiary">
+      <Paragraph className={styles.textColor} size="sm" color="text3">
         Learn more about selling on Zora
         <Icon
           className={styles.offsetY}

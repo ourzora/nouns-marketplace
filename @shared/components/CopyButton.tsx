@@ -32,7 +32,7 @@ export function CopyButton({
       title="Copy to Clipboard"
       {...props}
     >
-      <Icon id="Copy" size="sm" color="tertiary" />
+      <Icon id="Copy" size="sm" color="text3" />
     </Button>
   )
 }

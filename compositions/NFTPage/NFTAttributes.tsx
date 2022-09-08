@@ -27,7 +27,7 @@ export function NFTAttributes({ ...props }: NFTAttributesProps) {
                 <Label
                   size="lg"
                   className={lightFont}
-                  color="tertiary"
+                  color="text3"
                   textTransform="capitalize"
                 >
                   {attribute.name}

@@ -46,7 +46,7 @@ export function PrivateAskListForSale({ onNext, ...props }: PrivateAskListForSal
             </Stack>
 
             <Flex w="x13" justify="flex-end" align="center">
-              <Icon id="ChevronRight" color="tertiary" size="md" />
+              <Icon id="ChevronRight" color="icon2" size="md" />
             </Flex>
           </Well>
         </Button>

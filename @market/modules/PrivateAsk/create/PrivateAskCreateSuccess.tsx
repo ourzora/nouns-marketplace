@@ -52,7 +52,7 @@ export function PrivateAskCreateSuccess({
           Copy All Data
         </Button>
 
-        <Paragraph size="sm" color="tertiary" align="center">
+        <Paragraph size="sm" color="text3" align="center">
           You can copy all data later from the NFT page
         </Paragraph>
 

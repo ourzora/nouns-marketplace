@@ -1,10 +1,10 @@
 import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, textVariants, fontWeight, vars, media } from '@zoralabs/zord'
+import { typography, atoms, textVariants, vars, media } from '@zoralabs/zord'
 import { HEADER_HEIGHT } from 'styles/style-constants'
 
-export const borderStyle = `2px solid ${vars.color.border.tertiary}`
+export const borderStyle = `2px solid ${vars.color.border}`
 
 export const homepageGrid = style({
   '@media': {
@@ -14,20 +14,20 @@ export const homepageGrid = style({
   },
 })
 
-export const errorText = style({ color: vars.color.error.default })
+export const errorText = style({ color: vars.color.negative })
 
 export const textButton = style([
   {
-    whiteSpace: 'nowrap',
     fontWeight: 600,
   },
+  atoms({ whiteSpace: 'nowrap' }),
 ])
 
 export const textSmall = style({
-  fontSize: textVariants.variant['label-sm'].fontSize,
+  fontSize: typography.fontSize[14],
 })
 
-export const checkBox = style({
+export const checkBox = atoms({
   width: '100%',
   height: '100%',
 })
@@ -122,7 +122,7 @@ export const filterSidebar = style([
     '@media': {
       'screen and (max-width: 768px)': {
         position: 'relative',
-        background: vars.color.background.primary,
+        background: vars.color.background1,
         width: '100%',
         paddingRight: '0',
         height: '100%',
@@ -164,7 +164,7 @@ export const collectionBlock = style({
       height: '100%',
       inset: '0',
       opacity: 0,
-      backgroundColor: vars.color.background.tertiary,
+      backgroundColor: vars.color.background2,
       cursor: 'pointer',
       borderRadius: vars.radii.small,
     },
@@ -192,7 +192,7 @@ export const filterOption = style({
   backgroundColor: '$transparent',
   selectors: {
     '&:hover:not([disabled])': {
-      backgroundColor: vars.color.background.primary,
+      backgroundColor: vars.color.background1,
     },
     '&:focus-visible': {
       outline: '2px solid rgb(32, 103, 243)',
@@ -214,7 +214,7 @@ export const filterOption = style({
 })
 
 export const filterOptionsWrapper = style({
-  borderBottom: `2px solid ${vars.color.border.tertiary}`,
+  borderBottom: `2px solid ${vars.color.border}`,
 })
 
 export const activityModal = style([
@@ -247,18 +247,17 @@ const pill = {
   height: vars.space.x10,
   borderRadius: vars.radii.round,
   marginBottom: 0,
-  fontSize: textVariants.variant['label-md'].fontSize,
-  fontWeight: fontWeight.label,
+  fontSize: typography.fontSize[16],
+  fontWeight: typography.fontWeight.label,
   lineHeight: 1,
 }
 
 export const currencySelectVariants = {
   variant: {
     large: {
-      paddingLeft: vars.space.x4,
-      paddingRight: vars.space.x4,
+      px: vars.space.x4,
       height: vars.space.x15,
-      fontSize: textVariants.variant['label-md'].fontSize,
+      fontSize: typography.fontSize[16],
     },
     greyPill: {
       ...pill,
@@ -271,7 +270,7 @@ export const currencySelectVariants = {
     whitePill: {
       ...pill,
       boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.1), 0px 0.8px 2.6px rgba(0, 0, 0, 0.05)',
-      backgroundColor: vars.color.background.primary,
+      backgroundColor: vars.color.background1,
     },
   },
 }
@@ -285,15 +284,15 @@ export const currencySelect = recipe({
 const symbolTextVariants = {
   variant: {
     large: {
-      fontSize: textVariants.variant['label-md'].fontSize,
+      fontSize: typography.fontSize[16],
     },
     greyPill: {
-      fontSize: textVariants.variant['label-md'].fontSize,
-      fontWeight: fontWeight.label,
+      fontSize: typography.fontSize[16],
+      fontWeight: typography.fontWeight.label,
     },
     whitePill: {
-      fontSize: textVariants.variant['label-md'].fontSize,
-      fontWeight: fontWeight.label,
+      fontSize: typography.fontSize[16],
+      fontWeight: typography.fontWeight.label,
     },
   },
 }
@@ -326,13 +325,13 @@ export const filterSidebarModalContent = style([
 export const filterSidebarModalBackground = style([
   {
     borderRadius: 0,
-    maxHeight: '100vh',
   },
   atoms({
     position: 'fixed',
     height: '100vh',
     padding: 'x0',
     inset: 'x0',
+    maxHeight: '100vh',
   }),
 ])
 

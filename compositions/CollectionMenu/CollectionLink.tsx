@@ -31,7 +31,7 @@ export function CollectionLink({ collection }: { collection: CollectionsData }) 
           <Label color="tertiary" className={[lightFont]}>
             {aggregate?.aggregateStat?.nftCount} NFTs
           </Label>
-          <Icon id="ChevronRight" color="tertiary" />
+          <Icon id="ChevronRight" color="text3" />
         </Flex>
       </Flex>
     </Link>

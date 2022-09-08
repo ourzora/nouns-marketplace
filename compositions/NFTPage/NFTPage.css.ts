@@ -111,7 +111,7 @@ globalStyle(
 
 export const nftMarketWrapper = style([
   {
-    borderColor: vars.color.background.secondary,
+    borderColor: vars.color.background2,
   },
   atoms({
     borderRadius: 'phat',
@@ -182,7 +182,7 @@ export const nftAttributesWrapper = style([
 
 export const nftAttribute = style([
   {
-    backgroundColor: vars.color.background.tertiary,
+    backgroundColor: vars.color.background2,
   },
   atoms({
     width: '100%',
@@ -203,6 +203,7 @@ export const nftNextButton = style([
     backgroundRepeat: 'no-repeat',
     fontSize: 'large',
     padding: 0,
+    fontWeight: 700,
     fontFamily:
       '-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif!important',
   },
@@ -210,6 +211,5 @@ export const nftNextButton = style([
     backgroundSize: 'contain',
     display: 'inline-block',
     borderRadius: 'round',
-    fontWeight: 700,
   }),
 ])

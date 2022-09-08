@@ -94,6 +94,7 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
       event.preventDefault()
       placeBid && placeBid()
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [bidAmount]
   )
 
@@ -101,7 +102,7 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
     <Box {...props}>
       <form onSubmit={handleOnSubmit}>
         <Flex justify="space-between">
-          <Label color="secondary" size="lg">
+          <Label color="text2" size="lg">
             Bid
           </Label>
         </Flex>

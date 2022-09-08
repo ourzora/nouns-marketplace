@@ -57,10 +57,10 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
       <Separator />
 
       <Flex justify="space-between">
-        <Paragraph size="sm" color="tertiary">
+        <Paragraph size="sm" color="text3">
           Your balance
         </Paragraph>
-        <Eyebrow color="primary" inline>
+        <Eyebrow color="text1" inline>
           {walletBalance?.formatted} {walletBalance?.symbol}
         </Eyebrow>
       </Flex>

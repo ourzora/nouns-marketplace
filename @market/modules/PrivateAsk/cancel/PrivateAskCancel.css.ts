@@ -16,11 +16,11 @@ export const button = style({
   selectors: {
     '&:not([disabled]):hover': {
       cursor: 'pointer',
-      backgroundColor: vars.color.background.tertiary,
+      backgroundColor: vars.color.background2,
     },
   },
 })
 
 export const textColor = style({
-  color: vars.color.foreground.tertiary,
+  color: vars.color.accentDisabled,
 })

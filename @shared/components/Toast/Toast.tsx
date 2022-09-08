@@ -1,5 +1,5 @@
 import Portal from '@reach/portal'
-import { MotionBox } from '@shared'
+// import { MotionBox } from '@shared/components/Motion'
 import { Box, BoxProps, Paragraph } from '@zoralabs/zord'
 import { AnimatePresence } from 'framer-motion'
 
@@ -16,10 +16,10 @@ export function Toast({ visible, children }: ToastProps) {
         {visible && (
           // <MotionBox
           <Box
-            // key="toast"
-            // initial={{ opacity: 0 }}
-            // animate={{ opacity: 1 }}
-            // exit={{ opacity: 0 }}
+            key="toast"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className={styles.toast}
             pos="fixed"
             bottom="x5"
@@ -27,11 +27,10 @@ export function Toast({ visible, children }: ToastProps) {
             px="x4"
             borderRadius="round"
           >
-            <Paragraph color="reverse" size="sm">
+            <Paragraph color="onAccent" size="sm">
               {children}
             </Paragraph>
           </Box>
-          // </MotionBox>
         )}
       </AnimatePresence>
     </Portal>

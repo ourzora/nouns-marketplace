@@ -65,7 +65,7 @@ export function TokenInfo({
                 <Button
                   onClick={contractLinkHandler}
                   variant="unset"
-                  color="tertiary"
+                  color="text3"
                   className={[lightFont]}
                 >
                   {data?.nft?.contract?.name}

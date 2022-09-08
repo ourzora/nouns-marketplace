@@ -45,7 +45,7 @@ export function FilterHeader({
             className={filterCounter}
             as="span"
             variant="paragraph-sm"
-            color="tertiary"
+            color="text3"
             pl="x1"
             pr="x10"
           >

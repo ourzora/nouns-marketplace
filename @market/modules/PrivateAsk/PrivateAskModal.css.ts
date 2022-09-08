@@ -3,7 +3,7 @@ import { atoms, media, vars } from '@zoralabs/zord'
 
 export const content = style([
   {
-    background: vars.color.background.primary,
+    background: vars.color.background1,
     '@media': {
       [media.min480]: {
         height: 'auto',
@@ -20,7 +20,7 @@ export const round = atoms({ borderRadius: 'normal' })
 
 export const modalBackground = style([
   {
-    backgroundColor: vars.color.background.primary,
+    backgroundColor: vars.color.background1,
     '@media': {
       [media.min480]: {
         backgroundColor: 'transparent',

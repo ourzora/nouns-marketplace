@@ -8,7 +8,7 @@ export const useToast = () => {
   const toast = <Toast visible={toastVisible}>{text}</Toast>
 
   const showToast = useCallback(
-    (text: string, timeout: number = 5000): Promise<void> => {
+    (text: string, timeout: number = 3000): Promise<void> => {
       setText(text)
       setToastVisible(true)
 

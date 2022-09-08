@@ -397,7 +397,7 @@ export const link = style([
       '&:focus, &:hover': {
         '@media': {
           [media.min768]: {
-            backgroundColor: vars.color.background.tertiary,
+            backgroundColor: vars.color.background2,
           },
         },
       },

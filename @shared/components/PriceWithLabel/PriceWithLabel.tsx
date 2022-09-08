@@ -23,7 +23,7 @@ export function PriceWithLabel({
         {cryptoAmount} {symbol}
       </Heading>
       {usdAmount && (
-        <Eyebrow color="secondary" inline>
+        <Eyebrow color="text2" inline>
           <Label size="xs">${usdAmount} USD</Label>
         </Eyebrow>
       )}

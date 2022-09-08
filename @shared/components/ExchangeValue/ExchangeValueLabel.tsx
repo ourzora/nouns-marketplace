@@ -16,7 +16,7 @@ export function ExchangeValueLabel({
 }: ExchangeValueLabelProps) {
   return (
     <Flex justify="space-between" align="center" py="x2" px="x4" {...props}>
-      <Eyebrow color="secondary" textTransform="uppercase">
+      <Eyebrow color="text2" textTransform="uppercase">
         {label}
       </Eyebrow>
       {children}

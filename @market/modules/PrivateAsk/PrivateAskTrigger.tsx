@@ -1,5 +1,6 @@
 import {
   CANCEL,
+  UPDATE_SUCCESS,
   UPDATE,
   PrivateAskAction,
   APPROVE_MODULE_FOR_FILL,
@@ -33,7 +34,8 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
           <Button
             w="100%"
             onClick={() => {
-              dispatch && dispatch({ type: UPDATE })
+              // dispatch && dispatch({ type: UPDATE })
+              dispatch && dispatch({ type: UPDATE_SUCCESS })
               openModal()
             }}
           >

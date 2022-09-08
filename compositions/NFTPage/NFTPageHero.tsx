@@ -15,7 +15,7 @@ export function NFTPageHero({ ...props }: NFTPageHeroProps) {
     <Box
       w="100%"
       className={[cardImageWrapper, nftPageHero]}
-      backgroundColor="tertiary"
+      backgroundColor="background2"
       overflow="hidden"
       {...props}
     >

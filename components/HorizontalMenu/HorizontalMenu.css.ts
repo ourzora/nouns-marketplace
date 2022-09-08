@@ -1,13 +1,14 @@
 import { style } from '@vanilla-extract/css'
-import { color, space, atoms, media } from '@zoralabs/zord'
+import { color, atoms, media, typography } from '@zoralabs/zord'
 
 export const horizontalMenuButton = style([
   {
     borderRadius: 0,
     borderBottom: `2px solid transparent`,
+    lineHeight: typography.lineHeight[24],
     selectors: {
       '&.active': {
-        borderBottom: `2px solid ${color.black70}`,
+        borderBottom: `2px solid ${color.accent}`,
       },
     },
   },

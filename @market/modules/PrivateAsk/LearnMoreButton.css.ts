@@ -6,5 +6,5 @@ export const offsetY = style({
 })
 
 export const textColor = style({
-  color: vars.color.foreground.tertiary,
+  color: vars.color.accentDisabled,
 })

@@ -35,13 +35,13 @@ export function DataTableItem({
 
   return (
     <Flex justify="space-between" w="100%" {...props}>
-      <Paragraph size="sm" inline color="tertiary">
+      <Paragraph size="sm" inline color="text3">
         {children}
       </Paragraph>
 
       <Flex gap="x2" align="center">
         {showCopied && (
-          <Paragraph size="xs" color="tertiary">
+          <Paragraph size="xs" color="text3">
             Copied
           </Paragraph>
         )}
@@ -60,13 +60,7 @@ export function DataTableItem({
           {value}
 
           {url?.href && (
-            <Icon
-              display="inline"
-              id="ArrowRightAngle"
-              ml="x1"
-              top="x0"
-              color="tertiary"
-            />
+            <Icon display="inline" id="ArrowRightAngle" ml="x1" top="x0" color="text3" />
           )}
         </Paragraph>
 

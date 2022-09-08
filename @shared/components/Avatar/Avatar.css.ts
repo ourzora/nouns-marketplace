@@ -9,7 +9,7 @@ export const avatarVariants = {
     hairlineDark: style({
       selectors: {
         '&:before': {
-          boxShadow: `inset 0 0 0 1px ${vars.color.foreground.tertiary}`,
+          boxShadow: `inset 0 0 0 1px ${vars.color.accentDisabled}`,
           opacity: 0.7,
         },
       },
@@ -17,7 +17,7 @@ export const avatarVariants = {
     hairlineLight: style({
       selectors: {
         '&:before': {
-          boxShadow: `inset 0 0 0 1px ${vars.color.foreground.tertiary}`,
+          boxShadow: `inset 0 0 0 1px ${vars.color.accentDisabled}`,
           opacity: 0.3,
         },
       },
@@ -25,7 +25,7 @@ export const avatarVariants = {
     thickLight: style({
       selectors: {
         '&:before': {
-          boxShadow: `inset 0 0 0 3px ${vars.color.background.primary}`,
+          boxShadow: `inset 0 0 0 3px ${vars.color.background1}`,
         },
       },
     }),
