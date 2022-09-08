@@ -32,17 +32,16 @@ interface usePrivateAskTransactionProps {
   nft: NFTObject
   collectionAddress?: string
   tokenId?: string
-  onNext?: () => void
 }
 
 export const usePrivateAskTransaction = ({
   nft: nftData,
-  onNext,
 }: usePrivateAskTransactionProps) => {
   const { PrivateAsks } = usePrivateAskContractContext()
   const { txStatus, handleTx, txInProgress } = useContractTransaction()
   const [isSubmitting, setSubmitting] = useState<boolean>(false)
   const { setFinalizedPrivateAskDetails } = usePrivateAskStateContext()
+  const [finalizedTx, setFinalizedTx] = useState<ContractTransaction | null>()
   const [txError, setTxError] = useState<string>('')
   const { nft } = nftData
 
@@ -76,13 +75,13 @@ export const usePrivateAskTransaction = ({
       let promise: Promise<ContractTransaction>
 
       switch (txType) {
-        case CANCEL_ASK:
-          promise = PrivateAsks.cancelAsk(nft?.contract.address, nft?.tokenId)
-          break
-        case FILL_ASK:
-          promise = PrivateAsks.fillAsk(nft?.contract.address, nft?.tokenId, {
-            value: priceAsBigNumber, // optional override param actually required :)
-          })
+        case CREATE_ASK:
+          promise = PrivateAsks.createAsk(
+            nft?.contract.address,
+            nft?.tokenId,
+            priceAsBigNumber,
+            buyerAddress!
+          )
           break
         case UPDATE_ASK:
           promise = PrivateAsks.setAskPrice(
@@ -91,13 +90,13 @@ export const usePrivateAskTransaction = ({
             priceAsBigNumber
           )
           break
-        case CREATE_ASK:
-          promise = PrivateAsks.createAsk(
-            nft?.contract.address,
-            nft?.tokenId,
-            priceAsBigNumber,
-            buyerAddress!
-          )
+        case CANCEL_ASK:
+          promise = PrivateAsks.cancelAsk(nft?.contract.address, nft?.tokenId)
+          break
+        case FILL_ASK:
+          promise = PrivateAsks.fillAsk(nft?.contract.address, nft?.tokenId, {
+            value: priceAsBigNumber, // optional override param actually required :)
+          })
           break
         default:
           throw new Error('PrivateAsk txType not defined')
@@ -109,7 +108,7 @@ export const usePrivateAskTransaction = ({
         tx?.hash &&
         setFinalizedPrivateAskDetails({ price, buyerAddress, rawBuyerAddress })
 
-      tx && onNext && onNext()
+      setFinalizedTx(tx)
     } catch (err: any) {
       setTxError(err?.message || "There's been an error, please try again.")
     } finally {
@@ -118,7 +117,6 @@ export const usePrivateAskTransaction = ({
   }
 
   async function createAsk({ price, buyerAddress, rawBuyerAddress }: WriteAskTxValues) {
-    console.log('BUYER: ', buyerAddress)
     makeAskTransaction(CREATE_ASK, price, buyerAddress, rawBuyerAddress)
   }
   async function updateAsk({ price, buyerAddress, rawBuyerAddress }: WriteAskTxValues) {
@@ -141,5 +139,6 @@ export const usePrivateAskTransaction = ({
     txStatus,
     txInProgress,
     txError,
+    finalizedTx,
   }
 }

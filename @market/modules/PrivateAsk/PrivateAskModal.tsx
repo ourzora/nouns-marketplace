@@ -39,6 +39,7 @@ const componentMap = {
   [LIST]: PrivateAskListForSale,
   [APPROVE_MODULE_FOR_CREATE]: PrivateAskApproveModule,
   [APPROVE_TRANSFER]: PrivateAskApproveTransferHelper,
+  // [APPROVE_CURRENCY]: PrivateAskApproveERC20Currency, // TODO
   [CREATE]: PrivateAskCreate,
   [CREATE_SUCCESS]: PrivateAskCreateSuccess,
   [UPDATE]: PrivateAskUpdate,

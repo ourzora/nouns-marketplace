@@ -1,13 +1,14 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
+import { useAskHelper } from '@market/hooks/useAskHelper'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { PrintError } from '@shared/components/PrintError'
 import { reverseLookupAddress } from '@shared/utils/reverseLookupAddress'
 import { validateCurrency } from '@shared/utils/validateCurrency'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
 import { Field, FieldProps, Form, Formik } from 'formik'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
@@ -41,11 +42,11 @@ export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
   const { nft } = props
   const { markets } = nft
   const { ask } = useRelevantMarket(markets)
-  const { txStatus, txInProgress, txError, updateAsk } = usePrivateAskTransaction({
-    nft: nft,
-    onNext,
-  })
-  const buyerAddress = useMemo<string>(() => ask.raw.properties.buyer, [ask])
+  const { buyerAddress } = useAskHelper({ ask })
+  const { txStatus, txInProgress, txError, finalizedTx, updateAsk } =
+    usePrivateAskTransaction({ nft: nft })
+
+  useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
   return (
     // <MotionStack

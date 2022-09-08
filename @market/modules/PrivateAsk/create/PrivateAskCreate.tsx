@@ -11,8 +11,7 @@ import {
 import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
 import { Field, FieldProps, Form, Formik } from 'formik'
-import React from 'react'
-// import { usePrivateAskTransaction } from '../hooks'
+import React, { useEffect } from 'react'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
@@ -54,10 +53,9 @@ const validate = (values: Values) => {
 }
 
 export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
-  const { txStatus, txInProgress, txError, createAsk } = usePrivateAskTransaction({
-    nft: props.nft,
-    onNext,
-  })
+  const { txStatus, txInProgress, txError, createAsk, finalizedTx } =
+    usePrivateAskTransaction({ nft: props.nft })
+  useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
   return (
     // <MotionStack

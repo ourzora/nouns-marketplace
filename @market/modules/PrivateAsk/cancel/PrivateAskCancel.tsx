@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Heading, Paragraph, Stack } from '@zoralabs/zord'
 
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
@@ -8,11 +8,9 @@ import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {}
 
 export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
-  const { isSubmitting, cancelAsk, txStatus, txInProgress, txError } =
-    usePrivateAskTransaction({
-      nft: props.nft,
-      onNext,
-    })
+  const { isSubmitting, cancelAsk, txStatus, txInProgress, txError, finalizedTx } =
+    usePrivateAskTransaction({ nft: props.nft })
+  useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
   return (
     // <MotionStack

@@ -1,5 +1,5 @@
 import { Eyebrow, Flex, Paragraph, Separator, Stack } from '@zoralabs/zord'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
@@ -21,14 +21,13 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
   const { displayAskAmount, usdAskAmount, hasSufficientFunds } = useAskHelper({
     ask,
   })
-  const { txStatus, txInProgress, txError, fillAsk } = usePrivateAskTransaction({
-    nft: props.nft,
-    onNext,
-  })
+  const { txStatus, txInProgress, txError, finalizedTx, fillAsk } =
+    usePrivateAskTransaction({ nft: props.nft })
   const isDisabled = useMemo(
     () => !fillAsk || txInProgress || !hasSufficientFunds || !displayAskAmount,
     [displayAskAmount, fillAsk, hasSufficientFunds, txInProgress]
   )
+  useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
   return (
     // <MotionStack
