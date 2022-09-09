@@ -251,12 +251,12 @@ export const activityModal = style([
 ])
 
 export const filterPropertySelect = style([
-  {
+  atoms({
     display: 'flex',
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
+  }),
 ])
 
 const pill = {
@@ -378,7 +378,7 @@ export const mobileFiltersFooter = style([
   }),
 ])
 
-export const attributeBox = style([
+export const attributeSelectWrapper = style([
   {
     maxHeight: 300,
     msOverflowStyle: 'none',
