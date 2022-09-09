@@ -6,28 +6,33 @@ import { FOOTER_HEIGHT, FOOTER_HEIGHT_MOBILE } from 'styles/style-constants'
 export const footerWrapper = style([
   {
     height: FOOTER_HEIGHT_MOBILE,
-    gridTemplateColumns: '1fr',
+    gridTemplateAreas: `
+      'leftLink leftLink rightLink rightLink' 
+      'poweredBy poweredBy poweredBy poweredBy'
+    `,
     '@media': {
       [media.min1024]: {
         height: FOOTER_HEIGHT,
-        gridTemplateColumns: '1fr 1fr 1fr',
+        gridTemplateRows: '1fr',
+        gridTemplateAreas: `
+          'leftLink poweredBy poweredBy rightLink'
+          'leftLink poweredBy poweredBy rightLink'
+          `,
       },
     },
   },
   atoms({
-    marginTop: 'x8',
     w: '100%',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     px: 'x8',
+    marginTop: 'x10',
   }),
 ])
 
 const footerColVariants = {
   variant: {
     left: {
-      justifySelf: 'center',
+      gridArea: 'leftLink',
+      justifySelf: 'right',
       '@media': {
         [media.min1024]: {
           justifySelf: 'left',
@@ -35,7 +40,8 @@ const footerColVariants = {
       },
     },
     right: {
-      justifySelf: 'center',
+      gridArea: 'rightLink',
+      justifySelf: 'left',
       '@media': {
         [media.min1024]: {
           justifySelf: 'right',
@@ -49,5 +55,6 @@ export const footerCol = recipe({
   variants: footerColVariants,
   base: {
     justifySelf: 'center',
+    gridArea: 'poweredBy',
   },
 })

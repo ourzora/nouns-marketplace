@@ -9,9 +9,12 @@ export function FooterComposition() {
 
   return (
     <Grid as="footer" className={footerWrapper}>
-      <Box className={[footerCol({ variant: 'left' })]} as="a" href="/docs" passHref>
-        <Label as="a" size="lg">
+      <Box gap="x2" className={[footerCol({ variant: 'left' })]}>
+        <Label px="x4" as="a" size="lg" href="/docs" passhref>
           Docs
+        </Label>
+        <Label px="x4" as="a" size="lg" href="#">
+          About
         </Label>
       </Box>
 
@@ -20,34 +23,27 @@ export function FooterComposition() {
       </Box>
 
       <Box className={[footerCol({ variant: 'right' })]}>
-        <Flex>
-          <Flex
-            align="center"
-            p="x4"
-            gap="x2"
-            as="a"
-            href="https://twitter.com/nounsdao"
-            target="_blank"
-          >
-            <Label size="lg" rel="noreferrer">
-              Twitter
-            </Label>
-            <Icon id="ArrowRightAngle" size="sm" />
-          </Flex>
+        <Label
+          px="x4"
+          as="a"
+          href="https://twitter.com/nounsdao"
+          target="_blank"
+          size="lg"
+          rel="noreferrer"
+        >
+          Twitter
+        </Label>
 
-          <Flex
-            align="center"
-            gap="x2"
-            as="a"
-            href="https://github.com/ourzora/nouns-marketplace"
-            target="_blank"
-          >
-            <Label size="lg" rel="noreferrer">
-              GitHub
-            </Label>
-            <Icon id="ArrowRightAngle" size="sm" />
-          </Flex>
-        </Flex>
+        <Label
+          px="x4"
+          size="lg"
+          rel="noreferrer"
+          as="a"
+          href="https://github.com/ourzora/nouns-marketplace"
+          target="_blank"
+        >
+          GitHub
+        </Label>
       </Box>
     </Grid>
   )

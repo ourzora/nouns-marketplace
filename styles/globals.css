@@ -1,4 +1,9 @@
 @font-face {
+  font-family: PTRootUIWebLight;
+  src: url('/fonts/PT-Root-UI_Light.woff') format('woff');
+}
+
+@font-face {
   font-family: ptRegular;
   src: url('/fonts/PT-Root-UI_Regular.woff');
 }
@@ -20,10 +25,6 @@
 a {
   color: inherit;
   text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 :root {
