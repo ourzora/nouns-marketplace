@@ -1,5 +1,5 @@
 import { Heading, Paragraph, Stack } from '@zoralabs/zord'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { PrintError } from '@shared'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { usePrivateAskModuleApproval } from './hooks/usePrivateAskModuleApproval'
@@ -27,7 +27,7 @@ export function PrivateAskApproveModule({
   }, [isApproved, onNext])
 
   return isAwaitingApprovalCheck ? (
-    <PrivateAskCheckApprovalSpinner text="Checking Private Ask Module Approval" />
+    <PrivateAskCheckApprovalSpinner text="Checking Private Ask Module Approval..." />
   ) : (
     <Stack gap="x6">
       <Stack gap="x2">

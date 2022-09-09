@@ -5,6 +5,6 @@ export const offsetY = style({
   transform: 'translateY(1px)',
 })
 
-export const textColor = style({
-  color: vars.color.accentDisabled,
-})
+// export const textColor = style({
+//   color: vars.color.accentDisabled,
+// })

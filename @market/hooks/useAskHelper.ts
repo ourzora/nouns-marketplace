@@ -11,7 +11,7 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
   const buyerAddress = useMemo(() => ask?.raw?.properties?.buyer, [ask])
   const isPrivateAsk = useMemo(() => buyerAddress || false, [buyerAddress])
   const isActiveAsk = useMemo(
-    () => (ask && ask.status === MARKET_INFO_STATUSES.ACTIVE) || false,
+    () => ask?.status === MARKET_INFO_STATUSES.ACTIVE || false,
     [ask]
   )
   const hasActivePrivateAsk = useMemo(
@@ -23,10 +23,7 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
     [ask]
   )
   const hasAsk = useMemo(() => ask !== undefined, [ask])
-  const hasRelevantAsk = useMemo(
-    () => hasAsk && (isCompletedAsk || isActiveAsk),
-    [hasAsk, isActiveAsk, isCompletedAsk]
-  )
+  const hasRelevantAsk = useMemo(() => hasAsk && isActiveAsk, [hasAsk, isActiveAsk])
 
   const rawAskAmount = useMemo(() => ask?.amount?.amount.raw.toString(), [ask])
   const displayAskAmount = useMemo(() => ask?.amount?.amount.value.toString(), [ask])

@@ -1,4 +1,12 @@
-import React, { createContext, useContext, useMemo, useReducer, useState } from 'react'
+import { useToggle } from '@shared/hooks/useToggle'
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useReducer,
+  useState,
+} from 'react'
 interface PrivateAskProps {
   children: React.ReactNode
 }
@@ -85,6 +93,10 @@ export interface PrivateAskProviderState {
   dispatch: React.Dispatch<PrivateAskAction>
   finalizedPrivateAskDetails?: PrivateAskTxDetails
   setFinalizedPrivateAskDetails: (value: PrivateAskTxDetails) => void
+  isModalOpen: boolean
+  handleNext: () => void
+  handleClose: () => void
+  toggleModalOpen: () => void
 }
 
 export const PrivateAskStateContext = createContext<PrivateAskProviderState>({
@@ -92,21 +104,55 @@ export const PrivateAskStateContext = createContext<PrivateAskProviderState>({
   dispatch: (_action: PrivateAskAction) => {},
   finalizedPrivateAskDetails: undefined,
   setFinalizedPrivateAskDetails: (_value: PrivateAskTxDetails) => {},
+  isModalOpen: false,
+  handleNext: () => {},
+  handleClose: () => {},
+  toggleModalOpen: () => {},
 } as PrivateAskProviderState)
 
 export function PrivateAskStateProvider({ children }: PrivateAskProps) {
+  const [isModalOpen, toggleModalOpen] = useToggle()
+
   const [state, dispatch] = useReducer(reducer, initialState)
   const [finalizedPrivateAskDetails, setFinalizedPrivateAskDetails] = useState<
     PrivateAskTxDetails | undefined
   >(undefined)
 
+  const next = state.next as string | undefined
+
+  const handleNext = useCallback(() => {
+    console.log('HANDLE NEXT')
+
+    if (next) {
+      if (dispatch) {
+        dispatch({ type: next })
+      }
+    } else {
+      toggleModalOpen(false)
+      if (dispatch) dispatch({ type: RESET })
+    }
+  }, [dispatch, next, toggleModalOpen])
+
+  const handleClose = useCallback(() => toggleModalOpen(), [toggleModalOpen])
+
   const value = useMemo(
     () => ({
       state,
+      isModalOpen,
+      handleNext,
+      handleClose,
+      toggleModalOpen,
       finalizedPrivateAskDetails,
       setFinalizedPrivateAskDetails,
     }),
-    [finalizedPrivateAskDetails, state, setFinalizedPrivateAskDetails]
+    [
+      state,
+      isModalOpen,
+      handleNext,
+      handleClose,
+      toggleModalOpen,
+      finalizedPrivateAskDetails,
+    ]
   )
 
   return (

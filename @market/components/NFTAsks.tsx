@@ -1,9 +1,10 @@
 import { useMemo } from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
-import { ListV3AskModal, FillV3AskModal } from '@market/components'
+import { FillV3AskModal } from '@market/components'
 import { FlexProps } from '@zoralabs/zord'
 import { PrivateAskSidebar } from '@market/modules/PrivateAsk/PrivateAskSidebar'
+import { UniversalListAskModal } from '@market/modules/PrivateAsk/UniversalListAskModal'
 
 export interface NFTAskProps extends FlexProps {
   nftData: NFTObject
@@ -16,6 +17,7 @@ export function NFTAsks({ nftData, ...props }: NFTAskProps) {
 
   const marketComponent = useMemo(() => {
     if (hasRelevantAsk) {
+      // MANAGE ASKS
       return isPrivateAsk ? (
         <PrivateAskSidebar nft={nftData} />
       ) : (
@@ -24,8 +26,9 @@ export function NFTAsks({ nftData, ...props }: NFTAskProps) {
     } else {
       return (
         <>
-          <PrivateAskSidebar nft={nftData} />
-          <ListV3AskModal nftData={nftData} {...props} />
+          <UniversalListAskModal nftData={nftData} />
+          {/* <PrivateAskSidebar nft={nftData} /> */}
+          {/* <ListV3AskModal nftData={nftData} {...props} /> */}
         </>
       )
     }

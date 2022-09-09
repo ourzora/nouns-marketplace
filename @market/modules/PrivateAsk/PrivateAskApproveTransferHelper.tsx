@@ -29,7 +29,7 @@ export function PrivateAskApproveTransferHelper({
   }, [isApproved, onNext])
 
   return isAwaitingApprovalCheck ? (
-    <PrivateAskCheckApprovalSpinner text="Checking Zora Transfer Helper Approval" />
+    <PrivateAskCheckApprovalSpinner text="Checking Zora Transfer Helper Approval..." />
   ) : (
     <Stack gap="x6">
       <Stack gap="x2">

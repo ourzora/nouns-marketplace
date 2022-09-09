@@ -5,6 +5,8 @@ import {
   PrivateAskAction,
   APPROVE_MODULE_FOR_FILL,
   useFormattedPrivateAskInfo,
+  APPROVE_TRANSFER,
+  usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Button, Separator, Stack, Well } from '@zoralabs/zord'
@@ -14,13 +16,41 @@ import { useRelevantMarket, useAskHelper } from '@market/hooks'
 import { DataTable, useIsOwner } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 
+// import {
+//   APPROVE_MODULE_FOR_FILL,
+//   APPROVE_MODULE_FOR_CREATE,
+//   APPROVE_TRANSFER,
+//   CREATE,
+//   CREATE_SUCCESS,
+//   UPDATE,
+//   UPDATE_SUCCESS,
+//   LIST,
+//   RESET,
+//   CANCEL,
+//   CANCEL_SUCCESS,
+//   FILLASK,
+//   FILLASK_SUCCESS,
+//   usePrivateAskStateContext,
+// } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
+
 interface PrivateAskTriggerProps {
   nft: NFTObject
   openModal: () => void
-  dispatch: React.Dispatch<PrivateAskAction>
+  // dispatch: React.Dispatch<PrivateAskAction>
 }
 
-export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTriggerProps) {
+export function PrivateAskTrigger({
+  nft,
+  openModal,
+}: // openModal, dispatch
+PrivateAskTriggerProps) {
+  const {
+    // state,
+    dispatch,
+    // handleNext,
+    // handleClose,
+    // isModalOpen, toggleModalOpen
+  } = usePrivateAskStateContext()
   const { ask } = useRelevantMarket(nft.markets)
   const { hasActivePrivateAsk, displayAskAmount, usdAskAmount, isValidPrivateAskBuyer } =
     useAskHelper({ ask })
@@ -34,9 +64,11 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
           <Button
             w="100%"
             onClick={() => {
-              // dispatch && dispatch({ type: UPDATE })
-              dispatch && dispatch({ type: UPDATE_SUCCESS })
+              dispatch && dispatch({ type: UPDATE })
+              // dispatch && dispatch({ type: UPDATE_SUCCESS })
+              // dispatch && dispatch({ type: APPROVE_TRANSFER })
               openModal()
+              // toggleModalOpen()
             }}
           >
             Update Private Listing
@@ -47,6 +79,7 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
             onClick={() => {
               dispatch && dispatch({ type: CANCEL })
               openModal()
+              // toggleModalOpen()
             }}
           >
             Cancel Private Listing
@@ -77,6 +110,7 @@ export function PrivateAskTrigger({ nft, openModal, dispatch }: PrivateAskTrigge
           w="100%"
           onClick={() => {
             dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL })
+            // toggleModalOpen()
             openModal()
           }}
         >

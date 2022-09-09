@@ -15,6 +15,7 @@ import {
 import * as styles from './PrivateAskFlow.css'
 import { LearnMoreButton } from './LearnMoreButton'
 import { CommonPrivateAskComponentProps } from './PrivateAskModal'
+import { SaleTypeButton } from './SaleTypeButton'
 
 interface PrivateAskListForSaleProps extends CommonPrivateAskComponentProps {}
 
@@ -32,11 +33,24 @@ export function PrivateAskListForSale({ onNext, ...props }: PrivateAskListForSal
       <Stack gap="x2">
         <Eyebrow>Sale type</Eyebrow>
 
+        <SaleTypeButton
+          label="Fixed Price"
+          description="Sell for a fixed price. Anyone can buy the NFT."
+          tag="New"
+          onNext={onNext}
+        />
+        <SaleTypeButton
+          label="Private Listing"
+          description="Sell to a specific buyer. It's like an escrow contract but much better."
+          tag="New"
+          onNext={onNext}
+        />
+        {/* 
         <Button className={styles.button} variant="unset" align="center" onClick={onNext}>
           <Well display="grid" className={styles.grid}>
             <Stack gap="x1">
               <Flex gap="x2" justify="flex-start" align="flex-start">
-                <Label align="left">Create a Private Listing</Label>
+                <Label align="left">Create a Public Listing</Label>
                 <Tag className={styles.offsetY}>New</Tag>
               </Flex>
               <Paragraph className={styles.textColor} size="sm" align="left">
@@ -50,6 +64,25 @@ export function PrivateAskListForSale({ onNext, ...props }: PrivateAskListForSal
             </Flex>
           </Well>
         </Button>
+
+        <Button className={styles.button} variant="unset" align="center" onClick={onNext}>
+          <Well display="grid" className={styles.grid}>
+            <Stack gap="x1">
+              <Flex gap="x2" justify="flex-start" align="flex-start">
+                <Label align="left">Private Listing</Label>
+                <Tag className={styles.offsetY}>New</Tag>
+              </Flex>
+              <Paragraph className={styles.textColor} size="sm" align="left">
+                Sell to a specific buyer. It&apos;s like an escrow contract but much
+                better
+              </Paragraph>
+            </Stack>
+
+            <Flex w="x13" justify="flex-end" align="center">
+              <Icon id="ChevronRight" color="icon2" size="md" />
+            </Flex>
+          </Well>
+        </Button> */}
       </Stack>
 
       <LearnMoreButton
