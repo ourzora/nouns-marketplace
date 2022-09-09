@@ -35,6 +35,8 @@ export function formatContractError(error: TransactionError | Error) {
   }
 
   switch (error?.message) {
+    case 'Connector not found':
+      return 'You must connect your wallet to place a bid'
     case 'MetaMask Tx Signature: User denied transaction signature.':
       return 'Transaction rejected. If this was a mistake, try again.'
   }
