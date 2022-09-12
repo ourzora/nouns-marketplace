@@ -103,7 +103,6 @@ globalStyle(`${pSelector} em`, {
 
 globalStyle(`${pSelector} code`, {
   padding: `${space.x1} ${space.x2}`,
-  // backgroundColor: color.black5,
   backgroundColor: color.background2,
   borderRadius: radii.small,
 })

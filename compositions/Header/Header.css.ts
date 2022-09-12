@@ -9,7 +9,7 @@ export const headerWrapper = style([
     alignItems: 'center',
     gridTemplateColumns: 'repeat(2, 1fr)',
     gridTemplateRows: 'auto',
-    borderBottom: `2px solid ${color.black10}`,
+    borderBottom: `2px solid ${color.background2}`,
     '@media': {
       [media.min1024]: {
         height: HEADER_HEIGHT,

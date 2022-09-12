@@ -5,13 +5,13 @@ export const tabsButton = style([
   {
     all: 'unset',
     fontFamily: 'inherit',
-    backgroundColor: `${color.white100}`,
+    backgroundColor: `${color.background1}`,
     padding: '20px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 20,
-    color: vars.color.text.secondary,
+    color: vars.color.text2,
     cursor: 'pointer',
     zIndex: 3,
     width: '100%',
@@ -20,10 +20,10 @@ export const tabsButton = style([
     selectors: {
       '&:first-child': { borderTopLeftRadius: 40 },
       '&:last-child': { borderTopRightRadius: 40 },
-      '&:hover': { borderBottom: `2px solid ${color.black30}` },
+      '&:hover': { borderBottom: `2px solid ${color.accentActive}` },
       '&[data-state="active"]': {
-        color: vars.color.text.primary,
-        borderBottom: `2px solid ${color.black70}`,
+        color: vars.color.text1,
+        borderBottom: `2px solid ${color.neutralActive}`,
       },
     },
   },
@@ -31,7 +31,7 @@ export const tabsButton = style([
 
 export const tabsList = style([
   {
-    borderBottom: `2px solid ${color.black10}`,
+    borderBottom: `2px solid ${color.background2}`,
     zIndex: 4,
   },
   atoms({
@@ -42,7 +42,7 @@ export const tabsList = style([
 ])
 
 export const label = style({
-  color: vars.color.text.primary,
+  color: vars.color.text1,
 })
 
 export const collectionTrigger = style([

@@ -19,7 +19,7 @@ export const linkButton = style([
 export const errorBox = style([
   {
     textAlign: 'start',
-    backgroundColor: color.black10,
+    backgroundColor: color.background2,
   },
   atoms({
     w: '100%',
