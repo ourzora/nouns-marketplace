@@ -22,6 +22,7 @@ export const poweredByContainer = style([
     marginTop: '30px',
     '@media': {
       [media.min1024]: {
+        marginTop: 0,
         flexDirection: 'row',
         flexFlow: 'row-reverse',
       },

@@ -1,7 +1,12 @@
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 import { atoms, media } from '@zoralabs/zord'
-import { FOOTER_HEIGHT, FOOTER_HEIGHT_MOBILE } from 'styles/style-constants'
+import { FOOTER_HEIGHT, FOOTER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
+
+export const footerWrap = style({
+  margin: '0 auto',
+  maxWidth: MAX_WIDTH.LG,
+})
 
 export const footerWrapper = style([
   {
@@ -10,6 +15,8 @@ export const footerWrapper = style([
       'leftLink leftLink rightLink rightLink' 
       'poweredBy poweredBy poweredBy poweredBy'
     `,
+    // strictly by design
+    borderTop: `2px solid #F2F2F2`,
     '@media': {
       [media.min1024]: {
         height: FOOTER_HEIGHT,
@@ -23,7 +30,6 @@ export const footerWrapper = style([
   },
   atoms({
     w: '100%',
-    px: 'x8',
     marginTop: 'x10',
   }),
 ])
@@ -33,6 +39,7 @@ const footerColVariants = {
     left: {
       gridArea: 'leftLink',
       justifySelf: 'right',
+      paddingTop: '20px',
       '@media': {
         [media.min1024]: {
           justifySelf: 'left',
@@ -42,6 +49,7 @@ const footerColVariants = {
     right: {
       gridArea: 'rightLink',
       justifySelf: 'left',
+      paddingTop: '20px',
       '@media': {
         [media.min1024]: {
           justifySelf: 'right',
@@ -56,5 +64,11 @@ export const footerCol = recipe({
   base: {
     justifySelf: 'center',
     gridArea: 'poweredBy',
+    paddingTop: '0px',
+    '@media': {
+      [media.min1024]: {
+        paddingTop: '60px',
+      },
+    },
   },
 })
