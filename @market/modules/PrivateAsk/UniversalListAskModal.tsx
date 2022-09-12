@@ -11,9 +11,12 @@ export interface UniversalAskModalProps extends FlexProps {
   nftObj: NFTObject
 }
 
-export function UniversalListAskModal({ nftObj, ...props }: UniversalAskModalProps) {
+export function UniversalListAskModal({
+  nftObj,
+  className,
+  ...props
+}: UniversalAskModalProps) {
   const { nft } = nftObj
-  const { isOwner } = useIsOwner(nftObj)
   const { requestClose } = useModal()
 
   if (!nft) {
@@ -22,29 +25,30 @@ export function UniversalListAskModal({ nftObj, ...props }: UniversalAskModalPro
 
   return (
     <PrivateAskStateProvider>
-      <Stack {...props} flex="1" justify="flex-end">
-        {isOwner ? (
-          <ModalComposition
-            modalName={`list-${nft.tokenId}${nft.contract.address}`}
-            trigger={
-              <Button
-                as="span"
-                size="md"
-                borderRadius="curved"
-                className="zora-market-cardMarketTrigger"
-              >
-                List
-              </Button>
-            }
-            content={
-              <Box p="x8">
-                <SelectListFlow nftObj={nftObj} closeModal={requestClose} />
-              </Box>
-            }
-          />
-        ) : (
-          <NFTOwner address={nft?.owner?.address} align="left" />
-        )}
+      <Stack
+        {...props}
+        flex="1"
+        justify="flex-end"
+        className={['zora-universal-list-ask-modal', className]}
+      >
+        <ModalComposition
+          modalName={`list-${nft.tokenId}${nft.contract.address}`}
+          trigger={
+            <Button
+              as="span"
+              size="md"
+              borderRadius="curved"
+              className="zora-market-cardMarketTrigger"
+            >
+              List
+            </Button>
+          }
+          content={
+            <Box p="x8">
+              <SelectListFlow nftObj={nftObj} closeModal={requestClose} />
+            </Box>
+          }
+        />
       </Stack>
     </PrivateAskStateProvider>
   )

@@ -68,8 +68,6 @@ function PrivateAskFlowWithState({ header, nft }: PrivateAskModalProps) {
   const { state, handleNext } = usePrivateAskStateContext()
   const Component = componentMap[state.status]
 
-  console.log('STATE', state.status)
-
   return (
     <Stack justify="center">
       <Flex justify="center" mb="x4" mt="x1" width="100%">

@@ -1,11 +1,13 @@
 import React, { useCallback } from 'react'
+import clsx from 'clsx'
 import { PrivateAskTrigger } from './PrivateAskTrigger'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Box, StackProps } from '@zoralabs/zord'
+import { Modal, ModalContent, StackProps } from '@zoralabs/zord'
 
 import { PrivateAskFlow } from './PrivateAskFlow'
-import { ModalComposition, useModal } from '@modal'
+import { useModal } from '@modal'
 import { PrivateAskStateProvider } from './providers/PrivateAskStateProvider'
+import * as styles from './PrivateAskModal.css'
 
 interface PrivateAskModalProps {
   header: React.ReactNode
@@ -19,11 +21,13 @@ export interface CommonPrivateAskComponentProps extends StackProps {
   handleClose?: () => void
 }
 
-export function PrivateAskModal({ header, nftObj, modalName }: PrivateAskModalProps) {
-  const {
-    // requestClose,
-    requestOpen,
-  } = useModal()
+export function PrivateAskModal({
+  header,
+  nftObj,
+  modalName,
+}: // open
+PrivateAskModalProps) {
+  const { modalType, requestClose, requestOpen } = useModal()
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
   }, [modalName, requestOpen])
@@ -35,15 +39,15 @@ export function PrivateAskModal({ header, nftObj, modalName }: PrivateAskModalPr
 
   return (
     <PrivateAskStateProvider>
-      <ModalComposition
-        modalName={`list-${nft.tokenId}${nft.contract.address}`}
+      <Modal
+        open={modalType === modalName}
+        onOpenChange={requestClose}
         trigger={<PrivateAskTrigger nft={nftObj} openModal={modalHandler} />}
-        content={
-          <Box p="x8">
-            <PrivateAskFlow header={header} nft={nftObj} />
-          </Box>
-        }
-      />
+      >
+        <ModalContent className={clsx(styles.content, styles.modalBackground)}>
+          <PrivateAskFlow header={header} nft={nftObj} />
+        </ModalContent>
+      </Modal>
     </PrivateAskStateProvider>
   )
 }

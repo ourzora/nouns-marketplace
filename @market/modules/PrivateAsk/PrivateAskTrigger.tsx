@@ -1,13 +1,9 @@
 import {
   CANCEL,
-  UPDATE_SUCCESS,
   UPDATE,
-  PrivateAskAction,
   APPROVE_MODULE_FOR_FILL,
   useFormattedPrivateAskInfo,
-  APPROVE_TRANSFER,
   usePrivateAskStateContext,
-  PrivateAskStateProvider,
 } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Button, Separator, Stack, Well } from '@zoralabs/zord'
@@ -17,40 +13,13 @@ import { useRelevantMarket, useAskHelper } from '@market/hooks'
 import { DataTable, useIsOwner } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 
-// import {
-//   APPROVE_MODULE_FOR_FILL,
-//   APPROVE_MODULE_FOR_CREATE,
-//   APPROVE_TRANSFER,
-//   CREATE,
-//   CREATE_SUCCESS,
-//   UPDATE,
-//   UPDATE_SUCCESS,
-//   LIST,
-//   RESET,
-//   CANCEL,
-//   CANCEL_SUCCESS,
-//   FILLASK,
-//   FILLASK_SUCCESS,
-//   usePrivateAskStateContext,
-// } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
-
 interface PrivateAskTriggerProps {
   nft: NFTObject
   openModal: () => void
-  // dispatch: React.Dispatch<PrivateAskAction>
 }
 
 function PrivateAskTriggerWithState({ nft, openModal }: PrivateAskTriggerProps) {
-  const {
-    state,
-    dispatch,
-    // handleNext,
-    // handleClose,
-    // isModalOpen, toggleModalOpen
-  } = usePrivateAskStateContext()
-
-  console.log('state.status', state.status)
-
+  const { dispatch } = usePrivateAskStateContext()
   const { ask } = useRelevantMarket(nft.markets)
   const { hasActivePrivateAsk, displayAskAmount, usdAskAmount, isValidPrivateAskBuyer } =
     useAskHelper({ ask })
@@ -117,9 +86,5 @@ function PrivateAskTriggerWithState({ nft, openModal }: PrivateAskTriggerProps) 
 }
 
 export function PrivateAskTrigger({ nft, openModal }: PrivateAskTriggerProps) {
-  return (
-    // <PrivateAskStateProvider>
-    <PrivateAskTriggerWithState nft={nft} openModal={openModal} />
-    // </PrivateAskStateProvider>
-  )
+  return <PrivateAskTriggerWithState nft={nft} openModal={openModal} />
 }
