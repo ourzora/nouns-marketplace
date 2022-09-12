@@ -7,15 +7,15 @@ import { useRelevantMarket } from '@market/hooks'
 import { FillV3AskWizard, NFTOwner } from '@market/components'
 
 export interface FillV3AskModalProps extends FlexProps {
-  nftData: NFTObject
+  nftObj: NFTObject
 }
 
-export function FillV3AskModal({ nftData, ...props }: FillV3AskModalProps) {
-  const { nft, metadata, markets } = nftData
+export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
+  const { nft, metadata, markets } = nftObj
   const { ask } = useRelevantMarket(markets)
 
   const { requestClose } = useModal()
-  const { isOwner } = useIsOwner(nftData)
+  const { isOwner } = useIsOwner(nftObj)
 
   if (!nft || !metadata || ask?.status === MARKET_INFO_STATUSES.INVALID) {
     return null
@@ -63,7 +63,7 @@ export function FillV3AskModal({ nftData, ...props }: FillV3AskModalProps) {
                       tokenName={metadata.name}
                       askCurrency={ask.amount.address}
                       askPrice={ask.amount.amount.raw}
-                      nftData={nftData}
+                      nftObj={nftObj}
                       onClose={requestClose}
                       cancelButton={
                         <Button

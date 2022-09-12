@@ -17,7 +17,7 @@ type PrivateAskTxDetails = {
   rawBuyerAddress: string
 }
 
-export const LIST: string = 'listForSale'
+// export const LIST: string = 'listForSale'
 export const APPROVE_MODULE_FOR_CREATE: string = 'approveModuleForSale'
 export const APPROVE_MODULE_FOR_FILL: string = 'approveModuleForFill'
 export const APPROVE_TRANSFER: string = 'approveTransferHelper'
@@ -32,9 +32,13 @@ export const FILLASK_SUCCESS: string = 'fillPrivateAskSuccess'
 export const RESET: string = 'resetPrivateAsk'
 
 export const initialState = {
-  next: APPROVE_MODULE_FOR_CREATE,
-  status: LIST,
+  next: APPROVE_TRANSFER,
+  status: APPROVE_MODULE_FOR_CREATE,
 }
+// export const initialState = {
+//   next: APPROVE_MODULE_FOR_CREATE,
+//   status: LIST,
+// }
 
 interface State {
   next?: string
@@ -42,7 +46,7 @@ interface State {
 }
 
 export type PrivateAskAction =
-  | { type: typeof LIST }
+  // | { type: typeof LIST }
   | { type: typeof APPROVE_MODULE_FOR_CREATE }
   | { type: typeof APPROVE_TRANSFER }
   | { type: typeof CREATE }
@@ -59,10 +63,11 @@ export type PrivateAskAction =
 export function reducer(_state: State, action: PrivateAskAction): State {
   switch (action.type) {
     case RESET:
-    case LIST:
-      return initialState
+    // case LIST:
+    //   return initialState
     case APPROVE_MODULE_FOR_CREATE:
-      return { status: APPROVE_MODULE_FOR_CREATE, next: APPROVE_TRANSFER }
+      return initialState
+    // return { status: APPROVE_MODULE_FOR_CREATE, next: APPROVE_TRANSFER }
     case APPROVE_TRANSFER:
       return { status: APPROVE_TRANSFER, next: CREATE }
     case CREATE:
@@ -121,8 +126,6 @@ export function PrivateAskStateProvider({ children }: PrivateAskProps) {
   const next = state.next as string | undefined
 
   const handleNext = useCallback(() => {
-    console.log('HANDLE NEXT')
-
     if (next) {
       if (dispatch) {
         dispatch({ type: next })

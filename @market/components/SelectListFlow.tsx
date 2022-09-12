@@ -1,27 +1,11 @@
 import React, { useState } from 'react'
-import {
-  Button,
-  Eyebrow,
-  Flex,
-  Icon,
-  Label,
-  Paragraph,
-  Stack,
-  Tag,
-  Well,
-} from '@zoralabs/zord'
+import { Button, Eyebrow, Stack } from '@zoralabs/zord'
 import { SaleTypeButton } from '@market/modules/PrivateAsk/SaleTypeButton'
 import { LearnMoreButton } from '@market/modules'
 import { PrivateAskFlow } from '@market/modules/PrivateAsk/PrivateAskFlow'
 import { ListV3AskWizard } from './ListV3AskWizard'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { NounsGlasses } from 'components/NounsGlasses'
-// import { MotionStack } from '@shared'
-
-// import * as styles from './PrivateAskFlow.css'
-// import { LearnMoreButton } from './LearnMoreButton'
-// import { CommonPrivateAskComponentProps } from './PrivateAskModal'
-// import { SaleTypeButton } from './SaleTypeButton'
 
 export const V3_ASK_LISTING: string = 'V3Ask'
 export const PRIVATE_ASK_LISTING: string = 'PrivateAsk'
@@ -30,12 +14,12 @@ export type ListForSaleFlow = typeof V3_ASK_LISTING | typeof PRIVATE_ASK_LISTING
 
 interface SelectListFlowProps {
   closeModal?: () => void
-  nftData: NFTObject
+  nftObj: NFTObject
 }
 
-export function SelectListFlow({ nftData, closeModal, ...props }: SelectListFlowProps) {
+export function SelectListFlow({ nftObj, closeModal, ...props }: SelectListFlowProps) {
   const [flow, setFlow] = useState<ListForSaleFlow | null>(null)
-  const { nft, media } = nftData
+  const { nft, media } = nftObj
 
   if (!nft) {
     return null
@@ -82,6 +66,6 @@ export function SelectListFlow({ nftData, closeModal, ...props }: SelectListFlow
       }
     />
   ) : (
-    <PrivateAskFlow header={<NounsGlasses w="x13" mb="x4" mt="x1" />} nft={nftData} />
+    <PrivateAskFlow header={<NounsGlasses w="x13" mb="x4" mt="x1" />} nft={nftObj} />
   )
 }

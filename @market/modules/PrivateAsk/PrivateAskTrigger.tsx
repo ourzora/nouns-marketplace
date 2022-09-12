@@ -7,6 +7,7 @@ import {
   useFormattedPrivateAskInfo,
   APPROVE_TRANSFER,
   usePrivateAskStateContext,
+  PrivateAskStateProvider,
 } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Button, Separator, Stack, Well } from '@zoralabs/zord'
@@ -39,18 +40,17 @@ interface PrivateAskTriggerProps {
   // dispatch: React.Dispatch<PrivateAskAction>
 }
 
-export function PrivateAskTrigger({
-  nft,
-  openModal,
-}: // openModal, dispatch
-PrivateAskTriggerProps) {
+function PrivateAskTriggerWithState({ nft, openModal }: PrivateAskTriggerProps) {
   const {
-    // state,
+    state,
     dispatch,
     // handleNext,
     // handleClose,
     // isModalOpen, toggleModalOpen
   } = usePrivateAskStateContext()
+
+  console.log('state.status', state.status)
+
   const { ask } = useRelevantMarket(nft.markets)
   const { hasActivePrivateAsk, displayAskAmount, usdAskAmount, isValidPrivateAskBuyer } =
     useAskHelper({ ask })
@@ -65,10 +65,7 @@ PrivateAskTriggerProps) {
             w="100%"
             onClick={() => {
               dispatch && dispatch({ type: UPDATE })
-              // dispatch && dispatch({ type: UPDATE_SUCCESS })
-              // dispatch && dispatch({ type: APPROVE_TRANSFER })
               openModal()
-              // toggleModalOpen()
             }}
           >
             Update Private Listing
@@ -79,7 +76,6 @@ PrivateAskTriggerProps) {
             onClick={() => {
               dispatch && dispatch({ type: CANCEL })
               openModal()
-              // toggleModalOpen()
             }}
           >
             Cancel Private Listing
@@ -110,7 +106,6 @@ PrivateAskTriggerProps) {
           w="100%"
           onClick={() => {
             dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL })
-            // toggleModalOpen()
             openModal()
           }}
         >
@@ -118,5 +113,13 @@ PrivateAskTriggerProps) {
         </Button>
       </Well>
     )
+  )
+}
+
+export function PrivateAskTrigger({ nft, openModal }: PrivateAskTriggerProps) {
+  return (
+    // <PrivateAskStateProvider>
+    <PrivateAskTriggerWithState nft={nft} openModal={openModal} />
+    // </PrivateAskStateProvider>
   )
 }

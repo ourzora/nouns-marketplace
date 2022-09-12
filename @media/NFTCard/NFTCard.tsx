@@ -80,7 +80,7 @@ export function NFTCard() {
           </Link>
         </Flex>
         <Separator mt="x1" />
-        <NFTCardMarket nftData={data} />
+        <NFTCardMarket nftObj={data} />
       </Stack>
     </Stack>
   )

@@ -32,7 +32,7 @@ export function NFTMarket({ contractAddress, tokenId, nft }: NFTMarketProps) {
   ) : (
     <NFTAsks
       className={nftMarketWrapper}
-      nftData={nft}
+      nftObj={nft}
       p="x4"
       align="flex-start"
       direction="column"

@@ -35,7 +35,7 @@ interface usePrivateAskTransactionProps {
 }
 
 export const usePrivateAskTransaction = ({
-  nft: nftData,
+  nft: nftObj,
 }: usePrivateAskTransactionProps) => {
   const { PrivateAsks } = usePrivateAskContractContext()
   const { txStatus, handleTx, txInProgress } = useContractTransaction()
@@ -43,7 +43,7 @@ export const usePrivateAskTransaction = ({
   const { setFinalizedPrivateAskDetails } = usePrivateAskStateContext()
   const [finalizedTx, setFinalizedTx] = useState<ContractTransaction | null>()
   const [txError, setTxError] = useState<string>('')
-  const { nft } = nftData
+  const { nft } = nftObj
 
   async function makeAskTransaction(
     txType: PrivateAskTransaction,

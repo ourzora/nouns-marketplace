@@ -7,32 +7,34 @@ import { PrivateAskSidebar } from '@market/modules/PrivateAsk/PrivateAskSidebar'
 import { UniversalListAskModal } from '@market/modules/PrivateAsk/UniversalListAskModal'
 
 export interface NFTAskProps extends FlexProps {
-  nftData: NFTObject
+  nftObj: NFTObject
 }
 
-export function NFTAsks({ nftData, ...props }: NFTAskProps) {
-  const { markets } = nftData
+export function NFTAsks({ nftObj, ...props }: NFTAskProps) {
+  const { markets } = nftObj
   const { ask } = useRelevantMarket(markets)
   const { hasRelevantAsk, isPrivateAsk } = useAskHelper({ ask })
+
+  console.log('hasRelevantAsk', hasRelevantAsk)
 
   const marketComponent = useMemo(() => {
     if (hasRelevantAsk) {
       // MANAGE ASKS
       return isPrivateAsk ? (
-        <PrivateAskSidebar nft={nftData} />
+        <PrivateAskSidebar nftObj={nftObj} />
       ) : (
-        <FillV3AskModal nftData={nftData} {...props} />
+        <FillV3AskModal nftObj={nftObj} {...props} />
       )
     } else {
       return (
         <>
-          <UniversalListAskModal nftData={nftData} />
-          {/* <PrivateAskSidebar nft={nftData} /> */}
-          {/* <ListV3AskModal nftData={nftData} {...props} /> */}
+          <UniversalListAskModal nftObj={nftObj} />
+          {/* <PrivateAskSidebar nft={nftObj} /> */}
+          {/* <ListV3AskModal nftObj={nftObj} {...props} /> */}
         </>
       )
     }
-  }, [hasRelevantAsk, isPrivateAsk, nftData, props])
+  }, [hasRelevantAsk, isPrivateAsk, nftObj, props])
 
-  return nftData ? marketComponent : null
+  return nftObj ? marketComponent : null
 }

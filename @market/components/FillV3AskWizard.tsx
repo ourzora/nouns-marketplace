@@ -18,7 +18,7 @@ export type FillV3AskWizardProps = {
   askCurrency: string
   previewURL?: string
   marketSummary: any
-  nftData?: any
+  nftObj?: any
   onClose?: () => void
   cancelButton?: JSX.Element
 }

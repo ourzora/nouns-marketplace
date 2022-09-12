@@ -8,7 +8,6 @@ import {
   CREATE_SUCCESS,
   UPDATE,
   UPDATE_SUCCESS,
-  LIST,
   RESET,
   CANCEL,
   CANCEL_SUCCESS,
@@ -16,7 +15,6 @@ import {
   FILLASK_SUCCESS,
   usePrivateAskStateContext,
   PrivateAskStateProvider,
-  // PrivateAskStateProvider,
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
 import { PrivateAskApproveTransferHelper } from './PrivateAskApproveTransferHelper'
@@ -38,7 +36,7 @@ import { BoxProps, Flex, Modal, ModalContent, Stack, StackProps } from '@zoralab
 // import * as styles from './PrivateAskModal.css'
 
 const componentMap = {
-  [LIST]: PrivateAskListForSale,
+  // [LIST]: PrivateAskListForSale,
   [APPROVE_MODULE_FOR_CREATE]: PrivateAskApproveModule,
   [APPROVE_TRANSFER]: PrivateAskApproveTransferHelper,
   // [APPROVE_CURRENCY]: PrivateAskApproveERC20Currency, // TODO
@@ -69,6 +67,9 @@ export interface CommonPrivateAskComponentProps extends StackProps {
 function PrivateAskFlowWithState({ header, nft }: PrivateAskModalProps) {
   const { state, handleNext } = usePrivateAskStateContext()
   const Component = componentMap[state.status]
+
+  console.log('STATE', state.status)
+
   return (
     <Stack justify="center">
       <Flex justify="center" mb="x4" mt="x1" width="100%">
@@ -89,8 +90,8 @@ function PrivateAskFlowWithState({ header, nft }: PrivateAskModalProps) {
 
 export function PrivateAskFlow({ header, nft }: PrivateAskModalProps) {
   return (
-    <PrivateAskStateProvider>
-      <PrivateAskFlowWithState header={header} nft={nft} />
-    </PrivateAskStateProvider>
+    // <PrivateAskStateProvider>
+    <PrivateAskFlowWithState header={header} nft={nft} />
+    //</PrivateAskStateProvider>
   )
 }

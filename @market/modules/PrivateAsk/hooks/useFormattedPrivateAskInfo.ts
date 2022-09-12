@@ -10,10 +10,10 @@ interface PrivateAskInfoProps {
   nft: NFTObject
 }
 
-export const useFormattedPrivateAskInfo = ({ nft: nftData }: PrivateAskInfoProps) => {
+export const useFormattedPrivateAskInfo = ({ nft: nftObj }: PrivateAskInfoProps) => {
   const { PrivateAsks } = usePrivateAskContractContext()
   const { finalizedPrivateAskDetails } = usePrivateAskStateContext()
-  const { nft, markets } = nftData
+  const { nft, markets } = nftObj
 
   // Prioritize data from a just-created ask, or fall back to the relevant ask in the NFT's market obj
   const { ask } = useRelevantMarket(markets)

@@ -5,15 +5,15 @@ import { NounsGlasses } from 'components'
 import { PrivateAskModal } from './PrivateAskModal'
 
 interface PrivateAskSidebarProps extends StackProps {
-  nft: NFTObject
+  nftObj: NFTObject
 }
 
-export function PrivateAskSidebar({ nft, ...props }: PrivateAskSidebarProps) {
+export function PrivateAskSidebar({ nftObj, ...props }: PrivateAskSidebarProps) {
   return (
     <Stack {...props}>
       <PrivateAskModal
         modalName="PrivateAskV3"
-        nft={nft}
+        nftObj={nftObj}
         header={<NounsGlasses w="x13" mb="x4" mt="x1" />}
       />
     </Stack>

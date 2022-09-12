@@ -8,11 +8,11 @@ import { ListV3AskModal, FillV3AskModal } from '@market/components'
 import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTCardMarketProps extends FlexProps {
-  nftData: NFTObject
+  nftObj: NFTObject
 }
 
-export function NFTCardMarket({ nftData, ...props }: NFTCardMarketProps) {
-  const { markets } = nftData
+export function NFTCardMarket({ nftObj, ...props }: NFTCardMarketProps) {
+  const { markets } = nftObj
   const { ask } = useRelevantMarket(markets)
   const { hasAsk, isCompletedAsk, isActiveAsk } = useAskHelper({ ask })
   const hasRelevantAsk = useMemo(
@@ -23,12 +23,12 @@ export function NFTCardMarket({ nftData, ...props }: NFTCardMarketProps) {
   const marketComponent = useMemo(
     () =>
       hasRelevantAsk ? (
-        <FillV3AskModal nftData={nftData} {...props} />
+        <FillV3AskModal nftObj={nftObj} {...props} />
       ) : (
-        <ListV3AskModal nftData={nftData} {...props} />
+        <ListV3AskModal nftObj={nftObj} {...props} />
       ),
-    [hasRelevantAsk, nftData, props]
+    [hasRelevantAsk, nftObj, props]
   )
 
-  return nftData ? marketComponent : null
+  return nftObj ? marketComponent : null
 }

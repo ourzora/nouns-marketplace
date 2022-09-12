@@ -13,11 +13,11 @@ export type ModalCompositionProps = {
   trigger: JSX.Element
   /** Default is lightTheme */
   modalTheme?: ClassValue | undefined
-  /** Modal background css overrides: vannila extract style object */
+  /** Modal background css overrides: vanilla extract style object */
   modalBackgroundOverrides?: any
-  /** Modal content css overrides: vannila extract style object */
+  /** Modal content css overrides: vanilla extract style object */
   modalContentOverrides?: any
-  /** Modal overlay css overrides: vannila extract style object */
+  /** Modal overlay css overrides: vanilla extract style object */
   modalOverlayOverrides?: any
 }
 
