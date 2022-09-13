@@ -12,7 +12,7 @@ export function ImageWithNounFallback({
   tokenContract: string
   tokenId: string
 }) {
-  const isDao = useMemo(() => returnDao(tokenContract) !== undefined, [tokenContract])
+  // const isDao = useMemo(() => returnDao(tokenContract) !== undefined, [tokenContract])
 
   if (srcImg) {
     return (
@@ -27,14 +27,7 @@ export function ImageWithNounFallback({
     )
   }
 
-  if (isDao)
-    return (
-      <FallbackThumbnail
-        tokenContract={tokenContract}
-        tokenId={tokenId}
-        objectFit="cover"
-      />
-    )
+  // if (isDao) return <FallbackThumbnail tokenContract={tokenContract} tokenId={tokenId} />
 
   return <></>
 }
