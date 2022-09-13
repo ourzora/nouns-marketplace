@@ -5,8 +5,8 @@ import {
   APPROVE_MODULE_FOR_FILL,
   APPROVE_MODULE_FOR_CREATE,
   APPROVE_TRANSFER,
-  CREATE,
-  CREATE_SUCCESS,
+  // CREATE,
+  // CREATE_SUCCESS,
   UPDATE,
   UPDATE_SUCCESS,
   CANCEL,
@@ -17,8 +17,8 @@ import {
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
 import { PrivateAskApproveTransferHelper } from './PrivateAskApproveTransferHelper'
-import { PrivateAskCreate } from './create/PrivateAskCreate'
-import { PrivateAskCreateSuccess } from './create/PrivateAskCreateSuccess'
+// import { PrivateAskCreate } from './create/PrivateAskCreate'
+// import { PrivateAskCreateSuccess } from './create/PrivateAskCreateSuccess'
 import { PrivateAskUpdate } from './update/PrivateAskUpdate'
 import { PrivateAskUpdateSuccess } from './update/PrivateAskUpdateSuccess'
 import { PrivateAskCancel } from './cancel/PrivateAskCancel'
@@ -30,8 +30,8 @@ const componentMap = {
   [APPROVE_MODULE_FOR_CREATE]: PrivateAskApproveModule,
   [APPROVE_TRANSFER]: PrivateAskApproveTransferHelper,
   // // [APPROVE_CURRENCY]: PrivateAskApproveERC20Currency, // TODO
-  [CREATE]: PrivateAskCreate,
-  [CREATE_SUCCESS]: PrivateAskCreateSuccess,
+  // [CREATE]: PrivateAskCreate,
+  // [CREATE_SUCCESS]: PrivateAskCreateSuccess,
   [UPDATE]: PrivateAskUpdate,
   [UPDATE_SUCCESS]: PrivateAskUpdateSuccess,
   [CANCEL]: PrivateAskCancel,
