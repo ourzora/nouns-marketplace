@@ -1,4 +1,4 @@
-import { Box, BoxProps } from '@zoralabs/zord'
+import { BoxProps } from '@zoralabs/zord'
 import { useNounsToken } from '@noun-auction/hooks/useNounsToken'
 import { ImageElement } from 'components'
 import { nounishThumbnailImage } from '@noun-auction/styles/NounishStyles.css'

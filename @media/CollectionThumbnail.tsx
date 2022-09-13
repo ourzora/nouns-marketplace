@@ -1,7 +1,7 @@
 import { Box, Flex, Label, BoxProps } from '@zoralabs/zord'
 import { nftThumbnail } from './NftMedia.css'
 import { NFTObject, useNFT } from '@zoralabs/nft-hooks'
-// import { ImageWithNounFallback } from 'components'
+import { ImageWithNounFallback } from 'components/ImageWithNounFallback'
 import { useRawImageTransform } from './hooks/useRawImageTransform'
 import { useMemo } from 'react'
 
@@ -47,7 +47,7 @@ export function CollectionThumbnail({
   ...props
 }: CollectionThumbnailProps) {
   const { data: nft = initialNFT } = useNFT(collectionAddress, tokenId)
-  // const { image } = useRawImageTransform(nft?.media?.image?.uri)
+  const { image } = useRawImageTransform(nft?.media?.image?.uri)
   const thumbnailSize = useMemo(() => returnThumbnailSize(size), [size])
 
   if (!collectionAddress) return null
@@ -59,11 +59,11 @@ export function CollectionThumbnail({
         borderRadius={radius}
         className={['zora-media__nft-thumbnail', nftThumbnail]}
       >
-        {/* <ImageWithNounFallback
+        <ImageWithNounFallback
           srcImg={image}
           tokenId={tokenId}
           tokenContract={collectionAddress}
-        /> */}
+        />
       </Box>
       {useTitle && <Label size="lg">{nft?.nft?.contract?.name}</Label>}
     </Flex>
