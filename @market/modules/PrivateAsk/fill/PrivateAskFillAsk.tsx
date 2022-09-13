@@ -29,7 +29,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
 
   return (
     <Stack gap="x6">
-      <Flex w="100%" justify="space-between" textAlign="right">
+      {/* <Flex w="100%" justify="space-between" textAlign="right">
         <CollectionThumbnail
           collectionAddress={nft?.contract.address}
           tokenId={nft?.tokenId}
@@ -46,7 +46,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
 
       <Separator />
 
-      {/* <Flex justify="space-between">
+      <Flex justify="space-between">
         <Paragraph size="sm" color="text3">
           Your balance
         </Paragraph>
