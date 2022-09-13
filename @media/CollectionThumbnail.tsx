@@ -47,7 +47,7 @@ export function CollectionThumbnail({
   ...props
 }: CollectionThumbnailProps) {
   const { data: nft = initialNFT } = useNFT(collectionAddress, tokenId)
-  const { image } = useRawImageTransform(nft?.media?.image?.uri)
+  // const { image } = useRawImageTransform(nft?.media?.image?.uri)
   const thumbnailSize = useMemo(() => returnThumbnailSize(size), [size])
 
   if (!collectionAddress) return null
@@ -59,11 +59,11 @@ export function CollectionThumbnail({
         borderRadius={radius}
         className={['zora-media__nft-thumbnail', nftThumbnail]}
       >
-        <ImageWithNounFallback
+        {/* <ImageWithNounFallback
           srcImg={image}
           tokenId={tokenId}
           tokenContract={collectionAddress}
-        />
+        /> */}
       </Box>
       {useTitle && <Label size="lg">{nft?.nft?.contract?.name}</Label>}
     </Flex>
