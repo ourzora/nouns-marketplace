@@ -1,7 +1,4 @@
-import {
-  DataTable,
-  //  MotionStack,
-} from '@shared'
+import { DataTable } from '@shared'
 import { useToast } from '@shared/hooks/useToast'
 import { CopyStatus, useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
 import { Button, Eyebrow, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
@@ -32,14 +29,6 @@ export function PrivateAskCreateSuccess({
 
   return (
     <>
-      {/* <MotionStack
-        gap="x5"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
-        {...props}
-      > */}
       <Stack gap="x6">
         <Heading size="xs">Private Listing Created</Heading>
 
@@ -61,7 +50,6 @@ export function PrivateAskCreateSuccess({
         <Button onClick={onNext}>Done</Button>
 
         <LearnMoreButton>Learn more about private listings</LearnMoreButton>
-        {/* </MotionStack> */}
       </Stack>
       {toast}
     </>

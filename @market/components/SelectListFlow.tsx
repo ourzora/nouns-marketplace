@@ -66,7 +66,6 @@ export function SelectListFlow({ nftObj, closeModal, ...props }: SelectListFlowP
       }
     />
   ) : (
-    <></>
-    // <PrivateAskFlow header={<NounsGlasses w="x13" mb="x4" mt="x1" />} nft={nftObj} />
+    <PrivateAskFlow header={<NounsGlasses w="x13" mb="x4" mt="x1" />} nft={nftObj} />
   )
 }

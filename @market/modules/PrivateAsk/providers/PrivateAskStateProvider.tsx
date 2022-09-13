@@ -1,5 +1,4 @@
 import { useModal } from '@modal'
-import { useToggle } from '@shared/hooks/useToggle'
 import React, {
   createContext,
   useCallback,
@@ -19,7 +18,6 @@ type PrivateAskTxDetails = {
   rawBuyerAddress: string
 }
 
-// export const LIST: string = 'listForSale'
 export const APPROVE_MODULE_FOR_CREATE: string = 'approveModuleForSale'
 export const APPROVE_MODULE_FOR_FILL: string = 'approveModuleForFill'
 export const APPROVE_TRANSFER: string = 'approveTransferHelper'

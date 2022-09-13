@@ -13,14 +13,6 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
   return (
-    // <MotionStack
-    //   gap="x5"
-    //   initial={{ opacity: 0 }}
-    //   animate={{ opacity: 1 }}
-    //   exit={{ opacity: 0 }}
-    //   transition={{ duration: 0.2 }}
-    //   {...props}
-    // >
     <Stack gap="x6" {...props}>
       <Stack gap="x2">
         <Heading size="xs">Cancel Private Listing</Heading>
@@ -46,6 +38,5 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
         Cancel Private Listing
       </TransactionSubmitButton>
     </Stack>
-    // {/* </MotionStack> */}
   )
 }

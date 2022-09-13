@@ -30,14 +30,6 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
   return (
-    // <MotionStack
-    //   gap="x5"
-    //   initial={{ opacity: 0 }}
-    //   animate={{ opacity: 1 }}
-    //   exit={{ opacity: 0 }}
-    //   transition={{ duration: 0.2 }}
-    //   {...props}
-    // >
     <Stack gap="x6">
       <Flex w="100%" justify="space-between" className={[styles.summary]}>
         <CollectionThumbnail
@@ -77,6 +69,5 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
         {hasSufficientFunds ? `Buy NFT` : 'Insufficient Funds'}
       </TransactionSubmitButton>
     </Stack>
-    // </MotionStack>
   )
 }
