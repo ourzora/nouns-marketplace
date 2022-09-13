@@ -7,8 +7,8 @@ import { PrintError } from '@shared/components/PrintError'
 import { reverseLookupAddress } from '@shared/utils/reverseLookupAddress'
 import { validateCurrency } from '@shared/utils/validateCurrency'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
-import { Field, FieldProps, Form, Formik } from 'formik'
-import React, { useEffect, useMemo } from 'react'
+import { Field, FieldProps, Form, FormikFormProps, Formik } from 'formik'
+import React, { useEffect } from 'react'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
 
@@ -69,7 +69,7 @@ export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
         })
       }}
     >
-      {({ values, isValid, isSubmitting }) => (
+      {({ values, isValid, isSubmitting }: FormikFormProps) => (
         <Form>
           <Stack gap="x6" {...props}>
             <Heading size="xs">Update List Price</Heading>

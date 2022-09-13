@@ -1,8 +1,8 @@
 import {
   DataTable,
   //  MotionStack,
-  useToast,
 } from '@shared'
+import { useToast } from '@shared/hooks/useToast'
 import { CopyStatus, useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
 import { Button, Eyebrow, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import React, { useEffect } from 'react'

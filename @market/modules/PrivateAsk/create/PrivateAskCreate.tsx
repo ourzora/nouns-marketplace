@@ -10,7 +10,7 @@ import {
 } from '@shared'
 import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
-import { Field, FieldProps, Form, Formik } from 'formik'
+import { Field, FieldProps, Form, Formik, FormikFormProps } from 'formik'
 import React, { useEffect } from 'react'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
@@ -79,7 +79,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
         })
       }}
     >
-      {({ values, isValid, isSubmitting }) => (
+      {({ values, isValid, isSubmitting }: FormikFormProps) => (
         <Form>
           <Stack gap="x6" {...props}>
             <Heading size="xs">Create a Private Listing</Heading>
