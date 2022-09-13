@@ -13,7 +13,7 @@ import {
   CANCEL_SUCCESS,
   FILLASK,
   FILLASK_SUCCESS,
-  usePrivateAskStateContext,
+  // usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
 import { PrivateAskApproveTransferHelper } from './PrivateAskApproveTransferHelper'
@@ -52,8 +52,8 @@ export interface CommonPrivateAskComponentProps extends StackProps {
 }
 
 export function PrivateAskFlow({ header, nft }: PrivateAskModalProps) {
-  const { state, handleNext } = usePrivateAskStateContext()
-  const Component = componentMap[state.status]
+  // const { state, handleNext } = usePrivateAskStateContext()
+  // const Component = componentMap[state.status]
 
   return (
     <Stack justify="center">
