@@ -31,7 +31,7 @@ export function NFTAsks({ nftObj, ...props }: NFTAskProps) {
     if (isOwner) {
       return (
         <>
-          <UniversalListAskModal nftObj={nftObj} />
+          {/* <UniversalListAskModal nftObj={nftObj} /> */}
           {/* <PrivateAskSidebar nft={nftObj} /> */}
           {/* <ListV3AskModal nftObj={nftObj} {...props} /> */}
         </>
