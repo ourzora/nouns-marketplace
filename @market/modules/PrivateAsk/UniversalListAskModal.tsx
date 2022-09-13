@@ -42,7 +42,7 @@ export function UniversalListAskModal({
           }
           content={
             <Box p="x8">
-              {/* <SelectListFlow nftObj={nftObj} closeModal={requestClose} /> */}
+              <SelectListFlow nftObj={nftObj} closeModal={requestClose} />
             </Box>
           }
         />
