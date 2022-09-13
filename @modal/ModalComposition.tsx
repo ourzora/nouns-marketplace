@@ -34,7 +34,7 @@ export function ModalComposition({
 
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
-  }, [])
+  }, [modalName, requestOpen])
 
   return (
     <>

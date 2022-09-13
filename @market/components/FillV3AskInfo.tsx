@@ -16,7 +16,7 @@ export function FillV3AskInfo({ nft, askPrice, showBalance = true }: FillV3AskIn
 
   const cryptoVal = useMemo(() => {
     if (askPrice) return `${formatCryptoVal(parseFloat(askPrice))} ETH`
-  }, [])
+  }, [askPrice])
 
   if (!nft) {
     return null

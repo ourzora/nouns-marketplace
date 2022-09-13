@@ -1,16 +1,10 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import {
-  isAddress,
-  // MotionStack,
-  PrintError,
-  validateCurrency,
-  validateENSAddress,
-} from '@shared'
+import { isAddress, PrintError, validateCurrency, validateENSAddress } from '@shared'
 import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
-import { Field, FieldProps, Form, Formik, FormikFormProps } from 'formik'
+import { Field, FieldProps, Form, Formik } from 'formik'
 import React, { useEffect } from 'react'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
@@ -58,15 +52,6 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
   return (
-    // <MotionStack
-    //   gap="x5"
-    //   initial={{ opacity: 0 }}
-    //   animate={{ opacity: 1 }}
-    //   exit={{ opacity: 0 }}
-    //   transition={{ duration: 0.2 }}
-    //   {...props}
-    // >
-
     <Formik
       initialValues={{ buyeraddress: '', amount: '' }}
       validate={validate}
@@ -79,7 +64,11 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
         })
       }}
     >
-      {({ values, isValid, isSubmitting }: FormikFormProps) => (
+      {({
+        //values,
+        isValid,
+        isSubmitting,
+      }) => (
         <Form>
           <Stack gap="x6" {...props}>
             <Heading size="xs">Create a Private Listing</Heading>
@@ -138,6 +127,5 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
         </Form>
       )}
     </Formik>
-    // </MotionStack>
   )
 }

@@ -21,12 +21,7 @@ export interface CommonPrivateAskComponentProps extends StackProps {
   handleClose?: () => void
 }
 
-export function PrivateAskModal({
-  header,
-  nftObj,
-  modalName,
-}: // open
-PrivateAskModalProps) {
+export function PrivateAskModal({ header, nftObj, modalName }: PrivateAskModalProps) {
   const { modalType, requestClose, requestOpen } = useModal()
   const modalHandler = useCallback(() => {
     requestOpen(modalName)

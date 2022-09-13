@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react'
-import clsx from 'clsx'
+import React from 'react'
+import { NFTObject } from '@zoralabs/nft-hooks'
+import { Flex, Stack, StackProps } from '@zoralabs/zord'
 import {
   APPROVE_MODULE_FOR_FILL,
   APPROVE_MODULE_FOR_CREATE,
@@ -8,13 +9,11 @@ import {
   CREATE_SUCCESS,
   UPDATE,
   UPDATE_SUCCESS,
-  RESET,
   CANCEL,
   CANCEL_SUCCESS,
   FILLASK,
   FILLASK_SUCCESS,
   usePrivateAskStateContext,
-  PrivateAskStateProvider,
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
 import { PrivateAskApproveTransferHelper } from './PrivateAskApproveTransferHelper'
@@ -26,14 +25,6 @@ import { PrivateAskCancel } from './cancel/PrivateAskCancel'
 import { PrivateAskCancelSuccess } from './cancel/PrivateAskCancelSuccess'
 import { PrivateAskFillAsk } from './fill/PrivateAskFillAsk'
 import { PrivateAskFillAskSuccess } from './fill/PrivateAskFillAskSuccess'
-import { PrivateAskListForSale } from './PrivateAskListForSale'
-import { PrivateAskTrigger } from './PrivateAskTrigger'
-import { useToggle } from '@shared/hooks/useToggle'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { BoxProps, Flex, Modal, ModalContent, Stack, StackProps } from '@zoralabs/zord'
-// import { AnimatePresence } from 'framer-motion'
-
-// import * as styles from './PrivateAskModal.css'
 
 const componentMap = {
   // [LIST]: PrivateAskListForSale,
@@ -54,7 +45,6 @@ const componentMap = {
 interface PrivateAskModalProps {
   header: React.ReactNode
   nft: NFTObject
-  // open?: boolean
 }
 
 export interface CommonPrivateAskComponentProps extends StackProps {
@@ -63,7 +53,6 @@ export interface CommonPrivateAskComponentProps extends StackProps {
   handleClose?: () => void
 }
 
-// Abstract
 function PrivateAskFlowWithState({ header, nft }: PrivateAskModalProps) {
   const { state, handleNext } = usePrivateAskStateContext()
   const Component = componentMap[state.status]
@@ -74,22 +63,16 @@ function PrivateAskFlowWithState({ header, nft }: PrivateAskModalProps) {
         {header}
       </Flex>
 
-      {/* <AnimatePresence exitBeforeEnter={isOpen}> */}
       <Component
         key={state.status}
         nft={nft}
         onNext={handleNext}
         // handleClose={handleClose}
       />
-      {/* </AnimatePresence> */}
     </Stack>
   )
 }
 
 export function PrivateAskFlow({ header, nft }: PrivateAskModalProps) {
-  return (
-    // <PrivateAskStateProvider>
-    <PrivateAskFlowWithState header={header} nft={nft} />
-    //</PrivateAskStateProvider>
-  )
+  return <PrivateAskFlowWithState header={header} nft={nft} />
 }

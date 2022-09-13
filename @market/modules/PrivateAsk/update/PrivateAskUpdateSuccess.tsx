@@ -28,14 +28,6 @@ export function PrivateAskUpdateSuccess({
 
   return (
     <>
-      {/* <MotionStack
-        gap="x5"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
-        {...props}
-      > */}
       <Stack gap="x6">
         <Heading size="xs">Private Listing Updated</Heading>
 
@@ -57,7 +49,6 @@ export function PrivateAskUpdateSuccess({
         <Button onClick={onNext}>Done</Button>
 
         <LearnMoreButton>Learn more about private listings</LearnMoreButton>
-        {/* </MotionStack> */}
       </Stack>
       {toast}
     </>

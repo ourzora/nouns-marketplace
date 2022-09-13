@@ -1,9 +1,6 @@
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Box, FlexProps, Stack, Button } from '@zoralabs/zord'
 import { ModalComposition, useModal } from '@modal'
-import { useIsOwner } from '@shared'
-import { ListV3AskWizard, NFTOwner } from '@market/components'
-import { PrivateAskListForSale } from './PrivateAskListForSale'
 import { SelectListFlow } from '@market/components/SelectListFlow'
 import { PrivateAskStateProvider } from './providers/PrivateAskStateProvider'
 

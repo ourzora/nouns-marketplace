@@ -32,11 +32,13 @@ export function TokenInfo({
   const contractLinkHandler = useCallback((e) => {
     e.preventDefault()
     router.push(`/${routePrefix}/${contractAddress}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const tokenLinkHandler = useCallback((e) => {
     e.preventDefault()
     router.push(`/${routePrefix}/${contractAddress}/${tokenId}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

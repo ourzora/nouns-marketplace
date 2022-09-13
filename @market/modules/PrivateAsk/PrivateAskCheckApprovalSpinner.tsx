@@ -15,12 +15,7 @@ export function PrivateAskCheckApprovalSpinner({
     <Stack gap="x6" align="center" className={className} {...props}>
       {/* <Orb /> */}
       {/* <Spinner size="lg" /> */}
-      {/* <Paragraph>{text}</Paragraph> */}
-      <Paragraph
-        // className={styles.textColor}
-        size="sm"
-        color="text3"
-      >
+      <Paragraph size="sm" color="text3">
         {text}
       </Paragraph>
     </Stack>
