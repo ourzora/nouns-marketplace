@@ -31,6 +31,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
     <Stack gap="x6">
       <Flex w="100%" justify="space-between" textAlign="right">
         <CollectionThumbnail
+          initialNFT={props.nft}
           collectionAddress={nft?.contract.address}
           tokenId={nft?.tokenId}
         />

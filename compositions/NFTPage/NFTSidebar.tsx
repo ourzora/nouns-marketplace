@@ -65,6 +65,7 @@ export function NFTSidebar({ ...props }: NFTSidebarProps) {
         <Flex>
           <Link href={`/collections/${nft?.nft?.contract.address}`}>
             <CollectionThumbnail
+              initialNFT={nft}
               collectionAddress={nft?.nft?.contract.address}
               useTitle
               size="xxs"

@@ -15,7 +15,7 @@ import { useNFTProvider, useTitleWithFallback } from '@shared'
 
 export function NFTCard() {
   const {
-    hooksData: { data },
+    hooksData: { data: nft },
     contractAddress,
     tokenId,
   } = useNFTProvider()
@@ -23,24 +23,24 @@ export function NFTCard() {
   const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
     tokenId,
-    defaultTitle: data?.metadata?.name,
+    defaultTitle: nft?.metadata?.name,
   })
 
   const srcImg = useMemo(
     () =>
-      data?.media?.mimeType === 'image/svg+xml'
-        ? data?.media?.image?.uri
-        : data?.media?.poster?.uri,
-    [data?.media]
+      nft?.media?.mimeType === 'image/svg+xml'
+        ? nft?.media?.image?.uri
+        : nft?.media?.poster?.uri,
+    [nft?.media]
   )
 
   const useTitleScroll = useMemo(() => {
-    if (data?.metadata && data?.metadata?.name) {
-      return data?.metadata?.name.split('').length > 25
+    if (nft?.metadata && nft?.metadata?.name) {
+      return nft?.metadata?.name.split('').length > 25
     }
-  }, [data?.metadata])
+  }, [nft?.metadata])
 
-  if (!data || !contractAddress || !tokenId) return null
+  if (!nft || !contractAddress || !tokenId) return null
 
   return (
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
@@ -72,15 +72,16 @@ export function NFTCard() {
             <Flex align="center" gap="x2">
               <CollectionThumbnail
                 collectionAddress={contractAddress}
+                initialNFT={nft}
                 radius="round"
                 size="xs"
               />
-              <Heading size="xs">{data?.nft?.contract.name}</Heading>
+              <Heading size="xs">{nft?.nft?.contract.name}</Heading>
             </Flex>
           </Link>
         </Flex>
         <Separator mt="x1" />
-        <NFTCardMarket nftObj={data} />
+        <NFTCardMarket nftObj={nft} />
       </Stack>
     </Stack>
   )

@@ -23,11 +23,11 @@ export function NFTSummary({
   /** Additional NFT info to display based on use context */
   modalType?: MODAL_TYPES.fillAsk | MODAL_TYPES.list | MODAL_TYPES.auction
 }) {
-  const { data } = useNFT(collectionAddress, tokenId)
+  const { data: nft } = useNFT(collectionAddress, tokenId)
   const { address } = useAuth()
   const hasAsk = useMemo(
-    () => data && modalType === MODAL_TYPES.fillAsk && askPrice,
-    [askPrice, data, modalType]
+    () => nft && modalType === MODAL_TYPES.fillAsk && askPrice,
+    [askPrice, nft, modalType]
   )
   const { fallbackTitle } = useTitleWithFallback({
     contractAddress: collectionAddress,
@@ -47,8 +47,8 @@ export function NFTSummary({
               : MODAL_TYPES.auction
               ? 'Bid on'
               : ''
-          } ${data && data.metadata?.name ? data.metadata.name : fallbackTitle}`,
-    [data, fallbackTitle, modalType, noWallet]
+          } ${nft && nft.metadata?.name ? nft.metadata.name : fallbackTitle}`,
+    [nft, fallbackTitle, modalType, noWallet]
   )
 
   if (!collectionAddress || !tokenId) return null
@@ -57,9 +57,13 @@ export function NFTSummary({
     <Stack gap="x4">
       <Flex justify="space-between" align="flex-start">
         <ModalTitleAndDescription title={modalTitle} />
-        <CollectionThumbnail collectionAddress={collectionAddress} tokenId={tokenId} />
+        <CollectionThumbnail
+          initialNFT={nft}
+          collectionAddress={collectionAddress}
+          tokenId={tokenId}
+        />
       </Flex>
-      {hasAsk && <FillV3AskInfo nft={data!} askPrice={askPrice} />}
+      {hasAsk && <FillV3AskInfo nft={nft!} askPrice={askPrice} />}
     </Stack>
   )
 }
