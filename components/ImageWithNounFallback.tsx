@@ -1,6 +1,7 @@
 import { returnDao } from 'constants/collection-addresses'
 import { FallbackThumbnail } from '@noun-auction'
 import { ImageElement } from './ImageElement'
+import { useMemo } from 'react'
 
 export function ImageWithNounFallback({
   srcImg,
@@ -11,39 +12,29 @@ export function ImageWithNounFallback({
   tokenContract: string
   tokenId: string
 }) {
-  const isDao = returnDao(tokenContract) !== undefined
+  const isDao = useMemo(() => returnDao(tokenContract) !== undefined, [tokenContract])
 
-  return (
-    <>
-      {!isDao && srcImg ? (
-        <ImageElement
-          src={srcImg}
-          w="100%"
-          h="100%"
-          position="absolute"
-          inset="x0"
-          objectFit="cover"
-        />
-      ) : (
-        <>
-          {srcImg ? (
-            <ImageElement
-              src={srcImg}
-              w="100%"
-              h="100%"
-              position="absolute"
-              inset="x0"
-              objectFit="cover"
-            />
-          ) : (
-            <FallbackThumbnail
-              tokenContract={tokenContract}
-              tokenId={tokenId}
-              objectFit="cover"
-            />
-          )}
-        </>
-      )}
-    </>
-  )
+  if (srcImg) {
+    return (
+      <ImageElement
+        src={srcImg}
+        w="100%"
+        h="100%"
+        position="absolute"
+        inset="x0"
+        objectFit="cover"
+      />
+    )
+  }
+
+  if (isDao)
+    return (
+      <FallbackThumbnail
+        tokenContract={tokenContract}
+        tokenId={tokenId}
+        objectFit="cover"
+      />
+    )
+
+  return <></>
 }
