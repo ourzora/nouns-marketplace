@@ -2,9 +2,9 @@ import React from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Flex, Stack, StackProps } from '@zoralabs/zord'
 import {
-  // APPROVE_MODULE_FOR_FILL,
-  // APPROVE_MODULE_FOR_CREATE,
-  // APPROVE_TRANSFER,
+  APPROVE_MODULE_FOR_FILL,
+  APPROVE_MODULE_FOR_CREATE,
+  APPROVE_TRANSFER,
   // CREATE,
   // CREATE_SUCCESS,
   UPDATE,
@@ -15,8 +15,8 @@ import {
   // FILLASK_SUCCESS,
   usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
-// import { PrivateAskApproveModule } from './PrivateAskApproveModule'
-// import { PrivateAskApproveTransferHelper } from './PrivateAskApproveTransferHelper'
+import { PrivateAskApproveModule } from './PrivateAskApproveModule'
+import { PrivateAskApproveTransferHelper } from './PrivateAskApproveTransferHelper'
 // import { PrivateAskCreate } from './create/PrivateAskCreate'
 // import { PrivateAskCreateSuccess } from './create/PrivateAskCreateSuccess'
 import { PrivateAskUpdate } from './update/PrivateAskUpdate'
@@ -27,8 +27,8 @@ import { PrivateAskCancelSuccess } from './cancel/PrivateAskCancelSuccess'
 // import { PrivateAskFillAskSuccess } from './fill/PrivateAskFillAskSuccess'
 
 const componentMap = {
-  // [APPROVE_MODULE_FOR_CREATE]: PrivateAskApproveModule,
-  // [APPROVE_TRANSFER]: PrivateAskApproveTransferHelper,
+  [APPROVE_MODULE_FOR_CREATE]: PrivateAskApproveModule,
+  [APPROVE_TRANSFER]: PrivateAskApproveTransferHelper,
   // // [APPROVE_CURRENCY]: PrivateAskApproveERC20Currency, // TODO
   // [CREATE]: PrivateAskCreate,
   // [CREATE_SUCCESS]: PrivateAskCreateSuccess,
@@ -36,7 +36,7 @@ const componentMap = {
   [UPDATE_SUCCESS]: PrivateAskUpdateSuccess,
   [CANCEL]: PrivateAskCancel,
   [CANCEL_SUCCESS]: PrivateAskCancelSuccess,
-  // [APPROVE_MODULE_FOR_FILL]: PrivateAskApproveModule,
+  [APPROVE_MODULE_FOR_FILL]: PrivateAskApproveModule,
   // [FILLASK]: PrivateAskFillAsk,
   // [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
 }
