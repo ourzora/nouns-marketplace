@@ -1,7 +1,7 @@
 import { useModal } from '@modal'
 import { Button, Heading, Paragraph, Stack } from '@zoralabs/zord'
 import React from 'react'
-import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
+import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 
 interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}
 

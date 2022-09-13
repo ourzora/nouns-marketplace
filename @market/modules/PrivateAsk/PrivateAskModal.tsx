@@ -15,11 +15,6 @@ interface PrivateAskModalProps {
   modalName: string
 }
 
-export interface CommonPrivateAskComponentProps extends StackProps {
-  nft: NFTObject
-  onNext?: () => void
-}
-
 export function PrivateAskModal({ header, nftObj, modalName }: PrivateAskModalProps) {
   const { modalType, requestClose, requestOpen } = useModal()
   const modalHandler = useCallback(() => {

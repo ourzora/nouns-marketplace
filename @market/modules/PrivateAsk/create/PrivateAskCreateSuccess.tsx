@@ -6,7 +6,7 @@ import React, { useEffect } from 'react'
 import { useFormattedPrivateAskInfo } from '../hooks/'
 
 import { LearnMoreButton } from '../LearnMoreButton'
-import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
+import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 
 interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
 

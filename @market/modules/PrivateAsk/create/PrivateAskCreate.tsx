@@ -7,7 +7,7 @@ import { Heading, InputField, Stack } from '@zoralabs/zord'
 import { Field, FieldProps, Form, Formik } from 'formik'
 import React, { useEffect } from 'react'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
-import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
+import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 
 interface PrivateAskCreateProps extends CommonPrivateAskComponentProps {}
 

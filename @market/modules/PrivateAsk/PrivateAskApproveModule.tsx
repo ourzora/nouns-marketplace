@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { PrintError } from '@shared'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { usePrivateAskModuleApproval } from './hooks/usePrivateAskModuleApproval'
-import { CommonPrivateAskComponentProps } from './PrivateAskModal'
+import { CommonPrivateAskComponentProps } from './PrivateAskFlow'
 import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
 import { LearnMoreButton } from './LearnMoreButton'
 

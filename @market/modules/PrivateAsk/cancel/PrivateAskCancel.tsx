@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Heading, Paragraph, Stack } from '@zoralabs/zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
+import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 
