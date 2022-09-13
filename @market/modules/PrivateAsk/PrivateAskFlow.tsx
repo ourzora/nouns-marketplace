@@ -11,8 +11,8 @@ import {
   UPDATE_SUCCESS,
   CANCEL,
   CANCEL_SUCCESS,
-  FILLASK,
-  // FILLASK_SUCCESS,
+  // FILLASK,
+  FILLASK_SUCCESS,
   usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
@@ -23,8 +23,8 @@ import { PrivateAskUpdate } from './update/PrivateAskUpdate'
 import { PrivateAskUpdateSuccess } from './update/PrivateAskUpdateSuccess'
 import { PrivateAskCancel } from './cancel/PrivateAskCancel'
 import { PrivateAskCancelSuccess } from './cancel/PrivateAskCancelSuccess'
-import { PrivateAskFillAsk } from './fill/PrivateAskFillAsk'
-// import { PrivateAskFillAskSuccess } from './fill/PrivateAskFillAskSuccess'
+// import { PrivateAskFillAsk } from './fill/PrivateAskFillAsk'
+import { PrivateAskFillAskSuccess } from './fill/PrivateAskFillAskSuccess'
 
 const componentMap = {
   [APPROVE_MODULE_FOR_CREATE]: PrivateAskApproveModule,
@@ -37,8 +37,8 @@ const componentMap = {
   [CANCEL]: PrivateAskCancel,
   [CANCEL_SUCCESS]: PrivateAskCancelSuccess,
   [APPROVE_MODULE_FOR_FILL]: PrivateAskApproveModule,
-  [FILLASK]: PrivateAskFillAsk,
-  // [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
+  // [FILLASK]: PrivateAskFillAsk,
+  [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
 }
 
 interface PrivateAskModalProps {
