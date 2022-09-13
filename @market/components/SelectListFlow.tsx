@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Eyebrow, Stack } from '@zoralabs/zord'
 import { SaleTypeButton } from '@market/modules/PrivateAsk/SaleTypeButton'
-import { LearnMoreButton } from '@market/modules'
+import { LearnMoreButton } from '@market/modules/PrivateAsk/LearnMoreButton'
 import { PrivateAskFlow } from '@market/modules/PrivateAsk/PrivateAskFlow'
 import { ListV3AskWizard } from './ListV3AskWizard'
 import { NFTObject } from '@zoralabs/nft-hooks'
