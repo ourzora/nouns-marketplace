@@ -18,7 +18,7 @@ interface PrivateAskTriggerProps {
   openModal: () => void
 }
 
-function PrivateAskTriggerWithState({ nft, openModal }: PrivateAskTriggerProps) {
+export function PrivateAskTrigger({ nft, openModal }: PrivateAskTriggerProps) {
   const { dispatch } = usePrivateAskStateContext()
   const { ask } = useRelevantMarket(nft.markets)
   const { hasActivePrivateAsk, displayAskAmount, usdAskAmount, isValidPrivateAskBuyer } =
@@ -83,8 +83,4 @@ function PrivateAskTriggerWithState({ nft, openModal }: PrivateAskTriggerProps) 
       </Well>
     )
   )
-}
-
-export function PrivateAskTrigger({ nft, openModal }: PrivateAskTriggerProps) {
-  return <PrivateAskTriggerWithState nft={nft} openModal={openModal} />
 }
