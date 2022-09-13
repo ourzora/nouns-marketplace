@@ -6,7 +6,7 @@ import {
 } from '@shared/hooks/useCopyToClipboard'
 import { Button, Eyebrow, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import React from 'react'
-import { useFormattedPrivateAskInfo } from '../hooks/'
+import { useFormattedPrivateAskInfo } from '../hooks/useFormattedPrivateAskInfo'
 
 import { LearnMoreButton } from '../LearnMoreButton'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
