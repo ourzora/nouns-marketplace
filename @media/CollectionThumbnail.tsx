@@ -1,8 +1,8 @@
 import { Box, Flex, Label, BoxProps } from '@zoralabs/zord'
 import { nftThumbnail } from './NftMedia.css'
 import { useNFT } from '@zoralabs/nft-hooks'
-import { useRawImageTransform } from './hooks/useRawImageTransform'
 import { ImageWithNounFallback } from 'components'
+import { useRawImageTransform } from './hooks/useRawImageTransform'
 
 export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
 
