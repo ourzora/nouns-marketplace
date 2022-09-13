@@ -1,4 +1,3 @@
-import { Box } from '@zoralabs/zord'
 import { returnDao } from 'constants/collection-addresses'
 import { FallbackThumbnail } from '@noun-auction'
 import { ImageElement } from './ImageElement'
