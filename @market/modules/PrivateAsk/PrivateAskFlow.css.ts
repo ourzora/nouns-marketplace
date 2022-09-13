@@ -24,7 +24,3 @@ export const button = style({
 export const textColor = style({
   color: vars.color.accentDisabled,
 })
-
-export const summary = atoms({
-  textAlign: 'right',
-})
