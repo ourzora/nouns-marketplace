@@ -10,7 +10,7 @@ import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { useAskHelper } from '@market/hooks/useAskHelper'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
-// import { PrintError } from '@shared/components/PrintError'
+import { PrintError } from '@shared/components/PrintError'
 // import { useAuth } from '@shared/hooks/useAuth'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
@@ -29,13 +29,8 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
   } = useAskHelper({
     ask,
   })
-  const {
-    txStatus,
-    txInProgress,
-    // txError,
-    finalizedTx,
-    fillAsk,
-  } = usePrivateAskTransaction({ nft: props.nft })
+  const { txStatus, txInProgress, txError, finalizedTx, fillAsk } =
+    usePrivateAskTransaction({ nft: props.nft })
   const isDisabled = useMemo(
     () => !fillAsk || txInProgress || !hasSufficientFunds || !displayAskAmount,
     [displayAskAmount, fillAsk, hasSufficientFunds, txInProgress]
@@ -70,7 +65,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
         </Eyebrow>
       </Flex>
 */}
-      {/* {txError && <PrintError errorMessage={txError} />} */}
+      {txError && <PrintError errorMessage={txError} />}
 
       <TransactionSubmitButton
         type="submit"
