@@ -11,7 +11,7 @@ import {
   UPDATE_SUCCESS,
   CANCEL,
   CANCEL_SUCCESS,
-  // FILLASK,
+  FILLASK,
   FILLASK_SUCCESS,
   usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
@@ -23,7 +23,7 @@ import { PrivateAskUpdate } from './update/PrivateAskUpdate'
 import { PrivateAskUpdateSuccess } from './update/PrivateAskUpdateSuccess'
 import { PrivateAskCancel } from './cancel/PrivateAskCancel'
 import { PrivateAskCancelSuccess } from './cancel/PrivateAskCancelSuccess'
-// import { PrivateAskFillAsk } from './fill/PrivateAskFillAsk'
+import { PrivateAskFillAsk } from './fill/PrivateAskFillAsk'
 import { PrivateAskFillAskSuccess } from './fill/PrivateAskFillAskSuccess'
 
 const componentMap = {
@@ -37,7 +37,7 @@ const componentMap = {
   [CANCEL]: PrivateAskCancel,
   [CANCEL_SUCCESS]: PrivateAskCancelSuccess,
   [APPROVE_MODULE_FOR_FILL]: PrivateAskApproveModule,
-  // [FILLASK]: PrivateAskFillAsk,
+  [FILLASK]: PrivateAskFillAsk,
   [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
 }
 
