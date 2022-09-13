@@ -27,7 +27,6 @@ import { PrivateAskFillAsk } from './fill/PrivateAskFillAsk'
 import { PrivateAskFillAskSuccess } from './fill/PrivateAskFillAskSuccess'
 
 const componentMap = {
-  // [LIST]: PrivateAskListForSale,
   [APPROVE_MODULE_FOR_CREATE]: PrivateAskApproveModule,
   [APPROVE_TRANSFER]: PrivateAskApproveTransferHelper,
   // [APPROVE_CURRENCY]: PrivateAskApproveERC20Currency, // TODO
@@ -50,7 +49,6 @@ interface PrivateAskModalProps {
 export interface CommonPrivateAskComponentProps extends StackProps {
   nft: NFTObject
   onNext?: () => void
-  handleClose?: () => void
 }
 
 function PrivateAskFlowWithState({ header, nft }: PrivateAskModalProps) {
@@ -63,12 +61,7 @@ function PrivateAskFlowWithState({ header, nft }: PrivateAskModalProps) {
         {header}
       </Flex>
 
-      <Component
-        key={state.status}
-        nft={nft}
-        onNext={handleNext}
-        // handleClose={handleClose}
-      />
+      <Component key={state.status} nft={nft} onNext={handleNext} />
     </Stack>
   )
 }

@@ -1,3 +1,4 @@
+import { useModal } from '@modal'
 import { useToggle } from '@shared/hooks/useToggle'
 import React, {
   createContext,
@@ -7,6 +8,7 @@ import React, {
   useReducer,
   useState,
 } from 'react'
+
 interface PrivateAskProps {
   children: React.ReactNode
 }
@@ -35,10 +37,6 @@ export const initialState = {
   next: APPROVE_TRANSFER,
   status: APPROVE_MODULE_FOR_CREATE,
 }
-// export const initialState = {
-//   next: APPROVE_MODULE_FOR_CREATE,
-//   status: LIST,
-// }
 
 interface State {
   next?: string
@@ -46,7 +44,6 @@ interface State {
 }
 
 export type PrivateAskAction =
-  // | { type: typeof LIST }
   | { type: typeof APPROVE_MODULE_FOR_CREATE }
   | { type: typeof APPROVE_TRANSFER }
   | { type: typeof CREATE }
@@ -63,11 +60,8 @@ export type PrivateAskAction =
 export function reducer(_state: State, action: PrivateAskAction): State {
   switch (action.type) {
     case RESET:
-    // case LIST:
-    //   return initialState
     case APPROVE_MODULE_FOR_CREATE:
       return initialState
-    // return { status: APPROVE_MODULE_FOR_CREATE, next: APPROVE_TRANSFER }
     case APPROVE_TRANSFER:
       return { status: APPROVE_TRANSFER, next: CREATE }
     case CREATE:
@@ -98,10 +92,7 @@ export interface PrivateAskProviderState {
   dispatch: React.Dispatch<PrivateAskAction>
   finalizedPrivateAskDetails?: PrivateAskTxDetails
   setFinalizedPrivateAskDetails: (value: PrivateAskTxDetails) => void
-  isModalOpen: boolean
   handleNext: () => void
-  handleClose: () => void
-  toggleModalOpen: () => void
 }
 
 export const PrivateAskStateContext = createContext<PrivateAskProviderState>({
@@ -109,19 +100,15 @@ export const PrivateAskStateContext = createContext<PrivateAskProviderState>({
   dispatch: (_action: PrivateAskAction) => {},
   finalizedPrivateAskDetails: undefined,
   setFinalizedPrivateAskDetails: (_value: PrivateAskTxDetails) => {},
-  isModalOpen: false,
   handleNext: () => {},
-  handleClose: () => {},
-  toggleModalOpen: () => {},
 } as PrivateAskProviderState)
 
 export function PrivateAskStateProvider({ children }: PrivateAskProps) {
-  const [isModalOpen, toggleModalOpen] = useToggle()
-
   const [state, dispatch] = useReducer(reducer, initialState)
   const [finalizedPrivateAskDetails, setFinalizedPrivateAskDetails] = useState<
     PrivateAskTxDetails | undefined
   >(undefined)
+  const { requestClose } = useModal()
 
   const next = state.next as string | undefined
 
@@ -131,31 +118,20 @@ export function PrivateAskStateProvider({ children }: PrivateAskProps) {
         dispatch({ type: next })
       }
     } else {
-      toggleModalOpen(false)
+      // @BJ todo: add modal close functionality here
+      requestClose()
       if (dispatch) dispatch({ type: RESET })
     }
-  }, [dispatch, next, toggleModalOpen])
-
-  const handleClose = useCallback(() => toggleModalOpen(), [toggleModalOpen])
+  }, [next, requestClose])
 
   const value = useMemo(
     () => ({
       state,
-      isModalOpen,
       handleNext,
-      handleClose,
-      toggleModalOpen,
       finalizedPrivateAskDetails,
       setFinalizedPrivateAskDetails,
     }),
-    [
-      state,
-      isModalOpen,
-      handleNext,
-      handleClose,
-      toggleModalOpen,
-      finalizedPrivateAskDetails,
-    ]
+    [state, handleNext, finalizedPrivateAskDetails]
   )
 
   return (

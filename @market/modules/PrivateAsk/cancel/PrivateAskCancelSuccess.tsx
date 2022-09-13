@@ -1,13 +1,11 @@
 import React from 'react'
 import { Button, Heading, Paragraph, Stack } from '@zoralabs/zord'
 import { CommonPrivateAskComponentProps } from '../PrivateAskModal'
+import { useModal } from '@modal'
 
 interface PrivateAskCancelSuccessProps extends CommonPrivateAskComponentProps {}
-export function PrivateAskCancelSuccess({
-  handleClose,
-  ...props
-}: PrivateAskCancelSuccessProps) {
-  // const { toast, showToast } = useToast()
+export function PrivateAskCancelSuccess({ ...props }: PrivateAskCancelSuccessProps) {
+  const { requestClose } = useModal()
 
   // useEffect(() => {
   //   // if (copied) {
@@ -25,7 +23,7 @@ export function PrivateAskCancelSuccess({
             The sale will no longer be available to the buyer.
           </Paragraph>
         </Stack>
-        <Button onClick={handleClose}>Close</Button>
+        <Button onClick={requestClose}>Close</Button>
       </Stack>
       {/* {toast} */}
     </>

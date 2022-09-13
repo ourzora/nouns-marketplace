@@ -18,7 +18,6 @@ interface PrivateAskModalProps {
 export interface CommonPrivateAskComponentProps extends StackProps {
   nft: NFTObject
   onNext?: () => void
-  handleClose?: () => void
 }
 
 export function PrivateAskModal({ header, nftObj, modalName }: PrivateAskModalProps) {
