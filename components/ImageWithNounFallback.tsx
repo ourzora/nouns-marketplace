@@ -14,18 +14,18 @@ export function ImageWithNounFallback({
 }) {
   const isDao = useMemo(() => returnDao(tokenContract) !== undefined, [tokenContract])
 
-  if (srcImg) {
-    return (
-      <ImageElement
-        src={srcImg}
-        w="100%"
-        h="100%"
-        position="absolute"
-        inset="x0"
-        objectFit="cover"
-      />
-    )
-  }
+  // if (srcImg) {
+  //   return (
+  //     <ImageElement
+  //       src={srcImg}
+  //       w="100%"
+  //       h="100%"
+  //       position="absolute"
+  //       inset="x0"
+  //       objectFit="cover"
+  //     />
+  //   )
+  // }
 
   if (isDao)
     return (
