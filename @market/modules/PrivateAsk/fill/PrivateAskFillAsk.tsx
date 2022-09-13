@@ -1,5 +1,8 @@
 import {
-  // Eyebrow, Flex, Paragraph, Separator,
+  Eyebrow,
+  Flex,
+  Paragraph,
+  // Separator,
   Stack,
 } from '@zoralabs/zord'
 import React, { useEffect, useMemo } from 'react'
@@ -11,17 +14,14 @@ import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { useAskHelper } from '@market/hooks/useAskHelper'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 import { PrintError } from '@shared/components/PrintError'
-// import { useAuth } from '@shared/hooks/useAuth'
+import { useAuth } from '@shared/hooks/useAuth'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
 
 export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) {
-  const {
-    markets,
-    // nft
-  } = props.nft
+  const { markets, nft } = props.nft
   const { ask } = useRelevantMarket(markets)
-  // const { balance: walletBalance } = useAuth()
+  const { balance: walletBalance } = useAuth()
   const {
     displayAskAmount,
     // usdAskAmount,
@@ -32,8 +32,8 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
   const { txStatus, txInProgress, txError, finalizedTx, fillAsk } =
     usePrivateAskTransaction({ nft: props.nft })
   const isDisabled = useMemo(
-    () => !fillAsk || txInProgress || !hasSufficientFunds || !displayAskAmount,
-    [displayAskAmount, fillAsk, hasSufficientFunds, txInProgress]
+    () => txInProgress || !hasSufficientFunds || !displayAskAmount,
+    [displayAskAmount, hasSufficientFunds, txInProgress]
   )
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
@@ -55,7 +55,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
       </Flex>
 
       <Separator />
-
+*/}
       <Flex justify="space-between">
         <Paragraph size="sm" color="text3">
           Your balance
@@ -64,7 +64,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
           {walletBalance?.formatted} {walletBalance?.symbol}
         </Eyebrow>
       </Flex>
-*/}
+
       {txError && <PrintError errorMessage={txError} />}
 
       <TransactionSubmitButton
