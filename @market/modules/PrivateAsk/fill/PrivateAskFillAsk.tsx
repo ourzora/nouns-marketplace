@@ -1,10 +1,4 @@
-import {
-  Eyebrow,
-  Flex,
-  Paragraph,
-  // Separator,
-  Stack,
-} from '@zoralabs/zord'
+import { Eyebrow, Flex, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import React, { useEffect, useMemo } from 'react'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 // import { PriceWithLabel } from '@shared/components/PriceWithLabel'
@@ -39,7 +33,8 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
 
   return (
     <Stack gap="x6">
-      {/* <Flex w="100%" justify="space-between" textAlign="right">
+      <Flex w="100%" justify="space-between" textAlign="right">
+        {/*
         <CollectionThumbnail
           collectionAddress={nft?.contract.address}
           tokenId={nft?.tokenId}
@@ -52,10 +47,10 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
             usdAmount={usdAskAmount}
           />
         )}
+      */}
       </Flex>
 
       <Separator />
-*/}
       <Flex justify="space-between">
         <Paragraph size="sm" color="text3">
           Your balance
