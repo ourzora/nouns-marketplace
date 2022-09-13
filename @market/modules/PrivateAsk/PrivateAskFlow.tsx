@@ -51,7 +51,7 @@ export interface CommonPrivateAskComponentProps extends StackProps {
   onNext?: () => void
 }
 
-function PrivateAskFlowWithState({ header, nft }: PrivateAskModalProps) {
+export function PrivateAskFlow({ header, nft }: PrivateAskModalProps) {
   const { state, handleNext } = usePrivateAskStateContext()
   const Component = componentMap[state.status]
 
@@ -64,8 +64,4 @@ function PrivateAskFlowWithState({ header, nft }: PrivateAskModalProps) {
       <Component key={state.status} nft={nft} onNext={handleNext} />
     </Stack>
   )
-}
-
-export function PrivateAskFlow({ header, nft }: PrivateAskModalProps) {
-  return <PrivateAskFlowWithState header={header} nft={nft} />
 }
