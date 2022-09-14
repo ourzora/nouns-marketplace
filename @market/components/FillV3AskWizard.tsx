@@ -103,6 +103,7 @@ export function FillV3AskWizard({
               txInProgress={txInProgress}
               txStatus={txStatus}
               onClick={handleFillAsk}
+              w="100%"
             >
               {!hasSufficientFunds ? 'Insufficient Balance' : 'Buy now'}
             </TransactionSubmitButton>

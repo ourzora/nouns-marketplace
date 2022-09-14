@@ -18,7 +18,7 @@ export function PriceWithLabel({
     <Stack gap="x1">
       {label && <Eyebrow inline>{label}</Eyebrow>}
 
-      <Heading size="sm" inline>
+      <Heading as="h2" size="sm" inline>
         {cryptoAmount} {symbol}
       </Heading>
       {usdAmount && (

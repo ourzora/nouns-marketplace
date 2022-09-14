@@ -72,6 +72,7 @@ export function ERC721ContractApprovalForm({
           Go back
         </Button>
         <TransactionSubmitButton
+          w="100%"
           txInProgress={txInProgress}
           txStatus={txStatus}
           onClick={handleApproveERC721ForSpender}

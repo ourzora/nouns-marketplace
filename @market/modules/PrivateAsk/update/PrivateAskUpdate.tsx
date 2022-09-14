@@ -68,7 +68,9 @@ export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
       }) => (
         <Form>
           <Stack gap="x6" {...props}>
-            <Heading size="xs">Update List Price</Heading>
+            <Heading as="h2" size="md">
+              Update List Price
+            </Heading>
             <Stack gap="x2">
               <Field name="amount">
                 {({ field, meta: { touched, error } }: FieldProps) => (
@@ -101,6 +103,7 @@ export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
               txInProgress={txInProgress}
               loading={isSubmitting}
               disabled={!isValid}
+              w="100%"
             >
               Update List Price
             </TransactionSubmitButton>

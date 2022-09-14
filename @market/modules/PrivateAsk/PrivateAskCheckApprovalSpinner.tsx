@@ -1,5 +1,5 @@
-// import { Orb } from '@market/components/Orb'
-import { Paragraph, Spinner, Stack, StackProps } from '@zoralabs/zord'
+import { Zorb } from '@zora-brand'
+import { Paragraph, Stack, StackProps } from '@zoralabs/zord'
 import React from 'react'
 
 export interface PrivateAskCheckApprovalSpinnerProps extends StackProps {
@@ -13,7 +13,7 @@ export function PrivateAskCheckApprovalSpinner({
 }: PrivateAskCheckApprovalSpinnerProps) {
   return (
     <Stack gap="x6" align="center" className={className} {...props}>
-      {/* <Orb /> */}
+      <Zorb />
       {/* <Spinner size="lg" /> */}
       <Paragraph size="sm" color="text3">
         {text}

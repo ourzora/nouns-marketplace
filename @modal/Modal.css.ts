@@ -1,4 +1,4 @@
-import { atoms, media, ease, vars } from '@zoralabs/zord'
+import { atoms, vars } from '@zoralabs/zord'
 import { keyframes, style } from '@vanilla-extract/css'
 
 const MODAL_BACKDROP_LAYER = 2000
@@ -45,7 +45,7 @@ export const background = style([
 
 export const customContent = style([
   {
-    maxWidth: 500,
+    maxWidth: 448,
   },
 ])
 

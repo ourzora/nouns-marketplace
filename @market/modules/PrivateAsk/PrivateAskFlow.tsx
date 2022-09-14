@@ -57,9 +57,9 @@ export function PrivateAskFlow({ header, nft }: PrivateAskModalProps) {
 
   return (
     <Stack justify="center">
-      <Flex justify="center" mb="x4" mt="x1" width="100%">
+      {/* <Flex justify="center" mb="x4" mt="x1" width="100%">
         {header}
-      </Flex>
+      </Flex> */}
 
       <Component key={state.status} nft={nft} onNext={handleNext} />
     </Stack>

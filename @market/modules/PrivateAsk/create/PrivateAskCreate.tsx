@@ -71,7 +71,9 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
       }) => (
         <Form>
           <Stack gap="x6" {...props}>
-            <Heading size="xs">Create a Private Listing</Heading>
+            <Heading as="h2" size="md">
+              Private Listing
+            </Heading>
             <Stack gap="x2">
               <Field name="amount">
                 {({ field, meta: { touched, error } }: FieldProps) => (

@@ -1,8 +1,10 @@
 import { Flex, FlexProps } from '@zoralabs/zord'
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import { DataTableItem } from './DataTableItem'
 import { Hyperlink } from './DataTableItem'
+
+import * as rowStyles from './DataTableItem.css'
 
 /**
  * Data table to display a list of `DataTableItem`
@@ -14,18 +16,21 @@ export interface DataTableItemProps {
   label: string
   value?: string
   address?: string
+  rowVariant?: keyof typeof rowStyles.rowVariants['variant']
 }
 
 interface DataTableProps extends FlexProps {
   items?: DataTableItemProps[]
+  rowVariant?: keyof typeof rowStyles.rowVariants['variant']
 }
 
-export function DataTable({ children, items, ...props }: DataTableProps) {
+export function DataTable({ children, items, rowVariant, ...props }: DataTableProps) {
+  const gap = useMemo(() => (rowVariant !== 'withBorder' ? 'x3' : 'x0'), [rowVariant])
   return (
-    <Flex direction="column" gap="x3" {...props}>
+    <Flex direction="column" gap={gap} {...props}>
       {!!items?.length &&
         items.map(({ label, ...item }, idx) => (
-          <DataTableItem key={`${label}-${idx}`} {...item}>
+          <DataTableItem key={`${label}-${idx}`} {...item} variant={rowVariant}>
             {label}
           </DataTableItem>
         ))}

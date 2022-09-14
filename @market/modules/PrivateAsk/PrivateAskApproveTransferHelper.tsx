@@ -7,6 +7,7 @@ import { LearnMoreButton } from './LearnMoreButton'
 import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
 import { CommonPrivateAskComponentProps } from './PrivateAskFlow'
 import { PrintError } from '@shared/components/PrintError'
+import { Zorb } from '@zora-brand'
 
 interface PrivateAskApproveTransferHelperProps extends CommonPrivateAskComponentProps {}
 
@@ -31,10 +32,13 @@ export function PrivateAskApproveTransferHelper({
   return isAwaitingApprovalCheck ? (
     <PrivateAskCheckApprovalSpinner text="Checking Zora Transfer Helper Approval..." />
   ) : (
-    <Stack gap="x6">
-      <Stack gap="x2">
-        <Heading size="xs">Approve Transfer Helper</Heading>
-        <Paragraph size="sm">
+    <Stack gap="x8">
+      <Stack gap="x8" align="center">
+        <Zorb size={52} />
+        <Heading as="h2" size="md">
+          Approve Transfer Helper
+        </Heading>
+        <Paragraph size="sm" color="text4" align="center">
           To list your NFTs on ZORA, you first need to approve permission for ZORA to use
           them.
         </Paragraph>

@@ -31,7 +31,11 @@ export function HorizontalMenu({
   )
 
   return (
-    <Flex className={horizontalMenuWrapper} {...props}>
+    <Flex
+      className={['zora-horizontalmenu', horizontalMenuWrapper]}
+      justify="center"
+      {...props}
+    >
       {items.map((item) => (
         <Button
           key={item.label}

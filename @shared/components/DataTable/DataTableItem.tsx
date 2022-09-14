@@ -1,9 +1,9 @@
 import { CopyButton, AvatarImage } from '@shared'
+import { useToggle } from '@shared/hooks/useToggle'
 import { Flex, FlexProps, Icon, mixins, Paragraph } from '@zoralabs/zord'
 import React from 'react'
 
 import * as styles from './DataTableItem.css'
-import { useToggle } from '@shared/hooks/'
 
 /**
  * Line item in a data table, handles links and copy to clipboard button
@@ -21,11 +21,13 @@ export interface DataTableItemProps extends FlexProps {
   url?: Hyperlink
   value?: string
   address?: string
+  variant?: keyof typeof styles.rowVariants['variant']
 }
 
 export function DataTableItem({
   address,
   children,
+  variant,
   copyValue,
   url,
   value,
@@ -34,7 +36,7 @@ export function DataTableItem({
   const [showCopied, handleCopyStatus] = useToggle()
 
   return (
-    <Flex justify="space-between" w="100%" {...props}>
+    <Flex justify="space-between" w="100%" {...props} className={styles.row({ variant })}>
       <Paragraph size="sm" inline color="text3">
         {children}
       </Paragraph>

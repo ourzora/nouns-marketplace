@@ -4,13 +4,22 @@ import {
   APPROVE_MODULE_FOR_FILL,
   useFormattedPrivateAskInfo,
   usePrivateAskStateContext,
+  APPROVE_TRANSFER,
 } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Button, Separator, Stack, Well } from '@zoralabs/zord'
+import {
+  Button,
+  // Separator,
+  Stack,
+  Well,
+} from '@zoralabs/zord'
 import React from 'react'
 
 import { useRelevantMarket, useAskHelper } from '@market/hooks'
-import { DataTable, useIsOwner } from '@shared'
+import {
+  // DataTable,
+  useIsOwner,
+} from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 
 interface PrivateAskTriggerProps {
@@ -24,7 +33,7 @@ export function PrivateAskTrigger({ nft, openModal }: PrivateAskTriggerProps) {
   const { hasActivePrivateAsk, displayAskAmount, usdAskAmount, isValidPrivateAskBuyer } =
     useAskHelper({ ask })
   const { isOwner } = useIsOwner(nft)
-  const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft })
+  // const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft })
 
   return isOwner ? (
     <>
@@ -68,17 +77,18 @@ export function PrivateAskTrigger({ nft, openModal }: PrivateAskTriggerProps) {
           />
         )}
 
-        <Separator />
-        {formattedAskDetails && <DataTable items={formattedAskDetails} />}
+        {/* <Separator /> */}
+        {/* {formattedAskDetails && <DataTable items={formattedAskDetails} />} */}
 
         <Button
           w="100%"
           onClick={() => {
             dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL })
+            // dispatch && dispatch({ type: APPROVE_TRANSFER })
             openModal()
           }}
         >
-          Buy NFT Privately
+          Buy Now
         </Button>
       </Well>
     )

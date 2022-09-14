@@ -56,7 +56,7 @@ export function ModalComposition({
         <ModalContent
           title="modal"
           showClose={false}
-          removePadding
+          padding="x0"
           modalContentOverrides={modalContentOverrides}
           modalBackgroundOverrides={modalBackgroundOverrides}
         >
