@@ -30,11 +30,12 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
   return (
     <Stack gap="x6">
       <Flex w="100%" justify="space-between" textAlign="right">
-        <CollectionThumbnail
+        {/* @BJ TODO: This component causes 500 error when it hits the useNounsToken contract call */}
+        {/* <CollectionThumbnail
           initialNFT={props.nft}
           collectionAddress={nft?.contract.address}
           tokenId={nft?.tokenId}
-        />
+        /> */}
 
         {displayAskAmount && (
           <PriceWithLabel

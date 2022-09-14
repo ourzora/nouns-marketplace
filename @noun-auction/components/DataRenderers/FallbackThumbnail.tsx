@@ -13,21 +13,15 @@ export function FallbackThumbnail({
   tokenContract,
   ...props
 }: FallbackThumbnailProps) {
-  // const { tokenData } = useNounsToken(tokenContract, tokenId)
+  const { tokenData } = useNounsToken(tokenContract, tokenId) // @BJ <--- THIS HOOK SEEMS TO FAIL?
 
-  // if (!tokenData) return null
+  if (!tokenData) return null
 
   return (
-    <>
-      {tokenContract} {tokenId}
-    </>
+    <ImageElement
+      className={[nounishThumbnailImage, 'nouns-fallback-image']}
+      src={tokenData.image}
+      {...props}
+    />
   )
-
-  // return (
-  //   <ImageElement
-  //     className={[nounishThumbnailImage, 'nouns-fallback-image']}
-  //     src={tokenData?.image}
-  //     {...props}
-  //   />
-  // )
 }
