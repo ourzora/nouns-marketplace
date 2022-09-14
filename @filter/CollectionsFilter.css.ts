@@ -1,7 +1,7 @@
 import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { typography, atoms, textVariants, vars, media } from '@zoralabs/zord'
+import { typography, atoms, textVariants, vars, ease, media } from '@zoralabs/zord'
 import { HEADER_HEIGHT } from 'styles/style-constants'
 
 export const borderStyle = `2px solid ${vars.color.border}`
@@ -187,9 +187,9 @@ export const filterOption = style({
   minWidth: '76px',
   cursor: 'pointer',
   outline: 0,
-  transition: 'border 100ms $inOut, background 100ms $inOut, transform 200ms $out',
+  transition: `border 100ms ${ease.inOut}, background 100ms ${ease.inOut}, transform 200ms ${ease.out}`,
   userSelect: 'none',
-  backgroundColor: '$transparent',
+  backgroundColor: 'transparent',
   selectors: {
     '&:hover:not([disabled])': {
       backgroundColor: vars.color.background1,
@@ -203,7 +203,7 @@ export const filterOption = style({
     },
     '&[disabled]': {
       cursor: 'not-allowed',
-      color: '$black50',
+      color: vars.color.text3,
       pointerEvents: 'none',
     },
     '&:active&[disabled]': {
