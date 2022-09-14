@@ -1,5 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, vars, typography, media, radii } from '@zoralabs/zord'
+import { atoms, vars, media, radii } from '@zoralabs/zord'
 import { MAX_WIDTH } from 'styles/style-constants'
 
 export const nftPageWrapper = style([
@@ -192,5 +192,24 @@ export const nftAttribute = style([
       '@initial': 'x2',
       '@1024': 'x4',
     },
+  }),
+])
+
+export const nftNextButton = style([
+  {
+    marginLeft: '.5rem',
+    width: '2rem',
+    height: '2rem',
+    backgroundRepeat: 'no-repeat',
+    fontSize: 'large',
+    padding: 0,
+    fontFamily:
+      '-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif!important',
+  },
+  atoms({
+    backgroundSize: 'contain',
+    display: 'inline-block',
+    borderRadius: 'round',
+    fontWeight: 700,
   }),
 ])

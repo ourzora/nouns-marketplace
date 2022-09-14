@@ -37,7 +37,7 @@ export const background = style([
       display: 'none',
     },
   },
-  atoms({ 
+  atoms({
     overflowY: 'auto',
     width: '100%',
   }),

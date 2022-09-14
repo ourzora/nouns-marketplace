@@ -25,7 +25,9 @@ function CardContents() {
     timerComplete,
   } = useNounishAuctionProvider()
 
-  const { fallbackTitle } = useTitleWithFallback(contractAddress, tokenId)
+  const { fallbackTitle } = useTitleWithFallback({ contractAddress, tokenId })
+
+  if (!tokenId) return null
 
   return (
     <Stack

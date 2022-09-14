@@ -51,8 +51,34 @@ export const nounsGlasses = style([
   }),
 ])
 
+export const manageButton = style([
+  {
+    gridColumn: '2',
+    gridRow: '2',
+    height: 42,
+    paddingLeft: space.x5,
+    paddingRight: space.x5,
+    '@media': {
+      [media.min1024]: {
+        gridColumn: '23',
+        gridRow: '1',
+      },
+    },
+  },
+  atoms({
+    w: 'auto',
+    ml: 'auto',
+    borderRadius: 'curved',
+    justifyContent: {
+      '@initial': 'center',
+      '@1024': 'center',
+    },
+  }),
+])
+
 export const connectButton = style([
   {
+    borderRadius: 'phat',
     gridColumn: '2',
     gridRow: '1',
     '@media': {
@@ -73,14 +99,60 @@ export const connectButton = style([
 
 export const nounsCenterLink = style([
   {
-    gridColumn: '23',
+    gridColumn: '2',
     gridRow: '1',
     aspectRatio: '100 / 24',
     maxHeight: '24px',
+    '@media': {
+      [media.min1024]: {
+        gridColumn: '23',
+        gridRow: '1',
+      },
+    },
   },
   atoms({
     cursor: 'pointer',
     pos: 'relative',
     h: '100%',
   }),
+])
+
+export const modalWrapper = style([
+  {
+    msOverflowStyle: 'none',
+    scrollbarWidth: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
+    height: 400,
+  },
+  atoms({
+    overflowY: 'scroll',
+  }),
+])
+
+export const modalContent = style([
+  {
+    width: '300px',
+  },
+  atoms({
+    borderRadius: 'phat',
+  }),
+])
+
+export const menuItem = style([
+  atoms({
+    borderRadius: 'phat',
+    px: 'x5',
+    py: 'x5',
+  }),
+])
+
+export const disconnectButton = style([
+  {
+    color: 'red',
+    ':hover': {
+      cursor: 'pointer',
+    },
+  },
 ])
