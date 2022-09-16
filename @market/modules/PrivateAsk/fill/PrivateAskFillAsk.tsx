@@ -20,6 +20,7 @@ import { useAuth } from '@shared/hooks/useAuth'
 import { useModal } from '@modal'
 import { DataTable } from '@shared'
 import { usePrimaryAuctionSummary } from '../hooks/usePrimaryAuctionSummary'
+import { modalDescription } from '../PrivateAskFlow.css'
 //
 // import { useFormattedPrivateAskInfo } from '../hooks'
 // import { usePrimaryAuctionSummary } from '../hooks/'
@@ -47,17 +48,18 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
   return (
-    <Stack gap="x6">
-      <Heading as="h2" size="md">
-        {`Buy ${nft?.contract.name} #${nft?.tokenId}`}
-      </Heading>
+    <Stack gap="x3">
+      {/* Previously x6. Changed everywhere? */}
       <Flex w="100%" justify="space-between" textAlign="right">
+        <Heading as="h2" size="md">
+          {`Buy ${nft?.contract.name} #${nft?.tokenId}`}
+        </Heading>
         {/* @BJ TODO: This component causes 500 error when it hits the useNounsToken contract call */}
-        {/* <CollectionThumbnail
+        <CollectionThumbnail
           initialNFT={props.nft}
           collectionAddress={nft?.contract.address}
           tokenId={nft?.tokenId}
-        /> */}
+        />
 
         {/* {displayAskAmount && (
           <PriceWithLabel
@@ -68,7 +70,6 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
           />
         )} */}
       </Flex>
-
       {/* <Separator />
       <Flex justify="space-between">
         <Paragraph size="sm" color="text3">
@@ -78,18 +79,30 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
           {walletBalance?.formatted} {walletBalance?.symbol}
         </Eyebrow>
       </Flex> */}
-
       <DataTable rowVariant="withBorder" items={formattedAuctionSummary} />
-      {askPriceSummary && <DataTable rowVariant="withBorder" items={[askPriceSummary]} />}
-
-      <Paragraph size="sm" color="text4">
+      <Paragraph size="lg" color="text4" className={[modalDescription]}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, voluptatibus tempora
         rerum ea expedita cumque perspiciatis sed suscipit nesciunt doloribus
       </Paragraph>
-
+      <Separator />
+      {askPriceSummary && (
+        <Flex justify="space-between">
+          <Paragraph size="sm" inline color="text3">
+            {askPriceSummary.label}
+          </Paragraph>
+          <Heading
+            as="h1"
+            // size="sm"
+            // inline
+            color="text1"
+          >
+            {askPriceSummary.value}
+          </Heading>
+        </Flex>
+      )}
+      {/* {askPriceSummary && <DataTable rowVariant="withBorder" items={[askPriceSummary]} />} */}
       {txError && <PrintError errorMessage={txError} />}
-
-      <Flex alignItems="stretch" gap="x2" justify="space-between">
+      <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
         <Button flex="1" variant="secondary" borderRadius="curved" onClick={requestClose}>
           Cancel
         </Button>

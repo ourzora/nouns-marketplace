@@ -1,5 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, color } from '@zoralabs/zord'
+import { atoms, color, typography } from '@zoralabs/zord'
 
 export const linkButton = style([
   {
@@ -18,10 +18,10 @@ export const linkButton = style([
 
 export const errorBox = style([
   {
-    textAlign: 'start',
     backgroundColor: color.background2,
   },
   atoms({
+    textAlign: 'start',
     w: '100%',
     overflowX: 'scroll',
     px: 'x3',
@@ -31,10 +31,11 @@ export const errorBox = style([
 ])
 
 globalStyle(`${errorBox} pre`, {
-  fontSize: '12px',
+  fontSize: typography.fontSize[14],
   fontFamily: 'SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace!important',
   lineHeight: '1!important',
   color: 'red',
+  whiteSpace: 'pre-wrap',
 })
 
 export const lightFont = style({

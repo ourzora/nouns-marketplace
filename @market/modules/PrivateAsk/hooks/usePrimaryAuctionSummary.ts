@@ -23,12 +23,6 @@ export const usePrimaryAuctionSummary = ({ nft: nftObj }: NounishAuctionInfoProp
         ? {
             label: 'Price',
             value: `${ask?.amount?.eth?.value} ETH`,
-            // copyValue: `${ask?.amount?.eth?.value} ETH`,
-            url: {
-              href: '',
-              target: '_blank',
-              rel: 'noreferrer',
-            },
           }
         : null,
     [ask?.amount?.eth?.value, askPrice]
@@ -72,19 +66,6 @@ export const usePrimaryAuctionSummary = ({ nft: nftObj }: NounishAuctionInfoProp
       }
       summary.push(primarySummary)
     }
-    // if(askPrice) {
-    //   const askPriceSummary = {
-    //     label: 'Price',
-    //     value: `${ask?.amount?.eth?.value} ETH`,
-    //     copyValue: `${ask?.amount?.eth?.value} ETH`,
-    //     url: {
-    //       href: '',
-    //       target: '_blank',
-    //       rel: 'noreferrer',
-    //     },
-    //   }
-    //   summary.push(askPriceSummary)
-    // }
 
     return summary
   }, [nft?.owner?.address, nft?.minted.address, primarySalePrice])
