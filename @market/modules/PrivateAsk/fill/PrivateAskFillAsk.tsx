@@ -19,14 +19,20 @@ import { PrintError } from '@shared/components/PrintError'
 import { useAuth } from '@shared/hooks/useAuth'
 import { useModal } from '@modal'
 import { DataTable } from '@shared'
-import { useFormattedPrivateAskInfo } from '../hooks'
+import { usePrimaryAuctionSummary } from '../hooks/usePrimaryAuctionSummary'
+//
+// import { useFormattedPrivateAskInfo } from '../hooks'
+// import { usePrimaryAuctionSummary } from '../hooks/'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
 
 export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) {
   const { markets, nft } = props.nft
-  const { modalType, requestClose, requestOpen } = useModal()
-  const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft: props.nft })
+  const { requestClose } = useModal()
+  // const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft: props.nft })
+  const { askPriceSummary, formattedAuctionSummary } = usePrimaryAuctionSummary({
+    nft: props.nft,
+  })
   const { ask } = useRelevantMarket(markets)
   // const { balance: walletBalance } = useAuth()
   const { displayAskAmount, usdAskAmount, hasSufficientFunds } = useAskHelper({
@@ -73,9 +79,9 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
         </Eyebrow>
       </Flex> */}
 
-      <DataTable rowVariant="withBorder" items={formattedAskDetails} />
+      <DataTable rowVariant="withBorder" items={formattedAuctionSummary} />
+      {askPriceSummary && <DataTable rowVariant="withBorder" items={[askPriceSummary]} />}
 
-      <Flex>TODO: Add relevant data for sale. Owned By? Minted By? Price? TBD</Flex>
       <Paragraph size="sm" color="text4">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, voluptatibus tempora
         rerum ea expedita cumque perspiciatis sed suscipit nesciunt doloribus

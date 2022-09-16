@@ -10,6 +10,7 @@ import {
 import { NFTProvider } from '@shared/providers/NFTProvider'
 import { NounishAuctionProvider } from '@noun-auction'
 import { returnDao } from 'constants/collection-addresses'
+import { useMemo } from 'react'
 
 const NFT = ({
   nft,
@@ -20,7 +21,7 @@ const NFT = ({
   tokenAddress: string
   tokenId: string
 }) => {
-  const dao = returnDao(tokenAddress)
+  const dao = useMemo(() => returnDao(tokenAddress), [tokenAddress])
 
   return (
     <PageWrapper direction="column">

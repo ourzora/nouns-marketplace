@@ -194,20 +194,17 @@ export const sidebarBidWrapper = style([
 
 export const sidebarHighBid = style([
   {
-    // fontSize: typography.size[5],
-    fontSize: '5px',
+    fontSize: typography.fontSize['35'],
     fontFamily: "'Londrina Solid', cursive!important",
     fontWeight: 400,
   },
   atoms({
-    // color: 'reverse',
     color: 'onAccent',
   }),
 ])
 
 export const sideBarUpperLabel = style({
-  // fontSize: typography.size[9],
-  fontSize: '9px',
+  fontSize: typography.fontSize[18],
 })
 
 export const bidHistoryWrapper = style([
