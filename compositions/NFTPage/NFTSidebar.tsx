@@ -1,18 +1,18 @@
-import { Heading, Stack, Flex, Paragraph, Box, BoxProps, Button } from '@zoralabs/zord'
+import { Heading, Stack, Flex, Paragraph, BoxProps, Button, Box } from '@zoralabs/zord'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { useNFTProvider, useTitleWithFallback } from '@shared'
 import { Link } from 'components'
 import { clickAnimation } from 'styles/styles.css'
-import { nftInfoSidebarWrapper, nftNextButton, nftInfoSidebar } from './NFTPage.css'
 import { NFTMarket } from './NFTMarket'
 import { lightFont } from '@shared'
 import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 import { useNounishAuctionProvider } from '@noun-auction'
+import * as styles from './NFTPage.css'
 
 export interface NFTSidebarProps extends BoxProps {}
 
-export function NFTSidebar({ ...props }: NFTSidebarProps) {
+export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
   const router = useRouter()
   const { initialData: nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
   const { data } = useNounishAuctionProvider()
@@ -60,61 +60,66 @@ export function NFTSidebar({ ...props }: NFTSidebarProps) {
   if (!nft || !tokenId || !contractAddress) return null
 
   return (
-    <Box id="nft-info-sidebar" className={nftInfoSidebar} {...props}>
-      <Stack className={nftInfoSidebarWrapper}>
-        <Flex>
-          <Link href={`/collections/${nft?.nft?.contract.address}`}>
-            <CollectionThumbnail
-              initialNFT={nft}
-              collectionAddress={nft?.nft?.contract.address}
-              useTitle
-              size="xxs"
-              radius="round"
-              p="x2"
-              pr="x5"
-              backgroundColor="background2"
-              borderRadius="round"
-              className={clickAnimation}
-            />
-          </Link>
+    // <Box id="nft-info-sidebar" className={styles.nftInfoSidebar} {...props}>
+    <Stack
+      id="nft-info-sidebar"
+      className={[styles.nftInfoSidebar, className]}
+      {...props}
+    >
+      <Flex>
+        <Link href={`/collections/${nft?.nft?.contract.address}`}>
+          <CollectionThumbnail
+            initialNFT={nft}
+            collectionAddress={nft?.nft?.contract.address}
+            useTitle
+            size="xxs"
+            radius="round"
+            p="x2"
+            pr="x5"
+            backgroundColor="background2"
+            borderRadius="round"
+            className={clickAnimation}
+          />
+        </Link>
+      </Flex>
+      <Flex justify="space-between" align="center">
+        <Heading as="h1" size="xl">
+          {fallbackTitle}
+        </Heading>
+        <Flex w="x20">
+          <Button
+            className={[styles.nftNextButton]}
+            disabled={!hasPreviousNft}
+            onClick={handlePrev}
+            variant="circle"
+          >
+            ←
+          </Button>
+          <Button
+            className={[styles.nftNextButton]}
+            disabled={!hasNextNft}
+            onClick={handleNext}
+            variant="circle"
+          >
+            →
+          </Button>
         </Flex>
-        <Flex justify="space-between" align="center">
-          <Heading as="h1" size="xl">
-            {fallbackTitle}
-          </Heading>
-          <Flex w="x20">
-            <Button
-              className={[nftNextButton]}
-              disabled={!hasPreviousNft}
-              onClick={handlePrev}
-              variant="circle"
-            >
-              ←
-            </Button>
-            <Button
-              className={[nftNextButton]}
-              disabled={!hasNextNft}
-              onClick={handleNext}
-              variant="circle"
-            >
-              →
-            </Button>
-          </Flex>
-        </Flex>
-        {nft?.metadata?.description && (
-          <Paragraph size="lg" className={lightFont}>
-            {nft?.metadata?.description}
-          </Paragraph>
-        )}
-
-        {nft?.nft && (
+      </Flex>
+      {nft?.metadata?.description && (
+        <Paragraph size="lg" className={lightFont}>
+          {nft?.metadata?.description}
+        </Paragraph>
+      )}
+      {nft?.nft && ( // Clamp to bottom of container
+        <Box mt="auto">
           <NFTMarket
             contractAddress={nft.nft.contract.address}
             tokenId={nft.nft.tokenId}
             nft={nft}
           />
-        )}
-      </Stack>
-    </Box>
+        </Box>
+      )}
+    </Stack>
+    // </Box>
   )
 }

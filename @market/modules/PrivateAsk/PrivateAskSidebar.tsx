@@ -8,9 +8,13 @@ interface PrivateAskSidebarProps extends StackProps {
   nftObj: NFTObject
 }
 
-export function PrivateAskSidebar({ nftObj, ...props }: PrivateAskSidebarProps) {
+export function PrivateAskSidebar({
+  nftObj,
+  className,
+  ...props
+}: PrivateAskSidebarProps) {
   return (
-    <Stack {...props}>
+    <Stack {...props} className={className}>
       <PrivateAskModal
         modalName="PrivateAskV3"
         nftObj={nftObj}

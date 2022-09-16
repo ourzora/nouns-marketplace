@@ -22,23 +22,17 @@ export function NFTAsks({ nftObj, ...props }: NFTAskProps) {
     if (hasRelevantAsk) {
       // MANAGE ASKS
       return isPrivateAsk ? (
-        <PrivateAskSidebar nftObj={nftObj} />
+        <PrivateAskSidebar nftObj={nftObj} borderRadius="phat" />
       ) : (
         <FillV3AskModal nftObj={nftObj} {...props} />
       )
     }
 
-    if (isOwner) {
-      return (
-        <>
-          <UniversalListAskModal nftObj={nftObj} />
-          {/* <PrivateAskSidebar nft={nftObj} /> */}
-          {/* <ListV3AskModal nftObj={nftObj} {...props} /> */}
-        </>
-      )
-    }
-
-    return <NFTOwner address={nftObj.nft?.owner?.address} align="left" />
+    return isOwner ? (
+      <UniversalListAskModal nftObj={nftObj} />
+    ) : (
+      <NFTOwner address={nftObj.nft?.owner?.address} align="left" />
+    )
   }, [hasRelevantAsk, isOwner, isPrivateAsk, nftObj, props])
 
   return nftObj ? marketComponent : null

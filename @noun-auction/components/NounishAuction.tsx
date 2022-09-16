@@ -33,7 +33,7 @@ export interface AuctionViewConfig extends TokenInfoConfig {
   showLabels?: boolean
 }
 
-export interface NounishAuctionProps extends AuctionViewConfig {
+export interface NounishAuctionProps extends AuctionViewConfig, BoxProps {
   daoConfig: DaoConfigProps
   tokenId?: string
   /* Theming */
@@ -55,11 +55,12 @@ export function NounishAuction({
   hideCollectionTitle = false,
   routePrefix = 'collections',
   thumbnailSize = '100%',
+  className,
   showLabels,
   ...props
 }: NounishAuctionProps) {
   return (
-    <Box className={layout === 'row' && wrapperHover} {...props}>
+    <Box className={[layout === 'row' && wrapperHover, className]} {...props}>
       <Grid
         className={[
           'nounish-auction__auction-data-wrapper',
