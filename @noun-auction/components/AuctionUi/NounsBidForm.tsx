@@ -27,7 +27,7 @@ import {
 } from '@noun-auction'
 
 // Imports from @markets
-import { PrintError } from '@shared'
+import { formatContractError, PrintError } from '@shared'
 
 interface NounsBidFormProps extends BoxProps {
   onConfirmation?: (txHash: string, amount: string, currencyAddress: string) => void
@@ -138,9 +138,9 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
           )}
           <Separator />
         </Stack>
-        {isError && (
+        {isError && writeContractError && (
           <PrintError
-            errorMessage={writeContractError?.message ?? prepareError?.message}
+            errorMessage={formatContractError(writeContractError ?? prepareError)}
             mb="x4"
           />
         )}
