@@ -4,12 +4,14 @@ import {
   // CopyStatus,
   useCopyToClipboard,
 } from '@shared/hooks/useCopyToClipboard'
-import { Button, Eyebrow, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
+import { Button, Eyebrow, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import React from 'react'
+import { HeadlineDescription } from '../HeadlineDescription'
 import { useFormattedPrivateAskInfo } from '../hooks/useFormattedPrivateAskInfo'
 
 import { LearnMoreButton } from '../LearnMoreButton'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 
 interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
 
@@ -36,8 +38,12 @@ export function PrivateAskCreateSuccess({
 
   return (
     <>
-      <Stack gap="x6">
-        <Heading size="xs">Private Listing Created</Heading>
+      <Stack gap="x8">
+        <SuccessCheckmark />
+        <HeadlineDescription
+          heading="Private Listing Created"
+          description="This listing is now available to the buyer."
+        />
 
         <Stack gap="x3">
           <Eyebrow>Sale data</Eyebrow>

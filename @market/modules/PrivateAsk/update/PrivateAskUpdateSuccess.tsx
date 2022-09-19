@@ -1,12 +1,14 @@
 import { DataTable } from '@shared/components/DataTable'
 import { CopyStatus, useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
 import { useToast } from '@shared/hooks/useToast'
-import { Button, Eyebrow, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
+import { Button, Eyebrow, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import React, { useEffect } from 'react'
+import { HeadlineDescription } from '../HeadlineDescription'
 import { useFormattedPrivateAskInfo } from '../hooks/useFormattedPrivateAskInfo'
 
 import { LearnMoreButton } from '../LearnMoreButton'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 
 interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
 
@@ -28,8 +30,13 @@ export function PrivateAskUpdateSuccess({
 
   return (
     <>
-      <Stack gap="x6">
-        <Heading size="xs">Private Listing Updated</Heading>
+      <Stack gap="x8">
+        <SuccessCheckmark />
+
+        <HeadlineDescription
+          heading="Private Listing Updated"
+          description="The listing price has been changed."
+        />
 
         <Stack gap="x3">
           <Eyebrow>Sale data</Eyebrow>

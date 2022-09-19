@@ -1,7 +1,9 @@
 import { useModal } from '@modal'
 import { Button, Heading, Paragraph, Stack } from '@zoralabs/zord'
 import React from 'react'
+import { HeadlineDescription } from '../HeadlineDescription'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 
 interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}
 
@@ -18,13 +20,19 @@ export function PrivateAskFillAskSuccess({ ...props }: PrivateAskFillAskSuccessP
 
   return (
     <>
-      <Stack gap="x6">
-        <Stack gap="x2">
-          <Heading size="xs">Private Purchase Completed</Heading>
-          <Paragraph size="sm">You bought the NFT</Paragraph>
-        </Stack>
-        <Button onClick={requestClose}>Close</Button>
+      <Stack gap="x8">
+        <SuccessCheckmark />
+
+        <HeadlineDescription
+          heading="Private Purchase Completed"
+          description="Find this NFT in your collection soon."
+        />
+
+        <Button variant="secondary" onClick={requestClose}>
+          Close
+        </Button>
       </Stack>
+
       {/* {toast} */}
     </>
   )

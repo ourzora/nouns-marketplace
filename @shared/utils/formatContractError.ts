@@ -31,6 +31,8 @@ export function formatContractError(error: TransactionError | Error) {
         return 'The value of this bid cannot be correctly split between owners.'
       case 'execution reverted: Media: Only approved or owner':
         return 'The contract has not yet been approved or you are the owner.'
+      case 'execution reverted: ONLY_SELLER_OR_TOKEN_OWNER':
+        return 'This action can only be initiated by the token owner.'
     }
   }
 

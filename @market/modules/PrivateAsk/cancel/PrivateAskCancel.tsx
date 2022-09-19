@@ -4,6 +4,8 @@ import { Heading, Paragraph, Stack } from '@zoralabs/zord'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
+import { HeadlineDescription } from '../HeadlineDescription'
+import { PrintError } from '@shared'
 
 interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {}
 
@@ -14,19 +16,17 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
 
   return (
     <Stack gap="x6" {...props}>
-      <Stack gap="x2">
-        <Heading as="h2" size="md">
-          Cancel Private Listing
-        </Heading>
-        <Paragraph size="sm" color="text4" align="center">
-          Cancel the private listing. This action can not be reversed, but you will be
-          able to list the NFT for sale again.
-        </Paragraph>
+      <Stack gap="x4">
+        <HeadlineDescription
+          heading="Cancel Private Listing"
+          description="This action is irreversible, but you can list the NFT for sale again."
+        />
 
         {txError && (
-          <Paragraph size="xs" color="negative">
-            {txError}
-          </Paragraph>
+          <PrintError errorMessage={txError} />
+          // <Paragraph size="xs" color="negative">
+          //   {txError}
+          // </Paragraph>
         )}
       </Stack>
       <TransactionSubmitButton
@@ -37,7 +37,7 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
         loading={isSubmitting}
         disabled={isSubmitting}
       >
-        Cancel Private Listing
+        Cancel Listing
       </TransactionSubmitButton>
     </Stack>
   )

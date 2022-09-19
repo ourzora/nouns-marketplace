@@ -80,7 +80,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
         </Eyebrow>
       </Flex> */}
       <DataTable rowVariant="withBorder" items={formattedAuctionSummary} />
-      <Paragraph size="lg" color="text4" className={[modalDescription]}>
+      <Paragraph size="lg" color="text3" className={[modalDescription]}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, voluptatibus tempora
         rerum ea expedita cumque perspiciatis sed suscipit nesciunt doloribus
       </Paragraph>

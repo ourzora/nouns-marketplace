@@ -1,7 +1,9 @@
 import React from 'react'
-import { Button, Heading, Paragraph, Stack } from '@zoralabs/zord'
+import { Button, Stack } from '@zoralabs/zord'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { useModal } from '@modal'
+import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
+import { HeadlineDescription } from '../HeadlineDescription'
 
 interface PrivateAskCancelSuccessProps extends CommonPrivateAskComponentProps {}
 export function PrivateAskCancelSuccess({ ...props }: PrivateAskCancelSuccessProps) {
@@ -9,21 +11,21 @@ export function PrivateAskCancelSuccess({ ...props }: PrivateAskCancelSuccessPro
 
   // useEffect(() => {
   //   // if (copied) {
-  //   showToast('Cancelled')
+  //   showToast('Canceled')
   //   // }
   // }, [showToast])
 
   return (
     <>
-      <Stack gap="x5">
-        <Stack gap="x2">
-          <Heading size="xs">Private Listing Cancelled</Heading>
-
-          <Paragraph size="sm">
-            The sale will no longer be available to the buyer.
-          </Paragraph>
-        </Stack>
-        <Button onClick={requestClose}>Close</Button>
+      <Stack gap="x8">
+        <SuccessCheckmark />
+        <HeadlineDescription
+          heading="Private Listing Canceled"
+          description="The listing is no longer available to the buyer."
+        />
+        <Button variant="secondary" onClick={requestClose}>
+          Close
+        </Button>
       </Stack>
       {/* {toast} */}
     </>
