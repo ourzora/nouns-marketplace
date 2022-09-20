@@ -60,7 +60,7 @@ export const manageButton = style([
     paddingRight: space.x5,
     '@media': {
       [media.min1024]: {
-        gridColumn: '23',
+        gridColumn: '2',
         gridRow: '1',
       },
     },
@@ -83,12 +83,13 @@ export const connectButton = style([
     gridRow: '1',
     '@media': {
       [media.min1024]: {
-        gridColumn: '24',
+        gridColumn: '2',
         gridRow: '1',
       },
     },
   },
   atoms({
+    textAlign: 'center',
     w: '100%',
     justifyContent: {
       '@initial': 'flex-end',

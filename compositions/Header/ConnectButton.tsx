@@ -17,7 +17,13 @@ export const ConnectButton = ({ connectText = 'Connect wallet', ...props }) => {
 
   if (!address || !chain) {
     return (
-      <Button size="sm" px="x4" onClick={openConnectModal} {...props}>
+      <Button
+        className={connectButton}
+        size="sm"
+        px="x4"
+        onClick={openConnectModal}
+        {...props}
+      >
         {connectText}
       </Button>
     )
@@ -29,6 +35,7 @@ export const ConnectButton = ({ connectText = 'Connect wallet', ...props }) => {
         size="sm"
         variant="destructive"
         px="x4"
+        className={connectButton}
         onClick={openChainModal}
         style={{ gap: 4, gridGap: 4 }}
         {...props}
