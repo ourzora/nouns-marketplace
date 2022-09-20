@@ -26,7 +26,7 @@ export function FooterComposition() {
           <Label
             px="x4"
             as="a"
-            href="https://twitter.com/nounsdao"
+            href="https://twitter.com/nounmarket"
             target="_blank"
             size="lg"
             rel="noreferrer"

@@ -15,6 +15,10 @@ export const rankingWrapper = style([
       '@initial': 'x4',
       '@1024': 'x14',
     },
+    pb: {
+      '@initial': 'x4',
+      '@1024': 'x14',
+    },
   }),
 ])
 

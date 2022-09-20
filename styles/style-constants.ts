@@ -10,5 +10,5 @@ export const MAX_WIDTH = {
   SM: 720,
   MED: 1100,
   LG: 1200,
-  XL: 1376,
+  XL: 1440,
 }

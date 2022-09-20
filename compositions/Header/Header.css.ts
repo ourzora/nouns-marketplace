@@ -1,6 +1,11 @@
 import { style } from '@vanilla-extract/css'
 import { atoms, media, color, space } from '@zoralabs/zord'
-import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, HEADER_Z } from 'styles/style-constants'
+import {
+  HEADER_HEIGHT,
+  HEADER_HEIGHT_MOBILE,
+  HEADER_Z,
+  MAX_WIDTH,
+} from 'styles/style-constants'
 
 export const headerWrapper = style([
   {
@@ -10,6 +15,8 @@ export const headerWrapper = style([
     gridTemplateColumns: 'repeat(2, 1fr)',
     gridTemplateRows: 'auto',
     borderBottom: `2px solid ${color.black10}`,
+    margin: '0 auto',
+    maxWidth: MAX_WIDTH.XL,
     '@media': {
       [media.min1024]: {
         height: HEADER_HEIGHT,

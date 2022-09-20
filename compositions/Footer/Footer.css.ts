@@ -4,19 +4,19 @@ import { atoms, media } from '@zoralabs/zord'
 import { FOOTER_HEIGHT, FOOTER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
 
 export const footerWrap = style({
-  margin: '0 auto',
-  maxWidth: MAX_WIDTH.LG,
+  // strictly by design
+  borderTop: `2px solid #F2F2F2`,
 })
 
 export const footerWrapper = style([
   {
     height: FOOTER_HEIGHT_MOBILE,
+    margin: '0 auto',
+    maxWidth: MAX_WIDTH.XL,
     gridTemplateAreas: `
       'leftLink leftLink rightLink rightLink' 
       'poweredBy poweredBy poweredBy poweredBy'
     `,
-    // strictly by design
-    borderTop: `2px solid #F2F2F2`,
     '@media': {
       [media.min1024]: {
         height: FOOTER_HEIGHT,
