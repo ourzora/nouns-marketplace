@@ -35,10 +35,13 @@ export const footerWrapper = style([
 ])
 
 const footerColVariants = {
+  // x-values do not work here. bug?
   variant: {
     left: {
       gridArea: 'leftLink',
       justifySelf: 'right',
+      paddingLeft: '32px',
+      paddingRight: '8px',
       paddingTop: '20px',
       '@media': {
         [media.min1024]: {
@@ -49,6 +52,8 @@ const footerColVariants = {
     right: {
       gridArea: 'rightLink',
       justifySelf: 'left',
+      paddingRight: '32px',
+      paddingLeft: '8px',
       paddingTop: '20px',
       '@media': {
         [media.min1024]: {

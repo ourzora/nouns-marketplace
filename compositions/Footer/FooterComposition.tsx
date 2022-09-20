@@ -10,10 +10,10 @@ export function FooterComposition() {
     <Flex className={footerWrap}>
       <Grid as="footer" className={footerWrapper}>
         <Box gap="x2" className={[footerCol({ variant: 'left' })]}>
-          <Label px="x4" as="a" size="lg" href="/docs" passhref>
+          <Label as="a" size="lg" href="/docs" passhref>
             Docs
           </Label>
-          <Label px="x4" as="a" size="lg" href="#">
+          <Label pl="x4" as="a" size="lg" href="#">
             About
           </Label>
         </Box>
@@ -24,7 +24,6 @@ export function FooterComposition() {
 
         <Box className={[footerCol({ variant: 'right' })]}>
           <Label
-            px="x4"
             as="a"
             href="https://twitter.com/nounmarket"
             target="_blank"
@@ -35,7 +34,7 @@ export function FooterComposition() {
           </Label>
 
           <Label
-            px="x4"
+            pl="x4"
             size="lg"
             rel="noreferrer"
             as="a"
