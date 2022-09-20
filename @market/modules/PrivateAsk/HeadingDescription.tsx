@@ -1,18 +1,18 @@
 import { Heading, Paragraph, Stack } from '@zoralabs/zord'
-import { modalDescription } from './PrivateAskFlow.css'
+import { mediumFont } from 'styles/styles.css'
 
-interface HeadlineDescriptionProps {
+interface HeadingDescriptionProps {
   heading: string
   description: string
 }
 
-export function HeadlineDescription({ heading, description }: HeadlineDescriptionProps) {
+export function HeadingDescription({ heading, description }: HeadingDescriptionProps) {
   return (
     <Stack gap="x4" textAlign="center">
       <Heading as="h3" size="md">
         {heading}
       </Heading>
-      <Paragraph size="lg" color="text3" className={[modalDescription]}>
+      <Paragraph size="lg" color="text3" className={[mediumFont]}>
         {description}
       </Paragraph>
     </Stack>

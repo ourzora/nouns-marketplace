@@ -2,6 +2,7 @@ import { CopyButton, AvatarImage } from '@shared'
 import { useToggle } from '@shared/hooks/useToggle'
 import { Flex, FlexProps, Icon, mixins, Paragraph } from '@zoralabs/zord'
 import React from 'react'
+import { lightFont } from 'styles/styles.css'
 
 import * as styles from './DataTableItem.css'
 
@@ -37,7 +38,7 @@ export function DataTableItem({
 
   return (
     <Flex justify="space-between" w="100%" {...props} className={styles.row({ variant })}>
-      <Paragraph size="sm" inline color="text3">
+      <Paragraph size="sm" inline color="text3" className={[lightFont]}>
         {children}
       </Paragraph>
 

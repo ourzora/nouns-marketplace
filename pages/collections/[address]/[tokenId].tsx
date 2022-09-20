@@ -8,7 +8,6 @@ import { NounishAuctionProvider } from '@noun-auction'
 import { returnDao } from 'constants/collection-addresses'
 import { useMemo } from 'react'
 import * as styles from 'compositions/NFTPage/NFTPage.css'
-import { style } from '@vanilla-extract/css'
 
 const NFT = ({
   nft,
@@ -32,7 +31,7 @@ const NFT = ({
         <Grid className={styles.nftPageWrapper}>
           <NFTPageHero />
           {dao ? (
-            <NounishAuctionProvider daoConfig={dao} tokenId={nft?.nft?.tokenId}>
+            <NounishAuctionProvider daoConfig={dao} tokenId={tokenId}>
               <NFTSidebar />
             </NounishAuctionProvider>
           ) : (

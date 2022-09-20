@@ -25,7 +25,7 @@ export const textColor = style({
   color: vars.color.accentDisabled,
 })
 
-export const modalDescription = style({
-  fontFamily: 'PTRootUIWebLight!important',
-  fontWeight: 600,
-})
+// export const modalDescription = style({
+//   fontFamily: 'PTRootUIWebLight!important',
+//   fontWeight: 600,
+// })

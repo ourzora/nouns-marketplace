@@ -1,6 +1,6 @@
 import {
   Button,
-  Eyebrow,
+  // Eyebrow,
   Flex,
   Heading,
   Paragraph,
@@ -9,21 +9,18 @@ import {
 } from '@zoralabs/zord'
 import React, { useEffect, useMemo } from 'react'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { PriceWithLabel } from '@shared/components/PriceWithLabel'
+// import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { useAskHelper } from '@market/hooks/useAskHelper'
+import { usePrimaryAuctionDataTable } from '@market/modules/PrivateAsk/hooks/usePrimaryAuctionDataTable'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 import { PrintError } from '@shared/components/PrintError'
-import { useAuth } from '@shared/hooks/useAuth'
 import { useModal } from '@modal'
 import { DataTable } from '@shared'
-import { usePrimaryAuctionSummary } from '../hooks/usePrimaryAuctionSummary'
-import { modalDescription } from '../PrivateAskFlow.css'
+import { mediumFont } from 'styles/styles.css'
 //
-// import { useFormattedPrivateAskInfo } from '../hooks'
-// import { usePrimaryAuctionSummary } from '../hooks/'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
 
@@ -31,7 +28,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
   const { markets, nft } = props.nft
   const { requestClose } = useModal()
   // const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft: props.nft })
-  const { askPriceSummary, formattedAuctionSummary } = usePrimaryAuctionSummary({
+  const { askPriceSummary, formattedAuctionDataTable } = usePrimaryAuctionDataTable({
     nft: props.nft,
   })
   const { ask } = useRelevantMarket(markets)
@@ -79,8 +76,8 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
           {walletBalance?.formatted} {walletBalance?.symbol}
         </Eyebrow>
       </Flex> */}
-      <DataTable rowVariant="withBorder" items={formattedAuctionSummary} />
-      <Paragraph size="lg" color="text3" className={[modalDescription]}>
+      <DataTable rowVariant="withBorder" items={formattedAuctionDataTable} />
+      <Paragraph size="lg" color="text3" className={[mediumFont]}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, voluptatibus tempora
         rerum ea expedita cumque perspiciatis sed suscipit nesciunt doloribus
       </Paragraph>

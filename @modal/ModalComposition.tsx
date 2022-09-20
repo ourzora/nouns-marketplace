@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
 import { ClassValue } from 'clsx'
-import { Box, Button } from '@zoralabs/zord'
+import { Box, BoxProps, Button } from '@zoralabs/zord'
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from './Modal.css'
 
-export type ModalCompositionProps = {
+export interface ModalCompositionProps extends BoxProps {
   /** Unique identifier / key for the modal */
   modalName: string
   /** Content housed inside of modal */
@@ -26,6 +26,7 @@ export function ModalComposition({
   modalName,
   content,
   trigger,
+  className,
   modalContentOverrides = customContent,
   modalBackgroundOverrides = customBackground,
   modalOverlayOverrides,
@@ -38,7 +39,7 @@ export function ModalComposition({
 
   return (
     <>
-      <Box className="zora-modal-trigger-wrapper">
+      <Box className={['zora-modal-trigger-wrapper', className]}>
         <Button
           variant="unset"
           onClick={modalHandler}

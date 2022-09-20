@@ -6,7 +6,7 @@ import {
 } from '@shared/hooks/useCopyToClipboard'
 import { Button, Eyebrow, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import React from 'react'
-import { HeadlineDescription } from '../HeadlineDescription'
+import { HeadingDescription } from '../HeadingDescription'
 import { useFormattedPrivateAskInfo } from '../hooks/useFormattedPrivateAskInfo'
 
 import { LearnMoreButton } from '../LearnMoreButton'
@@ -40,7 +40,7 @@ export function PrivateAskCreateSuccess({
     <>
       <Stack gap="x8">
         <SuccessCheckmark />
-        <HeadlineDescription
+        <HeadingDescription
           heading="Private Listing Created"
           description="This listing is now available to the buyer."
         />

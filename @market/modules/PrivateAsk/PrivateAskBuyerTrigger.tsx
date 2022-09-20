@@ -1,0 +1,66 @@
+import {
+  CANCEL,
+  UPDATE,
+  APPROVE_MODULE_FOR_FILL,
+  useFormattedPrivateAskInfo,
+  usePrivateAskStateContext,
+  APPROVE_TRANSFER,
+  CANCEL_SUCCESS,
+  CREATE_SUCCESS,
+  UPDATE_SUCCESS,
+  FILLASK_SUCCESS,
+  CANCEL_ASK,
+} from '@market/modules/PrivateAsk/'
+import { NFTObject } from '@zoralabs/nft-hooks'
+import { Button, Well } from '@zoralabs/zord'
+import React from 'react'
+
+import { useRelevantMarket, useAskHelper } from '@market/hooks'
+import { PriceWithLabel } from '@shared/components/PriceWithLabel'
+
+interface PrivateAskBuyerTriggerProps {
+  nft: NFTObject
+  openModal: () => void
+}
+
+export function PrivateAskBuyerTrigger({ nft, openModal }: PrivateAskBuyerTriggerProps) {
+  const { dispatch } = usePrivateAskStateContext()
+  const { ask } = useRelevantMarket(nft.markets)
+  const { displayAskAmount, usdAskAmount, isValidPrivateAskBuyer } = useAskHelper({ ask })
+
+  if (!isValidPrivateAskBuyer) return null
+
+  // const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft })
+
+  return (
+    <Well gap="x6">
+      {displayAskAmount && (
+        <PriceWithLabel
+          label="Private Listing"
+          symbol="ETH"
+          cryptoAmount={displayAskAmount}
+          usdAmount={usdAskAmount}
+        />
+      )}
+
+      {/* <Separator /> */}
+      {/* {formattedAskDetails && <DataTable items={formattedAskDetails} />} */}
+
+      <Button
+        w="100%"
+        onClick={() => {
+          dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL }) // INITIAL STATE IN FLOW
+          // dispatch && dispatch({ type: APPROVE_TRANSFER }) // FOR TESTING
+          // dispatch && dispatch({ type: CANCEL_SUCCESS }) // FOR TESTING
+          // dispatch && dispatch({ type: CANCEL_ASK }) // FOR TESTING
+          // dispatch && dispatch({ type: CREATE_SUCCESS }) // FOR TESTING
+          // dispatch && dispatch({ type: UPDATE_SUCCESS }) // FOR TESTING
+          // dispatch && dispatch({ type: FILLASK_SUCCESS }) // FOR TESTING
+          openModal()
+        }}
+      >
+        Buy Now
+      </Button>
+    </Well>
+  )
+}

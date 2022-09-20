@@ -3,7 +3,7 @@ import { Button, Stack } from '@zoralabs/zord'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { useModal } from '@modal'
 import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
-import { HeadlineDescription } from '../HeadlineDescription'
+import { HeadingDescription } from '../HeadingDescription'
 
 interface PrivateAskCancelSuccessProps extends CommonPrivateAskComponentProps {}
 export function PrivateAskCancelSuccess({ ...props }: PrivateAskCancelSuccessProps) {
@@ -19,7 +19,7 @@ export function PrivateAskCancelSuccess({ ...props }: PrivateAskCancelSuccessPro
     <>
       <Stack gap="x8">
         <SuccessCheckmark />
-        <HeadlineDescription
+        <HeadingDescription
           heading="Private Listing Canceled"
           description="The listing is no longer available to the buyer."
         />

@@ -1,16 +1,17 @@
-import { Heading, Stack, Flex, Paragraph, BoxProps, Button, Box } from '@zoralabs/zord'
+import { Heading, Stack, Flex, Button, StackProps } from '@zoralabs/zord'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { useNFTProvider, useTitleWithFallback } from '@shared'
 import { Link } from 'components'
-import { clickAnimation } from 'styles/styles.css'
+import { clickAnimation, mediumFont } from 'styles/styles.css'
 import { NFTMarket } from './NFTMarket'
-import { lightFont } from '@shared'
 import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 import { useNounishAuctionProvider } from '@noun-auction'
 import * as styles from './NFTPage.css'
+import { NFTProvenance } from './NFTProvenance'
+import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
 
-export interface NFTSidebarProps extends BoxProps {}
+export interface NFTSidebarProps extends StackProps {}
 
 export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
   const router = useRouter()
@@ -60,7 +61,6 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
   if (!nft || !tokenId || !contractAddress) return null
 
   return (
-    // <Box id="nft-info-sidebar" className={styles.nftInfoSidebar} {...props}>
     <Stack
       id="nft-info-sidebar"
       className={[styles.nftInfoSidebar, className]}
@@ -106,20 +106,31 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
         </Flex>
       </Flex>
       {nft?.metadata?.description && (
-        <Paragraph size="lg" className={lightFont}>
+        <DescriptionWithMaxLines
+          baseLineheight={30}
+          maxLines={2}
+          // size="lg"
+          // paragraphClassName={lightFont}
+          // className={styles}
+          paragraphClassName={mediumFont}
+          overflowY="hidden"
+        >
+          {/* <Paragraph size="lg" className={lightFont}> */}
+          {/* <Paragraph size="lg" className={mediumFont}> */}
           {nft?.metadata?.description}
-        </Paragraph>
+          {/* </Paragraph> */}
+        </DescriptionWithMaxLines>
       )}
       {nft?.nft && ( // Clamp to bottom of container
-        <Box mt="auto">
+        <Stack gap="x4" mt="auto">
+          <NFTProvenance nft={nft} />
           <NFTMarket
             contractAddress={nft.nft.contract.address}
             tokenId={nft.nft.tokenId}
             nft={nft}
           />
-        </Box>
+        </Stack>
       )}
     </Stack>
-    // </Box>
   )
 }

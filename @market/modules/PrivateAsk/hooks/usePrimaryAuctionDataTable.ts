@@ -9,7 +9,7 @@ interface NounishAuctionInfoProps {
   nft: NFTObject
 }
 
-export const usePrimaryAuctionSummary = ({ nft: nftObj }: NounishAuctionInfoProps) => {
+export const usePrimaryAuctionDataTable = ({ nft: nftObj }: NounishAuctionInfoProps) => {
   const { nft, markets } = nftObj
   const { primarySalePrice } = useNounishAuctionProvider()
 
@@ -28,27 +28,27 @@ export const usePrimaryAuctionSummary = ({ nft: nftObj }: NounishAuctionInfoProp
     [ask?.amount?.eth?.value, askPrice]
   )
 
-  const formattedAuctionSummary = useMemo<DataTableItemProps[] | undefined>(() => {
+  const formattedAuctionDataTable = useMemo<DataTableItemProps[] | undefined>(() => {
     const summary = [
       {
         label: 'Owned by',
         value: shortenAddress(nft?.owner?.address),
-        copyValue: nft?.owner?.address,
-        url: {
-          href: `https://zora.co/${nft?.owner?.address}`,
-          target: '_blank',
-          rel: 'noreferrer',
-        },
+        // copyValue: nft?.owner?.address,
+        // url: {
+        //   href: `https://zora.co/${nft?.owner?.address}`,
+        //   target: '_blank',
+        //   rel: 'noreferrer',
+        // },
       },
       {
         label: 'Minted by',
         value: shortenAddress(nft?.minted.address),
-        copyValue: nft?.minted.address,
-        url: {
-          href: `https://zora.co/${nft?.minted.address}`,
-          target: '_blank',
-          rel: 'noreferrer',
-        },
+        // copyValue: nft?.minted.address,
+        // url: {
+        //   href: `https://zora.co/${nft?.minted.address}`,
+        //   target: '_blank',
+        //   rel: 'noreferrer',
+        // },
       },
       // @BJ TODO: Should we also add seller data to this table?
     ]
@@ -57,12 +57,12 @@ export const usePrimaryAuctionSummary = ({ nft: nftObj }: NounishAuctionInfoProp
       const primarySummary = {
         label: 'Auctioned for',
         value: `${primarySalePrice} ETH`,
-        copyValue: `${primarySalePrice} ETH`,
-        url: {
-          href: '',
-          target: '_blank',
-          rel: 'noreferrer',
-        },
+        // copyValue: `${primarySalePrice} ETH`,
+        // url: {
+        //   href: '',
+        //   target: '_blank',
+        //   rel: 'noreferrer',
+        // },
       }
       summary.push(primarySummary)
     }
@@ -71,15 +71,15 @@ export const usePrimaryAuctionSummary = ({ nft: nftObj }: NounishAuctionInfoProp
   }, [nft?.owner?.address, nft?.minted.address, primarySalePrice])
 
   const copyableValue = useMemo(() => {
-    if (!formattedAuctionSummary) return ''
+    if (!formattedAuctionDataTable) return ''
 
-    return formattedAuctionSummary
+    return formattedAuctionDataTable
       .map(({ label, copyValue }) => `${label}: ${copyValue}`)
       .join('\r\n')
-  }, [formattedAuctionSummary])
+  }, [formattedAuctionDataTable])
 
   return {
-    formattedAuctionSummary,
+    formattedAuctionDataTable,
     copyableValue,
     askPriceSummary,
   }

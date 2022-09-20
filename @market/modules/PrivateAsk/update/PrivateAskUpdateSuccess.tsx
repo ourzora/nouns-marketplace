@@ -3,7 +3,7 @@ import { CopyStatus, useCopyToClipboard } from '@shared/hooks/useCopyToClipboard
 import { useToast } from '@shared/hooks/useToast'
 import { Button, Eyebrow, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import React, { useEffect } from 'react'
-import { HeadlineDescription } from '../HeadlineDescription'
+import { HeadingDescription } from '../HeadingDescription'
 import { useFormattedPrivateAskInfo } from '../hooks/useFormattedPrivateAskInfo'
 
 import { LearnMoreButton } from '../LearnMoreButton'
@@ -33,7 +33,7 @@ export function PrivateAskUpdateSuccess({
       <Stack gap="x8">
         <SuccessCheckmark />
 
-        <HeadlineDescription
+        <HeadingDescription
           heading="Private Listing Updated"
           description="The listing price has been changed."
         />

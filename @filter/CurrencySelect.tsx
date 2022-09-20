@@ -52,24 +52,26 @@ export function CurrencySelect({
         {symbol}
       </Text>
 
-      <Select
-        autoFocus={autoFocus}
-        className={styles.currencySelect({ variant })}
-        onChange={handleChange}
-        name={name}
-        style={{ minWidth }}
-      >
-        {placeholder && (
-          <option value="Select Index" disabled>
-            {placeholder}
-          </option>
-        )}
-        {options.map((currency) => (
-          <option key={currency.id} value={currency.id}>
-            {currency.symbol}
-          </option>
-        ))}
-      </Select>
+      {name && (
+        <Select
+          autoFocus={autoFocus}
+          className={styles.currencySelect({ variant })}
+          onChange={handleChange}
+          name={name}
+          style={{ minWidth }}
+        >
+          {placeholder && (
+            <option value="Select Index" disabled>
+              {placeholder}
+            </option>
+          )}
+          {options.map((currency) => (
+            <option key={currency.id} value={currency.id}>
+              {currency.symbol}
+            </option>
+          ))}
+        </Select>
+      )}
     </Box>
   )
 }

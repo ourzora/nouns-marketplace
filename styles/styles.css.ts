@@ -28,8 +28,14 @@ globalStyle('light-font', {
 })
 
 export const lightFont = style({
-  fontWeight: 300,
   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
+  fontWeight: 300,
+})
+
+export const mediumFont = style({
+  fontFamily: 'PTRootUIWebLight, Arial, Helvetica, sans-serif!important',
+  // fontFamily: 'PTRootUIWebLight',
+  fontWeight: 600,
 })
 
 export const noTextWrap = style({
