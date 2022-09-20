@@ -1,4 +1,4 @@
-import { Grid, Heading, Label, Stack, Box, BoxProps } from '@zoralabs/zord'
+import { Grid, Heading, Label, Stack, Box, BoxProps, radii } from '@zoralabs/zord'
 import {
   nftMarketWrapper,
   nftAttributesWrapper,
@@ -17,28 +17,26 @@ export function NFTAttributes({ ...props }: NFTAttributesProps) {
   if (!nft || !nft?.metadata?.attributes) return null
 
   return (
-    <Box className={nftAttributes} {...props}>
-      <Stack className={nftMarketWrapper}>
-        <Heading as="h3">Traits</Heading>
-        <Grid className={nftAttributesWrapper}>
-          {nft?.metadata?.attributes &&
-            nft?.metadata?.attributes.map((attribute) => (
-              <Stack key={attribute.name} className={nftAttribute}>
-                <Label
-                  size="lg"
-                  className={lightFont}
-                  color="text3"
-                  textTransform="capitalize"
-                >
-                  {attribute.name}
-                </Label>
-                <Label size="lg" textTransform="capitalize">
-                  {attribute.value}
-                </Label>
-              </Stack>
-            ))}
-        </Grid>
-      </Stack>
-    </Box>
+    <Stack className={['traits', nftAttributes, nftMarketWrapper]} {...props}>
+      <Heading as="h3">Traits</Heading>
+      <Grid className={nftAttributesWrapper}>
+        {nft?.metadata?.attributes &&
+          nft?.metadata?.attributes.map((attribute) => (
+            <Stack key={attribute.name} className={nftAttribute}>
+              <Label
+                size="lg"
+                className={lightFont}
+                color="text3"
+                textTransform="capitalize"
+              >
+                {attribute.name}
+              </Label>
+              <Label size="lg" textTransform="capitalize">
+                {attribute.value}
+              </Label>
+            </Stack>
+          ))}
+      </Grid>
+    </Stack>
   )
 }

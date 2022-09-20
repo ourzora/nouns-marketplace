@@ -125,11 +125,17 @@ export const nftMarketWrapper = style([
   {
     borderColor: vars.color.background2,
     marginTop: 'auto',
+    borderRadius: 0,
+    borderWidth: 'none',
+    '@media': {
+      [media.min1024]: {
+        borderWidth: radii.tiny,
+        borderRadius: radii.phat,
+      },
+    },
   },
   atoms({
     mt: 'auto',
-    borderRadius: 'phat',
-    borderWidth: 'normal',
     borderStyle: 'solid',
     p: {
       '@initial': 'x4',
