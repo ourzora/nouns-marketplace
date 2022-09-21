@@ -18,6 +18,7 @@ type PrivateAskTxDetails = {
   rawBuyerAddress: string
 }
 
+export const VIEW_LISTING: string = 'viewListing'
 export const APPROVE_MODULE_FOR_CREATE: string = 'approveModuleForSale'
 export const APPROVE_MODULE_FOR_FILL: string = 'approveModuleForFill'
 export const APPROVE_TRANSFER: string = 'approveTransferHelper'
@@ -42,6 +43,7 @@ interface State {
 }
 
 export type PrivateAskAction =
+  | { type: typeof VIEW_LISTING }
   | { type: typeof APPROVE_MODULE_FOR_CREATE }
   | { type: typeof APPROVE_TRANSFER }
   | { type: typeof CREATE }
@@ -80,6 +82,8 @@ export function reducer(_state: State, action: PrivateAskAction): State {
       return { status: FILLASK, next: FILLASK_SUCCESS }
     case FILLASK_SUCCESS:
       return { status: FILLASK_SUCCESS }
+    case VIEW_LISTING:
+      return { status: VIEW_LISTING }
     default:
       throw new Error()
   }

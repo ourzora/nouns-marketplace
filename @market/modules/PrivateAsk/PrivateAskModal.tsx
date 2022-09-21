@@ -14,12 +14,16 @@ import * as styles from './PrivateAskModal.css'
 import { customContent, customBackground } from '@modal/Modal.css'
 
 interface PrivateAskModalProps {
-  header: React.ReactNode
+  // header: React.ReactNode
   nftObj: NFTObject
   modalName: string
 }
 
-export function PrivateAskModal({ header, nftObj, modalName }: PrivateAskModalProps) {
+export function PrivateAskModal({
+  // header,
+  nftObj,
+  modalName,
+}: PrivateAskModalProps) {
   const { modalType, requestClose, requestOpen } = useModal()
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
@@ -44,7 +48,10 @@ export function PrivateAskModal({ header, nftObj, modalName }: PrivateAskModalPr
           showClose={false}
           padding="x8"
         >
-          <PrivateAskFlow header={header} nft={nftObj} />
+          <PrivateAskFlow
+            //  header={header}
+            nft={nftObj}
+          />
         </ModalContent>
       </Modal>
     </PrivateAskStateProvider>

@@ -1,41 +1,41 @@
-import {
-  Button,
-  // Eyebrow,
-  Flex,
-  Heading,
-  Paragraph,
-  Separator,
-  Stack,
-} from '@zoralabs/zord'
+import { Button, Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import React, { useEffect, useMemo } from 'react'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-// import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { useAskHelper } from '@market/hooks/useAskHelper'
-import { usePrimaryAuctionDataTable } from '@market/modules/PrivateAsk/hooks/usePrimaryAuctionDataTable'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 import { PrintError } from '@shared/components/PrintError'
 import { useModal } from '@modal'
-import { DataTable } from '@shared'
 import { mediumFont } from 'styles/styles.css'
-//
+import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
 
 export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) {
-  const { markets, nft } = props.nft
   const { requestClose } = useModal()
-  // const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft: props.nft })
-  const { askPriceSummary, formattedAuctionDataTable } = usePrimaryAuctionDataTable({
-    nft: props.nft,
-  })
+  const { markets } = props.nft
   const { ask } = useRelevantMarket(markets)
-  // const { balance: walletBalance } = useAuth()
-  const { displayAskAmount, usdAskAmount, hasSufficientFunds } = useAskHelper({
+  const { displayAskAmount, hasSufficientFunds } = useAskHelper({
     ask,
   })
+  const askPriceSummary = useMemo(
+    () =>
+      displayAskAmount
+        ? {
+            label: 'Price',
+            value: `${displayAskAmount} ETH`,
+          }
+        : null,
+    [displayAskAmount]
+  )
+
+  const savings = useMemo(
+    () => (displayAskAmount ? (parseFloat(displayAskAmount) * 0.025).toFixed(5) : '0'),
+    [displayAskAmount]
+  )
+
   const { txStatus, txInProgress, txError, finalizedTx, fillAsk } =
     usePrivateAskTransaction({ nft: props.nft })
   const isDisabled = useMemo(
@@ -46,58 +46,41 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
 
   return (
     <Stack gap="x3">
-      {/* Previously x6. Changed everywhere? */}
-      <Flex w="100%" justify="space-between" textAlign="right">
+      {/* <Flex w="100%" justify="space-between" textAlign="left">
         <Heading as="h2" size="md">
           {`Buy ${nft?.contract.name} #${nft?.tokenId}`}
         </Heading>
-        {/* @BJ TODO: This component causes 500 error when it hits the useNounsToken contract call */}
         <CollectionThumbnail
           initialNFT={props.nft}
           collectionAddress={nft?.contract.address}
           tokenId={nft?.tokenId}
         />
-
-        {/* {displayAskAmount && (
-          <PriceWithLabel
-            label="Private Listing"
-            symbol="ETH"
-            cryptoAmount={displayAskAmount}
-            usdAmount={usdAskAmount}
-          />
-        )} */}
-      </Flex>
-      {/* <Separator />
-      <Flex justify="space-between">
-        <Paragraph size="sm" color="text3">
-          Your balance
-        </Paragraph>
-        <Eyebrow color="text1" inline>
-          {walletBalance?.formatted} {walletBalance?.symbol}
-        </Eyebrow>
       </Flex> */}
-      <DataTable rowVariant="withBorder" items={formattedAuctionDataTable} />
+
+      <PrivateAskModalHeading nftObj={props.nft} action="Buy" />
+
+      <Flex justify="space-between">
+        <Paragraph size="lg" inline color="text3" className={[mediumFont]}>
+          Savings
+        </Paragraph>
+        <Paragraph size="lg" inline color="text1">
+          ~{savings} ETH
+        </Paragraph>
+      </Flex>
       <Paragraph size="lg" color="text3" className={[mediumFont]}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, voluptatibus tempora
-        rerum ea expedita cumque perspiciatis sed suscipit nesciunt doloribus
+        vs. competing marketplaces that charge a 2.5% fee
       </Paragraph>
       <Separator />
       {askPriceSummary && (
         <Flex justify="space-between">
-          <Paragraph size="sm" inline color="text3">
+          <Paragraph size="lg" inline color="text3" className={[mediumFont]}>
             {askPriceSummary.label}
           </Paragraph>
-          <Heading
-            as="h1"
-            // size="sm"
-            // inline
-            color="text1"
-          >
+          <Heading as="h1" color="text1">
             {askPriceSummary.value}
           </Heading>
         </Flex>
       )}
-      {/* {askPriceSummary && <DataTable rowVariant="withBorder" items={[askPriceSummary]} />} */}
       {txError && <PrintError errorMessage={txError} />}
       <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
         <Button flex="1" variant="secondary" borderRadius="curved" onClick={requestClose}>

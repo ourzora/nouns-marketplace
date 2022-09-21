@@ -10,30 +10,18 @@ interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {
 export function PrivateAskFillAskSuccess({ ...props }: PrivateAskFillAskSuccessProps) {
   const { requestClose } = useModal()
 
-  // const { toast, showToast } = useToast()
-
-  // useEffect(() => {
-  //   // if (copied) {
-  //   showToast('Ask Filled')
-  //   // }
-  // }, [showToast])
-
   return (
-    <>
-      <Stack gap="x8">
-        <SuccessCheckmark />
+    <Stack gap="x8" {...props}>
+      <SuccessCheckmark />
 
-        <HeadingDescription
-          heading="Private Purchase Completed"
-          description="Find this NFT in your collection soon."
-        />
+      <HeadingDescription
+        heading="Private Purchase Completed"
+        description="Find this NFT in your collection soon."
+      />
 
-        <Button variant="secondary" onClick={requestClose}>
-          Close
-        </Button>
-      </Stack>
-
-      {/* {toast} */}
-    </>
+      <Button variant="secondary" onClick={requestClose}>
+        Close
+      </Button>
+    </Stack>
   )
 }

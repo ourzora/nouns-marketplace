@@ -18,11 +18,13 @@ export type Hyperlink = {
 }
 
 export interface DataTableItemProps extends FlexProps {
+  label: string
   copyValue?: string
   url?: Hyperlink
   value?: string
   address?: string
   variant?: keyof typeof styles.rowVariants['variant']
+  size?: 'lg' | 'sm'
 }
 
 export function DataTableItem({
@@ -31,6 +33,7 @@ export function DataTableItem({
   variant,
   copyValue,
   url,
+  size = 'sm',
   value,
   ...props
 }: DataTableItemProps) {
@@ -38,7 +41,7 @@ export function DataTableItem({
 
   return (
     <Flex justify="space-between" w="100%" {...props} className={styles.row({ variant })}>
-      <Paragraph size="sm" inline color="text3" className={[lightFont]}>
+      <Paragraph size={size} inline color="text2" className={[lightFont]}>
         {children}
       </Paragraph>
 
@@ -54,10 +57,9 @@ export function DataTableItem({
         <Paragraph
           display="flex"
           className={(styles.center, !!url?.href && mixins({ hoverFadeOut: true }))}
-          size="sm"
+          size={size}
           as={url?.href ? 'a' : 'div'}
           inline
-          style={{ alignItems: 'center' }}
           {...url}
         >
           {value}

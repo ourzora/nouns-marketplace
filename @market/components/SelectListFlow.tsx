@@ -5,7 +5,6 @@ import { LearnMoreButton } from '@market/modules/PrivateAsk/LearnMoreButton'
 import { PrivateAskFlow } from '@market/modules/PrivateAsk/PrivateAskFlow'
 import { ListV3AskWizard } from './ListV3AskWizard'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { NounsGlasses } from 'components/NounsGlasses'
 
 export const V3_ASK_LISTING: string = 'V3Ask'
 export const PRIVATE_ASK_LISTING: string = 'PrivateAsk'
@@ -39,7 +38,7 @@ export function SelectListFlow({ nftObj, closeModal, ...props }: SelectListFlowP
           />
           <SaleTypeButton
             label="Private Listing"
-            description="Sell to a specific buyer. It's like an escrow contract but much better."
+            description="Sell to a specific buyer address, safely and securely."
             tag="New"
             onNext={() => setFlow(PRIVATE_ASK_LISTING)}
           />
@@ -66,6 +65,6 @@ export function SelectListFlow({ nftObj, closeModal, ...props }: SelectListFlowP
       }
     />
   ) : (
-    <PrivateAskFlow header={<NounsGlasses w="x13" mb="x4" mt="x1" />} nft={nftObj} />
+    <PrivateAskFlow nft={nftObj} />
   )
 }

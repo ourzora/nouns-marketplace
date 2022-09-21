@@ -28,11 +28,9 @@ export function NFTAsks({ nftObj, ...props }: NFTAskProps) {
       )
     }
 
-    return isOwner ? (
-      <UniversalListAskModal nftObj={nftObj} />
-    ) : (
-      <NFTOwner address={nftObj.nft?.owner?.address} align="left" />
-    )
+    if (isOwner) return <UniversalListAskModal nftObj={nftObj} />
+
+    return null
   }, [hasRelevantAsk, isOwner, isPrivateAsk, nftObj, props])
 
   return nftObj ? marketComponent : null

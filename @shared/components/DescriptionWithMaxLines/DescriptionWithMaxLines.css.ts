@@ -9,5 +9,7 @@ export const button = style([
     position: 'absolute',
     bottom: 'x0',
     right: 'x0',
+    px: 'x2',
+    // backgroundColor: 'background1'
   }),
 ])

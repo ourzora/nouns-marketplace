@@ -13,6 +13,8 @@ interface TransactionSubmitButtonProps extends ButtonProps {
   onClick?: () => void
   txInProgress: boolean
   txStatus: WalletCallStatus
+  // size?: keyof typeof buttonVariants['size']
+  size?: 'md' | 'lg'
 }
 
 export function TransactionSubmitButton({
@@ -21,6 +23,7 @@ export function TransactionSubmitButton({
   loading,
   txInProgress,
   txStatus,
+  size = 'md',
   ...props
 }: TransactionSubmitButtonProps) {
   const isLoading = useMemo(
@@ -36,6 +39,8 @@ export function TransactionSubmitButton({
       loading={isLoading}
       disabled={isDisabled}
       w="100%"
+      variant="destructive"
+      size={size}
       borderRadius="curved"
       {...props}
     >

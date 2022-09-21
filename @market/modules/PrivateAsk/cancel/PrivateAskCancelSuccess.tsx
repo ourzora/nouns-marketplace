@@ -9,25 +9,16 @@ interface PrivateAskCancelSuccessProps extends CommonPrivateAskComponentProps {}
 export function PrivateAskCancelSuccess({ ...props }: PrivateAskCancelSuccessProps) {
   const { requestClose } = useModal()
 
-  // useEffect(() => {
-  //   // if (copied) {
-  //   showToast('Canceled')
-  //   // }
-  // }, [showToast])
-
   return (
-    <>
-      <Stack gap="x8">
-        <SuccessCheckmark />
-        <HeadingDescription
-          heading="Private Listing Canceled"
-          description="The listing is no longer available to the buyer."
-        />
-        <Button variant="secondary" onClick={requestClose}>
-          Close
-        </Button>
-      </Stack>
-      {/* {toast} */}
-    </>
+    <Stack gap="x8" {...props}>
+      <SuccessCheckmark />
+      <HeadingDescription
+        heading="Private Listing Canceled"
+        description="The listing is no longer available to the buyer."
+      />
+      <Button variant="secondary" onClick={requestClose}>
+        Close
+      </Button>
+    </Stack>
   )
 }

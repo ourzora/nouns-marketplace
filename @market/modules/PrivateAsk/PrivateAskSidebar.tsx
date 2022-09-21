@@ -18,7 +18,7 @@ export function PrivateAskSidebar({
       <PrivateAskModal
         modalName="PrivateAskV3"
         nftObj={nftObj}
-        header={<NounsGlasses w="x13" mb="x4" mt="x1" />}
+        // header={<NounsGlasses w="x13" mb="x4" mt="x1" />}
       />
     </Stack>
   )

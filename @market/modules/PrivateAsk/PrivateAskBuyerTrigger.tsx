@@ -33,7 +33,7 @@ export function PrivateAskBuyerTrigger({ nft, openModal }: PrivateAskBuyerTrigge
   // const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft })
 
   return (
-    <Well gap="x6">
+    <Well gap="x6" borderRadius="phat">
       {displayAskAmount && (
         <PriceWithLabel
           label="Private Listing"
@@ -43,16 +43,14 @@ export function PrivateAskBuyerTrigger({ nft, openModal }: PrivateAskBuyerTrigge
         />
       )}
 
-      {/* <Separator /> */}
-      {/* {formattedAskDetails && <DataTable items={formattedAskDetails} />} */}
-
       <Button
+        borderRadius="curved" // @BJ todo: replace with 'large' when zord has been updated
         w="100%"
         onClick={() => {
-          dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL }) // INITIAL STATE IN FLOW
+          // dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL }) // INITIAL STATE IN FLOW
           // dispatch && dispatch({ type: APPROVE_TRANSFER }) // FOR TESTING
           // dispatch && dispatch({ type: CANCEL_SUCCESS }) // FOR TESTING
-          // dispatch && dispatch({ type: CANCEL_ASK }) // FOR TESTING
+          dispatch && dispatch({ type: CANCEL_ASK }) // FOR TESTING
           // dispatch && dispatch({ type: CREATE_SUCCESS }) // FOR TESTING
           // dispatch && dispatch({ type: UPDATE_SUCCESS }) // FOR TESTING
           // dispatch && dispatch({ type: FILLASK_SUCCESS }) // FOR TESTING

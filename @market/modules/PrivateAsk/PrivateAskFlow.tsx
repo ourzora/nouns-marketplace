@@ -1,6 +1,6 @@
 import React from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Flex, Stack, StackProps } from '@zoralabs/zord'
+import { Stack, StackProps } from '@zoralabs/zord'
 import {
   APPROVE_MODULE_FOR_FILL,
   APPROVE_MODULE_FOR_CREATE,
@@ -13,6 +13,7 @@ import {
   CANCEL_SUCCESS,
   FILLASK,
   FILLASK_SUCCESS,
+  VIEW_LISTING,
   usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
@@ -25,6 +26,7 @@ import { PrivateAskCancel } from './cancel/PrivateAskCancel'
 import { PrivateAskCancelSuccess } from './cancel/PrivateAskCancelSuccess'
 import { PrivateAskFillAsk } from './fill/PrivateAskFillAsk'
 import { PrivateAskFillAskSuccess } from './fill/PrivateAskFillAskSuccess'
+import { PrivateAskViewListing } from './view'
 
 const componentMap = {
   [APPROVE_MODULE_FOR_CREATE]: PrivateAskApproveModule,
@@ -39,10 +41,10 @@ const componentMap = {
   [APPROVE_MODULE_FOR_FILL]: PrivateAskApproveModule,
   [FILLASK]: PrivateAskFillAsk,
   [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
+  [VIEW_LISTING]: PrivateAskViewListing,
 }
 
 interface PrivateAskModalProps {
-  header: React.ReactNode
   nft: NFTObject
 }
 
@@ -51,16 +53,12 @@ export interface CommonPrivateAskComponentProps extends StackProps {
   onNext?: () => void
 }
 
-export function PrivateAskFlow({ header, nft }: PrivateAskModalProps) {
+export function PrivateAskFlow({ nft }: PrivateAskModalProps) {
   const { state, handleNext } = usePrivateAskStateContext()
   const Component = componentMap[state.status]
 
   return (
     <Stack justify="center">
-      {/* <Flex justify="center" mb="x4" mt="x1" width="100%">
-        {header}
-      </Flex> */}
-
       <Component key={state.status} nft={nft} onNext={handleNext} />
     </Stack>
   )

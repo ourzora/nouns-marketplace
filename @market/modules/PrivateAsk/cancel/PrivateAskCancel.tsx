@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
-import { Heading, Paragraph, Stack } from '@zoralabs/zord'
+import { Button, Flex, Stack } from '@zoralabs/zord'
 
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
-import { HeadingDescription } from '../HeadingDescription'
-import { PrintError } from '@shared'
+import { DataTable, PrintError } from '@shared'
+import { useModal } from '@modal/useModal'
+import { useListingDataTable } from '@market/hooks'
+import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
 
 interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {}
 
@@ -13,32 +15,48 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
   const { isSubmitting, cancelAsk, txStatus, txInProgress, txError, finalizedTx } =
     usePrivateAskTransaction({ nft: props.nft })
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
+  const { requestClose } = useModal()
+  const { formattedListingDataTable } = useListingDataTable({
+    nft: props.nft,
+  })
 
   return (
-    <Stack gap="x6" {...props}>
+    <Stack gap="x3" {...props}>
       <Stack gap="x4">
-        <HeadingDescription
-          heading="Cancel Private Listing"
-          description="This action is irreversible, but you can list the NFT for sale again."
+        <PrivateAskModalHeading nftObj={props.nft} action="Delist" />
+
+        <DataTable
+          rowSize="lg"
+          rowVariant="withBorder"
+          items={formattedListingDataTable}
         />
 
-        {txError && (
-          <PrintError errorMessage={txError} />
-          // <Paragraph size="xs" color="negative">
-          //   {txError}
-          // </Paragraph>
-        )}
+        {txError && <PrintError errorMessage={txError} />}
       </Stack>
-      <TransactionSubmitButton
-        type="submit"
-        txStatus={txStatus}
-        txInProgress={txInProgress}
-        onClick={cancelAsk}
-        loading={isSubmitting}
-        disabled={isSubmitting}
-      >
-        Cancel Listing
-      </TransactionSubmitButton>
+
+      <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
+        <Button
+          flex="1"
+          variant="secondary"
+          size="lg"
+          borderRadius="curved"
+          onClick={requestClose}
+        >
+          Cancel
+        </Button>
+        <TransactionSubmitButton
+          flex={1}
+          type="submit"
+          size="lg"
+          txStatus={txStatus}
+          txInProgress={txInProgress}
+          onClick={cancelAsk}
+          loading={isSubmitting}
+          disabled={isSubmitting}
+        >
+          Delist
+        </TransactionSubmitButton>
+      </Flex>
     </Stack>
   )
 }

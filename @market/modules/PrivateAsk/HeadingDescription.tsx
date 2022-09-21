@@ -3,7 +3,7 @@ import { mediumFont } from 'styles/styles.css'
 
 interface HeadingDescriptionProps {
   heading: string
-  description: string
+  description?: string
 }
 
 export function HeadingDescription({ heading, description }: HeadingDescriptionProps) {
@@ -12,9 +12,11 @@ export function HeadingDescription({ heading, description }: HeadingDescriptionP
       <Heading as="h3" size="md">
         {heading}
       </Heading>
-      <Paragraph size="lg" color="text3" className={[mediumFont]}>
-        {description}
-      </Paragraph>
+      {description && (
+        <Paragraph size="lg" color="text3" className={[mediumFont]}>
+          {description}
+        </Paragraph>
+      )}
     </Stack>
   )
 }

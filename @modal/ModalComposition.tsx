@@ -39,15 +39,15 @@ export function ModalComposition({
 
   return (
     <>
-      <Box className={['zora-modal-trigger-wrapper', className]}>
-        <Button
-          variant="unset"
-          onClick={modalHandler}
+      <Box className={['zora-modal-trigger-wrapper', className]} onClick={modalHandler}>
+        <Box
+          // variant="unset"
+          // onClick={modalHandler}
           className="zora-modal-trigger"
           display="block"
         >
           {trigger}
-        </Button>
+        </Box>
       </Box>
       <Modal
         open={modalType === modalName}

@@ -3,9 +3,9 @@ import { useMemo } from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { usePrivateAskContractContext } from '../providers/PrivateAskContractProvider'
 import { usePrivateAskStateContext } from '../providers/PrivateAskStateProvider'
-import { DataTableItemProps } from '@shared/components/DataTable/DataTable'
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
+import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
 
 interface PrivateAskInfoProps {
   nft: NFTObject

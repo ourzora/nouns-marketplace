@@ -1,16 +1,3 @@
-import {
-  CANCEL,
-  UPDATE,
-  APPROVE_MODULE_FOR_FILL,
-  useFormattedPrivateAskInfo,
-  usePrivateAskStateContext,
-  APPROVE_TRANSFER,
-  CANCEL_SUCCESS,
-  CREATE_SUCCESS,
-  UPDATE_SUCCESS,
-  FILLASK_SUCCESS,
-  CANCEL_ASK,
-} from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import React from 'react'
 
@@ -18,6 +5,7 @@ import { useRelevantMarket, useAskHelper } from '@market/hooks'
 import { useIsOwner } from '@shared'
 import { PrivateAskOwnerTrigger } from './PrivateAskOwnerTrigger'
 import { PrivateAskBuyerTrigger } from './PrivateAskBuyerTrigger'
+import { PrivateAskVisitorTrigger } from './PrivateAskVisitorTrigger'
 
 interface PrivateAskTriggerProps {
   nft: NFTObject
@@ -37,5 +25,5 @@ export function PrivateAskTrigger({ nft, openModal }: PrivateAskTriggerProps) {
     return <PrivateAskBuyerTrigger nft={nft} openModal={openModal} />
   }
 
-  return null
+  return <PrivateAskVisitorTrigger nft={nft} openModal={openModal} />
 }

@@ -39,8 +39,15 @@ export function DescriptionWithMaxLines({
             pos="absolute"
             bottom="x0"
             right="x0"
+            // p="x8"
+            // variant="ghost"
             variant="unset"
+            size="sm"
             className={styles.button}
+            style={{
+              padding: '0 8px',
+              backgroundColor: 'white',
+            }}
           >
             ...more
           </Button>

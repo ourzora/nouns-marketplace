@@ -9,8 +9,9 @@ export enum CopyStatus {
 export const useCopyToClipboard = (
   text: string,
   notice = 1000
-): [CopyStatus, () => void] => {
+): [CopyStatus, boolean, () => void] => {
   const [copyStatus, setCopyStatus] = useState<CopyStatus>(CopyStatus.INACTIVE)
+  const copied = copyStatus === CopyStatus.COPIED
 
   useEffect(() => {
     if (copyStatus === CopyStatus.INACTIVE) {
@@ -29,5 +30,5 @@ export const useCopyToClipboard = (
     )
   }, [text])
 
-  return [copyStatus, copy]
+  return [copyStatus, copied, copy]
 }
