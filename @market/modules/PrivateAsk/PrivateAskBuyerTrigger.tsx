@@ -2,14 +2,13 @@ import {
   CANCEL,
   UPDATE,
   APPROVE_MODULE_FOR_FILL,
-  useFormattedPrivateAskInfo,
-  usePrivateAskStateContext,
   APPROVE_TRANSFER,
   CANCEL_SUCCESS,
   CREATE_SUCCESS,
   UPDATE_SUCCESS,
   FILLASK_SUCCESS,
   CANCEL_ASK,
+  usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Button, Well } from '@zoralabs/zord'
@@ -30,8 +29,6 @@ export function PrivateAskBuyerTrigger({ nft, openModal }: PrivateAskBuyerTrigge
 
   if (!isValidPrivateAskBuyer) return null
 
-  // const { formattedAskDetails } = useFormattedPrivateAskInfo({ nft })
-
   return (
     <Well gap="x6" borderRadius="phat">
       {displayAskAmount && (
@@ -47,7 +44,7 @@ export function PrivateAskBuyerTrigger({ nft, openModal }: PrivateAskBuyerTrigge
         borderRadius="curved" // @BJ todo: replace with 'large' when zord has been updated
         w="100%"
         onClick={() => {
-          // dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL }) // INITIAL STATE IN FLOW
+          dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL }) // INITIAL STATE IN FLOW
           // dispatch && dispatch({ type: APPROVE_TRANSFER }) // FOR TESTING
           // dispatch && dispatch({ type: CANCEL_SUCCESS }) // FOR TESTING
           // dispatch && dispatch({ type: CANCEL_ASK }) // FOR TESTING

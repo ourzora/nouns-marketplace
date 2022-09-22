@@ -35,7 +35,7 @@ export function PrivateAskVisitorTrigger({
         variant="secondary"
         w="100%"
         onClick={() => {
-          dispatch && dispatch({ type: VIEW_LISTING }) // INITIAL STATE IN FLOW
+          dispatch && dispatch({ type: VIEW_LISTING })
           openModal()
         }}
       >

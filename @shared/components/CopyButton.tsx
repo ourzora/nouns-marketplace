@@ -17,11 +17,11 @@ export function CopyButton({
   value,
   ...props
 }: CopyButtonProps) {
-  const [status, handleCopy] = useCopyToClipboard(value)
+  const [_, copied, handleCopy] = useCopyToClipboard(value)
 
   useEffect((): void => {
-    if (onStatusChange) onStatusChange(status === CopyStatus.COPIED)
-  }, [onStatusChange, status])
+    if (onStatusChange) onStatusChange(copied)
+  }, [copied, onStatusChange])
 
   return (
     <Button
