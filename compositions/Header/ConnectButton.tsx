@@ -7,7 +7,7 @@ import { useEnsData } from '@shared'
 import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
 import { noTextWrap } from 'styles/styles.css'
 
-export const ConnectButton = ({ connectText = 'Connect wallet', ...props }) => {
+export const ConnectButton = ({ connectText = 'Connect', ...props }) => {
   const { disconnect } = useDisconnect()
   const { address } = useAccount()
   const { chain } = useNetwork()
@@ -17,13 +17,7 @@ export const ConnectButton = ({ connectText = 'Connect wallet', ...props }) => {
 
   if (!address || !chain) {
     return (
-      <Button
-        className={connectButton}
-        size="sm"
-        px="x4"
-        onClick={openConnectModal}
-        {...props}
-      >
+      <Button className={connectButton} size="sm" onClick={openConnectModal} {...props}>
         {connectText}
       </Button>
     )
@@ -34,17 +28,12 @@ export const ConnectButton = ({ connectText = 'Connect wallet', ...props }) => {
       <Button
         size="sm"
         variant="destructive"
-        px="x4"
+        px="x5"
         className={connectButton}
         onClick={openChainModal}
-        style={{ gap: 4, gridGap: 4 }}
         {...props}
       >
-        <Text
-          as="span"
-          variant="paragraph-lg"
-          style={{ lineHeight: 0, top: 1, position: 'relative' }}
-        >
+        <Text as="span" variant="paragraph-lg">
           &#x26A0;
         </Text>{' '}
         Wrong network

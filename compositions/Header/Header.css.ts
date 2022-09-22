@@ -1,19 +1,21 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, media, color, space } from '@zoralabs/zord'
+import { atoms, media, color, space, vars } from '@zoralabs/zord'
 import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, HEADER_Z } from 'styles/style-constants'
+import { MAX_WIDTH } from 'styles/style-constants'
 
 export const headerWrapper = style([
   {
     height: HEADER_HEIGHT_MOBILE,
     zIndex: HEADER_Z,
+    justifyContent: 'space-between',
     alignItems: 'center',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gridTemplateRows: 'auto',
     borderBottom: `2px solid ${color.black10}`,
+    maxWidth: MAX_WIDTH.XL,
+    margin: '0 auto',
     '@media': {
       [media.min1024]: {
         height: HEADER_HEIGHT,
-        gridTemplateColumns: 'repeat(24, 1fr)',
+        gridTemplateColumns: 'repeat(3, 1fr)',
         borderBottom: 'none',
       },
     },
@@ -31,12 +33,11 @@ export const headerWrapper = style([
 
 export const nounsGlassesLink = style([
   {
-    gridColumn: '1',
-    gridRow: '1',
     aspectRatio: '70 / 24',
     maxHeight: '30px',
   },
   atoms({
+    mr: 'x6',
     cursor: 'pointer',
     pos: 'relative',
     h: '100%',
@@ -76,21 +77,34 @@ export const manageButton = style([
   }),
 ])
 
+export const leftContainer = style([
+  {
+    alignItems: 'center',
+  },
+])
+
+export const rightContainer = style([
+  {
+    alignItems: 'center',
+  },
+])
+
 export const connectButton = style([
   {
-    borderRadius: 'phat',
-    gridColumn: '2',
-    gridRow: '1',
+    justifyContent: 'space-around',
+    borderRadius: 16,
+    fontSize: 12,
+    height: '40px',
     '@media': {
       [media.min1024]: {
-        gridColumn: '2',
-        gridRow: '1',
+        height: '52px',
+        fontSize: 16,
       },
     },
   },
   atoms({
-    textAlign: 'center',
     w: '100%',
+    ml: 'x6',
     justifyContent: {
       '@initial': 'flex-end',
       '@1024': 'flex-start',
@@ -100,21 +114,12 @@ export const connectButton = style([
 
 export const nounsCenterLink = style([
   {
-    gridColumn: '2',
-    gridRow: '1',
     aspectRatio: '100 / 24',
     maxHeight: '24px',
-    '@media': {
-      [media.min1024]: {
-        gridColumn: '23',
-        gridRow: '1',
-      },
-    },
   },
   atoms({
     cursor: 'pointer',
     pos: 'relative',
-    h: '100%',
   }),
 ])
 

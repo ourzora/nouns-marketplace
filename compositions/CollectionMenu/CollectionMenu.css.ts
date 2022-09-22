@@ -4,14 +4,10 @@ import { MODAL_TAB_LAYER } from '../../constants/layers'
 
 export const collectionTrigger = style([
   {
-    gridColumn: '1',
-    gridRow: '2',
-    height: 42,
-    gridGap: space.x2,
+    height: '40px',
     '@media': {
       [media.min1024]: {
-        gridColumn: '3',
-        gridRow: '1',
+        height: '56px',
       },
     },
   },
