@@ -29,7 +29,14 @@ export const savings = style({
   fontWeight: 'bold',
 })
 
-// export const modalDescription = style({
-//   fontFamily: 'PTRootUIWebLight!important',
-//   fontWeight: 600,
-// })
+export const popupTrigger = style([
+  {
+    border: 'none',
+  },
+  atoms({
+    padding: 'x0',
+  }),
+])
+export const popupWrapper = style({
+  borderRadius: '16px',
+})

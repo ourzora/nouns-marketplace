@@ -20,7 +20,6 @@ export function NFTAsks({ nftObj, ...props }: NFTAskProps) {
 
   const marketComponent = useMemo(() => {
     if (hasRelevantAsk) {
-      // MANAGE ASKS
       return isPrivateAsk ? (
         <PrivateAskSidebar nftObj={nftObj} borderRadius="phat" />
       ) : (

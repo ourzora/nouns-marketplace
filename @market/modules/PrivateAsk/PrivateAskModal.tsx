@@ -2,10 +2,6 @@ import React, { useCallback } from 'react'
 import clsx from 'clsx'
 import { PrivateAskTrigger } from './PrivateAskTrigger'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import {
-  // Modal, ModalContent,
-  StackProps,
-} from '@zoralabs/zord'
 import { Modal, ModalContent, useModal } from '@modal'
 import { PrivateAskFlow } from './PrivateAskFlow'
 
@@ -14,16 +10,11 @@ import * as styles from './PrivateAskModal.css'
 import { customContent, customBackground } from '@modal/Modal.css'
 
 interface PrivateAskModalProps {
-  // header: React.ReactNode
   nftObj: NFTObject
   modalName: string
 }
 
-export function PrivateAskModal({
-  // header,
-  nftObj,
-  modalName,
-}: PrivateAskModalProps) {
+export function PrivateAskModal({ nftObj, modalName }: PrivateAskModalProps) {
   const { modalType, requestClose, requestOpen } = useModal()
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
@@ -48,10 +39,7 @@ export function PrivateAskModal({
           showClose={false}
           padding="x8"
         >
-          <PrivateAskFlow
-            //  header={header}
-            nft={nftObj}
-          />
+          <PrivateAskFlow nft={nftObj} />
         </ModalContent>
       </Modal>
     </PrivateAskStateProvider>

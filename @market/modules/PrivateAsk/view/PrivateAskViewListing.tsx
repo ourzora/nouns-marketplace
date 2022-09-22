@@ -13,11 +13,7 @@ export function PrivateAskViewListing({ nft, ...props }: PrivateAskFillAskSucces
   const { requestClose } = useModal()
   const { formattedAskDetails, copyableValue } = useFormattedPrivateAskInfo({ nft })
 
-  const [
-    _,
-    copied, //handleCopy,
-    copy,
-  ] = useCopyToClipboard(copyableValue)
+  const [_, copied, copy] = useCopyToClipboard(copyableValue)
   const { toast, showToast } = useToast()
 
   useEffect(() => {
@@ -34,8 +30,9 @@ export function PrivateAskViewListing({ nft, ...props }: PrivateAskFillAskSucces
         {formattedAskDetails && <DataTable items={formattedAskDetails} />}
 
         <Stack gap="x3" borderRadius="curved">
-          {/* <Button onClick={handleCopy}>Copy Listing Data</Button> */}
-          <Button onClick={copy}>Copy Listing Data</Button>
+          <Button onClick={copy} borderRadius="curved">
+            Copy Listing Data
+          </Button>
 
           <Button variant="secondary" onClick={requestClose} borderRadius="curved">
             Close

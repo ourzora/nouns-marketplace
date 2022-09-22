@@ -50,7 +50,7 @@ export function PrivateAskBuyerTrigger({ nft, openModal }: PrivateAskBuyerTrigge
           // dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL }) // INITIAL STATE IN FLOW
           // dispatch && dispatch({ type: APPROVE_TRANSFER }) // FOR TESTING
           // dispatch && dispatch({ type: CANCEL_SUCCESS }) // FOR TESTING
-          dispatch && dispatch({ type: CANCEL_ASK }) // FOR TESTING
+          // dispatch && dispatch({ type: CANCEL_ASK }) // FOR TESTING
           // dispatch && dispatch({ type: CREATE_SUCCESS }) // FOR TESTING
           // dispatch && dispatch({ type: UPDATE_SUCCESS }) // FOR TESTING
           // dispatch && dispatch({ type: FILLASK_SUCCESS }) // FOR TESTING

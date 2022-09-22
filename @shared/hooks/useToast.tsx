@@ -4,9 +4,6 @@ import { useCallback, useState } from 'react'
 export const useToast = () => {
   const [text, setText] = useState<string>('')
   const [toastVisible, setToastVisible] = useState<boolean>(false)
-
-  toastVisible && console.log('TOAST VISIBLE')
-
   const toast = <Toast visible={toastVisible}>{text}</Toast>
 
   const showToast = useCallback(

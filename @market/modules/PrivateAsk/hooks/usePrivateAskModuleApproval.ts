@@ -18,10 +18,6 @@ export function usePrivateAskModuleApproval() {
 
   // @BJ TODO: move into an Approval hook?
   const handleApproveModule = useCallback(async () => {
-    // @TODO: Add approve module logic
-    console.log('in handleApproveModule()...')
-    console.log('APPROVED?', isApproved)
-
     try {
       setError('')
       const promise = approve()
@@ -31,7 +27,7 @@ export function usePrivateAskModuleApproval() {
       setError(e.message)
       await mutate()
     }
-  }, [approve, isApproved, handleTx, mutate])
+  }, [approve, handleTx, mutate])
 
   return {
     txStatus,
