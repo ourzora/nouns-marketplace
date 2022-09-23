@@ -74,6 +74,12 @@ export const pageWrapper = style([
   }),
 ])
 
+export const fullHeighPageWrapper = style([
+  {
+    minHeight: '100vh',
+  },
+])
+
 export const maxWidthSm = style([
   {
     maxWidth: MAX_WIDTH.SM,
