@@ -14,7 +14,6 @@ export function PrivateAskCheckApprovalSpinner({
   return (
     <Stack gap="x6" align="center" className={className} {...props}>
       <Zorb />
-      {/* <Spinner size="lg" /> */}
       <Paragraph size="sm" color="text3">
         {text}
       </Paragraph>
