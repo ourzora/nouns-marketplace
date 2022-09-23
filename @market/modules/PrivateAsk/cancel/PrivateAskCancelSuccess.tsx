@@ -16,7 +16,7 @@ export function PrivateAskCancelSuccess({ ...props }: PrivateAskCancelSuccessPro
         heading="Private Listing Canceled"
         description="The listing is no longer available to the buyer."
       />
-      <Button variant="secondary" onClick={requestClose}>
+      <Button variant="secondary" onClick={requestClose} borderRadius="curved">
         Close
       </Button>
     </Stack>

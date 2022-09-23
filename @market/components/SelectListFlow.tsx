@@ -44,10 +44,7 @@ export function SelectListFlow({ nftObj, closeModal, ...props }: SelectListFlowP
           />
         </Stack>
 
-        <LearnMoreButton
-          href="https://support.zora.co/en/articles/5878598-what-s-an-approval"
-          target="_blank"
-        />
+        <LearnMoreButton />
       </Stack>
     )
   }

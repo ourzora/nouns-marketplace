@@ -51,6 +51,7 @@ export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
   return (
     <Formik
       initialValues={{ amount: '' }}
+      isInitialValid={false}
       validate={validate}
       onSubmit={async (values) => {
         const maybeBuyerAddressENS = await reverseLookupAddress(buyerAddress)

@@ -1,13 +1,13 @@
 import {
-  CANCEL,
-  UPDATE,
+  // CANCEL,
+  // UPDATE,
   APPROVE_MODULE_FOR_FILL,
-  APPROVE_TRANSFER,
-  CANCEL_SUCCESS,
-  CREATE_SUCCESS,
-  UPDATE_SUCCESS,
-  FILLASK_SUCCESS,
-  CANCEL_ASK,
+  // APPROVE_TRANSFER,
+  // CANCEL_SUCCESS,
+  // CREATE_SUCCESS,
+  // UPDATE_SUCCESS,
+  // FILLASK_SUCCESS,
+  // CANCEL_ASK,
   usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
@@ -46,8 +46,8 @@ export function PrivateAskBuyerTrigger({ nft, openModal }: PrivateAskBuyerTrigge
         onClick={() => {
           dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL }) // INITIAL STATE IN FLOW
           // dispatch && dispatch({ type: APPROVE_TRANSFER }) // FOR TESTING
-          // dispatch && dispatch({ type: CANCEL_SUCCESS }) // FOR TESTING
           // dispatch && dispatch({ type: CANCEL_ASK }) // FOR TESTING
+          // dispatch && dispatch({ type: CANCEL_SUCCESS }) // FOR TESTING
           // dispatch && dispatch({ type: CREATE_SUCCESS }) // FOR TESTING
           // dispatch && dispatch({ type: UPDATE_SUCCESS }) // FOR TESTING
           // dispatch && dispatch({ type: FILLASK_SUCCESS }) // FOR TESTING

@@ -18,7 +18,9 @@ export function PrivateAskCreateSuccess({
         heading="Private Listing Created"
         description="This listing is now available to the buyer."
       />
-      <Button onClick={onNext}>Done</Button>
+      <Button onClick={onNext} borderRadius="curved">
+        Done
+      </Button>
     </Stack>
   )
 }

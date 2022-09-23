@@ -53,11 +53,12 @@ export function PrivateAskOwnerTrigger({ nft, openModal }: PrivateAskOwnerTrigge
   if (hasActivePrivateAsk) {
     return (
       <PopUp
-        padding="x2"
+        // padding="x2"
         open={open}
         placement="bottom-end"
         wrapperClassName={clsx('privateask-owner-popup-wrapper', styles.popupWrapper)}
-        triggerClassName={clsx('privateask-owner-popup-trigger', styles.popupTrigger)}
+        // triggerClassName={clsx('privateask-owner-popup-trigger', styles.popupTrigger)}
+        triggerClassName={styles.popupTrigger}
         trigger={
           <Button
             w="100%"

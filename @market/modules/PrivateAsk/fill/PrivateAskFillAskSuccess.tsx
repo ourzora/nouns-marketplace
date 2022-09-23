@@ -19,7 +19,7 @@ export function PrivateAskFillAskSuccess({ ...props }: PrivateAskFillAskSuccessP
         description="Find this NFT in your collection soon."
       />
 
-      <Button variant="secondary" onClick={requestClose}>
+      <Button variant="secondary" onClick={requestClose} borderRadius="curved">
         Close
       </Button>
     </Stack>

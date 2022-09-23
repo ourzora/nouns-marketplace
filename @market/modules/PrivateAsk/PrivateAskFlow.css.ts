@@ -31,7 +31,8 @@ export const savings = style({
 
 export const popupTrigger = style([
   {
-    border: 'none',
+    border: '0!important',
+    padding: '0!important',
   },
   atoms({
     padding: 'x0',

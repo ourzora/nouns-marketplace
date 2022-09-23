@@ -4,13 +4,25 @@ import React from 'react'
 
 import * as styles from './LearnMoreButton.css'
 
-interface LearnMoreButtonProps extends ButtonProps, Hyperlink {}
+export interface LearnMoreButtonProps extends ButtonProps, Hyperlink {}
 
-export function LearnMoreButton(props: LearnMoreButtonProps) {
+export function LearnMoreButton({
+  children = 'Learn more about selling on Zora', // overrideable default text
+  target = '_blank',
+  href = 'https://support.zora.co/en/articles/5878598-what-s-an-approval',
+  ...props
+}: LearnMoreButtonProps) {
   return (
-    <Button as="a" variant="unset" className={mixins({ hoverFadeOut: true })} {...props}>
+    <Button
+      as="a"
+      variant="unset"
+      className={mixins({ hoverFadeOut: true })}
+      target={target}
+      href={href}
+      {...props}
+    >
       <Paragraph size="sm" color="text4">
-        Learn more about selling on Zora
+        {children}
         <Icon
           className={styles.offsetY}
           display="inline-block"

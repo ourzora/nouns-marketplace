@@ -51,6 +51,7 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
           txStatus={txStatus}
           txInProgress={txInProgress}
           onClick={cancelAsk}
+          variant="destructive"
           loading={isSubmitting}
           disabled={isSubmitting}
         >

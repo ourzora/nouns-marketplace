@@ -13,7 +13,7 @@ interface TransactionSubmitButtonProps extends ButtonProps {
   onClick?: () => void
   txInProgress: boolean
   txStatus: WalletCallStatus
-  // size?: keyof typeof buttonVariants['size']
+  variant?: 'primary' | 'destructive'
   size?: 'md' | 'lg'
 }
 
@@ -21,6 +21,7 @@ export function TransactionSubmitButton({
   children,
   disabled,
   loading,
+  variant = 'primary',
   txInProgress,
   txStatus,
   size = 'md',
@@ -39,7 +40,7 @@ export function TransactionSubmitButton({
       loading={isLoading}
       disabled={isDisabled}
       w="100%"
-      variant="destructive"
+      variant={variant}
       size={size}
       borderRadius="curved"
       {...props}

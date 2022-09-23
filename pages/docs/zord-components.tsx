@@ -627,7 +627,7 @@ export default function NounsAuctionHistory() {
               <Flex direction="column">
                 <Eyebrow>Select: size lg</Eyebrow>
                 <Box p="x2">
-                  <Select defaultValue="2" size="lg">
+                  <Select defaultValue="2" variant="lg">
                     <option value="1">Option 1</option>
                     <option value="2">Option 2</option>
                     <option value="3">Option 3</option>

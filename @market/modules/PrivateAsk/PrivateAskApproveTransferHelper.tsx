@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Heading, Paragraph, Stack } from '@zoralabs/zord'
+import { Stack } from '@zoralabs/zord'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { usePrivateAskTransferHelperApproval } from './hooks/usePrivateAskTransferHelperApproval'
 
@@ -8,6 +8,7 @@ import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner
 import { CommonPrivateAskComponentProps } from './PrivateAskFlow'
 import { PrintError } from '@shared/components/PrintError'
 import { Zorb } from '@zora-brand'
+import { HeadingDescription } from './HeadingDescription'
 
 interface PrivateAskApproveTransferHelperProps extends CommonPrivateAskComponentProps {}
 
@@ -35,30 +36,23 @@ export function PrivateAskApproveTransferHelper({
     <Stack gap="x8">
       <Stack gap="x8" align="center">
         <Zorb size={52} />
-        <Heading as="h2" size="md">
-          Approve Transfer Helper
-        </Heading>
-        <Paragraph size="sm" color="text4" align="center">
-          To list your NFTs on ZORA, you first need to approve permission for ZORA to use
-          them.
-        </Paragraph>
+        <HeadingDescription
+          heading="Approve Transfer Helper"
+          description="This contract handles the transferring of ERC-20 and ERC-721 tokens for the ZoraV3 modules."
+        />
         {error && <PrintError errorMessage={error} />}
       </Stack>
+      <Stack gap="x4">
+        <TransactionSubmitButton
+          txInProgress={txInProgress}
+          txStatus={txStatus}
+          onClick={handleApproveERC721ForSpender}
+        >
+          Approve your NFTs
+        </TransactionSubmitButton>
 
-      <TransactionSubmitButton
-        txInProgress={txInProgress}
-        txStatus={txStatus}
-        onClick={handleApproveERC721ForSpender}
-      >
-        Approve your NFTs
-      </TransactionSubmitButton>
-
-      <LearnMoreButton
-        href="https://support.zora.co/en/articles/5878598-what-s-an-approval"
-        target="_blank"
-      >
-        Learn more about selling on Zora
-      </LearnMoreButton>
+        <LearnMoreButton>Learn more about approvals</LearnMoreButton>
+      </Stack>
     </Stack>
   )
 }

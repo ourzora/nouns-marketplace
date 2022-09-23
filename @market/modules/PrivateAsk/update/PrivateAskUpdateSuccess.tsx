@@ -18,7 +18,9 @@ export function PrivateAskUpdateSuccess({
         heading="Private Listing Updated"
         description="The listing price has been changed."
       />
-      <Button onClick={onNext}>Done</Button>
+      <Button onClick={onNext} borderRadius="curved">
+        Done
+      </Button>
     </Stack>
   )
 }

@@ -1,5 +1,5 @@
-import { Heading, Paragraph, Stack } from '@zoralabs/zord'
 import React, { useEffect } from 'react'
+import { Stack } from '@zoralabs/zord'
 import { PrintError } from '@shared'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { usePrivateAskModuleApproval } from './hooks/usePrivateAskModuleApproval'
@@ -7,6 +7,7 @@ import { CommonPrivateAskComponentProps } from './PrivateAskFlow'
 import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
 import { LearnMoreButton } from './LearnMoreButton'
 import { Zorb } from '@zora-brand'
+import { HeadingDescription } from './HeadingDescription'
 
 interface PrivateAskApproveModuleProps extends CommonPrivateAskComponentProps {}
 
@@ -33,14 +34,10 @@ export function PrivateAskApproveModule({
     <Stack gap="x8">
       <Stack gap="x8" align="center">
         <Zorb size={52} />
-        <Heading as="h2" size="md">
-          Approve Module
-        </Heading>
-        <Paragraph size="sm" color="text4" align="center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi doloribus itaque
-          fugiat hic eveniet laborum, optio fuga dicta. Eaque corrupti tempora voluptas
-          qui error, totam dolores non repellendus asperiores obcaecati?
-        </Paragraph>
+        <HeadingDescription
+          heading="Approve Module"
+          description="The Private Asks Module let users sell an ERC-721 NFT to a specific buyer address."
+        />
         {error && <PrintError errorMessage={error} />}
       </Stack>
       <Stack gap="x4">
@@ -52,12 +49,7 @@ export function PrivateAskApproveModule({
           Approve module
         </TransactionSubmitButton>
 
-        <LearnMoreButton
-          href="https://support.zora.co/en/articles/5878598-what-s-an-approval"
-          target="_blank"
-        >
-          Learn more about selling on Zora
-        </LearnMoreButton>
+        <LearnMoreButton>Learn more about approvals</LearnMoreButton>
       </Stack>
     </Stack>
   )

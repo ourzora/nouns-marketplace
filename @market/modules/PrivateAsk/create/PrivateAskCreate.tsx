@@ -7,6 +7,7 @@ import { Heading, InputField, Stack } from '@zoralabs/zord'
 import { Field, FieldProps, Form, Formik } from 'formik'
 import React, { useEffect } from 'react'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
+import { LearnMoreButton } from '../LearnMoreButton'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 
 interface PrivateAskCreateProps extends CommonPrivateAskComponentProps {}
@@ -54,6 +55,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
   return (
     <Formik
       initialValues={{ buyeraddress: '', amount: '' }}
+      isInitialValid={false}
       validate={validate}
       onSubmit={async (values) => {
         const resolvedBuyerAddress = await resolvePossibleENSAddress(values.buyeraddress)
@@ -116,15 +118,18 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
 
               {txError && <PrintError errorMessage={txError} />}
             </Stack>
-            <TransactionSubmitButton
-              type="submit"
-              txStatus={txStatus}
-              txInProgress={txInProgress}
-              loading={isSubmitting}
-              disabled={!isValid}
-            >
-              Create Private Listing
-            </TransactionSubmitButton>
+            <Stack gap="x4">
+              <TransactionSubmitButton
+                type="submit"
+                txStatus={txStatus}
+                txInProgress={txInProgress}
+                loading={isSubmitting}
+                disabled={!isValid}
+              >
+                Create Private Listing
+              </TransactionSubmitButton>
+              <LearnMoreButton>Learn more about modules on Zora</LearnMoreButton>
+            </Stack>
           </Stack>
         </Form>
       )}

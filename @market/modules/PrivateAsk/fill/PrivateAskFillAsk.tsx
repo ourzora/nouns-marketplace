@@ -2,7 +2,6 @@ import { Button, Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zo
 import React, { useEffect, useMemo } from 'react'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { useAskHelper } from '@market/hooks/useAskHelper'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
@@ -10,6 +9,7 @@ import { PrintError } from '@shared/components/PrintError'
 import { useModal } from '@modal'
 import { mediumFont } from 'styles/styles.css'
 import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
+import { LearnMoreButton } from '../LearnMoreButton'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
 
@@ -45,18 +45,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
   return (
-    <Stack gap="x3">
-      {/* <Flex w="100%" justify="space-between" textAlign="left">
-        <Heading as="h2" size="md">
-          {`Buy ${nft?.contract.name} #${nft?.tokenId}`}
-        </Heading>
-        <CollectionThumbnail
-          initialNFT={props.nft}
-          collectionAddress={nft?.contract.address}
-          tokenId={nft?.tokenId}
-        />
-      </Flex> */}
-
+    <Stack gap="x3" {...props}>
       <PrivateAskModalHeading nftObj={props.nft} action="Buy" />
 
       <Flex justify="space-between">
@@ -82,22 +71,30 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
         </Flex>
       )}
       {txError && <PrintError errorMessage={txError} />}
-      <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
-        <Button flex="1" variant="secondary" borderRadius="curved" onClick={requestClose}>
-          Cancel
-        </Button>
-        <TransactionSubmitButton
-          type="submit"
-          txStatus={txStatus}
-          txInProgress={txInProgress}
-          onClick={() => fillAsk({ price: displayAskAmount })}
-          disabled={isDisabled}
-          w="auto"
-          flex={1}
-        >
-          {hasSufficientFunds ? `Buy NFT` : 'Insufficient Funds'}
-        </TransactionSubmitButton>
-      </Flex>
+      <Stack gap="x4">
+        <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
+          <Button
+            flex="1"
+            variant="secondary"
+            borderRadius="curved"
+            onClick={requestClose}
+          >
+            Cancel
+          </Button>
+          <TransactionSubmitButton
+            type="submit"
+            txStatus={txStatus}
+            txInProgress={txInProgress}
+            onClick={() => fillAsk({ price: displayAskAmount })}
+            disabled={isDisabled}
+            w="auto"
+            flex={1}
+          >
+            {hasSufficientFunds ? `Buy NFT` : 'Insufficient Funds'}
+          </TransactionSubmitButton>
+        </Flex>
+        <LearnMoreButton>Learn more about modules on Zora</LearnMoreButton>
+      </Stack>
     </Stack>
   )
 }

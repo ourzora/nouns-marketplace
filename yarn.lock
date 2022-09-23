@@ -1980,10 +1980,10 @@
     graphql-tag "^2.12.6"
     tslib "^2.2.0"
 
-"@zoralabs/zord@^1.2":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@zoralabs/zord/-/zord-1.2.0.tgz#62c87cab1b6846476e74d1e6ad6cd6b17ac37a41"
-  integrity sha512-DdCMR7HkVzvZ+oW0ZVfAHfP46VueDCXI/+gjPGRlXVQf5d7neeTl93buSPMX1Z9cdhQQoRV9rua098mudNEAvA==
+"@zoralabs/zord@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@zoralabs/zord/-/zord-1.3.1.tgz#5adfec62b1667cae43c2e67b9373d190a4584c5d"
+  integrity sha512-9TiXP2BG8zuBqh1BXZtKNrsSKzIDXjL8WE2CDGmR+kvgvqHsE9dDDxZX4rv+mx5fpWTa2eFZfKIl56AISA2pNQ==
   dependencies:
     "@radix-ui/react-dialog" "^0.1.5"
     uuid "^8.3.2"

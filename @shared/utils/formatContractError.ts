@@ -33,6 +33,8 @@ export function formatContractError(error: TransactionError | Error) {
         return 'The contract has not yet been approved or you are the owner.'
       case 'execution reverted: ONLY_SELLER_OR_TOKEN_OWNER':
         return 'This action can only be initiated by the token owner.'
+      case 'execution reverted: ONLY_TOKEN_OWNER_OR_OPERATOR':
+        return 'This action can only be initiated by the token owner'
     }
   }
 
