@@ -109,16 +109,10 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
         <DescriptionWithMaxLines
           baseLineheight={30}
           maxLines={2}
-          // size="lg"
-          // paragraphClassName={lightFont}
-          // className={styles}
           paragraphClassName={mediumFont}
           overflowY="hidden"
         >
-          {/* <Paragraph size="lg" className={lightFont}> */}
-          {/* <Paragraph size="lg" className={mediumFont}> */}
           {nft?.metadata?.description}
-          {/* </Paragraph> */}
         </DescriptionWithMaxLines>
       )}
       {nft?.nft && ( // Clamp to bottom of container
