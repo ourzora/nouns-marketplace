@@ -1931,15 +1931,15 @@
   dependencies:
     ethers "^5.0.19"
 
-"@zoralabs/nft-hooks@^1.1.8":
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/@zoralabs/nft-hooks/-/nft-hooks-1.1.8.tgz#24bc707be3555afd2e70dce68fdfa9a55982383f"
-  integrity sha512-AKXc/ym1BR2UIitDgRc/ud0QHwJVvuoKGjmGsco0Sh6CqzFswy4nBbjBM7UiuuL/84QcArI82KwHMCW5SG1PLA==
+"@zoralabs/nft-hooks@^1.1.10":
+  version "1.1.10"
+  resolved "https://registry.yarnpkg.com/@zoralabs/nft-hooks/-/nft-hooks-1.1.10.tgz#b746144a26cfee8c0651aa06fb096aed78c671b1"
+  integrity sha512-FRHCnlMBpZ9+dl8m9lfmcRrLo74Tw+7updAvRTJpQVzqxHU5UcfEJwGGvuQp8kRUeY6HDKEbphdOvUaSMlkDyQ==
   dependencies:
     "@ethersproject/address" "^5.6.0"
     "@ethersproject/bytes" "^5.6.1"
     "@types/deepmerge" "^2.2.0"
-    "@zoralabs/zdk" "2.1.3"
+    "@zoralabs/zdk" "2.1.9"
     big.js "^6.1.0"
     cross-fetch "^3.1.4"
     dataloader "^2.0.0"
@@ -1958,10 +1958,10 @@
     "@openzeppelin/contracts" "^4.5.0"
     "@rari-capital/solmate" "^6.2.0"
 
-"@zoralabs/zdk@2.1.3":
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/@zoralabs/zdk/-/zdk-2.1.3.tgz#d7327d6cf4a95d74424e5393515d9ba999801f88"
-  integrity sha512-U3mTJ5a1vN8e9Olu5GOlL18+8FRDx+gxBD+gFlc5xAa8Ky5nc3ny7yb3MWS2ObRPlvJfMF+XtUAi494BO4lsEg==
+"@zoralabs/zdk@2.1.9":
+  version "2.1.9"
+  resolved "https://registry.yarnpkg.com/@zoralabs/zdk/-/zdk-2.1.9.tgz#14a7859ebb796c8cb60def7235a005a7f86a835b"
+  integrity sha512-u7eUhfZo1qDG9BX08lj2RpDRCQE4BmqljFDETj6fizuRcvQO611NDijgAu3iKfoMn0pDq4ZX/UzV9SXzvbmYOQ==
   dependencies:
     big.js "^6.1.0"
     graphql "^16.5.0"
