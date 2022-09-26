@@ -1969,10 +1969,10 @@
     graphql-tag "^2.12.6"
     tslib "^2.2.0"
 
-"@zoralabs/zdk@^2.1.5":
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/@zoralabs/zdk/-/zdk-2.1.5.tgz#a07c47902fd6a5da581c6777a875d9b171fbc0d4"
-  integrity sha512-MGxqzFJfOxSjWQX9c/WeZOqlqSF7uVpTZmFRgyio8E+S5EnuD8jmAFhlxhNNrjH1bvQnDeEFnSiwmVyi1GXX+Q==
+"@zoralabs/zdk@^2.1.8":
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/@zoralabs/zdk/-/zdk-2.1.8.tgz#63d2a3f33b7a3b1a78f4934509363440015a57ac"
+  integrity sha512-PfznCOy9qnek6PKkT/oytXrKkUUIf0YRxFIIYab0vonUH+o40C2hPclbt4+q79drx+cLhuQoh/o64nhrL+m//A==
   dependencies:
     big.js "^6.1.0"
     graphql "^16.5.0"
