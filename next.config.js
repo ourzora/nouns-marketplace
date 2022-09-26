@@ -4,9 +4,9 @@ const withVanillaExtract = createVanillaExtractPlugin()
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    esmExternals: false,
-  },
+  // experimental: {  // @BJ: disabled due to out-of-mem errors
+  //   esmExternals: false,
+  // },
 
   images: {
     domains: [
