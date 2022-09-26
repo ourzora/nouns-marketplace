@@ -16,11 +16,11 @@ export function PrivateAskModalHeading({ nftObj, action }: PrivateAskModalHeadin
         {`${action} ${nft?.contract.name} #${nft?.tokenId}`}
       </Heading>
       {/* @BJ TODO: This component causes 500 error when it hits the useNounsToken contract call? */}
-      <CollectionThumbnail
+      {/* <CollectionThumbnail
         initialNFT={nftObj}
         collectionAddress={nft?.contract.address}
         tokenId={nft?.tokenId}
-      />
+      /> */}
     </Flex>
   )
 }

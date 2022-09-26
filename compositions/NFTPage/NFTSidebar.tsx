@@ -68,7 +68,7 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
     >
       <Flex>
         <Link href={`/collections/${nft?.nft?.contract.address}`}>
-          <CollectionThumbnail
+          {/* <CollectionThumbnail
             initialNFT={nft}
             collectionAddress={nft?.nft?.contract.address}
             useTitle
@@ -79,7 +79,7 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
             backgroundColor="background2"
             borderRadius="round"
             className={clickAnimation}
-          />
+          /> */}
         </Link>
       </Flex>
       <Flex justify="space-between" align="center">
