@@ -107,7 +107,6 @@ export const useFormattedPrivateAskInfo = ({ nft: nftObj }: PrivateAskInfoProps)
         },
         address: finalizedPrivateAskDetails?.buyerAddress,
       },
-      // @BJ TODO: Should we also add seller data to this table?
     ]
   }, [
     hasRelevantPrivateAsk,

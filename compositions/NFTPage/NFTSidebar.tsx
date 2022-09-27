@@ -16,7 +16,7 @@ export interface NFTSidebarProps extends StackProps {}
 export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
   const router = useRouter()
   const { initialData: nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
-  const { data } = useNounishAuctionProvider()
+  const { data, primarySalePrice } = useNounishAuctionProvider()
 
   const tokenId = useMemo(
     () => (tokenIdString ? parseInt(tokenIdString) : undefined),
@@ -117,7 +117,7 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
       )}
       {nft?.nft && ( // Clamp to bottom of container
         <Stack gap="x4" mt="auto">
-          <NFTProvenance nft={nft} />
+          {primarySalePrice && <NFTProvenance nft={nft} />}
           <NFTMarket
             contractAddress={nft.nft.contract.address}
             tokenId={nft.nft.tokenId}

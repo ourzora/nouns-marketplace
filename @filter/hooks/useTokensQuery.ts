@@ -16,7 +16,7 @@ import useSWRInfinite from 'swr/infinite'
 const PAGE_SIZE = 24
 
 export interface UseTokenQueryProps {
-  contractWhiteList?: string[] | undefined
+  contractAllowList?: string[] | undefined
   contractAddress?: string | null
   ownerAddress?: string
   initialData?: NFTObject[]
@@ -43,7 +43,7 @@ async function getNFTs(query: TokensQueryArgs): Promise<GetNFTReturnType> {
 }
 
 export function useTokensQuery({
-  contractWhiteList,
+  contractAllowList,
   contractAddress,
   ownerAddress,
   sort,
@@ -57,11 +57,11 @@ UseTokenQueryProps) {
       where: {
         ...(contractAddress && {
           collectionAddresses: ownerAddress
-            ? contractWhiteList
+            ? contractAllowList
             : getAddress(contractAddress),
         }),
         ...(ownerAddress && {
-          collectionAddresses: contractWhiteList,
+          collectionAddresses: contractAllowList,
           ownerAddresses: [getAddress(ownerAddress)],
         }),
         ...where,

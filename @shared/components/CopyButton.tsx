@@ -1,4 +1,4 @@
-import { CopyStatus, useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
+import { useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
 import { mixins, Button, ButtonProps, Icon } from '@zoralabs/zord'
 import React, { useEffect } from 'react'
 

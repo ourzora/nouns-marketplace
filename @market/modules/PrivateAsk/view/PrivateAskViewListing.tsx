@@ -1,11 +1,12 @@
 import { useModal } from '@modal'
 import { DataTable } from '@shared/components/DataTable'
 import { useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
-import { useToast } from '@shared/hooks/useToast'
 import { Button, Heading, Stack } from '@zoralabs/zord'
 import React, { useEffect } from 'react'
 import { useFormattedPrivateAskInfo } from '../hooks'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { useToast } from '@toast'
+import { ToastStatus, ToastVariant } from '@toast/toastReducer'
 
 interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}
 
@@ -14,13 +15,20 @@ export function PrivateAskViewListing({ nft, ...props }: PrivateAskFillAskSucces
   const { formattedAskDetails, copyableValue } = useFormattedPrivateAskInfo({ nft })
 
   const [_, copied, copy] = useCopyToClipboard(copyableValue)
-  const { toast, showToast } = useToast()
+  const { toastDispatch } = useToast()
 
   useEffect(() => {
     if (copied) {
-      showToast('Copied')
+      toastDispatch({
+        type: ToastStatus.REPLACE,
+        item: {
+          duration: 3500,
+          description: 'Copied to clipboard.',
+          variant: ToastVariant.SUCCESS,
+        },
+      })
     }
-  }, [copied, showToast])
+  }, [copied, toastDispatch])
 
   return (
     <>
@@ -39,8 +47,6 @@ export function PrivateAskViewListing({ nft, ...props }: PrivateAskFillAskSucces
           </Button>
         </Stack>
       </Stack>
-
-      {toast}
     </>
   )
 }

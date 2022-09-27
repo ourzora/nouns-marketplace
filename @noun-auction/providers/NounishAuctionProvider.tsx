@@ -17,8 +17,10 @@ import {
 import { defaultDaoConfig } from '@noun-auction/constants'
 import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
 import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
-import { first, isArray } from 'lodash'
+import { first } from 'lodash'
+import { AddressZero } from '@ethersproject/constants'
 import { formatUnits } from 'ethers/lib/utils'
+import { isAddressMatch } from '@shared'
 
 export type NounishAuctionProviderProps = {
   tokenId?: string
@@ -50,6 +52,8 @@ const NounsAuctionContext = createContext<{
   activeAuctionId: string | undefined
   activeAuction: ActiveNounishAuctionResponse
   primarySalePrice?: string
+  highestBidderAddress?: string
+  hasNonZeroHighestBidder?: boolean
 }>({
   daoConfig: defaultDaoConfig,
   timerComplete: false,
@@ -58,6 +62,7 @@ const NounsAuctionContext = createContext<{
   activeAuction: undefined,
   reservePrice: '0.01',
   primarySalePrice: undefined,
+  highestBidderAddress: undefined,
 })
 
 export function useNounishAuctionProvider() {
@@ -87,7 +92,7 @@ export function NounishAuctionProvider({
   }, [data])
 
   const isSettled = useMemo(() => {
-    if (noAuctionHistory) return null
+    if (noAuctionHistory) return false
 
     const settledAuctionEventType =
       marketType === 'NOUNS_AUCTION'
@@ -126,6 +131,18 @@ export function NounishAuctionProvider({
     return firstPrice
   }, [data?.events?.nodes, isSettled, marketType, noAuctionHistory])
 
+  const highestBidderAddress = useMemo(
+    () =>
+      activeAuction?.properties?.highestBidder
+        ? activeAuction?.properties?.highestBidder
+        : undefined,
+    [activeAuction?.properties?.highestBidder]
+  )
+  const hasNonZeroHighestBidder = useMemo(
+    () => !isAddressMatch(highestBidderAddress, AddressZero),
+    [highestBidderAddress]
+  )
+
   return (
     <NounsAuctionContext.Provider
       value={{
@@ -142,6 +159,8 @@ export function NounishAuctionProvider({
         layout,
         minBidIncrementPercentage: activeAuction?.properties?.minBidIncrementPercentage,
         reservePrice: '0.01',
+        highestBidderAddress,
+        hasNonZeroHighestBidder,
       }}
     >
       {children}
