@@ -8,6 +8,9 @@ const nextConfig = {
   sentry: {
     hideSourceMaps: true,
   },
+  // experimental: {  // @BJ: disabled due to out-of-mem errors
+  //   esmExternals: false,
+  // },
 
   images: {
     domains: [
