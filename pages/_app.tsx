@@ -30,6 +30,7 @@ import NextNProgress from 'nextjs-progressbar'
 import { HeaderComposition } from 'compositions/Header'
 import { FooterComposition } from 'compositions/Footer'
 import { PrivateAskContractProvider } from '@market/modules/PrivateAsk/providers/'
+import { ToastContextProvider } from '@toast'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 
@@ -84,21 +85,23 @@ function MyApp({ Component, pageProps }: AppProps) {
           >
             <CollectionsProvider collections={collections} daos={daos}>
               <ModalContextProvider>
-                <ContractProvider>
-                  <PrivateAskContractProvider>
-                    <HeaderComposition />
-                    <NextNProgress
-                      color="rgba(0,0,0,.5)"
-                      startPosition={0.125}
-                      stopDelayMs={200}
-                      height={2}
-                      showOnShallow={true}
-                      options={{ showSpinner: false }}
-                    />
-                    <Component {...pageProps} />
-                    <FooterComposition />
-                  </PrivateAskContractProvider>
-                </ContractProvider>
+                <ToastContextProvider>
+                  <ContractProvider>
+                    <PrivateAskContractProvider>
+                      <HeaderComposition />
+                      <NextNProgress
+                        color="rgba(0,0,0,.5)"
+                        startPosition={0.125}
+                        stopDelayMs={200}
+                        height={2}
+                        showOnShallow={true}
+                        options={{ showSpinner: false }}
+                      />
+                      <Component {...pageProps} />
+                      <FooterComposition />
+                    </PrivateAskContractProvider>
+                  </ContractProvider>
+                </ToastContextProvider>
               </ModalContextProvider>
             </CollectionsProvider>
           </RainbowKitProvider>
