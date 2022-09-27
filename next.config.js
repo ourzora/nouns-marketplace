@@ -1,9 +1,13 @@
 const { createVanillaExtractPlugin } = require('@vanilla-extract/next-plugin')
 const withVanillaExtract = createVanillaExtractPlugin()
+const { withSentryConfig } = require('@sentry/nextjs')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  sentry: {
+    hideSourceMaps: true,
+  },
 
   images: {
     domains: [
@@ -41,4 +45,18 @@ const nextConfig = {
   },
 }
 
-module.exports = withVanillaExtract(nextConfig)
+const sentryWebpackPluginOptions = {
+  // Additional config options for the Sentry Webpack plugin. Keep in mind that
+  // the following options are set automatically, and overriding them is not
+  // recommended:
+  //   release, url, org, project, authToken, configFile, stripPrefix,
+  //   urlPrefix, include, ignore
+
+  silent: false, // Suppresses all logs
+  // For all available options, see:
+  // https://github.com/getsentry/sentry-webpack-plugin#options.
+}
+
+module.exports = withVanillaExtract(
+  withSentryConfig(nextConfig, sentryWebpackPluginOptions)
+)
