@@ -53,54 +53,52 @@ export function PrivateAskOwnerTrigger({ nft, openModal }: PrivateAskOwnerTrigge
 
   if (hasActivePrivateAsk) {
     return (
-      <Well borderRadius="phat">
-        <Stack gap="x2">
-          {displayAskAmount && (
-            <PriceWithLabel
-              label="Private Listing"
-              symbol="ETH"
-              cryptoAmount={displayAskAmount}
-              usdAmount={usdAskAmount}
-            />
-          )}
-          <PopUp
-            open={open}
-            placement="bottom-end"
-            wrapperClassName={clsx('privateask-owner-popup-wrapper', styles.popupWrapper)}
-            triggerClassName={clsx('privateask-owner-popup-trigger', styles.popupTrigger)}
-            trigger={
+      <Well gap="x6" borderRadius="phat">
+        {displayAskAmount && (
+          <PriceWithLabel
+            label="Private Listing"
+            symbol="ETH"
+            cryptoAmount={displayAskAmount}
+            usdAmount={usdAskAmount}
+          />
+        )}
+        <PopUp
+          open={open}
+          placement="bottom-end"
+          wrapperClassName={clsx('privateask-owner-popup-wrapper', styles.popupWrapper)}
+          triggerClassName={clsx('privateask-owner-popup-trigger', styles.popupTrigger)}
+          trigger={
+            <Button
+              w="100%"
+              variant="secondary"
+              borderRadius="curved"
+              onClick={() => setOpen(true)}
+              className={['manage-dropdown']}
+            >
+              Manage Listing...
+            </Button>
+          }
+        >
+          <Stack aria-label="Manage Dropdown" w="x64" borderRadius="curved">
+            {dropdownOptions.map((option) => (
               <Button
+                variant="ghost"
                 w="100%"
-                variant="secondary"
-                borderRadius="curved"
-                onClick={() => setOpen(true)}
-                className={['manage-dropdown']}
+                display="flex"
+                justify="space-between"
+                style={{
+                  whiteSpace: 'nowrap',
+                }}
+                key={option.label}
+                onClick={() => handleClick(option.action)}
               >
-                Manage Listing...
+                <Text as="span" pr="x10" color={option.destructive && 'negative'}>
+                  {option.label}
+                </Text>
               </Button>
-            }
-          >
-            <Stack aria-label="Manage Dropdown" w="x64" borderRadius="curved">
-              {dropdownOptions.map((option) => (
-                <Button
-                  variant="ghost"
-                  w="100%"
-                  display="flex"
-                  justify="space-between"
-                  style={{
-                    whiteSpace: 'nowrap',
-                  }}
-                  key={option.label}
-                  onClick={() => handleClick(option.action)}
-                >
-                  <Text as="span" pr="x10" color={option.destructive && 'negative'}>
-                    {option.label}
-                  </Text>
-                </Button>
-              ))}
-            </Stack>
-          </PopUp>
-        </Stack>
+            ))}
+          </Stack>
+        </PopUp>
       </Well>
     )
   }
