@@ -29,6 +29,7 @@ import NextNProgress from 'nextjs-progressbar'
 
 import { HeaderComposition } from 'compositions/Header'
 import { FooterComposition } from 'compositions/Footer'
+import { BlocklistGuard } from 'providers/BlocklistProvider'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 
@@ -81,23 +82,25 @@ function MyApp({ Component, pageProps }: AppProps) {
               borderRadius: 'large',
             })}
           >
-            <CollectionsProvider collections={collections} daos={daos}>
-              <ModalContextProvider>
-                <ContractProvider>
-                  <HeaderComposition />
-                  <NextNProgress
-                    color="rgba(0,0,0,.5)"
-                    startPosition={0.125}
-                    stopDelayMs={200}
-                    height={2}
-                    showOnShallow={true}
-                    options={{ showSpinner: false }}
-                  />
-                  <Component {...pageProps} />
-                  <FooterComposition />
-                </ContractProvider>
-              </ModalContextProvider>
-            </CollectionsProvider>
+            <BlocklistGuard>
+              <CollectionsProvider collections={collections} daos={daos}>
+                <ModalContextProvider>
+                  <ContractProvider>
+                    <HeaderComposition />
+                    <NextNProgress
+                      color="rgba(0,0,0,.5)"
+                      startPosition={0.125}
+                      stopDelayMs={200}
+                      height={2}
+                      showOnShallow={true}
+                      options={{ showSpinner: false }}
+                    />
+                    <Component {...pageProps} />
+                    <FooterComposition />
+                  </ContractProvider>
+                </ModalContextProvider>
+              </CollectionsProvider>
+            </BlocklistGuard>
           </RainbowKitProvider>
         </NFTFetchConfiguration>
       </SWRConfig>
