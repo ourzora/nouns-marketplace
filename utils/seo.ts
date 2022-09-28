@@ -131,11 +131,11 @@ export function buildGalactusNFTSeo(nft: NFTObject, path: string): SeoProps {
   }
 }
 
-export async function buildCollectionSEO(
+export function buildCollectionSEO(
   collectionName?: string | null,
   symbol?: string | null,
   iconURL?: string | null
-): Promise<SeoProps> {
+): SeoProps {
   const title = `${symbol ? symbol + ': ' : ''}${collectionName} NFT Marketplace`
   const description = `${
     symbol ? symbol + ': ' : ''
