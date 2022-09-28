@@ -25,7 +25,6 @@ export function SearchInput({
 
   return (
     <Flex
-      layoutId="search"
       className={[styles.container, focused && styles.focused, className]}
       align="center"
       gap="x3"

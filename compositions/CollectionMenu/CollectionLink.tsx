@@ -19,35 +19,42 @@ export function CollectionLink({ collection }: { collection: CollectionsData }) 
   const tagText = useMemo(() => (isDao ? 'DAO' : 'COLLECTION'), [isDao])
 
   return (
-    <Link href={`/collections/${collection.address}`}>
-      <Flex align="center" justify="space-between" gap="x4" onClick={requestClose}>
-        <Flex align="center" gap="x4">
-          <CollectionThumbnail collectionAddress={collection.address} />
-          <Stack gap="x1">
-            <Flex gap="x2">
-              <Label size="lg" className={leadingTight} color="text1">
-                {collection.name}
+    <Link href={`/collections/${collection.address}`} passHref>
+      <a>
+        <Flex align="center" justify="space-between" gap="x4" onClick={requestClose}>
+          <Flex align="center" gap="x4">
+            <CollectionThumbnail collectionAddress={collection.address} />
+            <Stack gap="x1">
+              <Flex gap="x2">
+                <Label size="lg" className={leadingTight} color="text1">
+                  {collection.name}
+                </Label>
+                <Tag inactive backgroundColor="background2">
+                  {tagText}
+                </Tag>
+              </Flex>
+              {floorPrice && (
+                <Eyebrow
+                  color="text2"
+                  as="p"
+                  textTransform="none"
+                  className={[mediumFont]}
+                >
+                  Floor: {floorPrice} ETH
+                </Eyebrow>
+              )}
+            </Stack>
+          </Flex>
+          <Flex gap="x2" align="center">
+            {
+              <Label color="text2" className={[lightFont]}>
+                {nftCount} NFTs
               </Label>
-              <Tag inactive backgroundColor="background2">
-                {tagText}
-              </Tag>
-            </Flex>
-            {floorPrice && (
-              <Eyebrow color="text2" as="p" textTransform="none" className={[mediumFont]}>
-                Floor: {floorPrice} ETH
-              </Eyebrow>
-            )}
-          </Stack>
+            }
+            <Icon id="ChevronRight" color="text3" />
+          </Flex>
         </Flex>
-        <Flex gap="x2" align="center">
-          {
-            <Label color="text2" className={[lightFont]}>
-              {nftCount} NFTs
-            </Label>
-          }
-          <Icon id="ChevronRight" color="text3" />
-        </Flex>
-      </Flex>
+      </a>
     </Link>
   )
 }

@@ -40,7 +40,7 @@ export const modalWrapper = style([
 ])
 
 export const filteredItems = style({
-  maxHeight: 272, // (80px * 3 rows) + (2 * 16px gap)
+  maxHeight: 274, // (80px * 3 rows) + (2 * 16px gap) + 2px borderTop
   borderTop: '2px solid transparent',
 })
 

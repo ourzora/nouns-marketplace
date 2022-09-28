@@ -24,10 +24,9 @@ export function CollectionMenu() {
   )
 
   // ↓↓↓ Detect scroll to enable 2px top border
-  const [hasScrolled, setHasScrolled] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState<boolean>(false)
   const parentRef = useRef() as React.MutableRefObject<HTMLDivElement>
   const childRef = useRef() as React.MutableRefObject<HTMLDivElement>
-
   useScrollPosition(
     ({ currPos }) => {
       setHasScrolled(currPos.y > 4)
