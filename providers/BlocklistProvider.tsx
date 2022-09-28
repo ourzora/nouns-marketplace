@@ -1,5 +1,5 @@
 import { useBlocklist } from '@blocklist'
-import { Blocked } from 'components/blocked'
+import { Blocked } from 'components/Blocked'
 import { useAccount } from 'wagmi'
 import { ReactNode } from 'react'
 
