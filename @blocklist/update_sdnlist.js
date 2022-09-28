@@ -14,7 +14,7 @@ async function run() {
 
     const res = stdout.toString().match(/0x[a-fA-F0-9]{40}/g)
     // FIXME: isaac adress for testing
-    const unique = [...new Set(res), '0x8F474C2beae9D20Ae0F19c80266bfA04023830CB']
+    const unique = [...new Set(res)]
     writeFile('./@blocklist/sdnlist.json', JSON.stringify(unique, null, 2))
   } catch (err) {
     console.error(err)
