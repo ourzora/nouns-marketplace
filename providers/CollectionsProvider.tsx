@@ -10,8 +10,8 @@ import { collectionAddresses, daoAddresses } from 'constants/collection-addresse
 import { CollectionsData } from 'hooks'
 
 const CollectionsContext = createContext<{
-  collections: CollectionsData[] | []
-  daos: any[]
+  collections: CollectionsData[]
+  daos: CollectionsData[]
   collectionAmount: number
   daosAmount: number
   currentCollection: string
@@ -32,7 +32,7 @@ const CollectionsContext = createContext<{
 type CollectionsProps = {
   children?: ReactNode
   collections: CollectionsData[] | undefined
-  daos: any[] | undefined
+  daos: CollectionsData[] | undefined
 }
 
 export function useCollectionsContext() {
@@ -48,10 +48,9 @@ export function CollectionsProvider({ children, collections, daos }: Collections
   return (
     <CollectionsContext.Provider
       value={{
-        /* @ts-ignore */
-        collections: collections ? collections : [],
+        collections: collections ?? [],
         collectionAmount: collectionAddresses.length,
-        daos: daos ? daos : [],
+        daos: daos ?? [],
         daosAmount: daoAddresses.length,
         currentCollection,
         setCurrentCollection,

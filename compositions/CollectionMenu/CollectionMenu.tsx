@@ -1,62 +1,46 @@
-import { Box, Icon, Button, Label, Stack } from '@zoralabs/zord'
+import { Text, Icon, Button, Label, Stack, Heading, Flex, Box } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
-import { noTextWrap } from 'styles/styles.css'
+import { mediumFont, noTextWrap } from 'styles/styles.css'
 import { CollectionNavList } from './CollectionNavList'
 import { lightFont } from '@shared'
-import * as TabsPrimitive from '@radix-ui/react-tabs'
-import {
-  label,
-  tabsButton,
-  tabsList,
-  modalWrapper,
-  collectionTrigger,
-} from './CollectionMenu.css'
-
-// Exports
-export const Tabs = TabsPrimitive.Root
-export const TabsList = TabsPrimitive.List
-export const TabsTrigger = TabsPrimitive.Trigger
-export const TabsContent = TabsPrimitive.Content
-
-enum tabs {
-  DAOS = 'Daos',
-  COLLECTIONS = 'Collections',
-}
+import { useCallback, useMemo, useState } from 'react'
+import * as styles from './CollectionMenu.css'
+import { SearchInput } from 'compositions/SearchInput/SearchInput'
 
 export function CollectionMenu() {
-  const {
-    collections,
-    collectionAmount,
-    daos,
-    daosAmount,
-    currentCollection,
-    currentCollectionCount,
-  } = useCollectionsContext()
-  const menuCategories = [
-    {
-      id: tabs.DAOS,
-      label: tabs.DAOS,
-      items: daos,
-      count: daosAmount,
-    },
-    {
-      id: tabs.COLLECTIONS,
-      label: tabs.COLLECTIONS,
-      items: collections,
-      count: collectionAmount,
-    },
-  ]
+  const { collections, daos, currentCollection, currentCollectionCount } =
+    useCollectionsContext()
+  const menuItems = useMemo(() => daos.concat(collections), [collections, daos])
+  const menuItemCount = useMemo(() => menuItems.length, [menuItems])
+  const [filter, setFilter] = useState<string>('')
+  const filteredItems = useMemo(
+    () =>
+      menuItems.filter((item) =>
+        item?.name?.toLowerCase().includes(filter.toLowerCase())
+      ),
+    [filter, menuItems]
+  )
+
+  const handleChange = useCallback((value: string) => {
+    try {
+      setFilter(value)
+    } catch (e) {
+      console.error(e)
+      return
+    }
+  }, [])
 
   return (
     <ModalComposition
       modalName={`collections-menu`}
+      modalContentOverrides={styles.modal}
       trigger={
         <Button
           as="div"
           size="md"
           variant="secondary"
-          className={[collectionTrigger, noTextWrap]}
+          className={[styles.collectionTrigger, noTextWrap]}
         >
           {currentCollection}
           {currentCollectionCount ? (
@@ -70,36 +54,33 @@ export function CollectionMenu() {
               }}
               className={[lightFont, noTextWrap]}
             >
-              {currentCollectionCount ?? '...'}
+              {currentCollectionCount}
             </Label>
           ) : null}
           <Icon id="ChevronDown" size="md" color="secondary" />
         </Button>
       }
       content={
-        <Stack as="menu" gap="x6" className={modalWrapper}>
-          <Tabs defaultValue={tabs.DAOS} data-orientation="horizontal">
-            <TabsList aria-label="Choose your menu" className={tabsList}>
-              <TabsTrigger value={tabs.DAOS} className={tabsButton}>
-                <Box as="span" className={label}>
-                  {tabs.DAOS}
-                </Box>
-                &nbsp;&nbsp;{daosAmount}
-              </TabsTrigger>
-              <TabsTrigger value={tabs.COLLECTIONS} className={tabsButton}>
-                <Box as="span" className={label}>
-                  {tabs.COLLECTIONS}
-                </Box>
-                &nbsp;&nbsp;{collectionAmount}
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value={tabs.DAOS}>
-              <CollectionNavList items={daos} pt="x22" p="x6" />
-            </TabsContent>
-            <TabsContent value={tabs.COLLECTIONS}>
-              <CollectionNavList items={collections} pt="x22" p="x6" />
-            </TabsContent>
-          </Tabs>
+        <Stack as="menu" p="x8" gap="x6" className={styles.modalWrapper}>
+          <Flex>
+            <Heading as="h2">
+              Collections
+              <Text as="span" color="text3" ml="x2">
+                {menuItemCount}
+              </Text>
+            </Heading>
+          </Flex>
+          <SearchInput
+            placeholder="Quick search..."
+            className="collectionmenu-quicksearch"
+            inputClassNameOverrides={mediumFont}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              handleChange(event.target.value)
+            }
+          />
+          <Box overflowY="scroll" className={styles.filteredItems}>
+            {filteredItems && <CollectionNavList items={filteredItems} />}
+          </Box>
         </Stack>
       }
     />

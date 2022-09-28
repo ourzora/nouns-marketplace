@@ -23,6 +23,10 @@ export const collectionTrigger = style([
   }),
 ])
 
+export const modal = style({
+  maxWidth: 680,
+})
+
 export const modalWrapper = style([
   {
     msOverflowStyle: 'none',
@@ -30,54 +34,12 @@ export const modalWrapper = style([
     '::-webkit-scrollbar': {
       display: 'none',
     },
-    height: 400,
   },
   atoms({
     overflowY: 'scroll',
   }),
 ])
 
-export const tabsButton = style([
-  {
-    zIndex: MODAL_TAB_LAYER,
-    backgroundColor: `${color.background1}`,
-    fontSize: typography.fontSize[20],
-    borderBottom: `2px solid transparent`,
-    selectors: {
-      '&:first-child': { borderTopLeftRadius: space.x10 },
-      '&:last-child': { borderTopRightRadius: space.x10 },
-      '&:hover': { borderBottom: `2px solid ${color.accentHover}` }, // previously 0.3, maybe should use accentActive
-      '&[data-state="active"]': {
-        color: vars.color.text1,
-        borderBottom: `2px solid ${color.neutralActive}`,
-      },
-    },
-  },
-  atoms({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 'x5',
-    paddingBottom: 'x2',
-    width: '100%',
-    cursor: 'pointer',
-    borderColor: 'transparent',
-    color: 'tertiary',
-  }),
-])
-
-export const tabsList = style([
-  {
-    borderBottom: `2px solid ${color.background2}`,
-    zIndex: MODAL_TAB_LAYER,
-  },
-  atoms({
-    display: 'flex',
-    position: 'absolute',
-    width: '100%',
-  }),
-])
-
-export const label = style({
-  color: vars.color.text1,
+export const filteredItems = style({
+  maxHeight: 272, // (80px * 3 rows) + (2 * 16px gap)
 })
