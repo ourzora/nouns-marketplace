@@ -74,7 +74,7 @@ export const pageWrapper = style([
   }),
 ])
 
-export const fullHeighPageWrapper = style([
+export const fullHeightPageWrapper = style([
   {
     minHeight: '100vh',
   },

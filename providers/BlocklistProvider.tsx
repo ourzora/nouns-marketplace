@@ -7,7 +7,7 @@ type BlocklistGuardProps = {
   children: ReactNode
 }
 
-export function BlocklisGuard({ children }: BlocklistGuardProps) {
+export function BlocklistGuard({ children }: BlocklistGuardProps) {
   const { address, isConnecting } = useAccount()
   const blocked = useBlocklist(address)
 

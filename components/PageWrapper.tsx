@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Flex, FlexProps } from '@zoralabs/zord'
-import { fullHeighPageWrapper, pageWrapper } from 'styles/styles.css'
+import { fullHeightPageWrapper, pageWrapper } from 'styles/styles.css'
 
 export interface PageWrapperProps extends FlexProps {
   children: ReactNode
@@ -11,7 +11,7 @@ export function PageWrapper({ children, ...props }: PageWrapperProps) {
   return (
     <Flex
       as="main"
-      className={props.fullHeight ? pageWrapper : fullHeighPageWrapper}
+      className={props.fullHeight ? pageWrapper : fullHeightPageWrapper}
       {...props}
     >
       {children}
