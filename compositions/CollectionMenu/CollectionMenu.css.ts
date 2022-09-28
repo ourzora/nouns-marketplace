@@ -1,6 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { color, space, atoms, vars, media, typography } from '@zoralabs/zord'
-import { MODAL_TAB_LAYER } from '../../constants/layers'
+import { color, space, atoms, media } from '@zoralabs/zord'
 
 export const collectionTrigger = style([
   {
@@ -42,4 +41,9 @@ export const modalWrapper = style([
 
 export const filteredItems = style({
   maxHeight: 272, // (80px * 3 rows) + (2 * 16px gap)
+  borderTop: '2px solid transparent',
+})
+
+export const filterScrolled = style({
+  borderTop: `2px solid ${color.background2}`,
 })

@@ -1,10 +1,11 @@
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { Text, Icon, Button, Label, Stack, Heading, Flex, Box } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { mediumFont, noTextWrap } from 'styles/styles.css'
 import { CollectionNavList } from './CollectionNavList'
 import { lightFont } from '@shared'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import * as styles from './CollectionMenu.css'
 import { SearchInput } from 'compositions/SearchInput/SearchInput'
 
@@ -20,6 +21,23 @@ export function CollectionMenu() {
         item?.name?.toLowerCase().includes(filter.toLowerCase())
       ),
     [filter, menuItems]
+  )
+
+  // Detect scroll to enable 2px top border
+  const [hasScrolled, setHasScrolled] = useState(false)
+  const parentRef = useRef() as React.MutableRefObject<HTMLDivElement>
+  const childRef = useRef() as React.MutableRefObject<HTMLDivElement>
+
+  useScrollPosition(
+    ({ currPos }) => {
+      console.log('currPos', currPos.y)
+      setHasScrolled(currPos.y > 4)
+    },
+    [],
+    childRef,
+    false,
+    10,
+    parentRef
   )
 
   const handleChange = useCallback((value: string) => {
@@ -78,8 +96,12 @@ export function CollectionMenu() {
               handleChange(event.target.value)
             }
           />
-          <Box overflowY="scroll" className={styles.filteredItems}>
-            {filteredItems && <CollectionNavList items={filteredItems} />}
+          <Box
+            overflowY="scroll"
+            className={[styles.filteredItems, hasScrolled && styles.filterScrolled]}
+            ref={parentRef}
+          >
+            {filteredItems && <CollectionNavList items={filteredItems} ref={childRef} />}
           </Box>
         </Stack>
       }
