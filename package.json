@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "clean": "rm -rf node_modules",
-    "build": "next build",
+    "download-blocklist": "node ./@blocklist/update_sdnlist.js",
+    "build": "yarn download-blocklist && next build",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install"
