@@ -40,7 +40,7 @@ export async function nftService({ params }: NFTParamsProps) {
       },
     }
   } catch (err) {
-    console.log('ERRORED OUT')
+    console.error('ERRORED OUT')
     return {
       props: {
         nft: null,
