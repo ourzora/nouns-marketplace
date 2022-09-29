@@ -18,19 +18,34 @@ type PrivateAskTxDetails = {
   rawBuyerAddress: string
 }
 
-export const VIEW_LISTING: string = 'viewListing'
-export const APPROVE_MODULE_FOR_CREATE: string = 'approveModuleForSale'
-export const APPROVE_MODULE_FOR_FILL: string = 'approveModuleForFill'
-export const APPROVE_TRANSFER: string = 'approveTransferHelper'
-export const CREATE: string = 'createPrivateAsk'
-export const CREATE_SUCCESS: string = 'createPrivateAskSuccess'
-export const UPDATE: string = 'updatePrivateAsk'
-export const UPDATE_SUCCESS: string = 'updatePrivateAskSuccess'
-export const CANCEL: string = 'cancelPrivateAsk'
-export const CANCEL_SUCCESS: string = 'cancelPrivateAskSuccess'
-export const FILLASK: string = 'fillPrivateAsk'
-export const FILLASK_SUCCESS: string = 'fillPrivateAskSuccess'
-export const RESET: string = 'resetPrivateAsk'
+export const VIEW_LISTING = 'viewListing' as const
+export const APPROVE_MODULE_FOR_CREATE = 'approveModuleForSale' as const
+export const APPROVE_MODULE_FOR_FILL = 'approveModuleForFill' as const
+export const APPROVE_TRANSFER = 'approveTransferHelper' as const
+export const CREATE = 'createPrivateAsk' as const
+export const CREATE_SUCCESS = 'createPrivateAskSuccess' as const
+export const UPDATE = 'updatePrivateAsk' as const
+export const UPDATE_SUCCESS = 'updatePrivateAskSuccess' as const
+export const CANCEL = 'cancelPrivateAsk' as const
+export const CANCEL_SUCCESS = 'cancelPrivateAskSuccess' as const
+export const FILLASK = 'fillPrivateAsk' as const
+export const FILLASK_SUCCESS = 'fillPrivateAskSuccess' as const
+export const RESET = 'resetPrivateAsk' as const
+
+export type PossibleState =
+  | typeof VIEW_LISTING
+  | typeof APPROVE_MODULE_FOR_CREATE
+  | typeof APPROVE_TRANSFER
+  | typeof CREATE
+  | typeof CREATE_SUCCESS
+  | typeof UPDATE
+  | typeof UPDATE_SUCCESS
+  | typeof CANCEL
+  | typeof CANCEL_SUCCESS
+  | typeof APPROVE_MODULE_FOR_FILL
+  | typeof FILLASK
+  | typeof FILLASK_SUCCESS
+  | typeof RESET
 
 export const initialState = {
   next: APPROVE_TRANSFER,
@@ -38,8 +53,8 @@ export const initialState = {
 }
 
 interface State {
-  next?: string
-  status: string
+  next?: PossibleState
+  status: PossibleState
 }
 
 export type PrivateAskAction =
@@ -112,7 +127,7 @@ export function PrivateAskStateProvider({ children }: PrivateAskProps) {
   >(undefined)
   const { requestClose } = useModal()
 
-  const next = state.next as string | undefined
+  const next = state.next as PossibleState
 
   const handleNext = useCallback(() => {
     if (next) {
