@@ -1,15 +1,16 @@
-import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { Text, Icon, Button, Label, Stack, Heading, Flex, Box } from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { mediumFont, noTextWrap } from 'styles/styles.css'
 import { CollectionNavList } from './CollectionNavList'
 import { lightFont } from '@shared'
-import { useCallback, useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import * as styles from './CollectionMenu.css'
 import { SearchInput } from 'compositions/SearchInput/SearchInput'
+import { useHasScrolled } from '@shared/hooks/useHasScrolled'
 
 export function CollectionMenu() {
+  const { hasScrolled, parentRef, childRef } = useHasScrolled()
   const { collections, daos, currentCollection, currentCollectionCount } =
     useCollectionsContext()
   const menuItems = useMemo(() => daos.concat(collections), [collections, daos])
@@ -23,21 +24,7 @@ export function CollectionMenu() {
     [filter, menuItems]
   )
 
-  // ↓↓↓ Detect scroll to enable 2px top border
-  const [hasScrolled, setHasScrolled] = useState<boolean>(false)
-  const parentRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  const childRef = useRef() as React.MutableRefObject<HTMLDivElement>
-  useScrollPosition(
-    ({ currPos }) => {
-      setHasScrolled(currPos.y > 4)
-    },
-    [],
-    childRef,
-    false,
-    10,
-    parentRef
-  )
-  // ↑↑↑
+  // console.log('SCROLLED', hasScrolled)
 
   const handleChange = useCallback((value: string) => {
     try {
