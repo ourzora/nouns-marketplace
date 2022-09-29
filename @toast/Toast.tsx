@@ -31,16 +31,10 @@ export function Toast({
         onOpenChange={handleOpenChange}
       >
         <Flex justify="center">
-          <Stack gap="x1" align="center" justify="center" className="test1">
+          <Stack gap="x1" align="center" justify="center">
             {!!description && (
               <ToastPrimitive.Description>
-                <Paragraph
-                  size="sm"
-                  color="tertiary"
-                  align="center"
-                  justify="center"
-                  className="test2"
-                >
+                <Paragraph size="sm" color="onAccent" align="center" justify="center">
                   {description}
                 </Paragraph>
               </ToastPrimitive.Description>

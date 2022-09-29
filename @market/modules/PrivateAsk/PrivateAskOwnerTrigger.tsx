@@ -20,7 +20,7 @@ interface PrivateAskOwnerTriggerProps {
 
 const dropdownOptions = [
   {
-    label: 'View Listing',
+    label: 'Show Listing Data',
     action: VIEW_LISTING,
   },
   {
