@@ -1,7 +1,7 @@
 import { atoms, vars } from '@zoralabs/zord'
 import { keyframes, style } from '@vanilla-extract/css'
 
-const MODAL_BACKDROP_LAYER = 2000
+const MODAL_BACKDROP_LAYER = 20
 
 export const overlay = style([
   {
