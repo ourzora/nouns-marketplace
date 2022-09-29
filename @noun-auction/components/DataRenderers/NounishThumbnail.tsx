@@ -4,6 +4,7 @@ import {
   nounishThumbnailImage,
 } from '@noun-auction/styles/NounishStyles.css'
 import { FallbackThumbnail } from './FallbackThumbnail'
+import { useMemo } from 'react'
 
 export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
 
@@ -44,6 +45,14 @@ export function NounishThumbnail({
   tokenContract,
   ...props
 }: NounishThumbnailProps) {
+  const srcImg = useMemo(() => {
+    if (image?.startsWith('%3Csvg%20')) {
+      return `data:image/svg+xml,${image}`
+    }
+
+    return image
+  }, [image])
+
   return (
     <Box
       borderRadius={radius}
@@ -54,7 +63,7 @@ export function NounishThumbnail({
         <Box
           as="img"
           className={[nounishThumbnailImage, 'nouns-fallback-image']}
-          src={image}
+          src={srcImg}
         />
       ) : (
         <FallbackThumbnail tokenContract={tokenContract} tokenId={tokenId} />
