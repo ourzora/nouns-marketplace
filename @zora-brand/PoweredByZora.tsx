@@ -13,7 +13,6 @@ export function PoweredByZora({ vertical, ...props }: ZorbProps) {
       href="https://zora.co"
       target="_blank"
       rel="noreferrer"
-      alignItems="center"
     >
       <Zorb {...props} size={50} />
       <Flex>
