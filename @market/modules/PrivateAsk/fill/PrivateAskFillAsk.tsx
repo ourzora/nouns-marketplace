@@ -56,7 +56,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
           ~{savings} ETH
         </Paragraph>
       </Flex>
-      <Paragraph size="lg" color="text3" className={[mediumFont]}>
+      <Paragraph size="md" color="text3" className={[mediumFont]}>
         vs. competing marketplaces that charge a 2.5% fee
       </Paragraph>
       <Separator />
