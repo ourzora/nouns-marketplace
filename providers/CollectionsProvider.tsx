@@ -23,7 +23,7 @@ const CollectionsContext = createContext<{
   daos: [],
   collectionAmount: collectionAddresses.length,
   daosAmount: daoAddresses.length,
-  currentCollection: 'Explore...',
+  currentCollection: 'Browse...',
   setCurrentCollection: () => {},
   currentCollectionCount: undefined,
   setCurrentCollectionCount: () => {},
@@ -40,7 +40,7 @@ export function useCollectionsContext() {
 }
 
 export function CollectionsProvider({ children, collections, daos }: CollectionsProps) {
-  const [currentCollection, setCurrentCollection] = useState<string>('Explore...')
+  const [currentCollection, setCurrentCollection] = useState<string>('Browse...')
   const [currentCollectionCount, setCurrentCollectionCount] = useState<
     string | undefined
   >(undefined)
