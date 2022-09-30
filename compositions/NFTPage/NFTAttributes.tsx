@@ -8,13 +8,18 @@ import {
 import { useNFTProvider } from '@shared/providers/NFTProvider'
 
 import { lightFont } from '@shared'
+import { useMemo } from 'react'
 
 export interface NFTAttributesProps extends BoxProps {}
 
 export function NFTAttributes({ ...props }: NFTAttributesProps) {
   const { initialData: nft } = useNFTProvider()
+  const hasAttributes = useMemo(
+    () => nft?.metadata?.attributes && nft?.metadata?.attributes.length > 0,
+    [nft?.metadata?.attributes]
+  )
 
-  if (!nft || !nft?.metadata?.attributes) return null
+  if (!nft || !hasAttributes) return null
 
   return (
     <Stack className={['traits', nftAttributes, nftMarketWrapper]} {...props}>
