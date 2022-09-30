@@ -44,15 +44,17 @@ export const filteredItems = style([
     // maxHeight: 274, // (80px * 3 rows) + (2 * 16px gap) + 2px borderTop
     // maxHeight: 370, // (80px * 4 rows) + (3 * 16px gap) + 2px borderTop
     maxHeight: 466, // (80px * 5 rows) + (4 * 16px gap) + 2px borderTop // Waiting on answer from Andrei on # of rows to show
+    borderBottomLeftRadius: '10px',
+    borderBottomRightRadius: '10px',
   },
-  atoms({
-    borderRadius: 'curved',
-  }),
+  // atoms({
+  //   borderRadius: 'curved',
+  // }),
 ])
 
 export const filterUnscrolled = style({
   borderTop: `2px solid transparent`,
 })
 export const filterScrolled = style({
-  borderTop: `2px solid ${color.background2}`,
+  borderColor: color.background2,
 })
