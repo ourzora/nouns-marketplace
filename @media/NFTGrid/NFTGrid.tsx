@@ -1,7 +1,6 @@
 import { Grid, Stack, GridProps } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTGridLoadMore } from './NFTGridLoadMore'
-import { nftGridWrapper } from '../NftMedia.css'
 import { NFTProvider } from '@shared'
 
 export interface NFTGridProps extends GridProps {

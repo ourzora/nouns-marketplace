@@ -15,7 +15,7 @@ export interface NFTSidebarProps extends StackProps {}
 
 export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
   const router = useRouter()
-  const { initialData: nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
+  const { nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
   const { data, primarySalePrice } = useNounishAuctionProvider()
 
   const tokenId = useMemo(

@@ -14,11 +14,7 @@ import { ImageWithNounFallback } from 'components'
 import { useNFTProvider, useTitleWithFallback } from '@shared'
 
 export function NFTCard() {
-  const {
-    hooksData: { data: nft },
-    contractAddress,
-    tokenId,
-  } = useNFTProvider()
+  const { nft, contractAddress, tokenId } = useNFTProvider()
 
   const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
