@@ -1,4 +1,14 @@
-import { Text, Icon, Button, Label, Stack, Heading, Flex, Box } from '@zoralabs/zord'
+import {
+  Text,
+  Icon,
+  Button,
+  Label,
+  Stack,
+  Heading,
+  Flex,
+  Box,
+  Paragraph,
+} from '@zoralabs/zord'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { mediumFont, noTextWrap } from 'styles/styles.css'
@@ -23,8 +33,7 @@ export function CollectionMenu() {
       ),
     [filter, menuItems]
   )
-
-  // console.log('SCROLLED', hasScrolled)
+  const hasResults = useMemo(() => filteredItems.length > 0, [filteredItems])
 
   const handleChange = useCallback((value: string) => {
     try {
@@ -65,29 +74,39 @@ export function CollectionMenu() {
         </Button>
       }
       content={
-        <Stack as="menu" p="x8" gap="x6" className={styles.modalWrapper}>
-          <Flex>
+        <Stack as="menu" gap="x6" className={styles.modalWrapper}>
+          <Stack px="x8" pt="x8" gap="x6">
             <Heading as="h2">
               Collections
               <Text as="span" color="text3" ml="x2">
                 {menuItemCount}
               </Text>
             </Heading>
-          </Flex>
-          <SearchInput
-            placeholder="Quick search..."
-            className="collectionmenu-quicksearch"
-            inputClassNameOverrides={mediumFont}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleChange(event.target.value)
-            }
-          />
+            <SearchInput
+              placeholder="Quick search..."
+              className="collectionmenu-quicksearch"
+              inputClassNameOverrides={mediumFont}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                handleChange(event.target.value)
+              }
+            />
+          </Stack>
           <Box
-            overflowY="scroll"
-            className={[styles.filteredItems, hasScrolled && styles.filterScrolled]}
-            ref={parentRef}
+            px="x8"
+            pb="x8"
+            className={[styles.filterUnscrolled, hasScrolled && styles.filterScrolled]}
           >
-            {filteredItems && <CollectionNavList items={filteredItems} ref={childRef} />}
+            <Box overflowY="scroll" className={[styles.filteredItems]} ref={parentRef}>
+              {hasResults ? (
+                <CollectionNavList items={filteredItems} ref={childRef} />
+              ) : (
+                <Flex justify="center" align="center" h="x20">
+                  <Paragraph className={mediumFont} color="text3">
+                    Nothing found
+                  </Paragraph>
+                </Flex>
+              )}
+            </Box>
           </Box>
         </Stack>
       }
