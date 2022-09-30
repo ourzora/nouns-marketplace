@@ -5,7 +5,7 @@ const MODAL_BACKDROP_LAYER = 2000
 
 export const overlay = style([
   {
-    background: 'rgba(0, 0, 0, 0.4)',
+    background: 'rgba(0, 0, 0, 0.17)',
     inset: 0,
     placeItems: 'center',
     zIndex: MODAL_BACKDROP_LAYER,
@@ -52,8 +52,7 @@ export const customContent = style([
 export const customBackground = style([
   {
     background: vars.color.background1,
-    borderRadius: 40,
-    boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
+    borderRadius: 24,
     animation: `0.3s cubic-bezier(0.65, 0, 0.35, 1), ${keyframes({
       '0%': { opacity: 0, transform: 'scale(0.95)' },
       '100%': { opacity: 1, transform: 'scale(1)' },
