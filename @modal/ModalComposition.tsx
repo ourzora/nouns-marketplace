@@ -1,8 +1,9 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { ClassValue } from 'clsx'
 import { Box, Button } from '@zoralabs/zord'
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from './Modal.css'
+import { useAuth } from '@shared'
 
 export type ModalCompositionProps = {
   /** Unique identifier / key for the modal */
@@ -19,6 +20,7 @@ export type ModalCompositionProps = {
   modalContentOverrides?: any
   /** Modal overlay css overrides: vannila extract style object */
   modalOverlayOverrides?: any
+  onClickOverrideWhenUnconnected?: () => void
 }
 
 /* TODO: Modify Zord ModalContent component to accept custom styling */
@@ -29,19 +31,27 @@ export function ModalComposition({
   modalContentOverrides = customContent,
   modalBackgroundOverrides = customBackground,
   modalOverlayOverrides,
+  onClickOverrideWhenUnconnected,
 }: ModalCompositionProps) {
   const { modalType, requestClose, requestOpen } = useModal()
+  const { address } = useAuth()
 
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
-  }, [])
-
+  }, [modalName, requestOpen])
+  const triggerBehavior = useMemo(
+    () =>
+      !address && onClickOverrideWhenUnconnected
+        ? onClickOverrideWhenUnconnected
+        : modalHandler,
+    [address, modalHandler, onClickOverrideWhenUnconnected]
+  )
   return (
     <>
       <Box className="zora-modal-trigger-wrapper">
         <Button
           variant="unset"
-          onClick={modalHandler}
+          onClick={triggerBehavior}
           className="zora-modal-trigger"
           display="block"
         >
