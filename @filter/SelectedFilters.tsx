@@ -120,7 +120,7 @@ export function SelectedFilters() {
             color="primary"
             onClick={clearFilters}
           >
-            Clear All
+            Clear Filters
           </Button>
         )}
       </Flex>

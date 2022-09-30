@@ -1,7 +1,7 @@
 import { background, close, content, overlay } from './Modal.css'
 import * as Dialog from '@radix-ui/react-dialog'
 import clsx, { ClassValue } from 'clsx'
-import React from 'react'
+import React, { forwardRef } from 'react'
 import {
   IconProps,
   Box,
@@ -9,19 +9,6 @@ import {
   ThemeProvider as ZordProvider,
   mixins,
 } from '@zoralabs/zord'
-
-export interface ModalContentProps extends Dialog.DialogContentProps {
-  title?: string
-  showClose?: boolean
-  removePadding?: boolean
-  /** Modal background css overrides: vannila extract style object */
-  modalBackgroundOverrides?: any
-  /** Modal content css overrides: vannila extract style object */
-  modalContentOverrides?: any
-  children?: JSX.Element
-  /** Default is lightTheme */
-  modalTheme?: ClassValue | undefined
-}
 
 export interface ModalProps extends Dialog.DialogProps {
   trigger?: React.ReactNode
@@ -31,6 +18,7 @@ export interface ModalProps extends Dialog.DialogProps {
 
 export const ModalTrigger = Dialog.Trigger
 export const ModalClose = Dialog.Close
+export const ModalOverlay = Dialog.Overlay
 
 export function Modal({
   trigger,
@@ -41,7 +29,7 @@ export function Modal({
   return (
     <Dialog.Root {...props}>
       <Dialog.Portal>
-        <Dialog.DialogOverlay
+        <ModalOverlay
           className={clsx('zord-modal-overlay', overlay, modalOverlayOverrides)}
         />
         <Box key={props.open ? 'open' : 'closed'} className="zord-modal-wrapper">
@@ -57,7 +45,25 @@ export function Modal({
   )
 }
 
-export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
+interface ModalContentOverrideProps {
+  showClose?: boolean
+  removePadding?: boolean
+  /** Modal background css overrides: vannila extract style object */
+  modalBackgroundOverrides?: any
+  /** Modal content css overrides: vannila extract style object */
+  modalContentOverrides?: any
+  /** Default is lightTheme */
+  modalTheme?: ClassValue | undefined
+  children?: JSX.Element
+}
+
+type ModalContentProps = React.ComponentProps<typeof Dialog.Content> &
+  ModalContentOverrideProps
+
+export const ModalContent = forwardRef<
+  React.ElementRef<typeof Dialog.Content>,
+  ModalContentProps
+>(
   (
     {
       modalContentOverrides,
@@ -70,11 +76,11 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
       removePadding = false,
       ...props
     },
-    ref
+    forwardedRef
   ) => {
     return (
       <Dialog.DialogContent
-        ref={ref}
+        ref={forwardedRef}
         className={clsx(
           mixins({ center: 'xy' }),
           content,
@@ -101,6 +107,8 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
     )
   }
 )
+
+ModalContent.displayName = 'ModalContent'
 
 interface CloseButtonProps extends React.ComponentProps<typeof Dialog.Close> {
   /** Modal close button css overrides: vannila extract style object */

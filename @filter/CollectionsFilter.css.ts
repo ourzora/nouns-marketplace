@@ -1,8 +1,19 @@
 import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
-import { style } from '@vanilla-extract/css'
+import { keyframes, style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, textVariants, fontWeight, vars, media } from '@zoralabs/zord'
+import { atoms, textVariants, fontWeight, vars, media, color } from '@zoralabs/zord'
 import { HEADER_HEIGHT } from 'styles/style-constants'
+import { FilterPropertySelect } from './FilterPropertySelect'
+
+const slideUp = keyframes({
+  from: { transform: 'translate3d(0px,100%,0px)' },
+  to: { transform: 'translate3d(0px,0px,0px)' },
+})
+
+const slideDown = keyframes({
+  '0%': { transform: 'translate3d(0px,100%,0px)' },
+  '100%': { transform: 'translate3d(0px,0px,0px)' },
+})
 
 export const borderStyle = `2px solid ${vars.color.border.tertiary}`
 
@@ -117,7 +128,11 @@ export const filterCounter = style({
 
 export const filterSidebar = style([
   {
-    overflowY: 'scroll',
+    msOverflowStyle: 'none',
+    scrollbarWidth: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
     height: `calc(100% - ${HEADER_HEIGHT}px)`,
     '@media': {
       'screen and (max-width: 768px)': {
@@ -129,6 +144,9 @@ export const filterSidebar = style([
       },
     },
   },
+  atoms({
+    overflowY: 'scroll',
+  }),
 ])
 
 export const sideBarSeparator = style({
@@ -233,10 +251,12 @@ export const activityModal = style([
 ])
 
 export const filterPropertySelect = style([
-  {
-    textAlign: 'left',
-    justifyContent: 'flex-start',
-  },
+  atoms({
+    display: 'flex',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  }),
 ])
 
 const pill = {
@@ -327,6 +347,7 @@ export const filterSidebarModalBackground = style([
   {
     borderRadius: 0,
     maxHeight: '100vh',
+    animation: `${slideUp} 300ms ease-in`,
   },
   atoms({
     position: 'fixed',
@@ -354,5 +375,31 @@ export const mobileFiltersFooter = style([
     gap: 'x4',
     backgroundColor: 'primary',
     w: '100%',
+  }),
+])
+
+export const attributeSelectWrapper = style([
+  {
+    maxHeight: 300,
+    msOverflowStyle: 'none',
+    scrollbarWidth: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none',
+    },
+    // Below background are a CSS trick to display and hide scroll hints within the Box
+    background: [
+      `linear-gradient(${color.white100}, ${color.white100})`,
+      `linear-gradient(${color.white100}, ${color.white100}) 0 100%`,
+      `linear-gradient(${color.black10}, ${color.black10})`,
+      `linear-gradient(${color.black10}, ${color.black10}) 0 100%`,
+    ].join(','),
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 2px, 100% 2px, 100% 1px, 100% 1px',
+    backgroundPosition: 'top center, bottom center, top center, bottom center',
+    backgroundAttachment: 'local, local, scroll, scroll',
+  },
+  atoms({
+    position: 'relative',
+    overflowY: 'auto',
   }),
 ])
