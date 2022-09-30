@@ -3,6 +3,7 @@ import {
   UPDATE,
   VIEW_LISTING,
   usePrivateAskStateContext,
+  PossibleState,
 } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import clsx from 'clsx'
@@ -43,7 +44,7 @@ export function PrivateAskOwnerTrigger({ nft, openModal }: PrivateAskOwnerTrigge
   useKeyPress('Escape', open, () => setOpen(false))
 
   const handleClick = useCallback(
-    (actionType: string) => {
+    (actionType: PossibleState) => {
       setOpen(false)
       dispatch && dispatch({ type: actionType })
       openModal()
