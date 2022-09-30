@@ -14,6 +14,10 @@ if (typeof NETWORK_URL === 'undefined') {
 
 export const defaultProvider = new JsonRpcProvider(NETWORK_URL, NETWORK_CHAIN_ID)
 
+console.log('NETWORK_URL', NETWORK_URL)
+console.log('NETWORK_CHAIN_ID', NETWORK_CHAIN_ID)
+console.log('defaultProvider', defaultProvider)
+
 const chains = defaultChains
 const defaultChain = chain.mainnet
 
