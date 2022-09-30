@@ -12,7 +12,7 @@ import {
 } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Button, Well } from '@zoralabs/zord'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useRelevantMarket, useAskHelper } from '@market/hooks'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
@@ -26,6 +26,7 @@ export function PrivateAskBuyerTrigger({ nft, openModal }: PrivateAskBuyerTrigge
   const { dispatch } = usePrivateAskStateContext()
   const { ask } = useRelevantMarket(nft.markets)
   const { displayAskAmount, usdAskAmount, isValidPrivateAskBuyer } = useAskHelper({ ask })
+  const [disabled, setDisabled] = useState<boolean>(false)
 
   if (!isValidPrivateAskBuyer) return null
 
@@ -43,6 +44,7 @@ export function PrivateAskBuyerTrigger({ nft, openModal }: PrivateAskBuyerTrigge
       <Button
         borderRadius="curved" // @BJ todo: replace with 'large' when zord has been updated
         w="100%"
+        disabled={disabled}
         onClick={() => {
           dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL }) // INITIAL STATE IN FLOW
           // dispatch && dispatch({ type: APPROVE_TRANSFER }) // FOR TESTING
@@ -52,6 +54,7 @@ export function PrivateAskBuyerTrigger({ nft, openModal }: PrivateAskBuyerTrigge
           // dispatch && dispatch({ type: UPDATE_SUCCESS }) // FOR TESTING
           // dispatch && dispatch({ type: FILLASK_SUCCESS }) // FOR TESTING
           openModal()
+          setDisabled(true)
         }}
       >
         Buy Now
