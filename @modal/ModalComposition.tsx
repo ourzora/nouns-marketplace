@@ -19,6 +19,8 @@ export interface ModalCompositionProps extends BoxProps {
   modalContentOverrides?: any
   /** Modal overlay css overrides: vanilla extract style object */
   modalOverlayOverrides?: any
+  /** Disallow clicking outside of container to close modal */
+  disableCloseOnClickOutside?: boolean
 }
 
 /* TODO: Modify Zord ModalContent component to accept custom styling */
@@ -29,6 +31,7 @@ export function ModalComposition({
   className,
   modalContentOverrides = customContent,
   modalBackgroundOverrides = customBackground,
+  disableCloseOnClickOutside = false,
   modalOverlayOverrides,
 }: ModalCompositionProps) {
   const { modalType, requestClose, requestOpen } = useModal()
@@ -40,12 +43,7 @@ export function ModalComposition({
   return (
     <>
       <Box className={['zora-modal-trigger-wrapper', className]} onClick={modalHandler}>
-        <Box
-          // variant="unset"
-          // onClick={modalHandler}
-          className="zora-modal-trigger"
-          display="block"
-        >
+        <Box className="zora-modal-trigger" display="block">
           {trigger}
         </Box>
       </Box>
@@ -60,6 +58,7 @@ export function ModalComposition({
           padding="x0"
           modalContentOverrides={modalContentOverrides}
           modalBackgroundOverrides={modalBackgroundOverrides}
+          disableCloseOnClickOutside={disableCloseOnClickOutside}
         >
           {content}
         </ModalContent>

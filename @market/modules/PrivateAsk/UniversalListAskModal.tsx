@@ -3,7 +3,6 @@ import { Box, FlexProps, Stack, Button } from '@zoralabs/zord'
 import { ModalComposition, useModal } from '@modal'
 import { SelectListFlow } from '@market/components/SelectListFlow'
 import { PrivateAskStateProvider } from './providers/PrivateAskStateProvider'
-import { customBackground, customContent } from '@modal/Modal.css'
 
 export interface UniversalAskModalProps extends FlexProps {
   nftObj: NFTObject
