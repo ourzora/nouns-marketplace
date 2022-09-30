@@ -4,6 +4,7 @@ import { TransactionSubmitButton } from '@market/components/TransactionSubmitBut
 import { useAskHelper } from '@market/hooks/useAskHelper'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { PrintError } from '@shared/components/PrintError'
+import { formatContractError } from '@shared/utils'
 import { reverseLookupAddress } from '@shared/utils/reverseLookupAddress'
 import { validateCurrency } from '@shared/utils/validateCurrency'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
@@ -95,8 +96,7 @@ export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
                   />
                 )}
               </Field>
-
-              {txError && <PrintError errorMessage={txError} />}
+              {txError && <PrintError errorMessage={formatContractError(txError)} />}
             </Stack>
             <TransactionSubmitButton
               type="submit"

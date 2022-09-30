@@ -42,7 +42,7 @@ export const usePrivateAskTransaction = ({
   const [isSubmitting, setSubmitting] = useState<boolean>(false)
   const { setFinalizedPrivateAskDetails } = usePrivateAskStateContext()
   const [finalizedTx, setFinalizedTx] = useState<ContractTransaction | null>()
-  const [txError, setTxError] = useState<string>('')
+  const [txError, setTxError] = useState<Error>()
   const { nft } = nftObj
 
   async function makeAskTransaction(
@@ -110,7 +110,7 @@ export const usePrivateAskTransaction = ({
 
       setFinalizedTx(tx)
     } catch (err: any) {
-      setTxError(err?.message || "There's been an error, please try again.")
+      setTxError(err || new Error("There's been an error, please try again."))
     } finally {
       setSubmitting(false)
     }
