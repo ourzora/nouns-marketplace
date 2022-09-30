@@ -41,15 +41,10 @@ export const modalWrapper = style([
 
 export const filteredItems = style([
   {
-    // maxHeight: 274, // (80px * 3 rows) + (2 * 16px gap) + 2px borderTop
-    // maxHeight: 370, // (80px * 4 rows) + (3 * 16px gap) + 2px borderTop
-    maxHeight: 466, // (80px * 5 rows) + (4 * 16px gap) + 2px borderTop // Waiting on answer from Andrei on # of rows to show
+    maxHeight: 'calc((80px * 5) + (80px * 0.5) + (16px * 5) + 2px)', // (80px * 5 rows) + (0.5 * 1 row) + (5 * 16px gap) + 2px borderTop
     borderBottomLeftRadius: '10px',
     borderBottomRightRadius: '10px',
   },
-  // atoms({
-  //   borderRadius: 'curved',
-  // }),
 ])
 
 export const filterUnscrolled = style({
