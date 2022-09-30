@@ -10,6 +10,7 @@ import { useModal } from '@modal'
 import { mediumFont } from 'styles/styles.css'
 import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
 import { LearnMoreButton } from '../LearnMoreButton'
+import { formatContractError } from '@shared'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
 
@@ -70,7 +71,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
           </Heading>
         </Flex>
       )}
-      {txError && <PrintError errorMessage={txError} />}
+      {txError && <PrintError errorMessage={formatContractError(txError)} />}
       <Stack gap="x4">
         <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
           <Button

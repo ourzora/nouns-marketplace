@@ -1,7 +1,13 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { isAddress, PrintError, validateCurrency, validateENSAddress } from '@shared'
+import {
+  formatContractError,
+  isAddress,
+  PrintError,
+  validateCurrency,
+  validateENSAddress,
+} from '@shared'
 import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
 import { Field, FieldProps, Form, Formik } from 'formik'
@@ -116,7 +122,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
                 }}
               </Field>
 
-              {txError && <PrintError errorMessage={txError} />}
+              {txError && <PrintError errorMessage={formatContractError(txError)} />}
             </Stack>
             <Stack gap="x4">
               <TransactionSubmitButton
