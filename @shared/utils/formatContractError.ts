@@ -45,7 +45,7 @@ export function formatContractError(error: TransactionError | Error) {
       return 'Transaction rejected. If this was a mistake, try again.'
   }
 
-  if (error.message.includes('user rejected transaction')) {
+  if (error?.message.includes('user rejected transaction')) {
     return 'User rejected transaction'
   }
 
