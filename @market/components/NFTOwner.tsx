@@ -1,4 +1,4 @@
-import { Text, Stack } from '@zoralabs/zord'
+import { Stack, Label } from '@zoralabs/zord'
 import { lightFont } from '@shared'
 import { AddressWithLink } from './AddressWithLink'
 
@@ -20,9 +20,9 @@ export function NFTOwner({
       justify="space-between"
       flex="1"
     >
-      <Text variant="label-lg" align={align} className={lightFont} color="tertiary">
+      <Label size="lg" align={align} className={lightFont} color="text3">
         Owned by
-      </Text>
+      </Label>
       <AddressWithLink address={address} />
     </Stack>
   )

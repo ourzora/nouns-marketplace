@@ -65,7 +65,7 @@ export function FilterCollectionListItem({
                 </Text>
               </Box>
               {count ? (
-                <Text variant="paragraph-xs" color="tertiary">
+                <Text variant="paragraph-xs" color="text3">
                   {numberFormatter(count)} item{count !== 1 ? 's' : ''}
                 </Text>
               ) : null}

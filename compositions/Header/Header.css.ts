@@ -1,15 +1,16 @@
 import { style } from '@vanilla-extract/css'
 import { atoms, media, color, space } from '@zoralabs/zord'
-import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, HEADER_Z } from 'styles/style-constants'
+import { HEADER_LAYER } from 'constants/layers'
+import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE } from 'styles/style-constants'
 
 export const headerWrapper = style([
   {
     height: HEADER_HEIGHT_MOBILE,
-    zIndex: HEADER_Z,
+    zIndex: HEADER_LAYER,
     alignItems: 'center',
     gridTemplateColumns: 'repeat(2, 1fr)',
     gridTemplateRows: 'auto',
-    borderBottom: `2px solid ${color.black10}`,
+    borderBottom: `2px solid ${color.background2}`,
     '@media': {
       [media.min1024]: {
         height: HEADER_HEIGHT,
@@ -40,14 +41,6 @@ export const nounsGlassesLink = style([
     cursor: 'pointer',
     pos: 'relative',
     h: '100%',
-  }),
-])
-
-export const nounsGlasses = style([
-  atoms({
-    w: '100%',
-    h: '100%',
-    inset: 'x0',
   }),
 ])
 

@@ -4,9 +4,10 @@ import { atoms, color, radii, space, typography } from '@zoralabs/zord'
 export const codeWrapper = style([
   atoms({
     w: '100%',
-    backgroundColor: 'tertiary',
     px: 'x5',
     py: 'x3',
+    // backgroundColor: 'tertiary', // black5
+    backgroundColor: 'background2', // black10
     borderRadius: 'curved',
     overflowX: 'scroll',
     textAlign: 'left',
@@ -41,8 +42,8 @@ export const h1Selector = style([
 
 export const blockQuoteSelector = style([
   {
-    color: color.black70,
-    borderLeft: `3px solid ${color.black30}`,
+    color: color.text3,
+    borderLeft: `3px solid ${color.accentActive}`,
   },
   atoms({
     pl: 'x2',
@@ -50,12 +51,23 @@ export const blockQuoteSelector = style([
 ])
 
 globalStyle(`${blockQuoteSelector} > p`, {
-  fontSize: typography.size[10],
+  fontSize: typography.fontSize[16],
 })
 
 export const ulSelector = style([
   {
     listStyleType: 'disc',
+    lineHeight: '1.5',
+  },
+  atoms({
+    pl: 'x5',
+  }),
+])
+
+export const olSelector = style([
+  {
+    listStyle: 'number',
+    lineHeight: '1.5',
   },
   atoms({
     pl: 'x5',
@@ -69,13 +81,13 @@ globalStyle(`${ulSelector} ul`, {
 export const aSelector = style([
   atoms({
     textDecoration: 'underline',
-    color: 'success',
+    color: 'positive',
   }),
 ])
 
 export const hrSelector = style([
   {
-    border: `1px solid ${color.black10}`,
+    border: `1px solid ${color.border}`,
   },
   atoms({
     w: '100%',
@@ -90,11 +102,8 @@ globalStyle(`${pSelector} em`, {
 })
 
 globalStyle(`${pSelector} code`, {
-  paddingLeft: space.x2,
-  paddingRight: space.x2,
-  paddingTop: space.x1,
-  paddingBottom: space.x1,
-  backgroundColor: color.black5,
+  padding: `${space.x1} ${space.x2}`,
+  backgroundColor: color.background2,
   borderRadius: radii.small,
 })
 

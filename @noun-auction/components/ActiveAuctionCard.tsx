@@ -38,7 +38,7 @@ function CardContents() {
       style={{ maxWidth: '500px' }}
     >
       <Link href={`/collections/${contractAddress}/${tokenId}`}>
-        <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
+        <Box w="100%" className={cardImageWrapper} backgroundColor="background2">
           {tokenId && (
             <ImageWithNounFallback tokenContract={contractAddress} tokenId={tokenId} />
           )}

@@ -1,5 +1,5 @@
 import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, media, typography, colorTheme, radii, fontWeight } from '@zoralabs/zord'
+import { atoms, media, color, typography, radii } from '@zoralabs/zord'
 import {
   FOOTER_HEIGHT,
   FOOTER_HEIGHT_MOBILE,
@@ -28,8 +28,14 @@ globalStyle('light-font', {
 })
 
 export const lightFont = style({
-  fontWeight: 300,
   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
+  fontWeight: 300,
+})
+
+export const mediumFont = style({
+  fontFamily: 'PTRootUIWebLight, Arial, Helvetica, sans-serif!important',
+  // fontFamily: 'PTRootUIWebLight',
+  fontWeight: 600,
 })
 
 export const noTextWrap = style({
@@ -53,9 +59,8 @@ export const buttonStyle = style([
     backgroundColor: 'var(--light-grey)',
   },
   atoms({
+    p: 'x2',
     borderRadius: 'round',
-    px: 'x2',
-    py: 'x2',
     justifyContent: 'center',
   }),
 ])
@@ -90,30 +95,28 @@ export const maxWidthSm = style([
   }),
 ])
 
-globalStyle('.zord-acccordionTrigger > span', {
+globalStyle('.zord-accordionTrigger > span', {
   fontFamily: "'Londrina Solid', cursive!important",
-  fontSize: typography.size[8],
+  fontSize: typography.fontSize[20],
   paddingBottom: 10,
 })
 
 globalStyle('.zord-attributesHeading', {
   fontFamily: "'Londrina Solid', cursive!important",
-  fontSize: typography.size[8],
+  fontSize: typography.fontSize[20],
   paddingTop: 10,
 })
 
 globalStyle('.nouns-market-traits h3 > button > span', {
   fontFamily: "'ptBold', Arial, Helvetica, sans-serif!important",
-  fontSize: `${typography.size[10]}!important`,
+  fontSize: typography.fontSize[14],
   textTransform: 'capitalize',
   paddingBottom: 0,
 })
 
 globalStyle('.nouns-market-traits h3 > button', {
-  backgroundColor: `${colorTheme.background.tertiary}!important`,
-  paddingLeft: 10,
-  paddingRight: 10,
-  paddingBottom: 10,
+  backgroundColor: `${color.background2}!important`,
+  padding: 10,
   borderRadius: radii.curved,
   marginBottom: 5,
 })
@@ -144,20 +147,15 @@ export const clickAnimation = style({
 /* PAGE HEADER */
 export const pageHeadline = style([
   {
-    fontWeight: fontWeight.display,
-    lineHeight: '40px',
+    fontWeight: typography.fontWeight.display,
+    fontSize: typography.fontSize[48],
+    lineHeight: typography.lineHeight[40],
     '@media': {
       [media.min1024]: {
-        lineHeight: '50px',
+        lineHeight: typography.lineHeight[50],
       },
     },
   },
-  atoms({
-    fontSize: {
-      '@initial': '48px',
-      '@1024': typography.size[1],
-    },
-  }),
 ])
 
 export const pageHeaderWrapper = style([

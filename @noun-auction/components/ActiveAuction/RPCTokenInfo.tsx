@@ -14,10 +14,10 @@ export interface RPCTokenInfoProps extends BoxProps {
 }
 
 export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInfoProps) {
-  if (!tokenId || !contractAddress) return null
-
   const dao = returnDao(contractAddress)
   const { data } = useNFT(contractAddress, tokenId)
+
+  if (!tokenId || !contractAddress) return null
 
   return (
     <Flex className={['nounish-auction__token-info', tokenInfoWrapper]} {...props}>
@@ -36,7 +36,7 @@ export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInf
         </Heading>
         <Box mb="x1">
           <NextLink href={`/collections/${contractAddress}`} passHref>
-            <Label as="a" color="tertiary" className={[lightFont]}>
+            <Label as="a" color="text3" className={[lightFont]}>
               {dao?.name}
             </Label>
           </NextLink>

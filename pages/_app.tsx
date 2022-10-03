@@ -30,12 +30,14 @@ import NextNProgress from 'nextjs-progressbar'
 import { HeaderComposition } from 'compositions/Header'
 import { FooterComposition } from 'compositions/Footer'
 import { BlocklistGuard } from 'providers/BlocklistProvider'
+import { PrivateAskContractProvider } from '@market/modules/PrivateAsk/providers/'
+import { ToastContextProvider } from '@toast'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 
 const { chains, provider } = configureChains(
   [chain.mainnet],
-  [alchemyProvider({ alchemyId: alchemyKey }), publicProvider()]
+  [alchemyProvider({ apiKey: alchemyKey }), publicProvider()]
 )
 
 const { connectors } = getDefaultWallets({
@@ -85,19 +87,23 @@ function MyApp({ Component, pageProps }: AppProps) {
             <BlocklistGuard>
               <CollectionsProvider collections={collections} daos={daos}>
                 <ModalContextProvider>
-                  <ContractProvider>
-                    <HeaderComposition />
-                    <NextNProgress
-                      color="rgba(0,0,0,.5)"
-                      startPosition={0.125}
-                      stopDelayMs={200}
-                      height={2}
-                      showOnShallow={true}
-                      options={{ showSpinner: false }}
-                    />
-                    <Component {...pageProps} />
-                    <FooterComposition />
-                  </ContractProvider>
+                  <ToastContextProvider>
+                    <ContractProvider>
+                      <PrivateAskContractProvider>
+                        <HeaderComposition />
+                        <NextNProgress
+                          color="rgba(0,0,0,.5)"
+                          startPosition={0.125}
+                          stopDelayMs={200}
+                          height={2}
+                          showOnShallow={true}
+                          options={{ showSpinner: false }}
+                        />
+                        <Component {...pageProps} />
+                        <FooterComposition />
+                      </PrivateAskContractProvider>
+                    </ContractProvider>
+                  </ToastContextProvider>
                 </ModalContextProvider>
               </CollectionsProvider>
             </BlocklistGuard>

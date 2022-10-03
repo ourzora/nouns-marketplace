@@ -62,7 +62,7 @@ export function CollectionMenu() {
           {currentCollectionCount ? (
             <Label
               as="span"
-              color="tertiary"
+              color="text3"
               size="md"
               display={{
                 '@initial': 'none',

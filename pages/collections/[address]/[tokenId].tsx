@@ -1,20 +1,13 @@
 import { PageWrapper, Seo } from 'components'
 import { nftService } from 'services/nftService'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import {
-  NFTPageHero,
-  NFTInfoSidebar,
-  NFTAttributes,
-  NFTHistory,
-} from 'compositions/NFTPage'
+import { NFTPageHero, NFTSidebar, NFTAttributes, NFTHistory } from 'compositions/NFTPage'
 import { Grid, Stack } from '@zoralabs/zord'
-import {
-  attributesHistoryWrapper,
-  nftPageWrapper,
-} from 'compositions/NFTPage/NFTPage.css'
 import { NFTProvider } from '@shared/providers/NFTProvider'
 import { NounishAuctionProvider } from '@noun-auction'
 import { returnDao } from 'constants/collection-addresses'
+import { useMemo } from 'react'
+import * as styles from 'compositions/NFTPage/NFTPage.css'
 
 const NFT = ({
   nft,
@@ -25,7 +18,7 @@ const NFT = ({
   tokenAddress: string
   tokenId: string
 }) => {
-  const dao = returnDao(tokenAddress)
+  const dao = useMemo(() => returnDao(tokenAddress), [tokenAddress])
 
   return (
     <PageWrapper direction="column">
@@ -35,16 +28,16 @@ const NFT = ({
         ogImage={nft?.media?.poster?.uri}
       />
       <NFTProvider initialData={nft} contractAddress={tokenAddress} tokenId={tokenId}>
-        <Grid className={nftPageWrapper}>
+        <Grid className={styles.nftPageWrapper}>
           <NFTPageHero />
           {dao ? (
-            <NounishAuctionProvider daoConfig={dao} tokenId={nft?.nft?.tokenId}>
-              <NFTInfoSidebar />
+            <NounishAuctionProvider daoConfig={dao} tokenId={tokenId}>
+              <NFTSidebar />
             </NounishAuctionProvider>
           ) : (
-            <NFTInfoSidebar />
+            <NFTSidebar />
           )}
-          <Stack className={attributesHistoryWrapper}>
+          <Stack className={styles.attributesHistoryWrapper}>
             <NFTHistory />
             <NFTAttributes />
           </Stack>
