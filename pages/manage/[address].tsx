@@ -26,7 +26,7 @@ const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
       {ownerAddress && (
         <CollectionFilterProvider
           ownerAddress={ownerAddress}
-          contractWhiteList={allAddresses}
+          contractAllowList={allAddresses}
           // useFilterOwnerCollections
           useSidebarFilter={false}
         >

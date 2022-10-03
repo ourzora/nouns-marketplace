@@ -14,7 +14,7 @@ export interface DocsPageWrapperProps extends PageWrapperProps {
 
 export function BackButton() {
   return (
-    <Link href="/docs">
+    <Link href="/docs" passHref>
       <Button
         borderRadius="phat"
         as="a"

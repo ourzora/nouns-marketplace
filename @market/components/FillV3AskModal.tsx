@@ -1,4 +1,4 @@
-import { Text, Box, Flex, Stack, FlexProps, Button } from '@zoralabs/zord'
+import { Box, Flex, Stack, FlexProps, Button, Heading, Label } from '@zoralabs/zord'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { lightFont, useIsOwner } from '@shared'
@@ -7,15 +7,15 @@ import { useRelevantMarket } from '@market/hooks'
 import { FillV3AskWizard, NFTOwner } from '@market/components'
 
 export interface FillV3AskModalProps extends FlexProps {
-  nftData: NFTObject
+  nftObj: NFTObject
 }
 
-export function FillV3AskModal({ nftData, ...props }: FillV3AskModalProps) {
-  const { nft, metadata, markets } = nftData
+export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
+  const { nft, metadata, markets } = nftObj
   const { ask } = useRelevantMarket(markets)
 
   const { requestClose } = useModal()
-  const { isOwner } = useIsOwner(nftData)
+  const { isOwner } = useIsOwner(nftObj)
 
   if (!nft || !metadata || ask?.status === MARKET_INFO_STATUSES.INVALID) {
     return null
@@ -33,12 +33,12 @@ export function FillV3AskModal({ nftData, ...props }: FillV3AskModalProps) {
           {...props}
         >
           <Stack>
-            <Text variant="heading-xs" className={lightFont} color="tertiary">
+            <Heading size="xs" className={lightFont} color="text3">
               Price
-            </Text>
-            <Text variant="heading-xs" className={lightFont}>
+            </Heading>
+            <Heading size="xs" className={lightFont}>
               {ask.amount?.amount.value} {ask.amount?.symbol}
-            </Text>
+            </Heading>
           </Stack>
           {!isOwner ? (
             <ModalComposition
@@ -63,7 +63,7 @@ export function FillV3AskModal({ nftData, ...props }: FillV3AskModalProps) {
                       tokenName={metadata.name}
                       askCurrency={ask.amount.address}
                       askPrice={ask.amount.amount.raw}
-                      nftData={nftData}
+                      nftObj={nftObj}
                       onClose={requestClose}
                       cancelButton={
                         <Button
@@ -81,14 +81,7 @@ export function FillV3AskModal({ nftData, ...props }: FillV3AskModalProps) {
               }
             />
           ) : (
-            <Button
-              disabled
-              borderRadius="curved"
-              size="md"
-              variant="outline"
-              borderColor="secondary"
-              color="tertiary"
-            >
+            <Button disabled borderRadius="curved" size="md" variant="outline">
               On Sale
             </Button>
           )}
@@ -100,12 +93,12 @@ export function FillV3AskModal({ nftData, ...props }: FillV3AskModalProps) {
               {ask?.status === MARKET_INFO_STATUSES.COMPLETE ? (
                 <Flex id="v3-ask-complete" justify="space-between" w="100%" {...props}>
                   <Stack>
-                    <Text variant="label-lg" className={lightFont} color="tertiary">
+                    <Label size="lg" className={lightFont} color="text3">
                       Sold on Chain for
-                    </Text>
-                    <Text variant="heading-xs" className={lightFont}>
+                    </Label>
+                    <Heading size="xs" className={lightFont}>
                       {ask.amount?.amount.value} {ask.amount?.symbol}
-                    </Text>
+                    </Heading>
                   </Stack>
                   <NFTOwner address={ask.raw.properties.buyer} />
                 </Flex>

@@ -1,5 +1,5 @@
-import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, media, color, radii } from '@zoralabs/zord'
+import { style } from '@vanilla-extract/css'
+import { atoms, media, color } from '@zoralabs/zord'
 import { MAX_WIDTH } from 'styles/style-constants'
 
 export const daosWrapper = style([
@@ -17,7 +17,7 @@ export const daosRow = style([
   {
     '@media': {
       [media.min1024]: {
-        borderTop: `2px solid ${color.black10}`,
+        borderTop: `2px solid ${color.background2}`,
         transition: 'border-color 250ms ease',
       },
       '(hover: hover)': {

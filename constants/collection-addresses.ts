@@ -1,4 +1,5 @@
 import { DaoConfigProps, nounsAbi, lilNounsAbi } from '@noun-auction'
+import { isAddressMatch } from '@shared'
 
 export const daos: DaoConfigProps[] = [
   {
@@ -24,8 +25,7 @@ export const daos: DaoConfigProps[] = [
 
 export function returnDao(collectionAddress: string | undefined) {
   if (!collectionAddress) return
-  const address = collectionAddress.toLowerCase()
-  return daos.find((dao) => dao.contractAddress.toLowerCase() === address)
+  return daos.find((dao) => isAddressMatch(dao.contractAddress, collectionAddress))
 }
 
 export function returnDaoAuctionContract(collectionAddress: string) {

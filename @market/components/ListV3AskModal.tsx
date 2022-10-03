@@ -5,12 +5,12 @@ import { useIsOwner } from '@shared'
 import { ListV3AskWizard, NFTOwner } from '@market/components'
 
 export interface ListV3AskModalProps extends FlexProps {
-  nftData: NFTObject
+  nftObj: NFTObject
 }
 
-export function ListV3AskModal({ nftData, ...props }: ListV3AskModalProps) {
-  const { nft, media } = nftData
-  const { isOwner } = useIsOwner(nftData)
+export function ListV3AskModal({ nftObj, ...props }: ListV3AskModalProps) {
+  const { nft, media } = nftObj
+  const { isOwner } = useIsOwner(nftObj)
   const { requestClose } = useModal()
 
   if (!nft) {

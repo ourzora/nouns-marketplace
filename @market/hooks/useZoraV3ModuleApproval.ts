@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { useContractContext } from '@market/providers'
 
 /**
- * Hook to fetch approval status for zora V3 modules
+ * Hook to fetch approval status for Zora V3 modules
  */
 
 export function useZoraV3ModuleApproval(address: string) {

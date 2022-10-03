@@ -56,7 +56,7 @@ export function ContractInteractionStatus({
             w="x14"
             h="x14"
             borderRadius="normal"
-            backgroundColor="secondary"
+            backgroundColor="background2"
           />
           <Flex flex={1} direction={['column', 'row']} w="100%">
             <Stack justify="center" h="100%">

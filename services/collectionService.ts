@@ -64,6 +64,8 @@ export async function collectionService({ params }: CollectionParamsProps) {
       },
     }
   } catch (err) {
+    console.error(err)
+
     if (err instanceof Error) {
       if (err?.message.includes('404')) {
         return {

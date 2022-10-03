@@ -127,7 +127,7 @@ export function FilterSidebar() {
       <ModalContent
         title="modal"
         showClose={false}
-        removePadding
+        padding="x0"
         modalContentOverrides={filterSidebarModalContent}
         modalBackgroundOverrides={filterSidebarModalBackground}
       >

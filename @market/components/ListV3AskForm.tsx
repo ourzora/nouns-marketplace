@@ -94,7 +94,7 @@ export function ListV3AskForm({
       {({ values, isValid }) => (
         <Form>
           <Flex justify="space-between">
-            <Label color="secondary" size="lg">
+            <Label color="text2" size="lg">
               NFT Price {`(ETH)`}:
             </Label>
           </Flex>

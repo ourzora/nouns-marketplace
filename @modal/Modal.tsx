@@ -8,24 +8,27 @@ import {
   Icon,
   ThemeProvider as ZordProvider,
   mixins,
+  Atoms,
 } from '@zoralabs/zord'
 
 export interface ModalContentProps extends Dialog.DialogContentProps {
   title?: string
   showClose?: boolean
-  removePadding?: boolean
-  /** Modal background css overrides: vannila extract style object */
+  padding?: Atoms['p']
+  /** Modal background css overrides: vanilla extract style object */
   modalBackgroundOverrides?: any
-  /** Modal content css overrides: vannila extract style object */
+  /** Modal content css overrides: vanilla extract style object */
   modalContentOverrides?: any
   children?: JSX.Element
   /** Default is lightTheme */
   modalTheme?: ClassValue | undefined
+  /** Disallow clicking outside of container to close modal */
+  disableCloseOnClickOutside?: boolean
 }
 
 export interface ModalProps extends Dialog.DialogProps {
   trigger?: React.ReactNode
-  /** Modal overlay css overrides: vannila extract style object */
+  /** Modal overlay css overrides: vanilla extract style object */
   modalOverlayOverrides?: any
 }
 
@@ -44,7 +47,7 @@ export function Modal({
         <Dialog.DialogOverlay
           className={clsx('zord-modal-overlay', overlay, modalOverlayOverrides)}
         />
-        <Box key={props.open ? 'open' : 'closed'} className="zord-modal-wrapper">
+        <Box p="x12" key={props.open ? 'open' : 'closed'} className="zord-modal-wrapper">
           {children}
         </Box>
       </Dialog.Portal>
@@ -57,17 +60,19 @@ export function Modal({
   )
 }
 
+// eslint-disable-next-line react/display-name
 export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
   (
     {
       modalContentOverrides,
       modalBackgroundOverrides,
+      disableCloseOnClickOutside = false,
       modalTheme,
       className,
       children,
       title,
       showClose = true,
-      removePadding = false,
+      padding = 'x6',
       ...props
     },
     ref
@@ -75,6 +80,9 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
     return (
       <Dialog.DialogContent
         ref={ref}
+        onPointerDownOutside={
+          disableCloseOnClickOutside ? (e) => e.preventDefault() : undefined
+        }
         className={clsx(
           mixins({ center: 'xy' }),
           content,
@@ -91,7 +99,7 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
               modalBackgroundOverrides,
               'zord-modal-background'
             )}
-            p={removePadding ? 'x0' : 'x6'}
+            p={padding}
           >
             {showClose && <CloseButton />}
             {children}
@@ -116,7 +124,7 @@ function CloseButton({
   ...props
 }: CloseButtonProps) {
   return (
-    <Dialog.Close
+    <ModalClose
       className={clsx(
         close,
         modalCloseButtonOverrides,
@@ -126,6 +134,6 @@ function CloseButton({
       {...props}
     >
       <Icon id="Close" size={closeIconSize} className="zord-modal-close-icon" />
-    </Dialog.Close>
+    </ModalClose>
   )
 }
