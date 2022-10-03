@@ -10,7 +10,7 @@ export function FooterComposition() {
     <Flex className={footerWrap}>
       <Grid as="footer" className={footerWrapper}>
         <Box gap="x2" className={[footerCol({ variant: 'left' })]}>
-          <Label px="x4" as="a" size="lg" href="/docs">
+          <Label px="x4" as="a" size="lg" href="/docs" passhref="/docs">
             Docs
           </Label>
           <Label px="x4" as="a" size="lg" href="#">
