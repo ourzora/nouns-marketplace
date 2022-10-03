@@ -4,53 +4,20 @@ import { useNFTProvider, useTitleWithFallback } from '@shared'
 import { Link } from 'components'
 import { clickAnimation, mediumFont } from 'styles/styles.css'
 import { NFTMarket } from './NFTMarket'
-import { useRouter } from 'next/router'
-import { useCallback, useMemo } from 'react'
 import { useNounishAuctionProvider } from '@noun-auction'
 import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
 import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
+import { useTokenHelper } from '@shared/hooks'
 
 export interface NFTSidebarProps extends StackProps {}
 
 export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
-  const router = useRouter()
-  const { initialData: nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
-  const { data, primarySalePrice } = useNounishAuctionProvider()
-
-  const tokenId = useMemo(
-    () => (tokenIdString ? parseInt(tokenIdString) : undefined),
-    [tokenIdString]
+  const { primarySalePrice } = useNounishAuctionProvider()
+  const { nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
+  const { tokenID, hasPreviousNFT, hasNextNFT, handlePrev, handleNext } = useTokenHelper(
+    nft!
   )
-
-  const tokenWithIdOfZeroExists = useMemo(
-    () => data?.hasTokenWithIdOfZero?.token?.tokenId === '0',
-    [data]
-  )
-
-  const hasNextNft = useMemo(() => {
-    // !0 === true
-    if (tokenId === undefined) return false
-    const lastTokenId = data?.numberOfTokens.nftCount - (tokenWithIdOfZeroExists ? 1 : 0)
-    return lastTokenId > tokenId
-  }, [data?.numberOfTokens, tokenId, tokenWithIdOfZeroExists])
-
-  const hasPreviousNft = useMemo(() => {
-    // !0 === true
-    if (tokenId === undefined) return false
-
-    return tokenWithIdOfZeroExists ? tokenId > 0 : tokenId > 1
-  }, [tokenId, tokenWithIdOfZeroExists])
-
-  const handleNext = useCallback(() => {
-    if (hasNextNft) {
-      tokenId && router.push(`/collections/${contractAddress}/${tokenId + 1}`)
-    }
-  }, [hasNextNft, tokenId, router, contractAddress])
-
-  const handlePrev = useCallback(() => {
-    tokenId && router.push(`/collections/${contractAddress}/${tokenId - 1}`)
-  }, [contractAddress, tokenId, router])
 
   const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
@@ -58,7 +25,7 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
     defaultTitle: nft?.metadata?.name,
   })
 
-  if (!nft || !tokenId || !contractAddress) return null
+  if (!nft || !tokenID || !contractAddress) return null
 
   return (
     <Stack
@@ -89,7 +56,7 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
         <Flex w="x20">
           <Button
             className={[styles.nftNextButton]}
-            disabled={!hasPreviousNft}
+            disabled={!hasPreviousNFT}
             onClick={handlePrev}
             variant="circle"
           >
@@ -97,7 +64,7 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
           </Button>
           <Button
             className={[styles.nftNextButton]}
-            disabled={!hasNextNft}
+            disabled={!hasNextNFT}
             onClick={handleNext}
             variant="circle"
           >

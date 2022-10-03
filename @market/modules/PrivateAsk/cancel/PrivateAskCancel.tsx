@@ -4,7 +4,7 @@ import { Button, Flex, Stack } from '@zoralabs/zord'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
-import { DataTable, PrintError } from '@shared'
+import { DataTable, formatContractError, PrintError } from '@shared'
 import { useModal } from '@modal/useModal'
 import { useListingDataTable } from '@market/hooks'
 import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
@@ -31,7 +31,7 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
           items={formattedListingDataTable}
         />
 
-        {txError && <PrintError errorMessage={txError} />}
+        {txError && <PrintError errorMessage={formatContractError(txError)} />}
       </Stack>
 
       <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">

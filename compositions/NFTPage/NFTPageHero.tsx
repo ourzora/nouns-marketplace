@@ -8,7 +8,7 @@ import { ImageWithNounFallback } from 'components'
 export interface NFTPageHeroProps extends BoxProps {}
 
 export function NFTPageHero({ className, ...props }: NFTPageHeroProps) {
-  const { initialData: nft, tokenId, contractAddress } = useNFTProvider()
+  const { nft, tokenId, contractAddress } = useNFTProvider()
   const { srcImg } = useSourceImage(nft?.media)
 
   return (

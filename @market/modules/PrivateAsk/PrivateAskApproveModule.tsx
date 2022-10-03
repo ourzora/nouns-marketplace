@@ -36,7 +36,7 @@ export function PrivateAskApproveModule({
         <Zorb size={52} />
         <HeadingDescription
           heading="Approve Module"
-          description="The Private Asks Module let users sell an ERC-721 NFT to a specific buyer address."
+          description="The Private Asks Module allows a seller to initiate a private ERC-721 NFT sale to a specific buyer, and for the buyer to complete the purchase."
         />
         {error && <PrintError errorMessage={error} />}
       </Stack>

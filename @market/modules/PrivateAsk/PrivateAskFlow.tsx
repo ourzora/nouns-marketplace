@@ -15,6 +15,8 @@ import {
   FILLASK_SUCCESS,
   VIEW_LISTING,
   usePrivateAskStateContext,
+  PossibleState,
+  RESET,
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
 import { PrivateAskApproveTransferHelper } from './PrivateAskApproveTransferHelper'
@@ -42,6 +44,8 @@ const componentMap = {
   [FILLASK]: PrivateAskFillAsk,
   [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
   [VIEW_LISTING]: PrivateAskViewListing,
+  // other possible solution will be removing RESET from PossibleState
+  [RESET]: () => null,
 }
 
 interface PrivateAskModalProps {

@@ -13,7 +13,7 @@ import { useMemo } from 'react'
 export interface NFTAttributesProps extends BoxProps {}
 
 export function NFTAttributes({ ...props }: NFTAttributesProps) {
-  const { initialData: nft } = useNFTProvider()
+  const { nft } = useNFTProvider()
   const hasAttributes = useMemo(
     () => nft?.metadata?.attributes && nft?.metadata?.attributes.length > 0,
     [nft?.metadata?.attributes]

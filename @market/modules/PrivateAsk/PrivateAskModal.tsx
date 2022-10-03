@@ -12,9 +12,14 @@ import { customContent, customBackground } from '@modal/Modal.css'
 interface PrivateAskModalProps {
   nftObj: NFTObject
   modalName: string
+  disableCloseOnClickOutside?: boolean
 }
 
-export function PrivateAskModal({ nftObj, modalName }: PrivateAskModalProps) {
+export function PrivateAskModal({
+  nftObj,
+  modalName,
+  disableCloseOnClickOutside = false,
+}: PrivateAskModalProps) {
   const { modalType, requestClose, requestOpen } = useModal()
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
@@ -36,6 +41,7 @@ export function PrivateAskModal({ nftObj, modalName }: PrivateAskModalProps) {
           className={clsx(styles.content, styles.modalBackground)}
           modalContentOverrides={customContent}
           modalBackgroundOverrides={customBackground}
+          disableCloseOnClickOutside={disableCloseOnClickOutside}
           showClose={false}
           padding="x8"
         >
