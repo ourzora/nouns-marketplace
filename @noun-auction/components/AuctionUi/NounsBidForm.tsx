@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { parseUnits } from '@ethersproject/units'
-import { useContractWrite, useSigner, useAccount } from 'wagmi'
+import { useContractWrite, useSigner, useAccount, usePrepareContractWrite } from 'wagmi'
 import { BigNumber as EthersBN } from 'ethers'
 import {
   Flex,
@@ -52,7 +52,6 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
     minBidIncrementPercentage
   )
 
-  const { data: signer } = useSigner()
   const { address } = useAccount()
 
   const handleOnUpdate = useCallback(
@@ -70,17 +69,9 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
     [setBidAmount]
   )
 
-  /* @ts-ignore */
-  const {
-    isError,
-    isLoading,
-    isSuccess,
-    error: writeContractError,
-    write: placeBid,
-  } = useContractWrite({
+  const { config, error: prepareError } = usePrepareContractWrite({
     addressOrName: auctionContractAddress as string,
     contractInterface: abi,
-    signerOrProvider: signer,
     functionName: 'createBid',
     overrides: {
       from: address,
@@ -89,11 +80,21 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
     args: [tokenId],
   })
 
+  /* @ts-ignore */
+  const {
+    isError,
+    isLoading,
+    isSuccess,
+    error: writeContractError,
+    write: placeBid,
+  } = useContractWrite(config)
+
   const handleOnSubmit = useCallback(
     (event) => {
       event.preventDefault()
-      placeBid()
+      placeBid && placeBid()
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [bidAmount]
   )
 
@@ -101,7 +102,7 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
     <Box {...props}>
       <form onSubmit={handleOnSubmit}>
         <Flex justify="space-between">
-          <Label color="secondary" size="lg">
+          <Label color="text2" size="lg">
             Bid
           </Label>
         </Flex>
@@ -138,7 +139,10 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
           <Separator />
         </Stack>
         {isError && writeContractError && (
-          <PrintError errorMessage={formatContractError(writeContractError)} mb="x4" />
+          <PrintError
+            errorMessage={formatContractError(writeContractError ?? prepareError)}
+            mb="x4"
+          />
         )}
         {!isSuccess ? (
           <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x2">

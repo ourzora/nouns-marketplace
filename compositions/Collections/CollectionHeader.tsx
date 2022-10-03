@@ -102,7 +102,7 @@ export function CollectionHeader({
               address={collection.address}
               useEns={false}
               className={clickAnimation}
-              backgroundColor="tertiary"
+              backgroundColor="background2"
               px="x4"
               py="x2"
               borderRadius="curved"

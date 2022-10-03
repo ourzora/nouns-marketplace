@@ -1,7 +1,7 @@
-import { atoms, media, ease, vars } from '@zoralabs/zord'
+import { atoms, vars } from '@zoralabs/zord'
 import { keyframes, style } from '@vanilla-extract/css'
 
-const MODAL_BACKDROP_LAYER = 2000
+const MODAL_BACKDROP_LAYER = 20
 
 export const overlay = style([
   {
@@ -45,13 +45,13 @@ export const background = style([
 
 export const customContent = style([
   {
-    maxWidth: 500,
+    maxWidth: 448,
   },
 ])
 
 export const customBackground = style([
   {
-    background: vars.color.background.primary,
+    background: vars.color.background1,
     borderRadius: 40,
     boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
     animation: `0.3s cubic-bezier(0.65, 0, 0.35, 1), ${keyframes({

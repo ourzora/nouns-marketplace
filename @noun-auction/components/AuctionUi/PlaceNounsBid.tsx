@@ -6,7 +6,7 @@ import { ModalComposition } from '@modal'
 import { useConnectModal, useAccountModal, useChainModal } from '@rainbow-me/rainbowkit'
 
 // Imports from @markets
-import { NftInfo } from '@market'
+import { NFTSummary } from '@market'
 
 export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
   const { tokenId, layout, activeAuction } = useNounishAuctionProvider()
@@ -31,7 +31,7 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
           }
           content={
             <Stack p="x8">
-              <NftInfo
+              <NFTSummary
                 collectionAddress={activeAuction?.collectionAddress}
                 tokenId={tokenId}
               />

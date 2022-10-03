@@ -44,7 +44,7 @@ export interface FilterConfigProps {
 export interface FilterContextInputProps extends FilterConfigProps {
   contractAddress?: string | null
   ownerAddress?: string
-  contractWhiteList?: string[] | undefined
+  contractAllowList?: string[] | undefined
 }
 
 export interface TokenQueryReturnTypes extends FilterContextInputProps {

@@ -1,7 +1,6 @@
 import { NounishAuction } from '@noun-auction'
 import { useNFTProvider } from '@shared'
 import { returnDao } from 'constants/collection-addresses'
-import { useWindowWidth } from '@shared'
 
 export function NounishActivityRow() {
   const {
@@ -23,7 +22,7 @@ export function NounishActivityRow() {
       showLabels
       hideCollectionTitle={false}
       borderRadius="curved"
-      borderColor="tertiary"
+      borderColor="text3"
       tokenId={tokenId}
       p="x4"
     />

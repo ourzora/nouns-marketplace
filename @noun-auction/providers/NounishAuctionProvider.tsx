@@ -8,16 +8,33 @@ import {
   SetStateAction,
 } from 'react'
 import { useNounishAuctionQuery } from '@noun-auction/hooks'
-import { DaoConfigProps, ActiveNounishAuctionResponse } from '@noun-auction/typings'
+import {
+  DaoConfigProps,
+  ActiveNounishAuctionResponse,
+  NounsAuctionEventTypes,
+  LilNounsAuctionEventTypes,
+} from '@noun-auction/typings'
 import { defaultDaoConfig } from '@noun-auction/constants'
 import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
 import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
+import { first } from 'lodash'
+import { AddressZero } from '@ethersproject/constants'
+import { formatUnits } from 'ethers/lib/utils'
+import { isAddressMatch } from '@shared'
 
 export type NounishAuctionProviderProps = {
   tokenId?: string
   daoConfig: DaoConfigProps
   children?: ReactNode
   layout?: keyof typeof auctionWrapperVariants['layout']
+}
+
+function getLatestBlockNumberForEvent(a: any, b: any) {
+  return a.transactionInfo.blockNumber &&
+    b.transactionInfo.blockNumber &&
+    a.transactionInfo.blockNumber > b.transactionInfo.blockNumber
+    ? -1
+    : 1
 }
 
 const NounsAuctionContext = createContext<{
@@ -34,6 +51,9 @@ const NounsAuctionContext = createContext<{
   layout?: keyof typeof auctionWrapperVariants['layout']
   activeAuctionId: string | undefined
   activeAuction: ActiveNounishAuctionResponse
+  primarySalePrice?: string
+  highestBidderAddress?: string
+  hasNonZeroHighestBidder?: boolean
 }>({
   daoConfig: defaultDaoConfig,
   timerComplete: false,
@@ -41,6 +61,8 @@ const NounsAuctionContext = createContext<{
   setTimerComplete: () => {},
   activeAuction: undefined,
   reservePrice: '0.01',
+  primarySalePrice: undefined,
+  highestBidderAddress: undefined,
 })
 
 export function useNounishAuctionProvider() {
@@ -69,6 +91,58 @@ export function NounishAuctionProvider({
     if (data) return data?.events?.nodes.length === 0
   }, [data])
 
+  const isSettled = useMemo(() => {
+    if (noAuctionHistory) return false
+
+    const settledAuctionEventType =
+      marketType === 'NOUNS_AUCTION'
+        ? NounsAuctionEventTypes.NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT
+        : LilNounsAuctionEventTypes.LIL_NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT
+
+    const settledEvents = data?.events?.nodes.filter((event: any) =>
+      marketType === 'NOUNS_AUCTION'
+        ? event.properties.nounsAuctionEventType === settledAuctionEventType
+        : event.properties.lilNounsAuctionEventType === settledAuctionEventType
+    )
+
+    return !!settledEvents?.length
+  }, [data?.events?.nodes, marketType, noAuctionHistory])
+
+  const primarySalePrice = useMemo(() => {
+    if (noAuctionHistory || !isSettled) return undefined
+
+    const bidEventType =
+      marketType === 'NOUNS_AUCTION'
+        ? NounsAuctionEventTypes.NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT
+        : LilNounsAuctionEventTypes.LIL_NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT
+
+    const bidEvents = data?.events?.nodes
+      .filter((event: any) =>
+        marketType === 'NOUNS_AUCTION'
+          ? event.properties.nounsAuctionEventType === bidEventType
+          : event.properties.lilNounsAuctionEventType === bidEventType
+      )
+      .sort(getLatestBlockNumberForEvent)
+
+    const firstPrice = Array.isArray(bidEvents)
+      ? formatUnits(first(bidEvents).properties.properties.value, 18)
+      : undefined
+
+    return firstPrice
+  }, [data?.events?.nodes, isSettled, marketType, noAuctionHistory])
+
+  const highestBidderAddress = useMemo(
+    () =>
+      activeAuction?.properties?.highestBidder
+        ? activeAuction?.properties?.highestBidder
+        : undefined,
+    [activeAuction?.properties?.highestBidder]
+  )
+  const hasNonZeroHighestBidder = useMemo(
+    () => !isAddressMatch(highestBidderAddress, AddressZero),
+    [highestBidderAddress]
+  )
+
   return (
     <NounsAuctionContext.Provider
       value={{
@@ -80,10 +154,13 @@ export function NounishAuctionProvider({
         activeAuctionId: activeAuction ? activeAuction?.properties?.tokenId : undefined,
         daoConfig: daoConfig,
         activeAuction: activeAuction,
+        primarySalePrice,
         setTimerComplete,
         layout,
         minBidIncrementPercentage: activeAuction?.properties?.minBidIncrementPercentage,
         reservePrice: '0.01',
+        highestBidderAddress,
+        hasNonZeroHighestBidder,
       }}
     >
       {children}

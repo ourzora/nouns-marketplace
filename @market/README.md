@@ -6,8 +6,10 @@ Suite of UI Components and hooks for interacting with [Zora's V3 market contract
 
 [V3 Asks V1.1](https://docs.zora.co/docs/smart-contracts/modules/Asks/zora-v3-asks-v1.1)
 
-- Fill Ask
 - Create Ask
+- Fill Ask
+- Create Private Ask
+- Fill Private Ask
 
 [V3 Approvals](https://docs.zora.co/docs/guides/v3-approvals)
 

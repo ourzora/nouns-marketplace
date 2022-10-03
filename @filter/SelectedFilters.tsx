@@ -117,7 +117,7 @@ export function SelectedFilters() {
           <Button
             variant="unset"
             className={[textButton, textSmall]}
-            color="primary"
+            color="accent"
             onClick={clearFilters}
           >
             Clear All

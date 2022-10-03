@@ -22,7 +22,7 @@ export function PageHeader({ headline, copy, ...props }: PageHeaderProps) {
         </Text>
       ) : null}
       {copy ? (
-        <Paragraph as="p" size="lg" className={[lightFont, textCenter]} color="primary">
+        <Paragraph as="p" size="lg" className={[lightFont, textCenter]} color="text1">
           {copy}
         </Paragraph>
       ) : null}

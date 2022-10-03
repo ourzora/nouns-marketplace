@@ -4,7 +4,6 @@ export const HEADER_HEIGHT = 84
 export const HEADER_HEIGHT_MOBILE = 128
 export const FOOTER_HEIGHT = 204
 export const FOOTER_HEIGHT_MOBILE = 140
-export const HEADER_Z = 100
 
 export const MAX_WIDTH = {
   SM: 720,
