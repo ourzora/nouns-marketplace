@@ -25,7 +25,7 @@ export async function nftService({ params }: NFTParamsProps) {
   if (!tokenAddress || !tokenId) return false
 
   // Ensure token is a nounish collection/dao
-  if (tokenAddress && !allAddresses.includes(tokenAddress)) {
+  if (tokenAddress && !allAddresses.includes(tokenAddress.toLowerCase())) {
     return {
       notFound: true,
     }

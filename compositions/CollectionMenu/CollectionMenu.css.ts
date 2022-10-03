@@ -1,12 +1,11 @@
 import { style } from '@vanilla-extract/css'
-import { color, space, atoms, media } from '@zoralabs/zord'
+import { color, atoms, media } from '@zoralabs/zord'
 
 export const collectionTrigger = style([
   {
     gridColumn: '1',
     gridRow: '2',
     height: 42,
-    gridGap: space.x2,
     '@media': {
       [media.min1024]: {
         gridColumn: '3',
@@ -15,6 +14,7 @@ export const collectionTrigger = style([
     },
   },
   atoms({
+    gap: 'x2',
     w: '100%',
     justifyContent: 'flex-start',
     borderRadius: 'curved',
@@ -52,4 +52,7 @@ export const filterUnscrolled = style({
 })
 export const filterScrolled = style({
   borderColor: color.background2,
+})
+export const floor = atoms({
+  textTransform: 'none',
 })

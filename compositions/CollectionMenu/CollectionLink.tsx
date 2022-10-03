@@ -6,12 +6,14 @@ import { leadingTight, lightFont, mediumFont } from 'styles/styles.css'
 import { useAggregate, CollectionsData } from 'hooks'
 import { returnDao } from 'constants/collection-addresses'
 import { useMemo } from 'react'
+import * as styles from './CollectionMenu.css'
 
 export function CollectionLink({ collection }: { collection: CollectionsData }) {
   const { requestClose } = useModal()
   const { aggregate } = useAggregate(collection.address)
   const nftCount = aggregate?.aggregateStat.nftCount
   const floorPrice = aggregate?.aggregateStat.floorPrice
+
   const isDao = useMemo(
     () => returnDao(collection.address) !== undefined,
     [collection.address]
@@ -34,12 +36,7 @@ export function CollectionLink({ collection }: { collection: CollectionsData }) 
                 </Tag>
               </Flex>
               {floorPrice && (
-                <Eyebrow
-                  color="text2"
-                  as="p"
-                  textTransform="none"
-                  className={[mediumFont]}
-                >
+                <Eyebrow color="text2" as="p" className={[styles.floor, mediumFont]}>
                   Floor: {floorPrice} ETH
                 </Eyebrow>
               )}
