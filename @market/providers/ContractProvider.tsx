@@ -4,7 +4,9 @@ import { AsksV1_1 as AsksV11Interface } from '@zoralabs/v3/dist/typechain/AsksV1
 import { AsksV1_1__factory } from '@zoralabs/v3/dist/typechain/factories/AsksV1_1__factory'
 import { ZoraModuleManager as ZoraModuleManagerInterface } from '@zoralabs/v3/dist/typechain/ZoraModuleManager'
 import { ZoraModuleManager__factory as ModuleManagerFactory } from '@zoralabs/v3/dist/typechain/factories/ZoraModuleManager__factory'
-import { ASKS_V11_ADDRESS, MODULE_MANAGER_ADDRESS, defaultProvider } from '@shared'
+// import { ASKS_V11_ADDRESS, MODULE_MANAGER_ADDRESS, defaultProvider } from '@shared' // @BJ Todo: discuss w/ Oleg
+import { defaultProvider } from '@shared/utils/connectors'
+import { ASKS_V11_ADDRESS, MODULE_MANAGER_ADDRESS } from '@shared/constants/zoraAddresses'
 
 const defaultModuleManager = ModuleManagerFactory.connect(
   MODULE_MANAGER_ADDRESS,

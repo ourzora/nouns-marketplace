@@ -3,7 +3,7 @@ import { ClassValue } from 'clsx'
 import { Box, BoxProps, Button } from '@zoralabs/zord'
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from './Modal.css'
-import { useAuth } from '@shared'
+import { useButtonRequiresAuth } from '@shared/hooks/useButtonRequiresAuth'
 
 export interface ModalCompositionProps extends BoxProps {
   /** Unique identifier / key for the modal */
@@ -22,7 +22,7 @@ export interface ModalCompositionProps extends BoxProps {
   modalOverlayOverrides?: any
   /** Disallow clicking outside of container to close modal */
   disableCloseOnClickOutside?: boolean
-  onClickOverrideWhenUnconnected?: () => void
+  modalBehaviorRequiresAuth?: boolean
 }
 
 /* TODO: Modify Zord ModalContent component to accept custom styling */
@@ -35,27 +35,23 @@ export function ModalComposition({
   modalBackgroundOverrides = customBackground,
   disableCloseOnClickOutside = false,
   modalOverlayOverrides,
-  onClickOverrideWhenUnconnected,
+  modalBehaviorRequiresAuth = false,
 }: ModalCompositionProps) {
   const { modalType, requestClose, requestOpen } = useModal()
-  const { address } = useAuth()
 
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
   }, [modalName, requestOpen])
-  const triggerBehavior = useMemo(
-    () =>
-      !address && onClickOverrideWhenUnconnected
-        ? onClickOverrideWhenUnconnected
-        : modalHandler,
-    [address, modalHandler, onClickOverrideWhenUnconnected]
+
+  const variableButtonBehavior = useButtonRequiresAuth(modalHandler)
+  const buttonAction = useMemo(
+    () => (modalBehaviorRequiresAuth ? variableButtonBehavior : modalHandler),
+    [variableButtonBehavior, modalBehaviorRequiresAuth, modalHandler]
   )
+
   return (
     <>
-      <Box
-        className={['zora-modal-trigger-wrapper', className]}
-        onClick={triggerBehavior}
-      >
+      <Box className={['zora-modal-trigger-wrapper', className]} onClick={buttonAction}>
         <Box className="zora-modal-trigger" display="block">
           {trigger}
         </Box>

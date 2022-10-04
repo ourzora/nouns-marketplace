@@ -2213,10 +2213,10 @@
     swr "^1.3.0"
     tslib "^2.4.0"
 
-"@zoralabs/v3@1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@zoralabs/v3/-/v3-1.0.10.tgz#6b72db68dd50a5b03d0a6b1c16924ac67432db09"
-  integrity sha512-l6WibZXlACs4SWTrHf8LRnpkq9yomLdQWGlCAcDsXCFjf2YJr0PDK5p5oLxgTxeeFq3uWiLdc5HTE1WyXy7q2A==
+"@zoralabs/v3@1.0.13":
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@zoralabs/v3/-/v3-1.0.13.tgz#56a23172bb2c8bcf934bcbddbc0a72617c50f08b"
+  integrity sha512-qY9xGr1cS4NqyiRKLyKIza8frXZqP7UtOZF57pesNNp6tXi+3MDugONrsD+OksQV66MVFhF+oJeij6PrwF88DA==
   dependencies:
     "@manifoldxyz/royalty-registry-solidity" "^1.0.9"
     "@openzeppelin/contracts" "^4.5.0"

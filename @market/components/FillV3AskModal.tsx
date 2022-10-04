@@ -13,7 +13,6 @@ export interface FillV3AskModalProps extends FlexProps {
 export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
   const { nft, metadata, markets } = nftObj
   const { ask } = useRelevantMarket(markets)
-
   const { requestClose } = useModal()
   const { isOwner } = useIsOwner(nftObj)
 
@@ -43,6 +42,7 @@ export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
           {!isOwner ? (
             <ModalComposition
               modalName={`buy-${nft.contract.address}-${nft.tokenId}`}
+              modalBehaviorRequiresAuth={true}
               trigger={
                 <Button
                   as="span"

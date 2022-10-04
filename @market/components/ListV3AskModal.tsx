@@ -22,6 +22,7 @@ export function ListV3AskModal({ nftObj, ...props }: ListV3AskModalProps) {
       {isOwner ? (
         <ModalComposition
           modalName={`list-${nft.tokenId}${nft.contract.address}`}
+          modalBehaviorRequiresAuth={true}
           trigger={
             <Button
               as="span"

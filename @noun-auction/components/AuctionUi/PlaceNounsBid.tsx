@@ -3,21 +3,20 @@ import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { NounsBidForm } from './NounsBidForm'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { ModalComposition } from '@modal'
-import { useConnectModal, useAccountModal, useChainModal } from '@rainbow-me/rainbowkit'
+import { useConnectModal } from '@rainbow-me/rainbowkit'
 
 // Imports from @markets
 import { NFTSummary } from '@market'
 
 export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
   const { tokenId, layout, activeAuction } = useNounishAuctionProvider()
-  const { openConnectModal } = useConnectModal()
 
   return (
     <>
       {useModal ? (
         <ModalComposition
           modalName={`nouns-bid-${tokenId}`}
-          onClickOverrideWhenUnconnected={openConnectModal}
+          modalBehaviorRequiresAuth={true}
           trigger={
             <Button
               as="span"

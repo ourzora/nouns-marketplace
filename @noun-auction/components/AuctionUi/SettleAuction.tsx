@@ -1,9 +1,11 @@
 import { Button, Icon, Box, Stack, StackProps, color } from '@zoralabs/zord'
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
-import { PrintError } from '@shared'
+import { PrintError, useAuth } from '@shared'
+import { useConnectModal } from '@rainbow-me/rainbowkit'
+import { useButtonRequiresAuth } from '@shared/hooks/useButtonRequiresAuth'
 
 export interface SettleAuctionProps extends StackProps {
   useErrorMsg?: boolean
@@ -11,7 +13,6 @@ export interface SettleAuctionProps extends StackProps {
 
 export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionProps) {
   const [showError, setShowError] = useState(false)
-
   const {
     daoConfig: { abi, auctionContractAddress },
     layout,
@@ -29,6 +30,8 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
     write: settleAuction,
   } = useContractWrite(config)
 
+  const buttonBehavior = useButtonRequiresAuth(settleAuction)
+
   useEffect(() => {
     if (writeContractError) setShowError(true)
   }, [writeContractError])
@@ -37,8 +40,7 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
     <>
       <Stack w={layout === 'sideBarBid' ? '100%' : 'auto'} {...props}>
         <Button
-          onClick={settleAuction}
-          // variant="reverse"
+          onClick={buttonBehavior}
           variant="secondary"
           className={placeBidTrigger}
           w={layout === 'sideBarBid' ? '100%' : 'auto'}
