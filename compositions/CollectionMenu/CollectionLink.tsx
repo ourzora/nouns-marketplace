@@ -22,36 +22,32 @@ export function CollectionLink({ collection }: { collection: CollectionsData }) 
 
   return (
     <Link href={`/collections/${collection.address}`} passHref>
-      <a>
-        <Flex align="center" justify="space-between" gap="x4" onClick={requestClose}>
-          <Flex align="center" gap="x4">
-            <CollectionThumbnail collectionAddress={collection.address} />
-            <Stack gap="x1">
-              <Flex gap="x2">
-                <Label size="lg" className={leadingTight} color="text1">
-                  {collection.name}
-                </Label>
-                <Tag inactive backgroundColor="background2">
-                  {tagText}
-                </Tag>
-              </Flex>
-              {floorPrice && (
-                <Eyebrow color="text2" as="p" className={[styles.floor, mediumFont]}>
-                  Floor: {floorPrice} ETH
-                </Eyebrow>
-              )}
-            </Stack>
-          </Flex>
-          <Flex gap="x2" align="center">
-            {
-              <Label color="text2" className={[lightFont]}>
-                {nftCount} NFTs
+      <Flex align="center" justify="space-between" gap="x4" onClick={requestClose}>
+        <Flex align="center" gap="x4">
+          <CollectionThumbnail collectionAddress={collection.address} />
+          <Stack gap="x1">
+            <Flex gap="x2">
+              <Label size="lg" className={leadingTight} color="text1">
+                {collection.name}
               </Label>
-            }
-            <Icon id="ChevronRight" color="text3" />
-          </Flex>
+              <Tag inactive backgroundColor="background2">
+                {tagText}
+              </Tag>
+            </Flex>
+            {floorPrice && (
+              <Eyebrow color="text2" as="p" className={[styles.floor, mediumFont]}>
+                Floor: {floorPrice} ETH
+              </Eyebrow>
+            )}
+          </Stack>
         </Flex>
-      </a>
+        <Flex gap="x2" align="center">
+          <Label color="text2" className={lightFont}>
+            {nftCount} NFTs
+          </Label>
+          <Icon id="ChevronRight" color="text3" />
+        </Flex>
+      </Flex>
     </Link>
   )
 }

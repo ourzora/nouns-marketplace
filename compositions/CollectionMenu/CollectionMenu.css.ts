@@ -34,9 +34,6 @@ export const modalWrapper = style([
       display: 'none',
     },
   },
-  atoms({
-    overflowY: 'scroll',
-  }),
 ])
 
 export const filteredItems = style([

@@ -20,11 +20,11 @@ import { SearchInput } from 'compositions/SearchInput/SearchInput'
 import { useHasScrolled } from '@shared/hooks/useHasScrolled'
 
 export function CollectionMenu() {
-  const { hasScrolled, parentRef, childRef } = useHasScrolled()
   const { collections, daos, currentCollection, currentCollectionCount } =
     useCollectionsContext()
   const menuItems = useMemo(() => daos.concat(collections), [collections, daos])
   const menuItemCount = useMemo(() => menuItems.length, [menuItems])
+  const { hasScrolled, scrollEvent } = useHasScrolled()
   const [filter, setFilter] = useState<string>('')
   const filteredItems = useMemo(
     () =>
@@ -96,9 +96,13 @@ export function CollectionMenu() {
             pb="x8"
             className={[styles.filterUnscrolled, hasScrolled && styles.filterScrolled]}
           >
-            <Box overflowY="scroll" className={[styles.filteredItems]} ref={parentRef}>
+            <Box
+              overflowY="scroll"
+              className={[styles.filteredItems]}
+              onScroll={scrollEvent}
+            >
               {hasResults ? (
-                <CollectionNavList items={filteredItems} ref={childRef} />
+                <CollectionNavList items={filteredItems} />
               ) : (
                 <Flex justify="center" align="center" h="x20">
                   <Paragraph className={mediumFont} color="text3">

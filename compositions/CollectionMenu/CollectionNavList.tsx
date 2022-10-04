@@ -13,7 +13,7 @@ export const CollectionNavList = React.forwardRef<HTMLDivElement, CollectionNavL
       <Stack gap="x4" {...props} ref={forwardedRef}>
         {items.map((collection: Collection) => (
           <CollectionLink
-            key={`${collection.address}-${collection.name}r`}
+            key={`${collection.address}-${collection.name}`}
             collection={collection}
           />
         ))}
