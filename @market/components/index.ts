@@ -5,6 +5,7 @@ export * from './FillV3AskInfo'
 
 export * from './ListV3AskForm'
 export * from './ListV3AskWizard'
+export * from './ListV3AskModal'
 
 /* Approval Forms */
 export * from './V3ApprovalForm'
