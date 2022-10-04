@@ -10,6 +10,7 @@ import {
 } from '@zoralabs/zord'
 import { ModalTitleAndDescription } from '@market/components'
 import { formatCryptoVal, shortenTxHash, ETHERSCAN_BASE_URL } from '@shared'
+import { useMemo } from 'react'
 
 interface ContractInteractionStatusProps {
   title: string
@@ -34,7 +35,7 @@ export function ContractInteractionStatus({
   txHash,
   previewURL,
 }: ContractInteractionStatusProps) {
-  const prettyAmount = amount && formatCryptoVal(amount)
+  const prettyAmount = useMemo(() => amount && formatCryptoVal(amount), [amount])
 
   return (
     <Box>
