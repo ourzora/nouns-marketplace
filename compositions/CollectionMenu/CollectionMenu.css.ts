@@ -1,13 +1,11 @@
 import { style } from '@vanilla-extract/css'
-import { color, space, atoms, vars, media, typography } from '@zoralabs/zord'
-import { MODAL_TAB_LAYER } from '../../constants/layers'
+import { color, atoms, media } from '@zoralabs/zord'
 
 export const collectionTrigger = style([
   {
     gridColumn: '1',
     gridRow: '2',
     height: 42,
-    gridGap: space.x2,
     '@media': {
       [media.min1024]: {
         gridColumn: '3',
@@ -16,12 +14,17 @@ export const collectionTrigger = style([
     },
   },
   atoms({
+    gap: 'x2',
     w: '100%',
     justifyContent: 'flex-start',
     borderRadius: 'curved',
     display: 'flex',
   }),
 ])
+
+export const modal = style({
+  maxWidth: 680,
+})
 
 export const modalWrapper = style([
   {
@@ -30,54 +33,23 @@ export const modalWrapper = style([
     '::-webkit-scrollbar': {
       display: 'none',
     },
-    height: 400,
   },
-  atoms({
-    overflowY: 'scroll',
-  }),
 ])
 
-export const tabsButton = style([
+export const filteredItems = style([
   {
-    zIndex: MODAL_TAB_LAYER,
-    backgroundColor: `${color.background1}`,
-    fontSize: typography.fontSize[20],
-    borderBottom: `2px solid transparent`,
-    selectors: {
-      '&:first-child': { borderTopLeftRadius: space.x10 },
-      '&:last-child': { borderTopRightRadius: space.x10 },
-      '&:hover': { borderBottom: `2px solid ${color.accentHover}` }, // previously 0.3, maybe should use accentActive
-      '&[data-state="active"]': {
-        color: vars.color.text1,
-        borderBottom: `2px solid ${color.neutralActive}`,
-      },
-    },
+    maxHeight: 'calc((80px * 5) + (80px * 0.5) + (16px * 5) + 2px)', // (80px * 5 rows) + (0.5 * 1 row) + (5 * 16px gap) + 2px borderTop
+    borderBottomLeftRadius: '10px',
+    borderBottomRightRadius: '10px',
   },
-  atoms({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 'x5',
-    paddingBottom: 'x2',
-    width: '100%',
-    cursor: 'pointer',
-    borderColor: 'transparent',
-    color: 'tertiary',
-  }),
 ])
 
-export const tabsList = style([
-  {
-    borderBottom: `2px solid ${color.background2}`,
-    zIndex: MODAL_TAB_LAYER,
-  },
-  atoms({
-    display: 'flex',
-    position: 'absolute',
-    width: '100%',
-  }),
-])
-
-export const label = style({
-  color: vars.color.text1,
+export const filterUnscrolled = style({
+  borderTop: `2px solid transparent`,
+})
+export const filterScrolled = style({
+  borderColor: color.background2,
+})
+export const floor = atoms({
+  textTransform: 'none',
 })

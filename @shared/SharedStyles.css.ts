@@ -11,7 +11,6 @@ export const linkButton = style([
     px: 'x4',
     py: 'x2',
     justifyContent: 'center',
-    // backgroundColor: 'tertiary',
     color: 'accent',
   }),
 ])
