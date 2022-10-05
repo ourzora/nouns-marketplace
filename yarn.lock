@@ -1423,14 +1423,14 @@
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-primitive" "1.0.0"
 
-"@rainbow-me/rainbowkit@^0.4.2":
-  version "0.4.8"
-  resolved "https://registry.yarnpkg.com/@rainbow-me/rainbowkit/-/rainbowkit-0.4.8.tgz#1efa3b05abc7f93129db0fe4bf8db13ad6ff3d48"
-  integrity sha512-xtrMSgbXmNtZXiehiBHx9cOslGXAYRnTIUQPAn13XTZjwwyJiwKHw6nSlKEb6OvIFaCBeu2htRAnxMnWNzagOA==
+"@rainbow-me/rainbowkit@^0.7.0":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@rainbow-me/rainbowkit/-/rainbowkit-0.7.1.tgz#edf38dd512c1345624ab54b8ea5ac7d4aba444d0"
+  integrity sha512-8Q8uZ3ElrIjXhIiumc6s+8KlYzaN5HDTnpC5CjhnYcWkid7ZuKEzb/1uiNARmt0LTm0y7VGdOHRT74UBksxD0A==
   dependencies:
-    "@vanilla-extract/css" "1.7.0"
+    "@vanilla-extract/css" "1.9.1"
     "@vanilla-extract/dynamic" "2.0.2"
-    "@vanilla-extract/sprinkles" "1.4.1"
+    "@vanilla-extract/sprinkles" "1.5.0"
     clsx "1.1.1"
     qrcode "1.5.0"
     react-remove-scroll "2.5.4"
@@ -1903,24 +1903,7 @@
     "@babel/template" "^7.12.13"
     "@vanilla-extract/integration" "^5.0.0"
 
-"@vanilla-extract/css@1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@vanilla-extract/css/-/css-1.7.0.tgz#7276830c7741b17b7a70720be88c9083682f5206"
-  integrity sha512-2Abpr5aJskwKS+waMWxWnTBqq/rj4J93KtGteW0VSORMUsijrupwjOXECd7Llh+nSFfx/Y6usuexF5/ffyDF8A==
-  dependencies:
-    "@emotion/hash" "^0.8.0"
-    "@vanilla-extract/private" "^1.0.3"
-    chalk "^4.1.1"
-    css-mediaquery "^0.1.2"
-    css-what "^5.0.1"
-    cssesc "^3.0.0"
-    csstype "^3.0.7"
-    deep-object-diff "^1.1.0"
-    deepmerge "^4.2.2"
-    escape-string-regexp "^4.0.0"
-    outdent "^0.8.0"
-
-"@vanilla-extract/css@^1.7.0", "@vanilla-extract/css@^1.7.2":
+"@vanilla-extract/css@1.9.1", "@vanilla-extract/css@^1.7.0", "@vanilla-extract/css@^1.7.2":
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/@vanilla-extract/css/-/css-1.9.1.tgz#337b79faa5f8f98915a90c3fe3c30b54be746c09"
   integrity sha512-pu2SFiff5jRhPwvGoj8cM5l/qIyLvigOmy22ss5DGjwV5pJYezRjDLxWumi2luIwioMWvh9EozCjyfH8nq+7fQ==
@@ -1991,12 +1974,7 @@
   resolved "https://registry.yarnpkg.com/@vanilla-extract/recipes/-/recipes-0.2.5.tgz#40314b6db7319707303cccfb2c7200d919c313a8"
   integrity sha512-OWXUUiFJdswD3+Xg8f8avuw/vAHZRFS4oHqFeoV1TcO8cfbDQ0zmkreBHvyspoJU+qsyWK48yPHKSptqNRPy9Q==
 
-"@vanilla-extract/sprinkles@1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@vanilla-extract/sprinkles/-/sprinkles-1.4.1.tgz#8c8703ddedaac355c1187db909119816c0fc771c"
-  integrity sha512-aW6CfMMToX4a+baLuVxwcT0FSACjX3xrNt8wdi/3LLRlLAfhyue8OK7kJxhcYNZfydBeWTP59aRy8p5FUTIeew==
-
-"@vanilla-extract/sprinkles@^1.4.1":
+"@vanilla-extract/sprinkles@1.5.0", "@vanilla-extract/sprinkles@^1.4.1":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@vanilla-extract/sprinkles/-/sprinkles-1.5.0.tgz#c921183ae518bb484299c2dc81f2acefd91c3dbe"
   integrity sha512-W58f2Rzz5lLmk0jbhgStVlZl5wEiPB1Ur3fRvUaBM+MrifZ3qskmFq/CiH//fEYeG5Dh9vF1qRviMMH46cX9Nw==
@@ -2235,19 +2213,30 @@
     swr "^1.3.0"
     tslib "^2.4.0"
 
-"@zoralabs/v3@1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@zoralabs/v3/-/v3-1.0.10.tgz#6b72db68dd50a5b03d0a6b1c16924ac67432db09"
-  integrity sha512-l6WibZXlACs4SWTrHf8LRnpkq9yomLdQWGlCAcDsXCFjf2YJr0PDK5p5oLxgTxeeFq3uWiLdc5HTE1WyXy7q2A==
+"@zoralabs/v3@1.0.13":
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@zoralabs/v3/-/v3-1.0.13.tgz#56a23172bb2c8bcf934bcbddbc0a72617c50f08b"
+  integrity sha512-qY9xGr1cS4NqyiRKLyKIza8frXZqP7UtOZF57pesNNp6tXi+3MDugONrsD+OksQV66MVFhF+oJeij6PrwF88DA==
   dependencies:
     "@manifoldxyz/royalty-registry-solidity" "^1.0.9"
     "@openzeppelin/contracts" "^4.5.0"
     "@rari-capital/solmate" "^6.2.0"
 
-"@zoralabs/zdk@2.1.9", "@zoralabs/zdk@^2.1.9":
+"@zoralabs/zdk@2.1.9":
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/@zoralabs/zdk/-/zdk-2.1.9.tgz#14a7859ebb796c8cb60def7235a005a7f86a835b"
   integrity sha512-u7eUhfZo1qDG9BX08lj2RpDRCQE4BmqljFDETj6fizuRcvQO611NDijgAu3iKfoMn0pDq4ZX/UzV9SXzvbmYOQ==
+  dependencies:
+    big.js "^6.1.0"
+    graphql "^16.5.0"
+    graphql-request "^4.2.0"
+    graphql-tag "^2.12.6"
+    tslib "^2.2.0"
+
+"@zoralabs/zdk@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@zoralabs/zdk/-/zdk-2.2.0.tgz#559d7372be90e8ca9d4525069879029f9fc0d386"
+  integrity sha512-rhQXOu0flDgEGboZX1p7/+7CGZaU3WYNz/ZDT0e0UMlNEZyjx/WBY+u5ioji/qIAg0wcV/TNhOnEI+bhgRaeVA==
   dependencies:
     big.js "^6.1.0"
     graphql "^16.5.0"
@@ -3061,11 +3050,6 @@ css-loader@^6.7.1:
     postcss-modules-values "^4.0.0"
     postcss-value-parser "^4.2.0"
     semver "^7.3.5"
-
-css-mediaquery@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/css-mediaquery/-/css-mediaquery-0.1.2.tgz#6a2c37344928618631c54bd33cedd301da18bea0"
-  integrity sha512-COtn4EROW5dBGlE/4PiKnh6rZpAPxDeFLaEEwt4i10jpDMFt2EhQGS79QmmrO+iKCHv0PU/HrOWEhijFd1x99Q==
 
 css-what@^5.0.1:
   version "5.1.0"
