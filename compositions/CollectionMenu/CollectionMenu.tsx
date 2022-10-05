@@ -77,7 +77,7 @@ export function CollectionMenu() {
         <Stack as="menu" gap="x6" className={styles.modalWrapper}>
           <Stack px="x8" pt="x8" gap="x6">
             <Heading as="h2">
-              Collections
+              Browse
               <Text as="span" color="text3" ml="x2">
                 {menuItemCount}
               </Text>
