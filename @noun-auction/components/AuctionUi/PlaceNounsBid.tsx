@@ -3,7 +3,6 @@ import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { NounsBidForm } from './NounsBidForm'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { ModalComposition } from '@modal'
-import { useConnectModal } from '@rainbow-me/rainbowkit'
 
 // Imports from @markets
 import { NFTSummary } from '@market'

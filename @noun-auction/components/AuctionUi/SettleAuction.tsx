@@ -1,10 +1,9 @@
 import { Button, Icon, Box, Stack, StackProps, color } from '@zoralabs/zord'
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
-import { PrintError, useAuth } from '@shared'
-import { useConnectModal } from '@rainbow-me/rainbowkit'
+import { PrintError } from '@shared'
 import { useButtonRequiresAuth } from '@shared/hooks/useButtonRequiresAuth'
 
 export interface SettleAuctionProps extends StackProps {
