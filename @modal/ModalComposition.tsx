@@ -3,7 +3,7 @@ import { ClassValue } from 'clsx'
 import { Box, BoxProps } from '@zoralabs/zord'
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from './Modal.css'
-import { useButtonRequiresAuth } from '@shared/hooks'
+import { useButtonRequiresAuth } from '@shared/hooks/useButtonRequiresAuth'
 
 export interface ModalCompositionProps extends BoxProps {
   /** Unique identifier / key for the modal */
