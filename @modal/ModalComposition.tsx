@@ -55,7 +55,7 @@ export function ModalComposition({
       {/* <Box className={['zora-modal-trigger-wrapper', className]} onClick={buttonAction}> */}
       <Box
         className={['zora-modal-trigger-wrapper', className]}
-        onClick={(modalBehaviorRequiresAuth && variableButtonBehavior) ?? modalHandler}
+        onClick={modalBehaviorRequiresAuth ? variableButtonBehavior : modalHandler}
       >
         <Box className="zora-modal-trigger" display="block">
           {trigger}
