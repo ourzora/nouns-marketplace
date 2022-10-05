@@ -1,22 +1,14 @@
+import React, { useState } from 'react'
 import {
-  // CANCEL,
-  // UPDATE,
   APPROVE_MODULE_FOR_FILL,
-  // APPROVE_TRANSFER,
-  // CANCEL_SUCCESS,
-  // CREATE_SUCCESS,
-  // UPDATE_SUCCESS,
-  // FILLASK_SUCCESS,
-  // CANCEL_ASK,
   usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Button, Well } from '@zoralabs/zord'
-import React, { useState } from 'react'
 
 import { useRelevantMarket, useAskHelper } from '@market/hooks'
-import { PriceWithLabel } from '@shared/components/PriceWithLabel'
-import { useButtonRequiresAuth } from '@shared'
+import { PriceWithLabel } from '@shared/components'
+import { useButtonRequiresAuth } from '@shared/hooks'
 
 interface PrivateAskBuyerTriggerProps {
   nft: NFTObject

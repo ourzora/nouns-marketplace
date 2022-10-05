@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { PrintError } from '@shared'
-import { useButtonRequiresAuth } from '@shared/hooks/useButtonRequiresAuth'
+import { useButtonRequiresAuth } from '@shared/hooks'
 
 export interface SettleAuctionProps extends StackProps {
   useErrorMsg?: boolean
