@@ -3,7 +3,7 @@ import { ClassValue } from 'clsx'
 import { Box, BoxProps } from '@zoralabs/zord'
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from './Modal.css'
-import { useButtonRequiresAuth } from '@shared/hooks/useButtonRequiresAuth'
+import { useButtonRequiresAuth } from '@shared/hooks'
 
 export interface ModalCompositionProps extends BoxProps {
   /** Unique identifier / key for the modal */
@@ -45,18 +45,14 @@ export function ModalComposition({
   }, [modalName, requestOpen])
 
   const variableButtonBehavior = useButtonRequiresAuth(modalHandler)
-  // const buttonAction = useMemo(
-  //   () => (modalBehaviorRequiresAuth ? variableButtonBehavior : modalHandler),
-  //   [variableButtonBehavior, modalBehaviorRequiresAuth, modalHandler]
-  // )
+  const buttonAction = useMemo(
+    () => (modalBehaviorRequiresAuth ? variableButtonBehavior : modalHandler),
+    [variableButtonBehavior, modalBehaviorRequiresAuth, modalHandler]
+  )
 
   return (
     <>
-      {/* <Box className={['zora-modal-trigger-wrapper', className]} onClick={buttonAction}> */}
-      <Box
-        className={['zora-modal-trigger-wrapper', className]}
-        onClick={modalBehaviorRequiresAuth ? variableButtonBehavior : modalHandler}
-      >
+      <Box className={['zora-modal-trigger-wrapper', className]} onClick={buttonAction}>
         <Box className="zora-modal-trigger" display="block">
           {trigger}
         </Box>
