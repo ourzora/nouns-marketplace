@@ -24,11 +24,12 @@ export async function nftService({ params }: NFTParamsProps) {
 
   if (!tokenAddress || !tokenId) return false
 
-  // if (tokenAddress && !allAddresses.includes(tokenAddress)) { // ensure token is a nounish collection/dao
-  //   return {
-  //     notFound: true,
-  //   }
-  // }
+  // Ensure token is a nounish collection/dao
+  if (tokenAddress && !allAddresses.includes(tokenAddress.toLowerCase())) {
+    return {
+      notFound: true,
+    }
+  }
 
   try {
     const nft = prepareJson(await zdkFetchStrategy.fetchNFT(tokenAddress, tokenId))
