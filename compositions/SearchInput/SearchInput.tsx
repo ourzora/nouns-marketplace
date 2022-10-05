@@ -9,7 +9,6 @@ interface SearchInputProps extends BoxProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   placeholder?: string
   inputClassNameOverrides?: string
-  visible?: boolean
 }
 
 export function SearchInput({
@@ -17,11 +16,10 @@ export function SearchInput({
   className,
   inputClassNameOverrides,
   placeholder = 'Search Web3...',
-  visible = false,
   ...props
 }: SearchInputProps) {
   const [focused, toggleFocus] = useToggle(false)
-  const autoFocusRef = useAutoFocus(!visible)
+  const autoFocusRef = useAutoFocus()
 
   return (
     <Flex

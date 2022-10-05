@@ -41,12 +41,9 @@ export const input = style([
     },
   },
   atoms({
-    // color: 'tertiary',
     backgroundColor: 'transparent',
     fontSize: 18,
     lineHeight: 24,
-    // fontWeight: 'paragraph',
-    // fontWeight: 'paragraph',
     borderColor: 'transparent',
     w: '100%',
     h: '100%',

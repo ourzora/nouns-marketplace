@@ -24,7 +24,6 @@ globalStyle('h1, h2, h3, h4, h5', {
 
 globalStyle('p', {
   fontFamily: 'var(--ui-font)!important',
-  // lineHeight: '1.125!important',
 })
 
 globalStyle('light-font', {
@@ -53,10 +52,6 @@ export const textCenter = style({
 export const leadingTight = style({
   lineHeight: 1.125,
 })
-
-// export const lightGreyType = style({
-//   color: 'var(--dk-grey)',
-// })
 
 export const buttonStyle = style([
   {
