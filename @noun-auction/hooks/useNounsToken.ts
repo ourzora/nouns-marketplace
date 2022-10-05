@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { nounsTokenAbi } from '@noun-auction/contracts'
 import { useContractRead } from 'wagmi'
+import * as Sentry from '@sentry/react'
 
 export function useNounsToken(contractAddress: string, tokenId: string) {
   const { data: dataURI } = useContractRead({
@@ -18,7 +19,7 @@ export function useNounsToken(contractAddress: string, tokenId: string) {
         const result = JSON.parse(json)
         return result
       } catch (err) {
-        console.error(err)
+        Sentry.captureException(err)
       }
     }
   }, [dataURI])

@@ -2,6 +2,7 @@ import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { zdk } from '@shared'
 import { useEffect, useState } from 'react'
 import { collectionAddresses, daoAddresses } from 'constants/collection-addresses'
+import * as Sentry from '@sentry/react'
 
 export type CollectionsData = Collection
 
@@ -23,6 +24,7 @@ export function useCollections() {
         setLoading(false)
       } catch (error) {
         setError(error)
+        Sentry.captureException(error)
         setLoading(false)
       }
     }
@@ -40,7 +42,7 @@ export function useCollections() {
         setDaos(data?.collections?.nodes)
         setLoading(false)
       } catch (err) {
-        console.error(err)
+        Sentry.captureException(err)
       }
     }
     fetchDaos()

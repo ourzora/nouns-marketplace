@@ -48,7 +48,6 @@ export function CollectionsProvider({ children, collections, daos }: Collections
   return (
     <CollectionsContext.Provider
       value={{
-        /* @ts-ignore */
         collections: collections ? collections : [],
         collectionAmount: collectionAddresses.length,
         daos: daos ? daos : [],

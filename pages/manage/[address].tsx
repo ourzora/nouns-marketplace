@@ -6,7 +6,6 @@ import { Seo } from 'components/Seo'
 import { Collections } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
 import { Separator } from '@zoralabs/zord'
-import { useBlocklist } from '@blocklist/src/blocklist'
 
 const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
   return (

@@ -3,7 +3,7 @@ import { assert } from 'console'
 import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 import { prepareJson } from '@zoralabs/nft-hooks/dist/fetcher/NextUtils'
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
-import { allAddresses } from 'constants/collection-addresses'
+import * as Sentry from '@sentry/react'
 
 const zdkFetchStrategy = new ZDKFetchStrategy('1', GALACTUS_BASE_URL)
 
@@ -40,7 +40,11 @@ export async function nftService({ params }: NFTParamsProps) {
       },
     }
   } catch (err) {
-    console.error('ERRORED OUT')
+    Sentry.captureException(err)
+    Sentry.captureMessage(
+      `NFTService error! tokenAddress=${tokenAddress} tokenId=${tokenId}: ${err}`
+    )
+
     return {
       props: {
         nft: null,
