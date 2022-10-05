@@ -40,7 +40,7 @@ export function FillV3AskWizard({
 
   const hasSufficientFunds = useMemo(
     () => walletBalance?.value.gte(askPrice),
-    [askPrice, walletBalance, walletBalance?.value]
+    [askPrice, walletBalance?.value]
   )
 
   const [wizardStep, setWizardStep] = useState<FillV3AskWizardStep>('ReviewDetails')
