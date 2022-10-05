@@ -19,7 +19,7 @@ export const zoraBrand = style({
 export const poweredByContainer = style([
   {
     flexDirection: 'column',
-    marginTop: '30px',
+    // marginTop: '30px',
     '@media': {
       [media.min1024]: {
         marginTop: 0,
