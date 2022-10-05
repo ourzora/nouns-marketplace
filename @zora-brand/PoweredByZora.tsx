@@ -9,7 +9,6 @@ export function PoweredByZora({ vertical, ...props }: ZorbProps) {
       className={poweredByContainer}
       align="center"
       gap="x3"
-      // mb="x12"
       href="https://zora.co"
       target="_blank"
       rel="noreferrer"

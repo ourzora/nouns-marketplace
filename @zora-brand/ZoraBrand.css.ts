@@ -16,16 +16,18 @@ export const zoraBrand = style({
   fontWeight: 500,
 })
 
-export const poweredByContainer = style([
-  {
-    flexDirection: 'column',
-    // marginTop: '30px',
-    '@media': {
-      [media.min1024]: {
-        marginTop: 0,
-        flexDirection: 'row',
-        flexFlow: 'row-reverse',
+export const poweredByContainer = style(
+  [
+    {
+      '@media': {
+        [media.min1024]: {
+          marginTop: 0,
+          flexFlow: 'row-reverse',
+        },
       },
     },
-  },
-])
+  ],
+  atoms({
+    flexDirection: { '@initial': 'column', '@1024': 'row' },
+  })
+)
