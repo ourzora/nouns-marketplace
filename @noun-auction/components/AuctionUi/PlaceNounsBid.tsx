@@ -15,6 +15,7 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
       {useModal ? (
         <ModalComposition
           modalName={`nouns-bid-${tokenId}`}
+          modalBehaviorRequiresAuth={true}
           trigger={
             <Button
               as="span"

@@ -30,6 +30,7 @@ export function UniversalListAskModal({
       >
         <ModalComposition
           modalName={`list-${nft.tokenId}${nft.contract.address}`}
+          modalBehaviorRequiresAuth={true}
           trigger={
             <Button
               as="span"
