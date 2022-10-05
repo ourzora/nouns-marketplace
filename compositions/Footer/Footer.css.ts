@@ -1,74 +1,34 @@
 import { style } from '@vanilla-extract/css'
-import { recipe } from '@vanilla-extract/recipes'
-import { atoms, media } from '@zoralabs/zord'
-import { FOOTER_HEIGHT, FOOTER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
+import { atoms } from '@zoralabs/zord'
+import { MAX_WIDTH } from 'styles/style-constants'
 
-export const footerWrap = style({
-  margin: '0 auto',
-  maxWidth: MAX_WIDTH.LG,
-})
-
-export const footerWrapper = style([
+export const footerWrap = style([
   {
-    height: FOOTER_HEIGHT_MOBILE,
-    gridTemplateAreas: `
-      'leftLink leftLink rightLink rightLink' 
-      'poweredBy poweredBy poweredBy poweredBy'
-    `,
-    // strictly by design
-    borderTop: `2px solid #F2F2F2`,
-    '@media': {
-      [media.min1024]: {
-        height: FOOTER_HEIGHT,
-        gridTemplateRows: '1fr',
-        gridTemplateAreas: `
-          'leftLink poweredBy poweredBy rightLink'
-          'leftLink poweredBy poweredBy rightLink'
-          `,
-      },
-    },
+    maxWidth: MAX_WIDTH.LG,
   },
   atoms({
-    w: '100%',
-    marginTop: 'x10',
+    paddingTop: 'x10',
+    my: 'x0',
+    mx: 'auto',
   }),
 ])
 
-const footerColVariants = {
-  variant: {
-    left: {
-      gridArea: 'leftLink',
-      justifySelf: 'right',
-      paddingTop: '20px',
-      '@media': {
-        [media.min1024]: {
-          justifySelf: 'left',
-        },
-      },
-    },
-    right: {
-      gridArea: 'rightLink',
-      justifySelf: 'left',
-      paddingTop: '20px',
-      '@media': {
-        [media.min1024]: {
-          justifySelf: 'right',
-        },
-      },
-    },
+export const footerWrapper = style([
+  {
+    borderTop: `2px solid #F2F2F2`,
   },
-}
+  atoms({
+    w: '100%',
+    py: 'x10',
+    alignItems: { '@initial': 'start', '@1024': 'center' },
+    justifyContent: { '@initial': 'center', '@1024': 'space-between' },
+  }),
+])
 
-export const footerCol = recipe({
-  variants: footerColVariants,
-  base: {
-    justifySelf: 'center',
-    gridArea: 'poweredBy',
-    paddingTop: '0px',
-    '@media': {
-      [media.min1024]: {
-        paddingTop: '60px',
-      },
-    },
-  },
+export const poweredBy = atoms({
+  justifySelf: 'center',
+})
+
+export const menu = atoms({
+  display: { '@initial': 'none', '@1024': 'block' },
 })
