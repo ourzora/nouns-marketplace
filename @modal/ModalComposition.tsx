@@ -45,14 +45,18 @@ export function ModalComposition({
   }, [modalName, requestOpen])
 
   const variableButtonBehavior = useButtonRequiresAuth(modalHandler)
-  const buttonAction = useMemo(
-    () => (modalBehaviorRequiresAuth ? variableButtonBehavior : modalHandler),
-    [variableButtonBehavior, modalBehaviorRequiresAuth, modalHandler]
-  )
+  // const buttonAction = useMemo(
+  //   () => (modalBehaviorRequiresAuth ? variableButtonBehavior : modalHandler),
+  //   [variableButtonBehavior, modalBehaviorRequiresAuth, modalHandler]
+  // )
 
   return (
     <>
-      <Box className={['zora-modal-trigger-wrapper', className]} onClick={buttonAction}>
+      {/* <Box className={['zora-modal-trigger-wrapper', className]} onClick={buttonAction}> */}
+      <Box
+        className={['zora-modal-trigger-wrapper', className]}
+        onClick={(modalBehaviorRequiresAuth && variableButtonBehavior) ?? modalHandler}
+      >
         <Box className="zora-modal-trigger" display="block">
           {trigger}
         </Box>
