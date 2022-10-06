@@ -4,7 +4,7 @@ import { Box, BoxProps } from '@zoralabs/zord'
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from './Modal.css'
 // import { useButtonRequiresAuth } from '@shared/hooks/useButtonRequiresAuth' // <-- does not work
-import { useButtonRequiresAuth } from '@shared/hooks' // <-- does not work
+import { useButtonRequiresAuth } from '@shared/hooks' // <-- works
 
 export interface ModalCompositionProps extends BoxProps {
   /** Unique identifier / key for the modal */
