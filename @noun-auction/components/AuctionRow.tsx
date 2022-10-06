@@ -16,7 +16,7 @@ export function AuctionRow({
     } else {
       return auctionDataComponent
     }
-  }, [activeAuctionId])
+  }, [activeAuctionComponent, activeAuctionId, auctionDataComponent, tokenId])
 
   if (!activeAuctionId) return <RowLoader />
 

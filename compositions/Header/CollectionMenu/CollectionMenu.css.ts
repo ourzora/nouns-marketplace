@@ -50,7 +50,6 @@ export const collectionTrigger = style([
     gridColumn: '1',
     gridRow: '2',
     height: 42,
-    gridGap: space.x2,
     '@media': {
       [media.min1024]: {
         gridColumn: '3',
@@ -59,6 +58,7 @@ export const collectionTrigger = style([
     },
   },
   atoms({
+    gap: 'x2',
     w: '100%',
     justifyContent: 'flex-start',
     borderRadius: 'curved',

@@ -1,4 +1,3 @@
-import { linkButton } from '../SharedStyles.css'
 import NextLink from 'next/link'
 import { ButtonProps, Button } from '@zoralabs/zord'
 import { ReactNode } from 'react'
