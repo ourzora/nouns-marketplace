@@ -12,23 +12,17 @@ import {
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ImageWithNounFallback } from 'components'
 import { useNFTProvider, useTitleWithFallback } from '@shared'
+import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
 
 export function NFTCard() {
   const { nft, contractAddress, tokenId } = useNFTProvider()
-
   const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
     tokenId,
     defaultTitle: nft?.metadata?.name,
   })
 
-  const srcImg = useMemo(
-    () =>
-      nft?.media?.mimeType === 'image/svg+xml'
-        ? nft?.media?.image?.uri
-        : nft?.media?.poster?.uri,
-    [nft?.media]
-  )
+  const srcImg = useOptionalImageURIDecode(nft!) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
 
   const useTitleScroll = useMemo(() => {
     if (nft?.metadata && nft?.metadata?.name) {
