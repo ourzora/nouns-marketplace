@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useMemo } from 'react'
 import { Stack, StackProps, Box, Flex, Paragraph } from '@zoralabs/zord'
 
 // @noun-auction
@@ -17,13 +17,13 @@ export function AuctionHistory({ children, ...props }: BidHistoryProps) {
     noAuctionHistory,
   } = useNounishAuctionProvider()
 
+  const events = useMemo(() => data?.events?.nodes, [data?.events?.nodes])
+  const hasEvents = useMemo(() => events?.length > 0, [events?.length])
+
   const auctionEventTypeKey = () =>
     classifierPrefix !== null
       ? `${classifierPrefix?.keyPrefix}NounsAuctionEventType`
       : 'nounsAuctionEventType'
-
-  const hasEvents = data?.events?.nodes.length > 0
-  const events = data?.events?.nodes
 
   if (!hasEvents || noAuctionHistory) {
     return (

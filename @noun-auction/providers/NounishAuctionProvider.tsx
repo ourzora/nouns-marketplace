@@ -76,9 +76,7 @@ export function NounishAuctionProvider({
   children,
 }: NounishAuctionProviderProps) {
   const { marketType, contractAddress } = daoConfig
-
   const [timerComplete, setTimerComplete] = useState(false)
-
   const { data: activeAuction } = useActiveNounishAuction(daoConfig.marketType)
 
   const { data, error } = useNounishAuctionQuery({
@@ -135,10 +133,7 @@ export function NounishAuctionProvider({
   }, [data?.events?.nodes, isSettled, marketType, noAuctionHistory])
 
   const highestBidderAddress = useMemo(
-    () =>
-      activeAuction?.properties?.highestBidder
-        ? activeAuction?.properties?.highestBidder
-        : undefined,
+    () => activeAuction?.properties?.highestBidder ?? undefined,
     [activeAuction?.properties?.highestBidder]
   )
   const hasNonZeroHighestBidder = useMemo(
