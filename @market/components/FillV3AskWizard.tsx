@@ -9,6 +9,7 @@ import {
   MODAL_TYPES,
 } from '@market/components'
 import { useContractContext } from '@market/providers'
+import * as Sentry from '@sentry/react'
 
 export type FillV3AskWizardProps = {
   tokenId: string
@@ -67,6 +68,7 @@ export function FillV3AskWizard({
       setWizardStep('Confirmation')
     } catch (err: any) {
       setError(err.message || "There's been an error, please try again.")
+      Sentry.captureException(err)
     }
   }, [AsksV11, address, askCurrency, askPrice, handleTx, tokenAddress, tokenId])
 

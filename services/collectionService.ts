@@ -8,6 +8,7 @@ import { zdk } from '@shared'
 import { buildCollectionSEO, SeoProps } from 'utils/seo'
 import { allAddresses } from 'constants/collection-addresses'
 import { NetworkInput } from 'utils/network'
+import * as Sentry from '@sentry/react'
 
 export type CollectionServiceProps = {
   initialPage: NFTObject[]
@@ -64,7 +65,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
       },
     }
   } catch (err) {
-    console.error(err)
+    Sentry.captureException(err)
 
     if (err instanceof Error) {
       if (err?.message.includes('404')) {

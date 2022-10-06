@@ -13,6 +13,7 @@ import {
 } from '@shared'
 import { TransactionSubmitButton, BigNumberField } from '@market/components'
 import { useContractContext } from '@market/providers'
+import * as Sentry from '@sentry/react'
 
 export const fixedPriceSchema = Yup.object().shape({
   currency: Yup.object().required(),
@@ -77,6 +78,7 @@ export function ListV3AskForm({
         onConfirmation(tx.hash, values.amount.toString(), values.currency.id)
       } catch (err: any) {
         setError(err?.message || "There's been an error, please try again.")
+        Sentry.captureException(err)
       } finally {
         setSubmitting(false)
       }

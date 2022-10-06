@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/react'
+
 export async function zoraApiFetcher(query: () => void) {
   try {
     const response = await fetch(process.env.NEXT_PUBLIC_GALACTUS_BASE_URL as string, {
@@ -18,6 +20,6 @@ export async function zoraApiFetcher(query: () => void) {
     const res = response.json()
     return res
   } catch (err) {
-    console.error(err)
+    Sentry.captureException(err)
   }
 }

@@ -32,6 +32,7 @@ import { FooterComposition } from 'compositions/Footer'
 import { BlocklistGuard } from 'providers/BlocklistProvider'
 import { PrivateAskContractProvider } from '@market/modules/PrivateAsk/providers/'
 import { ToastContextProvider } from '@toast'
+import * as Sentry from '@sentry/react'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 
@@ -67,51 +68,56 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [router.events])
 
-  return (
-    <WagmiConfig client={wagmiClient}>
-      <SWRConfig
-        value={{
-          refreshInterval: 3000,
-          fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
-        }}
-      >
-        <NFTFetchConfiguration networkId="1" strategy={strategy}>
-          <RainbowKitProvider
-            chains={chains}
-            coolMode
-            theme={lightTheme({
-              accentColor: 'black',
-              borderRadius: 'large',
-            })}
-          >
-            <BlocklistGuard>
-              <CollectionsProvider collections={collections} daos={daos}>
-                <ModalContextProvider>
-                  <ToastContextProvider>
-                    <ContractProvider>
-                      <PrivateAskContractProvider>
-                        <HeaderComposition />
-                        <NextNProgress
-                          color="rgba(0,0,0,.5)"
-                          startPosition={0.125}
-                          stopDelayMs={200}
-                          height={2}
-                          showOnShallow={true}
-                          options={{ showSpinner: false }}
-                        />
-                        <Component {...pageProps} />
-                        <FooterComposition />
-                      </PrivateAskContractProvider>
-                    </ContractProvider>
-                  </ToastContextProvider>
-                </ModalContextProvider>
-              </CollectionsProvider>
-            </BlocklistGuard>
-          </RainbowKitProvider>
-        </NFTFetchConfiguration>
-      </SWRConfig>
-    </WagmiConfig>
-  )
+  try {
+    return (
+      <WagmiConfig client={wagmiClient}>
+        <SWRConfig
+          value={{
+            refreshInterval: 3000,
+            fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
+          }}
+        >
+          <NFTFetchConfiguration networkId="1" strategy={strategy}>
+            <RainbowKitProvider
+              chains={chains}
+              coolMode
+              theme={lightTheme({
+                accentColor: 'black',
+                borderRadius: 'large',
+              })}
+            >
+              <BlocklistGuard>
+                <CollectionsProvider collections={collections} daos={daos}>
+                  <ModalContextProvider>
+                    <ToastContextProvider>
+                      <ContractProvider>
+                        <PrivateAskContractProvider>
+                          <HeaderComposition />
+                          <NextNProgress
+                            color="rgba(0,0,0,.5)"
+                            startPosition={0.125}
+                            stopDelayMs={200}
+                            height={2}
+                            showOnShallow={true}
+                            options={{ showSpinner: false }}
+                          />
+                          <Component {...pageProps} />
+                          <FooterComposition />
+                        </PrivateAskContractProvider>
+                      </ContractProvider>
+                    </ToastContextProvider>
+                  </ModalContextProvider>
+                </CollectionsProvider>
+              </BlocklistGuard>
+            </RainbowKitProvider>
+          </NFTFetchConfiguration>
+        </SWRConfig>
+      </WagmiConfig>
+    )
+  } catch (err) {
+    Sentry.captureException(err)
+    return <h1>Something is wrong. Devs are doing something.</h1>
+  }
 }
 
 export default MyApp

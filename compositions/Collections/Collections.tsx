@@ -6,6 +6,7 @@ import { nftGridWrapper } from '@media/NftMedia.css'
 import { NounishActivityRow } from './NounishActivityRow'
 import { returnDao } from 'constants/collection-addresses'
 import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
+import * as Sentry from '@sentry/react'
 
 export type CollectionsProps = {
   collectionAddress?: string
@@ -40,7 +41,9 @@ export function DaoGrid({ dao, view }: { dao: any; view: CollectionsProps['view'
       return items.filter(
         (item) => activeAuction?.properties?.tokenId !== item?.nft?.tokenId
       )
-    } catch (err) {
+    } catch (err: any) {
+      Sentry.captureException(err)
+      Sentry.captureMessage('DAO Grid filter error: ' + err.message)
       return items
     }
   }, [dao, items, activeAuction?.properties?.tokenId])
