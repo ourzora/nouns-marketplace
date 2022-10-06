@@ -4,6 +4,7 @@ import { NFTObject, useNFT } from '@zoralabs/nft-hooks'
 import { ImageWithNounFallback } from 'components'
 import { useRawImageTransform } from './hooks/useRawImageTransform'
 import { useMemo } from 'react'
+import { useOptionalImageURIDecode } from './hooks/useImageURIDecode'
 
 export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
 
@@ -47,7 +48,13 @@ export function CollectionThumbnail({
   ...props
 }: CollectionThumbnailProps) {
   const { data: nft = initialNFT } = useNFT(collectionAddress, tokenId)
-  const { image } = useRawImageTransform(nft?.media?.image?.uri)
+  const { image: rawImageFallback } = useRawImageTransform(nft?.media?.image?.uri)
+  const decodedImgSrc = useOptionalImageURIDecode(nft!) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
+  const srcImg = useMemo(
+    () => decodedImgSrc ?? rawImageFallback,
+    [decodedImgSrc, rawImageFallback]
+  )
+
   const thumbnailSize = useMemo(() => returnThumbnailSize(size), [size])
 
   if (!collectionAddress) return null
@@ -60,7 +67,7 @@ export function CollectionThumbnail({
         className={['zora-media__nft-thumbnail', nftThumbnail]}
       >
         <ImageWithNounFallback
-          srcImg={image}
+          srcImg={srcImg}
           tokenId={tokenId}
           tokenContract={collectionAddress}
         />

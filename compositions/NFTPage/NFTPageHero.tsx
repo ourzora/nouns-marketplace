@@ -1,15 +1,15 @@
 import { Box, BoxProps } from '@zoralabs/zord'
 import { cardImageWrapper } from '@media/NftMedia.css'
 import { nftPageHero } from './NFTPage.css'
-import { useSourceImage } from '@media/hooks/useSrcImage'
 import { useNFTProvider } from '@shared/providers/NFTProvider'
 import { ImageWithNounFallback } from 'components'
+import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
 
 export interface NFTPageHeroProps extends BoxProps {}
 
 export function NFTPageHero({ className, ...props }: NFTPageHeroProps) {
   const { nft, tokenId, contractAddress } = useNFTProvider()
-  const { srcImg } = useSourceImage(nft?.media)
+  const srcImg = useOptionalImageURIDecode(nft!) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
 
   return (
     <Box

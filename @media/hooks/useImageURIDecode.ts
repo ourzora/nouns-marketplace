@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 
 /**
  * Handle non-base64 SVGs
+ * ** this hook temporarily works around normal usage of useSourceImage in Zora's nft-hooks package
  * @param nft: NFTObject
  * @returns uri as string
  */
