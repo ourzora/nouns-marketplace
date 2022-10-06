@@ -3,7 +3,7 @@ import { DocsLink } from './DocsLink'
 import { NounsLink } from './NounsLink'
 import { CollectionMenu } from '../CollectionMenu'
 import { headerWrapper } from './Header.css'
-import { useWindowWidth } from '@shared'
+import { useWindowWidth } from '@shared/hooks'
 import { ManageLink } from './ManageLink'
 import { ConnectButton } from './ConnectButton'
 
