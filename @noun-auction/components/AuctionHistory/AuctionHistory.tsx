@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
-import { Stack, StackProps, Box } from '@zoralabs/zord'
+import { Stack, StackProps, Box, Flex, Paragraph } from '@zoralabs/zord'
 
 // @noun-auction
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { AuctionEvents, BidTransactionEvent, EventWithTimestamp } from '@noun-auction'
-import { auctionEventRow } from '@noun-auction/styles/NounishStyles.css'
+import { auctionEventRow, lightFont } from '@noun-auction/styles/NounishStyles.css'
 
 interface BidHistoryProps extends StackProps {
   children?: ReactNode
@@ -17,60 +17,65 @@ export function AuctionHistory({ children, ...props }: BidHistoryProps) {
     noAuctionHistory,
   } = useNounishAuctionProvider()
 
-  if (!data) return null
-  if (noAuctionHistory) return null
-
   const auctionEventTypeKey = () =>
     classifierPrefix !== null
       ? `${classifierPrefix?.keyPrefix}NounsAuctionEventType`
       : 'nounsAuctionEventType'
 
+  const hasEvents = data?.events?.nodes.length > 0
+  const events = data?.events?.nodes
+
+  if (!hasEvents || noAuctionHistory) {
+    return (
+      <Flex>
+        <Paragraph size="sm" className={lightFont}>
+          No history found
+        </Paragraph>
+      </Flex>
+    )
+  }
+
   return (
     <Stack {...props} as="ul">
       {children}
-      {data.events.nodes.length &&
-        data.events.nodes.map((event: any) => (
-          <Box
-            as="li"
-            className={auctionEventRow}
-            key={event?.transactionInfo?.transactionHash}
-          >
+      {events.map((event: any) => {
+        const { transactionInfo, properties } = event
+        const { transactionHash } = transactionInfo
+        return (
+          <Box as="li" className={auctionEventRow} key={transactionHash}>
             <AuctionEvents
-              key={`${event.transactionInfo.transactionHash}-${
-                event.properties[`${auctionEventTypeKey()}`]
-              }`}
-              auctionEvent={event.properties[`${auctionEventTypeKey()}`]}
+              key={`${transactionHash}-${properties[`${auctionEventTypeKey()}`]}`}
+              auctionEvent={properties[`${auctionEventTypeKey()}`]}
               extendedRenderer={
                 <EventWithTimestamp
-                  transactionInfo={event.transactionInfo}
+                  transactionInfo={transactionInfo}
                   label="Auction Extended"
                 />
               }
               settledRenderer={
                 <EventWithTimestamp
-                  transactionInfo={event.transactionInfo}
+                  transactionInfo={transactionInfo}
                   label="Auction Settled"
                 />
               }
               createdRenderer={
                 <EventWithTimestamp
-                  transactionInfo={event.transactionInfo}
-                  label={`${
-                    classifierPrefix?.keyPrefix ? classifierPrefix?.keyPrefix : ''
-                  }Noun Born`}
+                  transactionInfo={transactionInfo}
+                  label={`${classifierPrefix?.keyPrefix ?? ''}Noun Born`}
                 />
               }
               bidRenderer={
                 <BidTransactionEvent
-                  transactionInfo={event.transactionInfo}
-                  sender={event.properties.properties.sender}
+                  transactionInfo={transactionInfo}
+                  sender={properties.properties.sender}
                   message={'placed a bid'}
-                  value={event.properties.properties.value}
+                  value={properties.properties.value}
                 />
               }
             />
           </Box>
-        ))}
+        )
+      })}
     </Stack>
   )
 }

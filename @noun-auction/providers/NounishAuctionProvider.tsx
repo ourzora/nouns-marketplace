@@ -84,8 +84,11 @@ export function NounishAuctionProvider({
   const { data, error } = useNounishAuctionQuery({
     marketType: marketType,
     contractAddress: contractAddress,
-    tokenId: tokenId ? tokenId : activeAuction?.properties?.tokenId,
+    tokenId: tokenId ?? activeAuction?.properties?.tokenId,
   })
+
+  console.log('useActiveNounishAuction', activeAuction)
+  console.log('useNounishAuctionQuery', data)
 
   const noAuctionHistory = useMemo(() => {
     if (data) return data?.events?.nodes.length === 0
