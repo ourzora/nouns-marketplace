@@ -3,8 +3,8 @@ import { useAccount } from 'wagmi'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { isAddressMatch } from '@shared/utils'
 
-export function useIsOwner(nftData: NFTObject) {
-  const { nft } = nftData
+export function useIsOwner(nftObj: NFTObject) {
+  const { nft } = nftObj
   const { address } = useAccount()
 
   const isOwner = useMemo(

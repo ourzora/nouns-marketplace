@@ -4,6 +4,7 @@ import {
   codeSelector,
   blockQuoteSelector,
   ulSelector,
+  olSelector,
   aSelector,
   hrSelector,
   h1Selector,
@@ -54,6 +55,7 @@ export const BlockQuote = ({ ...props }) => (
 )
 
 export const UL = ({ ...props }) => <Box as="ul" {...props} className={[ulSelector]} />
+export const OL = ({ ...props }) => <Box as="ol" {...props} className={[olSelector]} />
 
 export const A = ({ ...props }) => {
   const isLink = props?.href.startsWith('http')
@@ -92,6 +94,7 @@ export const MDXComponents = {
   code: Code,
   blockquote: BlockQuote,
   ul: UL,
+  ol: OL,
   // em: EM,
   hr: HR,
 }

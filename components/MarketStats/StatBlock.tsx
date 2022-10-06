@@ -12,14 +12,14 @@ export function StatBlock({
   return (
     <Stack
       p="x4"
-      borderColor="tertiary"
+      borderColor="border"
       borderStyle="solid"
       borderWidth="thin"
       borderRadius="phat"
     >
       <Text
         variant={['heading-xs, heading-xl']}
-        color="secondary"
+        color="text2"
         className={[lightFont, stat]}
       >
         {statType}

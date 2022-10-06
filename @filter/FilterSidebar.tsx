@@ -46,13 +46,13 @@ export function FilterSidebar() {
     useSidebarClearButton,
   } = useCollectionFilters()
 
-  const [scrolled, setScrolled] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
   const parentRef = useRef<HTMLDivElement>(null)
   const childRef = useRef<HTMLDivElement>(null)
 
   useScrollPosition(
     ({ currPos }) => {
-      setScrolled(currPos.y > 4)
+      setHasScrolled(currPos.y > 4)
     },
     [],
     // @ts-ignore-next-line
@@ -127,7 +127,7 @@ export function FilterSidebar() {
       <ModalContent
         title="modal"
         showClose={false}
-        removePadding
+        padding="x0"
         modalContentOverrides={filterSidebarModalContent}
         modalBackgroundOverrides={filterSidebarModalBackground}
       >
@@ -157,7 +157,7 @@ export function FilterSidebar() {
             className={[
               sideBarSeparator,
               {
-                [filterSidebarScrolled]: scrolled,
+                [filterSidebarScrolled]: hasScrolled,
               },
             ]}
           />

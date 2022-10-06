@@ -27,11 +27,15 @@ export function HorizontalMenu({
       e.preventDefault()
       !useCustomHandler && setId ? setId(category) : console.log(e)
     },
-    [setId]
+    [setId, useCustomHandler]
   )
 
   return (
-    <Flex className={horizontalMenuWrapper} {...props}>
+    <Flex
+      className={['zora-horizontalmenu', horizontalMenuWrapper]}
+      justify="center"
+      {...props}
+    >
       {items.map((item) => (
         <Button
           key={item.label}
@@ -44,11 +48,11 @@ export function HorizontalMenu({
           }
         >
           <Flex>
-            <Box as="span" color="primary">
+            <Box as="span" color="text1">
               {item.label}
             </Box>
             {item.count && (
-              <Box as="span" className={lightFont} color="tertiary">
+              <Box as="span" className={lightFont} color="text3">
                 &nbsp;{item.count}
               </Box>
             )}

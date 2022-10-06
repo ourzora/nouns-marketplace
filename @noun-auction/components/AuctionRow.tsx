@@ -19,7 +19,7 @@ export function AuctionRow({
     } else {
       return auctionDataComponent
     }
-  }, [activeAuctionId])
+  }, [activeAuctionComponent, activeAuctionId, auctionDataComponent, tokenId])
 
   return auctionComponent
 }

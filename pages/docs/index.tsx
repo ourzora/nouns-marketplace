@@ -5,7 +5,7 @@ import { DocsPageWrapper, MDXComponents, HorizontalMenu } from 'components'
 
 import Readme from './../../README.md'
 import NounishAuctionReadme from '../../@noun-auction/README.md'
-import ZoraCommonReadme from '../../@shared/README.md'
+// import ZoraCommonReadme from '../../@shared/README.md'
 import ZoraMarketReadme from '../../@market/README.md'
 import NFTFilterReadme from '../../@filter/README.md'
 import ZordReadme from '../../docs/zord.md'
@@ -50,10 +50,10 @@ export default function TestPages() {
         position="sticky"
         pt="x2"
         top="x0"
-        backgroundColor="primary"
+        backgroundColor="background1"
         justify="flex-start"
         style={{
-          borderBottom: `1px solid ${color.black10}`,
+          borderBottom: `1px solid ${color.background2}`,
           zIndex: 100,
         }}
       />

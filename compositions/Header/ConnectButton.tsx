@@ -3,7 +3,7 @@ import { connectButton, disconnectButton, menuItem, modalContent } from './Heade
 import Link from 'next/link'
 import { useConnectModal, useChainModal } from '@rainbow-me/rainbowkit'
 import { useDisconnect, useAccount, useNetwork } from 'wagmi'
-import { useEnsData } from '@shared'
+import { useEnsData } from '@shared/hooks'
 import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
 import { noTextWrap } from 'styles/styles.css'
 

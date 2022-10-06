@@ -57,10 +57,10 @@ export default function NounsAuctionHistory() {
         position="sticky"
         pt="x2"
         top="x0"
-        backgroundColor="primary"
+        backgroundColor="background1"
         justify="flex-start"
         style={{
-          borderBottom: `1px solid ${color.black10}`,
+          borderBottom: `1px solid ${color.background2}`,
           zIndex: 100,
         }}
       />
@@ -69,12 +69,11 @@ export default function NounsAuctionHistory() {
         <Flex direction="column" gap="x3">
           <Well style={{ gridColumn: '2/span 6' }} label="Colors">
             <Flex gap="x4">
-              <Box w="x8" h="x8" backgroundColor="primary" />
-              <Box w="x8" h="x8" backgroundColor="secondary" />
-              <Box w="x8" h="x8" backgroundColor="tertiary" />
-              <Box w="x8" h="x8" backgroundColor="reverse" />
-              <Box w="x8" h="x8" backgroundColor="destructive" />
-              <Box w="x8" h="x8" backgroundColor="success" />
+              <Box w="x8" h="x8" backgroundColor="background1" />
+              <Box w="x8" h="x8" backgroundColor="background2" />
+              <Box w="x8" h="x8" backgroundColor="accent" />
+              <Box w="x8" h="x8" backgroundColor="negative" />
+              <Box w="x8" h="x8" backgroundColor="positive" />
               <Box w="x8" h="x8" backgroundColor="warning" />
             </Flex>
             <Flex gap="x4">
@@ -83,35 +82,35 @@ export default function NounsAuctionHistory() {
                 h="x8"
                 borderWidth="normal"
                 borderStyle="solid"
-                borderColor="primary"
+                borderColor="background1"
               />
               <Box
                 w="x8"
                 h="x8"
                 borderWidth="normal"
                 borderStyle="solid"
-                borderColor="secondary"
+                borderColor="border"
               />
               <Box
                 w="x8"
                 h="x8"
                 borderWidth="normal"
                 borderStyle="solid"
-                borderColor="tertiary"
+                borderColor="accent"
               />
               <Box
                 w="x8"
                 h="x8"
                 borderWidth="normal"
                 borderStyle="solid"
-                borderColor="destructive"
+                borderColor="negative"
               />
               <Box
                 w="x8"
                 h="x8"
                 borderWidth="normal"
                 borderStyle="solid"
-                borderColor="success"
+                borderColor="positive"
               />
               <Box
                 w="x8"
@@ -122,25 +121,22 @@ export default function NounsAuctionHistory() {
               />
             </Flex>
             <Flex gap="x4">
-              <Box w="x8" h="x8" color="primary">
+              <Box w="x8" h="x8" color="background1">
                 xox
               </Box>
-              <Box w="x8" h="x8" color="secondary">
+              <Box w="x8" h="x8" color="text4">
                 xox
               </Box>
-              <Box w="x8" h="x8" color="tertiary">
+              <Box w="x8" h="x8" color="accent">
                 xox
               </Box>
-              <Box w="x8" h="x8" color="destructive">
+              <Box w="x8" h="x8" color="negative">
                 xox
               </Box>
-              <Box w="x8" h="x8" color="success">
+              <Box w="x8" h="x8" color="positive">
                 xox
               </Box>
               <Box w="x8" h="x8" color="warning">
-                xox
-              </Box>
-              <Box w="x8" h="x8" color="reverse">
                 xox
               </Box>
             </Flex>
@@ -185,10 +181,7 @@ export default function NounsAuctionHistory() {
             </Flex>
             <Flex direction="column">
               <Eyebrow>Responsive Text</Eyebrow>
-              <Text
-                fontWeight="display"
-                fontSize={{ '@initial': '48px', '@576': '65px' }}
-              >
+              <Text fontWeight="display" fontSize={{ '@initial': '48', '@576': '65' }}>
                 Custom size which gets smaller at 576px breakpoint
               </Text>
             </Flex>
@@ -634,7 +627,7 @@ export default function NounsAuctionHistory() {
               <Flex direction="column">
                 <Eyebrow>Select: size lg</Eyebrow>
                 <Box p="x2">
-                  <Select defaultValue="2" size="lg">
+                  <Select defaultValue="2" variant="lg">
                     <option value="1">Option 1</option>
                     <option value="2">Option 2</option>
                     <option value="3">Option 3</option>

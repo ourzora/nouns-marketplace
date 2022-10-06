@@ -6,6 +6,7 @@ import { Seo } from 'components/Seo'
 import { Collections } from 'compositions/Collections'
 import { CollectionFilterProvider } from '@filter'
 import { Separator } from '@zoralabs/zord'
+import { useBlocklist } from '@blocklist/src/blocklist'
 
 const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
   return (
@@ -25,7 +26,7 @@ const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
       {ownerAddress && (
         <CollectionFilterProvider
           ownerAddress={ownerAddress}
-          contractWhiteList={allAddresses}
+          contractAllowList={allAddresses}
           // useFilterOwnerCollections
           useSidebarFilter={false}
         >

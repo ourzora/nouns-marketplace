@@ -37,7 +37,7 @@ export function CollectionActivityHeader() {
         useCustomHandler
         currentId={filters?.marketStatus}
         style={{
-          borderBottom: `1px solid ${color.black10}`,
+          borderBottom: `1px solid ${color.background2}`,
           zIndex: 100,
         }}
       />

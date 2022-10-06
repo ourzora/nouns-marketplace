@@ -1,4 +1,3 @@
-import { useMemo, useCallback } from 'react'
 import { Stack, Button } from '@zoralabs/zord'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { NounsBidForm } from './NounsBidForm'
@@ -6,7 +5,7 @@ import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { ModalComposition } from '@modal'
 
 // Imports from @markets
-import { NftInfo } from '@market'
+import { NFTSummary } from '@market'
 
 export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
   const { tokenId, layout, activeAuction } = useNounishAuctionProvider()
@@ -29,7 +28,7 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
           }
           content={
             <Stack p="x8">
-              <NftInfo
+              <NFTSummary
                 collectionAddress={activeAuction?.collectionAddress}
                 tokenId={tokenId}
               />

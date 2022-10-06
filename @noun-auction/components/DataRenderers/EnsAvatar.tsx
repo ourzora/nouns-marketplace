@@ -19,7 +19,7 @@ export function EnsAvatar({ address, ...props }: EnsAvatarProps) {
       borderRadius="round"
       overflow="hidden"
       position="relative"
-      backgroundColor="tertiary"
+      backgroundColor="background2"
       {...props}
     >
       {ensAvatar ? (

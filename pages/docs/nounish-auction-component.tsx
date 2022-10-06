@@ -22,11 +22,11 @@ export default function NounsAuctionHistory() {
               showLabels
               layout="withHistory"
               /* Wrapper Styling */
-              borderColor="secondary"
+              borderColor="border"
               borderStyle="solid"
               borderWidth="normal"
               borderRadius="phat"
-              backgroundColor="primary"
+              backgroundColor="background1"
               p="x4"
             />
           )
@@ -43,11 +43,11 @@ export default function NounsAuctionHistory() {
             showLabels
             layout="withHistory"
             /* Wrapper Styling */
-            borderColor="secondary"
+            borderColor="border"
             borderStyle="solid"
             borderWidth="normal"
             borderRadius="phat"
-            backgroundColor="primary"
+            backgroundColor="background1"
             p="x4"
           />
         </Stack>
@@ -61,11 +61,11 @@ export default function NounsAuctionHistory() {
             showLabels
             layout="withHistory"
             /* Wrapper Styling */
-            borderColor="secondary"
+            borderColor="border"
             borderStyle="solid"
             borderWidth="normal"
             borderRadius="phat"
-            backgroundColor="primary"
+            backgroundColor="background1"
             p="x4"
           />
         </Stack>
@@ -81,11 +81,11 @@ export default function NounsAuctionHistory() {
             showLabels
             layout="withHistory"
             /* Wrapper Styling */
-            borderColor="secondary"
+            borderColor="border"
             borderStyle="solid"
             borderWidth="normal"
             borderRadius="phat"
-            backgroundColor="primary"
+            backgroundColor="background1"
             p="x4"
           />
         </Stack>
@@ -99,11 +99,11 @@ export default function NounsAuctionHistory() {
             showLabels
             layout="withHistory"
             /* Wrapper Styling */
-            borderColor="secondary"
+            borderColor="border"
             borderStyle="solid"
             borderWidth="normal"
             borderRadius="phat"
-            backgroundColor="primary"
+            backgroundColor="background1"
             p="x4"
           />
         </Stack>
@@ -119,11 +119,11 @@ export default function NounsAuctionHistory() {
           showLabels
           layout="historyOnly"
           /* Wrapper Styling */
-          borderColor="secondary"
+          borderColor="border"
           borderStyle="solid"
           borderWidth="normal"
           borderRadius="phat"
-          backgroundColor="primary"
+          backgroundColor="background1"
           p="x4"
         />
       </Stack>

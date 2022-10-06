@@ -6,6 +6,7 @@ import { StatBlock } from './StatBlock'
 import { CollectionStats } from './CollectionStats'
 import { DaoStats } from './DaoStats'
 import { returnDao } from 'constants/collection-addresses'
+import { useMemo } from 'react'
 
 export interface MarketStatesProps extends FlexProps {
   contractAddress: string
@@ -15,8 +16,14 @@ export function MarketStats({ contractAddress, ...props }: MarketStatesProps) {
   const { aggregate } = useAggregate(contractAddress)
   const dao = returnDao(contractAddress)
 
-  const ownerCount = numberFormatter(aggregate?.aggregateStat?.ownerCount)
-  const nftCount = numberFormatter(aggregate?.aggregateStat?.nftCount)
+  const ownerCount = useMemo(
+    () => numberFormatter(aggregate?.aggregateStat?.ownerCount),
+    [aggregate?.aggregateStat?.ownerCount]
+  )
+  const nftCount = useMemo(
+    () => numberFormatter(aggregate?.aggregateStat?.nftCount),
+    [aggregate?.aggregateStat?.nftCount]
+  )
   const floorPrice = aggregate?.aggregateStat?.floorPrice ?? '0'
 
   return (

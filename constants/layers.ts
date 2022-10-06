@@ -1,6 +1,8 @@
 /* Register your z-indexes here so it's easier to debug */
 
+export const MODAL_FOREGROUND_LAYER = 21
 export const MODAL_BACKDROP_LAYER = 20
+export const TOAST_LAYER = 25
 export const HEADER_LAYER = 10
 export const SECONDARY_LAYER = 2
 export const PRIMARY_LAYER = 1

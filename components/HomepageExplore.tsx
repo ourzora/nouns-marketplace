@@ -8,7 +8,7 @@ export function HomepageExplore() {
         <Flex
           align="center"
           borderRadius="curved"
-          backgroundColor="tertiary"
+          backgroundColor="background2"
           m="auto"
           px="x6"
         >
@@ -19,7 +19,7 @@ export function HomepageExplore() {
             }}
             as="span"
             size="lg"
-            color="secondary"
+            color="text2"
           >
             Explore
           </Label>
