@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { vars, ThemeProvider, lightTheme } from '@zoralabs/zord'
 import { assignInlineVars } from '@vanilla-extract/dynamic'
+import { radiiOverrides } from 'styles/zordOverrides'
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID
 
 class MyDocument extends Document {
@@ -60,11 +61,14 @@ class MyDocument extends Document {
           </svg>
           <ThemeProvider
             theme={lightTheme}
-            style={assignInlineVars({
-              [vars.radii.normal]: '16px',
-              [vars.radii.curved]: '16px',
-              [vars.radii.phat]: '24px',
-            })}
+            style={assignInlineVars(
+              { ...radiiOverrides }
+              // {
+              // [vars.radii.normal]: '16px',
+              // [vars.radii.curved]: '16px',
+              // [vars.radii.phat]: '24px',
+              // }
+            )}
           >
             <Main />
             <NextScript />
