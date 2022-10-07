@@ -1,6 +1,7 @@
 import { Heading, Stack, Flex, Button, StackProps } from '@zoralabs/zord'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { useNFTProvider, useTitleWithFallback } from '@shared'
+import { useTitleWithFallback } from '@shared/hooks'
+import { useNFTProvider } from '@shared/providers'
 import { Link } from 'components'
 import { clickAnimation, mediumFont } from 'styles/styles.css'
 import { NFTMarket } from './NFTMarket'
