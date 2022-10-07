@@ -11,11 +11,12 @@ import {
 } from '@media/NftMedia.css'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ImageWithNounFallback } from 'components'
-import { useNFTProvider, useTitleWithFallback } from '@shared'
+import { useIsOwner, useNFTProvider, useTitleWithFallback } from '@shared'
 import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
 
 export function NFTCard() {
   const { nft, contractAddress, tokenId } = useNFTProvider()
+  const { isOwner } = useIsOwner(nft)
   const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
     tokenId,
@@ -70,8 +71,12 @@ export function NFTCard() {
             </Flex>
           </Link>
         </Flex>
-        <Separator mt="x1" />
-        <NFTCardMarket nftObj={nft} />
+        {isOwner && (
+          <>
+            <Separator mt="x1" />
+            <NFTCardMarket nftObj={nft} />
+          </>
+        )}
       </Stack>
     </Stack>
   )
