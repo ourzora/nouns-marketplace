@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Box, Button, Paragraph, Text, Grid } from '@zoralabs/zord'
-import { useContractTransaction, PrintError } from '@shared'
+import { useContractTransaction } from '@shared/hooks'
+import { PrintError } from '@shared'
 import { TransactionSubmitButton, ModalTitleAndDescription } from '@market/components'
 import { useERC721TokenApproval } from '@market/hooks'
 

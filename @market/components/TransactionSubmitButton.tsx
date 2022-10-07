@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Box, Button, ButtonProps } from '@zoralabs/zord'
-import { useButtonRequiresAuth, WalletCallStatus } from '@shared'
+import { useButtonRequiresAuth, WalletCallStatus } from '@shared/hooks'
 
 /**
  * Render a button that will submit a transaction to the blockchain.
