@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { ThemeProvider, lightTheme } from '@zoralabs/zord'
+import { vars, ThemeProvider, lightTheme } from '@zoralabs/zord'
+import { assignInlineVars } from '@vanilla-extract/dynamic'
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID
 
 class MyDocument extends Document {
@@ -57,7 +58,14 @@ class MyDocument extends Document {
               <feMorphology operator="dilate" radius="4" />
             </filter>
           </svg>
-          <ThemeProvider theme={lightTheme}>
+          <ThemeProvider
+            theme={lightTheme}
+            style={assignInlineVars({
+              [vars.radii.normal]: '16px',
+              [vars.radii.curved]: '16px',
+              [vars.radii.phat]: '24px',
+            })}
+          >
             <Main />
             <NextScript />
           </ThemeProvider>
