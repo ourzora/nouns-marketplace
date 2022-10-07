@@ -18,19 +18,19 @@ type PrivateAskTxDetails = {
   rawBuyerAddress: string
 }
 
-export const VIEW_LISTING = 'viewListing' as const
-export const APPROVE_MODULE_FOR_CREATE = 'approveModuleForSale' as const
-export const APPROVE_MODULE_FOR_FILL = 'approveModuleForFill' as const
-export const APPROVE_TRANSFER = 'approveTransferHelper' as const
-export const CREATE = 'createPrivateAsk' as const
-export const CREATE_SUCCESS = 'createPrivateAskSuccess' as const
-export const UPDATE = 'updatePrivateAsk' as const
-export const UPDATE_SUCCESS = 'updatePrivateAskSuccess' as const
-export const CANCEL = 'cancelPrivateAsk' as const
-export const CANCEL_SUCCESS = 'cancelPrivateAskSuccess' as const
-export const FILLASK = 'fillPrivateAsk' as const
-export const FILLASK_SUCCESS = 'fillPrivateAskSuccess' as const
-export const RESET = 'resetPrivateAsk' as const
+export const VIEW_LISTING = 'viewListing'
+export const APPROVE_MODULE_FOR_CREATE = 'approveModuleForSale'
+export const APPROVE_MODULE_FOR_FILL = 'approveModuleForFill'
+export const APPROVE_TRANSFER = 'approveTransferHelper'
+export const CREATE = 'createPrivateAsk'
+export const CREATE_SUCCESS = 'createPrivateAskSuccess'
+export const UPDATE = 'updatePrivateAsk'
+export const UPDATE_SUCCESS = 'updatePrivateAskSuccess'
+export const CANCEL = 'cancelPrivateAsk'
+export const CANCEL_SUCCESS = 'cancelPrivateAskSuccess'
+export const FILLASK = 'fillPrivateAsk'
+export const FILLASK_SUCCESS = 'fillPrivateAskSuccess'
+export const RESET = 'resetPrivateAsk'
 
 export type PossibleState =
   | typeof VIEW_LISTING
@@ -48,8 +48,8 @@ export type PossibleState =
   | typeof RESET
 
 export const initialState = {
-  next: APPROVE_TRANSFER,
-  status: APPROVE_MODULE_FOR_CREATE,
+  next: 'approveTransferHelper' as const,
+  status: 'approveModuleForSale' as const,
 }
 
 interface State {

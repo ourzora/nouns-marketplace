@@ -22,15 +22,15 @@ interface PrivateAskOwnerTriggerProps {
 const dropdownOptions = [
   {
     label: 'Show Listing Data',
-    action: VIEW_LISTING,
+    action: 'viewListing' as const,
   },
   {
     label: 'Update Listing',
-    action: UPDATE,
+    action: 'updatePrivateAsk' as const,
   },
   {
     label: 'Delist',
-    action: CANCEL,
+    action: 'cancelPrivateAsk' as const,
     destructive: true,
   },
 ]

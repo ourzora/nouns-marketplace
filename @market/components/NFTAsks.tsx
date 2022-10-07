@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
-import { FillV3AskModal } from '@market/components'
+import { FillV3AskModal } from '@market/components/FillV3AskModal'
 import { FlexProps } from '@zoralabs/zord'
 import { PrivateAskSidebar } from '@market/modules/PrivateAsk/PrivateAskSidebar'
 import { UniversalListAskModal } from '@market/modules/PrivateAsk/UniversalListAskModal'

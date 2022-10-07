@@ -64,7 +64,7 @@ export function AuctionBidder({
           {hasNonZeroHighestBidder ? (
             <Flex gap="x2" align="center">
               <Label size="md" gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
-                {ensName ? ensName : shortAddress}
+                {ensName ?? shortAddress}
               </Label>
               {useAvatar && (
                 <>

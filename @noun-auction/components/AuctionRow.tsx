@@ -10,9 +10,6 @@ export function AuctionRow({
   activeAuctionComponent: JSX.Element
 }) {
   const { tokenId, activeAuctionId } = useNounishAuctionProvider()
-
-  if (!activeAuctionId) return <RowLoader />
-
   const auctionComponent = useMemo(() => {
     if (activeAuctionId === tokenId) {
       return activeAuctionComponent
@@ -20,6 +17,8 @@ export function AuctionRow({
       return auctionDataComponent
     }
   }, [activeAuctionComponent, activeAuctionId, auctionDataComponent, tokenId])
+
+  if (!activeAuctionId) return <RowLoader />
 
   return auctionComponent
 }
