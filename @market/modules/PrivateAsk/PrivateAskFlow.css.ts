@@ -41,3 +41,6 @@ export const popupTrigger = style([
 export const popupWrapper = style({
   borderRadius: '16px',
 })
+export const stretch = atoms({
+  alignItems: 'stretch',
+})

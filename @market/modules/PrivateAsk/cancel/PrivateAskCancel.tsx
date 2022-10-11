@@ -9,6 +9,7 @@ import { DataTable, formatContractError, PrintError } from '@shared'
 import { useModal } from '@modal/useModal'
 import { useListingDataTable } from '@market/hooks'
 import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
+import * as styles from '../PrivateAskFlow.css'
 
 interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {}
 
@@ -35,7 +36,7 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
         {txError && <PrintError errorMessage={formatContractError(txError)} />}
       </Stack>
 
-      <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
+      <Flex gap="x2" justify="space-between" pt="x3" className={styles.stretch}>
         <Button flex={1} variant="secondary" size="lg" onClick={requestClose}>
           Cancel
         </Button>
