@@ -48,9 +48,7 @@ export const manageButton = style([
   {
     gridColumn: '2',
     gridRow: '2',
-    height: 42,
-    paddingLeft: space.x5,
-    paddingRight: space.x5,
+    // height: 42,
     '@media': {
       [media.min1024]: {
         gridColumn: '23',
@@ -59,13 +57,9 @@ export const manageButton = style([
     },
   },
   atoms({
-    w: 'auto',
     ml: 'auto',
     borderRadius: 'curved',
-    justifyContent: {
-      '@initial': 'center',
-      '@1024': 'center',
-    },
+    justifyContent: 'center',
   }),
 ])
 
@@ -103,17 +97,7 @@ export const connectButton = style([
   }),
 ])
 
-export const docsLink = style([
-  {
-    height: 42,
-    paddingLeft: space.x1,
-    paddingRight: space.x3,
-  },
-  atoms({
-    // pl: 'x1',
-    // pr: 'x3',
-    gap: 'x3',
-    borderRadius: 'curved',
-    position: 'relative',
-  }),
-])
+export const docsLink = style({
+  paddingLeft: space.x2,
+  paddingRight: space.x3,
+})

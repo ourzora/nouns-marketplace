@@ -27,7 +27,6 @@ export const ConnectButton = ({ ...props }: ConnectButtonProps) => {
                 if (!mounted || !account || !chain) {
                   return (
                     <Button
-                      size="sm"
                       px="x4"
                       onClick={openConnectModal}
                       borderRadius="curved"
@@ -42,17 +41,17 @@ export const ConnectButton = ({ ...props }: ConnectButtonProps) => {
                 return (
                   <Flex>
                     <Button
-                      size="sm"
+                      // size="sm"
                       variant="secondary"
                       onClick={openAccountModal}
                       type="button"
-                      borderRadius="curved"
+                      // borderRadius="curved"
                       style={{
                         gap: 8,
                         minWidth: 0,
-                        height: 42,
-                        paddingLeft: 10,
-                        paddingRight: 10,
+                        // height: 42,
+                        // paddingLeft: 10,
+                        // paddingRight: 10,
                       }}
                     >
                       <EnsAvatar address={account.address} />
