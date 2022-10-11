@@ -46,9 +46,9 @@ export const buttonVariants = {
         },
       },
       atoms({
-        height: 'x14', // 56px
-        px: { '@initial': 'x4', '@576': 'x6' },
-        py: { '@initial': 'x2', '@576': 'x4' },
+        height: { '@initial': 'x10', '@1024': 'x14' }, // 40px -> 56px
+        px: { '@initial': 'x4', '@1024': 'x6' },
+        py: { '@initial': 'x2', '@1024': 'x4' },
         fontWeight: 'label',
       }),
     ],
@@ -63,8 +63,8 @@ export const buttonVariants = {
       },
       atoms({
         px: 'x6',
-        py: { '@initial': 'x4', '@576': 'x6' },
-        height: 'x18', // 72px
+        py: { '@initial': 'x4', '@1024': 'x6' },
+        height: { '@initial': 'x14', '@1024': 'x18' }, // 56px -> 72px
         minWidth: 'x23',
         fontWeight: 'label',
       }),

@@ -7,9 +7,6 @@ export const headerWrapper = style([
   {
     height: HEADER_HEIGHT_MOBILE,
     zIndex: HEADER_LAYER,
-    alignItems: 'center',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gridTemplateRows: 'auto',
     borderBottom: `2px solid ${color.background2}`,
     '@media': {
       [media.min1024]: {
@@ -21,23 +18,25 @@ export const headerWrapper = style([
   },
   atoms({
     w: '100%',
-    p: {
-      '@initial': 'x4',
-      '@1024': 'x4',
-    },
+    p: 'x4',
     pos: 'relative',
-    gap: 'x4',
+    alignItems: {
+      '@1024': 'center',
+    },
+    gap: {
+      '@initial': 'x2',
+      '@768': 'x6',
+    },
   }),
 ])
 
 export const nounsGlassesLink = style([
   {
-    gridColumn: '1',
-    gridRow: '1',
     aspectRatio: '70 / 24',
     maxHeight: '30px',
   },
   atoms({
+    w: 'x25',
     cursor: 'pointer',
     pos: 'relative',
     h: '100%',
@@ -45,17 +44,6 @@ export const nounsGlassesLink = style([
 ])
 
 export const manageButton = style([
-  {
-    gridColumn: '2',
-    gridRow: '2',
-    // height: 42,
-    '@media': {
-      [media.min1024]: {
-        gridColumn: '23',
-        gridRow: '1',
-      },
-    },
-  },
   atoms({
     ml: 'auto',
     borderRadius: 'curved',
@@ -78,16 +66,6 @@ export const modalWrapper = style([
 ])
 
 export const connectButton = style([
-  {
-    gridColumn: '2',
-    gridRow: '1',
-    '@media': {
-      [media.min1024]: {
-        gridColumn: '24',
-        gridRow: '1',
-      },
-    },
-  },
   atoms({
     w: '100%',
     justifyContent: {
