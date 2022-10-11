@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, vars } from '@zoralabs/zord'
+import { atoms, media, vars } from '@zoralabs/zord'
 
 export const buttonVariants = {
   loading: {
@@ -20,28 +20,50 @@ export const buttonVariants = {
       {
         width: 'auto',
         borderRadius: 12,
+        fontSize: 16,
+        '@media': {
+          [media.min768]: {
+            fontSize: 18,
+          },
+        },
       },
       atoms({
         display: 'inline-flex',
-        px: 'x3',
+        px: 'x4',
+        py: 'x2',
         height: 'x10', // 40px
         minWidth: 'x19',
         fontWeight: 'label',
       }),
     ],
     md: [
+      {
+        fontSize: 16,
+        '@media': {
+          [media.min768]: {
+            fontSize: 18,
+          },
+        },
+      },
       atoms({
         height: 'x14', // 56px
-        px: 'x6',
+        px: { '@initial': 'x4', '@576': 'x6' },
+        py: { '@initial': 'x2', '@576': 'x4' },
         fontWeight: 'label',
       }),
     ],
     lg: [
       {
-        fontSize: 22,
+        fontSize: 20,
+        '@media': {
+          [media.min768]: {
+            fontSize: 22,
+          },
+        },
       },
       atoms({
-        p: 'x6',
+        px: 'x6',
+        py: { '@initial': 'x4', '@576': 'x6' },
         height: 'x18', // 72px
         minWidth: 'x23',
         fontWeight: 'label',
@@ -227,25 +249,25 @@ export const button = recipe({
     size: 'md',
   },
 
-  compoundVariants: [
-    {
-      variants: { size: 'lg' },
-      style: atoms({
-        px: 'x6',
-      }),
-    },
-    {
-      variants: { size: 'md' },
-      style: atoms({
-        px: 'x5',
-      }),
-    },
-    {
-      variants: { size: 'sm' },
-      style: atoms({
-        px: 'x4',
-        py: 'x1',
-      }),
-    },
-  ],
+  // compoundVariants: [
+  //   {
+  //     variants: { size: 'lg' },
+  //     style: atoms({
+  //       px: 'x6',
+  //     }),
+  //   },
+  //   {
+  //     variants: { size: 'md' },
+  //     style: atoms({
+  //       px: 'x5',
+  //     }),
+  //   },
+  //   {
+  //     variants: { size: 'sm' },
+  //     style: atoms({
+  //       px: 'x4',
+  //       py: 'x1',
+  //     }),
+  //   },
+  // ],
 })
