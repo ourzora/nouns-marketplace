@@ -1,7 +1,7 @@
 import { Stack, Paragraph, GridProps, Grid, Flex } from '@zoralabs/zord'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { AddressWithLink } from '@market'
-import { PageHeader } from '../../components/PageHeader'
+import { PageHeader } from 'components/PageHeader'
 import {
   clickAnimation,
   collectionHeaderWrapper,
