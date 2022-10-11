@@ -36,7 +36,7 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
       </Stack>
 
       <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
-        <Button flex="1" variant="secondary" size="lg" onClick={requestClose}>
+        <Button flex={1} variant="secondary" size="lg" onClick={requestClose}>
           Cancel
         </Button>
         <TransactionSubmitButton
