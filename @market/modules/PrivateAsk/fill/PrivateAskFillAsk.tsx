@@ -75,7 +75,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
       {txError && <PrintError errorMessage={formatContractError(txError)} />}
       <Stack gap="x4">
         <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
-          <Button flex="1" variant="secondary" onClick={requestClose}>
+          <Button flex={1} variant="secondary" onClick={requestClose}>
             Cancel
           </Button>
           <TransactionSubmitButton

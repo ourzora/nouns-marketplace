@@ -22,7 +22,7 @@ export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
   }
 
   return (
-    <Stack flex="1">
+    <Stack flex={1}>
       {ask && ask.status === MARKET_INFO_STATUSES.ACTIVE ? (
         <Flex
           id="v3-ask-active"
