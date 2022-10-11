@@ -11,6 +11,8 @@ export function useCollection(collectionAddress: string) {
       })
   )
 
+  console.error(error)
+
   return {
     collection: data,
     error,
