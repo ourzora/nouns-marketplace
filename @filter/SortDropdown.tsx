@@ -1,11 +1,10 @@
-import { Icon, PopUp, Stack, Text } from '@zoralabs/zord'
+import { Button, Icon, PopUp, Stack, Text } from '@zoralabs/zord'
 import { useKeyPress, useClickOutside } from '@shared'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { activityButton } from './CollectionsFilter.css'
 import { useCollectionFilters } from './providers'
 import { sortMethodOptions } from './state/filterStore'
-import { Button } from 'components/Button'
 
 export function SortDropdown() {
   const dropdownRef = useRef(null)
