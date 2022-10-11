@@ -2,8 +2,14 @@ import { Stack } from '@zoralabs/zord'
 import { PageHeader, PageWrapper, Seo } from 'components'
 import { CollectionRanking } from 'compositions/CollectionRanking'
 import { DaoTable } from 'compositions/Daos'
-import React, { Component, ErrorInfo, ReactNode } from 'react'
-
+import React, { ReactNode } from 'react'
+import { zdk } from '@shared'
+import { collectionAddresses } from 'constants/collection-addresses'
+import {
+  CollectionSortKey,
+  CollectionsQuery,
+  SortDirection,
+} from '@zoralabs/zdk/dist/queries/queries-sdk'
 interface Props {
   children?: ReactNode
 }
@@ -12,35 +18,35 @@ interface State {
   hasError: boolean
 }
 
-class Home extends Component<Props, State> {
-  public state: State = {
-    hasError: false,
-  }
+export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
-  public static getDerivedStateFromError(_: Error): State {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true }
-  }
+function Home(props: { collections: CollectionParsed }) {
+  console.log(props)
 
-  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo)
-  }
+  return (
+    <PageWrapper direction="column" gap="x6">
+      <Seo />
+      <PageHeader headline="The Nouns Marketplace" />
+      <Stack px="x4">
+        <DaoTable />
+        <CollectionRanking collections={props.collections} />
+      </Stack>
+    </PageWrapper>
+  )
+}
 
-  public render() {
-    if (this.state.hasError) {
-      return <h1>Sorry.. there was an error</h1>
-    }
+export async function getStaticProps() {
+  const data = await zdk.collections({
+    where: { collectionAddresses: collectionAddresses },
+    sort: { sortDirection: SortDirection.Asc, sortKey: CollectionSortKey.None },
+  })
 
-    return (
-      <PageWrapper direction="column" gap="x6">
-        <Seo />
-        <PageHeader headline="The Nouns Marketplace" />
-        <Stack px="x4">
-          <DaoTable />
-          <CollectionRanking />
-        </Stack>
-      </PageWrapper>
-    )
+  const collections = data.collections
+
+  return {
+    props: {
+      collections: collections.nodes,
+    },
   }
 }
 

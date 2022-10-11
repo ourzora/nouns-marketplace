@@ -2,11 +2,14 @@ import { Stack, Heading } from '@zoralabs/zord'
 import { RankingRow } from './RankingRow'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { rankingWrapper } from './CollectionRanking.css'
+import { CollectionParsed } from 'pages'
 
 export const statRows = ['Volume', 'Items', 'Floor', 'Owners']
 
-export function CollectionRanking() {
-  const { collections } = useCollectionsContext()
+export function CollectionRanking({ collections }: { collections: CollectionParsed }) {
+  // const { collections } = useCollectionsContext()
+
+  console.log({ collections })
   return (
     <Stack className={rankingWrapper}>
       <Heading as="h2" size="lg">
