@@ -1,4 +1,5 @@
-import { Button, ButtonProps, Flex } from '@zoralabs/zord'
+import { Flex } from '@zoralabs/zord'
+import { Button, ButtonProps } from 'components/Button'
 import { useCollectionFilters } from '@filter'
 import { ActiveFilterCounter } from './ActiveFilterCounter'
 

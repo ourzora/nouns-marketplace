@@ -7,7 +7,8 @@ import {
 } from '@market/modules/PrivateAsk/'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import clsx from 'clsx'
-import { Text, Button, PopUp, Stack, Well } from '@zoralabs/zord'
+import { Text, PopUp, Stack, Well } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import React, { useCallback, useState } from 'react'
 
 import { useRelevantMarket, useAskHelper } from '@market/hooks'
@@ -72,7 +73,6 @@ export function PrivateAskOwnerTrigger({ nft, openModal }: PrivateAskOwnerTrigge
             <Button
               w="100%"
               variant="secondary"
-              borderRadius="curved"
               onClick={() => setOpen(true)}
               className={['manage-dropdown']}
             >
@@ -85,7 +85,6 @@ export function PrivateAskOwnerTrigger({ nft, openModal }: PrivateAskOwnerTrigge
               <Button
                 variant="ghost"
                 w="100%"
-                display="flex"
                 justify="space-between"
                 style={{
                   whiteSpace: 'nowrap',
@@ -93,7 +92,11 @@ export function PrivateAskOwnerTrigger({ nft, openModal }: PrivateAskOwnerTrigge
                 key={option.label}
                 onClick={() => handleClick(option.action)}
               >
-                <Text as="span" pr="x10" color={option.destructive && 'negative'}>
+                <Text
+                  as="span"
+                  pr="x10"
+                  color={option.destructive ? 'negative' : undefined}
+                >
                   {option.label}
                 </Text>
               </Button>

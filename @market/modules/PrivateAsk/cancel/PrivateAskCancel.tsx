@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { Button, Flex, Stack } from '@zoralabs/zord'
+import { Flex, Stack } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
@@ -35,13 +36,7 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
       </Stack>
 
       <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
-        <Button
-          flex="1"
-          variant="secondary"
-          size="lg"
-          borderRadius="curved"
-          onClick={requestClose}
-        >
+        <Button flex="1" variant="secondary" size="lg" onClick={requestClose}>
           Cancel
         </Button>
         <TransactionSubmitButton

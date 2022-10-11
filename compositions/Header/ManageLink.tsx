@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { useAccount } from 'wagmi'
 import { manageButton } from './Header.css'
 

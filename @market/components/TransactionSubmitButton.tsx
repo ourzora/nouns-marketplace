@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
-import { Box, Button, ButtonProps } from '@zoralabs/zord'
+import { Box } from '@zoralabs/zord'
+import { Button, ButtonProps } from 'components/Button'
 import { WalletCallStatus } from '@shared'
 
 /**
@@ -42,7 +43,6 @@ export function TransactionSubmitButton({
       w="100%"
       variant={variant}
       size={size}
-      borderRadius="curved"
       {...props}
     >
       {txStatus === WalletCallStatus.ERRORED ? (

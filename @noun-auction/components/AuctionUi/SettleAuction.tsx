@@ -1,9 +1,10 @@
-import { Button, Icon, Box, Stack, StackProps, color } from '@zoralabs/zord'
+import { Icon, Box, Stack, StackProps, color } from '@zoralabs/zord'
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { useEffect, useState } from 'react'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { PrintError } from '@shared'
+import { Button } from 'components/Button'
 
 export interface SettleAuctionProps extends StackProps {
   useErrorMsg?: boolean
@@ -37,8 +38,7 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
     <>
       <Stack w={layout === 'sideBarBid' ? '100%' : 'auto'} {...props}>
         <Button
-          onClick={settleAuction}
-          // variant="reverse"
+          onClick={() => settleAuction}
           variant="secondary"
           className={placeBidTrigger}
           w={layout === 'sideBarBid' ? '100%' : 'auto'}
@@ -51,7 +51,7 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
         <Button
           variant="unset"
           onClick={() => setShowError(false)}
-          display="flex"
+          // display="flex"
           alignItems="center"
           justifyContent="center"
           w="100%"

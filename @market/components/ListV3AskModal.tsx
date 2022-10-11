@@ -1,5 +1,6 @@
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Box, FlexProps, Stack, Button } from '@zoralabs/zord'
+import { Box, FlexProps, Stack } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { ModalComposition, useModal } from '@modal'
 import { useIsOwner } from '@shared'
 import { ListV3AskWizard, NFTOwner } from '@market/components'
@@ -23,12 +24,7 @@ export function ListV3AskModal({ nftObj, ...props }: ListV3AskModalProps) {
         <ModalComposition
           modalName={`list-${nft.tokenId}${nft.contract.address}`}
           trigger={
-            <Button
-              as="span"
-              size="md"
-              borderRadius="curved"
-              className="zora-market-cardMarketTrigger"
-            >
+            <Button as="span" size="md" className="zora-market-cardMarketTrigger">
               List
             </Button>
           }
@@ -40,12 +36,7 @@ export function ListV3AskModal({ nftObj, ...props }: ListV3AskModalProps) {
                 onClose={requestClose}
                 previewURL={media?.poster?.uri}
                 cancelButton={
-                  <Button
-                    onClick={requestClose}
-                    w="100%"
-                    variant="secondary"
-                    borderRadius="curved"
-                  >
+                  <Button onClick={requestClose} w="100%" variant="secondary">
                     Cancel
                   </Button>
                 }

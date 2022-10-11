@@ -108,9 +108,11 @@ export const docsLink = style([
     height: 42,
     paddingLeft: space.x1,
     paddingRight: space.x3,
-    gap: space.x3,
   },
   atoms({
+    // pl: 'x1',
+    // pr: 'x3',
+    gap: 'x3',
     borderRadius: 'curved',
     position: 'relative',
   }),

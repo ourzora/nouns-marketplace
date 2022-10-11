@@ -1,5 +1,6 @@
 import { ConnectButton as RKConnectButton } from '@rainbow-me/rainbowkit'
-import { Button, Flex, Box, Icon, FlexProps } from '@zoralabs/zord'
+import { Flex, Box, Icon, FlexProps } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { hideMobile, noTextWrap } from 'styles/styles.css'
 import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
 import { connectButton } from './Header.css'
@@ -41,7 +42,7 @@ export const ConnectButton = ({ ...props }: ConnectButtonProps) => {
                 return (
                   <Flex>
                     <Button
-                      size="md"
+                      size="sm"
                       variant="secondary"
                       onClick={openAccountModal}
                       type="button"

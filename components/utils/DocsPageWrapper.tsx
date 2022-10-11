@@ -1,4 +1,5 @@
-import { Stack, Heading, Flex, Label, Icon, Paragraph, Button } from '@zoralabs/zord'
+import { Stack, Heading, Flex, Icon, Paragraph } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { PageWrapper, PageWrapperProps } from 'components/PageWrapper'
 import { MAX_WIDTH } from 'styles/style-constants'
 import Link from 'next/link'
