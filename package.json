@@ -45,7 +45,6 @@
     "formik": "^2.2.9",
     "framer-motion": "^6.3.3",
     "lodash": "^4.17.21",
-    "react-polymorphic-types": "^2.0.0",
     "next": "12.3.1",
     "nextjs-progressbar": "^0.0.14",
     "react": "^17.0.2",

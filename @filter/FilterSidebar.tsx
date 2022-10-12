@@ -110,8 +110,6 @@ export function FilterSidebar() {
         {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
         {useSidebarClearButton ? (
           <ClearFilters
-            mt="x2"
-            borderRadius="curved"
             w="100%"
             display={{
               '@initial': 'none',

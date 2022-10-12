@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Box } from '@zoralabs/zord'
-import { Button, ButtonProps } from 'components/Button'
+import { Button, NounButtonProps } from 'components/Button'
 import { WalletCallStatus } from '@shared'
 
 /**
@@ -8,7 +8,7 @@ import { WalletCallStatus } from '@shared'
  * This button handles loading, disabling, and error states.
  */
 
-interface TransactionSubmitButtonProps extends ButtonProps {
+interface TransactionSubmitButtonProps extends NounButtonProps {
   disabled?: boolean
   loading?: boolean
   onClick?: () => void

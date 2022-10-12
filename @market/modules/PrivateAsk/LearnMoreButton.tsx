@@ -1,7 +1,6 @@
 import { Hyperlink } from '@shared/components/DataTable/DataTableItem'
-import { Icon, mixins, Paragraph } from '@zoralabs/zord'
+import { Icon, mixins, Paragraph, ButtonProps, Button } from '@zoralabs/zord'
 import React from 'react'
-import { Button, ButtonProps } from 'components/Button'
 
 import * as styles from './LearnMoreButton.css'
 

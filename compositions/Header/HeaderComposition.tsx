@@ -13,23 +13,23 @@ export function HeaderComposition() {
   return (
     <Flex as="header" className={headerWrapper} justify="space-between">
       <Flex
-        gap="x8"
+        gap={{ '@initial': 'x2', '@1024': 'x8' }}
         align={{ '@initial': 'flex-start', '@1024': 'center' }}
         direction={{ '@initial': 'column', '@1024': 'row' }}
         justify="space-between"
       >
         <NounsLink />
-        <Flex gap="x6">
-          {isLarge && <DocsLink />}
+        <Flex>
           <CollectionMenu />
         </Flex>
       </Flex>
 
       <Flex
-        gap="x4"
+        gap={{ '@initial': 'x2', '@1024': 'x6' }}
         direction={{ '@initial': 'column', '@1024': 'row' }}
         justify="space-between"
       >
+        {isLarge && <DocsLink />}
         <ManageLink />
         <ConnectButton />
       </Flex>

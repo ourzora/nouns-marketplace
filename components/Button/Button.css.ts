@@ -9,12 +9,6 @@ export const buttonVariants = {
     }),
   },
 
-  // pill: {
-  //   true: atoms({
-  //     borderRadius: 'round',
-  //   }),
-  // },
-
   size: {
     sm: [
       {
@@ -208,7 +202,6 @@ export const button = recipe({
 
   base: style([
     atoms({
-      // borderRadius: 'normal',
       borderStyle: 'solid',
       borderWidth: 'none',
       alignItems: 'center',
@@ -217,9 +210,9 @@ export const button = recipe({
       position: 'relative',
       cursor: 'pointer',
       fontSize: 18,
-      lineHeight: 24,
     }),
     {
+      lineHeight: 1,
       borderRadius: 16,
       transition:
         'border 0.1s ease-in-out, background 0.1s ease-in-out, transform 0.1s ease-out',
@@ -248,26 +241,4 @@ export const button = recipe({
     variant: 'primary',
     size: 'md',
   },
-
-  // compoundVariants: [
-  //   {
-  //     variants: { size: 'lg' },
-  //     style: atoms({
-  //       px: 'x6',
-  //     }),
-  //   },
-  //   {
-  //     variants: { size: 'md' },
-  //     style: atoms({
-  //       px: 'x5',
-  //     }),
-  //   },
-  //   {
-  //     variants: { size: 'sm' },
-  //     style: atoms({
-  //       px: 'x4',
-  //       py: 'x1',
-  //     }),
-  //   },
-  // ],
 })

@@ -6,7 +6,7 @@ import { Button } from 'components/Button'
 
 export function MobileFiltersFooter() {
   const {
-    filterStore: { showFilters, toggleShowFilters, hasFilters },
+    filterStore: { showFilters, toggleShowFilters },
   } = useCollectionFilters()
 
   if (!showFilters) {
