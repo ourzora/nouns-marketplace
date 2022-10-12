@@ -38,7 +38,7 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
     <>
       <Stack w={layout === 'sideBarBid' ? '100%' : 'auto'} {...props}>
         <Button
-          onClick={settleAuction}
+          onClick={() => settleAuction}
           variant="secondary"
           className={styles.placeBidTrigger}
           w={layout === 'sideBarBid' ? '100%' : 'auto'}

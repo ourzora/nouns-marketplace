@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import { Button as ZordButton, ButtonProps } from '@zoralabs/zord'
 import { button, buttonVariants } from './Button.css'
 
 export interface NounButtonProps extends ButtonProps {
   variant?: keyof typeof buttonVariants['variant']
   size?: keyof typeof buttonVariants['size']
-  onClick?: () => void
+  // onClick?: () => void
+  onClick?: MouseEventHandler<HTMLButtonElement>
+  // | React.MouseEvent<HTMLElement, MouseEvent>
   title?: string
   target?: string
   as?: React.ReactNode
