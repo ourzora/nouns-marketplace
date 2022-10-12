@@ -3,34 +3,23 @@ import { COLLECTIONS_INDEX_HEADLINE, COLLECTIONS_INDEX_COPY } from 'constants/co
 import { CollectionRanking } from 'compositions/CollectionRanking'
 import { PageHeader } from 'components/PageHeader'
 import { Seo } from 'components/Seo'
-import { zdk } from '@shared'
-import { collectionAddresses } from 'constants/collection-addresses'
-import { CollectionSortKey, SortDirection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { CollectionParsed } from 'pages'
+import { collectionsService } from 'services/collectionsService'
+import useSWR from 'swr'
 
-const Collections = (props: { collections: CollectionParsed }) => {
+const Collections = ({ fallback }: { fallback: CollectionParsed }) => {
+  const { data } = useSWR('collections', collectionsService)
+  const collections = data?.props?.fallback || fallback
+
   return (
     <PageWrapper p="x4" direction="column" gap="x4">
       <Seo title={COLLECTIONS_INDEX_HEADLINE} description={COLLECTIONS_INDEX_COPY} />
       <PageHeader headline={COLLECTIONS_INDEX_HEADLINE} copy={COLLECTIONS_INDEX_COPY} />
-      <CollectionRanking collections={props.collections} />
+      <CollectionRanking collections={collections} />
     </PageWrapper>
   )
 }
 
-export async function getStaticProps() {
-  const data = await zdk.collections({
-    where: { collectionAddresses: collectionAddresses },
-    sort: { sortDirection: SortDirection.Asc, sortKey: CollectionSortKey.None },
-  })
-
-  const collections = data.collections
-
-  return {
-    props: {
-      collections: collections.nodes,
-    },
-  }
-}
+export const getServerSideProps = collectionsService
 
 export default Collections

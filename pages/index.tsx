@@ -3,51 +3,30 @@ import { PageHeader, PageWrapper, Seo } from 'components'
 import { CollectionRanking } from 'compositions/CollectionRanking'
 import { DaoTable } from 'compositions/Daos'
 import React, { ReactNode } from 'react'
-import { zdk } from '@shared'
-import { collectionAddresses } from 'constants/collection-addresses'
-import {
-  CollectionSortKey,
-  CollectionsQuery,
-  SortDirection,
-} from '@zoralabs/zdk/dist/queries/queries-sdk'
-interface Props {
-  children?: ReactNode
-}
-
-interface State {
-  hasError: boolean
-}
+import { CollectionsQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { collectionsService } from 'services/collectionsService'
+import { SWRConfig } from 'swr'
+import useSWR from 'swr'
 
 export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
-function Home(props: { collections: CollectionParsed }) {
-  console.log(props)
+function Home(props: { fallback: CollectionParsed }) {
+  const { data } = useSWR('collections', collectionsService)
 
   return (
-    <PageWrapper direction="column" gap="x6">
-      <Seo />
-      <PageHeader headline="The Nouns Marketplace" />
-      <Stack px="x4">
-        <DaoTable />
-        <CollectionRanking collections={props.collections} />
-      </Stack>
-    </PageWrapper>
+    <SWRConfig value={{ fallback: props.fallback }}>
+      <PageWrapper direction="column" gap="x6">
+        <Seo />
+        <PageHeader headline="The Nouns Marketplace" />
+        <Stack px="x4">
+          <DaoTable />
+          <CollectionRanking collections={data?.props?.fallback} />
+        </Stack>
+      </PageWrapper>
+    </SWRConfig>
   )
 }
 
-export async function getStaticProps() {
-  const data = await zdk.collections({
-    where: { collectionAddresses: collectionAddresses },
-    sort: { sortDirection: SortDirection.Asc, sortKey: CollectionSortKey.None },
-  })
-
-  const collections = data.collections
-
-  return {
-    props: {
-      collections: collections.nodes,
-    },
-  }
-}
+export const getServerSideProps = collectionsService
 
 export default Home

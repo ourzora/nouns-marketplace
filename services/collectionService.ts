@@ -14,7 +14,7 @@ export type CollectionServiceProps = {
   initialPage: NFTObject[]
   contractAddress: string
   aggregateStats: CollectionStatsAggregateQuery
-  collection: Collection
+  collection: Collection // SSR data
   seo: SeoProps
 }
 
@@ -55,13 +55,15 @@ export async function collectionService({ params }: CollectionParamsProps) {
 
     const { name, symbol } = collection
 
-    const seo = await buildCollectionSEO(name, symbol)
+    const seo = buildCollectionSEO(name, symbol)
 
     return {
       props: {
-        contractAddress: tokenAddress,
-        collection,
-        seo,
+        fallback: {
+          contractAddress: tokenAddress,
+          collection,
+          seo,
+        },
       },
     }
   } catch (err) {

@@ -6,10 +6,7 @@ import { CollectionParsed } from 'pages'
 
 export const statRows = ['Volume', 'Items', 'Floor', 'Owners']
 
-export function CollectionRanking({ collections }: { collections: CollectionParsed }) {
-  // const { collections } = useCollectionsContext()
-
-  console.log({ collections })
+export function CollectionRanking({ collections }: { collections?: CollectionParsed }) {
   return (
     <Stack className={rankingWrapper}>
       <Heading as="h2" size="lg">
@@ -21,7 +18,8 @@ export function CollectionRanking({ collections }: { collections: CollectionPars
           '@1024': 'x6',
         }}
       >
-        {collections.length > 0 &&
+        {collections &&
+          collections.length > 0 &&
           collections.map((collection) => (
             <RankingRow key={collection.address} collection={collection} />
           ))}
