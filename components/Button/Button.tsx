@@ -8,7 +8,7 @@ export interface NounButtonProps extends ButtonProps {
   title?: string
   target?: string
   as?: React.ReactNode
-  onClick?: MouseEventHandler<HTMLButtonElement>
+  onClick?: MouseEventHandler<HTMLButtonElement> | (() => void)
 }
 
 export function Button({
