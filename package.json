@@ -47,6 +47,7 @@
     "lodash": "^4.17.21",
     "next": "12.3.1",
     "nextjs-progressbar": "^0.0.14",
+    "react-polymorphic-types": "^2.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-intersection-observer": "^9.1.0",
