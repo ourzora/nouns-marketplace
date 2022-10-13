@@ -27,9 +27,10 @@ const NFT = ({
   //   'Content-Type': 'application/json',
   //   'X-API-KEY': process.env.NEXT_PUBLIC_ZORA_API_KEY,
   // },
-  const [isUpdating, setIsUpdating] = useState<boolean>(false)
+  const [isUpdatingToken, setIsUpdatingToken] = useState<boolean>(false)
+  const [isUpdatingContract, setIsUpdatingContract] = useState<boolean>(false)
   const handleUpdateTokenMetadata = useCallback(async () => {
-    setIsUpdating(true)
+    setIsUpdatingToken(true)
     try {
       console.log('TRYING')
 
@@ -69,11 +70,11 @@ const NFT = ({
       console.log('CATCHING')
       console.error(err.message)
     } finally {
-      setIsUpdating(false)
+      setIsUpdatingToken(false)
     }
   }, [tokenAddress, tokenId])
   const handleUpdateContractMetadata = useCallback(async () => {
-    setIsUpdating(true)
+    setIsUpdatingContract(true)
     try {
       console.log('TRYING')
 
@@ -112,9 +113,9 @@ const NFT = ({
       console.log('CATCHING')
       console.error(err.message)
     } finally {
-      setIsUpdating(false)
+      setIsUpdatingContract(false)
     }
-  }, [tokenAddress, tokenId])
+  }, [tokenAddress])
   console.log(nft)
   return (
     <PageWrapper direction="column">
@@ -134,10 +135,10 @@ const NFT = ({
             <NFTSidebar />
           )}
           <Stack className={styles.attributesHistoryWrapper}>
-            <Button onClick={handleUpdateTokenMetadata} loading={isUpdating}>
+            <Button onClick={handleUpdateTokenMetadata} loading={isUpdatingToken}>
               REFRESH TOKEN
             </Button>
-            <Button onClick={handleUpdateContractMetadata} loading={isUpdating}>
+            <Button onClick={handleUpdateContractMetadata} loading={isUpdatingContract}>
               REFRESH CONTRACT
             </Button>
 
