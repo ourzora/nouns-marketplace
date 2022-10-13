@@ -10,7 +10,7 @@ import { useCallback, useMemo, useState } from 'react'
 import * as styles from 'compositions/NFTPage/NFTPage.css'
 
 // const NEXT_PUBLIC_REFRESH_METADATA_URL_ROOT = 'http://api.zora.co/refresh-nft-metadata'
-const REFRESH_METADATA_URL_ROOT = 'http://api.zora.co/refresh-nft-metadata'
+const REFRESH_METADATA_URL_ROOT = 'https://api.zora.co/refresh-nft-metadata'
 // const REFRESH_METADATA_URL_ROOT = 'http://api.zora.co'
 
 const NFT = ({
