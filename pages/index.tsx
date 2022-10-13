@@ -2,46 +2,31 @@ import { Stack } from '@zoralabs/zord'
 import { PageHeader, PageWrapper, Seo } from 'components'
 import { CollectionRanking } from 'compositions/CollectionRanking'
 import { DaoTable } from 'compositions/Daos'
-import React, { Component, ErrorInfo, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
+import { CollectionsQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { collectionsService } from 'services/collectionsService'
+import { SWRConfig } from 'swr'
+import useSWR from 'swr'
 
-interface Props {
-  children?: ReactNode
-}
+export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
-interface State {
-  hasError: boolean
-}
+function Home(props: { fallback: CollectionParsed }) {
+  const { data } = useSWR('collections', collectionsService)
 
-class Home extends Component<Props, State> {
-  public state: State = {
-    hasError: false,
-  }
-
-  public static getDerivedStateFromError(_: Error): State {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true }
-  }
-
-  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo)
-  }
-
-  public render() {
-    if (this.state.hasError) {
-      return <h1>Sorry.. there was an error</h1>
-    }
-
-    return (
+  return (
+    <SWRConfig value={{ fallback: props.fallback }}>
       <PageWrapper direction="column" gap="x6">
         <Seo />
         <PageHeader headline="The Nouns Marketplace" />
         <Stack px="x4">
           <DaoTable />
-          <CollectionRanking />
+          <CollectionRanking collections={data?.props?.fallback} />
         </Stack>
       </PageWrapper>
-    )
-  }
+    </SWRConfig>
+  )
 }
+
+export const getServerSideProps = collectionsService
 
 export default Home
