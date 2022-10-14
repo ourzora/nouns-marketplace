@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { Box } from '@zoralabs/zord'
 import { Button, NounButtonProps } from 'components/Button'
-import { WalletCallStatus } from '@shared'
+import { useButtonRequiresAuth, WalletCallStatus } from '@shared/hooks'
 
 /**
  * Render a button that will submit a transaction to the blockchain.
@@ -26,6 +26,7 @@ export function TransactionSubmitButton({
   txInProgress,
   txStatus,
   size = 'md',
+  onClick,
   ...props
 }: TransactionSubmitButtonProps) {
   const isLoading = useMemo(
@@ -34,6 +35,7 @@ export function TransactionSubmitButton({
   )
 
   const isDisabled = isLoading || disabled
+  const variableButtonBehavior = useButtonRequiresAuth(onClick)
 
   return (
     <Button
@@ -43,6 +45,7 @@ export function TransactionSubmitButton({
       w="100%"
       variant={variant}
       size={size}
+      onClick={variableButtonBehavior}
       {...props}
     >
       {txStatus === WalletCallStatus.ERRORED ? (

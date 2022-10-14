@@ -11,7 +11,8 @@ import {
 } from '@media/NftMedia.css'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ImageWithNounFallback } from 'components'
-import { useIsOwner, useNFTProvider, useTitleWithFallback } from '@shared'
+import { useIsOwner, useTitleWithFallback } from '@shared/hooks'
+import { useNFTProvider } from '@shared/providers'
 import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
 
 export function NFTCard() {

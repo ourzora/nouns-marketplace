@@ -1,4 +1,5 @@
-import { isAddressMatch, numberFormatter, roundTwoDecimals, useAuth } from '@shared'
+import { isAddressMatch, numberFormatter, roundTwoDecimals } from '@shared'
+import { useAuth } from '@shared/hooks'
 import { FixedPriceLike, MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types'
 import { useMemo } from 'react'
 

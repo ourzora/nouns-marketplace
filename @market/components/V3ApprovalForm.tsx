@@ -57,7 +57,7 @@ export function V3ApprovalForm({
           </Paragraph>
         </a>
       </Box>
-      {error && <PrintError errorMessage={error} />}
+      {error && <PrintError mb="x4" errorMessage={error} />}
       <TransactionSubmitButton
         txInProgress={txInProgress}
         txStatus={txStatus}

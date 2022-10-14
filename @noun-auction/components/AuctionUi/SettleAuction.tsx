@@ -5,6 +5,7 @@ import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { PrintError } from '@shared'
 import { Button } from 'components/Button'
+import { useButtonRequiresAuth } from '@shared/hooks'
 
 export interface SettleAuctionProps extends StackProps {
   useErrorMsg?: boolean
@@ -30,6 +31,8 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
     write: settleAuction,
   } = useContractWrite(config)
 
+  const buttonBehavior = useButtonRequiresAuth(settleAuction)
+
   useEffect(() => {
     if (writeContractError) setShowError(true)
   }, [writeContractError])
@@ -38,7 +41,7 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
     <>
       <Stack w={layout === 'sideBarBid' ? '100%' : 'auto'} {...props}>
         <Button
-          onClick={settleAuction}
+          onClick={buttonBehavior}
           variant="secondary"
           className={styles.placeBidTrigger}
           w={layout === 'sideBarBid' ? '100%' : 'auto'}

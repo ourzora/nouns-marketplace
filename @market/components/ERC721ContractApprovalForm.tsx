@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Stack, Box, Paragraph, Text, Grid } from '@zoralabs/zord'
-import { useContractTransaction, PrintError } from '@shared'
+import { useContractTransaction } from '@shared/hooks'
+import { PrintError } from '@shared'
 import { TransactionSubmitButton, ModalTitleAndDescription } from '@market/components'
 import { useERC721TokenApproval } from '@market/hooks'
 import { Button } from 'components/Button'
+
 interface ContractApprovalFormProps {
   title: string
   approvalCopy?: string

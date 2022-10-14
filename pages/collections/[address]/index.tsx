@@ -13,7 +13,7 @@ import { CollectionFilterProvider } from '@filter'
 import { Stack, Separator } from '@zoralabs/zord'
 import { useCollection } from '@filter/hooks/useCollection'
 import { returnDao } from 'constants/collection-addresses'
-import { useWindowWidth } from '@shared'
+import { useWindowWidth } from '@shared/hooks'
 import { ActiveAuctionCard } from '@noun-auction'
 import { useAggregate } from 'hooks'
 

@@ -7,7 +7,8 @@ import {
   transactionEventWrapper,
   transactionBidder,
 } from '@noun-auction/styles/NounishStyles.css'
-import { lightFont, useShortAddress } from '@shared'
+import { useShortAddress } from '@shared/hooks'
+import { lightFont } from '@shared'
 
 export interface BidTransactionEventProps extends GridProps {
   transactionInfo: {

@@ -43,6 +43,7 @@ export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
           {!isOwner ? (
             <ModalComposition
               modalName={`buy-${nft.contract.address}-${nft.tokenId}`}
+              modalBehaviorRequiresAuth={true}
               trigger={
                 <Button as="span" size="md" className="zora-market-cardMarketTrigger">
                   Buy
