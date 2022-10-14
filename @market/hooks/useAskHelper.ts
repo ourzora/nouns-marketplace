@@ -1,4 +1,4 @@
-import { isAddressMatch, numberFormatter, roundTwoDecimals } from '@shared'
+import { isAddressMatch, numberFormatterUSDC, roundTwoDecimals } from '@shared'
 import { useAuth } from '@shared/hooks'
 import { FixedPriceLike, MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types'
 import { useMemo } from 'react'
@@ -31,7 +31,7 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
   const usdAskAmount = useMemo(
     () =>
       ask?.amount?.usd?.value
-        ? numberFormatter(roundTwoDecimals(ask?.amount?.usd?.value))
+        ? numberFormatterUSDC(roundTwoDecimals(ask?.amount?.usd?.value))
         : '...',
     [ask]
   )
