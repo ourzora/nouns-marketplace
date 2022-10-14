@@ -6,7 +6,7 @@ import { Box, Grid, Stack } from '@zoralabs/zord'
 import { NFTProvider } from '@shared/providers/NFTProvider'
 import { NounishAuctionProvider } from '@noun-auction'
 import { returnDao } from 'constants/collection-addresses'
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 import * as styles from 'compositions/NFTPage/NFTPage.css'
 import { Text, Heading, Paragraph } from 'components/typography/Text'
 
@@ -20,6 +20,8 @@ const NFT = ({
   tokenId: string
 }) => {
   const dao = useMemo(() => returnDao(tokenAddress), [tokenAddress])
+
+  const testRef = useRef(null)
 
   return (
     <PageWrapper direction="column">
@@ -46,7 +48,7 @@ const NFT = ({
               <Heading size="sm">Heading</Heading>
               <Heading size="xs">Heading</Heading>
               <Text>Text</Text>
-              <Paragraph>Paragraph</Paragraph>
+              <Paragraph ref={testRef}>Paragraph</Paragraph>
               <Paragraph size="sm" color="text2">
                 Paragraph
               </Paragraph>

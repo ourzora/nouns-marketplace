@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { Accordion, Stack } from '@zoralabs/zord'
-import { RawDisplayer } from 'components/utils'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { FilterCollectionListItem } from './FilterCollectionListItem'

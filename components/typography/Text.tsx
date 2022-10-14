@@ -1,15 +1,8 @@
 import React, { ElementType, ForwardedRef, forwardRef } from 'react'
-import {
-  // Box,
-  //   BoxDefaultElement,
-  // BoxProps,
-  Text as ZordText,
-  TextProps,
-} from '@zoralabs/zord'
+import { Text as ZordText, TextProps } from '@zoralabs/zord'
 import { text, textVariants } from './Text.css'
-// import { Box, BoxDefaultElement, BoxProps }
 import type {
-  // PolymorphicForwardRefExoticComponent,
+  PolymorphicForwardRefExoticComponent,
   PolymorphicPropsWithRef,
   // PolymorphicPropsWithoutRef,
 } from 'react-polymorphic-types'
@@ -18,29 +11,12 @@ export const TextDefaultElement = 'div'
 
 export interface NounTextProps extends TextProps {
   variant?: keyof typeof textVariants['variant']
-  //   size?: keyof typeof buttonVariants['size']
-  //   title?: string
-  //   target?: string
-  //   as?: React.ReactNode
-  //   as?: ElementType<any>
-  //   onClick?: MouseEventHandler<HTMLButtonElement> | (() => void)
 }
 
-export function Text({
+export function InnerText({
   children,
-  //   as,
-  //   variant = 'primary',
   variant = 'paragraph-md',
-  //   gap,
-  //   loading,
-  //   size,
-  //   icon,
-  //   iconAlign,
-  //   iconSize,
-  //   onClick,
   className,
-  //   title,
-  //   target,
   ...props
 }: NounTextProps) {
   return (
@@ -62,7 +38,11 @@ export function Text({
   )
 }
 
-export interface HeadingProps extends Omit<TextProps, 'variant'> {
+export const Text: PolymorphicForwardRefExoticComponent<
+  NounTextProps, // Limits props to Noun subset via textVariants, rather than the full Zord set
+  typeof TextDefaultElement
+> = forwardRef(InnerText)
+export interface HeadingProps extends TextProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' // map to h5 -> h1 in noun.market Figma
 }
 
@@ -76,7 +56,6 @@ export function Heading<E extends ElementType = typeof TextDefaultElement>({
 }: HeadingComponentProps<E>) {
   return <Text variant={`heading-${size}`} {...props} />
 }
-
 export interface ParagraphProps extends Omit<TextProps, 'variant'> {
   size?: 'sm' | 'md'
 }
@@ -101,6 +80,6 @@ export function Span<E extends ElementType = typeof TextDefaultElement>({
 
 // TODO: replace all <Display... > with <Heading size="xl" ....>
 // Eyebrow
-// Label
+// Label - uh oh
 // Display - NADA
 // MenuText - NADA
