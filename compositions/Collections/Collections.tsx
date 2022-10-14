@@ -55,8 +55,7 @@ export function DaoGrid({
   dao: any
   view: CollectionsProps['view']
 } & CollectionsGridProps) {
-  const { data: activeAuction } = useActiveNounishAuction(dao?.marketType) // <-- this is a fetch
-
+  // const { data: activeAuction } = useActiveNounishAuction(dao?.marketType)
   // const filteredItems = useMemo(() => {
   //   try {
   //     return items.filter(
@@ -78,8 +77,7 @@ export function DaoGrid({
     <Filter
       grid={
         <NFTGrid
-          // items={filteredItems}
-          items={items}
+          items={items} // filteredItems
           handleLoadMore={handleLoadMore}
           isReachingEnd={isReachingEnd}
           isValidating={isValidating}
@@ -97,19 +95,17 @@ export function Collections({ view = 'nfts', collectionAddress }: CollectionsPro
   const {
     filterStore: { clearFilters },
   } = useCollectionFilters()
-
   const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
-
   const dao = returnDao(collectionAddress)
-  const sharedProps = { items, isReachingEnd, isValidating, handleLoadMore }
+  const gridProps = { items, isReachingEnd, isValidating, handleLoadMore }
 
   useEffect(() => {
     clearFilters()
   }, [clearFilters])
 
   if (!dao) {
-    return <CollectionGrid {...sharedProps} />
+    return <CollectionGrid {...gridProps} />
   } else {
-    return <DaoGrid dao={dao} view={view} {...sharedProps} />
+    return <DaoGrid dao={dao} view={view} {...gridProps} />
   }
 }

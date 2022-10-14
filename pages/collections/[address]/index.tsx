@@ -19,7 +19,6 @@ import { useAggregate } from 'hooks'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { contractAddress, seo } = fallback
-
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
   const dao = returnDao(contractAddress)
   const { isLarge } = useWindowWidth()
