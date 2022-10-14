@@ -13,8 +13,7 @@ import { flatten } from 'lodash'
 import { useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
-const INITIAL_PAGE_SIZE = 25
-const PAGE_SIZE = 24
+const PAGE_SIZE = 12 // must be divisible by 2,3,4 to ensure grid stays intact
 
 export interface UseTokenQueryProps {
   contractAllowList?: string[] | undefined
@@ -51,7 +50,6 @@ export function useTokensQuery({
   sort,
   filter,
   where,
-  initialPageSize = INITIAL_PAGE_SIZE,
 }: // initialData,
 UseTokenQueryProps) {
   const getKey = (pageIndex: number, previousPageData: GetNFTReturnType) => {
@@ -73,7 +71,7 @@ UseTokenQueryProps) {
       filter,
       pagination: {
         after: previousPageData?.nextCursor,
-        limit: pageIndex > 0 ? PAGE_SIZE : initialPageSize,
+        limit: PAGE_SIZE,
       },
       includeFullDetails: true,
     }
