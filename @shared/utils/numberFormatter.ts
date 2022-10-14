@@ -9,8 +9,6 @@ export function numberFormatter(number: number | string) {
     return '...'
   }
 
-  console.log('PARSED', parsed)
-
   return new Intl.NumberFormat('en-US').format(parsed)
 }
 
@@ -24,8 +22,6 @@ export function numberFormatterUSDC(number: number | string) {
   if (isNaN(parsed)) {
     return '...'
   }
-
-  console.log('PARSED', parsed)
 
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
