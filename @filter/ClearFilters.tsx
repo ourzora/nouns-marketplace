@@ -1,5 +1,6 @@
-import { Button, ButtonProps, Flex } from '@zoralabs/zord'
 import { useCollectionFilters } from '@filter'
+import { Button, ButtonProps, Flex } from '@zoralabs/zord'
+
 import { ActiveFilterCounter } from './ActiveFilterCounter'
 
 export function ClearFilters({ ...props }: ButtonProps) {

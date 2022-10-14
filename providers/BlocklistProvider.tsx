@@ -1,7 +1,10 @@
-import { useBlocklist } from '@blocklist'
-import { Blocked } from 'components/Blocked'
 import { useAccount } from 'wagmi'
+
+import { Blocked } from 'components'
+
 import { ReactNode } from 'react'
+
+import { useBlocklist } from '@blocklist'
 
 type BlocklistGuardProps = {
   children: ReactNode

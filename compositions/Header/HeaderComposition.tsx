@@ -1,11 +1,12 @@
-import { Grid } from '@zoralabs/zord'
-import { DocsLink } from './DocsLink'
-import { NounsLink } from './NounsLink'
-import { CollectionMenu } from '../CollectionMenu'
-import { headerWrapper } from './Header.css'
 import { useWindowWidth } from '@shared'
-import { ManageLink } from './ManageLink'
+import { Grid } from '@zoralabs/zord'
+
+import { CollectionMenu } from '../CollectionMenu'
 import { ConnectButton } from './ConnectButton'
+import { DocsLink } from './DocsLink'
+import { headerWrapper } from './Header.css'
+import { ManageLink } from './ManageLink'
+import { NounsLink } from './NounsLink'
 
 export function HeaderComposition() {
   const { isLarge } = useWindowWidth()

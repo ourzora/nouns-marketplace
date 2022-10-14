@@ -1,9 +1,11 @@
-import * as styles from './Toast.css'
-import * as ToastPrimitive from '@radix-ui/react-toast'
-import { Button, Flex, Icon, Label, Paragraph, Stack } from '@zoralabs/zord'
-import { useToggle } from '@shared/hooks/useToggle'
 import React, { useCallback } from 'react'
+
+import * as ToastPrimitive from '@radix-ui/react-toast'
+import { useToggle } from '@shared/hooks/useToggle'
 import { ToastItem } from '@toast/toastReducer'
+import { Button, Flex, Icon, Label, Paragraph, Stack } from '@zoralabs/zord'
+
+import * as styles from './Toast.css'
 
 export interface ToastProps extends ToastPrimitive.ToastProviderProps {
   item: ToastItem

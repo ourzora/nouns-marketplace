@@ -1,6 +1,9 @@
-import Link from 'next/link'
-import { Button } from '@zoralabs/zord'
 import { useAccount } from 'wagmi'
+
+import Link from 'next/link'
+
+import { Button } from '@zoralabs/zord'
+
 import { manageButton } from './Header.css'
 
 export function ManageLink() {

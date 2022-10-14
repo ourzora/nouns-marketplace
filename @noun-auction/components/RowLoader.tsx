@@ -1,7 +1,8 @@
-import { Icon, Flex, Box } from '@zoralabs/zord'
-import { rowLoader } from '@noun-auction/styles/NounishStyles.css'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { useMemo } from 'react'
+
+import { useNounishAuctionProvider } from '@noun-auction/providers'
+import { rowLoader } from '@noun-auction/styles/NounishStyles.css'
+import { Box, Flex, Icon } from '@zoralabs/zord'
 
 const lilLoader = './assets/nounish/lil-loading-skull.gif'
 const nounLoader = './assets/nounish/loading-skull-noun.gif'

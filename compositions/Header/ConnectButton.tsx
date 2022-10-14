@@ -1,7 +1,9 @@
-import { ConnectButton as RKConnectButton } from '@rainbow-me/rainbowkit'
-import { Button, Flex, Box, Icon, FlexProps } from '@zoralabs/zord'
 import { hideMobile, noTextWrap } from 'styles/styles.css'
+
 import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
+import { ConnectButton as RKConnectButton } from '@rainbow-me/rainbowkit'
+import { Box, Button, Flex, FlexProps, Icon } from '@zoralabs/zord'
+
 import { connectButton } from './Header.css'
 
 export interface ConnectButtonProps extends FlexProps {}

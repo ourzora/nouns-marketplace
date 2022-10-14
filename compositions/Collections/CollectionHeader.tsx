@@ -1,15 +1,18 @@
-import { Stack, Paragraph, GridProps, Grid, Flex } from '@zoralabs/zord'
-import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { AddressWithLink } from '@market'
-import { PageHeader } from '../../components/PageHeader'
 import {
   clickAnimation,
   collectionHeaderWrapper,
-  daoHeaderWrapper,
   collectionNameThumbDao,
+  daoHeaderWrapper,
 } from 'styles/styles.css'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
+
 import { useAggregate } from 'hooks'
+
+import { AddressWithLink } from '@market'
+import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { Flex, Grid, GridProps, Paragraph, Stack } from '@zoralabs/zord'
+
+import { PageHeader } from '../../components/PageHeader'
 
 export interface CollectionHeaderProps extends GridProps {
   collection: Collection

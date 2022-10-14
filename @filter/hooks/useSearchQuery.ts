@@ -1,6 +1,7 @@
 import useSWR from 'swr'
+
 import { zdk } from '@shared'
-import { SearchableEntity, SearchResult } from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { SearchResult, SearchableEntity } from '@zoralabs/zdk/dist/queries/queries-sdk'
 
 export function useSearchQuery(query: string, entityType: SearchableEntity) {
   const { data, ...rest } = useSWR(

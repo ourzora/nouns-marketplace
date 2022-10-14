@@ -1,6 +1,7 @@
-import { StackProps, Stack, Label } from '@zoralabs/zord'
+import { useNounishAuctionProvider } from '@noun-auction'
+import { Label, Stack, StackProps } from '@zoralabs/zord'
+
 import { TxTimestamp } from './TxTimestamp'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 
 export interface EventWithTimestampProps extends StackProps {
   label: string

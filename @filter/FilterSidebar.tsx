@@ -1,26 +1,27 @@
-import { Box, Stack, Heading, Button, Icon, Flex } from '@zoralabs/zord'
 import { useRef, useState } from 'react'
-import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+
 import { useCollectionFilters } from '@filter/providers'
 import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filter/state'
+import { Modal, ModalContent, useModal } from '@modal'
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import { useWindowWidth } from '@shared'
+import { Box, Button, Flex, Heading, Icon, Stack } from '@zoralabs/zord'
+
+import { ClearFilters } from './ClearFilters'
 import {
   filterSidebar,
+  filterSidebarModalBackground,
+  filterSidebarModalContent,
   filterSidebarScrolled,
   sideBarSeparator,
-  filterSidebarModalContent,
-  filterSidebarModalBackground,
 } from './CollectionsFilter.css'
 import { CollectionsFilterList } from './CollectionsFilterList'
 import { FilterHeader } from './FilterHeader'
 import { FilterOptions } from './FilterOptions'
+import { FilterOwnerCollections } from './FilterOwnerCollections'
 import { FilterPriceRange } from './FilterPriceRange'
 import { FilterProperties } from './FilterProperties'
-import { FilterOwnerCollections } from './FilterOwnerCollections'
-import { ClearFilters } from './ClearFilters'
 import { MobileFiltersFooter } from './MobileFiltersFooter'
-
-import { useWindowWidth } from '@shared'
-import { Modal, ModalContent, useModal } from '@modal'
 
 export function FilterSidebar() {
   const { requestClose } = useModal()

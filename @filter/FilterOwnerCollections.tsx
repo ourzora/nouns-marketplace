@@ -1,9 +1,12 @@
-import { useMemo } from 'react'
-import { Accordion, Stack } from '@zoralabs/zord'
 import { RawDisplayer } from 'components/utils'
-import { useCollectionFilters } from './providers/CollectionFilterProvider'
+
+import { useMemo } from 'react'
+
 import { NFTObject } from '@zoralabs/nft-hooks'
+import { Accordion, Stack } from '@zoralabs/zord'
+
 import { FilterCollectionListItem } from './FilterCollectionListItem'
+import { useCollectionFilters } from './providers/CollectionFilterProvider'
 
 export function FilterOwnerCollections() {
   const { items } = useCollectionFilters()

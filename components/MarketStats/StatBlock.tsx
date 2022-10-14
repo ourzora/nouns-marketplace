@@ -1,6 +1,7 @@
-import { Text, Stack } from '@zoralabs/zord'
 import { stat } from 'styles/styles.css'
+
 import { lightFont } from '@shared'
+import { Stack, Text } from '@zoralabs/zord'
 
 export function StatBlock({
   statType,

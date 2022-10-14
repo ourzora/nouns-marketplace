@@ -1,6 +1,7 @@
-import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, vars, media, radii } from '@zoralabs/zord'
 import { MAX_WIDTH } from 'styles/style-constants'
+
+import { globalStyle, style } from '@vanilla-extract/css'
+import { atoms, media, radii, vars } from '@zoralabs/zord'
 
 export const nftPageWrapper = style([
   {

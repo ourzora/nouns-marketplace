@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 export const useWindowWidth = () => {
   const [windowWidth, setWindowWidth] = useState<undefined | number>(undefined)

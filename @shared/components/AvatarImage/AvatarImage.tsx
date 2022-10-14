@@ -1,8 +1,10 @@
+import Image from 'next/image'
+import { avatarSizes } from 'styles/avatarSizes.css'
+
+import React, { useMemo } from 'react'
+
 import { AddressZero } from '@ethersproject/constants'
 import { Box, BoxProps } from '@zoralabs/zord'
-import Image from 'next/image'
-import React, { useMemo } from 'react'
-import { avatarSizes } from 'styles/avatarSizes.css'
 
 import { Avatar } from '../Avatar'
 import { ImageBoundaryWithFallback } from '../ImageBoundaryWithFallback'

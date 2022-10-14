@@ -1,12 +1,15 @@
-import { Filter, useCollectionFilters } from '@filter'
-import { NFTGrid } from '@media/NFTGrid'
-import { NFTCard } from '@media/NFTCard'
-import { useEffect, useMemo } from 'react'
-import { nftGridWrapper } from '@media/NftMedia.css'
-import { NounishActivityRow } from './NounishActivityRow'
 import { returnDao } from 'constants/collection-addresses'
+
+import { useEffect, useMemo } from 'react'
+
+import { Filter, useCollectionFilters } from '@filter'
+import { NFTCard } from '@media/NFTCard'
+import { NFTGrid } from '@media/NFTGrid'
+import { nftGridWrapper } from '@media/NftMedia.css'
 import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
 import * as Sentry from '@sentry/react'
+
+import { NounishActivityRow } from './NounishActivityRow'
 
 export type CollectionsProps = {
   collectionAddress?: string

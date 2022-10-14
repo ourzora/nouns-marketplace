@@ -1,8 +1,10 @@
-import { Stack, Heading, Flex, Label, Icon, Paragraph, Button } from '@zoralabs/zord'
 import { PageWrapper, PageWrapperProps } from 'components/PageWrapper'
-import { MAX_WIDTH } from 'styles/style-constants'
 import Link from 'next/link'
+import { MAX_WIDTH } from 'styles/style-constants'
+
 import { ReactNode } from 'react'
+
+import { Button, Flex, Heading, Icon, Label, Paragraph, Stack } from '@zoralabs/zord'
 
 export interface DocsPageWrapperProps extends PageWrapperProps {
   children: ReactNode

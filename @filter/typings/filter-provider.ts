@@ -1,7 +1,9 @@
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { FilterStore } from './filter-store'
 import { ReactNode } from 'react'
+
 import { stringDefaults, themeDefaults } from '@filter/constants'
+import { NFTObject } from '@zoralabs/nft-hooks'
+
+import { FilterStore } from './filter-store'
 
 export type Strings = typeof stringDefaults
 export type Theme = typeof themeDefaults

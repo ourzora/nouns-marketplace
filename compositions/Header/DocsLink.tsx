@@ -1,5 +1,7 @@
 import Link from 'next/link'
-import { Label, Button, Box } from '@zoralabs/zord'
+
+import { Box, Button, Label } from '@zoralabs/zord'
+
 import { docsLink } from './Header.css'
 
 export function DocsLink() {

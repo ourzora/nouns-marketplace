@@ -1,6 +1,7 @@
-import { Stack, Display, Button } from '@zoralabs/zord'
 import { PageWrapper } from 'components/PageWrapper'
 import { useRouter } from 'next/router'
+
+import { Button, Display, Stack } from '@zoralabs/zord'
 
 export default function Custom404() {
   const router = useRouter()

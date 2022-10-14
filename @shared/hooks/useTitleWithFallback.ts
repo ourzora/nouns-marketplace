@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+
 import { useNFT } from '@zoralabs/nft-hooks'
 
 export function useTitleWithFallback({

@@ -1,6 +1,7 @@
-import { MediaType } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Currency } from '@shared'
 import { MouseEventHandler } from 'react'
+
+import { Currency } from '@shared'
+import { MediaType } from '@zoralabs/zdk/dist/queries/queries-sdk'
 
 type Address = string
 

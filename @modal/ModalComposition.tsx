@@ -1,7 +1,10 @@
-import { useCallback } from 'react'
 import { ClassValue } from 'clsx'
-import { Box, BoxProps, Button } from '@zoralabs/zord'
+
+import { useCallback } from 'react'
+
 import { Modal, ModalContent, useModal } from '@modal'
+import { Box, BoxProps } from '@zoralabs/zord'
+
 import { customBackground, customContent } from './Modal.css'
 
 export interface ModalCompositionProps extends BoxProps {

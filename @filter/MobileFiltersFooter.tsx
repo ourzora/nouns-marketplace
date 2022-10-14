@@ -1,7 +1,8 @@
-import { mobileFiltersFooter } from './CollectionsFilter.css'
-import { Grid, Button } from '@zoralabs/zord'
 import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
+import { Button, Grid } from '@zoralabs/zord'
+
 import { ClearFilters } from './ClearFilters'
+import { mobileFiltersFooter } from './CollectionsFilter.css'
 
 export function MobileFiltersFooter() {
   const {

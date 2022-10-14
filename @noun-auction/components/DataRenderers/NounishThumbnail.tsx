@@ -1,10 +1,12 @@
-import { Box, BoxProps } from '@zoralabs/zord'
+import { useMemo } from 'react'
+
 import {
   nounishThumbnail,
   nounishThumbnailImage,
 } from '@noun-auction/styles/NounishStyles.css'
+import { Box, BoxProps } from '@zoralabs/zord'
+
 import { FallbackThumbnail } from './FallbackThumbnail'
-import { useMemo } from 'react'
 
 export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
 

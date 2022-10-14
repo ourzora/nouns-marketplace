@@ -1,11 +1,11 @@
-import { Stack, Button } from '@zoralabs/zord'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
-import { NounsBidForm } from './NounsBidForm'
-import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
-import { ModalComposition } from '@modal'
-
 // Imports from @markets
 import { NFTSummary } from '@market'
+import { ModalComposition } from '@modal'
+import { useNounishAuctionProvider } from '@noun-auction/providers'
+import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
+import { Button, Stack } from '@zoralabs/zord'
+
+import { NounsBidForm } from './NounsBidForm'
 
 export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
   const { tokenId, layout, activeAuction } = useNounishAuctionProvider()
