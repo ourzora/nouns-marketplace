@@ -1,4 +1,5 @@
-import { Heading, Stack, Flex, Button, StackProps } from '@zoralabs/zord'
+import { Heading, Stack, Flex, StackProps } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { useNFTProvider, useTitleWithFallback } from '@shared'
 import { Link } from 'components'

@@ -1,8 +1,8 @@
 import NextLink from 'next/link'
-import { ButtonProps, Button } from '@zoralabs/zord'
+import { NounButtonProps, Button } from 'components/Button'
 import { ReactNode } from 'react'
 
-export interface CollectionLinkProps extends ButtonProps {
+export interface CollectionLinkProps extends NounButtonProps {
   contractAddress: string
   children: ReactNode
   className?: any

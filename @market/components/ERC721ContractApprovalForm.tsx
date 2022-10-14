@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Box, Button, Paragraph, Text, Grid } from '@zoralabs/zord'
+import { Stack, Box, Paragraph, Text, Grid } from '@zoralabs/zord'
 import { useContractTransaction, PrintError } from '@shared'
 import { TransactionSubmitButton, ModalTitleAndDescription } from '@market/components'
 import { useERC721TokenApproval } from '@market/hooks'
-
+import { Button } from 'components/Button'
 interface ContractApprovalFormProps {
   title: string
   approvalCopy?: string
@@ -50,7 +50,7 @@ export function ERC721ContractApprovalForm({
   }, [approved, onApproval])
 
   return (
-    <Box>
+    <Stack gap="x4">
       <Box>
         <ModalTitleAndDescription title={title} description={approvalCopy} mb="x2" />
         <a
@@ -66,7 +66,7 @@ export function ERC721ContractApprovalForm({
           </Paragraph>
         </a>
       </Box>
-      {error && <PrintError errorMessage={error} mb="x4" />}
+      {error && <PrintError errorMessage={error} />}
       <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x2">
         <Button disabled={txInProgress} variant="secondary" w="100%" onClick={onBack}>
           Go back
@@ -80,6 +80,6 @@ export function ERC721ContractApprovalForm({
           {buttonCopy}
         </TransactionSubmitButton>
       </Grid>
-    </Box>
+    </Stack>
   )
 }

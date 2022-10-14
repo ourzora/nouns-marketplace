@@ -1,9 +1,10 @@
-import { Stack, Flex, Heading, Label, Box, Button, BoxProps } from '@zoralabs/zord'
+import { Stack, Flex, Heading, Label, Box, BoxProps } from '@zoralabs/zord'
 import { useNFT } from '@zoralabs/nft-hooks'
 import NextLink from 'next/link'
 import { returnDao } from 'constants/collection-addresses'
 import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
+import { Button } from 'components/Button'
 
 // @shared (or zord)
 import { lightFont } from '@shared'
