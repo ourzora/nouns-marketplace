@@ -1,4 +1,5 @@
-import { Box, Stack, Heading, Button, Icon, Flex } from '@zoralabs/zord'
+import { Box, Stack, Heading, Icon, Flex } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { useRef, useState } from 'react'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { useCollectionFilters } from '@filter/providers'
@@ -109,8 +110,6 @@ export function FilterSidebar() {
         {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
         {useSidebarClearButton ? (
           <ClearFilters
-            mt="x2"
-            borderRadius="curved"
             w="100%"
             display={{
               '@initial': 'none',

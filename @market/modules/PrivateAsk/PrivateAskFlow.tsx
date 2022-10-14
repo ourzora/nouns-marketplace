@@ -15,7 +15,6 @@ import {
   FILLASK_SUCCESS,
   VIEW_LISTING,
   usePrivateAskStateContext,
-  PossibleState,
   RESET,
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
@@ -33,7 +32,7 @@ import { PrivateAskViewListing } from './view'
 const componentMap = {
   [APPROVE_MODULE_FOR_CREATE]: PrivateAskApproveModule,
   [APPROVE_TRANSFER]: PrivateAskApproveTransferHelper,
-  // // [APPROVE_CURRENCY]: PrivateAskApproveERC20Currency, // TODO
+  // // [APPROVE_CURRENCY]: PrivateAskApproveERC20Currency, // TODO, not used in Noun.Market but should be available for non-nouns implementations
   [CREATE]: PrivateAskCreate,
   [CREATE_SUCCESS]: PrivateAskCreateSuccess,
   [UPDATE]: PrivateAskUpdate,
@@ -44,7 +43,6 @@ const componentMap = {
   [FILLASK]: PrivateAskFillAsk,
   [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
   [VIEW_LISTING]: PrivateAskViewListing,
-  // other possible solution will be removing RESET from PossibleState
   [RESET]: () => null,
 }
 

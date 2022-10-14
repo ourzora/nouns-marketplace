@@ -1,4 +1,5 @@
-import { Button, Stack } from '@zoralabs/zord'
+import { Stack } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import React, { useEffect } from 'react'
 import { HeadingDescription } from '../HeadingDescription'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
@@ -40,12 +41,10 @@ export function PrivateAskCreateSuccess({
         description="This listing is now available to the buyer."
       />
       <Stack gap="x2">
-        <Button variant="secondary" onClick={copy} borderRadius="curved">
+        <Button variant="secondary" onClick={copy}>
           Copy Listing URL
         </Button>
-        <Button onClick={onNext} borderRadius="curved">
-          Done
-        </Button>
+        <Button onClick={onNext}>Done</Button>
       </Stack>
     </Stack>
   )

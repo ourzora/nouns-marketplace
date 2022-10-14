@@ -1,4 +1,5 @@
-import { Button, Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
+import { Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import React, { useEffect, useMemo } from 'react'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
@@ -11,6 +12,7 @@ import { mediumFont } from 'styles/styles.css'
 import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
 import { LearnMoreButton } from '../LearnMoreButton'
 import { formatContractError } from '@shared'
+import * as styles from '../PrivateAskFlow.css'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
 
@@ -73,13 +75,8 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
       )}
       {txError && <PrintError errorMessage={formatContractError(txError)} />}
       <Stack gap="x4">
-        <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
-          <Button
-            flex="1"
-            variant="secondary"
-            borderRadius="curved"
-            onClick={requestClose}
-          >
+        <Flex gap="x2" justify="space-between" pt="x3" className={styles.stretch}>
+          <Button flex={1} variant="secondary" onClick={requestClose}>
             Cancel
           </Button>
           <TransactionSubmitButton

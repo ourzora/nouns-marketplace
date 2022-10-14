@@ -17,12 +17,16 @@ import { useWindowWidth } from '@shared/hooks'
 import { ActiveAuctionCard } from '@noun-auction'
 import { useAggregate } from 'hooks'
 
-const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps) => {
+const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
+  const { contractAddress, seo } = fallback
+
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
+  const dao = returnDao(contractAddress)
   const { isLarge } = useWindowWidth()
   const { aggregate } = useAggregate(contractAddress)
-
-  const dao = returnDao(contractAddress)
+  // wrapper for useSWR
+  const { data } = useCollection(contractAddress)
+  const collection = data || fallback?.collection
 
   useEffect(() => {
     if (collection && collection?.name) {
@@ -39,18 +43,18 @@ const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps
     }
   }, [aggregate, collection, setCurrentCollection, setCurrentCollectionCount])
 
-  const { data } = useCollection(contractAddress)
-
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
-      <CollectionHeader
-        collection={collection}
-        layout={dao ? 'dao' : 'collection'}
-        currentAuction={dao ? <ActiveAuctionCard daoConfig={dao} /> : null}
-      >
-        <MarketStats contractAddress={contractAddress} />
-      </CollectionHeader>
+      {collection && (
+        <CollectionHeader
+          collection={collection}
+          layout={dao ? 'dao' : 'collection'}
+          currentAuction={dao ? <ActiveAuctionCard daoConfig={dao} /> : null}
+        >
+          <MarketStats contractAddress={contractAddress} />
+        </CollectionHeader>
+      )}
       {contractAddress && (
         <CollectionFilterProvider
           useSidebarClearButton
@@ -69,7 +73,7 @@ const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps
             hideCurrencySelect: true,
           }}
           strings={{
-            NO_FILTER_RESULTS_COPY: `Sorry no ${data?.name} NFTs are available for purchase on chain.`,
+            NO_FILTER_RESULTS_COPY: `Sorry no ${collection?.name} NFTs are available for purchase on chain.`,
           }}
         >
           <Stack>

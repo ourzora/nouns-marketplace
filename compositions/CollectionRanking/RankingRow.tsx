@@ -125,7 +125,6 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
             <CollectionLink
               variant="secondary"
               contractAddress={collection.address}
-              borderRadius="curved"
               style={{ height: 42 }}
             >
               View

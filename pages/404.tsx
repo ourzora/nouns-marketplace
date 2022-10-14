@@ -1,4 +1,5 @@
-import { Stack, Display, Button } from '@zoralabs/zord'
+import { Stack, Display } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { PageWrapper } from 'components/PageWrapper'
 import { useRouter } from 'next/router'
 

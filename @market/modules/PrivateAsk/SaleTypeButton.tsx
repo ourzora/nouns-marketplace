@@ -1,16 +1,6 @@
-import {
-  Flex,
-  Label,
-  Stack,
-  BoxProps,
-  Button,
-  Well,
-  Tag,
-  Paragraph,
-  Icon,
-} from '@zoralabs/zord'
+import { Flex, Label, Stack, BoxProps, Well, Tag, Paragraph, Icon } from '@zoralabs/zord'
 import * as styles from './PrivateAskFlow.css'
-
+import { Button } from 'components/Button'
 export interface SaleTypeButtonProps extends BoxProps {
   label: string
   description: string
@@ -21,7 +11,7 @@ export interface SaleTypeButtonProps extends BoxProps {
 export function SaleTypeButton({ label, description, tag, onNext }: SaleTypeButtonProps) {
   return (
     <Button className={styles.button} variant="unset" align="center" onClick={onNext}>
-      <Well display="grid" className={styles.grid}>
+      <Well display="grid" className={styles.grid} borderRadius="curved">
         <Stack gap="x1">
           <Flex gap="x2" justify="flex-start" align="flex-start">
             <Label align="left">{label}</Label>

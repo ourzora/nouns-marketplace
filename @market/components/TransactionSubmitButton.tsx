@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
-import { Box, Button, ButtonProps } from '@zoralabs/zord'
+import { Box } from '@zoralabs/zord'
+import { Button, NounButtonProps } from 'components/Button'
 import { useButtonRequiresAuth, WalletCallStatus } from '@shared/hooks'
 
 /**
@@ -7,7 +8,7 @@ import { useButtonRequiresAuth, WalletCallStatus } from '@shared/hooks'
  * This button handles loading, disabling, and error states.
  */
 
-interface TransactionSubmitButtonProps extends ButtonProps {
+interface TransactionSubmitButtonProps extends NounButtonProps {
   disabled?: boolean
   loading?: boolean
   onClick?: () => void
@@ -44,7 +45,6 @@ export function TransactionSubmitButton({
       w="100%"
       variant={variant}
       size={size}
-      borderRadius="curved"
       onClick={variableButtonBehavior}
       {...props}
     >
