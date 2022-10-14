@@ -1,7 +1,9 @@
+import { Button } from 'components/Button'
+
 import { useMemo } from 'react'
 
-import { ModalComposition } from '@modal/ModalComposition'
-import { Box, BoxProps, Button, Heading, Paragraph, Stack } from '@zoralabs/zord'
+import { ModalComposition } from '@modal'
+import { Box, BoxProps, Heading, Paragraph, Stack } from '@zoralabs/zord'
 
 import * as styles from './DescriptionWithMaxLines.css'
 

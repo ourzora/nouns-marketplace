@@ -22,7 +22,6 @@ import { Separator, Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { contractAddress, seo } = fallback
-
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
   const dao = returnDao(contractAddress)
   const { isLarge } = useWindowWidth()
@@ -32,13 +31,10 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const collection = data || fallback?.collection
 
   useEffect(() => {
-    if (collection && collection?.name) {
+    if (collection?.name) {
+      const nftCount = aggregate?.aggregateStat.nftCount
       setCurrentCollection(collection.name)
-      setCurrentCollectionCount(
-        aggregate?.aggregateStat.nftCount
-          ? `${aggregate?.aggregateStat.nftCount} NFTs`
-          : '... NFTs'
-      )
+      setCurrentCollectionCount(nftCount ? `${nftCount} NFTs` : '... NFTs')
     }
     return () => {
       setCurrentCollection('Explore...')
@@ -61,7 +57,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
       {contractAddress && (
         <CollectionFilterProvider
           useSidebarClearButton
-          filtersVisible={isLarge ? true : false}
+          filtersVisible={isLarge}
           contractAddress={contractAddress}
           useSortDropdown
           useCollectionProperties={{

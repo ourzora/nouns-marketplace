@@ -1,3 +1,4 @@
+import { PageHeader } from 'components/PageHeader'
 import {
   clickAnimation,
   collectionHeaderWrapper,
@@ -11,8 +12,6 @@ import { AddressWithLink } from '@market'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Flex, Grid, GridProps, Paragraph, Stack } from '@zoralabs/zord'
-
-import { PageHeader } from '../../components/PageHeader'
 
 export interface CollectionHeaderProps extends GridProps {
   collection: Collection
@@ -78,11 +77,7 @@ export function CollectionHeader({
             </Stack>
             <PageHeader
               headline={collection.name}
-              copy={`${
-                aggregate?.aggregateStat?.nftCount
-                  ? aggregate?.aggregateStat?.nftCount
-                  : '...'
-              } NFTs`}
+              copy={`${aggregate?.aggregateStat?.nftCount ?? '...'} NFTs`}
               align={{
                 '@initial': 'center',
                 '@1024': layout === 'collection' ? 'center' : 'flex-start',
@@ -109,13 +104,10 @@ export function CollectionHeader({
               px="x4"
               py="x2"
               borderRadius="curved"
-              mt="x2"
-              mb="x2"
+              my="x2"
             />
           </Flex>
-          {collection.description !== "''" && collection.description && (
-            <Paragraph>{collection.description}</Paragraph>
-          )}
+          {collection.description && <Paragraph>{collection.description}</Paragraph>}
         </Stack>
         <Flex
           w="100%"

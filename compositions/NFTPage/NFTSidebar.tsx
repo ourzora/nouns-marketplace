@@ -1,12 +1,13 @@
 import { Link } from 'components'
+import { Button } from 'components/Button'
 import { clickAnimation, mediumFont } from 'styles/styles.css'
 
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { CollectionThumbnail } from '@media'
 import { useNounishAuctionProvider } from '@noun-auction'
 import { useNFTProvider, useTitleWithFallback } from '@shared'
 import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
 import { useTokenHelper } from '@shared/hooks'
-import { Button, Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
+import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
 
 import { NFTMarket } from './NFTMarket'
 import * as styles from './NFTPage.css'

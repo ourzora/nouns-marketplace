@@ -1,9 +1,11 @@
+import { Button } from 'components/Button'
+
 import React, { useCallback } from 'react'
 
 import * as ToastPrimitive from '@radix-ui/react-toast'
 import { useToggle } from '@shared/hooks/useToggle'
 import { ToastItem } from '@toast/toastReducer'
-import { Button, Flex, Icon, Label, Paragraph, Stack } from '@zoralabs/zord'
+import { Flex, Icon, Label, Paragraph, Stack } from '@zoralabs/zord'
 
 import * as styles from './Toast.css'
 
@@ -36,7 +38,7 @@ export function Toast({
           <Stack gap="x1" align="center" justify="center">
             {!!description && (
               <ToastPrimitive.Description>
-                <Paragraph size="sm" color="onAccent" align="center" justify="center">
+                <Paragraph size="sm" color="onAccent" align="center" justifySelf="center">
                   {description}
                 </Paragraph>
               </ToastPrimitive.Description>
@@ -59,7 +61,7 @@ export function Toast({
               top="x0"
               right="x0"
               variant="ghost"
-              size="xs"
+              size="md"
               w="x6"
               h="x6"
               minW="x6"

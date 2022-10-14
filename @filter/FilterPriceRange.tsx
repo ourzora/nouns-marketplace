@@ -1,6 +1,8 @@
+import { Button } from 'components/Button'
+
 import { useCollectionFilters } from '@filter/providers'
 import { ETH_CURRENCY_SHIM } from '@shared'
-import { Accordion, Box, Button, Stack } from '@zoralabs/zord'
+import { Accordion, Box, Stack } from '@zoralabs/zord'
 
 import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { PriceRangeSelector } from './PriceRangeSelector'

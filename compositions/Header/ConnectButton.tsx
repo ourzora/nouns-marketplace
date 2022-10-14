@@ -1,8 +1,9 @@
+import { Button } from 'components/Button'
 import { hideMobile, noTextWrap } from 'styles/styles.css'
 
 import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
 import { ConnectButton as RKConnectButton } from '@rainbow-me/rainbowkit'
-import { Box, Button, Flex, FlexProps, Icon } from '@zoralabs/zord'
+import { Box, Flex, FlexProps, Icon } from '@zoralabs/zord'
 
 import { connectButton } from './Header.css'
 
@@ -28,7 +29,6 @@ export const ConnectButton = ({ ...props }: ConnectButtonProps) => {
                 if (!mounted || !account || !chain) {
                   return (
                     <Button
-                      size="sm"
                       px="x4"
                       onClick={openConnectModal}
                       borderRadius="curved"
@@ -43,17 +43,12 @@ export const ConnectButton = ({ ...props }: ConnectButtonProps) => {
                 return (
                   <Flex>
                     <Button
-                      size="md"
                       variant="secondary"
                       onClick={openAccountModal}
                       type="button"
-                      borderRadius="curved"
                       style={{
                         gap: 8,
                         minWidth: 0,
-                        height: 42,
-                        paddingLeft: 10,
-                        paddingRight: 10,
                       }}
                     >
                       <EnsAvatar address={account.address} />

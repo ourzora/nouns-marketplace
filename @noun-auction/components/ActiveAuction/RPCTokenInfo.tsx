@@ -1,11 +1,11 @@
+import { Button } from 'components/Button'
 import { returnDao } from 'constants/collection-addresses'
 import NextLink from 'next/link'
 
 import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
-// @shared (or zord)
 import { lightFont } from '@shared'
 import { useNFT } from '@zoralabs/nft-hooks'
-import { Box, BoxProps, Button, Flex, Heading, Label, Stack } from '@zoralabs/zord'
+import { Box, BoxProps, Flex, Heading, Label, Stack } from '@zoralabs/zord'
 
 import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 

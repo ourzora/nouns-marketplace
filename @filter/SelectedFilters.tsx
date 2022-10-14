@@ -1,3 +1,5 @@
+import { Button } from 'components/Button'
+
 import { useCallback, useMemo } from 'react'
 
 import { FILTER_HEADER_HEIGHT } from '@filter/constants'
@@ -10,7 +12,7 @@ import {
   SelectOption,
   Status,
 } from '@filter/typings'
-import { Button, Flex } from '@zoralabs/zord'
+import { Flex } from '@zoralabs/zord'
 
 import { textButton, textSmall } from './CollectionsFilter.css'
 import { FilterOptionButton } from './FilterOptionButton'

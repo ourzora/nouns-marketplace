@@ -1,3 +1,4 @@
+import { Button } from 'components/Button'
 import { SearchInput } from 'compositions'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { mediumFont, noTextWrap } from 'styles/styles.css'
@@ -7,17 +8,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { ModalComposition } from '@modal'
 import { lightFont } from '@shared'
 import { useHasScrolled } from '@shared/hooks/useHasScrolled'
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Icon,
-  Label,
-  Paragraph,
-  Stack,
-  Text,
-} from '@zoralabs/zord'
+import { Box, Flex, Heading, Icon, Label, Paragraph, Stack, Text } from '@zoralabs/zord'
 
 import * as styles from './CollectionMenu.css'
 import { CollectionNavList } from './CollectionNavList'

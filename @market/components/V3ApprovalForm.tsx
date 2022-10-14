@@ -1,8 +1,11 @@
+import { Button } from 'components/Button'
+
 import React, { useCallback, useEffect, useState } from 'react'
-import { Box, Button, Paragraph, Text } from '@zoralabs/zord'
-import { useContractTransaction, PrintError } from '@shared'
-import { TransactionSubmitButton, ModalTitleAndDescription } from '@market/components'
+
+import { ModalTitleAndDescription, TransactionSubmitButton } from '@market/components'
 import { useZoraV3ModuleApproval } from '@market/hooks'
+import { PrintError, useContractTransaction } from '@shared'
+import { Box, Paragraph, Text } from '@zoralabs/zord'
 
 interface ContractApprovalFormProps {
   title: string
@@ -56,7 +59,7 @@ export function V3ApprovalForm({
           </Paragraph>
         </a>
       </Box>
-      {error && <PrintError errorMessage={error} />}
+      {error && <PrintError mb="x4" errorMessage={error} />}
       <TransactionSubmitButton
         txInProgress={txInProgress}
         txStatus={txStatus}

@@ -1,15 +1,8 @@
+import { Button } from 'components/Button'
+
 import { ModalTitleAndDescription } from '@market/components'
 import { ETHERSCAN_BASE_URL, formatCryptoVal, shortenTxHash } from '@shared'
-import {
-  Box,
-  Button,
-  Flex,
-  Label,
-  Paragraph,
-  Separator,
-  Stack,
-  Text,
-} from '@zoralabs/zord'
+import { Box, Flex, Label, Paragraph, Separator, Stack, Text } from '@zoralabs/zord'
 
 interface ContractInteractionStatusProps {
   title: string

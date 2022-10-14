@@ -436,3 +436,9 @@ export const activeAuctionRowWrapper = style([
     pos: 'relative',
   }),
 ])
+
+export const showError = atoms({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+})

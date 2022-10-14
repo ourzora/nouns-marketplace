@@ -1,5 +1,6 @@
 import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi'
 
+import { Button } from 'components/Button'
 import { BigNumber as EthersBN } from 'ethers'
 
 import React, { useCallback, useState } from 'react'
@@ -16,17 +17,7 @@ import {
 } from '@noun-auction'
 // Imports from @markets
 import { PrintError, formatContractError } from '@shared'
-import {
-  Box,
-  BoxProps,
-  Button,
-  Flex,
-  Grid,
-  Input,
-  Label,
-  Separator,
-  Stack,
-} from '@zoralabs/zord'
+import { Box, BoxProps, Flex, Grid, Input, Label, Separator, Stack } from '@zoralabs/zord'
 
 interface NounsBidFormProps extends BoxProps {
   onConfirmation?: (txHash: string, amount: string, currencyAddress: string) => void

@@ -1,10 +1,7 @@
 import { useEnsName } from 'wagmi'
 
-import { useNounishAuctionProvider } from '@noun-auction/providers'
+import { SharedDataRendererProps, useNounishAuctionProvider } from '@noun-auction'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
-// @noun-auction
-import { SharedDataRendererProps } from '@noun-auction/typings'
-// @shared
 import { lightFont, useShortAddress } from '@shared'
 import { Flex, Icon, Label } from '@zoralabs/zord'
 

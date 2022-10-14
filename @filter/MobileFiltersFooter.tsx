@@ -1,12 +1,14 @@
+import { Button } from 'components/Button'
+
 import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
-import { Button, Grid } from '@zoralabs/zord'
+import { Grid } from '@zoralabs/zord'
 
 import { ClearFilters } from './ClearFilters'
 import { mobileFiltersFooter } from './CollectionsFilter.css'
 
 export function MobileFiltersFooter() {
   const {
-    filterStore: { showFilters, toggleShowFilters, hasFilters },
+    filterStore: { showFilters, toggleShowFilters },
   } = useCollectionFilters()
 
   if (!showFilters) {
@@ -15,10 +17,8 @@ export function MobileFiltersFooter() {
 
   return (
     <Grid className={[mobileFiltersFooter, 'zora-mobileFilterFooter']}>
-      <ClearFilters borderRadius="curved" />
-      <Button onClick={toggleShowFilters} borderRadius="curved">
-        Done
-      </Button>
+      <ClearFilters />
+      <Button onClick={toggleShowFilters}>Done</Button>
     </Grid>
   )
 }

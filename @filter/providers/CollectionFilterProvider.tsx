@@ -75,7 +75,7 @@ export function CollectionFilterProvider({
     handleLoadMore,
   } = useTokensQuery({
     contractAllowList,
-    contractAddress: contractAddress ? contractAddress : undefined,
+    contractAddress: contractAddress ?? undefined,
     ownerAddress,
     initialData: initialPage,
     sort: sortMethodToSortParams(
@@ -90,15 +90,20 @@ export function CollectionFilterProvider({
     },
   })
 
-  // - Allows us to adjust the options available to users when sorting (eg. no sorting by price when there are no prices!)
-  const tokensHaveActiveMarkets = useMemo(
+  const tokensWithActiveMarkets = useMemo(
     () =>
       items.filter((token) =>
         token.markets?.map((mkt) =>
           [MARKET_INFO_STATUSES.ACTIVE, MARKET_INFO_STATUSES.PENDING].includes(mkt.status)
         )
-      ).length > 0,
+      ),
     [items]
+  )
+
+  // - Allows us to adjust the options available to users when sorting (eg. no sorting by price when there are no prices!)
+  const tokensHaveActiveMarkets = useMemo(
+    () => tokensWithActiveMarkets.length > 0,
+    [tokensWithActiveMarkets]
   )
 
   return (
@@ -106,6 +111,7 @@ export function CollectionFilterProvider({
       value={{
         filterStore,
         items,
+        // items: tokensWithoutActiveMarkets,
         isValidating,
         isReachingEnd,
         isEmpty,

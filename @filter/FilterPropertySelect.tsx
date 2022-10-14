@@ -1,7 +1,9 @@
+import { Button } from 'components/Button'
+
 import { useCallback, useMemo } from 'react'
 
 import { CollectionAttributeValue } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Button, Checkbox, Paragraph } from '@zoralabs/zord'
+import { Checkbox, Paragraph } from '@zoralabs/zord'
 
 import { filterPropertySelect } from './CollectionsFilter.css'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'

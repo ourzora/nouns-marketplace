@@ -16,7 +16,7 @@ import {
   TokensQueryInput,
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
 
-const PAGE_SIZE = 24
+const PAGE_SIZE = 12 // must be divisible by 2,3,4 to ensure grid stays intact
 
 export interface UseTokenQueryProps {
   contractAllowList?: string[] | undefined
@@ -26,6 +26,7 @@ export interface UseTokenQueryProps {
   sort?: TokenSortInput
   filter?: TokensQueryFilter
   where?: TokensQueryInput
+  initialPageSize?: number
 }
 
 type GetNFTReturnType = {

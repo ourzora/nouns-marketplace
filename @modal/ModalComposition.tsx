@@ -1,8 +1,9 @@
 import { ClassValue } from 'clsx'
 
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import { Modal, ModalContent, useModal } from '@modal'
+import { useButtonRequiresAuth } from '@shared'
 import { Box, BoxProps } from '@zoralabs/zord'
 
 import { customBackground, customContent } from './Modal.css'
@@ -24,6 +25,8 @@ export interface ModalCompositionProps extends BoxProps {
   modalOverlayOverrides?: any
   /** Disallow clicking outside of container to close modal */
   disableCloseOnClickOutside?: boolean
+  /** Optionally trigger RainbowWallet connect prompt if modal behavior requires auth  */
+  modalBehaviorRequiresAuth?: boolean
 }
 
 /* TODO: Modify Zord ModalContent component to accept custom styling */
@@ -36,6 +39,7 @@ export function ModalComposition({
   modalBackgroundOverrides = customBackground,
   disableCloseOnClickOutside = false,
   modalOverlayOverrides,
+  modalBehaviorRequiresAuth = false,
 }: ModalCompositionProps) {
   const { modalType, requestClose, requestOpen } = useModal()
 
@@ -43,9 +47,15 @@ export function ModalComposition({
     requestOpen(modalName)
   }, [modalName, requestOpen])
 
+  const variableButtonBehavior = useButtonRequiresAuth(modalHandler)
+  const buttonAction = useMemo(
+    () => (modalBehaviorRequiresAuth ? variableButtonBehavior : modalHandler),
+    [variableButtonBehavior, modalBehaviorRequiresAuth, modalHandler]
+  )
+
   return (
     <>
-      <Box className={['zora-modal-trigger-wrapper', className]} onClick={modalHandler}>
+      <Box className={['zora-modal-trigger-wrapper', className]} onClick={buttonAction}>
         <Box className="zora-modal-trigger" display="block">
           {trigger}
         </Box>

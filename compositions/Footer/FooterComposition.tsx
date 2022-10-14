@@ -1,4 +1,4 @@
-import { useWindowWidth } from '@shared'
+import { useWindowWidth } from '@shared/hooks'
 import { PoweredByZora } from '@zora-brand'
 import { Box, Flex, Label } from '@zoralabs/zord'
 

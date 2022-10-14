@@ -48,7 +48,7 @@ export function NFTCard() {
           )}
         </Box>
       </Link>
-      <Stack gap="x2" mt="x2" px="x4" pb="x4" flex="1">
+      <Stack gap="x2" mt="x2" px="x4" pb="x4" flex={1}>
         <Flex
           className={[titleWrapper, useTitleScroll && titleScroll]}
           style={{

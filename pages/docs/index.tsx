@@ -55,7 +55,6 @@ export default function TestPages() {
         justify="flex-start"
         style={{
           borderBottom: `1px solid ${color.background2}`,
-          zIndex: 100,
         }}
       />
       <Stack gap="x4">
