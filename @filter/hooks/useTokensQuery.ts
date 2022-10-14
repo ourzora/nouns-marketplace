@@ -13,7 +13,7 @@ import { flatten } from 'lodash'
 import { useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
-const PAGE_SIZE = 24
+const PAGE_SIZE = 12 // must be divisible by 2,3,4 to ensure grid stays intact
 
 export interface UseTokenQueryProps {
   contractAllowList?: string[] | undefined
@@ -23,6 +23,7 @@ export interface UseTokenQueryProps {
   sort?: TokenSortInput
   filter?: TokensQueryFilter
   where?: TokensQueryInput
+  initialPageSize?: number
 }
 
 type GetNFTReturnType = {

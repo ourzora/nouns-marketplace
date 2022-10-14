@@ -1,11 +1,11 @@
-import { Box, Flex, Stack, FlexProps, Button, Heading, Label } from '@zoralabs/zord'
+import { Box, Flex, Stack, FlexProps, Heading, Label } from '@zoralabs/zord'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { lightFont, useIsOwner } from '@shared'
 import { ModalComposition, useModal } from '@modal'
 import { useRelevantMarket } from '@market/hooks'
 import { FillV3AskWizard, NFTOwner } from '@market/components'
-
+import { Button } from 'components/Button'
 export interface FillV3AskModalProps extends FlexProps {
   nftObj: NFTObject
 }
@@ -22,7 +22,7 @@ export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
   }
 
   return (
-    <Stack flex="1">
+    <Stack flex={1}>
       {ask && ask.status === MARKET_INFO_STATUSES.ACTIVE ? (
         <Flex
           id="v3-ask-active"
@@ -43,13 +43,9 @@ export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
           {!isOwner ? (
             <ModalComposition
               modalName={`buy-${nft.contract.address}-${nft.tokenId}`}
+              modalBehaviorRequiresAuth={true}
               trigger={
-                <Button
-                  as="span"
-                  size="md"
-                  borderRadius="curved"
-                  className="zora-market-cardMarketTrigger"
-                >
+                <Button as="span" size="md" className="zora-market-cardMarketTrigger">
                   Buy
                 </Button>
               }
@@ -66,12 +62,7 @@ export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
                       nftObj={nftObj}
                       onClose={requestClose}
                       cancelButton={
-                        <Button
-                          onClick={requestClose}
-                          w="100%"
-                          variant="secondary"
-                          borderRadius="curved"
-                        >
+                        <Button onClick={requestClose} w="100%" variant="secondary">
                           Cancel
                         </Button>
                       }
@@ -81,7 +72,7 @@ export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
               }
             />
           ) : (
-            <Button disabled borderRadius="curved" size="md" variant="outline">
+            <Button disabled size="md" variant="outline">
               On Sale
             </Button>
           )}

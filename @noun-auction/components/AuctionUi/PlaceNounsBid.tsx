@@ -1,8 +1,9 @@
-import { Stack, Button } from '@zoralabs/zord'
+import { Stack } from '@zoralabs/zord'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { NounsBidForm } from './NounsBidForm'
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { ModalComposition } from '@modal'
+import { Button } from 'components/Button'
 
 // Imports from @markets
 import { NFTSummary } from '@market'
@@ -15,6 +16,7 @@ export function PlaceNounsBid({ useModal = true }: { useModal?: boolean }) {
       {useModal ? (
         <ModalComposition
           modalName={`nouns-bid-${tokenId}`}
+          modalBehaviorRequiresAuth={true}
           trigger={
             <Button
               as="span"

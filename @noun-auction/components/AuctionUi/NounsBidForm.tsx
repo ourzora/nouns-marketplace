@@ -1,18 +1,9 @@
 import React, { useCallback, useState } from 'react'
 import { parseUnits } from '@ethersproject/units'
-import { useContractWrite, useSigner, useAccount, usePrepareContractWrite } from 'wagmi'
+import { useContractWrite, useAccount, usePrepareContractWrite } from 'wagmi'
 import { BigNumber as EthersBN } from 'ethers'
-import {
-  Flex,
-  Label,
-  Box,
-  BoxProps,
-  Button,
-  Grid,
-  Stack,
-  Separator,
-  Input,
-} from '@zoralabs/zord'
+import { Flex, Label, Box, BoxProps, Grid, Stack, Separator, Input } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 
 import { useModal } from '@modal'
 

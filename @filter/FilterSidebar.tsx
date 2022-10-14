@@ -1,4 +1,5 @@
-import { Box, Stack, Heading, Button, Icon, Flex } from '@zoralabs/zord'
+import { Box, Stack, Heading, Icon, Flex } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { useRef, useState } from 'react'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { useCollectionFilters } from '@filter/providers'
@@ -19,7 +20,7 @@ import { FilterOwnerCollections } from './FilterOwnerCollections'
 import { ClearFilters } from './ClearFilters'
 import { MobileFiltersFooter } from './MobileFiltersFooter'
 
-import { useWindowWidth } from '@shared'
+import { useWindowWidth } from '@shared/hooks'
 import { Modal, ModalContent, useModal } from '@modal'
 
 export function FilterSidebar() {
@@ -109,8 +110,6 @@ export function FilterSidebar() {
         {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
         {useSidebarClearButton ? (
           <ClearFilters
-            mt="x2"
-            borderRadius="curved"
             w="100%"
             display={{
               '@initial': 'none',

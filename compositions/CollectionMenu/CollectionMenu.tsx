@@ -1,14 +1,5 @@
-import {
-  Text,
-  Icon,
-  Button,
-  Label,
-  Stack,
-  Heading,
-  Flex,
-  Box,
-  Paragraph,
-} from '@zoralabs/zord'
+import { Text, Icon, Label, Stack, Heading, Flex, Box, Paragraph } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { ModalComposition } from '@modal'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { mediumFont, noTextWrap } from 'styles/styles.css'
