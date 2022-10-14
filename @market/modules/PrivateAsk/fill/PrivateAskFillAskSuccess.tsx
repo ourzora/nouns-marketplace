@@ -1,6 +1,7 @@
-import { useModal } from '@modal'
-import { Button, Stack } from '@zoralabs/zord'
 import React from 'react'
+import { useModal } from '@modal'
+import { Stack } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { HeadingDescription } from '../HeadingDescription'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
@@ -19,7 +20,7 @@ export function PrivateAskFillAskSuccess({ ...props }: PrivateAskFillAskSuccessP
         description="Find this NFT in your collection soon."
       />
 
-      <Button variant="secondary" onClick={requestClose} borderRadius="curved">
+      <Button variant="secondary" onClick={requestClose}>
         Close
       </Button>
     </Stack>

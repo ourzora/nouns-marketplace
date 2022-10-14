@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Box, Button, Paragraph, Text } from '@zoralabs/zord'
+import { Box, Paragraph, Text } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { useContractTransaction, PrintError } from '@shared'
 import { TransactionSubmitButton, ModalTitleAndDescription } from '@market/components'
 import { useZoraV3ModuleApproval } from '@market/hooks'
@@ -56,7 +57,7 @@ export function V3ApprovalForm({
           </Paragraph>
         </a>
       </Box>
-      {error && <PrintError errorMessage={error} />}
+      {error && <PrintError mb="x4" errorMessage={error} />}
       <TransactionSubmitButton
         txInProgress={txInProgress}
         txStatus={txStatus}

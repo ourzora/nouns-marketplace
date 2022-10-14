@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Eyebrow, Stack } from '@zoralabs/zord'
+import { Eyebrow, Stack } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { SaleTypeButton } from '@market/modules/PrivateAsk/SaleTypeButton'
 import { LearnMoreButton } from '@market/modules/PrivateAsk/LearnMoreButton'
 import { PrivateAskFlow } from '@market/modules/PrivateAsk/PrivateAskFlow'
@@ -56,7 +57,7 @@ export function SelectListFlow({ nftObj, closeModal, ...props }: SelectListFlowP
       onClose={closeModal}
       previewURL={media?.poster?.uri}
       cancelButton={
-        <Button onClick={closeModal} w="100%" variant="secondary" borderRadius="curved">
+        <Button onClick={closeModal} w="100%" variant="secondary">
           Cancel
         </Button>
       }

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import { useAccount } from 'wagmi'
 import { manageButton } from './Header.css'
 
@@ -9,12 +9,7 @@ export function ManageLink() {
   if (address) {
     return (
       <Link href={`/manage/${address}`} passHref>
-        <Button
-          as="a"
-          size="md"
-          variant="secondary"
-          className={[manageButton, 'zora-manage-link']}
-        >
+        <Button as="a" variant="secondary" className={[manageButton, 'zora-manage-link']}>
           Manage
         </Button>
       </Link>

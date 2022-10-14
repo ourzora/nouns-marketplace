@@ -1,7 +1,8 @@
 import { useCallback } from 'react'
 import { useRouter } from 'next/router'
-import { Stack, Flex, Heading, Button, Box } from '@zoralabs/zord'
+import { Stack, Flex, Heading, Box } from '@zoralabs/zord'
 import { useNFT } from '@zoralabs/nft-hooks'
+import { Button } from 'components/Button'
 
 import { TokenInfoConfig } from '../NounishAuction'
 import { NounishThumbnail } from './NounishThumbnail'

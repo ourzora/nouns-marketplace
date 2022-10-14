@@ -1,6 +1,6 @@
-import { Stack, Display, Text } from '@zoralabs/zord'
+import { Stack, Text } from '@zoralabs/zord'
 import { useEnsName } from 'wagmi'
-import { useShortAddress } from '@shared'
+import { useShortAddress } from '@shared/hooks'
 import { AddressWithLink } from '@market'
 import { textCenter, pageHeadline } from 'styles/styles.css'
 

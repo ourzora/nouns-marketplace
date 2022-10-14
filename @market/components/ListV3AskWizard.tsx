@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { Stack, Button, Paragraph } from '@zoralabs/zord'
+import { Stack, Paragraph } from '@zoralabs/zord'
 import {
   ERC721ContractApprovalForm,
   ListV3AskForm,
@@ -10,6 +10,7 @@ import {
 } from '@market/components'
 import { ASKS_V11_ADDRESS, ERC721_TRANSFER_HELPER_ADDRESS } from '@shared'
 import { useERC721TokenApproval, useZoraV3ModuleApproval } from '@market/hooks'
+import { Button } from 'components/Button'
 
 type ListNFTStep =
   | 'CheckApprovals'

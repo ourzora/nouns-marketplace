@@ -1,5 +1,6 @@
-import { Button, Flex } from '@zoralabs/zord'
+import { Flex } from '@zoralabs/zord'
 import { useCallback, useMemo } from 'react'
+import { Button } from 'components/Button'
 
 import { textButton, textSmall } from './CollectionsFilter.css'
 import { FilterOptionButton } from './FilterOptionButton'

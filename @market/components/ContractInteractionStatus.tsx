@@ -1,16 +1,7 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Label,
-  Paragraph,
-  Text,
-  Stack,
-  Separator,
-} from '@zoralabs/zord'
+import { Box, Flex, Label, Paragraph, Text, Stack, Separator } from '@zoralabs/zord'
 import { ModalTitleAndDescription } from '@market/components'
 import { formatCryptoVal, shortenTxHash, ETHERSCAN_BASE_URL } from '@shared'
-
+import { Button } from 'components/Button'
 interface ContractInteractionStatusProps {
   title: string
   tokenAddress?: string

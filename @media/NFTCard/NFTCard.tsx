@@ -11,7 +11,8 @@ import {
 } from '@media/NftMedia.css'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ImageWithNounFallback } from 'components'
-import { useIsOwner, useNFTProvider, useTitleWithFallback } from '@shared'
+import { useIsOwner, useTitleWithFallback } from '@shared/hooks'
+import { useNFTProvider } from '@shared/providers'
 import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
 
 export function NFTCard() {
@@ -46,7 +47,7 @@ export function NFTCard() {
           )}
         </Box>
       </Link>
-      <Stack gap="x2" mt="x2" px="x4" pb="x4" flex="1">
+      <Stack gap="x2" mt="x2" px="x4" pb="x4" flex={1}>
         <Flex
           className={[titleWrapper, useTitleScroll && titleScroll]}
           style={{

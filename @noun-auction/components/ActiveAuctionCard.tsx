@@ -1,6 +1,6 @@
 import { Stack, Box, Flex, Heading, Separator, Grid } from '@zoralabs/zord'
 import { Link } from 'components/Link'
-import { useTitleWithFallback } from '@shared'
+import { useTitleWithFallback } from '@shared/hooks'
 import {
   cardWrapper,
   titleWrapper,

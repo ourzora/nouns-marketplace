@@ -13,7 +13,7 @@ import { flatten } from 'lodash'
 import { useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
-const INITIAL_PAGE_SIZE = 24
+const INITIAL_PAGE_SIZE = 25
 const PAGE_SIZE = 24
 
 export interface UseTokenQueryProps {
