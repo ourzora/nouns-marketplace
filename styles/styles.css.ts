@@ -49,8 +49,8 @@ export const textCenter = style({
   textAlign: 'center',
 })
 
-export const leadingTight = style({
-  lineHeight: 1.125,
+export const lineHeight1 = style({
+  lineHeight: 1,
 })
 
 export const buttonStyle = style([

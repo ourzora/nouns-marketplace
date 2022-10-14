@@ -1,12 +1,13 @@
-import { Flex, Stack, Label, Eyebrow, Icon, Tag } from '@zoralabs/zord'
+import { Flex, Stack, Label, Icon, Tag } from '@zoralabs/zord'
 import { useModal } from '@modal'
 import { Link } from 'components/Link'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { leadingTight, lightFont, mediumFont } from 'styles/styles.css'
+import { lineHeight1, lightFont, mediumFont } from 'styles/styles.css'
 import { useAggregate, CollectionsData } from 'hooks'
 import { returnDao } from 'constants/collection-addresses'
 import { useMemo } from 'react'
 import * as styles from './CollectionMenu.css'
+import { Span } from 'components/typography/Text'
 
 export function CollectionLink({ collection }: { collection: CollectionsData }) {
   const { requestClose } = useModal()
@@ -26,18 +27,23 @@ export function CollectionLink({ collection }: { collection: CollectionsData }) 
         <Flex align="center" gap="x4">
           <CollectionThumbnail collectionAddress={collection.address} />
           <Stack gap="x1">
-            <Flex gap="x2">
-              <Label size="lg" className={leadingTight} color="text1">
+            <Flex gap="x2" align="center">
+              <Label size="lg" className={lineHeight1} color="text1">
                 {collection.name}
               </Label>
-              <Tag inactive backgroundColor="background2">
+              <Tag
+                inactive
+                backgroundColor="background2"
+                color="text2"
+                className={mediumFont}
+              >
                 {tagText}
               </Tag>
             </Flex>
             {floorPrice && (
-              <Eyebrow color="text2" as="p" className={[styles.floor, mediumFont]}>
+              <Span color="text2" as="span" className={[styles.floor]}>
                 Floor: {floorPrice} ETH
-              </Eyebrow>
+              </Span>
             )}
           </Stack>
         </Flex>

@@ -5,9 +5,7 @@ import { useEffect, useMemo } from 'react'
 import { nftGridWrapper } from '@media/NftMedia.css'
 import { NounishActivityRow } from './NounishActivityRow'
 import { returnDao } from 'constants/collection-addresses'
-import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
 // import * as Sentry from '@sentry/react'
-import { Paragraph } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks'
 
 type CollectionsGridProps = {

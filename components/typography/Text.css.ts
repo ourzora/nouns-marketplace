@@ -177,9 +177,8 @@ export const textVariants = {
     //   lineHeight: 24,
     // }),
     'paragraph-sm': style([
-      // span in noun.market Figma
+      // 'span' in noun.market Figma
       {
-        // fontFamily: 'PTRootUIWebLight, Arial, Helvetica, sans-serif!important',
         fontFamily: 'var(--ui-font)!important',
       },
       atoms({

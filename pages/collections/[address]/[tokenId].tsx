@@ -47,6 +47,9 @@ const NFT = ({
               <Heading size="xs">Heading</Heading>
               <Text>Text</Text>
               <Paragraph>Paragraph</Paragraph>
+              <Paragraph size="sm" color="text2">
+                Paragraph
+              </Paragraph>
             </Box>
 
             <NFTHistory />

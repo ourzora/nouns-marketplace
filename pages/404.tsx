@@ -1,6 +1,7 @@
-import { Stack, Display } from '@zoralabs/zord'
+import { Stack } from '@zoralabs/zord'
 import { Button } from 'components/Button'
 import { PageWrapper } from 'components/PageWrapper'
+import { Heading } from 'components/typography/Text'
 import { useRouter } from 'next/router'
 
 export default function Custom404() {
@@ -9,10 +10,10 @@ export default function Custom404() {
   return (
     <PageWrapper>
       <Stack align="center" justify="center" w="100%" gap="x6">
-        <Display size="sm" as="h1" align="center">
+        <Heading size="xl" as="h1">
           Sorry! Page Not Found
-        </Display>
-        <Button variant="secondary" align="center" onClick={() => router.push('/')}>
+        </Heading>
+        <Button variant="secondary" onClick={() => router.push('/')}>
           Return Home
         </Button>
       </Stack>
