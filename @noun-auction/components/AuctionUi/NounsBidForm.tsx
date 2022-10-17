@@ -95,7 +95,7 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
   )
 
   const hasError = useMemo(
-    () => (hasBidInput && isError && writeContractError) || prepareError,
+    () => hasBidInput && ((isError && writeContractError) || prepareError),
     [isError, prepareError, writeContractError, hasBidInput]
   )
 
