@@ -16,6 +16,8 @@ export function formatContractError(error: TransactionError | Error) {
         return 'Your balance is too low to make this transaction'
       case "execution reverted: Auction doesn't exist":
         return 'Auction no longer exists'
+      case 'execution reverted: Must send at least reservePrice':
+        return 'Bid value must exceed reserve price'
     }
 
     switch (error?.error?.message) {
