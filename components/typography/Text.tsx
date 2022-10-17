@@ -4,7 +4,7 @@ import { text, textVariants } from './Text.css'
 import type {
   PolymorphicForwardRefExoticComponent,
   PolymorphicPropsWithRef,
-  // PolymorphicPropsWithoutRef,
+  PolymorphicPropsWithoutRef,
 } from 'react-polymorphic-types'
 
 export const TextDefaultElement = 'div'
@@ -13,15 +13,21 @@ export interface NounTextProps extends TextProps {
   variant?: keyof typeof textVariants['variant']
 }
 
-export function InnerText({
-  children,
-  variant = 'paragraph-md',
-  className,
-  ...props
-}: NounTextProps) {
+// export type TextComponentProps<E extends ElementType = typeof TextDefaultElement> =
+//   PolymorphicPropsWithRef<TextProps, E>
+
+export function InnerText<E extends ElementType = typeof TextDefaultElement>(
+  {
+    children,
+    variant = 'paragraph-md',
+    className,
+    ...props
+  }: PolymorphicPropsWithoutRef<NounTextProps, E>,
+  ref?: ForwardedRef<E>
+) {
   return (
     <ZordText
-      //   as={as}
+      ref={ref}
       variant={variant}
       {...props}
       className={[
@@ -65,10 +71,16 @@ export type ParagraphComponentProps<E extends ElementType = typeof TextDefaultEl
 
 export function Paragraph<E extends ElementType = typeof TextDefaultElement>({
   variant,
-  size = 'md',
+  // size = 'md',
   ...props
 }: ParagraphComponentProps<E>) {
-  return <Text variant={`paragraph-${size}`} {...props} />
+  return (
+    <Text
+      // variant={`paragraph-${size}`}
+      variant="paragraph-md"
+      {...props}
+    />
+  )
 }
 
 export function Span<E extends ElementType = typeof TextDefaultElement>({

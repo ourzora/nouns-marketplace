@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, media, color, space } from '@zoralabs/zord'
+import { atoms, media, color } from '@zoralabs/zord'
 import { HEADER_LAYER } from 'constants/layers'
 import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE } from 'styles/style-constants'
 
@@ -75,7 +75,7 @@ export const connectButton = style([
   }),
 ])
 
-export const docsLink = style({
-  paddingLeft: space.x2,
-  paddingRight: space.x3,
+export const docsLink = atoms({
+  pl: 'x2',
+  pr: 'x3',
 })
