@@ -105,8 +105,6 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
     return null
   }, [isError, prepareError, writeContractError])
 
-  console.log('errorOutput', errorOutput)
-
   return (
     <Box {...props}>
       <form onSubmit={handleOnSubmit}>
