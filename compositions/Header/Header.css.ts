@@ -33,7 +33,6 @@ export const headerWrapper = style([
 export const nounsGlassesLink = style([
   {
     aspectRatio: '70 / 24',
-    maxHeight: '30px',
   },
   atoms({
     w: 'x25',
