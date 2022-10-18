@@ -7,8 +7,9 @@ import { NounishActivityRow } from './NounishActivityRow'
 import { returnDao } from 'constants/collection-addresses'
 import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
 // import * as Sentry from '@sentry/react'
-import { Paragraph } from '@zoralabs/zord'
+import { Paragraph, Stack } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks'
+import * as styles from './Collections.css'
 
 type CollectionsGridProps = {
   items: NFTObject[]
@@ -30,6 +31,7 @@ export function CollectionGrid({
 }: CollectionsGridProps) {
   return (
     <Filter
+      className="zora-collection-filter"
       grid={
         <NFTGrid
           items={items}
@@ -75,6 +77,7 @@ export function DaoGrid({
 
   return (
     <Filter
+      className="zora-dao-filter"
       grid={
         <NFTGrid
           items={items} // filteredItems
@@ -103,9 +106,13 @@ export function Collections({ view = 'nfts', collectionAddress }: CollectionsPro
     clearFilters()
   }, [clearFilters])
 
-  if (!dao) {
-    return <CollectionGrid {...gridProps} />
-  } else {
-    return <DaoGrid dao={dao} view={view} {...gridProps} />
-  }
+  return (
+    <Stack className={['zora-collections-filter-parent', styles.collectionFilter]}>
+      {dao ? (
+        <DaoGrid dao={dao} view={view} {...gridProps} />
+      ) : (
+        <CollectionGrid {...gridProps} />
+      )}
+    </Stack>
+  )
 }
