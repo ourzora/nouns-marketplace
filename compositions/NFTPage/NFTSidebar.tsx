@@ -1,7 +1,7 @@
 import { Heading, Stack, Flex, StackProps, Paragraph } from '@zoralabs/zord'
 import { Button } from 'components/Button'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { useTitleWithFallback } from '@shared/hooks'
+import { useAuth, useTitleWithFallback } from '@shared/hooks'
 import { useNFTProvider } from '@shared/providers'
 import { Link } from 'components'
 import { clickAnimation, mediumFont } from 'styles/styles.css'
@@ -11,8 +11,9 @@ import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
 import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
 import { useTokenHelper } from '@shared/hooks'
-import { useOffchainOrders } from 'hooks/useOffchainOrders'
+import { useOffchainOrders } from '@market/hooks/useOffchainOrders'
 import { useMemo } from 'react'
+import { useValidateContractCall } from '@market/hooks/useValidateContractCall'
 
 export interface NFTSidebarProps extends StackProps {}
 
@@ -24,8 +25,31 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
   const { tokenID, hasPreviousNFT, hasNextNFT, handlePrev, handleNext } = useTokenHelper(
     nft!
   )
+  const { address: userAddress } = useAuth()
+  const { isValidated } = useValidateContractCall({
+    callerAddress: userAddress!, // user address
+    contractAddress: offchainOrders
+      ? offchainOrders[0]?.offchainOrder?.offchainOrder?.contractAddress
+      : '', // the contract that fills the orders, eg. Seaport
+    calldata: offchainOrders ? offchainOrders[0]?.offchainOrder?.callData : '', //
+    value: offchainOrders ? offchainOrders[0]?.price?.chainTokenPrice?.decimal : 0, // Price in Ether (Decimal price)
+  })
 
   // console.log('OFF_CHAIN', offchain)
+
+  // offchainOrder: {
+  //   callData: '',
+  //   contractAddress: ''
+  // }s
+  // price: {
+  //   chainTokenPrice: {
+  //     decimal: number
+  //   }
+  // }
+  // token: {
+  //   collectionName: '',
+  //   tokenId: ''
+  // }
 
   const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
@@ -97,6 +121,7 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
               <Paragraph size="sm">
                 OFFCHAIN PRICE:{' '}
                 {offchainOrders[0]?.offchainOrder?.price?.chainTokenPrice?.decimal}
+                IS_VALIDATED: {isValidated ? 'yes' : 'no'}
               </Paragraph>
             </Stack>
           )}
