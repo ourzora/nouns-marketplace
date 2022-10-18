@@ -13,7 +13,7 @@ interface NFTMarketProps extends BoxProps {
 }
 
 export function NFTMarket({ className, contractAddress, tokenId, nft }: NFTMarketProps) {
-  const dao = returnDao(contractAddress)
+  const dao = useMemo(() => returnDao(contractAddress), [contractAddress])
   const { data: activeAuction } = useActiveNounishAuction(dao?.marketType)
   const hasNounishAuction = useMemo(
     () => activeAuction?.properties?.tokenId === tokenId && dao,

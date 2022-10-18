@@ -1,4 +1,4 @@
-import { Heading, Stack, Flex, StackProps } from '@zoralabs/zord'
+import { Heading, Stack, Flex, StackProps, Paragraph } from '@zoralabs/zord'
 import { Button } from 'components/Button'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { useTitleWithFallback } from '@shared/hooks'
@@ -11,15 +11,21 @@ import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
 import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
 import { useTokenHelper } from '@shared/hooks'
+import { useOffchainOrders } from 'hooks/useOffchainOrders'
+import { useMemo } from 'react'
 
 export interface NFTSidebarProps extends StackProps {}
 
 export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
   const { primarySalePrice } = useNounishAuctionProvider()
   const { nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
+  const { data: offchainOrders } = useOffchainOrders(nft!)
+  const hasOffchainOrders = useMemo(() => offchainOrders?.length > 0, [offchainOrders])
   const { tokenID, hasPreviousNFT, hasNextNFT, handlePrev, handleNext } = useTokenHelper(
     nft!
   )
+
+  // console.log('OFF_CHAIN', offchain)
 
   const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
@@ -86,6 +92,14 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
       )}
       {nft?.nft && ( // Clamp to bottom of container
         <Stack gap="x4" mt="auto">
+          {hasOffchainOrders && (
+            <Stack>
+              <Paragraph size="sm">
+                OFFCHAIN PRICE:{' '}
+                {offchainOrders[0]?.offchainOrder?.price?.chainTokenPrice?.decimal}
+              </Paragraph>
+            </Stack>
+          )}
           {primarySalePrice && <NFTProvenance nft={nft} />}
           <NFTMarket
             contractAddress={nft.nft.contract.address}

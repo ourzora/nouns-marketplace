@@ -96,7 +96,7 @@ export function Collections({ view = 'nfts', collectionAddress }: CollectionsPro
     filterStore: { clearFilters },
   } = useCollectionFilters()
   const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
-  const dao = returnDao(collectionAddress)
+  const dao = useMemo(() => returnDao(collectionAddress), [collectionAddress])
   const gridProps = { items, isReachingEnd, isValidating, handleLoadMore }
 
   useEffect(() => {
