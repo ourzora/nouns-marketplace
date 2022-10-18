@@ -12,8 +12,8 @@ import { useEffect, useState } from 'react'
 // }
 
 export type ContractCallValidationData = {
-  callerAddress: string
-  contractAddress: string // the contract that fills the orders, eg. Seaport
+  caller_address: string
+  contract_address: string // the contract that fills the orders, eg. Seaport
   calldata: string //
   value: string // Price in Ether (Decimal price)
 }

@@ -13,7 +13,7 @@ import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLi
 import { useTokenHelper } from '@shared/hooks'
 import { useOffchainOrders } from '@market/hooks/useOffchainOrders'
 import { useMemo } from 'react'
-import { useValidateContractCall } from '@market/hooks/useValidateContractCall'
+import { NFTOffchainOrders } from './NFTOffchainOrders'
 
 export interface NFTSidebarProps extends StackProps {}
 
@@ -26,14 +26,14 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
     nft!
   )
   const { address: userAddress } = useAuth()
-  const { isValidated } = useValidateContractCall({
-    callerAddress: userAddress!, // user address
-    contractAddress: offchainOrders
-      ? offchainOrders[0]?.offchainOrder?.offchainOrder?.contractAddress
-      : '', // the contract that fills the orders, eg. Seaport
-    calldata: offchainOrders ? offchainOrders[0]?.offchainOrder?.callData : '', //
-    value: offchainOrders ? offchainOrders[0]?.price?.chainTokenPrice?.decimal : 0, // Price in Ether (Decimal price)
-  })
+  // const { isValidated } = useValidateContractCall({
+  //   callerAddress: userAddress!, // user address
+  //   contractAddress: offchainOrders
+  //     ? offchainOrders[0]?.offchainOrder?.offchainOrder?.contractAddress
+  //     : '', // the contract that fills the orders, eg. Seaport
+  //   calldata: offchainOrders ? offchainOrders[0]?.offchainOrder?.callData : '', //
+  //   value: offchainOrders ? offchainOrders[0]?.price?.chainTokenPrice?.decimal : 0, // Price in Ether (Decimal price)
+  // })
 
   // console.log('OFF_CHAIN', offchain)
 
@@ -117,13 +117,11 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
       {nft?.nft && ( // Clamp to bottom of container
         <Stack gap="x4" mt="auto">
           {hasOffchainOrders && (
-            <Stack>
-              <Paragraph size="sm">
-                OFFCHAIN PRICE:{' '}
-                {offchainOrders[0]?.offchainOrder?.price?.chainTokenPrice?.decimal}
-                IS_VALIDATED: {isValidated ? 'yes' : 'no'}
-              </Paragraph>
-            </Stack>
+            <NFTOffchainOrders
+              nft={nft}
+              userAddress={userAddress}
+              offchainOrders={offchainOrders}
+            />
           )}
           {primarySalePrice && <NFTProvenance nft={nft} />}
           <NFTMarket
