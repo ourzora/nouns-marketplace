@@ -13,11 +13,11 @@ export const buttonVariants = {
     sm: [
       {
         width: 'auto',
-        borderRadius: 12,
-        fontSize: 16,
+        borderRadius: '12px!important',
+        fontSize: '16px!important',
         '@media': {
           [media.min768]: {
-            fontSize: 18,
+            fontSize: '18px!important',
           },
         },
       },
@@ -32,10 +32,10 @@ export const buttonVariants = {
     ],
     md: [
       {
-        fontSize: 16,
+        fontSize: '16px!important',
         '@media': {
           [media.min768]: {
-            fontSize: 18,
+            fontSize: '18px!important',
           },
         },
       },
@@ -48,10 +48,10 @@ export const buttonVariants = {
     ],
     lg: [
       {
-        fontSize: 20,
+        fontSize: '20px!important',
         '@media': {
           [media.min768]: {
-            fontSize: 22,
+            fontSize: '22px!important',
           },
         },
       },
@@ -193,6 +193,7 @@ export const buttonVariants = {
       height: 'unset',
       fontSize: 'unset',
       fontWeight: 'unset',
+      borderRadius: 'unset!important',
     },
   },
 }
@@ -209,11 +210,11 @@ export const button = recipe({
       flexShrink: 0,
       position: 'relative',
       cursor: 'pointer',
-      fontSize: 18,
     }),
     {
+      fontSize: '18px!important',
       lineHeight: 1,
-      borderRadius: 16,
+      borderRadius: '12px!important',
       transition:
         'border 0.1s ease-in-out, background 0.1s ease-in-out, transform 0.1s ease-out',
       userSelect: 'none',

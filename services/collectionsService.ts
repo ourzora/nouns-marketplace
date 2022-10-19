@@ -1,7 +1,8 @@
-import { zdk } from '@shared'
 import { collectionAddresses } from 'constants/collection-addresses'
-import { CollectionSortKey, SortDirection } from '@zoralabs/zdk/dist/queries/queries-sdk'
+
 import * as Sentry from '@sentry/react'
+import { zdk } from '@shared'
+import { CollectionSortKey, SortDirection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 
 export async function collectionsService() {
   try {

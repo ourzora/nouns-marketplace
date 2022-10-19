@@ -1,6 +1,8 @@
-import Link from 'next/link'
-import { Box } from '@zoralabs/zord'
 import { Button } from 'components/Button'
+import Link from 'next/link'
+
+import { Box } from '@zoralabs/zord'
+
 import { docsLink } from './Header.css'
 
 export function DocsLink() {

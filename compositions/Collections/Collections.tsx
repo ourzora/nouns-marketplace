@@ -1,15 +1,17 @@
-import { Filter, useCollectionFilters } from '@filter'
-import { NFTGrid } from '@media/NFTGrid'
-import { NFTCard } from '@media/NFTCard'
-import { useEffect, useMemo } from 'react'
-import { nftGridWrapper } from '@media/NftMedia.css'
-import { NounishActivityRow } from './NounishActivityRow'
 import { returnDao } from 'constants/collection-addresses'
-import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
-// import * as Sentry from '@sentry/react'
-import { Paragraph, Stack } from '@zoralabs/zord'
+
+import { useEffect, useMemo } from 'react'
+
+import { Filter, useCollectionFilters } from '@filter'
+import { NFTCard } from '@media/NFTCard'
+import { NFTGrid } from '@media/NFTGrid'
+import { nftGridWrapper } from '@media/NftMedia.css'
 import { NFTObject } from '@zoralabs/nft-hooks'
+import { Stack } from '@zoralabs/zord'
+
 import * as styles from './Collections.css'
+// import * as Sentry from '@sentry/react'
+import { NounishActivityRow } from './NounishActivityRow'
 
 type CollectionsGridProps = {
   items: NFTObject[]

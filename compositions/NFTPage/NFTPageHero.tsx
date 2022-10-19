@@ -1,9 +1,11 @@
-import { Box, BoxProps } from '@zoralabs/zord'
-import { cardImageWrapper } from '@media/NftMedia.css'
-import { nftPageHero } from './NFTPage.css'
-import { useNFTProvider } from '@shared/providers/NFTProvider'
 import { ImageWithNounFallback } from 'components'
+
+import { cardImageWrapper } from '@media/NftMedia.css'
 import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
+import { useNFTProvider } from '@shared/providers/NFTProvider'
+import { Box, BoxProps } from '@zoralabs/zord'
+
+import { nftPageHero } from './NFTPage.css'
 
 export interface NFTPageHeroProps extends BoxProps {}
 

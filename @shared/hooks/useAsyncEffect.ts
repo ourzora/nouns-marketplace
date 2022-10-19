@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+
 import * as Sentry from '@sentry/react'
 
 const useAsyncEffect = (func: () => any | Promise<any>, args: Array<any> = []) => {

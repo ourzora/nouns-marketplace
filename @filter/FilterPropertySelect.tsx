@@ -1,9 +1,12 @@
-import { filterPropertySelect } from './CollectionsFilter.css'
-import { useCollectionFilters } from './providers/CollectionFilterProvider'
+import { Button } from 'components/Button'
+
+import { useCallback, useMemo } from 'react'
+
 import { CollectionAttributeValue } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Checkbox, Paragraph } from '@zoralabs/zord'
-import { useCallback, useMemo } from 'react'
-import { Button } from 'components/Button'
+
+import { filterPropertySelect } from './CollectionsFilter.css'
+import { useCollectionFilters } from './providers/CollectionFilterProvider'
 
 export function FilterPropertySelect({
   traitType,

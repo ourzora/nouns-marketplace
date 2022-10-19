@@ -1,13 +1,15 @@
 import React, { Dispatch, createContext, useCallback, useReducer } from 'react'
-import { ToastContainer } from './ToastContainer'
+
 import {
+  ToastAction,
+  ToastProps,
   ToastStatus,
   reducer as toastReducer,
-  ToastProps,
-  ToastAction,
 } from '@toast/toastReducer'
+
 import { Toast } from './Toast'
 import * as styles from './Toast.css'
+import { ToastContainer } from './ToastContainer'
 
 export type ToastType = string | undefined
 

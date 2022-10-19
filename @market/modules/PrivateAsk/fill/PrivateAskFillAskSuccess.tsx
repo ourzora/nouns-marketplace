@@ -1,10 +1,13 @@
+import { Button } from 'components/Button'
+
 import React from 'react'
+
+import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 import { useModal } from '@modal'
 import { Stack } from '@zoralabs/zord'
-import { Button } from 'components/Button'
+
 import { HeadingDescription } from '../HeadingDescription'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 
 interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}
 

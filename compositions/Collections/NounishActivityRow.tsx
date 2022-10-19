@@ -1,6 +1,7 @@
+import { returnDao } from 'constants/collection-addresses'
+
 import { NounishAuction } from '@noun-auction'
 import { useNFTProvider } from '@shared'
-import { returnDao } from 'constants/collection-addresses'
 
 export function NounishActivityRow() {
   const {

@@ -1,9 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Box, Paragraph, Text } from '@zoralabs/zord'
 import { Button } from 'components/Button'
-import { useContractTransaction, PrintError } from '@shared'
-import { TransactionSubmitButton, ModalTitleAndDescription } from '@market/components'
+
+import React, { useCallback, useEffect, useState } from 'react'
+
+import { ModalTitleAndDescription, TransactionSubmitButton } from '@market/components'
 import { useZoraV3ModuleApproval } from '@market/hooks'
+import { PrintError, useContractTransaction } from '@shared'
+import { Box, Paragraph, Text } from '@zoralabs/zord'
 
 interface ContractApprovalFormProps {
   title: string

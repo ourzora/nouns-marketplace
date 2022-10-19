@@ -1,10 +1,13 @@
-import { Box, Flex, Label, BoxProps } from '@zoralabs/zord'
-import { nftThumbnail } from './NftMedia.css'
-import { NFTObject, useNFT } from '@zoralabs/nft-hooks'
 import { ImageWithNounFallback } from 'components'
-import { useRawImageTransform } from './hooks/useRawImageTransform'
+
 import { useMemo } from 'react'
+
+import { NFTObject, useNFT } from '@zoralabs/nft-hooks'
+import { Box, BoxProps, Flex, Label } from '@zoralabs/zord'
+
+import { nftThumbnail } from './NftMedia.css'
 import { useOptionalImageURIDecode } from './hooks/useImageURIDecode'
+import { useRawImageTransform } from './hooks/useRawImageTransform'
 
 export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
 

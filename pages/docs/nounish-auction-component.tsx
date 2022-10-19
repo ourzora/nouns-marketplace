@@ -1,6 +1,7 @@
-import { NounishAuction } from '@noun-auction'
+import { DocsPageWrapper } from 'components'
 import { daos } from 'constants/collection-addresses'
-import { DocsPageWrapper } from 'components/utils/DocsPageWrapper'
+
+import { NounishAuction } from '@noun-auction'
 import { Grid, Heading, Stack } from '@zoralabs/zord'
 
 export default function NounsAuctionHistory() {

@@ -1,4 +1,5 @@
 import useSWR from 'swr'
+
 import { NounAuctionQueryProps, nounAuctionQuery } from '@noun-auction/data'
 import { zoraApiFetcher } from '@shared'
 

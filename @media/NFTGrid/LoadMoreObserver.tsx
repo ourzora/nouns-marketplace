@@ -1,6 +1,7 @@
-import { Box, BoxProps } from '@zoralabs/zord'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
+
+import { Box, BoxProps } from '@zoralabs/zord'
 
 interface LoadMoreObserverProps extends BoxProps {
   handleVisible?: () => void
