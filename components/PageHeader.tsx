@@ -1,4 +1,4 @@
-import { pageHeaderWrapper, pageHeadline, textCenter } from 'styles/styles.css'
+import * as styles from 'styles/styles.css'
 
 import { lightFont } from '@shared'
 import { Maybe } from '@zoralabs/nft-hooks/dist/backends/zora-indexer-v1/zora-indexer-types'
@@ -11,21 +11,34 @@ export interface PageHeaderProps extends FlexProps {
 
 export function PageHeader({ headline, copy, ...props }: PageHeaderProps) {
   return (
-    <Stack className={[pageHeaderWrapper, 'page-header-wrapper']} {...props}>
-      {headline ? (
+    <Stack className={[styles.pageHeaderWrapper, 'page-header-wrapper']} {...props}>
+      {headline && (
         <Text
-          className={[textCenter, pageHeadline]}
+          className={[
+            // styles.textCenter,
+            styles.pageHeadline,
+          ]}
+          textAlign="center"
           as="h1"
           style={{ lineHeight: 1.125 }}
         >
           {headline}
         </Text>
-      ) : null}
-      {copy ? (
-        <Paragraph as="p" size="lg" className={[lightFont, textCenter]} color="text1">
+      )}
+      {copy && (
+        <Paragraph
+          as="p"
+          size="lg"
+          textAlign="center"
+          className={[
+            lightFont,
+            // styles.textCenter
+          ]}
+          color="text1"
+        >
           {copy}
         </Paragraph>
-      ) : null}
+      )}
     </Stack>
   )
 }

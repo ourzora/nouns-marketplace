@@ -1,11 +1,19 @@
 import { HEADER_LAYER } from 'constants/layers'
-import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE } from 'styles/style-constants'
+import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
 
 import { style } from '@vanilla-extract/css'
 import { atoms, color, media, space } from '@zoralabs/zord'
 
 export const headerWrapper = style([
+  atoms({
+    w: '100%',
+    justifyContent: 'center',
+  }),
+])
+
+export const header = style([
   {
+    maxWidth: MAX_WIDTH.LG,
     height: HEADER_HEIGHT_MOBILE,
     zIndex: HEADER_LAYER,
     borderBottom: `2px solid ${color.background2}`,

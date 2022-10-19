@@ -4,7 +4,7 @@ import { WagmiConfig, chain, configureChains, createClient } from 'wagmi'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 
-import { FooterComposition, HeaderComposition } from 'compositions'
+import { Footer, Header } from 'compositions'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar'
@@ -86,7 +86,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <ToastContextProvider>
                     <ContractProvider>
                       <PrivateAskContractProvider>
-                        <HeaderComposition />
+                        <Header />
                         <NextNProgress
                           color="rgba(0,0,0,.5)"
                           startPosition={0.125}
@@ -96,7 +96,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                           options={{ showSpinner: false }}
                         />
                         <Component {...pageProps} />
-                        <FooterComposition />
+                        <Footer />
                       </PrivateAskContractProvider>
                     </ContractProvider>
                   </ToastContextProvider>

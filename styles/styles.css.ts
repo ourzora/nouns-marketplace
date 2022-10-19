@@ -1,5 +1,6 @@
-import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, media, color, typography, radii } from '@zoralabs/zord'
+import { globalStyle, style } from '@vanilla-extract/css'
+import { atoms, color, media, radii, typography } from '@zoralabs/zord'
+
 import {
   FOOTER_HEIGHT,
   FOOTER_HEIGHT_MOBILE,
@@ -159,7 +160,13 @@ export const pageHeadline = style([
 
 export const pageHeaderWrapper = style([
   {
-    maxWidth: MAX_WIDTH.SM,
+    // maxWidth: MAX_WIDTH.SM,
+    gridColumn: '1/span 4',
+    '@media': {
+      [media.min1024]: {
+        gridColumn: '4/span 6',
+      },
+    },
   },
   atoms({
     width: '100%',
@@ -239,4 +246,25 @@ export const marketStatsWrapper = atoms({
 
 export const stat = style({
   whiteSpace: 'nowrap',
+})
+
+export const homepageGrid = style({
+  maxWidth: MAX_WIDTH.MED,
+  gridTemplateColumns: 'repeat(4, [col-start] 1fr)',
+  gridTemplateRows: 'auto',
+  '@media': {
+    [media.min1024]: {
+      gridTemplateColumns: 'repeat(12, [col-start] 1fr)',
+      maxWidth: MAX_WIDTH.XL,
+    },
+  },
+})
+
+export const homepageTable = style({
+  gridColumn: '1/span 4',
+  '@media': {
+    [media.min1024]: {
+      gridColumn: '2/span 10',
+    },
+  },
 })

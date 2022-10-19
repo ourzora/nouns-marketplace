@@ -1,16 +1,24 @@
 import { CollectionParsed } from 'pages'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 
-import { Heading, Stack } from '@zoralabs/zord'
+import { Heading, Stack, StackProps } from '@zoralabs/zord'
 
 import { rankingWrapper } from './CollectionRanking.css'
 import { RankingRow } from './RankingRow'
 
 export const statRows = ['Volume', 'Items', 'Floor', 'Owners']
 
-export function CollectionRanking({ collections }: { collections?: CollectionParsed }) {
+interface CollectionRankingTableProps extends StackProps {
+  collections?: CollectionParsed
+}
+
+export function CollectionRanking({
+  collections,
+  className,
+  ...props
+}: CollectionRankingTableProps) {
   return (
-    <Stack className={rankingWrapper}>
+    <Stack className={[rankingWrapper, className]}>
       <Heading as="h2" size="lg">
         Collections
       </Heading>

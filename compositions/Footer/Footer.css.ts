@@ -11,7 +11,7 @@ export const footerWrap = atoms({
   mx: 'auto',
 })
 
-export const footerWrapper = style([
+export const footer = style([
   {
     borderTop: `2px solid #F2F2F2`,
     maxWidth: MAX_WIDTH.LG,
