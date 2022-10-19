@@ -1,11 +1,15 @@
-import { Flex, Stack, Label, Eyebrow, Icon, Tag } from '@zoralabs/zord'
-import { useModal } from '@modal'
 import { Link } from 'components/Link'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { leadingTight, lightFont, mediumFont } from 'styles/styles.css'
-import { useAggregate, CollectionsData } from 'hooks'
 import { returnDao } from 'constants/collection-addresses'
+import { leadingTight, lightFont, mediumFont } from 'styles/styles.css'
+
+import { CollectionsData, useAggregate } from 'hooks'
+
 import { useMemo } from 'react'
+
+import { CollectionThumbnail } from '@media'
+import { useModal } from '@modal'
+import { Eyebrow, Flex, Icon, Label, Stack, Tag } from '@zoralabs/zord'
+
 import * as styles from './CollectionMenu.css'
 
 export function CollectionLink({ collection }: { collection: CollectionsData }) {

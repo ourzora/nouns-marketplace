@@ -1,20 +1,23 @@
+import clsx from 'clsx'
+import { Button } from 'components/Button'
+
+import React, { useCallback, useState } from 'react'
+
+import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import {
   CANCEL,
+  PossibleState,
   UPDATE,
   VIEW_LISTING,
   usePrivateAskStateContext,
-  PossibleState,
 } from '@market/modules/PrivateAsk/'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import clsx from 'clsx'
-import { Text, PopUp, Stack, Well } from '@zoralabs/zord'
-import { Button } from 'components/Button'
-import React, { useCallback, useState } from 'react'
-
-import { useRelevantMarket, useAskHelper } from '@market/hooks'
 import { useKeyPress } from '@shared'
-import * as styles from './PrivateAskFlow.css'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
+import { NFTObject } from '@zoralabs/nft-hooks'
+import { PopUp, Stack, Text, Well } from '@zoralabs/zord'
+
+import * as styles from './PrivateAskFlow.css'
+
 interface PrivateAskOwnerTriggerProps {
   nft: NFTObject
   openModal: () => void

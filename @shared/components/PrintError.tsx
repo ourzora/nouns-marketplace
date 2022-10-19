@@ -1,4 +1,5 @@
 import { Box, BoxProps } from '@zoralabs/zord'
+
 import { errorBox } from '../SharedStyles.css'
 
 interface PrintErrorProps extends BoxProps {

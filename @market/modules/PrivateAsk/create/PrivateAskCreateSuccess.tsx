@@ -1,12 +1,15 @@
-import { Stack } from '@zoralabs/zord'
 import { Button } from 'components/Button'
+
 import React, { useEffect } from 'react'
-import { HeadingDescription } from '../HeadingDescription'
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+
 import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 import { useCopyToClipboard } from '@shared'
 import { useToast } from '@toast'
 import { ToastStatus, ToastVariant } from '@toast/toastReducer'
+import { Stack } from '@zoralabs/zord'
+
+import { HeadingDescription } from '../HeadingDescription'
+import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 
 interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
 

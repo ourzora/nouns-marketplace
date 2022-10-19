@@ -1,13 +1,10 @@
-import { Flex, Label } from '@zoralabs/zord'
-
-// @noun-auction
-import { SharedDataRendererProps } from '@noun-auction/typings'
-import { EthAmount } from './EthAmount'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
+import { SharedDataRendererProps, useNounishAuctionProvider } from '@noun-auction'
 import { sidebarHighBid } from '@noun-auction/styles/NounishStyles.css'
-
 // @shared
 import { lightFont } from '@shared'
+import { Flex, Label } from '@zoralabs/zord'
+
+import { EthAmount } from './EthAmount'
 
 export function AuctionHighBid({
   label = 'Current bid',

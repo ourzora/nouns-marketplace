@@ -1,6 +1,7 @@
+import { isNaN } from 'lodash'
+
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
-import { isNaN } from 'lodash'
 
 export const validateCurrency = (
   amount: string | number,

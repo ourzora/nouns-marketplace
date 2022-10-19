@@ -1,24 +1,23 @@
-import React, { useCallback, useState } from 'react'
-import { parseUnits } from '@ethersproject/units'
-import { useContractWrite, useAccount, usePrepareContractWrite } from 'wagmi'
-import { BigNumber as EthersBN } from 'ethers'
-import { Flex, Label, Box, BoxProps, Grid, Stack, Separator, Input } from '@zoralabs/zord'
+import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi'
+
 import { Button } from 'components/Button'
+import { BigNumber as EthersBN } from 'ethers'
 
+import React, { useCallback, useState } from 'react'
+
+import { parseUnits } from '@ethersproject/units'
 import { useModal } from '@modal'
-
-// @noun-auction
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { useNounBidIncrement } from '@noun-auction'
 import {
+  AuctionBidder,
   AuctionCountdown,
   AuctionHighBid,
-  AuctionBidder,
   WalletBalance,
+  useNounishAuctionProvider,
 } from '@noun-auction'
-
 // Imports from @markets
-import { formatContractError, PrintError } from '@shared'
+import { PrintError, formatContractError } from '@shared'
+import { Box, BoxProps, Flex, Grid, Input, Label, Separator, Stack } from '@zoralabs/zord'
 
 interface NounsBidFormProps extends BoxProps {
   onConfirmation?: (txHash: string, amount: string, currencyAddress: string) => void

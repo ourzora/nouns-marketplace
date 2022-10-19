@@ -1,8 +1,8 @@
-import { Flex, FlexProps } from '@zoralabs/zord'
 import React, { useMemo } from 'react'
 
-import { DataTableItem, DataTableItemProps } from './DataTableItem'
+import { Flex, FlexProps } from '@zoralabs/zord'
 
+import { DataTableItem, DataTableItemProps } from './DataTableItem'
 import * as rowStyles from './DataTableItem.css'
 
 interface DataTableProps extends FlexProps {

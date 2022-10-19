@@ -1,5 +1,6 @@
-import { uniqueId } from 'lodash'
 import { ReactNode } from 'react'
+
+import { uniqueId } from 'lodash'
 
 export enum ToastVariant {
   ERROR = 'error',

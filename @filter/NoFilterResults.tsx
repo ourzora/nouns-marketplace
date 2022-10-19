@@ -1,6 +1,7 @@
-import { Heading, Stack } from '@zoralabs/zord'
-import { stringDefaults } from './constants'
 import { useCollectionFilters } from '@filter/providers'
+import { Heading, Stack } from '@zoralabs/zord'
+
+import { stringDefaults } from './constants'
 
 export function NoFilterResults({
   noResultsString,

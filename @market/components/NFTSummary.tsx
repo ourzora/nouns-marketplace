@@ -1,9 +1,10 @@
 import { useMemo } from 'react'
+
+import { FillV3AskInfo, ModalTitleAndDescription } from '@market/components'
+import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { useAuth, useTitleWithFallback } from '@shared/hooks'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { Flex, Stack } from '@zoralabs/zord'
-import { FillV3AskInfo, ModalTitleAndDescription } from '@market/components'
-import { useAuth, useTitleWithFallback } from '@shared/hooks'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
 
 export enum MODAL_TYPES {
   list = 'list',

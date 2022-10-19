@@ -1,6 +1,7 @@
 import useSWR from 'swr'
-import { ActiveNounishAuctionResponse, NounishMarketTypes } from '@noun-auction/typings'
+
 import { activeNounishAuction } from '@noun-auction/data'
+import { ActiveNounishAuctionResponse, NounishMarketTypes } from '@noun-auction/typings'
 import { zoraApiFetcher } from '@shared'
 
 export function useActiveNounishAuction(marketType?: NounishMarketTypes) {

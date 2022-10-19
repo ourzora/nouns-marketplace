@@ -1,6 +1,6 @@
+import { NETWORK_CHAIN_ID } from '@shared/utils/connectors'
 import mainnetV3 from '@zoralabs/v3/dist/addresses/1.json'
 import goerliV3 from '@zoralabs/v3/dist/addresses/5.json'
-import { NETWORK_CHAIN_ID } from '@shared/utils/connectors'
 
 export const MODULE_MANAGER_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? mainnetV3.ZoraModuleManager : goerliV3.ZoraModuleManager

@@ -1,4 +1,4 @@
-import { DaoConfigProps, nounsAbi, lilNounsAbi } from '@noun-auction'
+import { DaoConfigProps, lilNounsAbi, nounsAbi } from '@noun-auction'
 import { isAddressMatch } from '@shared'
 
 export const daos: DaoConfigProps[] = [

@@ -1,9 +1,8 @@
 import { style } from '@vanilla-extract/css'
-import { color, atoms, media, typography } from '@zoralabs/zord'
+import { atoms, color, media, typography } from '@zoralabs/zord'
 
 export const horizontalMenuButton = style([
   {
-    borderRadius: 0,
     borderBottom: `2px solid transparent`,
     lineHeight: typography.lineHeight[24],
     selectors: {

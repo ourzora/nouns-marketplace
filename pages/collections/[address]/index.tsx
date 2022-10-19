@@ -1,21 +1,24 @@
-import { PageWrapper } from 'components/PageWrapper'
-import { collectionService, CollectionServiceProps } from 'services/collectionService'
-import { useEffect } from 'react'
-import { MarketStats } from 'components/MarketStats/MarketStats'
 import { Seo } from 'components'
-import { useCollectionsContext } from 'providers/CollectionsProvider'
+import { MarketStats } from 'components/MarketStats/MarketStats'
+import { PageWrapper } from 'components/PageWrapper'
 import {
-  Collections,
   CollectionActivityHeader,
   CollectionHeader,
+  Collections,
 } from 'compositions/Collections'
-import { CollectionFilterProvider, useCollectionFilters } from '@filter'
-import { Stack, Separator } from '@zoralabs/zord'
-import { useCollection } from '@filter/hooks/useCollection'
 import { returnDao } from 'constants/collection-addresses'
-import { useWindowWidth } from '@shared/hooks'
-import { ActiveAuctionCard } from '@noun-auction'
+import { useCollectionsContext } from 'providers/CollectionsProvider'
+import { CollectionServiceProps, collectionService } from 'services/collectionService'
+
 import { useAggregate } from 'hooks'
+
+import { useEffect } from 'react'
+
+import { CollectionFilterProvider } from '@filter'
+import { useCollection } from '@filter/hooks/useCollection'
+import { ActiveAuctionCard } from '@noun-auction'
+import { useWindowWidth } from '@shared'
+import { Separator, Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { contractAddress, seo } = fallback

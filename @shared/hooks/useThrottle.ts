@@ -1,5 +1,6 @@
-import _ from 'lodash'
 import { useCallback, useEffect, useRef } from 'react'
+
+import _ from 'lodash'
 
 export const useThrottle = (cb: CallableFunction, delay: number | undefined) => {
   const options = { leading: true, trailing: false } // add custom lodash options

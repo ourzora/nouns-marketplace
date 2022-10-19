@@ -1,7 +1,11 @@
-import { useMemo } from 'react'
-import { roundFourDecimals, numberFormatter } from '@shared'
-import { useAuctionVolume, useAggregate } from 'hooks'
 import { returnDao } from 'constants/collection-addresses'
+
+import { useAggregate, useAuctionVolume } from 'hooks'
+
+import { useMemo } from 'react'
+
+import { numberFormatter, roundFourDecimals } from '@shared'
+
 import { StatBlock } from './StatBlock'
 
 export function DaoStats({ contractAddress }: { contractAddress: string }) {

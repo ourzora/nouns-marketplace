@@ -1,9 +1,4 @@
-import { Accordion, Separator, Stack, BoxProps, Grid, Box } from '@zoralabs/zord'
 import { NounishAuctionProvider } from '@noun-auction/providers'
-import { AuctionHistory } from './AuctionHistory'
-import { AuctionDebugger } from './Debuggers'
-import { AuctionRow } from './AuctionRow'
-import { ActiveAuctionRow } from './ActiveAuction/ActiveAuctionRow'
 import {
   auctionWrapper,
   auctionWrapperVariants,
@@ -12,6 +7,12 @@ import {
   wrapperHover,
 } from '@noun-auction/styles/NounishStyles.css'
 import { DaoConfigProps } from '@noun-auction/typings'
+import { Accordion, Box, BoxProps, Grid, Separator, Stack } from '@zoralabs/zord'
+
+import { ActiveAuctionRow } from './ActiveAuction/ActiveAuctionRow'
+import { AuctionHistory } from './AuctionHistory'
+import { AuctionRow } from './AuctionRow'
+import { AuctionDebugger } from './Debuggers'
 
 export interface TokenInfoConfig extends BoxProps {
   /* ~ Move to provider as config object */

@@ -1,14 +1,15 @@
-import { GridProps, Flex, Grid, Stack, Label } from '@zoralabs/zord'
 import { useEnsName } from 'wagmi'
+
+import {
+  transactionBidder,
+  transactionEventWrapper,
+} from '@noun-auction/styles/NounishStyles.css'
+import { lightFont, useShortAddress } from '@shared'
+import { Flex, Grid, GridProps, Label, Stack } from '@zoralabs/zord'
+
 import { EnsAvatar } from './EnsAvatar'
 import { EthAmount } from './EthAmount'
 import { TxTimestamp } from './TxTimestamp'
-import {
-  transactionEventWrapper,
-  transactionBidder,
-} from '@noun-auction/styles/NounishStyles.css'
-import { useShortAddress } from '@shared/hooks'
-import { lightFont } from '@shared'
 
 export interface BidTransactionEventProps extends GridProps {
   transactionInfo: {

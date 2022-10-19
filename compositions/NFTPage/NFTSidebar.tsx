@@ -1,15 +1,16 @@
-import { Heading, Stack, Flex, StackProps } from '@zoralabs/zord'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { useTitleWithFallback } from '@shared/hooks'
-import { useNFTProvider } from '@shared/providers'
 import { Link } from 'components'
 import { clickAnimation, mediumFont } from 'styles/styles.css'
-import { NFTMarket } from './NFTMarket'
+
+import { CollectionThumbnail } from '@media'
 import { useNounishAuctionProvider } from '@noun-auction'
-import * as styles from './NFTPage.css'
-import { NFTProvenance } from './NFTProvenance'
+import { useNFTProvider, useTitleWithFallback } from '@shared'
 import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
 import { useTokenHelper } from '@shared/hooks'
+import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
+
+import { NFTMarket } from './NFTMarket'
+import * as styles from './NFTPage.css'
+import { NFTProvenance } from './NFTProvenance'
 
 export interface NFTSidebarProps extends StackProps {}
 

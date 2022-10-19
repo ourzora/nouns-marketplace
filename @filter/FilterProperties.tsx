@@ -1,8 +1,9 @@
+import { useCollectionFilters } from '@filter/providers'
+import { Accordion, Box, Label, Stack } from '@zoralabs/zord'
+
 import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { FilterPropertySelect } from './FilterPropertySelect'
 import { useCollection } from './hooks/useCollection'
-import { Accordion, Box, Stack, Label } from '@zoralabs/zord'
-import { useCollectionFilters } from '@filter/providers'
 
 export function FilterProperties({ collectionAddress }: { collectionAddress: string }) {
   const { data } = useCollection(collectionAddress)

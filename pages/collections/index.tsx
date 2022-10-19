@@ -1,10 +1,8 @@
-import { PageWrapper } from 'components/PageWrapper'
-import { COLLECTIONS_INDEX_HEADLINE, COLLECTIONS_INDEX_COPY } from 'constants/copy'
-import { CollectionRanking } from 'compositions/CollectionRanking'
-import { PageHeader } from 'components/PageHeader'
-import { Seo } from 'components/Seo'
+import { PageHeader, PageWrapper, Seo } from 'components'
+import { CollectionRanking } from 'compositions'
+import { COLLECTIONS_INDEX_COPY, COLLECTIONS_INDEX_HEADLINE } from 'constants/copy'
 import { CollectionParsed } from 'pages'
-import { collectionsService } from 'services/collectionsService'
+import { collectionsService } from 'services'
 import useSWR from 'swr'
 
 const Collections = ({ fallback }: { fallback: CollectionParsed }) => {
