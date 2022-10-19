@@ -1,13 +1,23 @@
-import { style } from '@vanilla-extract/css'
-import { atoms, media, color, space } from '@zoralabs/zord'
-import { HEADER_LAYER } from 'constants/layers'
-import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
+import { MAX_WIDTH } from 'styles/style-constants'
 
-export const collectionFilter = style([
+import { style } from '@vanilla-extract/css'
+import { atoms, media, vars } from '@zoralabs/zord'
+
+export const collections = style([
   {
-    maxWidth: MAX_WIDTH.XL,
+    maxWidth: '100%',
+    '@media': {
+      [media.min1024]: {
+        maxWidth: '100%',
+      },
+      [media.min1440]: {
+        maxWidth: `calc(${MAX_WIDTH.XL}px + (2 * ${vars.space.x8}))`,
+      },
+    },
   },
   atoms({
+    px: { '@initial': 'x4', '@1024': 'x8' },
+    width: '100%',
     alignSelf: 'center',
   }),
 ])

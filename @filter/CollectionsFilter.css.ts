@@ -226,25 +226,20 @@ export const activityModal = style([
     width: 230,
   },
   atoms({
-    pl: 'x0',
-    pr: 'x0',
-    pb: 'x0',
-    pt: 'x0',
+    p: 'x0',
   }),
 ])
 
 export const filterPropertySelect = style([
   {
     textAlign: 'left',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start!important', // TODO: remove !important invocations when zord has been vendored into marketplace
+    height: 'unset!important',
   },
 ])
 
 const pill = {
-  paddingLeft: vars.space.x3,
-  paddingRight: vars.space.x3,
-  paddingTop: 0,
-  paddingBottom: 0,
+  padding: `0 ${vars.space.x3}`,
   height: vars.space.x10,
   borderRadius: vars.radii.round,
   marginBottom: 0,

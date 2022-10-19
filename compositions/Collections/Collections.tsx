@@ -33,7 +33,7 @@ export function CollectionGrid({
 }: CollectionsGridProps) {
   return (
     <Filter
-      className="zora-collection-filter"
+      className="collection-filter"
       grid={
         <NFTGrid
           items={items}
@@ -79,7 +79,7 @@ export function DaoGrid({
 
   return (
     <Filter
-      className="zora-dao-filter"
+      className="dao-filter"
       grid={
         <NFTGrid
           items={items} // filteredItems
@@ -101,15 +101,13 @@ export function Collections({ view = 'nfts', collectionAddress }: CollectionsPro
     filterStore: { clearFilters },
   } = useCollectionFilters()
   const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
-  const dao = returnDao(collectionAddress)
+  const dao = useMemo(() => returnDao(collectionAddress), [collectionAddress])
   const gridProps = { items, isReachingEnd, isValidating, handleLoadMore }
 
-  useEffect(() => {
-    clearFilters()
-  }, [clearFilters])
+  useEffect(() => clearFilters(), [clearFilters])
 
   return (
-    <Stack className={['zora-collections-filter-parent', styles.collectionFilter]}>
+    <Stack className={['zora-collections-filter-parent', styles.collections]}>
       {dao ? (
         <DaoGrid dao={dao} view={view} {...gridProps} />
       ) : (

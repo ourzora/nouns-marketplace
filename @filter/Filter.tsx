@@ -32,7 +32,11 @@ export function Filter({ grid, className, ...props }: FilterProps) {
   } = useCollectionFilters()
 
   return (
-    <Stack px="x4" className={className} {...props}>
+    <Stack
+      // px="x4"
+      className={className}
+      {...props}
+    >
       {!showFilters && useSidebarFilter && (
         <FilterHeader>
           <>
