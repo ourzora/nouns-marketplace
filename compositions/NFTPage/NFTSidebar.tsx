@@ -1,5 +1,4 @@
 import { Link } from 'components'
-import { Button } from 'components/Button'
 import { clickAnimation, mediumFont } from 'styles/styles.css'
 
 import { CollectionThumbnail } from '@media'
@@ -18,9 +17,7 @@ export interface NFTSidebarProps extends StackProps {}
 export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
   const { primarySalePrice } = useNounishAuctionProvider()
   const { nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
-  const { tokenID, hasPreviousNFT, hasNextNFT, handlePrev, handleNext } = useTokenHelper(
-    nft!
-  )
+  const { tokenID } = useTokenHelper(nft!)
 
   const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
@@ -56,24 +53,6 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
         <Heading as="h1" size="xl">
           {fallbackTitle}
         </Heading>
-        <Flex w="x20">
-          <Button
-            className={[styles.nftNextButton]}
-            disabled={!hasPreviousNFT}
-            onClick={handlePrev}
-            variant="circle"
-          >
-            ←
-          </Button>
-          <Button
-            className={[styles.nftNextButton]}
-            disabled={!hasNextNFT}
-            onClick={handleNext}
-            variant="circle"
-          >
-            →
-          </Button>
-        </Flex>
       </Flex>
       {nft?.metadata?.description && (
         <DescriptionWithMaxLines

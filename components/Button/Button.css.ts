@@ -193,6 +193,7 @@ export const buttonVariants = {
       height: 'unset',
       fontSize: 'unset',
       fontWeight: 'unset',
+      borderRadius: 'unset!important',
     },
   },
 }
