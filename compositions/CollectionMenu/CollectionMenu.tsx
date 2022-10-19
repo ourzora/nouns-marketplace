@@ -1,14 +1,17 @@
-import { Text, Icon, Label, Stack, Heading, Flex, Box, Paragraph } from '@zoralabs/zord'
 import { Button } from 'components/Button'
-import { ModalComposition } from '@modal'
+import { SearchInput } from 'compositions'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { mediumFont, noTextWrap } from 'styles/styles.css'
-import { CollectionNavList } from './CollectionNavList'
-import { lightFont } from '@shared'
+
 import { useCallback, useMemo, useState } from 'react'
-import * as styles from './CollectionMenu.css'
-import { SearchInput } from 'compositions/SearchInput/SearchInput'
+
+import { ModalComposition } from '@modal'
+import { lightFont } from '@shared'
 import { useHasScrolled } from '@shared/hooks/useHasScrolled'
+import { Box, Flex, Heading, Icon, Label, Paragraph, Stack, Text } from '@zoralabs/zord'
+
+import * as styles from './CollectionMenu.css'
+import { CollectionNavList } from './CollectionNavList'
 
 export function CollectionMenu() {
   const { collections, daos, currentCollection, currentCollectionCount } =

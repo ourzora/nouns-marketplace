@@ -1,6 +1,7 @@
-import { Text } from '@zoralabs/zord'
 import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 import { useRouter } from 'next/router'
+
+import { Text } from '@zoralabs/zord'
 
 export interface LinkProps extends NextLinkProps {
   children: React.ReactNode

@@ -1,5 +1,6 @@
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { useMemo } from 'react'
+
+import { NFTObject } from '@zoralabs/nft-hooks'
 
 /**
  * Handle non-base64 SVGs

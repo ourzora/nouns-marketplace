@@ -1,18 +1,20 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { MediaType } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { removeItemAtIndex } from '../utils/store'
+
 import {
-  SelectOption,
-  MarketStatusFilter,
-  OwnerStatusFilter,
-  MediaTypeFilter,
-  SortMethodType,
+  CollectionAttributeFilterValue,
   FilterState,
   FilterStore,
+  MarketStatusFilter,
+  MediaTypeFilter,
+  OwnerStatusFilter,
   PriceRangeFilter,
+  SelectOption,
+  SortMethodType,
   TokenContractsFilter,
-  CollectionAttributeFilterValue,
 } from '@filter/typings'
+import { MediaType } from '@zoralabs/zdk/dist/queries/queries-sdk'
+
+import { removeItemAtIndex } from '../utils/store'
 
 export const marketStatusOptions: SelectOption<MarketStatusFilter>[] = [
   { label: 'Live Auction', value: 'live' },

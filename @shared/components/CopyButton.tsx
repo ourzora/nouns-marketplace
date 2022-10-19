@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react'
-import { useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
-import { mixins, Icon } from '@zoralabs/zord'
 import { Button, NounButtonProps } from 'components/Button'
+
+import React, { useEffect } from 'react'
+
+import { useCopyToClipboard } from '@shared'
+import { Icon, mixins } from '@zoralabs/zord'
 
 /**
  * Button that copies text to clipboard, handles copy status and state

@@ -1,5 +1,7 @@
 import { useMemo } from 'react'
+
 import { useNounishAuctionProvider } from '@noun-auction/providers'
+
 import { RowLoader } from './RowLoader'
 
 export function AuctionRow({

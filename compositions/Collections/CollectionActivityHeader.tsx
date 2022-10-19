@@ -1,6 +1,7 @@
-import { Stack, color } from '@zoralabs/zord'
-import { useCollectionFilters } from '@filter'
 import { HorizontalMenu, HorizontalMenuProps } from 'components'
+
+import { useCollectionFilters } from '@filter'
+import { Stack, color } from '@zoralabs/zord'
 
 export function CollectionActivityHeader() {
   const {

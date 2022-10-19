@@ -1,5 +1,6 @@
-import { useEffect, useState, useMemo } from 'react'
-import { intervalToDuration, fromUnixTime, getUnixTime } from 'date-fns'
+import { fromUnixTime, getUnixTime, intervalToDuration } from 'date-fns'
+
+import { useEffect, useMemo, useState } from 'react'
 
 export const useCountdown = (start?: string, end?: string) => {
   const [ready, setReady] = useState(false)

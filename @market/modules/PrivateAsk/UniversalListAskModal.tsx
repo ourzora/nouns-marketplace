@@ -1,8 +1,10 @@
+import { Button } from 'components/Button'
+
+import { SelectListFlow } from '@market/components/SelectListFlow'
+import { ModalComposition, useModal } from '@modal'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Box, FlexProps, Stack } from '@zoralabs/zord'
-import { Button } from 'components/Button'
-import { ModalComposition, useModal } from '@modal'
-import { SelectListFlow } from '@market/components/SelectListFlow'
+
 import { PrivateAskStateProvider } from './providers/PrivateAskStateProvider'
 
 export interface UniversalAskModalProps extends FlexProps {
