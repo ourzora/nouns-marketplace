@@ -1,8 +1,10 @@
-import { CurrencySelect } from './CurrencySelect'
-import { errorText } from './CollectionsFilter.css'
-import { Flex, Input, Paragraph } from '@zoralabs/zord'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+
 import { Currency } from '@shared'
+import { Flex, Input, Paragraph } from '@zoralabs/zord'
+
+import { errorText } from './CollectionsFilter.css'
+import { CurrencySelect } from './CurrencySelect'
 import { useCollectionFilters } from './providers'
 
 export type PriceRangeReturnValue = {

@@ -1,15 +1,18 @@
-import { background, close, content, overlay } from './Modal.css'
-import * as Dialog from '@radix-ui/react-dialog'
 import clsx, { ClassValue } from 'clsx'
+
 import React from 'react'
+
+import * as Dialog from '@radix-ui/react-dialog'
 import {
-  IconProps,
+  Atoms,
   Box,
   Icon,
+  IconProps,
   ThemeProvider as ZordProvider,
   mixins,
-  Atoms,
 } from '@zoralabs/zord'
+
+import { background, close, content, overlay } from './Modal.css'
 
 export interface ModalContentProps extends Dialog.DialogContentProps {
   title?: string

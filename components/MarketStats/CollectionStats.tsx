@@ -1,6 +1,8 @@
-import { StatBlock } from './StatBlock'
 import { useAggregate } from 'hooks'
-import { roundFourDecimals, roundTwoDecimals, numberFormatter } from '@shared'
+
+import { numberFormatter, roundFourDecimals, roundTwoDecimals } from '@shared'
+
+import { StatBlock } from './StatBlock'
 
 export function CollectionStats({ contractAddress }: { contractAddress: string }) {
   const { aggregate } = useAggregate(contractAddress)

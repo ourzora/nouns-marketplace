@@ -1,6 +1,7 @@
 import { Flex, Label } from '@zoralabs/zord'
+
+import { poweredByContainer, zoraBrand, zoraTagline } from './ZoraBrand.css'
 import { Zorb, ZorbProps } from './Zorb'
-import { zoraTagline, zoraBrand, poweredByContainer } from './ZoraBrand.css'
 
 export function PoweredByZora({ vertical, ...props }: ZorbProps) {
   return (

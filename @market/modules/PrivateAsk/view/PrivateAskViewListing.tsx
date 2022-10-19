@@ -1,17 +1,20 @@
+import { Button } from 'components/Button'
+
+import React, { useEffect } from 'react'
+
 import { useModal } from '@modal'
 import { DataTable } from '@shared/components/DataTable'
 import { useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
+import { useToast } from '@toast'
+import { ToastStatus, ToastVariant } from '@toast/toastReducer'
 import {
   // Button,
   Heading,
   Stack,
 } from '@zoralabs/zord'
-import React, { useEffect } from 'react'
-import { useFormattedPrivateAskInfo } from '../hooks'
+
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { useToast } from '@toast'
-import { ToastStatus, ToastVariant } from '@toast/toastReducer'
-import { Button } from 'components/Button'
+import { useFormattedPrivateAskInfo } from '../hooks'
 
 interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}
 

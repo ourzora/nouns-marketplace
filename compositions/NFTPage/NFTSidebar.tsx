@@ -1,19 +1,20 @@
-import { Heading, Stack, Flex, StackProps, Paragraph } from '@zoralabs/zord'
-import { Button } from 'components/Button'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { useAuth, useTitleWithFallback } from '@shared/hooks'
-import { useNFTProvider } from '@shared/providers'
-import { Link } from 'components'
+import { Button, Link } from 'components'
 import { clickAnimation, mediumFont } from 'styles/styles.css'
-import { NFTMarket } from './NFTMarket'
+
+import { useMemo } from 'react'
+
+import { useOffchainOrders } from '@market/hooks'
+import { CollectionThumbnail } from '@media'
 import { useNounishAuctionProvider } from '@noun-auction'
+import { useNFTProvider, useTitleWithFallback } from '@shared'
+import { DescriptionWithMaxLines } from '@shared/components'
+import { useAuth, useTokenHelper } from '@shared/hooks'
+import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
+
+import { NFTMarket } from './NFTMarket'
+import { NFTOffchainOrders } from './NFTOffchainOrders'
 import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
-import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
-import { useTokenHelper } from '@shared/hooks'
-import { useOffchainOrders } from '@market/hooks/useOffchainOrders'
-import { useMemo } from 'react'
-import { NFTOffchainOrders } from './NFTOffchainOrders'
 
 export interface NFTSidebarProps extends StackProps {}
 
@@ -21,11 +22,14 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
   const { primarySalePrice } = useNounishAuctionProvider()
   const { nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
   const { data: offchainOrders } = useOffchainOrders(nft!)
-  const hasOffchainOrders = useMemo(() => offchainOrders?.length > 0, [offchainOrders])
+  const { address: userAddress } = useAuth()
+  const showOffchainOrders = useMemo(
+    () => userAddress && offchainOrders?.length > 0,
+    [offchainOrders?.length, userAddress]
+  )
   const { tokenID, hasPreviousNFT, hasNextNFT, handlePrev, handleNext } = useTokenHelper(
     nft!
   )
-  const { address: userAddress } = useAuth()
   // const { isValidated } = useValidateContractCall({
   //   callerAddress: userAddress!, // user address
   //   contractAddress: offchainOrders
@@ -116,10 +120,10 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
       )}
       {nft?.nft && ( // Clamp to bottom of container
         <Stack gap="x4" mt="auto">
-          {hasOffchainOrders && (
+          {showOffchainOrders && (
             <NFTOffchainOrders
               nft={nft}
-              userAddress={userAddress}
+              userAddress={userAddress!}
               offchainOrders={offchainOrders}
             />
           )}

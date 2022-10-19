@@ -1,12 +1,13 @@
-import { Stack } from '@zoralabs/zord'
 import { PageHeader, PageWrapper, Seo } from 'components'
-import { CollectionRanking } from 'compositions/CollectionRanking'
-import { DaoTable } from 'compositions/Daos'
-import React, { ReactNode } from 'react'
-import { CollectionsQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { CollectionRanking, DaoTable } from 'compositions'
 import { collectionsService } from 'services/collectionsService'
 import { SWRConfig } from 'swr'
 import useSWR from 'swr'
+
+import React from 'react'
+
+import { CollectionsQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { Stack } from '@zoralabs/zord'
 
 export type CollectionParsed = CollectionsQuery['collections']['nodes']
 

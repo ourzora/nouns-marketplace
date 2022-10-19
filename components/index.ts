@@ -1,4 +1,6 @@
 export * from './Link'
+export * from './Button'
+export * from './Blocked'
 export * from './ManageHeader'
 export * from './PageHeader'
 export * from './PageWrapper'

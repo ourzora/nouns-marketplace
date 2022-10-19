@@ -1,14 +1,16 @@
+import { NetworkInput } from 'utils/network'
+import { SeoProps, buildCollectionSEO } from 'utils/seo'
+
+import { allAddresses } from 'constants/collection-addresses'
+import { GetServerSideProps } from 'next'
+
+import * as Sentry from '@sentry/react'
+import { zdk } from '@shared'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import {
   Collection,
   CollectionStatsAggregateQuery,
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { GetServerSideProps } from 'next'
-import { zdk } from '@shared'
-import { buildCollectionSEO, SeoProps } from 'utils/seo'
-import { allAddresses } from 'constants/collection-addresses'
-import { NetworkInput } from 'utils/network'
-import * as Sentry from '@sentry/react'
 
 export type CollectionServiceProps = {
   initialPage: NFTObject[]

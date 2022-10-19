@@ -1,5 +1,6 @@
-import { Stack, Label } from '@zoralabs/zord'
 import { lightFont } from '@shared'
+import { Label, Stack } from '@zoralabs/zord'
+
 import { AddressWithLink } from './AddressWithLink'
 
 export function NFTOwner({

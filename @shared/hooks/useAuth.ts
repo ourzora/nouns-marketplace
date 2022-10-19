@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react'
 import {
   useAccount,
+  useBalance,
   useDisconnect,
+  useEnsAvatar,
+  useEnsName,
   useNetwork,
   useProvider,
   useSigner,
-  useBalance,
-  useEnsName,
-  useEnsAvatar,
 } from 'wagmi'
-import { shortenAddress, NETWORK_CHAIN_ID } from '@shared'
+
+import { useEffect, useState } from 'react'
+
+import { NETWORK_CHAIN_ID, shortenAddress } from '@shared'
 
 export function useAuth() {
   const provider = useProvider()

@@ -1,10 +1,13 @@
-import { useMemo } from 'react'
-import { NounishAuction, useActiveNounishAuction } from '@noun-auction'
 import { returnDao } from 'constants/collection-addresses'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { nftMarketWrapper } from './NFTPage.css'
+
+import { useMemo } from 'react'
+
 import { NFTAsks } from '@market/components/NFTAsks'
+import { NounishAuction, useActiveNounishAuction } from '@noun-auction'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import { BoxProps } from '@zoralabs/zord'
+
+import { nftMarketWrapper } from './NFTPage.css'
 
 interface NFTMarketProps extends BoxProps {
   contractAddress: string

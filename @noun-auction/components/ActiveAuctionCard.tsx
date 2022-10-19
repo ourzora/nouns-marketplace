@@ -1,22 +1,24 @@
-import { Stack, Box, Flex, Heading, Separator, Grid } from '@zoralabs/zord'
-import { Link } from 'components/Link'
-import { useTitleWithFallback } from '@shared/hooks'
-import {
-  cardWrapper,
-  titleWrapper,
-  titleHeading,
-  cardImageWrapper,
-} from '@media/NftMedia.css'
 import { ImageWithNounFallback } from 'components'
-import { AuctionHighBid, AuctionBidder } from './DataRenderers'
-import { AuctionCountdown } from './ActiveAuction'
+import { Link } from 'components/Link'
+
+import {
+  cardImageWrapper,
+  cardWrapper,
+  titleHeading,
+  titleWrapper,
+} from '@media/NftMedia.css'
 import {
   NounishAuctionProvider,
   useNounishAuctionProvider,
 } from '@noun-auction/providers'
-import { DaoConfigProps } from '@noun-auction/typings'
-import { SettleAuction, PlaceNounsBid } from './AuctionUi'
 import { activeAuctionCardData } from '@noun-auction/styles/NounishStyles.css'
+import { DaoConfigProps } from '@noun-auction/typings'
+import { useTitleWithFallback } from '@shared'
+import { Box, Flex, Grid, Heading, Separator, Stack } from '@zoralabs/zord'
+
+import { AuctionCountdown } from './ActiveAuction'
+import { PlaceNounsBid, SettleAuction } from './AuctionUi'
+import { AuctionBidder, AuctionHighBid } from './DataRenderers'
 
 function CardContents() {
   const {

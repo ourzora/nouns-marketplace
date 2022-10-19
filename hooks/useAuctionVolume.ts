@@ -1,6 +1,8 @@
 import useSWR from 'swr'
-import { zoraApiFetcher } from '@shared'
+
 import { nounishAuctionVolume } from 'data'
+
+import { zoraApiFetcher } from '@shared'
 
 export type AuctionVolumeReturnType =
   | {
