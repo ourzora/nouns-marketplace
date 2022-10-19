@@ -6,7 +6,7 @@ import {
   rowButtonWrapper,
   sidebarBidWrapper,
 } from '@noun-auction/styles/NounishStyles.css'
-import { Box, Flex, Separator, Stack } from '@zoralabs/zord'
+import { Flex, Separator, Stack } from '@zoralabs/zord'
 
 import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
 import { AuctionBidder, AuctionHighBid, CollectionLink } from '../DataRenderers'
@@ -85,7 +85,7 @@ export function ActiveAuctionRow({
         layoutDirection="row"
         showLabels={showLabels}
         justify="space-between"
-        className="nounish-auction__sidebar-top-contdown"
+        className="nounish-auction__sidebar-top-countdown"
       />
     </Stack>
   )
