@@ -8,8 +8,8 @@ export function FooterComposition() {
   const { isLarge } = useWindowWidth()
 
   return (
-    <Flex className={styles.footerWrap}>
-      <Flex as="footer" className={styles.footerWrapper}>
+    <Flex as="footer" className={styles.footerWrap}>
+      <Flex className={styles.footerWrapper}>
         <Box gap="x2" className={styles.menu}>
           <Label px="x4" as="a" size="lg" href="/docs" passhref="/docs">
             Docs
