@@ -14,7 +14,7 @@ We also want to open this up to accept all NounsDao style contracts. As of now t
 
 First off the only required prop is the `daoConfig` object, we need to know the NFT contract address, and the auction contract address along with the Zora API market type and the auction contract abi:
 
-### DaoConfig Prop:
+### DaoProp:
 
 > Nouns
 
@@ -56,7 +56,7 @@ Relatively simple for Nouns, Lil Nouns has its own classifier in the Zora API an
 ```tsx
 import { NounishAuction } from '@noun-auction'
 ...
-<NounishAuction daoConfig={dao} />
+<NounishAuction dao={dao} />
 ```
 
 > To render auction history of a specific token:
@@ -82,7 +82,7 @@ import { NounishAuctionProvider } from '@noun-auction'
 /**
 * Current live auction
 */
-<NounishAuctionProvider daoConfig={dao}>
+<NounishAuctionProvider dao={dao}>
   <ChildComponent />
 </NounishAuctionProvider>
 ```
@@ -90,7 +90,7 @@ import { NounishAuctionProvider } from '@noun-auction'
 > For a specific token pass in a tokenId (expects a string):
 
 ```
-<NounishAuctionProvider daoConfig={dao} tokenId='200'>
+<NounishAuctionProvider dao={dao} tokenId='200'>
   <ChildComponent />
 </NounishAuctionProvider>
 ```
@@ -131,7 +131,7 @@ const { activeAuctionId  } = useNounishAuctionProvider()
 # Props:
 
 ```
-  daoConfig: DaoConfigProps
+  dao: DaoConfigProps
   tokenId?: string
 
   /* Layout element configuration */

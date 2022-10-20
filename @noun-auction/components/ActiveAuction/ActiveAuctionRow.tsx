@@ -2,37 +2,43 @@ import { Flex, Separator, Stack, Box } from '@zoralabs/zord'
 
 // @noun-auction
 import { TokenInfoConfig } from '../NounishAuction'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { AuctionBidder, AuctionHighBid, CollectionLink } from '../DataRenderers'
 import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
 import {
   responsiveRow,
   sidebarBidWrapper,
   rowButtonWrapper,
+  auctionWrapperVariants,
 } from '@noun-auction/styles/NounishStyles.css'
 
 import { AuctionCountdown } from './AuctionCountdown'
 import { RPCTokenInfo } from './RPCTokenInfo'
 import Link from 'next/link'
+import { NounsBuilderAuction } from 'types/zora.api.generated'
 
 export interface ActiveAuctionRowProps extends TokenInfoConfig {
   useModal?: boolean
   showLabels?: boolean
   useErrorMsg?: boolean
-  /* View Config */
   showTopBid?: boolean
+  layout?: keyof typeof auctionWrapperVariants['layout']
+  activeAuction: NounsBuilderAuction
+  timerComplete: boolean
 }
 
 export function ActiveAuctionRow({
   useModal,
   showLabels,
   useErrorMsg,
+  layout,
+  activeAuction,
+  timerComplete,
 }: ActiveAuctionRowProps) {
-  const { daoConfig, tokenId, timerComplete, layout } = useNounishAuctionProvider()
+  const { tokenId, collectionAddress } = activeAuction
 
   const rowLayout = (
     <>
-      <Link href={`collections/${daoConfig.contractAddress}`} passHref>
+      <Link href={`collections/${collectionAddress}`} passHref>
         <AuctionCountdown
           layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
           showLabels={showLabels}
@@ -40,9 +46,10 @@ export function ActiveAuctionRow({
           align={'flex-end'}
           className={[layout === 'row' && responsiveRow, 'nounish-auction__countdown']}
           cursor="pointer"
+          activeAuction={activeAuction}
         />
       </Link>
-      <Link href={`collections/${daoConfig.contractAddress}`} passHref>
+      <Link href={`collections/${collectionAddress}`} passHref>
         <AuctionHighBid
           layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
           showLabels={showLabels}
@@ -50,9 +57,10 @@ export function ActiveAuctionRow({
           align={'flex-end'}
           className={[layout === 'row' && responsiveRow, 'nounish-auction__high-bid']}
           cursor="pointer"
+          activeAuction={activeAuction}
         />
       </Link>
-      <Link href={`collections/${daoConfig.contractAddress}`} passHref>
+      <Link href={`collections/${collectionAddress}`} passHref>
         <Flex
           position="relative"
           h="100%"
@@ -67,6 +75,7 @@ export function ActiveAuctionRow({
             justify={'center'}
             align={'flex-end'}
             className="nounish-auction__bidder"
+            activeAuction={activeAuction}
           />
         </Flex>
       </Link>
@@ -80,12 +89,14 @@ export function ActiveAuctionRow({
         layoutDirection="row"
         justify="space-between"
         className="nounish-auction__sidebar-top-bidder"
+        activeAuction={activeAuction}
       />
       <AuctionCountdown
         layoutDirection="row"
         showLabels={showLabels}
         justify="space-between"
         className="nounish-auction__sidebar-top-contdown"
+        activeAuction={activeAuction}
       />
     </Stack>
   )
@@ -93,10 +104,10 @@ export function ActiveAuctionRow({
   return (
     <>
       {layout !== 'sideBarBid' && (
-        <Link href={`collections/${daoConfig.contractAddress}`} passHref>
+        <Link href={`collections/${collectionAddress}`} passHref>
           <RPCTokenInfo
             tokenId={tokenId}
-            contractAddress={daoConfig?.contractAddress}
+            contractAddress={collectionAddress}
             cursor="pointer"
           />
         </Link>
@@ -124,7 +135,7 @@ export function ActiveAuctionRow({
         )}
         {layout === 'row' && (
           <CollectionLink
-            contractAddress={daoConfig?.contractAddress}
+            collectionAddress={collectionAddress}
             className="nounish-auction__row-link"
             display={{
               '@initial': 'block',
@@ -141,7 +152,11 @@ export function ActiveAuctionRow({
             className="nounish-auction__row-link"
           />
         ) : (
-          <PlaceNounsBid useModal={useModal} />
+          <PlaceNounsBid
+            layout={layout!}
+            activeAuction={activeAuction}
+            useModal={useModal}
+          />
         )}
       </Flex>
     </>

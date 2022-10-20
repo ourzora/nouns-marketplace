@@ -1,27 +1,76 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { nounsTokenAbi } from '@noun-auction/contracts'
 import { useContractRead } from 'wagmi'
+
+const PINATA_API_URL = 'https://gateway.pinata.cloud/ipfs/'
+
+// FIXME
+const useIpfsFile = ({ isIpfs, dataURI }: any) => {
+  const [file, setFile] = useState()
+
+  useEffect(() => {
+    if (!isIpfs) return
+
+    const fetchFile = async () => {
+      try {
+        const fetchIpfsData = async (ipfsHash: string) => {
+          const url = `${PINATA_API_URL}${ipfsHash}`
+          try {
+            const res = await fetch(url)
+            const json = await res.json()
+            setFile(json)
+          } catch (err) {
+            console.error(err)
+          }
+        }
+
+        await fetchIpfsData(dataURI?.replace('ipfs://', ''))
+      } catch (err) {
+        console.error(err)
+      }
+
+      fetchFile()
+    }
+  }, [dataURI, isIpfs])
+
+  return file
+}
+
+function UnicodeDecodeB64(str: string) {
+  const res = decodeURIComponent(atob(str))
+  return JSON.parse(res)
+}
 
 export function useNounsToken(contractAddress: string, tokenId: string) {
   const { data: dataURI } = useContractRead({
     addressOrName: contractAddress,
-    /* @ts-ignore */
     contractInterface: nounsTokenAbi,
     functionName: 'tokenURI',
     args: [tokenId],
   })
 
+  const isIpfs = dataURI?.startsWith('ipfs://')
+  const isBase64 = dataURI?.startsWith('data:application/json;base64')
+  const isHttp = dataURI?.startsWith('https://')
+
+  useIpfsFile({ isIpfs, dataURI })
+
   const decodedTokenURI = useMemo(() => {
+    let data = dataURI?.substring(29)
+    if (isBase64) {
+      data = UnicodeDecodeB64(dataURI?.replace('data:application/json;base64,', ''))
+    }
+
     if (dataURI) {
       try {
-        const json = atob(dataURI.substring(29))
+        const json = atob(data)
         const result = JSON.parse(json)
         return result
       } catch (err) {
         console.error(err)
       }
     }
-  }, [dataURI])
+  }, [dataURI, isBase64])
 
   return {
     tokenData: decodedTokenURI,

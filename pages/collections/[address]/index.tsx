@@ -47,7 +47,7 @@ const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps
       <CollectionHeader
         collection={collection}
         layout={dao ? 'dao' : 'collection'}
-        currentAuction={dao ? <ActiveAuctionCard daoConfig={dao} /> : null}
+        currentAuction={dao ? <ActiveAuctionCard dao={dao} /> : null}
       >
         <MarketStats contractAddress={contractAddress} />
       </CollectionHeader>

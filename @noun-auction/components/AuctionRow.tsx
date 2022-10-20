@@ -9,17 +9,15 @@ export function AuctionRow({
   auctionDataComponent: JSX.Element
   activeAuctionComponent: JSX.Element
 }) {
-  const { tokenId, activeAuctionId } = useNounishAuctionProvider()
+  // const auctionComponent = useMemo(() => {
+  //   if (activeAuctionId === tokenId) {
+  //     return activeAuctionComponent
+  //   } else {
+  //     return auctionDataComponent
+  //   }
+  // }, [activeAuctionComponent, activeAuctionId, auctionDataComponent, tokenId])
 
-  if (!activeAuctionId) return <RowLoader />
+  // if (!activeAuctionId) return <RowLoader />
 
-  const auctionComponent = useMemo(() => {
-    if (activeAuctionId === tokenId) {
-      return activeAuctionComponent
-    } else {
-      return auctionDataComponent
-    }
-  }, [activeAuctionId])
-
-  return auctionComponent
+  return activeAuctionComponent
 }

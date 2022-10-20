@@ -1,12 +1,10 @@
 import { Stack, Flex, Heading, Label, Box, Button, BoxProps } from '@zoralabs/zord'
-import { useNFT } from '@zoralabs/nft-hooks'
 import NextLink from 'next/link'
-import { returnDao } from 'constants/collection-addresses'
 import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
 
-// @shared (or zord)
 import { lightFont } from '@shared'
+import { useToken } from 'hooks/useToken'
 
 export interface RPCTokenInfoProps extends BoxProps {
   contractAddress: string | undefined
@@ -14,17 +12,18 @@ export interface RPCTokenInfoProps extends BoxProps {
 }
 
 export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInfoProps) {
-  if (!tokenId || !contractAddress) return null
+  const { token } = useToken({ address: contractAddress!, tokenId: tokenId! })
 
-  const dao = returnDao(contractAddress)
-  const { data } = useNFT(contractAddress, tokenId)
+  // console.log({ data })
+
+  if (!tokenId || !contractAddress) return null
 
   return (
     <Flex className={['nounish-auction__token-info', tokenInfoWrapper]} {...props}>
       <NextLink href={`/collections/${contractAddress}/${tokenId}`} passHref>
         <Button as="a" variant="unset">
           <NounishThumbnail
-            image={data?.media?.image?.uri}
+            image={token?.image?.url!}
             tokenContract={contractAddress}
             tokenId={tokenId}
           />
@@ -32,12 +31,12 @@ export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInf
       </NextLink>
       <Stack justify="space-between">
         <Heading size="sm" as="h3">
-          {data?.metadata?.name ? data?.metadata?.name : `${dao?.name} ${tokenId}`}
+          {token?.metadata?.name ? token?.metadata?.name : `${tokenId}`}
         </Heading>
         <Box mb="x1">
           <NextLink href={`/collections/${contractAddress}`} passHref>
             <Label as="a" color="tertiary" className={[lightFont]}>
-              {dao?.name}
+              {token?.metadata?.collection?.name}
             </Label>
           </NextLink>
         </Box>

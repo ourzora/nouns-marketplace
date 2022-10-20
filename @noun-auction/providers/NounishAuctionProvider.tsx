@@ -2,28 +2,33 @@ import {
   createContext,
   useContext,
   ReactNode,
-  useMemo,
   useState,
   Dispatch,
   SetStateAction,
 } from 'react'
-import { useNounishAuctionQuery } from '@noun-auction/hooks'
-import { DaoConfigProps, ActiveNounishAuctionResponse } from '@noun-auction/typings'
-import { defaultDaoConfig } from '@noun-auction/constants'
+import {
+  useNounishAuctionQuery,
+  useActiveNounishAuction,
+  DaoConfigProps,
+} from '@noun-auction'
 import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
-import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
+import {
+  NounishAuctionsQuery,
+  NounsBuilderAuction,
+  NounsDao,
+} from 'types/zora.api.generated'
+import { isAfter } from 'date-fns'
 
 export type NounishAuctionProviderProps = {
   tokenId?: string
-  daoConfig: DaoConfigProps
+  dao: NounsDao
   children?: ReactNode
   layout?: keyof typeof auctionWrapperVariants['layout']
 }
 
 const NounsAuctionContext = createContext<{
-  data?: any
   error?: any
-  daoConfig: DaoConfigProps
+  dao: DaoConfigProps
   tokenId?: string
   noAuctionHistory?: boolean
   contract?: any
@@ -33,9 +38,8 @@ const NounsAuctionContext = createContext<{
   setTimerComplete: Dispatch<SetStateAction<boolean>>
   layout?: keyof typeof auctionWrapperVariants['layout']
   activeAuctionId: string | undefined
-  activeAuction: ActiveNounishAuctionResponse
+  activeAuction: NounsBuilderAuction
 }>({
-  daoConfig: defaultDaoConfig,
   timerComplete: false,
   activeAuctionId: undefined,
   setTimerComplete: () => {},
@@ -48,45 +52,89 @@ export function useNounishAuctionProvider() {
 }
 
 export function NounishAuctionProvider({
-  daoConfig,
+  dao,
   tokenId,
   layout,
   children,
 }: NounishAuctionProviderProps) {
-  const { marketType, contractAddress } = daoConfig
-
-  const [timerComplete, setTimerComplete] = useState(false)
-
-  const { data: activeAuction } = useActiveNounishAuction(daoConfig.marketType)
-
-  const { data, error } = useNounishAuctionQuery({
-    marketType: marketType,
-    contractAddress: contractAddress,
-    tokenId: tokenId ? tokenId : activeAuction?.properties?.tokenId,
+  const { collectionAddress } = dao
+  // nouns and lil nouns
+  const { data: activeOriginalNounishAuction } = useActiveNounishAuction()
+  // all other nouns daos
+  const { activeNounishAuction } = useNounishAuctionQuery({
+    collectionAddress,
   })
 
-  const noAuctionHistory = useMemo(() => {
-    if (data) return data?.events?.nodes.length === 0
-  }, [data])
+  if (!activeNounishAuction || !dao) return null
+
+  const timerComplete = isAfter(parseInt(activeNounishAuction.endTime), Date.now() * 1000)
+
+  const noAuctionHistory = true
+  // useMemo(() => {
+  //   if (data) return data?.events?.nodes.length === 0
+  // }, [data])
+
+  const normalizedDaoConfig: DaoConfigProps = {
+    name: dao.name!,
+    collectionAddress: dao.collectionAddress,
+    auctionContractAddress: dao.auctionAddress,
+    marketType: 'BUILDER_NOUNS_AUCTION',
+    classifierPrefix: null,
+    abi: undefined,
+  }
+  // console.log({ activeNounishAuction })
 
   return (
     <NounsAuctionContext.Provider
       value={{
-        data,
-        error,
+        dao: normalizedDaoConfig,
+        activeAuction: activeNounishAuction,
+        // nounishAuction,
+        // error,
         noAuctionHistory,
         timerComplete,
-        tokenId: tokenId ? tokenId : activeAuction?.properties?.tokenId,
-        activeAuctionId: activeAuction ? activeAuction?.properties?.tokenId : undefined,
-        daoConfig: daoConfig,
-        activeAuction: activeAuction,
-        setTimerComplete,
+        // tokenId,
+        // activeAuctionId: activeNounishAuction?.tokenId,
+        // FIXME
+        setTimerComplete: () => {},
         layout,
-        minBidIncrementPercentage: activeAuction?.properties?.minBidIncrementPercentage,
+        minBidIncrementPercentage: activeNounishAuction.minBidIncrementPercentage!,
         reservePrice: '0.01',
       }}
     >
       {children}
     </NounsAuctionContext.Provider>
   )
+
+  //   const timerComplete = isAfter(
+  //     parseInt(activeNounishAuction.endTime),
+  //     Date.now() * 1000
+  //   )
+  //   const noAuctionHistory = true
+  //   // useMemo(() => {
+  //   //   if (data) return data?.events?.nodes.length === 0
+  //   // }, [data])
+  //   // console.log({ nounishAuction })
+  //   return (
+  //     <NounsAuctionContext.Provider
+  //       value={{
+  //         nounishAuction,
+  //         error,
+  //         noAuctionHistory,
+  //         timerComplete,
+  //         tokenId: tokenId ? tokenId : activeAuction?.tokenId,
+  //         activeAuctionId: activeAuction ? activeAuction?.tokenId : undefined,
+  //         dao,
+  //         activeAuction,
+  //         // FIXME
+  //         // setTimerComplete,
+  //         layout,
+  //         minBidIncrementPercentage: activeAuction?.minBidIncrementPercentage,
+  //         reservePrice: '0.01',
+  //       }}
+  //     >
+  //       {children}
+  //     </NounsAuctionContext.Provider>
+  //   )
+  //   }
 }

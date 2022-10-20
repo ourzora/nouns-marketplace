@@ -1,16 +1,29 @@
 import useSWR from 'swr'
-import { NounAuctionQueryProps, nounAuctionQuery } from '@noun-auction/data'
 import { zoraApiFetcher } from '@shared'
+import { NOUNISH_AUCTIONS_QUERY } from 'data/nounishAuctions'
+import { NounishAuctionsQuery } from 'types/zora.api.generated'
 
-export function useNounishAuctionQuery(params: NounAuctionQueryProps) {
-  const { data: response, error } = useSWR(
-    [`nounish-auction-${params.contractAddress}-${params.contractAddress}`, params],
-    (_, params) => zoraApiFetcher(() => nounAuctionQuery(params))
+export function useNounishAuctionQuery({
+  collectionAddress,
+}: {
+  collectionAddress: string
+}) {
+  const { data, error } = useSWR<NounishAuctionsQuery>(
+    [`nounish-auction-${collectionAddress}`],
+    () => zoraApiFetcher(NOUNISH_AUCTIONS_QUERY, { collectionAddress })
   )
 
+  if (error || !data) {
+    error ? console.error(error) : console.error(`No data for ${collectionAddress}`)
+    return {
+      auction: undefined,
+    }
+  }
+
+  // console.log(`useNounishAuctionQuery: ${collectionAddress}`, data)
+
   return {
-    params,
-    data: response?.data ? response?.data : undefined,
+    activeNounishAuction: data.nouns.nounsActiveMarket,
     error,
   }
 }

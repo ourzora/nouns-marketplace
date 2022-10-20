@@ -13,7 +13,7 @@ export interface EventWithTimestampProps extends StackProps {
 export function EventWithTimestamp({ transactionInfo, label }: EventWithTimestampProps) {
   const {
     tokenId,
-    daoConfig: { classifierPrefix, contractAddress },
+    dao: { classifierPrefix, collectionAddress },
   } = useNounishAuctionProvider()
 
   return (

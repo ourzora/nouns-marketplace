@@ -18,7 +18,7 @@ export function AuctionEvents({
   settledRenderer = <div>{`Auction Settled`}</div>,
 }: AuctionEventsProps) {
   const {
-    daoConfig: { classifierPrefix },
+    dao: { classifierPrefix },
   } = useNounishAuctionProvider()
 
   const addTypePrefix = (type: NounsAuctionEventTypes) =>
@@ -43,7 +43,14 @@ export function AuctionEvents({
       default:
         return null
     }
-  }, [auctionEvent])
+  }, [
+    addTypePrefix,
+    auctionEvent,
+    bidRenderer,
+    createdRenderer,
+    extendedRenderer,
+    settledRenderer,
+  ])
 
   return <>{eventRenderer}</>
 }

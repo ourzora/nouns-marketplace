@@ -18,7 +18,7 @@ import { useModal } from '@modal'
 
 // @noun-auction
 import { useNounishAuctionProvider } from '@noun-auction/providers'
-import { useNounBidIncrement } from '@noun-auction'
+import { auctionWrapperVariants, useNounBidIncrement } from '@noun-auction'
 import {
   AuctionCountdown,
   AuctionHighBid,
@@ -26,20 +26,20 @@ import {
   WalletBalance,
 } from '@noun-auction'
 
-// Imports from @markets
 import { PrintError } from '@shared'
 
 interface NounsBidFormProps extends BoxProps {
   onConfirmation?: (txHash: string, amount: string, currencyAddress: string) => void
+  layout: keyof typeof auctionWrapperVariants['layout']
 }
 
-export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
+export function NounsBidForm({ onConfirmation, layout, ...props }: NounsBidFormProps) {
   const { requestClose } = useModal()
 
   const [bidAmount, setBidAmount] = useState<string | '0'>('0')
 
   const {
-    daoConfig: { auctionContractAddress, abi },
+    dao: { auctionContractAddress, abi },
     tokenId,
     minBidIncrementPercentage,
     reservePrice,
@@ -48,7 +48,7 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
 
   const { minBidAmount } = useNounBidIncrement(
     reservePrice,
-    activeAuction?.properties?.highestBidPrice?.chainTokenPrice?.raw,
+    activeAuction?.highestBidPrice?.chainTokenPrice?.raw,
     minBidIncrementPercentage
   )
 
@@ -70,7 +70,6 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
     [setBidAmount]
   )
 
-  /* @ts-ignore */
   const {
     isError,
     isLoading,
@@ -94,7 +93,7 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
       event.preventDefault()
       placeBid()
     },
-    [bidAmount]
+    [placeBid]
   )
 
   return (
@@ -129,6 +128,7 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
           <Separator />
           {address && (
             <WalletBalance
+              layout={layout}
               showLabels
               address={address}
               justify="space-between"
@@ -159,7 +159,7 @@ export function NounsBidForm({ onConfirmation, ...props }: NounsBidFormProps) {
             variant="secondary"
             borderRadius="curved"
           >
-            You're bid has been placed!
+            Your bid has been placed!
           </Button>
         )}
       </form>

@@ -1,17 +1,17 @@
-import { Accordion, Separator, Stack, BoxProps, Grid, Box } from '@zoralabs/zord'
+import { Separator, Stack, BoxProps, Grid, Box } from '@zoralabs/zord'
 import { NounishAuctionProvider } from '@noun-auction/providers'
 import { AuctionHistory } from './AuctionHistory'
-import { AuctionDebugger } from './Debuggers'
 import { AuctionRow } from './AuctionRow'
 import { ActiveAuctionRow } from './ActiveAuction/ActiveAuctionRow'
 import {
   auctionWrapper,
   auctionWrapperVariants,
   bidHistoryWrapper,
-  debugWrapper,
   wrapperHover,
 } from '@noun-auction/styles/NounishStyles.css'
-import { DaoConfigProps } from '@noun-auction/typings'
+import { NounsBuilderAuction, NounsDao } from 'types/zora.api.generated'
+import { useNounishAuctionQuery } from '@noun-auction'
+import { isAfter } from 'date-fns'
 
 export interface TokenInfoConfig extends BoxProps {
   /* ~ Move to provider as config object */
@@ -27,22 +27,20 @@ export interface AuctionViewConfig extends TokenInfoConfig {
   showAuctionRow?: boolean
   showBidHistory?: boolean
   useInlineBid?: boolean
-  debug?: boolean
   useErrorMsg?: boolean
   showTopBid?: boolean
   showLabels?: boolean
 }
 
 export interface NounishAuctionProps extends AuctionViewConfig {
-  daoConfig: DaoConfigProps
+  dao: NounsDao
   tokenId?: string
-  /* Theming */
   layout?: keyof typeof auctionWrapperVariants['layout']
 }
 
 export function NounishAuction({
   layout = 'row',
-  daoConfig,
+  dao,
   tokenId,
   showAuctionRow = true,
   showBidHistory = false,
@@ -50,7 +48,6 @@ export function NounishAuction({
   useInlineBid = false,
   hideThumbnail = false,
   hideTitle = false,
-  debug = false,
   useErrorMsg = false,
   hideCollectionTitle = false,
   routePrefix = 'collections',
@@ -58,8 +55,19 @@ export function NounishAuction({
   showLabels,
   ...props
 }: NounishAuctionProps) {
+  const { activeNounishAuction } = useNounishAuctionQuery({
+    collectionAddress: dao.collectionAddress,
+  })
+  const timerComplete = activeNounishAuction
+    ? isAfter(parseInt(activeNounishAuction.endTime), Date.now() * 1000)
+    : false
+
   return (
-    <Box className={layout === 'row' && wrapperHover} {...props}>
+    <Box
+      key={dao.collectionAddress}
+      className={layout === 'row' && wrapperHover}
+      {...props}
+    >
       <Grid
         className={[
           'nounish-auction__auction-data-wrapper',
@@ -67,13 +75,16 @@ export function NounishAuction({
           auctionWrapper({ layout: layout }),
         ]}
       >
-        <NounishAuctionProvider daoConfig={daoConfig} tokenId={tokenId} layout={layout}>
-          {showAuctionRow && (
+        <NounishAuctionProvider dao={dao} tokenId={tokenId} layout={layout}>
+          {showAuctionRow && activeNounishAuction && (
             <>
               <AuctionRow
                 auctionDataComponent={<div>AUCTION DATA</div>}
                 activeAuctionComponent={
                   <ActiveAuctionRow
+                    timerComplete={timerComplete}
+                    layout={layout}
+                    activeAuction={activeNounishAuction}
                     routePrefix={routePrefix}
                     useModal={!useInlineBid}
                     showLabels={showLabels}
@@ -83,19 +94,16 @@ export function NounishAuction({
               />
             </>
           )}
-          {showBidHistory && (
-            <AuctionHistory className={bidHistoryWrapper} mb="x2">
+          {/* {showBidHistory && (
+            <AuctionHistory
+              dao={dao}
+              noAuctionHistory={noAuctionHistory}
+              className={bidHistoryWrapper}
+              mb="x2"
+            >
               {showAuctionRow && <Separator mt="x4" mb="x3" />}
             </AuctionHistory>
-          )}
-          {debug && (
-            <Stack className={debugWrapper} py="x2" mb="x2">
-              <Separator mb="x4" />
-              <Accordion label="Api Data">
-                <AuctionDebugger />
-              </Accordion>
-            </Stack>
-          )}
+          )} */}
         </NounishAuctionProvider>
       </Grid>
     </Box>

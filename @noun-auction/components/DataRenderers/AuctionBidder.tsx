@@ -3,13 +3,9 @@ import { useEnsName } from 'wagmi'
 import { Flex, Label, Icon } from '@zoralabs/zord'
 import { AddressZero } from '@ethersproject/constants'
 
-// @noun-auction
-import { SharedDataRendererProps } from '@noun-auction/typings'
 import { EnsAvatar } from './EnsAvatar'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 
-// @shared
 import { lightFont, useShortAddress, isAddressMatch } from '@shared'
 
 export function AuctionBidder({
@@ -17,25 +13,16 @@ export function AuctionBidder({
   layoutDirection = 'row',
   showLabels,
   useAvatar = true,
+  layout,
+  activeAuction,
   ...props
-}: {
-  useAvatar?: boolean
-} & SharedDataRendererProps) {
-  const { layout, activeAuction } = useNounishAuctionProvider()
-
+}: any) {
   const { data: ensName } = useEnsName({
-    address: activeAuction?.properties?.highestBidder || undefined,
+    address: activeAuction?.highestBidder,
   })
 
-  const shortAddress = useShortAddress(activeAuction?.properties?.highestBidder)
-
-  const highestBidder = useMemo(
-    () =>
-      activeAuction?.properties?.highestBidder
-        ? activeAuction?.properties?.highestBidder
-        : undefined,
-    [activeAuction, activeAuction?.properties?.highestBidder]
-  )
+  const shortAddress = useShortAddress(activeAuction?.highestBidder)
+  const highestBidder = useMemo(() => activeAuction?.highestBidder, [activeAuction])
 
   return (
     <Flex

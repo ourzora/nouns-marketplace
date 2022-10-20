@@ -1,22 +1,13 @@
-export async function zoraApiFetcher(query: () => void) {
+import { DocumentNode } from 'graphql'
+import { client } from './gqlClient'
+
+export async function zoraApiFetcher(query: DocumentNode, variables?: any) {
+  // haha see what I did here
+  const network = { chain: 'GOERLI', network: 'ETHEREUM' }
+
   try {
-    const response = await fetch(process.env.NEXT_PUBLIC_GALACTUS_BASE_URL as string, {
-      method: 'POST',
-      /* @ts-ignore */
-      headers: {
-        'Content-Type': 'application/json',
-        'X-API-KEY': process.env.NEXT_PUBLIC_ZORA_API_KEY,
-      },
-      cache: 'no-store',
-      body: JSON.stringify({
-        query: query(),
-      }),
-    })
-    if (!response.ok) {
-      throw new Error(`Error! status: ${response.status}`)
-    }
-    const res = response.json()
-    return res
+    const response = await client.request(query, { ...variables, network })
+    return response
   } catch (err) {
     console.error(err)
   }

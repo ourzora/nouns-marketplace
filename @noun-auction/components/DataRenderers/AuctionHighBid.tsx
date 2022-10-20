@@ -1,25 +1,20 @@
 import { Flex, Label } from '@zoralabs/zord'
 
-// @noun-auction
-import { SharedDataRendererProps } from '@noun-auction/typings'
 import { EthAmount } from './EthAmount'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { sidebarHighBid } from '@noun-auction/styles/NounishStyles.css'
 
-// @shared
 import { lightFont } from '@shared'
 
 export function AuctionHighBid({
   label = 'Current bid',
   layoutDirection = 'row',
   showLabels,
+  activeAuction,
+  layout,
+  timerComplete,
   ...props
-}: {
-  useUsdc?: boolean
-} & SharedDataRendererProps) {
-  const { layout, timerComplete, activeAuction } = useNounishAuctionProvider()
-
-  const highestBid = activeAuction?.properties?.highestBidPrice?.chainTokenPrice?.raw
+}: any) {
+  const highestBid = activeAuction?.highestBidPrice?.nativePrice?.raw
 
   return (
     <Flex

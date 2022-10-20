@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typegen": "DOTENV_CONFIG_PATH='./.env.local' graphql-codegen --config typegen.ts --require dotenv/config"
   },
   "dependencies": {
     "@mdx-js/loader": "^2.1.2",
@@ -54,6 +55,10 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.13.7",
+    "@graphql-codegen/introspection": "^2.2.1",
+    "@graphql-codegen/typescript": "^2.7.4",
+    "@graphql-codegen/typescript-operations": "^2.5.4",
     "@types/dompurify": "^2.3.3",
     "@types/gtag.js": "^0.0.10",
     "@types/lodash": "^4.14.182",

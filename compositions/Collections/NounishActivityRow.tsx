@@ -1,7 +1,5 @@
-import { NounishAuction } from '@noun-auction'
+import { NounishAuction, useOneNounsDao } from '@noun-auction'
 import { useNFTProvider } from '@shared'
-import { returnDao } from 'constants/collection-addresses'
-import { useWindowWidth } from '@shared'
 
 export function NounishActivityRow() {
   const {
@@ -10,16 +8,16 @@ export function NounishActivityRow() {
     tokenId,
   } = useNFTProvider()
 
+  // FIXME: get rid of useNFTProvider
+  const { dao } = useOneNounsDao({ contractAddress })
+
   if (!data || !contractAddress || !tokenId) return null
-
-  const dao = returnDao(contractAddress)
-
   if (!dao) return null
 
   return (
     <NounishAuction
       key={`${contractAddress}`}
-      daoConfig={dao}
+      dao={dao}
       showLabels
       hideCollectionTitle={false}
       borderRadius="curved"

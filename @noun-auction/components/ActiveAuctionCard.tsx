@@ -10,22 +10,31 @@ import {
 import { ImageWithNounFallback } from 'components'
 import { AuctionHighBid, AuctionBidder } from './DataRenderers'
 import { AuctionCountdown } from './ActiveAuction'
-import {
-  NounishAuctionProvider,
-  useNounishAuctionProvider,
-} from '@noun-auction/providers'
 import { DaoConfigProps } from '@noun-auction/typings'
 import { SettleAuction, PlaceNounsBid } from './AuctionUi'
-import { activeAuctionCardData } from '@noun-auction/styles/NounishStyles.css'
+import {
+  activeAuctionCardData,
+  auctionWrapperVariants,
+} from '@noun-auction/styles/NounishStyles.css'
+import { useNounishAuctionQuery } from '@noun-auction'
 
-function CardContents() {
-  const {
-    daoConfig: { contractAddress },
-    tokenId,
-    timerComplete,
-  } = useNounishAuctionProvider()
+export function ActiveAuctionCard({
+  dao,
+  timerComplete,
+  layout,
+}: {
+  dao: DaoConfigProps
+  timerComplete: boolean
+  layout: keyof typeof auctionWrapperVariants['layout']
+}) {
+  const { collectionAddress } = dao
+  const { activeNounishAuction: activeAuction } = useNounishAuctionQuery({
+    collectionAddress,
+  })
+  const tokenId = activeAuction && activeAuction.tokenId
 
-  const { fallbackTitle } = useTitleWithFallback(contractAddress, tokenId)
+  // FIXME: remove useNFT from useTitleWithFallback
+  const { fallbackTitle } = useTitleWithFallback(collectionAddress, tokenId!)
 
   return (
     <Stack
@@ -35,10 +44,10 @@ function CardContents() {
       className={cardWrapper}
       style={{ maxWidth: '500px' }}
     >
-      <Link href={`/collections/${contractAddress}/${tokenId}`}>
+      <Link href={`/collections/${collectionAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
           {tokenId && (
-            <ImageWithNounFallback tokenContract={contractAddress} tokenId={tokenId} />
+            <ImageWithNounFallback tokenContract={collectionAddress} tokenId={tokenId} />
           )}
         </Box>
       </Link>
@@ -67,7 +76,11 @@ function CardContents() {
               {fallbackTitle}
             </Heading>
           </Flex>
-          {timerComplete ? <SettleAuction /> : <PlaceNounsBid useModal />}
+          {timerComplete ? (
+            <SettleAuction />
+          ) : (
+            <PlaceNounsBid activeAuction={activeAuction!} layout={layout} />
+          )}
         </Flex>
         <Separator mt="x1" />
         <Grid className={activeAuctionCardData}>
@@ -82,13 +95,5 @@ function CardContents() {
         </Grid>
       </Stack>
     </Stack>
-  )
-}
-
-export function ActiveAuctionCard({ daoConfig }: { daoConfig: DaoConfigProps }) {
-  return (
-    <NounishAuctionProvider daoConfig={daoConfig}>
-      <CardContents />
-    </NounishAuctionProvider>
   )
 }

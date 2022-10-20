@@ -3,21 +3,20 @@ import { useBalance } from 'wagmi'
 import { useMemo } from 'react'
 import { lightFont, roundFourDecimals } from '@shared'
 
-// @noun-auction
 import { SharedDataRendererProps } from '@noun-auction/typings'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
+import { auctionWrapperVariants } from '@noun-auction'
 
 export function WalletBalance({
   label = 'Your balance',
   layoutDirection = 'row',
   address,
   showLabels,
+  layout,
   ...props
 }: {
   address: string
+  layout: keyof typeof auctionWrapperVariants['layout']
 } & SharedDataRendererProps) {
-  const { layout } = useNounishAuctionProvider()
-
   const { data } = useBalance({
     addressOrName: address,
   })

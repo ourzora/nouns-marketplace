@@ -2,9 +2,7 @@ import { useEffect } from 'react'
 import { Flex, Label } from '@zoralabs/zord'
 
 // @noun-auction
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { useCountdown } from '@noun-auction/hooks/useCountdown'
-import { SharedDataRendererProps } from '@noun-auction/typings'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 
 // @shared
@@ -15,16 +13,14 @@ export function AuctionCountdown({
   endedCopy = 'Bidding & Settling',
   label = 'Ends in',
   layoutDirection = 'row',
+  activeAuction,
+  // FIXME
+  setTimerComplete = () => {},
+  layout,
   ...props
-}: {
-  endedCopy?: string
-} & SharedDataRendererProps) {
-  const { setTimerComplete, layout, activeAuction } = useNounishAuctionProvider()
-
-  const { text, isEnded } = useCountdown(
-    activeAuction?.properties?.startTime,
-    activeAuction?.properties?.endTime
-  )
+}: any) {
+  const { startTime, endTime } = activeAuction
+  const { text, isEnded } = useCountdown(startTime, endTime)
 
   useEffect(() => {
     if (isEnded) {
@@ -32,12 +28,7 @@ export function AuctionCountdown({
     } else {
       setTimerComplete(false)
     }
-  }, [
-    isEnded,
-    activeAuction,
-    activeAuction?.properties?.startTime,
-    activeAuction?.properties?.endTime,
-  ])
+  }, [isEnded, startTime, endTime, setTimerComplete])
 
   return (
     <Flex

@@ -13,7 +13,7 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
   const [showError, setShowError] = useState(false)
 
   const {
-    daoConfig: { abi, auctionContractAddress },
+    dao: { abi, auctionContractAddress },
     layout,
   } = useNounishAuctionProvider()
 

@@ -1,7 +1,5 @@
-import { useMemo } from 'react'
-import { NounishAuction, useActiveNounishAuction } from '@noun-auction'
+import { NounishAuction, useActiveNounishAuction, useOneNounsDao } from '@noun-auction'
 import { NFTCardMarket } from '@market'
-import { returnDao } from 'constants/collection-addresses'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { nftMarketWrapper } from './NFTPage.css'
 
@@ -14,14 +12,13 @@ export function MarketUi({
   tokenId: string
   nft: NFTObject
 }) {
-  const dao = returnDao(contractAddress)
-
+  const { dao } = useOneNounsDao({ contractAddress })
   const { data: activeAuction } = useActiveNounishAuction(dao?.marketType)
 
   if (activeAuction?.properties?.tokenId === tokenId && dao) {
     return (
       <NounishAuction
-        daoConfig={dao}
+        dao={dao}
         hideThumbnail
         hideTitle
         hideCollectionTitle

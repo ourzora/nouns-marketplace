@@ -1,15 +1,10 @@
 import { Icon, Flex, Box } from '@zoralabs/zord'
 import { rowLoader } from '@noun-auction/styles/NounishStyles.css'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 
 const lilLoader = './assets/nounish/lil-loading-skull.gif'
 const nounLoader = './assets/nounish/loading-skull-noun.gif'
 
-export function RowLoader() {
-  const {
-    daoConfig: { name },
-  } = useNounishAuctionProvider()
-
+export function RowLoader({ name }: { name: string }) {
   return (
     <Flex className={[rowLoader]}>
       {name ? (

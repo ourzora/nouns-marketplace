@@ -38,7 +38,7 @@ const NFT = ({
         <Grid className={nftPageWrapper}>
           <NFTPageHero />
           {dao ? (
-            <NounishAuctionProvider daoConfig={dao} tokenId={nft?.nft?.tokenId}>
+            <NounishAuctionProvider dao={dao} tokenId={nft?.nft?.tokenId}>
               <NFTInfoSidebar />
             </NounishAuctionProvider>
           ) : (

@@ -11,7 +11,10 @@ export type ClassifierPrefixProps = {
   typePrefix: string
 } | null
 
-export type NounishMarketTypes = 'NOUNS_AUCTION' | 'LIL_NOUNS_AUCTION'
+export type NounishMarketTypes =
+  | 'NOUNS_AUCTION'
+  | 'LIL_NOUNS_AUCTION'
+  | 'BUILDER_NOUNS_AUCTION'
 
 export enum NounsAuctionEventTypes {
   NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT = 'NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT',
@@ -26,7 +29,7 @@ export enum NounsAuctionEventTypes {
 
 export type DaoConfigProps = {
   name: string
-  contractAddress: string
+  collectionAddress: string
   auctionContractAddress: string
   marketType: NounishMarketTypes
   classifierPrefix: ClassifierPrefixProps
