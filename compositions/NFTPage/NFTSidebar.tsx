@@ -1,5 +1,5 @@
 import { Link } from 'components'
-import { clickAnimation, mediumFont } from 'styles/styles.css'
+import { mediumFont } from 'styles/styles.css'
 
 import { CollectionThumbnail } from '@media'
 import { useNounishAuctionProvider } from '@noun-auction'
@@ -45,7 +45,6 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
             pr="x5"
             backgroundColor="background2"
             borderRadius="round"
-            className={clickAnimation}
           />
         </Link>
       </Flex>

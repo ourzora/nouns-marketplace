@@ -7,14 +7,6 @@ import { atoms, ease, media, typography, vars } from '@zoralabs/zord'
 
 export const borderStyle = `2px solid ${vars.color.border}`
 
-export const homepageGrid = style({
-  '@media': {
-    [media.min768]: {
-      gridTemplateColumns: `1fr`,
-    },
-  },
-})
-
 export const errorText = style({ color: vars.color.negative })
 
 export const textButton = style([

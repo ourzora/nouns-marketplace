@@ -1,6 +1,6 @@
 import { useEnsName } from 'wagmi'
 
-import { pageHeadline, textCenter } from 'styles/styles.css'
+import { pageHeadline } from 'styles/styles.css'
 
 import { AddressWithLink } from '@market'
 import { useShortAddress } from '@shared'
@@ -26,7 +26,7 @@ export function ManageHeader({ ownerAddress }: { ownerAddress: string }) {
       }}
       gap="x2"
     >
-      <Text className={[textCenter, pageHeadline]} as="h1">
+      <Text textAlign="center" className={[pageHeadline]} as="h1">
         {ensName ? ensName : shortAddress}
       </Text>
       <AddressWithLink
