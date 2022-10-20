@@ -1,32 +1,22 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { parseUnits } from '@ethersproject/units'
-import { useContractWrite, useSigner, useAccount } from 'wagmi'
+import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi'
+
+import { Button } from 'components/Button'
 import { BigNumber as EthersBN } from 'ethers'
-import {
-  Flex,
-  Label,
-  Box,
-  BoxProps,
-  Button,
-  Grid,
-  Stack,
-  Separator,
-  Input,
-} from '@zoralabs/zord'
 
+import React, { useCallback, useState } from 'react'
+
+import { parseUnits } from '@ethersproject/units'
 import { useModal } from '@modal'
-
-// @noun-auction
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { auctionWrapperVariants, useNounBidIncrement } from '@noun-auction'
 import {
+  AuctionBidder,
   AuctionCountdown,
   AuctionHighBid,
-  AuctionBidder,
   WalletBalance,
+  useNounishAuctionProvider,
 } from '@noun-auction'
-
-import { PrintError } from '@shared'
+import { PrintError, formatContractError } from '@shared'
+import { Box, BoxProps, Flex, Grid, Input, Label, Separator, Stack } from '@zoralabs/zord'
 
 interface NounsBidFormProps extends BoxProps {
   onConfirmation?: (txHash: string, amount: string, currencyAddress: string) => void
@@ -52,7 +42,6 @@ export function NounsBidForm({ onConfirmation, layout, ...props }: NounsBidFormP
     minBidIncrementPercentage
   )
 
-  const { data: signer } = useSigner()
   const { address } = useAccount()
 
   const handleOnUpdate = useCallback(
@@ -70,16 +59,9 @@ export function NounsBidForm({ onConfirmation, layout, ...props }: NounsBidFormP
     [setBidAmount]
   )
 
-  const {
-    isError,
-    isLoading,
-    isSuccess,
-    error: writeContractError,
-    write: placeBid,
-  } = useContractWrite({
+  const { config, error: prepareError } = usePrepareContractWrite({
     addressOrName: auctionContractAddress as string,
     contractInterface: abi,
-    signerOrProvider: signer,
     functionName: 'createBid',
     overrides: {
       from: address,
@@ -88,19 +70,29 @@ export function NounsBidForm({ onConfirmation, layout, ...props }: NounsBidFormP
     args: [tokenId],
   })
 
+  /* @ts-ignore */
+  const {
+    isError,
+    isLoading,
+    isSuccess,
+    error: writeContractError,
+    write: placeBid,
+  } = useContractWrite(config)
+
   const handleOnSubmit = useCallback(
     (event) => {
       event.preventDefault()
-      placeBid()
+      placeBid && placeBid()
     },
-    [placeBid]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [bidAmount]
   )
 
   return (
     <Box {...props}>
       <form onSubmit={handleOnSubmit}>
         <Flex justify="space-between">
-          <Label color="secondary" size="lg">
+          <Label color="text2" size="lg">
             Bid
           </Label>
         </Flex>
@@ -137,7 +129,12 @@ export function NounsBidForm({ onConfirmation, layout, ...props }: NounsBidFormP
           )}
           <Separator />
         </Stack>
-        {isError && <PrintError errorMessage={writeContractError?.message} mb="x4" />}
+        {isError && writeContractError && (
+          <PrintError
+            errorMessage={formatContractError(writeContractError ?? prepareError)}
+            mb="x4"
+          />
+        )}
         {!isSuccess ? (
           <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x2">
             <Button

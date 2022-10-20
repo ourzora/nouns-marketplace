@@ -1,8 +1,11 @@
-import { Box, BoxProps } from '@zoralabs/zord'
+import { useMemo } from 'react'
+
 import {
   nounishThumbnail,
   nounishThumbnailImage,
 } from '@noun-auction/styles/NounishStyles.css'
+import { Box, BoxProps } from '@zoralabs/zord'
+
 import { FallbackThumbnail } from './FallbackThumbnail'
 
 export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
@@ -44,6 +47,14 @@ export function NounishThumbnail({
   tokenContract,
   ...props
 }: NounishThumbnailProps) {
+  const srcImg = useMemo(() => {
+    if (image?.startsWith('%3Csvg%20')) {
+      return `data:image/svg+xml,${image}`
+    }
+
+    return image
+  }, [image])
+
   return (
     <Box
       borderRadius={radius}
@@ -54,7 +65,7 @@ export function NounishThumbnail({
         <Box
           as="img"
           className={[nounishThumbnailImage, 'nouns-fallback-image']}
-          src={image}
+          src={srcImg}
         />
       ) : (
         <FallbackThumbnail tokenContract={tokenContract} tokenId={tokenId} />

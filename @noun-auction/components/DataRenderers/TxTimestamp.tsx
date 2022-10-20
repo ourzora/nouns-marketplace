@@ -1,7 +1,10 @@
-import { useMemo } from 'react'
-import { FlexProps, Flex, Stack, Label, Icon } from '@zoralabs/zord'
-import { lightFont } from '@shared'
 import { format } from 'date-fns'
+
+import { useMemo } from 'react'
+
+import * as Sentry from '@sentry/react'
+import { lightFont } from '@shared'
+import { Flex, FlexProps, Icon, Label, Stack } from '@zoralabs/zord'
 
 export interface TxTimestampProps extends FlexProps {
   transactionInfo: {
@@ -15,7 +18,7 @@ export function TxTimestamp({ transactionInfo }: TxTimestampProps) {
     try {
       return format(new Date(transactionInfo.blockTimestamp), 'LLL dd, kk:mm:ss')
     } catch (err) {
-      console.error(err)
+      Sentry.captureException(err)
       return null
     }
   }, [transactionInfo])
@@ -30,10 +33,10 @@ export function TxTimestamp({ transactionInfo }: TxTimestampProps) {
         align="center"
         gap="x1"
       >
-        <Label className={lightFont} color="tertiary">
+        <Label className={lightFont} color="text3">
           {timeStamp}
         </Label>
-        <Icon id="ArrowRightAngle" color="tertiary" />
+        <Icon id="ArrowRightAngle" color="text3" />
       </Flex>
     </Stack>
   )

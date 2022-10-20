@@ -1,20 +1,15 @@
 import { PageWrapper, Seo } from 'components'
-import { nftService } from 'services/nftService'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import {
-  NFTPageHero,
-  NFTInfoSidebar,
-  NFTAttributes,
-  NFTHistory,
-} from 'compositions/NFTPage'
-import { Grid, Stack } from '@zoralabs/zord'
-import {
-  attributesHistoryWrapper,
-  nftPageWrapper,
-} from 'compositions/NFTPage/NFTPage.css'
-import { NFTProvider } from '@shared/providers/NFTProvider'
-import { NounishAuctionProvider } from '@noun-auction'
+import { NFTAttributes, NFTHistory, NFTPageHero, NFTSidebar } from 'compositions'
+import * as styles from 'compositions/NFTPage/NFTPage.css'
 import { returnDao } from 'constants/collection-addresses'
+import { nftService } from 'services'
+
+import { useMemo } from 'react'
+
+import { NounishAuctionProvider } from '@noun-auction'
+import { NFTProvider } from '@shared/providers/NFTProvider'
+import { NFTObject } from '@zoralabs/nft-hooks'
+import { Grid, Stack } from '@zoralabs/zord'
 
 const NFT = ({
   nft,
@@ -25,7 +20,8 @@ const NFT = ({
   tokenAddress: string
   tokenId: string
 }) => {
-  const dao = returnDao(tokenAddress)
+  // FIXME
+  const dao = useMemo(() => returnDao(tokenAddress), [tokenAddress])
 
   return (
     <PageWrapper direction="column">
@@ -35,16 +31,16 @@ const NFT = ({
         ogImage={nft?.media?.poster?.uri}
       />
       <NFTProvider initialData={nft} contractAddress={tokenAddress} tokenId={tokenId}>
-        <Grid className={nftPageWrapper}>
+        <Grid className={styles.nftPageWrapper}>
           <NFTPageHero />
           {dao ? (
-            <NounishAuctionProvider dao={dao} tokenId={nft?.nft?.tokenId}>
-              <NFTInfoSidebar />
+            <NounishAuctionProvider dao={dao} tokenId={tokenId}>
+              <NFTSidebar />
             </NounishAuctionProvider>
           ) : (
-            <NFTInfoSidebar />
+            <NFTSidebar />
           )}
-          <Stack className={attributesHistoryWrapper}>
+          <Stack className={styles.attributesHistoryWrapper}>
             <NFTHistory />
             <NFTAttributes />
           </Stack>

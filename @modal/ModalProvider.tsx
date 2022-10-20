@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, createContext, useState } from 'react'
+
 export type ModalType = string | undefined
 
 export type ModalState = {

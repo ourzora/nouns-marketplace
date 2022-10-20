@@ -1,13 +1,10 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, color, media, space, vars } from '@zoralabs/zord'
-import { MODAL_TAB_LAYER } from '../../constants/layers'
+import { atoms, color, media } from '@zoralabs/zord'
 
 export const collectionTrigger = style([
   {
     gridColumn: '1',
     gridRow: '2',
-    height: 42,
-    gridGap: space.x2,
     '@media': {
       [media.min1024]: {
         gridColumn: '3',
@@ -16,12 +13,17 @@ export const collectionTrigger = style([
     },
   },
   atoms({
+    gap: 'x2',
     w: '100%',
     justifyContent: 'flex-start',
     borderRadius: 'curved',
     display: 'flex',
   }),
 ])
+
+export const modal = style({
+  maxWidth: 680,
+})
 
 export const modalWrapper = style([
   {
@@ -30,54 +32,23 @@ export const modalWrapper = style([
     '::-webkit-scrollbar': {
       display: 'none',
     },
-    height: 400,
   },
-  atoms({
-    overflowY: 'scroll',
-  }),
 ])
 
-export const tabsButton = style([
+export const filteredItems = style([
   {
-    zIndex: MODAL_TAB_LAYER,
-    backgroundColor: `${color.white100}`,
-    borderBottom: `2px solid transparent`,
-    selectors: {
-      '&:first-child': { borderTopLeftRadius: space.x10 },
-      '&:last-child': { borderTopRightRadius: space.x10 },
-      '&:hover': { borderBottom: `2px solid ${color.black30}` },
-      '&[data-state="active"]': {
-        color: vars.color.text.primary,
-        borderBottom: `2px solid ${color.black70}`,
-      },
-    },
+    maxHeight: 'calc((80px * 5) + (80px * 0.5) + (16px * 5) + 2px)', // (80px * 5 rows) + (0.5 * 1 row) + (5 * 16px gap) + 2px borderTop
+    borderBottomLeftRadius: '10px',
+    borderBottomRightRadius: '10px',
   },
-  atoms({
-    borderColor: 'transparent',
-    color: 'tertiary',
-    paddingBottom: 'x2',
-    fontSize: '20px',
-    padding: 'x5',
-    width: '100%',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }),
 ])
 
-export const tabsList = style([
-  {
-    borderBottom: `2px solid ${color.black10}`,
-    zIndex: MODAL_TAB_LAYER,
-  },
-  atoms({
-    display: 'flex',
-    position: 'absolute',
-    width: '100%',
-  }),
-])
-
-export const label = style({
-  color: vars.color.text.primary,
+export const filterUnscrolled = style({
+  borderTop: `2px solid transparent`,
+})
+export const filterScrolled = style({
+  borderColor: color.background2,
+})
+export const floor = atoms({
+  textTransform: 'none',
 })

@@ -1,51 +1,44 @@
-import { useMemo } from 'react'
-import { Stack, Box, Flex, Heading, Separator } from '@zoralabs/zord'
-import { Link } from 'components/Link'
-import { NFTCardMarket } from '@market'
-import {
-  cardWrapper,
-  titleWrapper,
-  titleScroll,
-  titleHeading,
-  cardImageWrapper,
-} from '@media/NftMedia.css'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ImageWithNounFallback } from 'components'
-import { useNFTProvider, useTitleWithFallback } from '@shared'
+import { Link } from 'components/Link'
+
+import { useMemo } from 'react'
+
+import { NFTCardMarket } from '@market'
+import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import {
+  cardImageWrapper,
+  cardWrapper,
+  titleHeading,
+  titleScroll,
+  titleWrapper,
+} from '@media/NftMedia.css'
+import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
+import { useIsOwner, useNFTProvider, useTitleWithFallback } from '@shared'
+import { Box, Flex, Heading, Separator, Stack } from '@zoralabs/zord'
 
 export function NFTCard() {
-  const {
-    hooksData: { data },
+  const { nft, contractAddress, tokenId } = useNFTProvider()
+  const { isOwner } = useIsOwner(nft)
+  const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
     tokenId,
-  } = useNFTProvider()
+    defaultTitle: nft?.metadata?.name,
+  })
 
-  const { fallbackTitle } = useTitleWithFallback(
-    contractAddress,
-    tokenId,
-    data?.metadata?.name
-  )
-
-  const srcImg = useMemo(
-    () =>
-      data?.media?.mimeType === 'image/svg+xml'
-        ? data?.media?.image?.uri
-        : data?.media?.poster?.uri,
-    [data?.media]
-  )
+  const srcImg = useOptionalImageURIDecode(nft!) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
 
   const useTitleScroll = useMemo(() => {
-    if (data?.metadata && data?.metadata?.name) {
-      return data?.metadata?.name.split('').length > 25
+    if (nft?.metadata && nft?.metadata?.name) {
+      return nft?.metadata?.name.split('').length > 25
     }
-  }, [data?.metadata])
+  }, [nft?.metadata])
 
-  if (!data) return null
+  if (!nft || !contractAddress || !tokenId) return null
 
   return (
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
       <Link href={`/collections/${contractAddress}/${tokenId}`}>
-        <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
+        <Box w="100%" className={cardImageWrapper} backgroundColor="background2">
           {contractAddress && tokenId && (
             <ImageWithNounFallback
               tokenContract={contractAddress}
@@ -55,7 +48,7 @@ export function NFTCard() {
           )}
         </Box>
       </Link>
-      <Stack gap="x2" mt="x2" px="x4" pb="x4" flex="1">
+      <Stack gap="x2" mt="x2" px="x4" pb="x4" flex={1}>
         <Flex
           className={[titleWrapper, useTitleScroll && titleScroll]}
           style={{
@@ -72,15 +65,20 @@ export function NFTCard() {
             <Flex align="center" gap="x2">
               <CollectionThumbnail
                 collectionAddress={contractAddress}
+                initialNFT={nft}
                 radius="round"
                 size="xs"
               />
-              <Heading size="xs">{data?.nft?.contract.name}</Heading>
+              <Heading size="xs">{nft?.nft?.contract.name}</Heading>
             </Flex>
           </Link>
         </Flex>
-        <Separator mt="x1" />
-        <NFTCardMarket nftData={data} />
+        {isOwner && (
+          <>
+            <Separator mt="x1" />
+            <NFTCardMarket nftObj={nft} />
+          </>
+        )}
       </Stack>
     </Stack>
   )

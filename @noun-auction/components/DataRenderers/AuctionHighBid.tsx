@@ -1,9 +1,8 @@
+import { sidebarHighBid } from '@noun-auction/styles/NounishStyles.css'
+import { lightFont } from '@shared'
 import { Flex, Label } from '@zoralabs/zord'
 
 import { EthAmount } from './EthAmount'
-import { sidebarHighBid } from '@noun-auction/styles/NounishStyles.css'
-
-import { lightFont } from '@shared'
 
 export function AuctionHighBid({
   label = 'Current bid',

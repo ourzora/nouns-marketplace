@@ -1,6 +1,7 @@
-import { NounishAuction } from '@noun-auction'
+import { DocsPageWrapper } from 'components'
 import { daos } from 'constants/collection-addresses'
-import { DocsPageWrapper } from 'components/utils/DocsPageWrapper'
+
+import { NounishAuction } from '@noun-auction'
 import { Grid, Heading, Stack } from '@zoralabs/zord'
 
 export default function NounsAuctionHistory() {
@@ -12,120 +13,115 @@ export default function NounsAuctionHistory() {
       useBackButton
     >
       <Grid style={{ gridTemplateColumns: '1fr' }} gap="x4">
-        {daos.map((dao) => {
+        {/* {daos.map((dao) => {
           return (
             <NounishAuction
-              key={dao.contractAddress}
-              daoConfig={dao}
+              key={dao.collectionAddress}
+              dao={dao}
               debug
               showBidHistory
               showLabels
               layout="withHistory"
-              /* Wrapper Styling */
-              borderColor="secondary"
+              borderColor="border"
               borderStyle="solid"
               borderWidth="normal"
               borderRadius="phat"
-              backgroundColor="primary"
+              backgroundColor="background1"
               p="x4"
             />
           )
-        })}
+        })} */}
       </Grid>
       <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x4">
         <Stack>
           <Heading mb="x4">Completed Nouns auction</Heading>
-          <NounishAuction
-            daoConfig={daos[0]}
+          {/* <NounishAuction
+            dao={daos[0]}
             tokenId="152"
             debug
             showBidHistory
             showLabels
             layout="withHistory"
-            /* Wrapper Styling */
-            borderColor="secondary"
+            borderColor="border"
             borderStyle="solid"
             borderWidth="normal"
             borderRadius="phat"
-            backgroundColor="primary"
+            backgroundColor="background1"
             p="x4"
-          />
+          /> */}
         </Stack>
         <Stack>
           <Heading mb="x4">Completed LilNouns auction</Heading>
-          <NounishAuction
-            daoConfig={daos[1]}
+          {/* <NounishAuction
+            dao={daos[1]}
             tokenId="3369"
             debug
             showBidHistory
             showLabels
             layout="withHistory"
-            /* Wrapper Styling */
-            borderColor="secondary"
+            borderColor="border"
             borderStyle="solid"
             borderWidth="normal"
             borderRadius="phat"
-            backgroundColor="primary"
+            backgroundColor="background1"
             p="x4"
-          />
+          /> */}
         </Stack>
       </Grid>
       <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x4">
         <Stack>
           <Heading mb="x4">Nouns No Auction: Winner nounders.eth</Heading>
-          <NounishAuction
-            daoConfig={daos[0]}
+          {/* <NounishAuction
+            dao={daos[0]}
             tokenId="300"
             debug
             showBidHistory
             showLabels
             layout="withHistory"
-            /* Wrapper Styling */
-            borderColor="secondary"
+            borderColor="border"
             borderStyle="solid"
             borderWidth="normal"
             borderRadius="phat"
-            backgroundColor="primary"
+            backgroundColor="background1"
             p="x4"
-          />
+          /> */}
         </Stack>
         <Stack>
           <Heading mb="x4">LilNouns No Auction: Winner lilnounders.eth</Heading>
-          <NounishAuction
-            daoConfig={daos[1]}
+          {/* <NounishAuction
+            dao={daos[1]}
             tokenId="3370"
             debug
             showBidHistory
             showLabels
             layout="withHistory"
-            /* Wrapper Styling */
-            borderColor="secondary"
+            borderColor="border"
             borderStyle="solid"
             borderWidth="normal"
             borderRadius="phat"
-            backgroundColor="primary"
+            backgroundColor="background1"
             p="x4"
           />
+          */}
         </Stack>
       </Grid>
       <Stack>
         <Heading mb="x4">Nouns Auction History</Heading>
-        <NounishAuction
+        {/* <NounishAuction
           showAuctionRow={false}
-          daoConfig={daos[0]}
+          dao={daos[0]}
           tokenId="125"
           debug
           showBidHistory
           showLabels
           layout="historyOnly"
-          /* Wrapper Styling */
-          borderColor="secondary"
+          borderColor="border"
           borderStyle="solid"
           borderWidth="normal"
           borderRadius="phat"
-          backgroundColor="primary"
+          backgroundColor="background1"
           p="x4"
-        />
+        /> */}
       </Stack>
     </DocsPageWrapper>
   )

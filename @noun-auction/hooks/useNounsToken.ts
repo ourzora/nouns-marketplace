@@ -1,6 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
-import { nounsTokenAbi } from '@noun-auction/contracts'
 import { useContractRead } from 'wagmi'
+
+import { useEffect, useMemo, useState } from 'react'
+
+import { nounsTokenAbi } from '@noun-auction/contracts'
+import * as Sentry from '@sentry/react'
 
 const PINATA_API_URL = 'https://gateway.pinata.cloud/ipfs/'
 
@@ -67,7 +70,7 @@ export function useNounsToken(contractAddress: string, tokenId: string) {
         const result = JSON.parse(json)
         return result
       } catch (err) {
-        console.error(err)
+        Sentry.captureException(err)
       }
     }
   }, [dataURI, isBase64])

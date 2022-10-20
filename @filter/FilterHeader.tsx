@@ -1,12 +1,13 @@
+import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
+import { Button, Flex, Text } from '@zoralabs/zord'
+
+import { ActiveFilterCounter } from './ActiveFilterCounter'
 import {
   filterCounter,
   filterHeader,
   filtersButton,
   stickyFilterHeader,
 } from './CollectionsFilter.css'
-import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
-import { Button, Flex, Text } from '@zoralabs/zord'
-import { ActiveFilterCounter } from './ActiveFilterCounter'
 
 export function FilterHeader({
   children,
@@ -45,7 +46,7 @@ export function FilterHeader({
             className={filterCounter}
             as="span"
             variant="paragraph-sm"
-            color="tertiary"
+            color="text3"
             pl="x1"
             pr="x10"
           >

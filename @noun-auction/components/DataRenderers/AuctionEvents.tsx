@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { NounsAuctionEventTypes } from '@noun-auction/typings'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
+
+import { NounsAuctionEventTypes, useNounishAuctionProvider } from '@noun-auction'
 
 export type AuctionEventsProps = {
   auctionEvent: string

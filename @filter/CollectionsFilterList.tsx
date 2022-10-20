@@ -1,8 +1,10 @@
-import { FilterCollectionListItem } from './FilterCollectionListItem'
-import { Accordion, InputField, Stack } from '@zoralabs/zord'
 import { useState } from 'react'
-import { useSearchQuery } from './hooks/useSearchQuery'
+
 import { SearchableEntity } from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { Accordion, InputField, Stack } from '@zoralabs/zord'
+
+import { FilterCollectionListItem } from './FilterCollectionListItem'
+import { useSearchQuery } from './hooks/useSearchQuery'
 
 export function CollectionsFilterList() {
   const [query, setQuery] = useState<string>('')

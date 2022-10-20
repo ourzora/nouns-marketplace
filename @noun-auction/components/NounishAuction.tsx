@@ -1,24 +1,25 @@
-import { Separator, Stack, BoxProps, Grid, Box } from '@zoralabs/zord'
+import { NounsDao } from 'types/zora.api.generated'
+
+import { isAfter } from 'date-fns'
+
+import { useNounishAuctionQuery } from '@noun-auction'
 import { NounishAuctionProvider } from '@noun-auction/providers'
-import { AuctionHistory } from './AuctionHistory'
-import { AuctionRow } from './AuctionRow'
-import { ActiveAuctionRow } from './ActiveAuction/ActiveAuctionRow'
 import {
   auctionWrapper,
   auctionWrapperVariants,
-  bidHistoryWrapper,
   wrapperHover,
 } from '@noun-auction/styles/NounishStyles.css'
-import { NounsBuilderAuction, NounsDao } from 'types/zora.api.generated'
-import { useNounishAuctionQuery } from '@noun-auction'
-import { isAfter } from 'date-fns'
+import { Box, BoxProps, Grid, Separator, Stack } from '@zoralabs/zord'
+
+import { ActiveAuctionRow } from './ActiveAuction/ActiveAuctionRow'
+import { AuctionRow } from './AuctionRow'
 
 export interface TokenInfoConfig extends BoxProps {
   /* ~ Move to provider as config object */
   hideThumbnail?: boolean
   hideTitle?: boolean
   hideCollectionTitle?: boolean
-  thumbnailSize?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | '100%' | undefined
+  thumbnailSize?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | '100%'
   routePrefix?: string
 }
 
@@ -52,6 +53,7 @@ export function NounishAuction({
   hideCollectionTitle = false,
   routePrefix = 'collections',
   thumbnailSize = '100%',
+  className,
   showLabels,
   ...props
 }: NounishAuctionProps) {
@@ -63,11 +65,7 @@ export function NounishAuction({
     : false
 
   return (
-    <Box
-      key={dao.collectionAddress}
-      className={layout === 'row' && wrapperHover}
-      {...props}
-    >
+    <Box className={[layout === 'row' && wrapperHover, className]} {...props}>
       <Grid
         className={[
           'nounish-auction__auction-data-wrapper',
@@ -78,7 +76,11 @@ export function NounishAuction({
         <NounishAuctionProvider dao={dao} tokenId={tokenId} layout={layout}>
           {showAuctionRow && activeNounishAuction && (
             <>
+              {/* FIXME ! cast */}
               <AuctionRow
+                tokenId={tokenId!}
+                activeAuctionId={activeNounishAuction.auction}
+                name={dao.name!}
                 auctionDataComponent={<div>AUCTION DATA</div>}
                 activeAuctionComponent={
                   <ActiveAuctionRow

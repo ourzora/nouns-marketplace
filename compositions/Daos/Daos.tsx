@@ -1,8 +1,10 @@
-import { Stack, Heading, Box } from '@zoralabs/zord'
-import { NounishAuction } from '@noun-auction'
 // import { daos } from 'constants/collection-addresses'
-import { daosWrapper, daosRow } from './Daos.css'
 import { useNounsDaos } from 'hooks/useNounsDaos'
+
+import { NounishAuction } from '@noun-auction'
+import { Box, Heading, Stack } from '@zoralabs/zord'
+
+import { daosRow, daosWrapper } from './Daos.css'
 
 export function DaoTable() {
   const { daos } = useNounsDaos()

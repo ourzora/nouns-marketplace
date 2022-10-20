@@ -1,22 +1,24 @@
-import { Stack, Box, Flex, Heading, Separator, Grid } from '@zoralabs/zord'
-import { Link } from 'components/Link'
-import { useTitleWithFallback } from '@shared'
-import {
-  cardWrapper,
-  titleWrapper,
-  titleHeading,
-  cardImageWrapper,
-} from '@media/NftMedia.css'
 import { ImageWithNounFallback } from 'components'
-import { AuctionHighBid, AuctionBidder } from './DataRenderers'
-import { AuctionCountdown } from './ActiveAuction'
-import { DaoConfigProps } from '@noun-auction/typings'
-import { SettleAuction, PlaceNounsBid } from './AuctionUi'
+import { Link } from 'components/Link'
+
+import {
+  cardImageWrapper,
+  cardWrapper,
+  titleHeading,
+  titleWrapper,
+} from '@media/NftMedia.css'
+import { useNounishAuctionQuery } from '@noun-auction'
 import {
   activeAuctionCardData,
   auctionWrapperVariants,
 } from '@noun-auction/styles/NounishStyles.css'
-import { useNounishAuctionQuery } from '@noun-auction'
+import { DaoConfigProps } from '@noun-auction/typings'
+import { useTitleWithFallback } from '@shared'
+import { Box, Flex, Grid, Heading, Separator, Stack } from '@zoralabs/zord'
+
+import { AuctionCountdown } from './ActiveAuction'
+import { PlaceNounsBid, SettleAuction } from './AuctionUi'
+import { AuctionBidder, AuctionHighBid } from './DataRenderers'
 
 export function ActiveAuctionCard({
   dao,
@@ -32,9 +34,12 @@ export function ActiveAuctionCard({
     collectionAddress,
   })
   const tokenId = activeAuction && activeAuction.tokenId
+  const contractAddress = activeAuction && activeAuction.collectionAddress
 
   // FIXME: remove useNFT from useTitleWithFallback
-  const { fallbackTitle } = useTitleWithFallback(collectionAddress, tokenId!)
+  const { fallbackTitle } = useTitleWithFallback({ contractAddress, tokenId })
+
+  if (!tokenId) return null
 
   return (
     <Stack

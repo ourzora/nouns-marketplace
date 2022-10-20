@@ -1,6 +1,8 @@
-import { avatarPadding, filterOption } from './CollectionsFilter.css'
-import { Checkbox, Flex, Icon, Text } from '@zoralabs/zord'
 import { Fragment, ReactNode } from 'react'
+
+import { Checkbox, Flex, Icon, Text } from '@zoralabs/zord'
+
+import { avatarPadding, filterOption } from './CollectionsFilter.css'
 
 export interface FilterOptionButtonProps {
   iconSize?: number
@@ -48,11 +50,11 @@ export function FilterOptionButton({
       pl="x3"
       pointerEvents={disabled ? 'none' : 'all'}
       mr={rightPad ? 'x1' : 'x0'}
-      borderColor={checked || useBorder ? 'primary' : 'tertiary'}
+      borderColor={checked || useBorder ? 'border' : 'background2'}
       borderStyle="solid"
       borderWidth="thin"
       borderRadius="round"
-      color="primary"
+      color="accent"
       onClick={onClick}
     >
       {children}
@@ -66,11 +68,7 @@ export function FilterOptionButton({
           onChange={onClick}
         />
       )}
-      <Text
-        variant="paragraph-sm"
-        inline
-        style={{ color: disabled ? 'tertiary' : 'primary' }}
-      >
+      <Text variant="paragraph-sm" inline color={disabled ? 'text3' : 'text1'}>
         {label}
       </Text>
       {showCloseIcon && <Icon id="Close" size="sm" />}

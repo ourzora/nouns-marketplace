@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
 import { Box, BoxProps } from '@zoralabs/zord'
+
 import { errorBox } from '../SharedStyles.css'
 
 interface PrintErrorProps extends BoxProps {
@@ -7,10 +7,6 @@ interface PrintErrorProps extends BoxProps {
 }
 
 export function PrintError({ errorMessage, ...props }: PrintErrorProps) {
-  useEffect(() => {
-    console.log(errorMessage)
-  }, [errorMessage])
-
   return (
     <Box className={errorBox} {...props}>
       <code>

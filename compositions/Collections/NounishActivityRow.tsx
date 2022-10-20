@@ -21,7 +21,7 @@ export function NounishActivityRow() {
       showLabels
       hideCollectionTitle={false}
       borderRadius="curved"
-      borderColor="tertiary"
+      borderColor="text3"
       tokenId={tokenId}
       p="x4"
     />

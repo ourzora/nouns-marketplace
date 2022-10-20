@@ -1,14 +1,18 @@
+import { Button } from 'components/Button'
+
 import { useCallback, useState } from 'react'
-import { Stack, Button, Paragraph } from '@zoralabs/zord'
+
 import {
+  ContractInteractionStatus,
   ERC721ContractApprovalForm,
   ListV3AskForm,
+  MODAL_TYPES,
+  NFTSummary,
   V3ApprovalForm,
-  ContractInteractionStatus,
-  NftInfo,
 } from '@market/components'
-import { ASKS_V11_ADDRESS, ERC721_TRANSFER_HELPER_ADDRESS } from '@shared'
 import { useERC721TokenApproval, useZoraV3ModuleApproval } from '@market/hooks'
+import { ASKS_V11_ADDRESS, ERC721_TRANSFER_HELPER_ADDRESS } from '@shared'
+import { Paragraph, Stack } from '@zoralabs/zord'
 
 type ListNFTStep =
   | 'CheckApprovals'
@@ -64,7 +68,11 @@ export function ListV3AskWizard({
   return (
     <Stack w="100%" gap="x4" p="x4">
       {wizardStep !== 'Confirmation' && (
-        <NftInfo collectionAddress={tokenAddress} tokenId={tokenId} modalType="list" />
+        <NFTSummary
+          collectionAddress={tokenAddress}
+          tokenId={tokenId}
+          modalType={MODAL_TYPES.list}
+        />
       )}
       {wizardStep === 'CheckApprovals' ? (
         <Stack gap="x4">

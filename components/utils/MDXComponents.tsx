@@ -1,13 +1,15 @@
-import { Heading, Paragraph, Box } from '@zoralabs/zord'
+import { Box, Heading, Paragraph } from '@zoralabs/zord'
+
 import {
-  codeWrapper,
-  codeSelector,
-  blockQuoteSelector,
-  ulSelector,
   aSelector,
-  hrSelector,
+  blockQuoteSelector,
+  codeSelector,
+  codeWrapper,
   h1Selector,
+  hrSelector,
+  olSelector,
   pSelector,
+  ulSelector,
 } from './UtilStyles.css'
 
 export function slugify(string?: string) {
@@ -54,6 +56,7 @@ export const BlockQuote = ({ ...props }) => (
 )
 
 export const UL = ({ ...props }) => <Box as="ul" {...props} className={[ulSelector]} />
+export const OL = ({ ...props }) => <Box as="ol" {...props} className={[olSelector]} />
 
 export const A = ({ ...props }) => {
   const isLink = props?.href.startsWith('http')
@@ -92,6 +95,7 @@ export const MDXComponents = {
   code: Code,
   blockquote: BlockQuote,
   ul: UL,
+  ol: OL,
   // em: EM,
   hr: HR,
 }

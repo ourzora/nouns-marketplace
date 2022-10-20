@@ -1,12 +1,9 @@
 import { useEffect } from 'react'
-import { Flex, Label } from '@zoralabs/zord'
 
-// @noun-auction
 import { useCountdown } from '@noun-auction/hooks/useCountdown'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
-
-// @shared
 import { lightFont } from '@shared'
+import { Flex, Label } from '@zoralabs/zord'
 
 export function AuctionCountdown({
   showLabels,
@@ -14,7 +11,6 @@ export function AuctionCountdown({
   label = 'Ends in',
   layoutDirection = 'row',
   activeAuction,
-  // FIXME
   setTimerComplete = () => {},
   layout,
   ...props

@@ -117,11 +117,11 @@ const { activeAuctionId  } = useNounishAuctionProvider()
   showLabels
   layout="withHistory"
   /* Example of additional wrapper styling with Zord atom props */
-  borderColor="secondary"
+  borderColor="border"
   borderStyle="solid"
   borderWidth="normal"
   borderRadius="phat"
-  backgroundColor="primary"
+  backgroundColor="background1"
   p="x4"
 />
 ```

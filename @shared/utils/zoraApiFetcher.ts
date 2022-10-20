@@ -1,4 +1,7 @@
 import { DocumentNode } from 'graphql'
+
+import * as Sentry from '@sentry/react'
+
 import { client } from './gqlClient'
 
 export async function zoraApiFetcher(query: DocumentNode, variables?: any) {
@@ -9,6 +12,6 @@ export async function zoraApiFetcher(query: DocumentNode, variables?: any) {
     const response = await client.request(query, { ...variables, network })
     return response
   } catch (err) {
-    console.error(err)
+    Sentry.captureException(err)
   }
 }

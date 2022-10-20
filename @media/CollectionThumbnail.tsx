@@ -1,8 +1,13 @@
-import { Box, Flex, Label, BoxProps } from '@zoralabs/zord'
-import { nftThumbnail } from './NftMedia.css'
-import { useNFT } from '@zoralabs/nft-hooks'
-import { useRawImageTransform } from './hooks/useRawImageTransform'
 import { ImageWithNounFallback } from 'components'
+
+import { useMemo } from 'react'
+
+import { NFTObject, useNFT } from '@zoralabs/nft-hooks'
+import { Box, BoxProps, Flex, Label } from '@zoralabs/zord'
+
+import { nftThumbnail } from './NftMedia.css'
+import { useOptionalImageURIDecode } from './hooks/useImageURIDecode'
+import { useRawImageTransform } from './hooks/useRawImageTransform'
 
 export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
 
@@ -28,6 +33,7 @@ export const returnThumbnailSize = (size: SizeProps) => {
 export interface CollectionThumbnailProps extends BoxProps {
   collectionAddress: string | undefined
   tokenId?: string
+  initialNFT?: NFTObject
   size?: SizeProps
   radius?: 'curved' | 'round' | 'phat'
   useTitle?: boolean
@@ -41,27 +47,35 @@ export function CollectionThumbnail({
   radius = 'curved',
   useTitle = false,
   thumbnailStyle,
+  initialNFT,
   ...props
 }: CollectionThumbnailProps) {
-  const { data } = useNFT(collectionAddress, tokenId)
-  const { image } = useRawImageTransform(data?.media?.image?.uri)
+  const { data: nft = initialNFT } = useNFT(collectionAddress, tokenId)
+  const { image: rawImageFallback } = useRawImageTransform(nft?.media?.image?.uri)
+  const decodedImgSrc = useOptionalImageURIDecode(nft!) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
+  const srcImg = useMemo(
+    () => decodedImgSrc ?? rawImageFallback,
+    [decodedImgSrc, rawImageFallback]
+  )
+
+  const thumbnailSize = useMemo(() => returnThumbnailSize(size), [size])
 
   if (!collectionAddress) return null
 
   return (
     <Flex align="center" gap="x4" {...props}>
       <Box
-        h={returnThumbnailSize(size)}
+        h={thumbnailSize}
         borderRadius={radius}
         className={['zora-media__nft-thumbnail', nftThumbnail]}
       >
         <ImageWithNounFallback
-          srcImg={image}
+          srcImg={srcImg}
           tokenId={tokenId}
           tokenContract={collectionAddress}
         />
       </Box>
-      {useTitle && <Label size="lg">{data?.nft?.contract?.name}</Label>}
+      {useTitle && <Label size="lg">{nft?.nft?.contract?.name}</Label>}
     </Flex>
   )
 }

@@ -1,12 +1,14 @@
-import * as styles from './CollectionsFilter.css'
-import { isAddressMatch } from '@shared'
-import { Box, BoxComponentProps, Select, Text } from '@zoralabs/zord'
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react'
+
+import { isAddressMatch } from '@shared'
 import { Currency } from '@shared'
+import { Box, BoxComponentProps, Select, Text } from '@zoralabs/zord'
+
+import * as styles from './CollectionsFilter.css'
 
 export interface CurrencySelectProps extends BoxComponentProps<'select'> {
+  name: string
   autoFocus?: boolean
-  name?: string
   placeholder?: string
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void
   options?: Currency[]
@@ -16,10 +18,10 @@ export interface CurrencySelectProps extends BoxComponentProps<'select'> {
 const ICON_WIDTH = 32
 
 export function CurrencySelect({
+  name,
   autoFocus,
   placeholder,
   onChange,
-  name,
   options = [],
   variant,
   ...props
@@ -53,10 +55,10 @@ export function CurrencySelect({
       </Text>
 
       <Select
+        name={name}
         autoFocus={autoFocus}
         className={styles.currencySelect({ variant })}
         onChange={handleChange}
-        name={name}
         style={{ minWidth }}
       >
         {placeholder && (

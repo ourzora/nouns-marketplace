@@ -1,6 +1,7 @@
-import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, color, media, radii } from '@zoralabs/zord'
 import { MAX_WIDTH } from 'styles/style-constants'
+
+import { globalStyle, style } from '@vanilla-extract/css'
+import { atoms, color, media, radii } from '@zoralabs/zord'
 
 export const rankingWrapper = style([
   {
@@ -47,7 +48,7 @@ export const rankingRow = style([
     gridTemplateColumns: '2fr 1fr',
     gridTemplateRows: 'auto',
     borderRadius: radii.phat,
-    border: `2px solid ${color.black10}`,
+    border: `2px solid ${color.background2}`,
     '@media': {
       [media.min1024]: {
         gridTemplateColumns: '1fr 3.75fr 100px',
@@ -64,7 +65,7 @@ export const rankingRow = style([
             width: 'calc(100% + 30px)',
             height: 'calc(100% + 20px)',
             transform: 'translateX(-15px) translateY(-10px)',
-            backgroundColor: color.black5,
+            backgroundColor: color.background2,
             position: 'absolute',
             top: '0',
             left: '0',
@@ -142,7 +143,7 @@ export const rankingStats = style([
     zIndex: '10',
     gridArea: '2',
     gridColumn: '1 / 3',
-    borderTop: `2px solid ${color.black5}`,
+    borderTop: `2px solid ${color.background2}`,
     '@media': {
       [media.min1024]: {
         gridTemplateColumns: 'repeat(4, 1fr)',

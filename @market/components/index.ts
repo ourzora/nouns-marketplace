@@ -5,7 +5,6 @@ export * from './FillV3AskInfo'
 
 export * from './ListV3AskForm'
 export * from './ListV3AskWizard'
-export * from './ListV3AskModal'
 
 /* Approval Forms */
 export * from './V3ApprovalForm'
@@ -19,7 +18,7 @@ export * from './TransactionSubmitButton'
 export * from './ContractInteractionStatus'
 export * from './AddressWithLink'
 export * from './ModalTitleAndDescription'
-export * from './NftInfo'
+export * from './NFTSummary'
 export * from './NFTOwner'
-export * from './WalletBalace'
+export * from './WalletBalance'
 export * from './BigNumberField'

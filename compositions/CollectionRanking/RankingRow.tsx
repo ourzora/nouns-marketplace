@@ -1,16 +1,20 @@
+import { Link } from 'components/Link'
+import { clickAnimation } from 'styles/styles.css'
+
+import { CollectionsData, useAggregate } from 'hooks'
+
 import { useMemo } from 'react'
-import { Grid, Flex, Label, Stack, StackProps } from '@zoralabs/zord'
+
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { CollectionLink, numberFormatter, roundTwoDecimals } from '@shared'
+import { Flex, Grid, Label, Stack, StackProps } from '@zoralabs/zord'
+
 import {
   rankingRow,
-  rankingStats,
   rankingRowInfo,
   rankingRowLink,
+  rankingStats,
 } from './CollectionRanking.css'
-import { clickAnimation } from 'styles/styles.css'
-import { Link } from 'components/Link'
-import { useAggregate, CollectionsData } from 'hooks'
-import { roundTwoDecimals, CollectionLink, numberFormatter } from '@shared'
 
 /* todo: add a skeleton or some kind of loading state */
 
@@ -57,7 +61,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
               <Label
                 size="md"
                 as="span"
-                color="tertiary"
+                color="text3"
                 display={{ '@initial': 'inline', '@1024': 'none' }}
               >
                 Volume
@@ -74,7 +78,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
               <Label
                 size="md"
                 as="span"
-                color="tertiary"
+                color="text3"
                 display={{ '@initial': 'inline', '@1024': 'none' }}
               >
                 Items
@@ -87,7 +91,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
               <Label
                 size="md"
                 as="span"
-                color="tertiary"
+                color="text3"
                 display={{ '@initial': 'inline', '@1024': 'none' }}
               >
                 Floor price
@@ -111,7 +115,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
               <Label
                 size="md"
                 as="span"
-                color="tertiary"
+                color="text3"
                 display={{ '@initial': 'inline', '@1024': 'none' }}
               >
                 Owners
@@ -125,7 +129,6 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
             <CollectionLink
               variant="secondary"
               contractAddress={collection.address}
-              borderRadius="curved"
               style={{ height: 42 }}
             >
               View

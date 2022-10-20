@@ -1,12 +1,13 @@
-import { useMemo } from 'react'
 import { useEnsName } from 'wagmi'
-import { Flex, Label, Icon } from '@zoralabs/zord'
+
+import { useMemo } from 'react'
+
 import { AddressZero } from '@ethersproject/constants'
+import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
+import { isAddressMatch, lightFont, useShortAddress } from '@shared'
+import { Flex, Icon, Label } from '@zoralabs/zord'
 
 import { EnsAvatar } from './EnsAvatar'
-import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
-
-import { lightFont, useShortAddress, isAddressMatch } from '@shared'
 
 export function AuctionBidder({
   label = 'Top bidder',
@@ -16,13 +17,27 @@ export function AuctionBidder({
   layout,
   activeAuction,
   ...props
-}: any) {
+}: // FIXME
+any) {
   const { data: ensName } = useEnsName({
     address: activeAuction?.highestBidder,
   })
 
   const shortAddress = useShortAddress(activeAuction?.highestBidder)
   const highestBidder = useMemo(() => activeAuction?.highestBidder, [activeAuction])
+
+  const highestBidderAddress = useMemo(
+    () =>
+      activeAuction?.properties?.highestBidder
+        ? activeAuction?.properties?.highestBidder
+        : undefined,
+    [activeAuction?.properties?.highestBidder]
+  )
+
+  const hasNonZeroHighestBidder = useMemo(
+    () => !isAddressMatch(highestBidderAddress, AddressZero),
+    [highestBidderAddress]
+  )
 
   return (
     <Flex
@@ -54,17 +69,17 @@ export function AuctionBidder({
           style={{ lineHeight: '1.15' }}
           align="right"
           className={[sideBarUpperLabel]}
-          color={!isAddressMatch(highestBidder, AddressZero) ? 'primary' : 'tertiary'}
+          color={hasNonZeroHighestBidder ? 'primary' : 'tertiary'}
         >
-          {!isAddressMatch(highestBidder, AddressZero) ? (
+          {hasNonZeroHighestBidder ? (
             <Flex gap="x2" align="center">
               <Label size="md" gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
-                {ensName ? ensName : shortAddress}
+                {ensName ?? shortAddress}
               </Label>
               {useAvatar && (
                 <>
-                  {layout !== 'sideBarBid' && highestBidder ? (
-                    <EnsAvatar address={highestBidder} />
+                  {layout !== 'sideBarBid' && highestBidderAddress ? (
+                    <EnsAvatar address={highestBidderAddress} />
                   ) : (
                     <Icon id="ArrowRightAngle" />
                   )}

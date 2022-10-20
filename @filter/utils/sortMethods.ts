@@ -1,4 +1,10 @@
 import {
+  CollectionAttributesFilter,
+  MarketStatusFilter,
+  PriceRangeFilter,
+  SortMethodType,
+} from '@filter/typings'
+import {
   MarketCategory,
   MarketStatus,
   MarketType,
@@ -7,13 +13,6 @@ import {
   TokenSortKey,
   TokensQueryFilter,
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
-
-import {
-  CollectionAttributesFilter,
-  SortMethodType,
-  MarketStatusFilter,
-  PriceRangeFilter,
-} from '@filter/typings'
 
 export function marketStatusToSortAxis(marketType: MarketStatusFilter) {
   switch (marketType) {

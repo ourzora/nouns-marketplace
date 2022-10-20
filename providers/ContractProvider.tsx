@@ -1,5 +1,4 @@
-import { createContext, useContext, ReactNode, useEffect, useState } from 'react'
-import { useContractRead } from 'wagmi'
+import { ReactNode, createContext, useContext } from 'react'
 
 export type ContractProps = {
   contractAddress: string

@@ -1,8 +1,8 @@
 /**
  * Ideally there would be a simple pattern for naming convention of these market types - as more are added.
  */
-import { NounishMarketTypes, DaoConfigProps } from '@noun-auction/typings'
 import { nounsAbi } from '@noun-auction/contracts'
+import { DaoConfigProps, NounishMarketTypes } from '@noun-auction/typings'
 
 export type NounishMarketTypesProps = {
   type: NounishMarketTypes

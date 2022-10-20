@@ -1,7 +1,9 @@
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { FilterStore } from './filter-store'
 import { ReactNode } from 'react'
+
 import { stringDefaults, themeDefaults } from '@filter/constants'
+import { NFTObject } from '@zoralabs/nft-hooks'
+
+import { FilterStore } from './filter-store'
 
 export type Strings = typeof stringDefaults
 export type Theme = typeof themeDefaults
@@ -44,7 +46,7 @@ export interface FilterConfigProps {
 export interface FilterContextInputProps extends FilterConfigProps {
   contractAddress?: string | null
   ownerAddress?: string
-  contractWhiteList?: string[] | undefined
+  contractAllowList?: string[] | undefined
 }
 
 export interface TokenQueryReturnTypes extends FilterContextInputProps {

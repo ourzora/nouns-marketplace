@@ -1,10 +1,13 @@
-import { Stack, Flex, Heading, Label, Box, Button, BoxProps } from '@zoralabs/zord'
+import { Button } from 'components/Button'
 import NextLink from 'next/link'
-import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
-import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
 
-import { lightFont } from '@shared'
 import { useToken } from 'hooks/useToken'
+
+import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
+import { lightFont } from '@shared'
+import { Box, BoxProps, Flex, Heading, Label, Stack } from '@zoralabs/zord'
+
+import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 
 export interface RPCTokenInfoProps extends BoxProps {
   contractAddress: string | undefined
@@ -14,7 +17,7 @@ export interface RPCTokenInfoProps extends BoxProps {
 export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInfoProps) {
   const { token } = useToken({ address: contractAddress!, tokenId: tokenId! })
 
-  // console.log({ data })
+  if (!tokenId || !contractAddress) return null
 
   if (!tokenId || !contractAddress) return null
 

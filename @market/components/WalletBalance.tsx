@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
+
+import { roundFourDecimals, useAuth } from '@shared'
 import { Paragraph } from '@zoralabs/zord'
-import { useAuth, roundFourDecimals } from '@shared'
 
 export function WalletBalance({ address }: { address: string }) {
   const { balance: data } = useAuth()
@@ -10,7 +11,7 @@ export function WalletBalance({ address }: { address: string }) {
   }, [data])
 
   return (
-    <Paragraph color="tertiary">
+    <Paragraph color="text3">
       Your balance: {balance} {data?.symbol}
     </Paragraph>
   )

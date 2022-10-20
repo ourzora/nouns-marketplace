@@ -1,6 +1,7 @@
+import { useMemo } from 'react'
+
 import { FilterOptionButton } from './FilterOptionButton'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
-import { useMemo } from 'react'
 
 export function SelectedPriceRange() {
   const {

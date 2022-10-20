@@ -1,7 +1,9 @@
 import useSWR from 'swr'
-import { zoraApiFetcher } from '@shared'
-import { NOUNISH_AUCTIONS_QUERY } from 'data/nounishAuctions'
 import { NounishAuctionsQuery } from 'types/zora.api.generated'
+
+import { NOUNISH_AUCTIONS_QUERY } from 'data/nounishAuctions'
+
+import { zoraApiFetcher } from '@shared'
 
 export function useNounishAuctionQuery({
   collectionAddress,

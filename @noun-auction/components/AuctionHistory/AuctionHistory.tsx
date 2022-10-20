@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
-import { Stack, StackProps, Box } from '@zoralabs/zord'
 
+import { AuctionEvents, BidTransactionEvent, EventWithTimestamp } from '@noun-auction'
 // @noun-auction
 import { useNounishAuctionProvider } from '@noun-auction/providers'
-import { AuctionEvents, BidTransactionEvent, EventWithTimestamp } from '@noun-auction'
 import { auctionEventRow } from '@noun-auction/styles/NounishStyles.css'
+import { Box, Stack, StackProps } from '@zoralabs/zord'
 
 interface BidHistoryProps extends StackProps {
   children?: ReactNode

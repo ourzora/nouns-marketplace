@@ -1,5 +1,5 @@
-import { Flex, Text } from '@zoralabs/zord'
 import { useCollectionFilters } from '@filter'
+import { Flex, Text } from '@zoralabs/zord'
 
 export function ActiveFilterCounter() {
   const {
@@ -9,14 +9,14 @@ export function ActiveFilterCounter() {
   if (activeFilterCount > 0) {
     return (
       <Flex
-        backgroundColor="primary"
+        backgroundColor="background1"
         w="x5"
         h="x5"
         borderRadius="round"
         align="center"
         justify="center"
       >
-        <Text variant="label-sm" color="primary">
+        <Text variant="label-sm" color="text1">
           {activeFilterCount}
         </Text>
       </Flex>

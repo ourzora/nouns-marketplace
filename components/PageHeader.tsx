@@ -1,8 +1,8 @@
-import { Stack, Text, Paragraph, FlexProps } from '@zoralabs/zord'
-import { textCenter, pageHeadline, pageHeaderWrapper } from 'styles/styles.css'
-import { Maybe } from '@zoralabs/nft-hooks/dist/backends/zora-indexer-v1/zora-indexer-types'
+import { pageHeaderWrapper, pageHeadline, textCenter } from 'styles/styles.css'
 
 import { lightFont } from '@shared'
+import { Maybe } from '@zoralabs/nft-hooks/dist/backends/zora-indexer-v1/zora-indexer-types'
+import { FlexProps, Paragraph, Stack, Text } from '@zoralabs/zord'
 
 export interface PageHeaderProps extends FlexProps {
   headline: Maybe<string> | undefined
@@ -22,7 +22,7 @@ export function PageHeader({ headline, copy, ...props }: PageHeaderProps) {
         </Text>
       ) : null}
       {copy ? (
-        <Paragraph as="p" size="lg" className={[lightFont, textCenter]} color="primary">
+        <Paragraph as="p" size="lg" className={[lightFont, textCenter]} color="text1">
           {copy}
         </Paragraph>
       ) : null}

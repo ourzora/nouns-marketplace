@@ -1,20 +1,20 @@
-import { Flex, Separator, Stack, Box } from '@zoralabs/zord'
-
-// @noun-auction
-import { TokenInfoConfig } from '../NounishAuction'
-import { AuctionBidder, AuctionHighBid, CollectionLink } from '../DataRenderers'
-import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
-import {
-  responsiveRow,
-  sidebarBidWrapper,
-  rowButtonWrapper,
-  auctionWrapperVariants,
-} from '@noun-auction/styles/NounishStyles.css'
-
-import { AuctionCountdown } from './AuctionCountdown'
-import { RPCTokenInfo } from './RPCTokenInfo'
 import Link from 'next/link'
 import { NounsBuilderAuction } from 'types/zora.api.generated'
+
+import {
+  auctionWrapperVariants,
+  responsiveRow,
+  rowButtonWrapper,
+  sidebarBidWrapper,
+} from '@noun-auction/styles/NounishStyles.css'
+import { Flex, Separator, Stack } from '@zoralabs/zord'
+
+import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
+import { AuctionBidder, AuctionHighBid, CollectionLink } from '../DataRenderers'
+// @noun-auction
+import { TokenInfoConfig } from '../NounishAuction'
+import { AuctionCountdown } from './AuctionCountdown'
+import { RPCTokenInfo } from './RPCTokenInfo'
 
 export interface ActiveAuctionRowProps extends TokenInfoConfig {
   useModal?: boolean

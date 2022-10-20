@@ -1,12 +1,14 @@
-import { Stack, Heading } from '@zoralabs/zord'
-import { RankingRow } from './RankingRow'
+import { CollectionParsed } from 'pages'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
+
+import { Heading, Stack } from '@zoralabs/zord'
+
 import { rankingWrapper } from './CollectionRanking.css'
+import { RankingRow } from './RankingRow'
 
 export const statRows = ['Volume', 'Items', 'Floor', 'Owners']
 
-export function CollectionRanking() {
-  const { collections } = useCollectionsContext()
+export function CollectionRanking({ collections }: { collections?: CollectionParsed }) {
   return (
     <Stack className={rankingWrapper}>
       <Heading as="h2" size="lg">
@@ -18,7 +20,8 @@ export function CollectionRanking() {
           '@1024': 'x6',
         }}
       >
-        {collections.length > 0 &&
+        {collections &&
+          collections.length > 0 &&
           collections.map((collection) => (
             <RankingRow key={collection.address} collection={collection} />
           ))}

@@ -1,13 +1,15 @@
-import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { identity, pickBy, truncate } from 'lodash'
 import { NETWORK_CHAIN_ID } from 'utils/env-vars'
 import {
-  OG_IMAGE,
   APP_DESCRIPTION,
   APP_TITLE,
-  TWITTER_HANDLE,
   BASE_URL,
+  OG_IMAGE,
+  TWITTER_HANDLE,
 } from 'utils/env-vars'
+
+import { identity, pickBy, truncate } from 'lodash'
+
+import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 
 export const DEFAULT_SEO = {
   title: APP_TITLE,
@@ -131,11 +133,11 @@ export function buildGalactusNFTSeo(nft: NFTObject, path: string): SeoProps {
   }
 }
 
-export async function buildCollectionSEO(
+export function buildCollectionSEO(
   collectionName?: string | null,
   symbol?: string | null,
   iconURL?: string | null
-): Promise<SeoProps> {
+): SeoProps {
   const title = `${symbol ? symbol + ': ' : ''}${collectionName} NFT Marketplace`
   const description = `${
     symbol ? symbol + ': ' : ''

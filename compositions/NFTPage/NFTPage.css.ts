@@ -1,15 +1,19 @@
-import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, vars, typography, media, radii } from '@zoralabs/zord'
 import { MAX_WIDTH } from 'styles/style-constants'
+
+import { globalStyle, style } from '@vanilla-extract/css'
+import { atoms, media, radii, vars } from '@zoralabs/zord'
 
 export const nftPageWrapper = style([
   {
     maxWidth: MAX_WIDTH.MED,
-    gridTemplateColumns: '1fr',
+    // gridTemplateColumns: '1fr',
+    gridTemplateColumns: 'repeat(4, [col-start] 1fr)',
     gridTemplateRows: 'auto',
     '@media': {
       [media.min1024]: {
-        gridTemplateColumns: '5fr 3fr',
+        gridTemplateColumns: 'repeat(12, [col-start] 1fr)',
+        // gridTemplateColumns: '5fr 3fr',
+        maxWidth: MAX_WIDTH.XL,
       },
     },
   },
@@ -38,10 +42,12 @@ export const nftPageWrapper = style([
 
 export const nftPageHero = style([
   {
+    gridColumn: '1/span 4',
     '@media': {
       [media.min1024]: {
         borderRadius: radii.phat,
-        gridArea: 'nft-hero / 1 / 1 / 1 / 1',
+        gridColumn: '3/span 5',
+        // gridArea: 'nft-hero / 1 / 1 / 1 / 1',
       },
     },
   },
@@ -49,9 +55,16 @@ export const nftPageHero = style([
 
 export const nftInfoSidebar = style([
   {
+    gridColumn: '1/span 4',
+    // 'selectors': {
+    //   '&:last-child': {
+    //     marginTop: 'auto'
+    //   }
+    // },
     '@media': {
       [media.min1024]: {
-        gridArea: 'nft-sidebar / 1 / 1 / last-line / 1',
+        gridColumn: '8/span 3',
+        // gridArea: 'nft-sidebar / 1 / 1 / last-line / 1',
       },
     },
   },
@@ -76,27 +89,27 @@ export const nftInfoSidebar = style([
   }),
 ])
 
-export const nftInfoSidebarWrapper = style([
-  {
-    maxWidth: 400,
-  },
-  atoms({
-    width: '100%',
-    overflowX: 'hidden',
-    gap: {
-      '@initial': 'x3',
-      '@1024': 'x6',
-    },
-    position: {
-      '@initial': 'relative',
-      '@1024': 'sticky',
-    },
-    top: {
-      '@initial': 'auto',
-      '@1024': 'x6',
-    },
-  }),
-])
+// export const nftInfoSidebarWrapper = style([
+//   {
+//     maxWidth: 400,
+//   },
+//   atoms({
+//     width: '100%',
+//     overflowX: 'hidden',
+//     gap: {
+//       '@initial': 'x3',
+//       '@1024': 'x6',
+//     },
+//     position: {
+//       '@initial': 'relative',
+//       '@1024': 'sticky',
+//     },
+//     top: {
+//       '@initial': 'auto',
+//       '@1024': 'x6',
+//     },
+//   }),
+// ])
 
 globalStyle(
   `
@@ -111,11 +124,19 @@ globalStyle(
 
 export const nftMarketWrapper = style([
   {
-    borderColor: vars.color.background.secondary,
+    borderColor: vars.color.background2,
+    marginTop: 'auto',
+    borderRadius: 0,
+    borderWidth: 'none',
+    '@media': {
+      [media.min1024]: {
+        borderWidth: radii.tiny,
+        borderRadius: radii.phat,
+      },
+    },
   },
   atoms({
-    borderRadius: 'phat',
-    borderWidth: 'normal',
+    mt: 'auto',
     borderStyle: 'solid',
     p: {
       '@initial': 'x4',
@@ -132,7 +153,7 @@ export const nftAttributes = style([
   {
     '@media': {
       [media.min1024]: {
-        gridArea: 'nft-attributes / 1 / 2',
+        // gridArea: 'nft-attributes / 1 / 2',
       },
     },
   },
@@ -147,9 +168,11 @@ export const nftAttributes = style([
 
 export const attributesHistoryWrapper = style([
   {
+    gridColumn: '1/span 4',
     '@media': {
       [media.min1024]: {
-        gridArea: 'nft-attributes / 1 / 2',
+        // gridArea: 'nft-attributes / 1 / 2',
+        gridColumn: '3/span 5',
       },
     },
   },
@@ -182,7 +205,7 @@ export const nftAttributesWrapper = style([
 
 export const nftAttribute = style([
   {
-    backgroundColor: vars.color.background.tertiary,
+    backgroundColor: vars.color.background2,
   },
   atoms({
     width: '100%',
@@ -192,5 +215,24 @@ export const nftAttribute = style([
       '@initial': 'x2',
       '@1024': 'x4',
     },
+  }),
+])
+
+export const nftNextButton = style([
+  {
+    marginLeft: '.5rem',
+    width: '2rem',
+    height: '2rem',
+    backgroundRepeat: 'no-repeat',
+    fontSize: 'large',
+    padding: 0,
+    fontWeight: 700,
+    fontFamily:
+      '-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif!important',
+  },
+  atoms({
+    backgroundSize: 'contain',
+    display: 'inline-block',
+    borderRadius: 'round',
   }),
 ])

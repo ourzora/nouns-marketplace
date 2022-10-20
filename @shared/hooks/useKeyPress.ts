@@ -1,5 +1,6 @@
-import { useCallback, useEffect } from 'react'
 import { isClientSide } from 'utils/window'
+
+import { useCallback, useEffect } from 'react'
 
 export const useKeyPress = (
   keyPressed: string,

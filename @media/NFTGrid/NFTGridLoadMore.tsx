@@ -1,6 +1,8 @@
-import { Flex, Icon } from '@zoralabs/zord'
-import { LoadMoreObserver } from './LoadMoreObserver'
 import { useCallback } from 'react'
+
+import { Flex, Icon } from '@zoralabs/zord'
+
+import { LoadMoreObserver } from './LoadMoreObserver'
 
 interface NFTGridLoadMoreProps {
   showObserver?: boolean
@@ -35,7 +37,7 @@ export const NFTGridLoadMore = ({
         />
       )}
       <Flex justify="center" py="x4" aria-hidden height="x16" w="100%">
-        {isValidating && <Icon key="spinner" id="Spinner" color="primary" size="lg" />}
+        {isValidating && <Icon key="spinner" id="Spinner" color="icon1" size="lg" />}
       </Flex>
     </Flex>
   )

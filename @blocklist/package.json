@@ -1,0 +1,23 @@
+{
+  "name": "blocklist",
+  "version": "0.0.1",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "lint": "eslint *.ts*",
+    "update": "./update_sdnlist.sh"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.37",
+    "@zoralabs/eslint-config": "*",
+    "@zoralabs/tsconfig": "*",
+    "eslint": "8.13.0",
+    "react": "^17.0.2",
+    "typescript": "^4.5.2"
+  },
+  "peerDependencies": {
+    "ethers": "^5.7.0"
+  }
+}

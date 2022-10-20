@@ -1,14 +1,15 @@
-import { Stack, Button } from '@zoralabs/zord'
-import { NounsBidForm } from './NounsBidForm'
+import { Button } from 'components/Button'
+import { NounsBuilderAuction } from 'types/zora.api.generated'
+
+import { NFTSummary } from '@market'
+import { ModalComposition } from '@modal'
 import {
   auctionWrapperVariants,
   placeBidTrigger,
 } from '@noun-auction/styles/NounishStyles.css'
-import { ModalComposition } from '@modal'
+import { Stack } from '@zoralabs/zord'
 
-// Imports from @markets
-import { NftInfo } from '@market'
-import { NounsBuilderAuction } from 'types/zora.api.generated'
+import { NounsBidForm } from './NounsBidForm'
 
 type PlaceNounsBidProps = {
   useModal?: boolean
@@ -27,6 +28,7 @@ export function PlaceNounsBid({
       {useModal ? (
         <ModalComposition
           modalName={`nouns-bid-${tokenId}`}
+          modalBehaviorRequiresAuth={true}
           trigger={
             <Button
               as="span"
@@ -40,7 +42,7 @@ export function PlaceNounsBid({
           }
           content={
             <Stack p="x8">
-              <NftInfo collectionAddress={collectionAddress} tokenId={tokenId} />
+              <NFTSummary collectionAddress={collectionAddress} tokenId={tokenId} />
               <NounsBidForm layout={layout} mt="x4" />
             </Stack>
           }

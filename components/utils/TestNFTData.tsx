@@ -1,8 +1,9 @@
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { Heading, Box } from '@zoralabs/zord'
 import { RawDisplayer } from 'components/utils'
+
 import { NFTCard } from '@media/NFTCard'
 import { NFTProvider } from '@shared'
+import { NFTObject } from '@zoralabs/nft-hooks'
+import { Box, Heading } from '@zoralabs/zord'
 
 export function TestNftData({ data }: { data: NFTObject }) {
   return (

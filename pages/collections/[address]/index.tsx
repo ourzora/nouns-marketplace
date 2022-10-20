@@ -1,37 +1,40 @@
-import { PageWrapper } from 'components/PageWrapper'
-import { collectionService, CollectionServiceProps } from 'services/collectionService'
-import { useEffect } from 'react'
-import { MarketStats } from 'components/MarketStats/MarketStats'
 import { Seo } from 'components'
-import { useCollectionsContext } from 'providers/CollectionsProvider'
+import { MarketStats } from 'components/MarketStats/MarketStats'
+import { PageWrapper } from 'components/PageWrapper'
 import {
-  Collections,
   CollectionActivityHeader,
   CollectionHeader,
+  Collections,
 } from 'compositions/Collections'
-import { CollectionFilterProvider } from '@filter'
-import { Stack, Separator } from '@zoralabs/zord'
-import { useCollection } from '@filter/hooks/useCollection'
 import { returnDao } from 'constants/collection-addresses'
-import { useWindowWidth } from '@shared'
-import { ActiveAuctionCard } from '@noun-auction'
+import { useCollectionsContext } from 'providers/CollectionsProvider'
+import { CollectionServiceProps, collectionService } from 'services/collectionService'
+
 import { useAggregate } from 'hooks'
 
-const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps) => {
+import { useEffect } from 'react'
+
+import { CollectionFilterProvider } from '@filter'
+import { useCollection } from '@filter/hooks/useCollection'
+import { ActiveAuctionCard } from '@noun-auction'
+import { useWindowWidth } from '@shared'
+import { Separator, Stack } from '@zoralabs/zord'
+
+const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
+  const { contractAddress, seo } = fallback
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
+  const dao = returnDao(contractAddress)
   const { isLarge } = useWindowWidth()
   const { aggregate } = useAggregate(contractAddress)
-
-  const dao = returnDao(contractAddress)
+  // wrapper for useSWR
+  const { data } = useCollection(contractAddress)
+  const collection = data || fallback?.collection
 
   useEffect(() => {
-    if (collection && collection?.name) {
+    if (collection?.name) {
+      const nftCount = aggregate?.aggregateStat.nftCount
       setCurrentCollection(collection.name)
-      setCurrentCollectionCount(
-        aggregate?.aggregateStat.nftCount
-          ? `${aggregate?.aggregateStat.nftCount} NFTs`
-          : '... NFTs'
-      )
+      setCurrentCollectionCount(nftCount ? `${nftCount} NFTs` : '... NFTs')
     }
     return () => {
       setCurrentCollection('Explore...')
@@ -39,22 +42,30 @@ const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps
     }
   }, [aggregate, collection, setCurrentCollection, setCurrentCollectionCount])
 
-  const { data } = useCollection(contractAddress)
-
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
-      <CollectionHeader
-        collection={collection}
-        layout={dao ? 'dao' : 'collection'}
-        currentAuction={dao ? <ActiveAuctionCard dao={dao} /> : null}
-      >
-        <MarketStats contractAddress={contractAddress} />
-      </CollectionHeader>
+      {collection && (
+        <CollectionHeader
+          collection={collection}
+          layout={dao ? 'dao' : 'collection'}
+          currentAuction={
+            dao ? (
+              <ActiveAuctionCard
+                timerComplete={timerComplete}
+                layout={layout}
+                dao={dao}
+              />
+            ) : null
+          }
+        >
+          <MarketStats contractAddress={contractAddress} />
+        </CollectionHeader>
+      )}
       {contractAddress && (
         <CollectionFilterProvider
           useSidebarClearButton
-          filtersVisible={isLarge ? true : false}
+          filtersVisible={isLarge}
           contractAddress={contractAddress}
           useSortDropdown
           useCollectionProperties={{
@@ -69,7 +80,7 @@ const Collection = ({ contractAddress, seo, collection }: CollectionServiceProps
             hideCurrencySelect: true,
           }}
           strings={{
-            NO_FILTER_RESULTS_COPY: `Sorry no ${data?.name} NFTs are available for purchase on chain.`,
+            NO_FILTER_RESULTS_COPY: `Sorry no ${collection?.name} NFTs are available for purchase on chain.`,
           }}
         >
           <Stack>

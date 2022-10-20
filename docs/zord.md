@@ -29,12 +29,12 @@ Adding to your project boils down to:
 
 ```tsx
 // pages/_app.tsx
+import type { AppProps } from 'next/app'
 
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/600.css'
-import '@zoralabs/zord/index.css'
 import { ThemeProvider, lightTheme } from '@zoralabs/zord'
-import type { AppProps } from 'next/app'
+import '@zoralabs/zord/index.css'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -50,63 +50,213 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 Theming with Zord is done by defining an object known as a "_Theme Contract_", a common interface of consistent design tokens defined in a central theme file and then used throughout a site's components.
 
 ```ts
-export const colorTheme = createThemeContract({
-  foreground: {
-    primary: '',
-    secondary: '',
-    tertiary: '',
-    success: '',
-    destructive: '',
-    warning: '',
-    reverse: '',
-    transparent: '',
+export const theme = createThemeContract({
+  fonts: {
+    heading: '',
+    body: '',
+    mono: '',
   },
-  background: {
-    primary: '',
-    secondary: '',
-    tertiary: '',
-    success: '',
-    warning: '',
-    destructive: '',
-    reverse: '',
-    transparent: '',
+  fontSizing: {
+    fontSize: {
+      0: '',
+      12: '',
+      14: '',
+      16: '',
+      18: '',
+      20: '',
+      28: '',
+      30: '',
+      35: '',
+      40: '',
+      48: '',
+      50: '',
+      65: '',
+      80: '',
+      unset: '',
+    },
+    lineHeight: {
+      0: '',
+      14: '',
+      20: '',
+      24: '',
+      25: '',
+      30: '',
+      34: '',
+      40: '',
+      50: '',
+      55: '',
+      65: '',
+      70: '',
+      85: '',
+      95: '',
+      unset: '',
+    },
+    fontWeight: {
+      display: '',
+      heading: '',
+      label: '',
+      paragraph: '',
+    },
+  },
+  radii: {
+    tiny: '',
+    small: '',
+    normal: '',
+    curved: '',
+    phat: '',
+    round: '',
+  },
+  size: {
+    x0: '',
+    x1: '',
+    x2: '',
+    x3: '',
+    x4: '',
+    x5: '',
+    x6: '',
+    x7: '',
+    x8: '',
+    x9: '',
+    x10: '',
+    x11: '',
+    x12: '',
+    x13: '',
+    x14: '',
+    x15: '',
+    x16: '',
+    x17: '',
+    x18: '',
+    x19: '',
+    x20: '',
+    x21: '',
+    x22: '',
+    x23: '',
+    x24: '',
+    x25: '',
+    x26: '',
+    x27: '',
+    x28: '',
+    x29: '',
+    x30: '',
+    x32: '',
+    x64: '',
+    auto: '',
+    '100vw': '',
+    '100vh': '',
+    '100%': '',
+    unset: '',
+  },
+  space: {
+    x0: '',
+    x1: '',
+    x2: '',
+    x3: '',
+    x4: '',
+    x5: '',
+    x6: '',
+    x7: '',
+    x8: '',
+    x9: '',
+    x10: '',
+    x11: '',
+    x12: '',
+    x13: '',
+    x14: '',
+    x15: '',
+    x16: '',
+    x17: '',
+    x18: '',
+    x19: '',
+    x20: '',
+    x21: '',
+    x22: '',
+    x23: '',
+    x24: '',
+    x25: '',
+    x26: '',
+    x27: '',
+    x28: '',
+    x29: '',
+    x30: '',
+    x32: '',
+    x64: '',
+    auto: '',
+  },
+  ease: {
+    in: '',
+    out: '',
+    inOut: '',
   },
   border: {
+    width: {
+      none: '',
+      thin: '',
+      normal: '',
+      thick: '',
+    },
+    style: {
+      solid: '',
+      dashed: '',
+      dotted: '',
+    },
+  },
+  colors: {
+    backdrop: '',
+    border: '',
+    borderOnImage: '',
+    background1: '',
+    background2: '',
+    text1: '',
+    text2: '',
+    text3: '',
+    text4: '',
+    icon1: '',
+    icon2: '',
     primary: '',
     secondary: '',
     tertiary: '',
-    success: '',
-    warning: '',
-    destructive: '',
+    quaternary: '',
     transparent: '',
-  },
-  text: {
-    primary: '',
-    secondary: '',
-    tertiary: '',
-    success: '',
+    accent: '',
+    accentHover: '',
+    accentActive: '',
+    accentDisabled: '',
+    onAccent: '',
+    onAccentDisabled: '',
+    positive: '',
+    positiveHover: '',
+    positiveActive: '',
+    positiveDisabled: '',
+    onPositive: '',
+    onPositiveDisabled: '',
     warning: '',
-    destructive: '',
-    primaryInverse: '',
-    transparent: '',
+    warningHover: '',
+    warningActive: '',
+    warningDisabled: '',
+    onWarning: '',
+    onWarningDisabled: '',
+    negative: '',
+    negativeHover: '',
+    negativeActive: '',
+    negativeDisabled: '',
+    onNegative: '',
+    onNegativeDisabled: '',
+    ghost: '',
+    ghostHover: '',
+    ghostActive: '',
+    ghostDisabled: '',
+    onGhost: '',
+    onGhostDisabled: '',
+    neutral: '',
+    neutralHover: '',
+    neutralActive: '',
+    neutralDisabled: '',
+    onNeutral: '',
+    onNeutralDisabled: '',
   },
-  error: {
-    light: '',
-    default: '',
-    dark: '',
-    background: '',
-  },
-  success: {
-    light: '',
-    default: '',
-    dark: '',
-    background: '',
-  },
-  warning: {
-    light: '',
-    default: '',
-    dark: '',
-    background: '',
+  shadows: {
+    small: '',
+    medium: '',
   },
 })
 ```
@@ -116,49 +266,51 @@ Multiple implementations of a ThemeContract can exist on a single site, and the 
 Each theme maps 1-1 with the ThemeContract:
 
 ```ts
-export const lightTheme = createTheme(colorTheme, {
-  foreground: {
-    primary: color.black100,
-    secondary: color.black70,
-    tertiary: color.black50,
-    success: color.successDefault,
-    warning: color.warningDefault,
-    destructive: color.errorDefault,
-    reverse: color.white100,
-    transparent: 'transparent',
+import { border, colorTheme, ease, radii, size, space, typography } from './tokens'
+
+export const lightTheme = createTheme(theme, {
+  fonts: {
+    heading: typography.fonts.body,
+    body: typography.fonts.body,
+    mono: typography.fonts.mono,
   },
-  background: {
-    primary: color.white100,
-    secondary: color.black10,
-    tertiary: color.black5,
-    success: color.successBackground,
-    warning: color.warningBackground,
-    destructive: color.errorDefault,
-    reverse: color.black100,
-    transparent: 'transparent',
+  fontSizing: {
+    fontSize: typography.fontSize,
+    lineHeight: typography.lineHeight,
+    fontWeight: typography.fontWeight,
   },
-  ... (+ all other tokens)
-}
+  colors,
+  shadows,
+  radii,
+  size,
+  space,
+  ease,
+  border,
+})
 ```
 
 Themes are most commonly used to define theme colors, but can also be used to specify typefaces, spacing conventions, borders, animation standards, and more.
 
-Zora's standard theme defines colors, borders + radii, container sizing, animation easing, and spacing increments:
+Zora's standard theme defines colors, typography, borders + radii, shadows, container sizing, animation easing, and spacing increments:
 
 ```ts
 export const [baseTheme, vars] = createTheme({
-  color: colorTheme,
-  space,
-  size,
-  radii,
-  border,
-  ease,
+  color: theme.colors,
+  fonts: theme.fonts,
+  fontSize: theme.fontSizing.fontSize,
+  lineHeight: theme.fontSizing.lineHeight,
+  fontWeight: theme.fontSizing.fontWeight,
+  radii: theme.radii,
+  shadows: theme.shadows,
+  size: theme.size,
+  space: theme.space,
+  ease: theme.ease,
+  border: theme.border,
 })
 ```
 
 TODO: How can we easily let people customize themes?
 
-- fonts
 - colors
 - spacing
 - breakpoints

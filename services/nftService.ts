@@ -1,8 +1,13 @@
-import { GetServerSideProps } from 'next'
-import { assert } from 'console'
-import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
-import { prepareJson } from '@zoralabs/nft-hooks/dist/fetcher/NextUtils'
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
+
+import { allAddresses } from 'constants/collection-addresses'
+import { GetServerSideProps } from 'next'
+
+import assert from 'assert'
+
+import * as Sentry from '@sentry/react'
+import { prepareJson } from '@zoralabs/nft-hooks/dist/fetcher/NextUtils'
+import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 
 const zdkFetchStrategy = new ZDKFetchStrategy('1', GALACTUS_BASE_URL)
 
@@ -23,6 +28,13 @@ export async function nftService({ params }: NFTParamsProps) {
 
   if (!tokenAddress || !tokenId) return false
 
+  // Ensure token is a nounish collection/dao
+  if (tokenAddress && !allAddresses.includes(tokenAddress.toLowerCase())) {
+    return {
+      notFound: true,
+    }
+  }
+
   try {
     const nft = prepareJson(await zdkFetchStrategy.fetchNFT(tokenAddress, tokenId))
     return {
@@ -33,9 +45,14 @@ export async function nftService({ params }: NFTParamsProps) {
       },
     }
   } catch (err) {
+    Sentry.captureException(err)
+    Sentry.captureMessage(
+      `NFTService error! tokenAddress=${tokenAddress} tokenId=${tokenId}: ${err}`
+    )
+
     return {
       props: {
-        nft: undefined,
+        nft: null,
         tokenAddress: tokenAddress,
         tokenId: tokenId,
       },

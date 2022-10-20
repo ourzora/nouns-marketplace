@@ -1,4 +1,5 @@
 import { Box } from '@zoralabs/zord'
+
 import { codeWrapper } from './UtilStyles.css'
 
 export function RawDisplayer({ data }: { data?: any }) {
@@ -7,7 +8,7 @@ export function RawDisplayer({ data }: { data?: any }) {
       className={codeWrapper}
       p="x4"
       borderRadius="curved"
-      backgroundColor="tertiary"
+      backgroundColor="background2"
       w="100%"
       position="relative"
     >

@@ -1,7 +1,9 @@
-import { Stack, StackProps, Heading } from '@zoralabs/zord'
 import { returnDao } from 'constants/collection-addresses'
+
 import { NounishAuction, useOneNounsDao } from '@noun-auction'
 import { useNFTProvider } from '@shared'
+import { Heading, Stack, StackProps } from '@zoralabs/zord'
+
 import { nftMarketWrapper } from './NFTPage.css'
 
 export interface NFTHistoryProps extends StackProps {}

@@ -1,7 +1,10 @@
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { GetServerSideProps } from 'next'
-import { assert } from 'console'
-import { defaultProvider, isAddress } from '@shared'
+
+import assert from 'assert'
+
+import { isAddress } from '@shared'
+import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
+import { NFTObject } from '@zoralabs/nft-hooks'
 
 export type ManageNFTsServiceProps = {
   ownerAddress: string
@@ -19,9 +22,7 @@ export async function manageNftsService({ params }: ManageNftsProps) {
   assert(params, 'User template must provide a params object with an address')
   let initialPage: NFTObject[] | [] = []
 
-  const ownerAddress = isAddress(params.address)
-    ? params.address
-    : await defaultProvider.resolveName(params.address)
+  const ownerAddress = await resolvePossibleENSAddress(params.address)
 
   if (!ownerAddress || !isAddress(ownerAddress)) {
     return {

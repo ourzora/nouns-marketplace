@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 
+import * as Sentry from '@sentry/react'
+
 const useAsyncEffect = (func: () => any | Promise<any>, args: Array<any> = []) => {
   useEffect(() => {
     const p = func()
@@ -7,7 +9,7 @@ const useAsyncEffect = (func: () => any | Promise<any>, args: Array<any> = []) =
       p.then(() => {
         return undefined
       }).catch((err: any) => {
-        console.error(err)
+        Sentry.captureException(err)
         return undefined
       })
     }
