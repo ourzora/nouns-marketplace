@@ -1,12 +1,16 @@
-import { Heading, Paragraph, Stack } from '@zoralabs/zord'
 import { mediumFont } from 'styles/styles.css'
+
+import { Heading, Paragraph, Stack } from '@zoralabs/zord'
 
 interface HeadingDescriptionProps {
   heading: string
   description?: string
 }
 
-export function HeadingDescription({ heading, description }: HeadingDescriptionProps) {
+export function V3AskHeadingDescription({
+  heading,
+  description,
+}: HeadingDescriptionProps) {
   return (
     <Stack gap="x4" textAlign="center">
       <Heading as="h3" size="md">

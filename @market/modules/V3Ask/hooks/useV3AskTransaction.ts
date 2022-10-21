@@ -3,24 +3,21 @@ import { ContractTransaction } from 'ethers'
 import { useState } from 'react'
 
 import { parseUnits } from '@ethersproject/units'
-import {
-  usePrivateAskContractContext,
-  usePrivateAskStateContext,
-} from '@market/modules/PrivateAsk'
+import { useV3AskContractContext, useV3AskStateContext } from '@market/modules/V3Ask'
 import * as Sentry from '@sentry/react'
 import { useContractTransaction } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
 
-export const CREATE_PRIVATE_ASK: string = 'createPrivateAsk'
-export const CANCEL_PRIVATE_ASK: string = 'cancelPrivateAsk'
-export const FILL_PRIVATE_ASK: string = 'fillPrivateAsk'
-export const UPDATE_PRIVATE_ASK: string = 'updatePrivateAsk'
+export const CREATE_V3_ASK: string = 'createV3Ask'
+export const CANCEL_V3_ASK: string = 'cancelV3Ask'
+export const FILL_V3_ASK: string = 'fillV3Ask'
+export const UPDATE_V3_ASK: string = 'updateV3Ask'
 
-type PrivateAskTransaction =
-  | typeof CREATE_PRIVATE_ASK
-  | typeof CANCEL_PRIVATE_ASK
-  | typeof FILL_PRIVATE_ASK
-  | typeof UPDATE_PRIVATE_ASK
+type V3AskTransaction =
+  | typeof CREATE_V3_ASK
+  | typeof CANCEL_V3_ASK
+  | typeof FILL_V3_ASK
+  | typeof UPDATE_V3_ASK
 
 interface AskTxValues {
   price?: string // as user-facing display value (eg. 0.0001 ETH), not raw BigNumber
@@ -31,46 +28,41 @@ interface WriteAskTxValues extends AskTxValues {
   rawBuyerAddress: string // Pre-resolution: possibly ENS address or 0xAddress
 }
 
-interface usePrivateAskTransactionProps {
+interface useV3AskTransactionProps {
   nft: NFTObject
   collectionAddress?: string
   tokenId?: string
 }
 
-export const usePrivateAskTransaction = ({
-  nft: nftObj,
-}: usePrivateAskTransactionProps) => {
-  const { PrivateAsks } = usePrivateAskContractContext()
+export const useV3AskTransaction = ({ nft: nftObj }: useV3AskTransactionProps) => {
+  const { V3Asks } = useV3AskContractContext()
   const { txStatus, handleTx, txInProgress } = useContractTransaction()
   const [isSubmitting, setSubmitting] = useState<boolean>(false)
-  const { setFinalizedPrivateAskDetails } = usePrivateAskStateContext()
+  const { setFinalizedV3AskDetails } = useV3AskStateContext()
   const [finalizedTx, setFinalizedTx] = useState<ContractTransaction | null>()
   const [txError, setTxError] = useState<Error>()
   const { nft } = nftObj
 
   async function makeAskTransaction(
-    txType: PrivateAskTransaction,
+    txType: V3AskTransaction,
     price?: string, // as user-facing display value (eg. 0.0001 ETH), not raw BigNumber
     buyerAddress?: string,
     rawBuyerAddress?: string
   ) {
     const isValidWrite =
-      [CREATE_PRIVATE_ASK, UPDATE_PRIVATE_ASK].includes(txType) &&
+      [CREATE_V3_ASK, UPDATE_V3_ASK].includes(txType) &&
       price &&
       buyerAddress &&
       rawBuyerAddress
 
     try {
-      if (!nft || !PrivateAsks) {
+      if (!nft || !V3Asks) {
         throw new Error('V3AskContract is not ready, please try again.')
       }
-      if (
-        [CREATE_PRIVATE_ASK, UPDATE_PRIVATE_ASK, FILL_PRIVATE_ASK].includes(txType) &&
-        !price
-      ) {
+      if ([CREATE_V3_ASK, UPDATE_V3_ASK, FILL_V3_ASK].includes(txType) && !price) {
         throw new Error('Missing/Invalid price')
       }
-      if (txType === CREATE_PRIVATE_ASK && !buyerAddress) {
+      if (txType === CREATE_V3_ASK && !buyerAddress) {
         throw new Error('Missing/Invalid buyerAddress')
       }
 
@@ -81,38 +73,38 @@ export const usePrivateAskTransaction = ({
       let promise: Promise<ContractTransaction>
 
       switch (txType) {
-        case CREATE_PRIVATE_ASK:
-          promise = PrivateAsks.createAsk(
+        case CREATE_V3_ASK:
+          promise = V3Asks.createAsk(
             nft?.contract.address,
             nft?.tokenId,
             priceAsBigNumber,
             buyerAddress!
           )
           break
-        case UPDATE_PRIVATE_ASK:
-          promise = PrivateAsks.setAskPrice(
+        case UPDATE_V3_ASK:
+          promise = V3Asks.setAskPrice(
             nft?.contract.address,
             nft?.tokenId,
             priceAsBigNumber
           )
           break
-        case CANCEL_PRIVATE_ASK:
-          promise = PrivateAsks.cancelAsk(nft?.contract.address, nft?.tokenId)
+        case CANCEL_V3_ASK:
+          promise = V3Asks.cancelAsk(nft?.contract.address, nft?.tokenId)
           break
-        case FILL_PRIVATE_ASK:
-          promise = PrivateAsks.fillAsk(nft?.contract.address, nft?.tokenId, {
+        case FILL_V3_ASK:
+          promise = V3Asks.fillAsk(nft?.contract.address, nft?.tokenId, {
             value: priceAsBigNumber, // optional override param actually required :)
           })
           break
         default:
-          throw new Error('PrivateAsk txType not defined')
+          throw new Error('V3Ask txType not defined')
       }
 
       const tx = await handleTx(promise)
 
       isValidWrite &&
         tx?.hash &&
-        setFinalizedPrivateAskDetails({ price, buyerAddress, rawBuyerAddress })
+        setFinalizedV3AskDetails({ price, buyerAddress, rawBuyerAddress })
 
       setFinalizedTx(tx)
     } catch (err: any) {
@@ -124,16 +116,16 @@ export const usePrivateAskTransaction = ({
   }
 
   async function createAsk({ price, buyerAddress, rawBuyerAddress }: WriteAskTxValues) {
-    makeAskTransaction(CREATE_PRIVATE_ASK, price, buyerAddress, rawBuyerAddress)
+    makeAskTransaction(CREATE_V3_ASK, price, buyerAddress, rawBuyerAddress)
   }
   async function updateAsk({ price, buyerAddress, rawBuyerAddress }: WriteAskTxValues) {
-    makeAskTransaction(UPDATE_PRIVATE_ASK, price, buyerAddress, rawBuyerAddress)
+    makeAskTransaction(UPDATE_V3_ASK, price, buyerAddress, rawBuyerAddress)
   }
   async function cancelAsk() {
-    makeAskTransaction(CANCEL_PRIVATE_ASK)
+    makeAskTransaction(CANCEL_V3_ASK)
   }
   async function fillAsk({ price }: AskTxValues) {
-    makeAskTransaction(FILL_PRIVATE_ASK, price)
+    makeAskTransaction(FILL_V3_ASK, price)
   }
 
   return {

@@ -4,15 +4,15 @@ import { Button } from 'components/Button'
 import React, { useCallback, useState } from 'react'
 
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
-import { PossibleState, usePrivateAskStateContext } from '@market/modules/PrivateAsk/'
+import { PossibleV3AskState, useV3AskStateContext } from '@market/modules/V3Ask/'
 import { useKeyPress } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { PopUp, Stack, Text, Well } from '@zoralabs/zord'
 
-import * as styles from './PrivateAskFlow.css'
+import * as styles from './V3AskFlow.css'
 
-interface PrivateAskOwnerTriggerProps {
+interface V3AskOwnerTriggerProps {
   nft: NFTObject
   openModal: () => void
 }
@@ -24,25 +24,25 @@ const dropdownOptions = [
   },
   {
     label: 'Update Listing',
-    action: 'updatePrivateAsk' as const,
+    action: 'updateV3Ask' as const,
   },
   {
     label: 'Delist',
-    action: 'cancelPrivateAsk' as const,
+    action: 'cancelV3Ask' as const,
     destructive: true,
   },
 ]
 
-export function PrivateAskOwnerTrigger({ nft, openModal }: PrivateAskOwnerTriggerProps) {
-  const { dispatch } = usePrivateAskStateContext()
+export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
+  const { dispatch } = useV3AskStateContext()
   const { ask } = useRelevantMarket(nft.markets)
-  const { displayAskAmount, usdAskAmount, hasActivePrivateAsk } = useAskHelper({ ask })
+  const { displayAskAmount, usdAskAmount, hasActiveV3Ask } = useAskHelper({ ask })
 
   const [open, setOpen] = useState<boolean>(false)
   useKeyPress('Escape', open, () => setOpen(false))
 
   const handleClick = useCallback(
-    (actionType: PossibleState) => {
+    (actionType: PossibleV3AskState) => {
       setOpen(false)
       dispatch && dispatch({ type: actionType })
       openModal()
@@ -50,7 +50,7 @@ export function PrivateAskOwnerTrigger({ nft, openModal }: PrivateAskOwnerTrigge
     [dispatch, openModal]
   )
 
-  if (hasActivePrivateAsk) {
+  if (hasActiveV3Ask) {
     return (
       <Well gap="x6" borderRadius="phat">
         {displayAskAmount && (

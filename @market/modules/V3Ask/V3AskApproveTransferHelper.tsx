@@ -5,19 +5,19 @@ import { PrintError } from '@shared/components/PrintError'
 import { Zorb } from '@zora-brand'
 import { Stack } from '@zoralabs/zord'
 
-import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
-import { CommonPrivateAskComponentProps } from './PrivateAskFlow'
-import { PrivateAskHeadingDescription } from './PrivateAskHeadingDescription'
-import { PrivateAskLearnMoreButton } from './PrivateAskLearnMoreButton'
-import { usePrivateAskTransferHelperApproval } from './hooks/usePrivateAskTransferHelperApproval'
+import { V3AskCheckApprovalSpinner } from './V3AskCheckApprovalSpinner'
+import { CommonV3AskComponentProps } from './V3AskFlow'
+import { V3AskHeadingDescription } from './V3AskHeadingDescription'
+import { V3AskLearnMoreButton } from './V3AskLearnMoreButton'
+import { useV3AskTransferHelperApproval } from './hooks/useV3AskTransferHelperApproval'
 
-interface PrivateAskApproveTransferHelperProps extends CommonPrivateAskComponentProps {}
+interface V3AskApproveTransferHelperProps extends CommonV3AskComponentProps {}
 
-export function PrivateAskApproveTransferHelper({
+export function V3AskApproveTransferHelper({
   onNext,
   nft,
   ...props
-}: PrivateAskApproveTransferHelperProps) {
+}: V3AskApproveTransferHelperProps) {
   const {
     txStatus,
     txInProgress,
@@ -25,19 +25,19 @@ export function PrivateAskApproveTransferHelper({
     isAwaitingApprovalCheck,
     error,
     handleApproveERC721ForSpender,
-  } = usePrivateAskTransferHelperApproval({ contractAddress: nft.nft?.contract.address })
+  } = useV3AskTransferHelperApproval({ contractAddress: nft.nft?.contract.address })
 
   useEffect(() => {
     isApproved && onNext && onNext()
   }, [isApproved, onNext])
 
   return isAwaitingApprovalCheck ? (
-    <PrivateAskCheckApprovalSpinner text="Checking Zora Transfer Helper Approval..." />
+    <V3AskCheckApprovalSpinner text="Checking Zora Transfer Helper Approval..." />
   ) : (
     <Stack gap="x8">
       <Stack gap="x8" align="center">
         <Zorb size={52} />
-        <PrivateAskHeadingDescription
+        <V3AskHeadingDescription
           heading="Approve Transfer Helper"
           description="This contract handles the transferring of ERC-20 and ERC-721 tokens for the ZoraV3 modules."
         />
@@ -52,7 +52,7 @@ export function PrivateAskApproveTransferHelper({
           Approve your NFTs
         </TransactionSubmitButton>
 
-        <PrivateAskLearnMoreButton>Learn more about approvals</PrivateAskLearnMoreButton>
+        <V3AskLearnMoreButton>Learn more about approvals</V3AskLearnMoreButton>
       </Stack>
     </Stack>
   )

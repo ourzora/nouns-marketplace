@@ -11,15 +11,15 @@ import { formatContractError } from '@shared'
 import { PrintError } from '@shared/components/PrintError'
 import { Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import * as styles from '../PrivateAskFlow.css'
-import { LearnMoreButton } from '../PrivateAskLearnMoreButton'
-import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
-import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
+import { CommonV3AskComponentProps } from '../V3AskFlow'
+import * as styles from '../V3AskFlow.css'
+import { V3AskLearnMoreButton } from '../V3AskLearnMoreButton'
+import { V3AskModalHeading } from '../V3AskModalHeading'
+import { useV3AskTransaction } from '../hooks/useV3AskTransaction'
 
-interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
+interface V3AskFillAskProps extends CommonV3AskComponentProps {}
 
-export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) {
+export function V3AskFillAsk({ onNext, ...props }: V3AskFillAskProps) {
   const { requestClose } = useModal()
   const { markets } = props.nft
   const { ask } = useRelevantMarket(markets)
@@ -42,8 +42,9 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
     [displayAskAmount]
   )
 
-  const { txStatus, txInProgress, txError, finalizedTx, fillAsk } =
-    usePrivateAskTransaction({ nft: props.nft })
+  const { txStatus, txInProgress, txError, finalizedTx, fillAsk } = useV3AskTransaction({
+    nft: props.nft,
+  })
   const isDisabled = useMemo(
     () => txInProgress || !hasSufficientFunds || !displayAskAmount,
     [displayAskAmount, hasSufficientFunds, txInProgress]
@@ -52,7 +53,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
 
   return (
     <Stack gap="x3" {...props}>
-      <PrivateAskModalHeading nftObj={props.nft} action="Buy" />
+      <V3AskModalHeading nftObj={props.nft} action="Buy" />
 
       <Flex justify="space-between">
         <Paragraph size="lg" inline color="text3" className={[mediumFont]}>
@@ -94,7 +95,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
             {hasSufficientFunds ? `Buy NFT` : 'Insufficient Funds'}
           </TransactionSubmitButton>
         </Flex>
-        <LearnMoreButton>Learn more about modules on Zora</LearnMoreButton>
+        <V3AskLearnMoreButton>Learn more about modules on Zora</V3AskLearnMoreButton>
       </Stack>
     </Stack>
   )

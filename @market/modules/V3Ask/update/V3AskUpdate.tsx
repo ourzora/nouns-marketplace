@@ -5,24 +5,20 @@ import React, { useEffect } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import {
-  PrintError,
-  formatContractError,
-  isAddress,
-  validateCurrency,
-  validateENSAddress,
-} from '@shared'
-import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
+import { useAskHelper } from '@market/hooks/useAskHelper'
+import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
+import { PrintError } from '@shared/components/PrintError'
+import { formatContractError } from '@shared/utils'
+import { reverseLookupAddress } from '@shared/utils/reverseLookupAddress'
+import { validateCurrency } from '@shared/utils/validateCurrency'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { PrivateAskLearnMoreButton } from '../PrivateAskLearnMoreButton'
-import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
+import { CommonV3AskComponentProps } from '../V3AskFlow'
+import { useV3AskTransaction } from '../hooks/useV3AskTransaction'
 
-interface PrivateAskCreateProps extends CommonPrivateAskComponentProps {}
+interface V3AskUpdateProps extends CommonV3AskComponentProps {}
 
 interface Values {
-  buyeraddress: string
   amount: string
 }
 
@@ -43,47 +39,43 @@ const validate = (values: Values) => {
   // @ts-ignore
   if (invalidAmount) errors.amount = invalidAmount
 
-  // address
-  const isEns = validateENSAddress(values.buyeraddress)
-  if (!values.buyeraddress) {
-    // @ts-ignore
-    errors.buyeraddress = 'Buyer address required'
-  } else if (!isAddress(values.buyeraddress) && !isEns) {
-    // @ts-ignore
-    errors.buyeraddress = 'Buyer address not valid'
-  }
-
   return errors
 }
 
-export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
-  const { txStatus, txInProgress, txError, createAsk, finalizedTx } =
-    usePrivateAskTransaction({ nft: props.nft })
+export function V3AskUpdate({ onNext, ...props }: V3AskUpdateProps) {
+  const { nft } = props
+  const { markets } = nft
+  const { ask } = useRelevantMarket(markets)
+  const { buyerAddress } = useAskHelper({ ask })
+  const { txStatus, txInProgress, txError, finalizedTx, updateAsk } = useV3AskTransaction(
+    { nft: nft }
+  )
+
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
   return (
     <Formik
-      initialValues={{ buyeraddress: '', amount: '' }}
+      initialValues={{ amount: '' }}
       isInitialValid={false}
       validate={validate}
       onSubmit={async (values) => {
-        const resolvedBuyerAddress = await resolvePossibleENSAddress(values.buyeraddress)
-        createAsk({
+        const maybeBuyerAddressENS = await reverseLookupAddress(buyerAddress)
+        updateAsk({
           price: values.amount,
-          buyerAddress: resolvedBuyerAddress!,
-          rawBuyerAddress: values.buyeraddress,
+          buyerAddress: buyerAddress,
+          rawBuyerAddress: maybeBuyerAddressENS!,
         })
       }}
     >
       {({
-        //values,
+        // values,
         isValid,
         isSubmitting,
       }) => (
         <Form>
           <Stack gap="x6" {...props}>
             <Heading as="h2" size="md">
-              Private Listing
+              Update List Price
             </Heading>
             <Stack gap="x2">
               <Field name="amount">
@@ -108,39 +100,18 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
                   />
                 )}
               </Field>
-
-              <Field name="buyeraddress">
-                {({ field, meta: { touched, error } }: FieldProps) => {
-                  return (
-                    <InputField
-                      label="Buyer"
-                      indentFields={false}
-                      variant="lg"
-                      canError
-                      placeholder="0x... or .eth"
-                      error={(touched && error) || undefined}
-                      {...field}
-                    />
-                  )
-                }}
-              </Field>
-
               {txError && <PrintError errorMessage={formatContractError(txError)} />}
             </Stack>
-            <Stack gap="x4">
-              <TransactionSubmitButton
-                type="submit"
-                txStatus={txStatus}
-                txInProgress={txInProgress}
-                loading={isSubmitting}
-                disabled={!isValid}
-              >
-                Create Private Listing
-              </TransactionSubmitButton>
-              <PrivateAskLearnMoreButton>
-                Learn more about modules on Zora
-              </PrivateAskLearnMoreButton>
-            </Stack>
+            <TransactionSubmitButton
+              type="submit"
+              txStatus={txStatus}
+              txInProgress={txInProgress}
+              loading={isSubmitting}
+              disabled={!isValid}
+              w="100%"
+            >
+              Update List Price
+            </TransactionSubmitButton>
           </Stack>
         </Form>
       )}

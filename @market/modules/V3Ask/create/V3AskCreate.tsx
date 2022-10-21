@@ -15,11 +15,11 @@ import {
 import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { PrivateAskLearnMoreButton } from '../PrivateAskLearnMoreButton'
-import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
+import { CommonV3AskComponentProps } from '../V3AskFlow'
+import { V3AskLearnMoreButton } from '../V3AskLearnMoreButton'
+import { useV3AskTransaction } from '../hooks/useV3AskTransaction'
 
-interface PrivateAskCreateProps extends CommonPrivateAskComponentProps {}
+interface V3AskCreateProps extends CommonV3AskComponentProps {}
 
 interface Values {
   buyeraddress: string
@@ -56,9 +56,10 @@ const validate = (values: Values) => {
   return errors
 }
 
-export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
-  const { txStatus, txInProgress, txError, createAsk, finalizedTx } =
-    usePrivateAskTransaction({ nft: props.nft })
+export function V3AskCreate({ onNext, ...props }: V3AskCreateProps) {
+  const { txStatus, txInProgress, txError, createAsk, finalizedTx } = useV3AskTransaction(
+    { nft: props.nft }
+  )
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
   return (
@@ -137,9 +138,9 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
               >
                 Create Private Listing
               </TransactionSubmitButton>
-              <PrivateAskLearnMoreButton>
+              <V3AskLearnMoreButton>
                 Learn more about modules on Zora
-              </PrivateAskLearnMoreButton>
+              </V3AskLearnMoreButton>
             </Stack>
           </Stack>
         </Form>

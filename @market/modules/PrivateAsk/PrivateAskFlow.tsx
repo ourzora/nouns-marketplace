@@ -1,19 +1,19 @@
 import React from 'react'
 
 import {
-  APPROVE_MODULE_FOR_CREATE,
-  APPROVE_MODULE_FOR_FILL,
-  APPROVE_TRANSFER,
-  CANCEL,
-  CANCEL_SUCCESS,
-  CREATE,
-  CREATE_SUCCESS,
-  FILLASK,
-  FILLASK_SUCCESS,
-  RESET,
-  UPDATE,
-  UPDATE_SUCCESS,
-  VIEW_LISTING,
+  APPROVE_MODULE_FOR_CREATE_PRIVATEASK,
+  APPROVE_MODULE_FOR_FILL_PRIVATEASK,
+  APPROVE_TRANSFER_FOR_PRIVATEASK,
+  CANCEL_PRIVATEASK,
+  CANCEL_PRIVATEASK_SUCCESS,
+  CREATE_PRIVATEASK,
+  CREATE_PRIVATEASK_SUCCESS,
+  FILL_PRIVATEASK,
+  FILL_PRIVATEASK_SUCCESS,
+  RESET_PRIVATEASK,
+  UPDATE_PRIVATEASK,
+  UPDATE_PRIVATEASK_SUCCESS,
+  VIEW_PRIVATEASK_LISTING,
   usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
 import { NFTObject } from '@zoralabs/nft-hooks'
@@ -32,20 +32,20 @@ import { PrivateAskUpdateSuccess } from './update/PrivateAskUpdateSuccess'
 import { PrivateAskViewListing } from './view'
 
 const componentMap = {
-  [APPROVE_MODULE_FOR_CREATE]: PrivateAskApproveModule,
-  [APPROVE_TRANSFER]: PrivateAskApproveTransferHelper,
+  [APPROVE_MODULE_FOR_CREATE_PRIVATEASK]: PrivateAskApproveModule,
+  [APPROVE_TRANSFER_FOR_PRIVATEASK]: PrivateAskApproveTransferHelper,
   // // [APPROVE_CURRENCY]: PrivateAskApproveERC20Currency, // TODO, not used in Noun.Market but should be available for non-nouns implementations
-  [CREATE]: PrivateAskCreate,
-  [CREATE_SUCCESS]: PrivateAskCreateSuccess,
-  [UPDATE]: PrivateAskUpdate,
-  [UPDATE_SUCCESS]: PrivateAskUpdateSuccess,
-  [CANCEL]: PrivateAskCancel,
-  [CANCEL_SUCCESS]: PrivateAskCancelSuccess,
-  [APPROVE_MODULE_FOR_FILL]: PrivateAskApproveModule,
-  [FILLASK]: PrivateAskFillAsk,
-  [FILLASK_SUCCESS]: PrivateAskFillAskSuccess,
-  [VIEW_LISTING]: PrivateAskViewListing,
-  [RESET]: () => null,
+  [CREATE_PRIVATEASK]: PrivateAskCreate,
+  [CREATE_PRIVATEASK_SUCCESS]: PrivateAskCreateSuccess,
+  [UPDATE_PRIVATEASK]: PrivateAskUpdate,
+  [UPDATE_PRIVATEASK_SUCCESS]: PrivateAskUpdateSuccess,
+  [CANCEL_PRIVATEASK]: PrivateAskCancel,
+  [CANCEL_PRIVATEASK_SUCCESS]: PrivateAskCancelSuccess,
+  [APPROVE_MODULE_FOR_FILL_PRIVATEASK]: PrivateAskApproveModule,
+  [FILL_PRIVATEASK]: PrivateAskFillAsk,
+  [FILL_PRIVATEASK_SUCCESS]: PrivateAskFillAskSuccess,
+  [VIEW_PRIVATEASK_LISTING]: PrivateAskViewListing,
+  [RESET_PRIVATEASK]: () => null,
 }
 
 interface PrivateAskModalProps {

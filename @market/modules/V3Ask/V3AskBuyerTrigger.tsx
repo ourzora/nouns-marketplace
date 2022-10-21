@@ -1,28 +1,26 @@
 import { Button } from 'components/Button'
 
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import {
-  VIEW_PRIVATEASK_LISTING,
-  usePrivateAskStateContext,
-} from '@market/modules/PrivateAsk/'
+  APPROVE_MODULE_FOR_FILL_V3ASK,
+  useV3AskStateContext,
+} from '@market/modules/V3Ask/'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Well } from '@zoralabs/zord'
 
-interface PrivateAskVisitorTriggerProps {
+interface V3AskBuyerTriggerProps {
   nft: NFTObject
   openModal: () => void
 }
 
-export function PrivateAskVisitorTrigger({
-  nft,
-  openModal,
-}: PrivateAskVisitorTriggerProps) {
-  const { dispatch } = usePrivateAskStateContext()
+export function V3AskBuyerTrigger({ nft, openModal }: V3AskBuyerTriggerProps) {
+  const { dispatch } = useV3AskStateContext()
   const { ask } = useRelevantMarket(nft.markets)
   const { displayAskAmount, usdAskAmount } = useAskHelper({ ask })
+  const [disabled, setDisabled] = useState<boolean>(false)
 
   return (
     <Well gap="x6" borderRadius="phat">
@@ -36,14 +34,15 @@ export function PrivateAskVisitorTrigger({
       )}
 
       <Button
-        variant="secondary"
         w="100%"
+        disabled={disabled}
         onClick={() => {
-          dispatch && dispatch({ type: VIEW_PRIVATEASK_LISTING })
+          dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL_V3ASK }) // INITIAL STATE IN FLOW
           openModal()
+          setDisabled(true)
         }}
       >
-        Show Sale Data
+        Buy Now
       </Button>
     </Well>
   )

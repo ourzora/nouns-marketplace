@@ -6,19 +6,19 @@ import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 import { useModal } from '@modal'
 import { Stack } from '@zoralabs/zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { PrivateAskHeadingDescription } from '../PrivateAskHeadingDescription'
+import { CommonV3AskComponentProps } from '../V3AskFlow'
+import { V3AskHeadingDescription } from '../V3AskHeadingDescription'
 
-interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}
+interface V3AskFillAskSuccessProps extends CommonV3AskComponentProps {}
 
-export function PrivateAskFillAskSuccess({ ...props }: PrivateAskFillAskSuccessProps) {
+export function V3AskFillAskSuccess({ ...props }: V3AskFillAskSuccessProps) {
   const { requestClose } = useModal()
 
   return (
     <Stack gap="x8" {...props}>
       <SuccessCheckmark />
 
-      <PrivateAskHeadingDescription
+      <V3AskHeadingDescription
         heading="Private Purchase Completed"
         description="Find this NFT in your collection soon."
       />

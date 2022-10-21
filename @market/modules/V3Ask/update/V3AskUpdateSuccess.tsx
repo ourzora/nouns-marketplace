@@ -5,20 +5,16 @@ import React from 'react'
 import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 import { Stack } from '@zoralabs/zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { PrivateAskHeadingDescription } from '../PrivateAskHeadingDescription'
+import { CommonV3AskComponentProps } from '../V3AskFlow'
+import { V3AskHeadingDescription } from '../V3AskHeadingDescription'
 
-interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
+interface V3AskCreateSuccessProps extends CommonV3AskComponentProps {}
 
-export function PrivateAskUpdateSuccess({
-  nft,
-  onNext,
-  ...props
-}: PrivateAskCreateSuccessProps) {
+export function V3AskUpdateSuccess({ nft, onNext, ...props }: V3AskCreateSuccessProps) {
   return (
     <Stack gap="x8" {...props}>
       <SuccessCheckmark />
-      <PrivateAskHeadingDescription
+      <V3AskHeadingDescription
         heading="Private Listing Updated"
         description="The listing price has been changed."
       />

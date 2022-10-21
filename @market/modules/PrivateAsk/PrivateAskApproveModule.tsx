@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
-import { Stack } from '@zoralabs/zord'
-import { PrintError } from '@shared'
+
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { usePrivateAskModuleApproval } from './hooks/usePrivateAskModuleApproval'
-import { CommonPrivateAskComponentProps } from './PrivateAskFlow'
-import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
-import { LearnMoreButton } from './LearnMoreButton'
+import { PrintError } from '@shared'
 import { Zorb } from '@zora-brand'
-import { HeadingDescription } from './HeadingDescription'
+import { Stack } from '@zoralabs/zord'
+
+import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
+import { CommonPrivateAskComponentProps } from './PrivateAskFlow'
+import { PrivateAskHeadingDescription } from './PrivateAskHeadingDescription'
+import { PrivateAskLearnMoreButton } from './PrivateAskLearnMoreButton'
+import { usePrivateAskModuleApproval } from './hooks/usePrivateAskModuleApproval'
 
 interface PrivateAskApproveModuleProps extends CommonPrivateAskComponentProps {}
 
@@ -34,7 +36,7 @@ export function PrivateAskApproveModule({
     <Stack gap="x8">
       <Stack gap="x8" align="center">
         <Zorb size={52} />
-        <HeadingDescription
+        <PrivateAskHeadingDescription
           heading="Approve Module"
           description="The Private Asks Module allows a seller to initiate a private ERC-721 NFT sale to a specific buyer, and for the buyer to complete the purchase."
         />
@@ -49,7 +51,7 @@ export function PrivateAskApproveModule({
           Approve module
         </TransactionSubmitButton>
 
-        <LearnMoreButton>Learn more about approvals</LearnMoreButton>
+        <PrivateAskLearnMoreButton>Learn more about approvals</PrivateAskLearnMoreButton>
       </Stack>
     </Stack>
   )

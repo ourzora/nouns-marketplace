@@ -8,16 +8,16 @@ import { useToast } from '@toast'
 import { ToastStatus, ToastVariant } from '@toast/toastReducer'
 import { Stack } from '@zoralabs/zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { PrivateAskHeadingDescription } from '../PrivateAskHeadingDescription'
+import { CommonV3AskComponentProps } from '../V3AskFlow'
+import { V3AskHeadingDescription } from '../V3AskHeadingDescription'
 
-interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
+interface V3AskCreateSuccessProps extends CommonV3AskComponentProps {}
 
-export function PrivateAskCreateSuccess({
+export function V3AskCreateSuccess({
   nft: nftObj,
   onNext,
   ...props
-}: PrivateAskCreateSuccessProps) {
+}: V3AskCreateSuccessProps) {
   const { nft } = nftObj
   const askURL = `https://noun.market/collections/${nft?.contract.address}/${nft?.tokenId}`
   const [_, copied, copy] = useCopyToClipboard(askURL)
@@ -39,7 +39,7 @@ export function PrivateAskCreateSuccess({
   return (
     <Stack gap="x8" {...props}>
       <SuccessCheckmark />
-      <PrivateAskHeadingDescription
+      <V3AskHeadingDescription
         heading="Private Listing Created"
         description="This listing is now available to the buyer."
       />

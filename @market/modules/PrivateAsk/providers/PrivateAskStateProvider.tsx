@@ -1,4 +1,3 @@
-import { useModal } from '@modal'
 import React, {
   createContext,
   useCallback,
@@ -7,6 +6,8 @@ import React, {
   useReducer,
   useState,
 } from 'react'
+
+import { useModal } from '@modal'
 
 interface PrivateAskProps {
   children: React.ReactNode
@@ -18,34 +19,34 @@ type PrivateAskTxDetails = {
   rawBuyerAddress: string
 }
 
-export const VIEW_LISTING = 'viewListing'
-export const APPROVE_MODULE_FOR_CREATE = 'approveModuleForSale'
-export const APPROVE_MODULE_FOR_FILL = 'approveModuleForFill'
-export const APPROVE_TRANSFER = 'approveTransferHelper'
-export const CREATE = 'createPrivateAsk'
-export const CREATE_SUCCESS = 'createPrivateAskSuccess'
-export const UPDATE = 'updatePrivateAsk'
-export const UPDATE_SUCCESS = 'updatePrivateAskSuccess'
-export const CANCEL = 'cancelPrivateAsk'
-export const CANCEL_SUCCESS = 'cancelPrivateAskSuccess'
-export const FILLASK = 'fillPrivateAsk'
-export const FILLASK_SUCCESS = 'fillPrivateAskSuccess'
-export const RESET = 'resetPrivateAsk'
+export const VIEW_PRIVATEASK_LISTING = 'viewListing'
+export const APPROVE_MODULE_FOR_CREATE_PRIVATEASK = 'approveModuleForSale'
+export const APPROVE_MODULE_FOR_FILL_PRIVATEASK = 'approveModuleForFill'
+export const APPROVE_TRANSFER_FOR_PRIVATEASK = 'approveTransferHelper'
+export const CREATE_PRIVATEASK = 'createPrivateAsk'
+export const CREATE_PRIVATEASK_SUCCESS = 'createPrivateAskSuccess'
+export const UPDATE_PRIVATEASK = 'updatePrivateAsk'
+export const UPDATE_PRIVATEASK_SUCCESS = 'updatePrivateAskSuccess'
+export const CANCEL_PRIVATEASK = 'cancelPrivateAsk'
+export const CANCEL_PRIVATEASK_SUCCESS = 'cancelPrivateAskSuccess'
+export const FILL_PRIVATEASK = 'fillPrivateAsk'
+export const FILL_PRIVATEASK_SUCCESS = 'fillPrivateAskSuccess'
+export const RESET_PRIVATEASK = 'RESET_PRIVATEASKPrivateAsk'
 
 export type PossibleState =
-  | typeof VIEW_LISTING
-  | typeof APPROVE_MODULE_FOR_CREATE
-  | typeof APPROVE_TRANSFER
-  | typeof CREATE
-  | typeof CREATE_SUCCESS
-  | typeof UPDATE
-  | typeof UPDATE_SUCCESS
-  | typeof CANCEL
-  | typeof CANCEL_SUCCESS
-  | typeof APPROVE_MODULE_FOR_FILL
-  | typeof FILLASK
-  | typeof FILLASK_SUCCESS
-  | typeof RESET
+  | typeof VIEW_PRIVATEASK_LISTING
+  | typeof APPROVE_MODULE_FOR_CREATE_PRIVATEASK
+  | typeof APPROVE_TRANSFER_FOR_PRIVATEASK
+  | typeof CREATE_PRIVATEASK
+  | typeof CREATE_PRIVATEASK_SUCCESS
+  | typeof UPDATE_PRIVATEASK
+  | typeof UPDATE_PRIVATEASK_SUCCESS
+  | typeof CANCEL_PRIVATEASK
+  | typeof CANCEL_PRIVATEASK_SUCCESS
+  | typeof APPROVE_MODULE_FOR_FILL_PRIVATEASK
+  | typeof FILL_PRIVATEASK
+  | typeof FILL_PRIVATEASK_SUCCESS
+  | typeof RESET_PRIVATEASK
 
 export const initialState = {
   next: 'approveTransferHelper' as const,
@@ -58,47 +59,47 @@ interface State {
 }
 
 export type PrivateAskAction =
-  | { type: typeof VIEW_LISTING }
-  | { type: typeof APPROVE_MODULE_FOR_CREATE }
-  | { type: typeof APPROVE_TRANSFER }
-  | { type: typeof CREATE }
-  | { type: typeof CREATE_SUCCESS }
-  | { type: typeof UPDATE }
-  | { type: typeof UPDATE_SUCCESS }
-  | { type: typeof CANCEL }
-  | { type: typeof CANCEL_SUCCESS }
-  | { type: typeof APPROVE_MODULE_FOR_FILL }
-  | { type: typeof FILLASK }
-  | { type: typeof FILLASK_SUCCESS }
-  | { type: typeof RESET }
+  | { type: typeof VIEW_PRIVATEASK_LISTING }
+  | { type: typeof APPROVE_MODULE_FOR_CREATE_PRIVATEASK }
+  | { type: typeof APPROVE_TRANSFER_FOR_PRIVATEASK }
+  | { type: typeof CREATE_PRIVATEASK }
+  | { type: typeof CREATE_PRIVATEASK_SUCCESS }
+  | { type: typeof UPDATE_PRIVATEASK }
+  | { type: typeof UPDATE_PRIVATEASK_SUCCESS }
+  | { type: typeof CANCEL_PRIVATEASK }
+  | { type: typeof CANCEL_PRIVATEASK_SUCCESS }
+  | { type: typeof APPROVE_MODULE_FOR_FILL_PRIVATEASK }
+  | { type: typeof FILL_PRIVATEASK }
+  | { type: typeof FILL_PRIVATEASK_SUCCESS }
+  | { type: typeof RESET_PRIVATEASK }
 
-export function reducer(_state: State, action: PrivateAskAction): State {
+export function privateAskStateReducer(_state: State, action: PrivateAskAction): State {
   switch (action.type) {
-    case RESET:
-    case APPROVE_MODULE_FOR_CREATE:
+    case RESET_PRIVATEASK:
+    case APPROVE_MODULE_FOR_CREATE_PRIVATEASK:
       return initialState
-    case APPROVE_TRANSFER:
-      return { status: APPROVE_TRANSFER, next: CREATE }
-    case CREATE:
-      return { status: CREATE, next: CREATE_SUCCESS }
-    case CREATE_SUCCESS:
-      return { status: CREATE_SUCCESS }
-    case UPDATE:
-      return { status: UPDATE, next: UPDATE_SUCCESS }
-    case UPDATE_SUCCESS:
-      return { status: UPDATE_SUCCESS }
-    case CANCEL:
-      return { status: CANCEL, next: CANCEL_SUCCESS }
-    case CANCEL_SUCCESS:
-      return { status: CANCEL_SUCCESS }
-    case APPROVE_MODULE_FOR_FILL:
-      return { status: APPROVE_MODULE_FOR_FILL, next: FILLASK }
-    case FILLASK:
-      return { status: FILLASK, next: FILLASK_SUCCESS }
-    case FILLASK_SUCCESS:
-      return { status: FILLASK_SUCCESS }
-    case VIEW_LISTING:
-      return { status: VIEW_LISTING }
+    case APPROVE_TRANSFER_FOR_PRIVATEASK:
+      return { status: APPROVE_TRANSFER_FOR_PRIVATEASK, next: CREATE_PRIVATEASK }
+    case CREATE_PRIVATEASK:
+      return { status: CREATE_PRIVATEASK, next: CREATE_PRIVATEASK_SUCCESS }
+    case CREATE_PRIVATEASK_SUCCESS:
+      return { status: CREATE_PRIVATEASK_SUCCESS }
+    case UPDATE_PRIVATEASK:
+      return { status: UPDATE_PRIVATEASK, next: UPDATE_PRIVATEASK_SUCCESS }
+    case UPDATE_PRIVATEASK_SUCCESS:
+      return { status: UPDATE_PRIVATEASK_SUCCESS }
+    case CANCEL_PRIVATEASK:
+      return { status: CANCEL_PRIVATEASK, next: CANCEL_PRIVATEASK_SUCCESS }
+    case CANCEL_PRIVATEASK_SUCCESS:
+      return { status: CANCEL_PRIVATEASK_SUCCESS }
+    case APPROVE_MODULE_FOR_FILL_PRIVATEASK:
+      return { status: APPROVE_MODULE_FOR_FILL_PRIVATEASK, next: FILL_PRIVATEASK }
+    case FILL_PRIVATEASK:
+      return { status: FILL_PRIVATEASK, next: FILL_PRIVATEASK_SUCCESS }
+    case FILL_PRIVATEASK_SUCCESS:
+      return { status: FILL_PRIVATEASK_SUCCESS }
+    case VIEW_PRIVATEASK_LISTING:
+      return { status: VIEW_PRIVATEASK_LISTING }
     default:
       throw new Error()
   }
@@ -121,7 +122,7 @@ export const PrivateAskStateContext = createContext<PrivateAskProviderState>({
 } as PrivateAskProviderState)
 
 export function PrivateAskStateProvider({ children }: PrivateAskProps) {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(privateAskStateReducer, initialState)
   const [finalizedPrivateAskDetails, setFinalizedPrivateAskDetails] = useState<
     PrivateAskTxDetails | undefined
   >(undefined)
@@ -137,7 +138,7 @@ export function PrivateAskStateProvider({ children }: PrivateAskProps) {
     } else {
       // @BJ todo: add modal close functionality here
       requestClose()
-      if (dispatch) dispatch({ type: RESET })
+      if (dispatch) dispatch({ type: RESET_PRIVATEASK })
     }
   }, [next, requestClose])
 

@@ -3,16 +3,16 @@ import React from 'react'
 import { Hyperlink } from '@shared/components/DataTable/DataTableItem'
 import { Button, ButtonProps, Icon, Paragraph, mixins } from '@zoralabs/zord'
 
-import * as styles from './LearnMoreButton.css'
+import * as styles from './V3AskLearnMoreButton.css'
 
-export interface LearnMoreButtonProps extends ButtonProps, Hyperlink {}
+export interface V3AskLearnMoreButtonProps extends ButtonProps, Hyperlink {}
 
-export function LearnMoreButton({
+export function V3AskLearnMoreButton({
   children = 'Learn more about selling on Zora', // overrideable default text
   target = '_blank',
   href = 'https://support.zora.co/en/articles/5878598-what-s-an-approval',
   ...props
-}: LearnMoreButtonProps) {
+}: V3AskLearnMoreButtonProps) {
   return (
     <Button
       as="a"

@@ -6,17 +6,17 @@ import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 import { useModal } from '@modal'
 import { Stack } from '@zoralabs/zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { PrivateAskHeadingDescription } from '../PrivateAskHeadingDescription'
+import { CommonV3AskComponentProps } from '../V3AskFlow'
+import { V3AskHeadingDescription } from '../V3AskHeadingDescription'
 
-interface PrivateAskCancelSuccessProps extends CommonPrivateAskComponentProps {}
-export function PrivateAskCancelSuccess({ ...props }: PrivateAskCancelSuccessProps) {
+interface V3AskCancelSuccessProps extends CommonV3AskComponentProps {}
+export function V3AskCancelSuccess({ ...props }: V3AskCancelSuccessProps) {
   const { requestClose } = useModal()
 
   return (
     <Stack gap="x8" {...props}>
       <SuccessCheckmark />
-      <PrivateAskHeadingDescription
+      <V3AskHeadingDescription
         heading="Private Listing Canceled"
         description="The listing is no longer available to the buyer."
       />
