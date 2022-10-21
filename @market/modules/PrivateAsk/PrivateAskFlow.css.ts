@@ -13,6 +13,7 @@ export const offsetY = style({
 })
 
 export const button = style({
+  height: 'unset!important', // TODO: removeme when zord is vendored
   selectors: {
     '&:not([disabled]):hover': {
       cursor: 'pointer',
