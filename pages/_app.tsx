@@ -1,37 +1,33 @@
-import type { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { getDefaultWallets, RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit'
-import '@rainbow-me/rainbowkit/styles.css'
-
-import '@zoralabs/zord/index.css'
-import '../styles/globals.css'
-import '../styles/reset.css'
-import 'styles/styles.css'
-
+import { GALACTUS_BASE_URL } from 'utils/env-vars'
 import * as gtag from 'utils/gtag'
-import { createClient, chain, configureChains, WagmiConfig } from 'wagmi'
+import { WagmiConfig, chain, configureChains, createClient } from 'wagmi'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 
-import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
-import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
-import { ModalContextProvider } from '@modal'
-import { ContractProvider } from '@market'
+import { FooterComposition, HeaderComposition } from 'compositions'
+import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
+import NextNProgress from 'nextjs-progressbar'
+import { BlocklistGuard, CollectionsProvider } from 'providers'
+import 'styles/styles.css'
+import { SWRConfig } from 'swr'
 
-import { GALACTUS_BASE_URL } from 'utils/env-vars'
-
-import { CollectionsProvider } from 'providers/CollectionsProvider'
 import { useCollections } from 'hooks'
 
-import { SWRConfig } from 'swr'
-import NextNProgress from 'nextjs-progressbar'
+import { useEffect } from 'react'
 
-import { HeaderComposition } from 'compositions/Header'
-import { FooterComposition } from 'compositions/Footer'
-import { BlocklistGuard } from 'providers/BlocklistProvider'
-import { PrivateAskContractProvider } from '@market/modules/PrivateAsk/providers/'
+import { ContractProvider } from '@market'
+import { PrivateAskContractProvider } from '@market'
+import { ModalContextProvider } from '@modal'
+import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/rainbowkit'
+import '@rainbow-me/rainbowkit/styles.css'
 import { ToastContextProvider } from '@toast'
+import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
+import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
+import '@zoralabs/zord/index.css'
+
+import '../styles/globals.css'
+import '../styles/reset.css'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 

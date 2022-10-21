@@ -1,13 +1,17 @@
+import { Button } from 'components/Button'
+
 import React, { useEffect } from 'react'
-import { Button, Flex, Stack } from '@zoralabs/zord'
+
+import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
+import { useListingDataTable } from '@market/hooks'
+import { useModal } from '@modal/useModal'
+import { DataTable, PrintError, formatContractError } from '@shared'
+import { Flex, Stack } from '@zoralabs/zord'
 
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
-import { DataTable, formatContractError, PrintError } from '@shared'
-import { useModal } from '@modal/useModal'
-import { useListingDataTable } from '@market/hooks'
+import * as styles from '../PrivateAskFlow.css'
 import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
+import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 
 interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {}
 
@@ -34,14 +38,8 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
         {txError && <PrintError errorMessage={formatContractError(txError)} />}
       </Stack>
 
-      <Flex alignItems="stretch" gap="x2" justify="space-between" pt="x3">
-        <Button
-          flex="1"
-          variant="secondary"
-          size="lg"
-          borderRadius="curved"
-          onClick={requestClose}
-        >
+      <Flex gap="x2" justify="space-between" pt="x3" className={styles.stretch}>
+        <Button flex={1} variant="secondary" size="lg" onClick={requestClose}>
           Cancel
         </Button>
         <TransactionSubmitButton

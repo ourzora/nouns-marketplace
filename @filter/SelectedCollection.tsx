@@ -1,7 +1,8 @@
-import { FilterOptionButton } from './FilterOptionButton'
-import { Zorb } from '@zora-brand'
-import { useCollectionFilters } from './providers/CollectionFilterProvider'
 import { shortenAddress } from '@shared'
+import { Zorb } from '@zora-brand'
+
+import { FilterOptionButton } from './FilterOptionButton'
+import { useCollectionFilters } from './providers/CollectionFilterProvider'
 
 export function SelectedCollection({ tokenAddress }: { tokenAddress: any }) {
   const {

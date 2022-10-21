@@ -1,13 +1,15 @@
+import { collectionAddresses, daoAddresses } from 'constants/collection-addresses'
+
+import { CollectionsData } from 'hooks'
+
 import {
+  Dispatch,
   ReactNode,
+  SetStateAction,
   createContext,
   useContext,
   useState,
-  Dispatch,
-  SetStateAction,
 } from 'react'
-import { collectionAddresses, daoAddresses } from 'constants/collection-addresses'
-import { CollectionsData } from 'hooks'
 
 const CollectionsContext = createContext<{
   collections: CollectionsData[]

@@ -1,12 +1,13 @@
-import { Stack, Flex, Heading, Label, Box, Button, BoxProps } from '@zoralabs/zord'
-import { useNFT } from '@zoralabs/nft-hooks'
-import NextLink from 'next/link'
+import { Button } from 'components/Button'
 import { returnDao } from 'constants/collection-addresses'
-import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
-import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
+import NextLink from 'next/link'
 
-// @shared (or zord)
+import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
+import { useNFT } from '@zoralabs/nft-hooks'
+import { Box, BoxProps, Flex, Heading, Label, Stack } from '@zoralabs/zord'
+
+import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 
 export interface RPCTokenInfoProps extends BoxProps {
   contractAddress: string | undefined

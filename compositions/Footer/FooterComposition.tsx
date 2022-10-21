@@ -1,7 +1,8 @@
-import { Label, Box, Flex } from '@zoralabs/zord'
+import { useWindowWidth } from '@shared/hooks'
 import { PoweredByZora } from '@zora-brand'
+import { Box, Flex, Label } from '@zoralabs/zord'
+
 import * as styles from './Footer.css'
-import { useWindowWidth } from '@shared'
 
 export function FooterComposition() {
   const { isLarge } = useWindowWidth()

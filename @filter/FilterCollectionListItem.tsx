@@ -1,4 +1,12 @@
+import { Button } from 'components/Button'
+
+import { useMemo } from 'react'
+
+import { isAddressMatch, shortenAddress } from '@shared'
+import { numberFormatter } from '@shared'
 import { Zorb } from '@zora-brand'
+import { Box, Flex, Stack, Text, mixins } from '@zoralabs/zord'
+
 import {
   collectionBlock,
   collectionBlockContent,
@@ -7,10 +15,6 @@ import {
 } from './CollectionsFilter.css'
 import { FilterProperties } from './FilterProperties'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
-import { mixins, Button, Flex, Stack, Text, Box } from '@zoralabs/zord'
-import { useMemo } from 'react'
-import { shortenAddress, isAddressMatch } from '@shared'
-import { numberFormatter } from '@shared'
 
 export function FilterCollectionListItem({
   tokenAddress,

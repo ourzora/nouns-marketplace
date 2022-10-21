@@ -1,14 +1,16 @@
 import { useCallback, useMemo, useState } from 'react'
+
 import { AddressZero } from '@ethersproject/constants'
-import { Box, Separator, Grid } from '@zoralabs/zord'
-import { PrintError, useContractTransaction, useAuth, isAddressMatch } from '@shared'
 import {
-  TransactionSubmitButton,
   ContractInteractionStatus,
-  NFTSummary,
   MODAL_TYPES,
+  NFTSummary,
+  TransactionSubmitButton,
 } from '@market/components'
 import { useContractContext } from '@market/providers'
+import * as Sentry from '@sentry/react'
+import { PrintError, isAddressMatch, useAuth, useContractTransaction } from '@shared'
+import { Box, Grid, Separator } from '@zoralabs/zord'
 
 export type FillV3AskWizardProps = {
   tokenId: string
@@ -40,7 +42,7 @@ export function FillV3AskWizard({
 
   const hasSufficientFunds = useMemo(
     () => walletBalance?.value.gte(askPrice),
-    [askPrice, walletBalance, walletBalance?.value]
+    [askPrice, walletBalance?.value]
   )
 
   const [wizardStep, setWizardStep] = useState<FillV3AskWizardStep>('ReviewDetails')
@@ -67,6 +69,7 @@ export function FillV3AskWizard({
       setWizardStep('Confirmation')
     } catch (err: any) {
       setError(err.message || "There's been an error, please try again.")
+      Sentry.captureException(err)
     }
   }, [AsksV11, address, askCurrency, askPrice, handleTx, tokenAddress, tokenId])
 

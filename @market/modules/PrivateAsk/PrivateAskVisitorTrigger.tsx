@@ -1,10 +1,12 @@
-import { usePrivateAskStateContext, VIEW_LISTING } from '@market/modules/PrivateAsk/'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { Button, Well } from '@zoralabs/zord'
+import { Button } from 'components/Button'
+
 import React from 'react'
 
-import { useRelevantMarket, useAskHelper } from '@market/hooks'
+import { useAskHelper, useRelevantMarket } from '@market/hooks'
+import { VIEW_LISTING, usePrivateAskStateContext } from '@market/modules/PrivateAsk/'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
+import { NFTObject } from '@zoralabs/nft-hooks'
+import { Well } from '@zoralabs/zord'
 
 interface PrivateAskVisitorTriggerProps {
   nft: NFTObject
@@ -31,7 +33,6 @@ export function PrivateAskVisitorTrigger({
       )}
 
       <Button
-        borderRadius="curved" // @BJ todo: replace with 'large' when zord has been updated
         variant="secondary"
         w="100%"
         onClick={() => {

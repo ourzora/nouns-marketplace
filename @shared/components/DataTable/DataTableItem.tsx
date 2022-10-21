@@ -1,8 +1,10 @@
-import { CopyButton, AvatarImage } from '@shared'
-import { useToggle } from '@shared/hooks/useToggle'
-import { Flex, FlexProps, Icon, mixins, Paragraph } from '@zoralabs/zord'
-import React from 'react'
 import { lightFont } from 'styles/styles.css'
+
+import React from 'react'
+
+import { AvatarImage, CopyButton } from '@shared'
+import { useToggle } from '@shared/hooks/useToggle'
+import { Flex, FlexProps, Icon, Paragraph, mixins } from '@zoralabs/zord'
 
 import * as styles from './DataTableItem.css'
 

@@ -1,11 +1,10 @@
 import { style } from '@vanilla-extract/css'
-import { color, atoms, media } from '@zoralabs/zord'
+import { atoms, color, media } from '@zoralabs/zord'
 
 export const collectionTrigger = style([
   {
     gridColumn: '1',
     gridRow: '2',
-    height: 42,
     '@media': {
       [media.min1024]: {
         height: '56px',

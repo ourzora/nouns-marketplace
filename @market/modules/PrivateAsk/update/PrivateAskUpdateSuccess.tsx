@@ -1,8 +1,12 @@
-import { Button, Stack } from '@zoralabs/zord'
+import { Button } from 'components/Button'
+
 import React from 'react'
+
+import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
+import { Stack } from '@zoralabs/zord'
+
 import { HeadingDescription } from '../HeadingDescription'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 
 interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
 
@@ -18,9 +22,7 @@ export function PrivateAskUpdateSuccess({
         heading="Private Listing Updated"
         description="The listing price has been changed."
       />
-      <Button onClick={onNext} borderRadius="curved">
-        Done
-      </Button>
+      <Button onClick={onNext}>Done</Button>
     </Stack>
   )
 }

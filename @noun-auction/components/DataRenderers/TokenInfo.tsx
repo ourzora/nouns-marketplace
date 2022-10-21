@@ -1,14 +1,15 @@
-import { useCallback } from 'react'
+import { Button } from 'components/Button'
 import { useRouter } from 'next/router'
-import { Stack, Flex, Heading, Button, Box } from '@zoralabs/zord'
+
+import { useCallback } from 'react'
+
+import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
+import { lightFont } from '@shared'
 import { useNFT } from '@zoralabs/nft-hooks'
+import { Box, Flex, Heading, Stack } from '@zoralabs/zord'
 
 import { TokenInfoConfig } from '../NounishAuction'
 import { NounishThumbnail } from './NounishThumbnail'
-import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
-
-// @shared (or zord)
-import { lightFont } from '@shared'
 
 export interface TokenInfoProps extends TokenInfoConfig {
   contractAddress: string

@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { createContext, useContext } from 'react'
+
 import { NFTObject, useNFT, useNFTType } from '@zoralabs/nft-hooks'
 
 export type NFTProps = {

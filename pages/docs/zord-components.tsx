@@ -1,36 +1,39 @@
+import { DocsPageWrapper, HorizontalMenu, MDXComponents } from 'components'
+
 import { useState } from 'react'
-import { MDXComponents, DocsPageWrapper, HorizontalMenu } from 'components'
+
 import {
-  color,
-  Button,
-  Heading,
-  Stack,
-  Well,
-  Box,
-  Flex,
-  Paragraph,
-  Label,
-  Eyebrow,
-  Icon,
-  MenuText,
-  Text,
-  Display,
-  Spinner,
-  SpinnerOG,
-  InputField,
-  Input,
-  TextArea,
-  Select,
-  Switch,
-  RadioButtonGroup,
-  Checkbox,
   Accordion,
+  Box,
+  Button,
+  Checkbox,
+  Display,
+  Eyebrow,
+  Flex,
+  Heading,
+  Icon,
+  Input,
+  InputField,
+  Label,
+  MenuText,
   Modal,
   ModalContent,
+  Paragraph,
   PopUp,
+  RadioButtonGroup,
+  Select,
   Slider,
+  Spinner,
+  SpinnerOG,
+  Stack,
+  Switch,
   Tag,
+  Text,
+  TextArea,
+  Well,
+  color,
 } from '@zoralabs/zord'
+
 import ZordMarkup from '../../docs/zordMarkup.md'
 
 enum tabs {
@@ -61,7 +64,6 @@ export default function NounsAuctionHistory() {
         justify="flex-start"
         style={{
           borderBottom: `1px solid ${color.background2}`,
-          zIndex: 100,
         }}
       />
       {tab === tabs.MARKUP && <ZordMarkup components={{ ...MDXComponents }} />}

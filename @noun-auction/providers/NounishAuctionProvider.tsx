@@ -1,25 +1,28 @@
+import { formatUnits } from 'ethers/lib/utils'
+
 import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
   createContext,
   useContext,
-  ReactNode,
   useMemo,
   useState,
-  Dispatch,
-  SetStateAction,
 } from 'react'
-import { useNounishAuctionQuery } from '@noun-auction/hooks'
-import {
-  DaoConfigProps,
-  ActiveNounishAuctionResponse,
-  NounsAuctionEventTypes,
-  LilNounsAuctionEventTypes,
-} from '@noun-auction/typings'
-import { defaultDaoConfig } from '@noun-auction/constants'
-import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
-import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
+
 import { first } from 'lodash'
+
 import { AddressZero } from '@ethersproject/constants'
-import { formatUnits } from 'ethers/lib/utils'
+import { defaultDaoConfig } from '@noun-auction/constants'
+import { useNounishAuctionQuery } from '@noun-auction/hooks'
+import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
+import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
+import {
+  ActiveNounishAuctionResponse,
+  DaoConfigProps,
+  LilNounsAuctionEventTypes,
+  NounsAuctionEventTypes,
+} from '@noun-auction/typings'
 import { isAddressMatch } from '@shared'
 
 export type NounishAuctionProviderProps = {

@@ -1,14 +1,11 @@
 import { useEnsName } from 'wagmi'
-import { Flex, Label, Icon } from '@zoralabs/zord'
 
-// @noun-auction
-import { SharedDataRendererProps } from '@noun-auction/typings'
-import { EnsAvatar } from './EnsAvatar'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
+import { SharedDataRendererProps, useNounishAuctionProvider } from '@noun-auction'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
-
-// @shared
 import { lightFont, useShortAddress } from '@shared'
+import { Flex, Icon, Label } from '@zoralabs/zord'
+
+import { EnsAvatar } from './EnsAvatar'
 
 export function AuctionBidder({
   label = 'Top bidder',
@@ -63,7 +60,7 @@ export function AuctionBidder({
           {hasNonZeroHighestBidder ? (
             <Flex gap="x2" align="center">
               <Label size="md" gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
-                {ensName ? ensName : shortAddress}
+                {ensName ?? shortAddress}
               </Label>
               {useAvatar && (
                 <>

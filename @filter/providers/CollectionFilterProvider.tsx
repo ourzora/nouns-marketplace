@@ -1,18 +1,19 @@
-import { initialFilterStore, useFilterStore } from '@filter/state/filterStore'
 import { createContext, useContext, useMemo } from 'react'
-import { useTokensQuery } from '@filter/hooks/useTokensQuery'
+
 import {
-  sortMethodToSortParams,
   attributesToFilterParams,
-  priceRangeToQueryParams,
   marketTypeToFilterParams,
+  priceRangeToQueryParams,
+  sortMethodToSortParams,
 } from '@filter'
-import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { stringDefaults, themeDefaults } from '@filter/constants'
+import { useTokensQuery } from '@filter/hooks/useTokensQuery'
+import { initialFilterStore, useFilterStore } from '@filter/state/filterStore'
 import {
   CollectionFilterContextTypes,
   CollectionFilterProviderProps,
 } from '@filter/typings'
+import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 
 const CollectionFilterContext = createContext<CollectionFilterContextTypes>({
   filterStore: initialFilterStore,
@@ -74,7 +75,7 @@ export function CollectionFilterProvider({
     handleLoadMore,
   } = useTokensQuery({
     contractAllowList,
-    contractAddress: contractAddress ? contractAddress : undefined,
+    contractAddress: contractAddress ?? undefined,
     ownerAddress,
     initialData: initialPage,
     sort: sortMethodToSortParams(
@@ -89,15 +90,20 @@ export function CollectionFilterProvider({
     },
   })
 
-  // - Allows us to adjust the options available to users when sorting (eg. no sorting by price when there are no prices!)
-  const tokensHaveActiveMarkets = useMemo(
+  const tokensWithActiveMarkets = useMemo(
     () =>
       items.filter((token) =>
         token.markets?.map((mkt) =>
           [MARKET_INFO_STATUSES.ACTIVE, MARKET_INFO_STATUSES.PENDING].includes(mkt.status)
         )
-      ).length > 0,
+      ),
     [items]
+  )
+
+  // - Allows us to adjust the options available to users when sorting (eg. no sorting by price when there are no prices!)
+  const tokensHaveActiveMarkets = useMemo(
+    () => tokensWithActiveMarkets.length > 0,
+    [tokensWithActiveMarkets]
   )
 
   return (
@@ -105,6 +111,7 @@ export function CollectionFilterProvider({
       value={{
         filterStore,
         items,
+        // items: tokensWithoutActiveMarkets,
         isValidating,
         isReachingEnd,
         isEmpty,

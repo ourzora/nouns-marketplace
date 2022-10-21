@@ -1,5 +1,7 @@
-import { Filter, useCollectionFilters } from '@filter'
 import { useEffect } from 'react'
+
+import { Filter, useCollectionFilters } from '@filter'
+
 import { NFTGridTestData } from './NFTGridTestData'
 
 export function CollectionsTest({ collectionAddress }: { collectionAddress?: string }) {

@@ -1,10 +1,7 @@
-import { Button, Flex } from '@zoralabs/zord'
+import { Button } from 'components/Button'
+
 import { useCallback, useMemo } from 'react'
 
-import { textButton, textSmall } from './CollectionsFilter.css'
-import { FilterOptionButton } from './FilterOptionButton'
-import { SelectedCollection } from './SelectedCollection'
-import { SelectedPriceRange } from './SelectedPriceRange'
 import { FILTER_HEADER_HEIGHT } from '@filter/constants'
 import { useCollectionFilters } from '@filter/providers'
 import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filter/state'
@@ -15,6 +12,12 @@ import {
   SelectOption,
   Status,
 } from '@filter/typings'
+import { Flex } from '@zoralabs/zord'
+
+import { textButton, textSmall } from './CollectionsFilter.css'
+import { FilterOptionButton } from './FilterOptionButton'
+import { SelectedCollection } from './SelectedCollection'
+import { SelectedPriceRange } from './SelectedPriceRange'
 
 /* Reusable - but not sure how to pass dynamic argument type ie. MarketStatusFilter
 /* @ts-ignore */

@@ -1,11 +1,14 @@
-import { Button, Flex, Box, Text, Stack, PopUp, Separator, Icon } from '@zoralabs/zord'
-import { connectButton, disconnectButton, menuItem, modalContent } from './Header.css'
+import { useAccount, useDisconnect, useNetwork } from 'wagmi'
+
 import Link from 'next/link'
-import { useConnectModal, useChainModal } from '@rainbow-me/rainbowkit'
-import { useDisconnect, useAccount, useNetwork } from 'wagmi'
-import { useEnsData } from '@shared/hooks'
-import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
 import { noTextWrap } from 'styles/styles.css'
+
+import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
+import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit'
+import { useEnsData } from '@shared/hooks'
+import { Box, Button, Flex, Icon, PopUp, Separator, Stack, Text } from '@zoralabs/zord'
+
+import { connectButton, disconnectButton, menuItem, modalContent } from './Header.css'
 
 export const ConnectButton = ({ connectText = 'Connect', ...props }) => {
   const { disconnect } = useDisconnect()

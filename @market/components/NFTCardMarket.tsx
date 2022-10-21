@@ -1,7 +1,9 @@
 import { useMemo } from 'react'
-import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
+
+import { FillV3AskModal } from '@market/components'
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
-import { ListV3AskModal, FillV3AskModal } from '@market/components'
+import { UniversalListAskModal } from '@market/modules/PrivateAsk/UniversalListAskModal'
+import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTCardMarketProps extends FlexProps {
@@ -18,6 +20,6 @@ export function NFTCardMarket({ nftObj, ...props }: NFTCardMarketProps) {
   return hasRelevantAsk ? (
     <FillV3AskModal nftObj={nftObj} {...props} />
   ) : (
-    <ListV3AskModal nftObj={nftObj} {...props} />
+    <UniversalListAskModal nftObj={nftObj} {...props} />
   )
 }

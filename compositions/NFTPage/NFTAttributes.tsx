@@ -1,14 +1,15 @@
-import { Grid, Heading, Label, Stack, Box, BoxProps, radii } from '@zoralabs/zord'
-import {
-  nftMarketWrapper,
-  nftAttributesWrapper,
-  nftAttribute,
-  nftAttributes,
-} from './NFTPage.css'
-import { useNFTProvider } from '@shared/providers/NFTProvider'
+import { useMemo } from 'react'
 
 import { lightFont } from '@shared'
-import { useMemo } from 'react'
+import { useNFTProvider } from '@shared/providers/NFTProvider'
+import { BoxProps, Grid, Heading, Label, Stack, radii } from '@zoralabs/zord'
+
+import {
+  nftAttribute,
+  nftAttributes,
+  nftAttributesWrapper,
+  nftMarketWrapper,
+} from './NFTPage.css'
 
 export interface NFTAttributesProps extends BoxProps {}
 

@@ -1,12 +1,15 @@
-import { useContractTransaction } from '@shared'
-import { useState } from 'react'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { ContractTransaction } from 'ethers'
+
+import { useState } from 'react'
+
 import { parseUnits } from '@ethersproject/units'
 import {
-  usePrivateAskStateContext,
   usePrivateAskContractContext,
-} from '@market/modules/PrivateAsk/'
+  usePrivateAskStateContext,
+} from '@market/modules/PrivateAsk'
+import * as Sentry from '@sentry/react'
+import { useContractTransaction } from '@shared'
+import { NFTObject } from '@zoralabs/nft-hooks'
 
 export const CREATE_ASK: string = 'createPrivateAsk'
 export const CANCEL_ASK: string = 'cancelPrivateAsk'
@@ -111,6 +114,7 @@ export const usePrivateAskTransaction = ({
       setFinalizedTx(tx)
     } catch (err: any) {
       setTxError(err || new Error("There's been an error, please try again."))
+      Sentry.captureException(err)
     } finally {
       setSubmitting(false)
     }

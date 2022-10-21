@@ -1,9 +1,10 @@
-import { BoxProps, Flex, Icon } from '@zoralabs/zord'
+import clsx from 'clsx'
 
 import { useToggle } from '@shared/hooks'
-import clsx from 'clsx'
-import * as styles from './SearchInput.css'
 import useAutoFocus from '@shared/hooks/useAutoFocus'
+import { BoxProps, Flex, Icon } from '@zoralabs/zord'
+
+import * as styles from './SearchInput.css'
 
 interface SearchInputProps extends BoxProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void

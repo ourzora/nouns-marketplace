@@ -1,5 +1,6 @@
-import { zdk } from '@shared'
 import useSWR from 'swr'
+
+import { zdk } from '@shared'
 
 export function useCollection(collectionAddress: string) {
   const { data, error } = useSWR(
@@ -10,6 +11,8 @@ export function useCollection(collectionAddress: string) {
         includeFullDetails: true,
       })
   )
+
+  console.error(error)
 
   return {
     collection: data,

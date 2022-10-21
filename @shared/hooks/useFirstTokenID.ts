@@ -1,7 +1,10 @@
-import { zdk } from '@shared'
-import { useMemo } from 'react'
-import useSWR from 'swr'
 import { NetworkInput } from 'utils/network'
+
+import useSWR from 'swr'
+
+import { useMemo } from 'react'
+
+import { zdk } from '@shared'
 
 export function useFirstTokenID(collectionAddress: string) {
   const { data: tokenData, error: firstTokenDataError } = useSWR(

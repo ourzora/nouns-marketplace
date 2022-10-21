@@ -1,34 +1,31 @@
-import { useMemo } from 'react'
-import { Stack, Box, Flex, Heading, Separator } from '@zoralabs/zord'
-import { Link } from 'components/Link'
-import { NFTCardMarket } from '@market'
-import {
-  cardWrapper,
-  titleWrapper,
-  titleScroll,
-  titleHeading,
-  cardImageWrapper,
-} from '@media/NftMedia.css'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ImageWithNounFallback } from 'components'
-import { useNFTProvider, useTitleWithFallback } from '@shared'
+import { Link } from 'components/Link'
+
+import { useMemo } from 'react'
+
+import { NFTCardMarket } from '@market'
+import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import {
+  cardImageWrapper,
+  cardWrapper,
+  titleHeading,
+  titleScroll,
+  titleWrapper,
+} from '@media/NftMedia.css'
+import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
+import { useIsOwner, useNFTProvider, useTitleWithFallback } from '@shared'
+import { Box, Flex, Heading, Separator, Stack } from '@zoralabs/zord'
 
 export function NFTCard() {
   const { nft, contractAddress, tokenId } = useNFTProvider()
-
+  const { isOwner } = useIsOwner(nft)
   const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
     tokenId,
     defaultTitle: nft?.metadata?.name,
   })
 
-  const srcImg = useMemo(
-    () =>
-      nft?.media?.mimeType === 'image/svg+xml'
-        ? nft?.media?.image?.uri
-        : nft?.media?.poster?.uri,
-    [nft?.media]
-  )
+  const srcImg = useOptionalImageURIDecode(nft!) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
 
   const useTitleScroll = useMemo(() => {
     if (nft?.metadata && nft?.metadata?.name) {
@@ -51,7 +48,7 @@ export function NFTCard() {
           )}
         </Box>
       </Link>
-      <Stack gap="x2" mt="x2" px="x4" pb="x4" flex="1">
+      <Stack gap="x2" mt="x2" px="x4" pb="x4" flex={1}>
         <Flex
           className={[titleWrapper, useTitleScroll && titleScroll]}
           style={{
@@ -76,8 +73,12 @@ export function NFTCard() {
             </Flex>
           </Link>
         </Flex>
-        <Separator mt="x1" />
-        <NFTCardMarket nftObj={nft} />
+        {isOwner && (
+          <>
+            <Separator mt="x1" />
+            <NFTCardMarket nftObj={nft} />
+          </>
+        )}
       </Stack>
     </Stack>
   )

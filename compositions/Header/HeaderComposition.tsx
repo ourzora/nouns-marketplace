@@ -1,9 +1,10 @@
 import { Flex } from '@zoralabs/zord'
-import { NounsLink } from './NounsLink'
+
 import { CollectionMenu } from '../CollectionMenu'
-import { headerWrapper, leftContainer, rightContainer } from './Header.css'
 import { ConnectButton } from './ConnectButton'
+import { headerWrapper, leftContainer, rightContainer } from './Header.css'
 import { NounsCenterLink } from './NounsCenterLink'
+import { NounsLink } from './NounsLink'
 
 export function HeaderComposition() {
   return (

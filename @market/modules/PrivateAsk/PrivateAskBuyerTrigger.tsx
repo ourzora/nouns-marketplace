@@ -1,21 +1,15 @@
-import {
-  // CANCEL,
-  // UPDATE,
-  APPROVE_MODULE_FOR_FILL,
-  // APPROVE_TRANSFER,
-  // CANCEL_SUCCESS,
-  // CREATE_SUCCESS,
-  // UPDATE_SUCCESS,
-  // FILLASK_SUCCESS,
-  // CANCEL_ASK,
-  usePrivateAskStateContext,
-} from '@market/modules/PrivateAsk/'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { Button, Well } from '@zoralabs/zord'
+import { Button } from 'components/Button'
+
 import React, { useState } from 'react'
 
-import { useRelevantMarket, useAskHelper } from '@market/hooks'
+import { useAskHelper, useRelevantMarket } from '@market/hooks'
+import {
+  APPROVE_MODULE_FOR_FILL,
+  usePrivateAskStateContext,
+} from '@market/modules/PrivateAsk/'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
+import { NFTObject } from '@zoralabs/nft-hooks'
+import { Well } from '@zoralabs/zord'
 
 interface PrivateAskBuyerTriggerProps {
   nft: NFTObject
@@ -42,17 +36,10 @@ export function PrivateAskBuyerTrigger({ nft, openModal }: PrivateAskBuyerTrigge
       )}
 
       <Button
-        borderRadius="curved" // @BJ todo: replace with 'large' when zord has been updated
         w="100%"
         disabled={disabled}
         onClick={() => {
           dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL }) // INITIAL STATE IN FLOW
-          // dispatch && dispatch({ type: APPROVE_TRANSFER }) // FOR TESTING
-          // dispatch && dispatch({ type: CANCEL_ASK }) // FOR TESTING
-          // dispatch && dispatch({ type: CANCEL_SUCCESS }) // FOR TESTING
-          // dispatch && dispatch({ type: CREATE_SUCCESS }) // FOR TESTING
-          // dispatch && dispatch({ type: UPDATE_SUCCESS }) // FOR TESTING
-          // dispatch && dispatch({ type: FILLASK_SUCCESS }) // FOR TESTING
           openModal()
           setDisabled(true)
         }}

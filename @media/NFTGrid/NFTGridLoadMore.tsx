@@ -1,6 +1,8 @@
-import { Flex, Icon } from '@zoralabs/zord'
-import { LoadMoreObserver } from './LoadMoreObserver'
 import { useCallback } from 'react'
+
+import { Flex, Icon } from '@zoralabs/zord'
+
+import { LoadMoreObserver } from './LoadMoreObserver'
 
 interface NFTGridLoadMoreProps {
   showObserver?: boolean

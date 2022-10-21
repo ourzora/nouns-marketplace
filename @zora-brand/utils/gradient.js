@@ -1,6 +1,8 @@
-import { arrayify } from '@ethersproject/bytes'
-import _ from 'lodash'
 import tinycolor from 'tinycolor2'
+
+import _ from 'lodash'
+
+import { arrayify } from '@ethersproject/bytes'
 
 const linear = (p) => p
 

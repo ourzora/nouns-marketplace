@@ -1,5 +1,7 @@
-import { Stack, StackProps } from '@zoralabs/zord'
 import React from 'react'
+
+import { Stack, StackProps } from '@zoralabs/zord'
+
 import * as styles from './Toast.css'
 
 export function ToastContainer({ children }: StackProps) {

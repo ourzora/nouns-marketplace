@@ -1,12 +1,12 @@
+import { NETWORK_CHAIN_ID } from '@shared/utils/connectors'
 import mainnetV3 from '@zoralabs/v3/dist/addresses/1.json'
 import goerliV3 from '@zoralabs/v3/dist/addresses/5.json'
-import { NETWORK_CHAIN_ID } from '@shared/utils/connectors'
 
 export const MODULE_MANAGER_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? mainnetV3.ZoraModuleManager : goerliV3.ZoraModuleManager
 
 export const ASKS_V11_ADDRESS =
-  NETWORK_CHAIN_ID === 1 ? mainnetV3.AsksV1_1 : 'TODO:ADDME_FOR_GORLI'
+  NETWORK_CHAIN_ID === 1 ? mainnetV3.AsksV1_1 : goerliV3.AsksV1_1
 
 export const ERC721_TRANSFER_HELPER_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? mainnetV3.ERC721TransferHelper : goerliV3.ERC721TransferHelper
