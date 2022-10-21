@@ -71,19 +71,17 @@ export function NounishAuction({
       >
         <NounishAuctionProvider daoConfig={daoConfig} tokenId={tokenId} layout={layout}>
           {showAuctionRow && (
-            <>
-              <AuctionRow
-                auctionDataComponent={<div>AUCTION DATA</div>}
-                activeAuctionComponent={
-                  <ActiveAuctionRow
-                    routePrefix={routePrefix}
-                    useModal={!useInlineBid}
-                    showLabels={showLabels}
-                    showTopBid={showTopBid}
-                  />
-                }
-              />
-            </>
+            <AuctionRow
+              auctionDataComponent={<div>AUCTION DATA</div>}
+              activeAuctionComponent={
+                <ActiveAuctionRow
+                  routePrefix={routePrefix}
+                  useModal={!useInlineBid}
+                  showLabels={showLabels}
+                  showTopBid={showTopBid}
+                />
+              }
+            />
           )}
           {showBidHistory && (
             <AuctionHistory className={bidHistoryWrapper} mb="x2">

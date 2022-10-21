@@ -28,7 +28,6 @@ function Home(props: { fallback: CollectionParsed }) {
         >
           <HomePageHeader
             headline="The Nouns Marketplace"
-            copy="Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum porro obcaecati itaque maiores voluptatibus soluta laboriosam vitae cupiditate aliquam excepturi incidunt neque dolorum, quod asperiores quis hic, modi earum nisi."
             mt={{ '@initial': 'x6', '@1024': 'x24' }}
             mb={{ '@initial': 'x8', '@1024': 'x24' }}
           />

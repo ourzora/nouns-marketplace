@@ -1,7 +1,11 @@
+import { InfoIcon } from 'components/Icon/InfoIcon'
 import { CollectionParsed } from 'pages'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
+import { mediumFont } from 'styles/styles.css'
 
-import { Heading, Stack, StackProps } from '@zoralabs/zord'
+import { Modal, ModalContent, useModal } from '@modal'
+import { customBackground, customContent } from '@modal/Modal.css'
+import { Flex, Heading, Paragraph, Stack, StackProps } from '@zoralabs/zord'
 
 import { rankingWrapper } from './CollectionRanking.css'
 import { RankingRow } from './RankingRow'
@@ -17,11 +21,30 @@ export function CollectionRanking({
   className,
   ...props
 }: CollectionRankingTableProps) {
+  const { requestClose } = useModal()
   return (
     <Stack className={[rankingWrapper, className]}>
-      <Heading as="h2" size="lg">
-        Collections
-      </Heading>
+      <Flex gap="x2" align="center">
+        <Heading as="h2" size="lg">
+          Collections
+        </Heading>
+
+        <Modal onOpenChange={requestClose} trigger={<InfoIcon />}>
+          <ModalContent
+            modalContentOverrides={customContent}
+            modalBackgroundOverrides={customBackground}
+            showClose={true}
+            padding="x8"
+          >
+            <Stack gap="x8">
+              <Heading as="h2">What are Collections?</Heading>
+              <Paragraph size="lg" className={mediumFont}>
+                Collections do not have treasuries nor a voting mechanism.
+              </Paragraph>
+            </Stack>
+          </ModalContent>
+        </Modal>
+      </Flex>
       <Stack
         gap={{
           '@initial': 'x4',
