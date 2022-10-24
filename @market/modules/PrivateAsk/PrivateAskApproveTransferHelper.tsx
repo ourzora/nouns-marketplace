@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { PrintError } from '@shared/components/PrintError'
@@ -29,7 +29,7 @@ export function PrivateAskApproveTransferHelper({
 
   useEffect(() => {
     isApproved && onNext && onNext()
-  }, [isApproved, onNext])
+  }, [isApproved, , onNext])
 
   return isAwaitingApprovalCheck ? (
     <PrivateAskCheckApprovalSpinner text="Checking Zora Transfer Helper Approval..." />
