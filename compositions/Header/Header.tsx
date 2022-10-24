@@ -1,18 +1,14 @@
 import * as styles from 'styles/styles.css'
 
-import { useWindowWidth } from '@shared'
 import { Flex, Grid } from '@zoralabs/zord'
 
 import { CollectionMenu } from '../CollectionMenu'
 import { ConnectButton } from './ConnectButton'
-import { DocsLink } from './DocsLink'
 import * as headerStyles from './Header.css'
 import { ManageLink } from './ManageLink'
 import { NounsLink } from './NounsLink'
 
 export function Header() {
-  const { isLarge } = useWindowWidth()
-
   return (
     <Flex className={headerStyles.headerWrapper}>
       <Grid
@@ -43,7 +39,6 @@ export function Header() {
             direction={{ '@initial': 'column', '@1024': 'row' }}
             justify="space-between"
           >
-            {isLarge && <DocsLink />}
             <ManageLink />
             <ConnectButton />
           </Flex>

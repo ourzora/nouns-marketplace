@@ -18,7 +18,7 @@ export const daosWrapper = style([
   atoms({
     w: '100%',
     m: 'auto',
-    gap: 'x4',
+    gap: 'x8',
   }),
 ])
 

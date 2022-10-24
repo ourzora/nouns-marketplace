@@ -2,7 +2,7 @@ import { HEADER_LAYER } from 'constants/layers'
 import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
 
 import { style } from '@vanilla-extract/css'
-import { atoms, color, media, space, vars } from '@zoralabs/zord'
+import { atoms, color, media, vars } from '@zoralabs/zord'
 
 export const headerWrapper = style([
   atoms({
@@ -83,8 +83,3 @@ export const connectButton = style([
     },
   }),
 ])
-
-export const docsLink = style({
-  paddingLeft: space.x2,
-  paddingRight: space.x3,
-})

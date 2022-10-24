@@ -1,14 +1,11 @@
 import { InfoIcon } from 'components/Icon/InfoIcon'
 import { daos } from 'constants/collection-addresses'
-import Link from 'next/link'
 import { mediumFont } from 'styles/styles.css'
-
-import { useCallback } from 'react'
 
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from '@modal/Modal.css'
 import { NounishAuction } from '@noun-auction'
-import { Button, Flex, Heading, Paragraph, Stack, StackProps } from '@zoralabs/zord'
+import { Flex, Heading, Paragraph, Stack, StackProps } from '@zoralabs/zord'
 
 import { daosRow, daosWrapper } from './Daos.css'
 
