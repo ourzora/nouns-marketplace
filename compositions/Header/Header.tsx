@@ -37,7 +37,7 @@ export function Header() {
           <Flex
             gap={{ '@initial': 'x4', '@1024': 'x6' }}
             direction={{ '@initial': 'column', '@1024': 'row' }}
-            justify="space-between"
+            justify={{ '@initial': 'flex-start', '@1024': 'space-between' }}
           >
             <ManageLink />
             <ConnectButton />
