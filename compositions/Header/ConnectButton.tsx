@@ -1,17 +1,28 @@
 import { useAccount, useDisconnect, useNetwork } from 'wagmi'
 
+import { Button } from 'components/Button'
 import Link from 'next/link'
 import { noTextWrap } from 'styles/styles.css'
 
 import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit'
 import { useEnsData } from '@shared/hooks'
-import { Box, Button, Flex, Icon, PopUp, Separator, Stack, Text } from '@zoralabs/zord'
+import { Box, Flex, Icon, PopUp, Separator, Stack, Text } from '@zoralabs/zord'
 
-import { connectButton, disconnectButton, menuItem, modalContent } from './Header.css'
+import {
+  connectButton,
+  disconnectButton,
+  menuItem,
+  modalContent,
+  popUpWrapper,
+} from './Header.css'
 
 export const ConnectButton = ({ connectText = 'Connect', ...props }) => {
-  const { disconnect } = useDisconnect()
+  const { disconnect } = useDisconnect({
+    onError(error) {
+      console.log('Error', error)
+    },
+  })
   const { address } = useAccount()
   const { chain } = useNetwork()
   const { openConnectModal } = useConnectModal()
@@ -29,7 +40,6 @@ export const ConnectButton = ({ connectText = 'Connect', ...props }) => {
   if (chain.unsupported) {
     return (
       <Button
-        size="sm"
         variant="destructive"
         px="x5"
         className={connectButton}
@@ -49,6 +59,7 @@ export const ConnectButton = ({ connectText = 'Connect', ...props }) => {
       <PopUp
         padding="x0"
         placement="bottom-end"
+        wrapperClassName={popUpWrapper}
         trigger={
           <Button variant="ghost" type="button">
             <Box as="span">{displayName}</Box>
@@ -59,16 +70,20 @@ export const ConnectButton = ({ connectText = 'Connect', ...props }) => {
         <Stack className={modalContent} gap="x0">
           <Flex className={menuItem} justify="space-between">
             <Link passHref href="/collections">
-              <Button as="a" size="sm" variant="unset">
+              <Button as="a" variant="unset">
                 <EnsAvatar address={address} />
                 <Box ml={'x2'} as="span" className={[noTextWrap]}>
                   {displayName}
                 </Box>{' '}
               </Button>
             </Link>
-            <Box onClick={disconnect} className={[disconnectButton]}>
+            <Button
+              variant="unset"
+              onClick={() => disconnect()}
+              className={[disconnectButton]}
+            >
               Disconnect
-            </Box>
+            </Button>
           </Flex>
           <Separator />
           <Box className={menuItem}>

@@ -15,7 +15,6 @@ export const headerWrapper = style([
     '@media': {
       [media.min1024]: {
         height: HEADER_HEIGHT,
-        gridTemplateColumns: 'repeat(3, 1fr)',
         borderBottom: 'none',
       },
     },
@@ -34,10 +33,19 @@ export const headerWrapper = style([
   }),
 ])
 
-export const nounsGlassesLink = style([
+export const leftContainer = style([
   {
-    aspectRatio: '70 / 24',
+    alignItems: 'center',
   },
+])
+
+export const rightContainer = style([
+  {
+    alignItems: 'center',
+  },
+])
+
+export const nounsGlassesLink = style([
   atoms({
     mr: 'x6',
     cursor: 'pointer',
@@ -67,24 +75,10 @@ export const manageButton = style([
   }),
 ])
 
-export const leftContainer = style([
-  {
-    alignItems: 'center',
-  },
-])
-
-export const rightContainer = style([
-  {
-    alignItems: 'center',
-  },
-])
-
 export const connectButton = style([
   {
     justifyContent: 'space-around',
     borderRadius: 16,
-    fontSize: 12,
-    height: '40px',
     '@media': {
       [media.min1024]: {
         height: '52px',
@@ -104,12 +98,16 @@ export const connectButton = style([
 
 export const nounsCenterLink = style([
   {
-    aspectRatio: '100 / 24',
-    maxHeight: '24px',
+    display: 'none',
+    '@media': {
+      [media.min576]: {
+        flexShrink: 0,
+        display: 'block',
+      },
+    },
   },
   atoms({
     cursor: 'pointer',
-    pos: 'relative',
   }),
 ])
 
@@ -138,6 +136,7 @@ export const modalContent = style([
 
 export const menuItem = style([
   atoms({
+    alignItems: 'center',
     borderRadius: 'phat',
     px: 'x5',
     py: 'x5',
@@ -150,5 +149,12 @@ export const disconnectButton = style([
     ':hover': {
       cursor: 'pointer',
     },
+  },
+])
+
+export const popUpWrapper = style([
+  {
+    // only works with !important
+    borderRadius: '20px!important',
   },
 ])

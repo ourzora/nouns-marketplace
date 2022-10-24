@@ -5,9 +5,14 @@ export const collectionTrigger = style([
   {
     gridColumn: '1',
     gridRow: '2',
+    display: 'none',
     '@media': {
       [media.min1024]: {
         height: '56px',
+      },
+      [media.min576]: {
+        flexShrink: 0,
+        display: 'block',
       },
     },
   },
