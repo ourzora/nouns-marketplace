@@ -31,7 +31,7 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
   const usdAskAmount = useMemo(
     () =>
       ask?.amount?.usd?.value
-        ? numberFormatterUSDC(roundTwoDecimals(ask?.amount?.usd?.value))
+        ? numberFormatterUSDC(roundTwoDecimals(ask.amount.usd.value))
         : '...',
     [ask]
   )
