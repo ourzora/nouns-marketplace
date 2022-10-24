@@ -1,6 +1,7 @@
-import { style } from '@vanilla-extract/css'
-import { atoms, media, color } from '@zoralabs/zord'
 import { MAX_WIDTH } from 'styles/style-constants'
+
+import { style } from '@vanilla-extract/css'
+import { atoms, color, media } from '@zoralabs/zord'
 
 export const daosWrapper = style([
   {

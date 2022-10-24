@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
 import { isClientSide } from 'utils/window'
+
+import { useEffect } from 'react'
 
 /**
  * Detect clicks outside of the specified element or those having specified selectors, and apply a function when triggered.

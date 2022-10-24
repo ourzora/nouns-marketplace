@@ -1,6 +1,9 @@
-import { Flex, Label, Stack, BoxProps, Well, Tag, Paragraph, Icon } from '@zoralabs/zord'
-import * as styles from './PrivateAskFlow.css'
 import { Button } from 'components/Button'
+
+import { BoxProps, Flex, Icon, Label, Paragraph, Stack, Tag, Well } from '@zoralabs/zord'
+
+import * as styles from './PrivateAskFlow.css'
+
 export interface SaleTypeButtonProps extends BoxProps {
   label: string
   description: string

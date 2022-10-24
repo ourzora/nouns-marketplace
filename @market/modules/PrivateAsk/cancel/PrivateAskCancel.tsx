@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react'
-import { Flex, Stack } from '@zoralabs/zord'
 import { Button } from 'components/Button'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import React, { useEffect } from 'react'
+
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
-import { DataTable, formatContractError, PrintError } from '@shared'
-import { useModal } from '@modal/useModal'
 import { useListingDataTable } from '@market/hooks'
-import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
+import { useModal } from '@modal/useModal'
+import { DataTable, PrintError, formatContractError } from '@shared'
+import { Flex, Stack } from '@zoralabs/zord'
+
+import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import * as styles from '../PrivateAskFlow.css'
+import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
+import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 
 interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {}
 

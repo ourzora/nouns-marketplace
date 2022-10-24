@@ -1,11 +1,14 @@
-import { Icon, Box, Stack, StackProps, color } from '@zoralabs/zord'
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
-import { useEffect, useState } from 'react'
-import * as styles from '@noun-auction/styles/NounishStyles.css'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
-import { PrintError } from '@shared'
+
 import { Button } from 'components/Button'
+
+import { useEffect, useState } from 'react'
+
+import { useNounishAuctionProvider } from '@noun-auction/providers'
+import * as styles from '@noun-auction/styles/NounishStyles.css'
+import { PrintError } from '@shared'
 import { useButtonRequiresAuth } from '@shared/hooks'
+import { Box, Icon, Stack, StackProps, color } from '@zoralabs/zord'
 
 export interface SettleAuctionProps extends StackProps {
   useErrorMsg?: boolean

@@ -1,6 +1,8 @@
-import { avatarPadding, filterOption } from './CollectionsFilter.css'
-import { Checkbox, Flex, Icon, Text } from '@zoralabs/zord'
 import { Fragment, ReactNode } from 'react'
+
+import { Checkbox, Flex, Icon, Text } from '@zoralabs/zord'
+
+import { avatarPadding, filterOption } from './CollectionsFilter.css'
 
 export interface FilterOptionButtonProps {
   iconSize?: number

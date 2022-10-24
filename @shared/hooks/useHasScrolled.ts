@@ -1,4 +1,5 @@
 import { SyntheticEvent, useState } from 'react'
+
 import { useThrottle } from './useThrottle'
 
 export function useHasScrolled() {

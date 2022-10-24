@@ -1,13 +1,15 @@
 import { PageWrapper, Seo } from 'components'
-import { nftService } from 'services/nftService'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { NFTPageHero, NFTSidebar, NFTAttributes, NFTHistory } from 'compositions/NFTPage'
-import { Grid, Stack } from '@zoralabs/zord'
-import { NFTProvider } from '@shared/providers/NFTProvider'
-import { NounishAuctionProvider } from '@noun-auction'
-import { returnDao } from 'constants/collection-addresses'
-import { useMemo } from 'react'
+import { NFTAttributes, NFTHistory, NFTPageHero, NFTSidebar } from 'compositions'
 import * as styles from 'compositions/NFTPage/NFTPage.css'
+import { returnDao } from 'constants/collection-addresses'
+import { nftService } from 'services'
+
+import { useMemo } from 'react'
+
+import { NounishAuctionProvider } from '@noun-auction'
+import { NFTProvider } from '@shared/providers/NFTProvider'
+import { NFTObject } from '@zoralabs/nft-hooks'
+import { Grid, Stack } from '@zoralabs/zord'
 
 const NFT = ({
   nft,

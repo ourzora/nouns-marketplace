@@ -1,8 +1,10 @@
-import Link from 'next/link'
-import { Flex } from '@zoralabs/zord'
-import { nounsGlassesLink } from './Header.css'
-import { clickAnimation } from 'styles/styles.css'
 import { NounsGlasses } from 'components'
+import Link from 'next/link'
+import { clickAnimation } from 'styles/styles.css'
+
+import { Flex } from '@zoralabs/zord'
+
+import { nounsGlassesLink } from './Header.css'
 
 export function NounsLink() {
   return (

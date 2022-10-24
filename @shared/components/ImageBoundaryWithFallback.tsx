@@ -1,4 +1,5 @@
 import { ImageProps } from 'next/image'
+
 import React, { Component } from 'react'
 
 export interface ImageBoundaryWithFallbackProps extends ImageProps {

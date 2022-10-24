@@ -1,14 +1,15 @@
+import { Button } from 'components/Button'
+
+import React, { useState } from 'react'
+
+import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import {
   APPROVE_MODULE_FOR_FILL,
   usePrivateAskStateContext,
 } from '@market/modules/PrivateAsk/'
+import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Well } from '@zoralabs/zord'
-import React, { useState } from 'react'
-import { Button } from 'components/Button'
-
-import { useRelevantMarket, useAskHelper } from '@market/hooks'
-import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 
 interface PrivateAskBuyerTriggerProps {
   nft: NFTObject

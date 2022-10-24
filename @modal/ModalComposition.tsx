@@ -1,10 +1,12 @@
-import { useCallback, useMemo } from 'react'
 import { ClassValue } from 'clsx'
-import { Box, BoxProps } from '@zoralabs/zord'
+
+import { useCallback, useMemo } from 'react'
+
 import { Modal, ModalContent, useModal } from '@modal'
+import { useButtonRequiresAuth } from '@shared'
+import { Box, BoxProps } from '@zoralabs/zord'
+
 import { customBackground, customContent } from './Modal.css'
-// import { useButtonRequiresAuth } from '@shared/hooks/useButtonRequiresAuth' // <-- does not work
-import { useButtonRequiresAuth } from '@shared/hooks' // <-- works
 
 export interface ModalCompositionProps extends BoxProps {
   /** Unique identifier / key for the modal */

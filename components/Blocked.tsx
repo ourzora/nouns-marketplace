@@ -1,7 +1,8 @@
-import { style } from '@vanilla-extract/css'
-import { atoms, Heading, Paragraph, Stack } from '@zoralabs/zord'
 import { PageWrapper } from 'components'
+
 import React, { SVGProps } from 'react'
+
+import { Heading, Paragraph, Stack } from '@zoralabs/zord'
 
 export function Skull(props: SVGProps<SVGSVGElement>) {
   return (

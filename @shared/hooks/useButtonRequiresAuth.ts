@@ -1,5 +1,7 @@
-import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useMemo } from 'react'
+
+import { useConnectModal } from '@rainbow-me/rainbowkit'
+
 import { useAuth } from './useAuth'
 
 // If user isn't connected, adjust button behavior to open connect modal

@@ -1,9 +1,10 @@
-import { JsonRpcProvider } from '@ethersproject/providers'
 import { chain, defaultChains } from 'wagmi'
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+
+import { JsonRpcProvider } from '@ethersproject/providers'
 
 export const NETWORK_URL = process.env.NEXT_PUBLIC_NETWORK_URL
 export const NETWORK_CHAIN_ID: number = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID ?? '1')

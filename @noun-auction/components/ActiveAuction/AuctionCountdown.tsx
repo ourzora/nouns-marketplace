@@ -1,14 +1,13 @@
 import { useEffect } from 'react'
-import { Flex, Label } from '@zoralabs/zord'
 
+import { useCountdown } from '@noun-auction/hooks/useCountdown'
 // @noun-auction
 import { useNounishAuctionProvider } from '@noun-auction/providers'
-import { useCountdown } from '@noun-auction/hooks/useCountdown'
-import { SharedDataRendererProps } from '@noun-auction/typings'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
-
+import { SharedDataRendererProps } from '@noun-auction/typings'
 // @shared
 import { lightFont } from '@shared'
+import { Flex, Label } from '@zoralabs/zord'
 
 export function AuctionCountdown({
   showLabels,

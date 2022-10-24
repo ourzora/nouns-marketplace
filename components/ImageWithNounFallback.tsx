@@ -1,7 +1,10 @@
 import { returnDao } from 'constants/collection-addresses'
-import { FallbackThumbnail } from '@noun-auction'
-import { ImageElement } from './ImageElement'
+
 import { useMemo } from 'react'
+
+import { FallbackThumbnail } from '@noun-auction'
+
+import { ImageElement } from './ImageElement'
 
 export function ImageWithNounFallback({
   srcImg,

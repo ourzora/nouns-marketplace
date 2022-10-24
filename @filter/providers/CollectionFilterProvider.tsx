@@ -1,18 +1,19 @@
-import { initialFilterStore, useFilterStore } from '@filter/state/filterStore'
 import { createContext, useContext, useMemo } from 'react'
-import { useTokensQuery } from '@filter/hooks/useTokensQuery'
+
 import {
-  sortMethodToSortParams,
   attributesToFilterParams,
-  priceRangeToQueryParams,
   marketTypeToFilterParams,
+  priceRangeToQueryParams,
+  sortMethodToSortParams,
 } from '@filter'
-import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { stringDefaults, themeDefaults } from '@filter/constants'
+import { useTokensQuery } from '@filter/hooks/useTokensQuery'
+import { initialFilterStore, useFilterStore } from '@filter/state/filterStore'
 import {
   CollectionFilterContextTypes,
   CollectionFilterProviderProps,
 } from '@filter/typings'
+import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 
 const CollectionFilterContext = createContext<CollectionFilterContextTypes>({
   filterStore: initialFilterStore,

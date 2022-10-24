@@ -1,13 +1,15 @@
-import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { identity, pickBy, truncate } from 'lodash'
 import { NETWORK_CHAIN_ID } from 'utils/env-vars'
 import {
-  OG_IMAGE,
   APP_DESCRIPTION,
   APP_TITLE,
-  TWITTER_HANDLE,
   BASE_URL,
+  OG_IMAGE,
+  TWITTER_HANDLE,
 } from 'utils/env-vars'
+
+import { identity, pickBy, truncate } from 'lodash'
+
+import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 
 export const DEFAULT_SEO = {
   title: APP_TITLE,
