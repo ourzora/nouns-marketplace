@@ -1,6 +1,7 @@
-import { Label, LabelProps } from '@zoralabs/zord'
 import { useMemo } from 'react'
+
 import { formatCryptoVal } from '@shared'
+import { Label, LabelProps } from '@zoralabs/zord'
 
 interface EthAmountProps extends LabelProps {
   ethAmount: string
@@ -8,9 +9,11 @@ interface EthAmountProps extends LabelProps {
 }
 
 export function EthAmount({ ethAmount, ethSymbol = 'ETH', ...props }: EthAmountProps) {
+  const formattedEthAmount = useMemo(
+    () => (ethAmount ? formatCryptoVal(ethAmount) : null),
+    [ethAmount]
+  )
   if (!ethAmount) return null
-
-  const formattedEthAmount = useMemo(() => formatCryptoVal(ethAmount), [ethAmount])
 
   return (
     <Label {...props}>

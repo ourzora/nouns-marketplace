@@ -1,5 +1,6 @@
-import { ModalContext, ModalContextType, ModalType } from './ModalProvider'
 import { useCallback, useContext } from 'react'
+
+import { ModalContext, ModalContextType, ModalType } from './ModalProvider'
 
 export function useModal() {
   const [state, setState] = useContext<ModalContextType>(ModalContext)

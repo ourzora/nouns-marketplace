@@ -1,6 +1,8 @@
-import { useMemo } from 'react'
-import { nounsTokenAbi } from '@noun-auction/contracts'
 import { useContractRead } from 'wagmi'
+
+import { useMemo } from 'react'
+
+import { nounsTokenAbi } from '@noun-auction/contracts'
 import * as Sentry from '@sentry/react'
 
 export function useNounsToken(contractAddress: string, tokenId: string) {

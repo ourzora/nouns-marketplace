@@ -1,7 +1,9 @@
-import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
-import NextLink, { LinkProps as NextLinkProps } from 'next/link'
-import { Label, LabelProps } from '@zoralabs/zord'
+import NextLink from 'next/link'
+
 import { ReactNode } from 'react'
+
+import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
+import { Label, LabelProps } from '@zoralabs/zord'
 
 export interface CollectionLinkProps extends LabelProps {
   contractAddress: string

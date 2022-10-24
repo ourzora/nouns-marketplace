@@ -1,12 +1,13 @@
+import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
+import { Button, Flex, Text } from '@zoralabs/zord'
+
+import { ActiveFilterCounter } from './ActiveFilterCounter'
 import {
   filterCounter,
   filterHeader,
   filtersButton,
   stickyFilterHeader,
 } from './CollectionsFilter.css'
-import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
-import { Button, Flex, Text } from '@zoralabs/zord'
-import { ActiveFilterCounter } from './ActiveFilterCounter'
 
 export function FilterHeader({
   children,

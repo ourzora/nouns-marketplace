@@ -1,6 +1,8 @@
-import { useMemo } from 'react'
 import BigNumber from 'bignumber.js'
-import { utils, BigNumber as EthersBN, BigNumberish } from 'ethers'
+
+import { BigNumberish, BigNumber as EthersBN, utils } from 'ethers'
+
+import { useMemo } from 'react'
 
 export function useNounBidIncrement(
   reservePrice: BigNumberish,

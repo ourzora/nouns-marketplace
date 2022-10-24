@@ -1,5 +1,5 @@
-import { atoms, media } from '@zoralabs/zord'
 import { style } from '@vanilla-extract/css'
+import { atoms, media } from '@zoralabs/zord'
 
 export const zoraTagline = style([
   {

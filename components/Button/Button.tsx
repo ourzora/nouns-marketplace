@@ -1,5 +1,7 @@
 import React, { MouseEventHandler } from 'react'
-import { Button as ZordButton, ButtonProps } from '@zoralabs/zord'
+
+import { ButtonProps, Button as ZordButton } from '@zoralabs/zord'
+
 import { button, buttonVariants } from './Button.css'
 
 export interface NounButtonProps extends ButtonProps {

@@ -1,11 +1,10 @@
-import { Flex, Label } from '@zoralabs/zord'
 import { useBalance } from 'wagmi'
-import { useMemo } from 'react'
-import { lightFont, roundFourDecimals } from '@shared'
 
-// @noun-auction
-import { SharedDataRendererProps } from '@noun-auction/typings'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
+import { useMemo } from 'react'
+
+import { SharedDataRendererProps, useNounishAuctionProvider } from '@noun-auction'
+import { lightFont, roundFourDecimals } from '@shared'
+import { Flex, Label } from '@zoralabs/zord'
 
 export function WalletBalance({
   label = 'Your balance',

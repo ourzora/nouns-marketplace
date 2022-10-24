@@ -1,8 +1,10 @@
-import { useMemo } from 'react'
 import useSWR from 'swr'
+
+import { useMemo } from 'react'
+
 import { ContractTransaction } from '@ethersproject/contracts'
-import { Erc721Factory } from '@zoralabs/core/dist/typechain'
 import { useAuth } from '@shared/hooks'
+import { Erc721Factory } from '@zoralabs/core/dist/typechain'
 
 export function useERC721TokenApproval(contractAddress?: string, spender?: string) {
   const { address: account, signer } = useAuth()

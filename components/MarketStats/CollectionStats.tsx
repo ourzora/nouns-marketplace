@@ -1,19 +1,34 @@
-import { StatBlock } from './StatBlock'
 import { useAggregate } from 'hooks'
-import { roundFourDecimals, roundTwoDecimals, numberFormatter } from '@shared'
+
+import { useMemo } from 'react'
+
+import {
+  numberFormatter,
+  numberFormatterUSDC,
+  roundFourDecimals,
+  roundTwoDecimals,
+} from '@shared'
+
+import { StatBlock } from './StatBlock'
 
 export function CollectionStats({ contractAddress }: { contractAddress: string }) {
   const { aggregate } = useAggregate(contractAddress)
 
-  const volume =
-    `${numberFormatter(
-      roundFourDecimals(aggregate?.aggregateStat?.salesVolume?.chainTokenPrice)
-    )} ETH` ?? '...'
+  const volume = useMemo(
+    () =>
+      `${numberFormatter(
+        roundFourDecimals(aggregate?.aggregateStat?.salesVolume?.chainTokenPrice)
+      )} ETH` ?? '...',
+    [aggregate]
+  )
 
-  const usdcPrice =
-    `$${numberFormatter(
-      roundTwoDecimals(aggregate?.aggregateStat?.salesVolume?.usdcPrice)
-    )}` ?? '...'
+  const usdcPrice = useMemo(
+    () =>
+      `${numberFormatterUSDC(
+        roundTwoDecimals(aggregate?.aggregateStat?.salesVolume?.usdcPrice)
+      )}` ?? '...',
+    [aggregate]
+  )
 
   return (
     <>

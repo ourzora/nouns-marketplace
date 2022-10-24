@@ -1,12 +1,16 @@
-import { Flex, FlexProps, Box } from '@zoralabs/zord'
+import { returnDao } from 'constants/collection-addresses'
 import { marketStatsWrapper } from 'styles/styles.css'
-import { numberFormatter } from '@shared'
+
 import { useAggregate } from 'hooks'
-import { StatBlock } from './StatBlock'
+
+import { useMemo } from 'react'
+
+import { numberFormatter } from '@shared'
+import { Box, Flex, FlexProps } from '@zoralabs/zord'
+
 import { CollectionStats } from './CollectionStats'
 import { DaoStats } from './DaoStats'
-import { returnDao } from 'constants/collection-addresses'
-import { useMemo } from 'react'
+import { StatBlock } from './StatBlock'
 
 export interface MarketStatesProps extends FlexProps {
   contractAddress: string

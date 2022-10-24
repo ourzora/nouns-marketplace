@@ -1,7 +1,8 @@
-import { Flex, FlexProps, Box } from '@zoralabs/zord'
 import { useEnsAvatar } from 'wagmi'
+
 import { nounishThumbnailImage, pixelate } from '@noun-auction/styles/NounishStyles.css'
 import { Zorb } from '@zora-brand'
+import { Box, Flex, FlexProps } from '@zoralabs/zord'
 
 export interface EnsAvatarProps extends FlexProps {
   address: string

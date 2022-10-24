@@ -1,7 +1,8 @@
+import { avatarSizes } from 'styles/avatarSizes.css'
+
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 import { atoms, vars } from '@zoralabs/zord'
-import { avatarSizes } from 'styles/avatarSizes.css'
 
 export const avatarVariants = {
   size: avatarSizes,

@@ -1,14 +1,15 @@
-import { Heading, Paragraph, Box } from '@zoralabs/zord'
+import { Box, Heading, Paragraph } from '@zoralabs/zord'
+
 import {
-  codeWrapper,
-  codeSelector,
-  blockQuoteSelector,
-  ulSelector,
-  olSelector,
   aSelector,
-  hrSelector,
+  blockQuoteSelector,
+  codeSelector,
+  codeWrapper,
   h1Selector,
+  hrSelector,
+  olSelector,
   pSelector,
+  ulSelector,
 } from './UtilStyles.css'
 
 export function slugify(string?: string) {

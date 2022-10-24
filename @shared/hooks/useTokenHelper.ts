@@ -1,8 +1,11 @@
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { useAggregate } from 'hooks'
 import { useRouter } from 'next/router'
+
+import { useAggregate } from 'hooks'
+
 import { useCallback, useMemo } from 'react'
+
 import { useFirstTokenID } from '@shared/hooks'
+import { NFTObject } from '@zoralabs/nft-hooks'
 
 export function useTokenHelper(nftObj: NFTObject) {
   const router = useRouter()

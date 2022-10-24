@@ -1,8 +1,11 @@
-import { useCallback, MouseEvent, Dispatch, SetStateAction } from 'react'
-import { Flex, FlexProps, Box } from '@zoralabs/zord'
-import { horizontalMenuButton, horizontalMenuWrapper } from './HorizontalMenu.css'
-import { lightFont } from '@shared'
 import { Button } from 'components/Button'
+
+import { Dispatch, MouseEvent, SetStateAction, useCallback } from 'react'
+
+import { lightFont } from '@shared'
+import { Box, Flex, FlexProps } from '@zoralabs/zord'
+
+import { horizontalMenuButton, horizontalMenuWrapper } from './HorizontalMenu.css'
 
 export interface HorizontalMenuProps extends FlexProps {
   items: {

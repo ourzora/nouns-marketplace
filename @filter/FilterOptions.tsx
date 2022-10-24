@@ -1,7 +1,9 @@
+import { useCallback } from 'react'
+
+import { Accordion, Box, Flex } from '@zoralabs/zord'
+
 import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { FilterOptionButton } from './FilterOptionButton'
-import { Accordion, Box, Flex } from '@zoralabs/zord'
-import { useCallback } from 'react'
 
 export interface FilterOption {
   label: string

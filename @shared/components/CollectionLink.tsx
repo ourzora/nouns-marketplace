@@ -1,5 +1,6 @@
+import { Button, NounButtonProps } from 'components/Button'
 import NextLink from 'next/link'
-import { NounButtonProps, Button } from 'components/Button'
+
 import { ReactNode } from 'react'
 
 export interface CollectionLinkProps extends NounButtonProps {

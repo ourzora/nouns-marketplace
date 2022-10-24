@@ -1,8 +1,10 @@
-import { Stack, Heading } from '@zoralabs/zord'
-import { RankingRow } from './RankingRow'
-import { useCollectionsContext } from 'providers/CollectionsProvider'
-import { rankingWrapper } from './CollectionRanking.css'
 import { CollectionParsed } from 'pages'
+import { useCollectionsContext } from 'providers/CollectionsProvider'
+
+import { Heading, Stack } from '@zoralabs/zord'
+
+import { rankingWrapper } from './CollectionRanking.css'
+import { RankingRow } from './RankingRow'
 
 export const statRows = ['Volume', 'Items', 'Floor', 'Owners']
 
