@@ -1,6 +1,5 @@
 import { InfoIcon } from 'components/Icon/InfoIcon'
 import { CollectionParsed } from 'pages'
-import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { mediumFont } from 'styles/styles.css'
 
 import { Modal, ModalContent, useModal } from '@modal'
@@ -22,6 +21,10 @@ export function CollectionRanking({
   ...props
 }: CollectionRankingTableProps) {
   const { requestClose } = useModal()
+  const hasCollections = useMemo(
+    () => collections && collections.length > 0,
+    [collections]
+  )
   return (
     <Stack className={[rankingWrapper, className]}>
       <Flex gap="x2" align="center">
@@ -45,18 +48,18 @@ export function CollectionRanking({
           </ModalContent>
         </Modal>
       </Flex>
-      <Stack
-        gap={{
-          '@initial': 'x4',
-          '@1024': 'x6',
-        }}
-      >
-        {collections &&
-          collections.length > 0 &&
-          collections.map((collection) => (
+      {hasCollections && (
+        <Stack
+          gap={{
+            '@initial': 'x4',
+            '@1024': 'x6',
+          }}
+        >
+          {collections!.map((collection) => (
             <RankingRow key={collection.address} collection={collection} />
           ))}
-      </Stack>
+        </Stack>
+      )}
     </Stack>
   )
 }

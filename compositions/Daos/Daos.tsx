@@ -2,6 +2,8 @@ import { InfoIcon } from 'components/Icon/InfoIcon'
 import { daos } from 'constants/collection-addresses'
 import { mediumFont } from 'styles/styles.css'
 
+import React, { useMemo } from 'react'
+
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from '@modal/Modal.css'
 import { NounishAuction } from '@noun-auction'
@@ -57,16 +59,18 @@ export function DaoTable({ routePrefix, className, ...props }: DaoTableProps) {
           </ModalContent>
         </Modal>
       </Flex>
-      <Stack className="nounish-auction_dao-rows" gap="x4">
-        {daos.map((dao) => (
-          <NounishAuction
-            className={daosRow}
-            key={dao.contractAddress}
-            daoConfig={dao}
-            showLabels
-          />
-        ))}
-      </Stack>
+      {daos && (
+        <Stack className="nounish-auction_dao-rows" gap="x4">
+          {daos.map((dao) => (
+            <NounishAuction
+              className={daosRow}
+              key={dao.contractAddress}
+              daoConfig={dao}
+              showLabels
+            />
+          ))}
+        </Stack>
+      )}
     </Stack>
   )
 }
