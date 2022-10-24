@@ -1,5 +1,6 @@
 import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi'
 
+import { Button } from 'components/Button'
 import { BigNumber as EthersBN } from 'ethers'
 
 import React, { useCallback, useMemo, useState } from 'react'
