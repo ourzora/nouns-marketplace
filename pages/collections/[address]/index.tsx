@@ -47,9 +47,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
     <PageWrapper direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
       <Grid
-        //  px="x4" gap="x2" className={styles.pageGrid} justifyContent="center"
         className={[styles.pageGrid]}
-        // px={{ '@initial': 'x4', '@1024': 'x8' }}
         px={{ '@initial': 'x0', '@1024': 'x8' }}
         gap="x2"
         alignSelf="center"
