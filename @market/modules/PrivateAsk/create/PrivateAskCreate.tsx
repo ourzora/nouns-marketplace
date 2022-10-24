@@ -59,7 +59,7 @@ const validate = (values: Values) => {
 export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
   const { txStatus, txInProgress, txError, createAsk, finalizedTx } =
     usePrivateAskTransaction({ nft: props.nft })
-  useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
+  useEffect(() => finalizedTx!! && onNext!(), [finalizedTx, onNext])
 
   return (
     <Formik

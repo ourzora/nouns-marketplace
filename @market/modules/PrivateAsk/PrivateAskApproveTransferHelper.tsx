@@ -28,7 +28,7 @@ export function PrivateAskApproveTransferHelper({
   } = usePrivateAskTransferHelperApproval({ contractAddress: nft.nft?.contract.address })
 
   useEffect(() => {
-    isApproved && onNext && onNext()
+    isApproved && onNext!()
   }, [isApproved, , onNext])
 
   return isAwaitingApprovalCheck ? (

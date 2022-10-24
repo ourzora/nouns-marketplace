@@ -18,7 +18,7 @@ interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {}
 export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
   const { isSubmitting, cancelAsk, txStatus, txInProgress, txError, finalizedTx } =
     usePrivateAskTransaction({ nft: props.nft })
-  useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
+  useEffect(() => finalizedTx!! && onNext!(), [finalizedTx, onNext])
   const { requestClose } = useModal()
   const { formattedListingDataTable } = useListingDataTable({
     nft: props.nft,

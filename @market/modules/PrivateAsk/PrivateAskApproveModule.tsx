@@ -27,7 +27,7 @@ export function PrivateAskApproveModule({
   } = usePrivateAskModuleApproval()
 
   useEffect(() => {
-    isApproved && onNext && onNext()
+    isApproved && onNext!()
   }, [isApproved, onNext])
 
   return isAwaitingApprovalCheck ? (

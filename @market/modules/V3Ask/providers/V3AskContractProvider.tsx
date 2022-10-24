@@ -2,9 +2,16 @@ import { useAccount, useSigner } from 'wagmi'
 
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-import { ASKS_V11_ADDRESS, MODULE_MANAGER_ADDRESS, defaultProvider } from '@shared'
+import {
+  ASKS_V11_ADDRESS,
+  MODULE_MANAGER_ADDRESS,
+  PRIVATE_ASKS_ADDRESS,
+  defaultProvider,
+} from '@shared'
+import { AsksCoreEth as AsksCoreEthInterface } from '@zoralabs/v3/dist/typechain/AsksCoreEth'
 import { AsksPrivateEth as AsksPrivateEthInterface } from '@zoralabs/v3/dist/typechain/AsksPrivateEth'
 import { ZoraModuleManager as ZoraModuleManagerInterface } from '@zoralabs/v3/dist/typechain/ZoraModuleManager'
+import { AsksCoreEth__factory } from '@zoralabs/v3/dist/typechain/factories/AsksCoreEth__factory'
 import { AsksPrivateEth__factory } from '@zoralabs/v3/dist/typechain/factories/AsksPrivateEth__factory'
 import { ZoraModuleManager__factory as ModuleManagerFactory } from '@zoralabs/v3/dist/typechain/factories/ZoraModuleManager__factory'
 
@@ -13,17 +20,23 @@ const defaultModuleManager = ModuleManagerFactory.connect(
   defaultProvider
 )
 
-const defaultV3Asks = AsksPrivateEth__factory.connect(ASKS_V11_ADDRESS, defaultProvider)
+const defaultV3Asks = AsksCoreEth__factory.connect(ASKS_V11_ADDRESS, defaultProvider)
+const defaultPrivateAsks = AsksPrivateEth__factory.connect(
+  PRIVATE_ASKS_ADDRESS,
+  defaultProvider
+)
 
 export type V3AskContractContext = {
   ModuleManager: ZoraModuleManagerInterface
-  V3Asks: AsksPrivateEthInterface
+  V3Asks: AsksCoreEthInterface
+  PrivateAsks: AsksPrivateEthInterface
   isReadOnly: boolean
 }
 
 export const V3AskContractCtx = createContext<V3AskContractContext>({
   ModuleManager: defaultModuleManager,
   V3Asks: defaultV3Asks,
+  PrivateAsks: defaultPrivateAsks,
   isReadOnly: true,
 })
 
@@ -38,7 +51,9 @@ const V3AskContractProvider: React.FC = ({ children }) => {
 
   const [ModuleManager, setModuleManager] =
     useState<ZoraModuleManagerInterface>(defaultModuleManager)
-  const [V3Asks, setV3Asks] = useState<AsksPrivateEthInterface>(defaultV3Asks)
+  const [V3Asks, setV3Asks] = useState<AsksCoreEthInterface>(defaultV3Asks)
+  const [PrivateAsks, setPrivateAsks] =
+    useState<AsksPrivateEthInterface>(defaultPrivateAsks)
 
   useEffect(() => {
     if (!signer) {
@@ -50,7 +65,12 @@ const V3AskContractProvider: React.FC = ({ children }) => {
         signer
       )
       setModuleManager(authorisedModuleManager)
-      const authorizedV3Asks = AsksPrivateEth__factory.connect(ASKS_V11_ADDRESS, signer)
+      const authorizedV3Asks = AsksCoreEth__factory.connect(ASKS_V11_ADDRESS, signer)
+      const authorizedPrivateAsks = AsksPrivateEth__factory.connect(
+        PRIVATE_ASKS_ADDRESS,
+        signer
+      )
+      setPrivateAsks(authorizedPrivateAsks)
       setV3Asks(authorizedV3Asks)
       setIsReadOnly(false)
     }
@@ -60,6 +80,7 @@ const V3AskContractProvider: React.FC = ({ children }) => {
     if (!address && !isReadOnly) {
       setModuleManager(defaultModuleManager)
       setV3Asks(defaultV3Asks)
+      setPrivateAsks(defaultPrivateAsks)
       setIsReadOnly(true)
     }
   }, [address, isReadOnly])
@@ -69,6 +90,7 @@ const V3AskContractProvider: React.FC = ({ children }) => {
       value={{
         ModuleManager,
         V3Asks,
+        PrivateAsks,
         isReadOnly,
       }}
     >

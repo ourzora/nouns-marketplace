@@ -1,4 +1,4 @@
-import { ContractTransaction } from 'ethers'
+import { BigNumber, ContractTransaction } from 'ethers'
 
 import { useState } from 'react'
 
@@ -35,13 +35,16 @@ interface useV3AskTransactionProps {
 }
 
 export const useV3AskTransaction = ({ nft: nftObj }: useV3AskTransactionProps) => {
-  const { V3Asks } = useV3AskContractContext()
+  const { V3Asks, PrivateAsks } = useV3AskContractContext()
   const { txStatus, handleTx, txInProgress } = useContractTransaction()
   const [isSubmitting, setSubmitting] = useState<boolean>(false)
   const { setFinalizedV3AskDetails } = useV3AskStateContext()
   const [finalizedTx, setFinalizedTx] = useState<ContractTransaction | null>()
   const [txError, setTxError] = useState<Error>()
   const { nft } = nftObj
+
+  const isPrivate = true
+  const ActiveAskModule = isPrivate ? PrivateAsks : V3Asks
 
   async function makeAskTransaction(
     txType: V3AskTransaction,
@@ -68,31 +71,49 @@ export const useV3AskTransaction = ({ nft: nftObj }: useV3AskTransactionProps) =
 
       const priceAsBigNumber = parseUnits(price?.toString() || '0', 'ether') // Convert from human-readable number to WEI
 
+      // const createParams: [string, string, BigNumber, string] = [nft?.contract.address, nft?.tokenId, priceAsBigNumber, buyerAddress].filter(x => typeof x !== 'undefined')
+      const createParams: [string, string, BigNumber] = [
+        nft?.contract.address,
+        nft?.tokenId,
+        priceAsBigNumber,
+      ]
+      // const privateCreateParams: [string, string, BigNumber, string|undefined]  = [nft?.contract.address, nft?.tokenId, priceAsBigNumber, buyerAddress]
+      // const params = isPrivate ? privateCreateParams : createParams
+
       setSubmitting(true)
 
       let promise: Promise<ContractTransaction>
 
       switch (txType) {
         case CREATE_V3_ASK:
-          promise = V3Asks.createAsk(
-            nft?.contract.address,
-            nft?.tokenId,
-            priceAsBigNumber,
-            buyerAddress!
-          )
+          promise =
+            // isPrivate ?
+            // PrivateAsks.createAsk(
+            //   ...createParams,
+            //   buyerAddress!
+            // )
+            ActiveAskModule.createAsk(
+              nft?.contract.address,
+              nft?.tokenId,
+              priceAsBigNumber,
+              isPrivate && buyerAddress!
+            )
+          // : V3Asks.createAsk(
+          //   ...createParams,
+          // )
           break
         case UPDATE_V3_ASK:
-          promise = V3Asks.setAskPrice(
+          promise = ActiveAskModule.setAskPrice(
             nft?.contract.address,
             nft?.tokenId,
             priceAsBigNumber
           )
           break
         case CANCEL_V3_ASK:
-          promise = V3Asks.cancelAsk(nft?.contract.address, nft?.tokenId)
+          promise = ActiveAskModule.cancelAsk(nft?.contract.address, nft?.tokenId)
           break
         case FILL_V3_ASK:
-          promise = V3Asks.fillAsk(nft?.contract.address, nft?.tokenId, {
+          promise = ActiveAskModule.fillAsk(nft?.contract.address, nft?.tokenId, {
             value: priceAsBigNumber, // optional override param actually required :)
           })
           break

@@ -60,7 +60,7 @@ export function V3AskCreate({ onNext, ...props }: V3AskCreateProps) {
   const { txStatus, txInProgress, txError, createAsk, finalizedTx } = useV3AskTransaction(
     { nft: props.nft }
   )
-  useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
+  useEffect(() => finalizedTx!! && onNext!(), [finalizedTx, onNext])
 
   return (
     <Formik
