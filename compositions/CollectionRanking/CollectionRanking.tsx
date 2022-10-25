@@ -2,6 +2,8 @@ import { InfoIcon } from 'components/Icon/InfoIcon'
 import { CollectionParsed } from 'pages'
 import { mediumFont } from 'styles/styles.css'
 
+import { useMemo } from 'react'
+
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from '@modal/Modal.css'
 import { Flex, Heading, Paragraph, Stack, StackProps } from '@zoralabs/zord'
