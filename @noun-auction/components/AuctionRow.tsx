@@ -12,12 +12,10 @@ export function AuctionRow({
   activeAuctionComponent: JSX.Element
 }) {
   const { tokenId, activeAuctionId } = useNounishAuctionProvider()
+
   const auctionComponent = useMemo(() => {
-    if (activeAuctionId === tokenId) {
-      return activeAuctionComponent
-    } else {
-      return auctionDataComponent
-    }
+    const isActiveAuction = activeAuctionId === tokenId
+    return isActiveAuction ? activeAuctionComponent : auctionDataComponent
   }, [activeAuctionComponent, activeAuctionId, auctionDataComponent, tokenId])
 
   if (!activeAuctionId) return <RowLoader />

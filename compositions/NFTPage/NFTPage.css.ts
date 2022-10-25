@@ -6,13 +6,11 @@ import { atoms, media, radii, vars } from '@zoralabs/zord'
 export const nftPageWrapper = style([
   {
     maxWidth: MAX_WIDTH.MED,
-    // gridTemplateColumns: '1fr',
     gridTemplateColumns: 'repeat(4, [col-start] 1fr)',
     gridTemplateRows: 'auto',
     '@media': {
       [media.min1024]: {
         gridTemplateColumns: 'repeat(12, [col-start] 1fr)',
-        // gridTemplateColumns: '5fr 3fr',
         maxWidth: MAX_WIDTH.XL,
       },
     },
@@ -20,7 +18,8 @@ export const nftPageWrapper = style([
   atoms({
     width: '100%',
     margin: 'auto',
-    my: 'x0',
+    mt: { '@initial': 'x0', '@1024': 'x10' },
+    mb: 'x0',
     px: {
       '@initial': 'x0',
       '@1024': 'x4',

@@ -1,1 +1,1 @@
-export * from './HeaderComposition'
+export * from './Header'

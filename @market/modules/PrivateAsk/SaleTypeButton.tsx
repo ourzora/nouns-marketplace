@@ -13,7 +13,13 @@ export interface SaleTypeButtonProps extends BoxProps {
 
 export function SaleTypeButton({ label, description, tag, onNext }: SaleTypeButtonProps) {
   return (
-    <Button className={styles.button} variant="unset" align="center" onClick={onNext}>
+    <Button
+      className={styles.button}
+      variant="unset"
+      align="center"
+      onClick={onNext}
+      style={{ height: 'unset!important' }}
+    >
       <Well display="grid" className={styles.grid} borderRadius="curved">
         <Stack gap="x1">
           <Flex gap="x2" justify="flex-start" align="flex-start">
