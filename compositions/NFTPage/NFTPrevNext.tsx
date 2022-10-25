@@ -1,8 +1,10 @@
-import { Flex, StackProps } from '@zoralabs/zord'
 import { Button } from 'components/Button'
-import * as styles from './NFTPage.css'
+
 import { useTokenHelper } from '@shared/hooks'
 import { NFTObject } from '@zoralabs/nft-hooks'
+import { Flex, StackProps } from '@zoralabs/zord'
+
+import * as styles from './NFTPage.css'
 
 export interface NFTPrevNextProps extends StackProps {
   nftObj: NFTObject

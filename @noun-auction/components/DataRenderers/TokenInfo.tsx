@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { useCallback } from 'react'
 
-import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
+import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { Box, Flex, Heading, Stack } from '@zoralabs/zord'
@@ -43,11 +43,11 @@ export function TokenInfo({
   }, [])
 
   return (
-    <Flex className={['nounish-auction__token-info', tokenInfoWrapper]} {...props}>
+    <Flex className={['nounish-auction__token-info', styles.tokenInfoWrapper]} {...props}>
       {data && (
         <>
           {!hideThumbnail && (
-            <Button onClick={tokenLinkHandler} variant="unset" w="unset">
+            <Button onClick={tokenLinkHandler} variant="unset" w="unset" h="unset">
               <NounishThumbnail
                 image={data?.media?.image?.uri}
                 tokenContract={contractAddress}
@@ -58,9 +58,8 @@ export function TokenInfo({
           <Stack justify="space-between">
             {!hideTitle && (
               <Heading size="sm" as="h3">
-                {data?.metadata?.name
-                  ? data?.metadata?.name
-                  : `${data?.nft?.contract?.name} ${data?.nft?.tokenId}`}
+                {data?.metadata?.name ??
+                  `${data?.nft?.contract?.name} ${data?.nft?.tokenId}`}
               </Heading>
             )}
             {!hideCollectionTitle && (

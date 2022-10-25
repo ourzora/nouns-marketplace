@@ -1,1 +1,1 @@
-export * from './FooterComposition'
+export * from './Footer'

@@ -1,16 +1,27 @@
 import { HEADER_LAYER } from 'constants/layers'
-import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE } from 'styles/style-constants'
+import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
 
 import { style } from '@vanilla-extract/css'
-import { atoms, color, media, space } from '@zoralabs/zord'
+import { atoms, color, media, vars } from '@zoralabs/zord'
 
 export const headerWrapper = style([
+  atoms({
+    w: '100%',
+    justifyContent: 'center',
+  }),
+])
+
+export const header = style([
   {
+    width: MAX_WIDTH.XL,
     height: HEADER_HEIGHT_MOBILE,
     zIndex: HEADER_LAYER,
     borderBottom: `2px solid ${color.background2}`,
+    gridColumn: '1/span 4',
     '@media': {
       [media.min1024]: {
+        maxWidth: `calc(${MAX_WIDTH.XL}px + (2 * ${vars.space.x8}))`,
+        gridColumn: '1/span 12',
         height: HEADER_HEIGHT,
         gridTemplateColumns: 'repeat(24, 1fr)',
         borderBottom: 'none',
@@ -19,7 +30,6 @@ export const headerWrapper = style([
   },
   atoms({
     w: '100%',
-    p: 'x4',
     pos: 'relative',
     alignItems: {
       '@1024': 'center',
@@ -39,7 +49,6 @@ export const nounsGlassesLink = style([
     w: 'x25',
     cursor: 'pointer',
     pos: 'relative',
-    h: '100%',
   }),
 ])
 
@@ -74,8 +83,3 @@ export const connectButton = style([
     },
   }),
 ])
-
-export const docsLink = style({
-  paddingLeft: space.x2,
-  paddingRight: space.x3,
-})
