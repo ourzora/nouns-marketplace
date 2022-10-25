@@ -54,7 +54,7 @@ export function DaoGrid({
   view: CollectionsProps['view']
   collectionAddress: string
 } & CollectionsGridProps) {
-  const { activeNounishAuction: activeAuction } = useNounishAuctionQuery({
+  const { activeAuction } = useNounishAuctionQuery({
     collectionAddress,
   })
   const tokenId = activeAuction?.tokenId

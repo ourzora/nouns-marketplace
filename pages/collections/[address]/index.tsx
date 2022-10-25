@@ -16,7 +16,7 @@ import { useEffect } from 'react'
 
 import { CollectionFilterProvider } from '@filter'
 import { useCollection } from '@filter/hooks/useCollection'
-import { ActiveAuctionCard } from '@noun-auction'
+import { ActiveAuctionCard, useNounishAuctionQuery } from '@noun-auction'
 import { useWindowWidth } from '@shared'
 import { Separator, Stack } from '@zoralabs/zord'
 
@@ -30,6 +30,10 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { data } = useCollection(contractAddress)
   const collection = data || fallback?.collection
 
+  const { activeAuction } = useNounishAuctionQuery({
+    collectionAddress: contractAddress,
+  })
+
   useEffect(() => {
     if (collection?.name) {
       const nftCount = aggregate?.aggregateStat.nftCount
@@ -42,6 +46,12 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
     }
   }, [aggregate, collection, setCurrentCollection, setCurrentCollectionCount])
 
+  if (!activeAuction) return null
+
+  const tokenId = activeAuction.tokenId
+  const startTime = activeAuction.startTime
+  const endTime = activeAuction.endTime
+
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
@@ -51,7 +61,13 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
           layout={dao ? 'dao' : 'collection'}
           currentAuction={
             dao ? (
-              <ActiveAuctionCard layout={'row'} collectionAddress={contractAddress} />
+              <ActiveAuctionCard
+                layout={'row'}
+                contractAddress={contractAddress}
+                tokenId={tokenId}
+                startTime={startTime}
+                endTime={endTime}
+              />
             ) : null
           }
         >

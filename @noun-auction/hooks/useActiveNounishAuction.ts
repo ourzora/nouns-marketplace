@@ -6,7 +6,7 @@ import { activeNounishAuction } from '@noun-auction/data'
 import { ActiveNounishAuctionResponse, NounishMarketTypes } from '@noun-auction/typings'
 import { zoraApiFetcher } from '@shared'
 
-export function useActiveNounishAuction(marketType?: NounishMarketTypes) {
+export function useActiveOGNounishAuction(marketType?: NounishMarketTypes) {
   const { data: response, error } = useSWR(
     [`active-nounish-auction_${marketType}`],
     () =>

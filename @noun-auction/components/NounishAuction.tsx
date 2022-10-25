@@ -1,6 +1,6 @@
-import { NounsDao } from 'types/zora.api.generated'
-
 import { isAfter } from 'date-fns'
+
+import { TypeSafeDao } from 'validators/dao'
 
 import { useNounishAuctionQuery } from '@noun-auction'
 import {
@@ -34,7 +34,7 @@ export interface AuctionViewConfig extends TokenInfoConfig {
 }
 
 export interface NounishAuctionProps extends AuctionViewConfig {
-  dao: NounsDao
+  dao: TypeSafeDao
   layout?: keyof typeof auctionWrapperVariants['layout']
 }
 
@@ -55,11 +55,11 @@ export function NounishAuction({
   showLabels,
   ...props
 }: NounishAuctionProps) {
-  const { activeNounishAuction } = useNounishAuctionQuery({
+  const { activeAuction } = useNounishAuctionQuery({
     collectionAddress: dao.collectionAddress,
   })
-  const timerComplete = activeNounishAuction
-    ? isAfter(parseInt(activeNounishAuction.endTime), Date.now() * 1000)
+  const timerComplete = activeAuction
+    ? isAfter(parseInt(activeAuction.endTime), Date.now() * 1000)
     : false
 
   return (
@@ -71,11 +71,11 @@ export function NounishAuction({
           auctionWrapper({ layout: layout }),
         ]}
       >
-        {showAuctionRow && activeNounishAuction && (
+        {showAuctionRow && activeAuction && (
           <ActiveAuctionRow
             timerComplete={timerComplete}
             layout={layout}
-            activeAuction={activeNounishAuction}
+            activeAuction={activeAuction}
             routePrefix={routePrefix}
             useModal={!useInlineBid}
             showLabels={showLabels}

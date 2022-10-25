@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
 import { NFTAsks } from '@market/components/NFTAsks'
-import { NounishAuction, useActiveNounishAuction, useOneNounsDao } from '@noun-auction'
+import { NounishAuction, useActiveOGNounishAuction, useOneNounsDao } from '@noun-auction'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { BoxProps } from '@zoralabs/zord'
 
@@ -16,7 +16,7 @@ interface NFTMarketProps extends BoxProps {
 export function NFTMarket({ className, contractAddress, tokenId, nft }: NFTMarketProps) {
   const { dao } = useOneNounsDao({ contractAddress })
 
-  const { data: activeAuction } = useActiveNounishAuction()
+  const { data: activeAuction } = useActiveOGNounishAuction()
 
   const hasNounishAuction = useMemo(
     () => activeAuction?.properties?.tokenId === tokenId && dao,

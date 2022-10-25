@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { NounsBuilderAuction } from 'types/zora.api.generated'
+
+import { TypeSafeNounsAuction } from 'validators/auction'
 
 import {
   auctionWrapperVariants,
@@ -11,7 +12,6 @@ import { Flex, Separator, Stack } from '@zoralabs/zord'
 
 import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
 import { AuctionBidder, AuctionHighBid, CollectionLink } from '../DataRenderers'
-// @noun-auction
 import { TokenInfoConfig } from '../NounishAuction'
 import { AuctionCountdown } from './AuctionCountdown'
 import { RPCTokenInfo } from './RPCTokenInfo'
@@ -22,7 +22,7 @@ export interface ActiveAuctionRowProps extends TokenInfoConfig {
   useErrorMsg?: boolean
   showTopBid?: boolean
   layout?: keyof typeof auctionWrapperVariants['layout']
-  activeAuction: NounsBuilderAuction
+  activeAuction: TypeSafeNounsAuction
   timerComplete: boolean
 }
 
@@ -154,7 +154,8 @@ export function ActiveAuctionRow({
         ) : (
           <PlaceNounsBid
             layout={layout!}
-            activeAuction={activeAuction}
+            tokenId={tokenId}
+            contractAddress={collectionAddress}
             useModal={useModal}
           />
         )}

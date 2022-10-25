@@ -4,6 +4,7 @@ import { Button } from 'components/Button'
 import { BigNumber as EthersBN } from 'ethers'
 
 import React, { useCallback, useState } from 'react'
+import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { parseUnits } from '@ethersproject/units'
 import { useModal } from '@modal'
@@ -17,7 +18,6 @@ import {
   AuctionCountdown,
   AuctionHighBid,
   WalletBalance,
-  useNounishAuctionProvider,
 } from '@noun-auction'
 import { PrintError, formatContractError } from '@shared'
 import { Box, BoxProps, Flex, Grid, Input, Label, Separator, Stack } from '@zoralabs/zord'
@@ -25,24 +25,39 @@ import { Box, BoxProps, Flex, Grid, Input, Label, Separator, Stack } from '@zora
 interface NounsBidFormProps extends BoxProps {
   onConfirmation?: (txHash: string, amount: string, currencyAddress: string) => void
   layout: keyof typeof auctionWrapperVariants['layout']
+  collectionAddress: string
 }
 
-export function NounsBidForm({ onConfirmation, layout, ...props }: NounsBidFormProps) {
+export function NounsBidForm({ collectionAddress, ...props }: NounsBidFormProps) {
+  const { activeAuction } = useNounishAuctionQuery({
+    collectionAddress,
+  })
+
+  if (!activeAuction) return null
+  return (
+    <NounsBidFormComponent
+      activeAuction={activeAuction}
+      collectionAddress={collectionAddress}
+      {...props}
+    />
+  )
+}
+
+export function NounsBidFormComponent({
+  onConfirmation,
+  layout,
+  collectionAddress,
+  activeAuction,
+  ...props
+}: NounsBidFormProps & { activeAuction: TypeSafeNounsAuction }) {
   const { requestClose } = useModal()
 
   const [bidAmount, setBidAmount] = useState<string | '0'>('0')
 
-  const { dao, tokenId, minBidIncrementPercentage, reservePrice } =
-    useNounishAuctionProvider()
-
-  const { activeNounishAuction: activeAuction } = useNounishAuctionQuery({
-    collectionAddress: dao.collectionAddress,
-  })
-
   const { minBidAmount } = useNounBidIncrement(
-    reservePrice,
-    activeAuction?.highestBidPrice?.chainTokenPrice?.raw,
-    minBidIncrementPercentage
+    activeAuction.reservePrice,
+    activeAuction.highestBidPrice?.chainTokenPrice?.raw,
+    activeAuction.minBidIncrementPercentage
   )
 
   const { address } = useAccount()
@@ -63,14 +78,14 @@ export function NounsBidForm({ onConfirmation, layout, ...props }: NounsBidFormP
   )
 
   const { config, error: prepareError } = usePrepareContractWrite({
-    addressOrName: dao.auctionContractAddress as string,
+    addressOrName: activeAuction.address,
     contractInterface: dao.abi,
     functionName: 'createBid',
     overrides: {
       from: address,
       value: bidAmount,
     },
-    args: [tokenId],
+    args: [activeAuction.tokenId],
   })
 
   /* @ts-ignore */
@@ -115,7 +130,7 @@ export function NounsBidForm({ onConfirmation, layout, ...props }: NounsBidFormP
           <AuctionHighBid layoutDirection="row" showLabels justify="space-between" />
           <Separator />
           <AuctionBidder
-            activeAuction={activeAuction!}
+            activeAuction={activeAuction}
             layout={layout}
             layoutDirection="row"
             showLabels

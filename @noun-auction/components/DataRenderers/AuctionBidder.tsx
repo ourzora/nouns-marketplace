@@ -1,8 +1,7 @@
 import { useEnsName } from 'wagmi'
 
-import { NounsBuilderAuction } from 'types/zora.api.generated'
-
 import { useMemo } from 'react'
+import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { AddressZero } from '@ethersproject/constants'
 import {
@@ -20,7 +19,7 @@ type AuctionBidderProps = Partial<{
   showLabels?: boolean
   useAvatar?: boolean
   layout: keyof typeof auctionWrapperVariants['layout']
-  activeAuction: NounsBuilderAuction
+  activeAuction: TypeSafeNounsAuction
   // FIXME
   [key: string]: any
 }>

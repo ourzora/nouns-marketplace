@@ -22,29 +22,24 @@ import { PlaceNounsBid, SettleAuction } from './AuctionUi'
 import { AuctionBidder, AuctionHighBid } from './DataRenderers'
 
 export function ActiveAuctionCard({
-  collectionAddress,
+  tokenId,
+  contractAddress,
+  startTime,
+  endTime,
   layout,
 }: {
-  collectionAddress: string
+  tokenId: string
+  contractAddress: string
+  startTime: string
+  endTime: string
   layout: keyof typeof auctionWrapperVariants['layout']
 }) {
-  const { activeNounishAuction: activeAuction } = useNounishAuctionQuery({
-    collectionAddress,
-  })
-  const tokenId = activeAuction?.tokenId ?? undefined
-  const contractAddress = activeAuction?.collectionAddress ?? undefined
-  // FIXME types...
-  const startTime = activeAuction?.startTime!
-  const endTime = activeAuction?.endTime!
-
   // FIXME: remove useNFT from useTitleWithFallback
   const { fallbackTitle } = useTitleWithFallback({ contractAddress, tokenId })
   const { auctionCompleted } = useAuctionCountdown({
     startTime,
     endTime,
   })
-
-  if (!tokenId) return null
 
   return (
     <Stack
@@ -54,10 +49,10 @@ export function ActiveAuctionCard({
       className={cardWrapper}
       style={{ maxWidth: '500px' }}
     >
-      <Link href={`/collections/${collectionAddress}/${tokenId}`}>
+      <Link href={`/collections/${contractAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
           {tokenId && (
-            <ImageWithNounFallback tokenContract={collectionAddress} tokenId={tokenId} />
+            <ImageWithNounFallback tokenContract={contractAddress} tokenId={tokenId} />
           )}
         </Box>
       </Link>
@@ -89,7 +84,11 @@ export function ActiveAuctionCard({
           {auctionCompleted ? (
             <SettleAuction />
           ) : (
-            <PlaceNounsBid activeAuction={activeAuction!} layout={layout} />
+            <PlaceNounsBid
+              tokenId={tokenId}
+              contractAddress={contractAddress}
+              layout={layout}
+            />
           )}
         </Flex>
         <Separator mt="x1" />
@@ -98,7 +97,8 @@ export function ActiveAuctionCard({
           <AuctionHighBid showLabels align="flex-start" direction="column" />
           <AuctionBidder
             layout={layout}
-            activeAuction={activeAuction!}
+            tokenId={tokenId}
+            collectionAddress={contractAddress}
             align="flex-start"
             direction="column"
             showLabels

@@ -6,7 +6,7 @@ import { Dispatch, ReactNode, SetStateAction, createContext, useContext } from '
 
 import {
   DaoConfigProps,
-  useActiveNounishAuction,
+  useActiveOGNounishAuction,
   useNounishAuctionQuery,
 } from '@noun-auction'
 import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
@@ -46,10 +46,10 @@ export function NounishAuctionProvider({
 }: NounishAuctionProviderProps) {
   const { collectionAddress } = dao
   // nouns and lil nouns
-  const { data: activeOriginalNounishAuction } = useActiveNounishAuction()
+  const { data: activeOriginalNounishAuction } = useActiveOGNounishAuction()
 
   // all other nouns daos
-  const { activeNounishAuction: activeAuction } = useNounishAuctionQuery({
+  const { activeAuction } = useNounishAuctionQuery({
     collectionAddress,
   })
 

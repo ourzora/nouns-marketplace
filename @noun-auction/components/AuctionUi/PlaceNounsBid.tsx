@@ -1,5 +1,4 @@
 import { Button } from 'components/Button'
-import { NounsBuilderAuction } from 'types/zora.api.generated'
 
 import { NFTSummary } from '@market'
 import { ModalComposition } from '@modal'
@@ -13,16 +12,17 @@ import { NounsBidForm } from './NounsBidForm'
 
 type PlaceNounsBidProps = {
   useModal?: boolean
-  activeAuction: NounsBuilderAuction
+  tokenId: string
+  contractAddress: string
   layout: keyof typeof auctionWrapperVariants['layout']
 }
 
 export function PlaceNounsBid({
   layout,
-  activeAuction,
+  tokenId,
+  contractAddress,
   useModal = true,
 }: PlaceNounsBidProps) {
-  const { tokenId, collectionAddress } = activeAuction
   return (
     <>
       {useModal ? (
@@ -42,13 +42,18 @@ export function PlaceNounsBid({
           }
           content={
             <Stack p="x8">
-              <NFTSummary collectionAddress={collectionAddress} tokenId={tokenId} />
-              <NounsBidForm layout={layout} mt="x4" />
+              <NFTSummary collectionAddress={contractAddress} tokenId={tokenId} />
+              <NounsBidForm collectionAddress={contractAddress} layout={layout} mt="x4" />
             </Stack>
           }
         />
       ) : (
-        <NounsBidForm layout={layout} mt="x4" w="100%" />
+        <NounsBidForm
+          collectionAddress={contractAddress}
+          layout={layout}
+          mt="x4"
+          w="100%"
+        />
       )}
     </>
   )
