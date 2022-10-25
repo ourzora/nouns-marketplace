@@ -5,11 +5,13 @@ import { BoxProps } from '@zoralabs/zord'
 
 interface NFTProvenanceProps extends BoxProps {
   nft: NFTObject
+  primarySalePrice: string
 }
 
-export function NFTProvenance({ nft }: NFTProvenanceProps) {
+export function NFTProvenance({ nft, primarySalePrice }: NFTProvenanceProps) {
   const { formattedAuctionDataTable } = usePrimaryAuctionDataTable({
-    nft: nft,
+    nft,
+    primarySalePrice,
   })
 
   return <DataTable items={formattedAuctionDataTable} />

@@ -4,7 +4,7 @@ import { collectionsService } from 'services/collectionsService'
 import { SWRConfig } from 'swr'
 import useSWR from 'swr'
 
-import React from 'react'
+import React, { Profiler } from 'react'
 
 import { CollectionsQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Stack } from '@zoralabs/zord'
@@ -20,7 +20,14 @@ function Home(props: { fallback: CollectionParsed }) {
         <Seo />
         <PageHeader headline="The Nouns Marketplace" />
         <Stack px="x4">
-          <DaoTable />
+          <Profiler
+            id="DaoTable"
+            onRender={(...props: any[]) => {
+              // console.log(props)
+            }}
+          >
+            <DaoTable />
+          </Profiler>
           <CollectionRanking collections={data?.props?.fallback} />
         </Stack>
       </PageWrapper>

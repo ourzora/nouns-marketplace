@@ -1,6 +1,8 @@
 import { ImageWithNounFallback } from 'components'
 import { Link } from 'components/Link'
 
+import { useAuctionCountdown } from 'hooks/useAuctionCountdown'
+
 import {
   cardImageWrapper,
   cardWrapper,
@@ -12,7 +14,6 @@ import {
   activeAuctionCardData,
   auctionWrapperVariants,
 } from '@noun-auction/styles/NounishStyles.css'
-import { DaoConfigProps } from '@noun-auction/typings'
 import { useTitleWithFallback } from '@shared'
 import { Box, Flex, Grid, Heading, Separator, Stack } from '@zoralabs/zord'
 
@@ -21,23 +22,27 @@ import { PlaceNounsBid, SettleAuction } from './AuctionUi'
 import { AuctionBidder, AuctionHighBid } from './DataRenderers'
 
 export function ActiveAuctionCard({
-  dao,
-  timerComplete,
+  collectionAddress,
   layout,
 }: {
-  dao: DaoConfigProps
-  timerComplete: boolean
+  collectionAddress: string
   layout: keyof typeof auctionWrapperVariants['layout']
 }) {
-  const { collectionAddress } = dao
   const { activeNounishAuction: activeAuction } = useNounishAuctionQuery({
     collectionAddress,
   })
-  const tokenId = activeAuction && activeAuction.tokenId
-  const contractAddress = activeAuction && activeAuction.collectionAddress
+  const tokenId = activeAuction?.tokenId ?? undefined
+  const contractAddress = activeAuction?.collectionAddress ?? undefined
+  // FIXME types...
+  const startTime = activeAuction?.startTime!
+  const endTime = activeAuction?.endTime!
 
   // FIXME: remove useNFT from useTitleWithFallback
   const { fallbackTitle } = useTitleWithFallback({ contractAddress, tokenId })
+  const { auctionCompleted } = useAuctionCountdown({
+    startTime,
+    endTime,
+  })
 
   if (!tokenId) return null
 
@@ -81,7 +86,7 @@ export function ActiveAuctionCard({
               {fallbackTitle}
             </Heading>
           </Flex>
-          {timerComplete ? (
+          {auctionCompleted ? (
             <SettleAuction />
           ) : (
             <PlaceNounsBid activeAuction={activeAuction!} layout={layout} />
@@ -92,6 +97,8 @@ export function ActiveAuctionCard({
           <AuctionCountdown showLabels align="flex-start" direction="column" />
           <AuctionHighBid showLabels align="flex-start" direction="column" />
           <AuctionBidder
+            layout={layout}
+            activeAuction={activeAuction!}
             align="flex-start"
             direction="column"
             showLabels

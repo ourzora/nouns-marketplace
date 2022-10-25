@@ -51,11 +51,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
           layout={dao ? 'dao' : 'collection'}
           currentAuction={
             dao ? (
-              <ActiveAuctionCard
-                timerComplete={timerComplete}
-                layout={layout}
-                dao={dao}
-              />
+              <ActiveAuctionCard layout={'row'} collectionAddress={contractAddress} />
             ) : null
           }
         >
@@ -85,7 +81,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         >
           <Stack>
             {dao ? <Separator /> : <CollectionActivityHeader />}
-            <Collections collectionAddress={contractAddress} />
+            <Collections collectionAddress={contractAddress!} />
           </Stack>
         </CollectionFilterProvider>
       )}

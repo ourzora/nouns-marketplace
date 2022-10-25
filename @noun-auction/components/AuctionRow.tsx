@@ -15,6 +15,8 @@ export function AuctionRow({
   activeAuctionId: string
   name: string
 }) {
+  // console.log({ tokenId, activeAuctionId })
+
   const auctionComponent = useMemo(() => {
     if (activeAuctionId === tokenId) {
       return activeAuctionComponent

@@ -1,8 +1,9 @@
 import { Link } from 'components'
 import { clickAnimation, mediumFont } from 'styles/styles.css'
 
+import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
+
 import { CollectionThumbnail } from '@media'
-import { useNounishAuctionProvider } from '@noun-auction'
 import { useNFTProvider, useTitleWithFallback } from '@shared'
 import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
 import { useTokenHelper } from '@shared/hooks'
@@ -12,11 +13,15 @@ import { NFTMarket } from './NFTMarket'
 import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
 
-export interface NFTSidebarProps extends StackProps {}
+export interface NFTSidebarProps extends StackProps {
+  contractAddress: string
+}
 
-export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
-  const { primarySalePrice } = useNounishAuctionProvider()
-  const { nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
+export function NFTSidebar({ className, contractAddress, ...props }: NFTSidebarProps) {
+  const { primarySalePrice } = usePrimarySalePrice({ contractAddress })
+
+  // FIXME: looks obsolete
+  const { nft, tokenId: tokenIdString } = useNFTProvider()
   const { tokenID } = useTokenHelper(nft!)
 
   const { fallbackTitle } = useTitleWithFallback({
@@ -66,7 +71,9 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
       )}
       {nft?.nft && ( // Clamp to bottom of container
         <Stack gap="x4" mt="auto">
-          {primarySalePrice && <NFTProvenance nft={nft} />}
+          {primarySalePrice && (
+            <NFTProvenance primarySalePrice={primarySalePrice} nft={nft} />
+          )}
           <NFTMarket
             contractAddress={nft.nft.contract.address}
             tokenId={nft.nft.tokenId}

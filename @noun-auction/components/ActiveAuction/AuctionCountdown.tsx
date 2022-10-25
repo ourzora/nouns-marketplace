@@ -1,6 +1,5 @@
-import { useEffect } from 'react'
+import { useAuctionCountdown } from 'hooks/useAuctionCountdown'
 
-import { useCountdown } from '@noun-auction/hooks/useCountdown'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
 import { Flex, Label } from '@zoralabs/zord'
@@ -13,18 +12,11 @@ export function AuctionCountdown({
   activeAuction,
   setTimerComplete = () => {},
   layout,
+  // FIXME: any
   ...props
 }: any) {
   const { startTime, endTime } = activeAuction
-  const { text, isEnded } = useCountdown(startTime, endTime)
-
-  useEffect(() => {
-    if (isEnded) {
-      setTimerComplete(true)
-    } else {
-      setTimerComplete(false)
-    }
-  }, [isEnded, startTime, endTime, setTimerComplete])
+  const { auctionCompleted, text } = useAuctionCountdown({ startTime, endTime })
 
   return (
     <Flex
@@ -41,10 +33,10 @@ export function AuctionCountdown({
           style={{ lineHeight: '1.15' }}
           align={{ '@initial': 'left', '@1024': 'right' }}
         >
-          {!isEnded ? label : 'Status'}&nbsp;
+          {!auctionCompleted ? label : 'Status'}&nbsp;
         </Label>
       )}
-      {!isEnded ? (
+      {!auctionCompleted ? (
         <Label
           size="md"
           style={{ lineHeight: '1.15' }}

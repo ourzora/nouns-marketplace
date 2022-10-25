@@ -1,7 +1,9 @@
 import useSWR from 'swr'
-import { zoraApiFetcher } from '@shared'
-import { NounishAuctionsQuery, OneNounsDaoQuery } from 'types/zora.api.generated'
+import { OneNounsDaoQuery } from 'types/zora.api.generated'
+
 import { ONE_NOUNS_DAO } from 'data/oneNounceDao'
+
+import { zoraApiFetcher } from '@shared'
 
 export function useOneNounsDao({ contractAddress }: { contractAddress: string }) {
   const { data, error } = useSWR<OneNounsDaoQuery>(
@@ -12,7 +14,8 @@ export function useOneNounsDao({ contractAddress }: { contractAddress: string })
   if (error || !data) {
     error ? console.error(error) : console.error(`No data for ${contractAddress}`)
     return {
-      auction: undefined,
+      dao: undefined,
+      error,
     }
   }
 

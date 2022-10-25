@@ -3,16 +3,16 @@ import { NounsDao } from 'types/zora.api.generated'
 import { isAfter } from 'date-fns'
 
 import { useNounishAuctionQuery } from '@noun-auction'
-import { NounishAuctionProvider } from '@noun-auction/providers'
 import {
   auctionWrapper,
   auctionWrapperVariants,
+  bidHistoryWrapper,
   wrapperHover,
 } from '@noun-auction/styles/NounishStyles.css'
 import { Box, BoxProps, Grid, Separator, Stack } from '@zoralabs/zord'
 
 import { ActiveAuctionRow } from './ActiveAuction/ActiveAuctionRow'
-import { AuctionRow } from './AuctionRow'
+import { AuctionHistory } from './AuctionHistory'
 
 export interface TokenInfoConfig extends BoxProps {
   /* ~ Move to provider as config object */
@@ -35,14 +35,12 @@ export interface AuctionViewConfig extends TokenInfoConfig {
 
 export interface NounishAuctionProps extends AuctionViewConfig {
   dao: NounsDao
-  tokenId?: string
   layout?: keyof typeof auctionWrapperVariants['layout']
 }
 
 export function NounishAuction({
   layout = 'row',
   dao,
-  tokenId,
   showAuctionRow = true,
   showBidHistory = false,
   showTopBid = true,
@@ -73,40 +71,22 @@ export function NounishAuction({
           auctionWrapper({ layout: layout }),
         ]}
       >
-        <NounishAuctionProvider dao={dao} tokenId={tokenId} layout={layout}>
-          {showAuctionRow && activeNounishAuction && (
-            <>
-              {/* FIXME ! cast */}
-              <AuctionRow
-                tokenId={tokenId!}
-                activeAuctionId={activeNounishAuction.auction}
-                name={dao.name!}
-                auctionDataComponent={<div>AUCTION DATA</div>}
-                activeAuctionComponent={
-                  <ActiveAuctionRow
-                    timerComplete={timerComplete}
-                    layout={layout}
-                    activeAuction={activeNounishAuction}
-                    routePrefix={routePrefix}
-                    useModal={!useInlineBid}
-                    showLabels={showLabels}
-                    showTopBid={showTopBid}
-                  />
-                }
-              />
-            </>
-          )}
-          {/* {showBidHistory && (
-            <AuctionHistory
-              dao={dao}
-              noAuctionHistory={noAuctionHistory}
-              className={bidHistoryWrapper}
-              mb="x2"
-            >
-              {showAuctionRow && <Separator mt="x4" mb="x3" />}
-            </AuctionHistory>
-          )} */}
-        </NounishAuctionProvider>
+        {showAuctionRow && activeNounishAuction && (
+          <ActiveAuctionRow
+            timerComplete={timerComplete}
+            layout={layout}
+            activeAuction={activeNounishAuction}
+            routePrefix={routePrefix}
+            useModal={!useInlineBid}
+            showLabels={showLabels}
+            showTopBid={showTopBid}
+          />
+        )}
+        {showBidHistory && (
+          <AuctionHistory className={bidHistoryWrapper} mb="x2">
+            {showAuctionRow && <Separator mt="x4" mb="x3" />}
+          </AuctionHistory>
+        )}
       </Grid>
     </Box>
   )

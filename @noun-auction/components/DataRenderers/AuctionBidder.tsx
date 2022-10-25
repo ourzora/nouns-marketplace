@@ -1,13 +1,29 @@
 import { useEnsName } from 'wagmi'
 
+import { NounsBuilderAuction } from 'types/zora.api.generated'
+
 import { useMemo } from 'react'
 
 import { AddressZero } from '@ethersproject/constants'
-import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
+import {
+  auctionWrapperVariants,
+  sideBarUpperLabel,
+} from '@noun-auction/styles/NounishStyles.css'
 import { isAddressMatch, lightFont, useShortAddress } from '@shared'
 import { Flex, Icon, Label } from '@zoralabs/zord'
 
 import { EnsAvatar } from './EnsAvatar'
+
+type AuctionBidderProps = Partial<{
+  label?: string
+  layoutDirection?: 'row' | 'column'
+  showLabels?: boolean
+  useAvatar?: boolean
+  layout: keyof typeof auctionWrapperVariants['layout']
+  activeAuction: NounsBuilderAuction
+  // FIXME
+  [key: string]: any
+}>
 
 export function AuctionBidder({
   label = 'Top bidder',
@@ -17,21 +33,17 @@ export function AuctionBidder({
   layout,
   activeAuction,
   ...props
-}: // FIXME
-any) {
+}: AuctionBidderProps) {
   const { data: ensName } = useEnsName({
-    address: activeAuction?.highestBidder,
+    address: activeAuction?.highestBidder ?? undefined,
   })
 
   const shortAddress = useShortAddress(activeAuction?.highestBidder)
   const highestBidder = useMemo(() => activeAuction?.highestBidder, [activeAuction])
 
   const highestBidderAddress = useMemo(
-    () =>
-      activeAuction?.properties?.highestBidder
-        ? activeAuction?.properties?.highestBidder
-        : undefined,
-    [activeAuction?.properties?.highestBidder]
+    () => (activeAuction?.highestBidder ? activeAuction?.highestBidder : undefined),
+    [activeAuction?.highestBidder]
   )
 
   const hasNonZeroHighestBidder = useMemo(

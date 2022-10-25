@@ -3,19 +3,22 @@ import { returnDaoAuctionContract } from 'constants/collection-addresses'
 import { useMemo } from 'react'
 
 import { useRelevantMarket } from '@market/hooks'
-import { useNounishAuctionProvider } from '@noun-auction'
 import { shortenAddress } from '@shared'
 import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
 import { NFTObject } from '@zoralabs/nft-hooks'
 
 interface NounishAuctionInfoProps {
   nft: NFTObject
+  primarySalePrice: string
 }
 
-export const usePrimaryAuctionDataTable = ({ nft: nftObj }: NounishAuctionInfoProps) => {
+export const usePrimaryAuctionDataTable = ({
+  nft: nftObj,
+  primarySalePrice,
+}: NounishAuctionInfoProps) => {
   const { nft, markets } = nftObj
-  const { primarySalePrice } = useNounishAuctionProvider()
   const { ask } = useRelevantMarket(markets)
+
   const askPrice = useMemo(() => ask?.amount?.eth?.value, [ask?.amount?.eth?.value])
   const auctionContractAddress = useMemo(
     () => (nft ? returnDaoAuctionContract(nft?.contract.address) : null),

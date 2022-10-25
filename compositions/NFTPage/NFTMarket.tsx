@@ -1,5 +1,3 @@
-import { returnDao } from 'constants/collection-addresses'
-
 import { useMemo } from 'react'
 
 import { NFTAsks } from '@market/components/NFTAsks'
@@ -16,7 +14,7 @@ interface NFTMarketProps extends BoxProps {
 }
 
 export function NFTMarket({ className, contractAddress, tokenId, nft }: NFTMarketProps) {
-  const dao = useOneNounsDao({ contractAddress })
+  const { dao } = useOneNounsDao({ contractAddress })
 
   const { data: activeAuction } = useActiveNounishAuction()
 
@@ -25,7 +23,7 @@ export function NFTMarket({ className, contractAddress, tokenId, nft }: NFTMarke
     [activeAuction?.properties?.tokenId, dao, tokenId]
   )
 
-  return hasNounishAuction ? (
+  return hasNounishAuction && dao ? (
     <NounishAuction
       dao={dao}
       hideThumbnail

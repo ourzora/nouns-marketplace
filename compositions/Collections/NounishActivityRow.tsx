@@ -1,17 +1,15 @@
 import { NounishAuction, useOneNounsDao } from '@noun-auction'
-import { useNFTProvider } from '@shared'
 
-export function NounishActivityRow() {
-  const {
-    hooksData: { data },
-    contractAddress,
-    tokenId,
-  } = useNFTProvider()
-
-  // FIXME: get rid of useNFTProvider
+export function NounishActivityRow({
+  contractAddress,
+  tokenId,
+}: {
+  contractAddress: string
+  tokenId: string
+}) {
   const { dao } = useOneNounsDao({ contractAddress })
 
-  if (!data || !contractAddress || !tokenId) return null
+  if (contractAddress || !tokenId) return null
   if (!dao) return null
 
   return (
@@ -22,7 +20,6 @@ export function NounishActivityRow() {
       hideCollectionTitle={false}
       borderRadius="curved"
       borderColor="text3"
-      tokenId={tokenId}
       p="x4"
     />
   )

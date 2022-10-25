@@ -7,7 +7,11 @@ import React, { useCallback, useState } from 'react'
 
 import { parseUnits } from '@ethersproject/units'
 import { useModal } from '@modal'
-import { auctionWrapperVariants, useNounBidIncrement } from '@noun-auction'
+import {
+  auctionWrapperVariants,
+  useNounBidIncrement,
+  useNounishAuctionQuery,
+} from '@noun-auction'
 import {
   AuctionBidder,
   AuctionCountdown,
@@ -28,13 +32,12 @@ export function NounsBidForm({ onConfirmation, layout, ...props }: NounsBidFormP
 
   const [bidAmount, setBidAmount] = useState<string | '0'>('0')
 
-  const {
-    dao: { auctionContractAddress, abi },
-    tokenId,
-    minBidIncrementPercentage,
-    reservePrice,
-    activeAuction,
-  } = useNounishAuctionProvider()
+  const { dao, tokenId, minBidIncrementPercentage, reservePrice } =
+    useNounishAuctionProvider()
+
+  const { activeNounishAuction: activeAuction } = useNounishAuctionQuery({
+    collectionAddress: dao.collectionAddress,
+  })
 
   const { minBidAmount } = useNounBidIncrement(
     reservePrice,
@@ -60,8 +63,8 @@ export function NounsBidForm({ onConfirmation, layout, ...props }: NounsBidFormP
   )
 
   const { config, error: prepareError } = usePrepareContractWrite({
-    addressOrName: auctionContractAddress as string,
-    contractInterface: abi,
+    addressOrName: dao.auctionContractAddress as string,
+    contractInterface: dao.abi,
     functionName: 'createBid',
     overrides: {
       from: address,
@@ -112,6 +115,8 @@ export function NounsBidForm({ onConfirmation, layout, ...props }: NounsBidFormP
           <AuctionHighBid layoutDirection="row" showLabels justify="space-between" />
           <Separator />
           <AuctionBidder
+            activeAuction={activeAuction!}
+            layout={layout}
             layoutDirection="row"
             showLabels
             useAvatar={false}

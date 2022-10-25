@@ -6,7 +6,7 @@ import { nftService } from 'services'
 
 import { useMemo } from 'react'
 
-import { NounishAuctionProvider } from '@noun-auction'
+import { useOneNounsDao } from '@noun-auction'
 import { NFTProvider } from '@shared/providers/NFTProvider'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Grid, Stack } from '@zoralabs/zord'
@@ -21,7 +21,8 @@ const NFT = ({
   tokenId: string
 }) => {
   // FIXME
-  const dao = useMemo(() => returnDao(tokenAddress), [tokenAddress])
+  const dao = useOneNounsDao({ contractAddress: tokenAddress })
+  useMemo(() => returnDao(tokenAddress), [tokenAddress])
 
   return (
     <PageWrapper direction="column">
@@ -34,14 +35,12 @@ const NFT = ({
         <Grid className={styles.nftPageWrapper}>
           <NFTPageHero />
           {dao ? (
-            <NounishAuctionProvider dao={dao} tokenId={tokenId}>
-              <NFTSidebar />
-            </NounishAuctionProvider>
+            <NFTSidebar contractAddress={tokenAddress} />
           ) : (
-            <NFTSidebar />
+            <NFTSidebar contractAddress={tokenAddress} />
           )}
           <Stack className={styles.attributesHistoryWrapper}>
-            <NFTHistory />
+            <NFTHistory contractAddress={tokenAddress} tokenId={tokenId} />
             <NFTAttributes />
           </Stack>
         </Grid>

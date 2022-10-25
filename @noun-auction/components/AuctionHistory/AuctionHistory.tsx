@@ -1,8 +1,6 @@
 import { ReactNode } from 'react'
 
 import { AuctionEvents, BidTransactionEvent, EventWithTimestamp } from '@noun-auction'
-// @noun-auction
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { auctionEventRow } from '@noun-auction/styles/NounishStyles.css'
 import { Box, Stack, StackProps } from '@zoralabs/zord'
 
