@@ -57,8 +57,9 @@ const validate = (values: Values) => {
 }
 
 export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
-  const { txStatus, txInProgress, txError, createPrivateAsk, finalizedTx } =
-    useV3AskTransaction({ nft: props.nft, askType: PRIVATE_ASK })
+  const { txStatus, txInProgress, txError, createAsk, finalizedTx } = useV3AskTransaction(
+    { nft: props.nft, askType: PRIVATE_ASK }
+  )
   useEffect(() => finalizedTx!! && onNext!(), [finalizedTx, onNext])
 
   return (
@@ -68,7 +69,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
       validate={validate}
       onSubmit={async (values) => {
         const resolvedBuyerAddress = await resolvePossibleENSAddress(values.buyeraddress)
-        createPrivateAsk({
+        createAsk({
           price: values.amount,
           buyerAddress: resolvedBuyerAddress!,
           rawBuyerAddress: values.buyeraddress,

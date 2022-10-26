@@ -10,6 +10,7 @@ import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { PopUp, Stack, Text, Well } from '@zoralabs/zord'
 
+import { UniversalListAskFlow } from './UniversalListAskFlow'
 import * as styles from './V3AskFlow.css'
 
 interface V3AskOwnerTriggerProps {
@@ -52,15 +53,14 @@ const privateAskDropdownOptions = [
 export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
   const { dispatch } = useV3AskStateContext()
   const { ask } = useRelevantMarket(nft.markets)
-  const {
-    displayAskAmount,
-    usdAskAmount,
-    hasActiveV3Ask,
-    hasActivePrivateAsk,
-    isActiveAsk,
-  } = useAskHelper({
-    ask,
-  })
+
+  console.log('MARKETS?', nft.markets)
+  console.log('ASK?', ask)
+
+  const { displayAskAmount, usdAskAmount, hasActivePrivateAsk, isActiveAsk } =
+    useAskHelper({
+      ask,
+    })
 
   const dropdownOptions = useMemo(
     () => (hasActivePrivateAsk ? privateAskDropdownOptions : v3AskDropdownOptions),
@@ -79,12 +79,19 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
     [dispatch, openModal]
   )
 
+  const label = useMemo(
+    () => (hasActivePrivateAsk ? 'Private Listing' : 'Listing'),
+    [hasActivePrivateAsk]
+  )
+
+  console.log('isActiveAsk?', isActiveAsk)
+
   if (isActiveAsk) {
     return (
       <Well gap="x6" borderRadius="phat">
         {displayAskAmount && (
           <PriceWithLabel
-            label="Private Listing"
+            label={label}
             symbol="ETH"
             cryptoAmount={displayAskAmount}
             usdAmount={usdAskAmount}
@@ -133,9 +140,7 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
     )
   }
 
-  return (
-    <Button w="100%" onClick={openModal}>
-      Create Listing
-    </Button>
-  )
+  console.log('OUTPUTTING UNIVERSAL?')
+
+  return <UniversalListAskFlow nftObj={nft} />
 }

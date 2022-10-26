@@ -42,7 +42,7 @@ export const popupTrigger = style([
   }),
 ])
 export const popupWrapper = style({
-  borderRadius: '16px',
+  borderRadius: '16px!important', // TODO: removeme when zord is vendored
 })
 export const stretch = atoms({
   alignItems: 'stretch',

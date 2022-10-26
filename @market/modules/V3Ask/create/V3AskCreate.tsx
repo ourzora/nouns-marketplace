@@ -5,14 +5,7 @@ import React, { useEffect } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import {
-  PrintError,
-  formatContractError,
-  isAddress,
-  validateCurrency,
-  validateENSAddress,
-} from '@shared'
-import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
+import { PrintError, formatContractError, validateCurrency } from '@shared'
 import { Heading, InputField, Stack } from '@zoralabs/zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
@@ -22,7 +15,6 @@ import { useV3AskTransaction } from '../hooks/useV3AskTransaction'
 interface V3AskCreateProps extends CommonV3AskComponentProps {}
 
 interface Values {
-  buyeraddress: string
   amount: string
 }
 
@@ -43,16 +35,6 @@ const validate = (values: Values) => {
   // @ts-ignore
   if (invalidAmount) errors.amount = invalidAmount
 
-  // address
-  const isEns = validateENSAddress(values.buyeraddress)
-  if (!values.buyeraddress) {
-    // @ts-ignore
-    errors.buyeraddress = 'Buyer address required'
-  } else if (!isAddress(values.buyeraddress) && !isEns) {
-    // @ts-ignore
-    errors.buyeraddress = 'Buyer address not valid'
-  }
-
   return errors
 }
 
@@ -64,15 +46,14 @@ export function V3AskCreate({ onNext, ...props }: V3AskCreateProps) {
 
   return (
     <Formik
-      initialValues={{ buyeraddress: '', amount: '' }}
+      initialValues={{ amount: '' }}
       isInitialValid={false}
       validate={validate}
-      onSubmit={async (values) => {
-        // const resolvedBuyerAddress = await resolvePossibleENSAddress(values.buyeraddress)
+      onSubmit={(values) =>
         createAsk({
           price: values.amount,
         })
-      }}
+      }
     >
       {({
         //values,
@@ -82,7 +63,7 @@ export function V3AskCreate({ onNext, ...props }: V3AskCreateProps) {
         <Form>
           <Stack gap="x6" {...props}>
             <Heading as="h2" size="md">
-              Private Listing
+              Create Listing
             </Heading>
             <Stack gap="x2">
               <Field name="amount">
@@ -106,22 +87,6 @@ export function V3AskCreate({ onNext, ...props }: V3AskCreateProps) {
                     {...field}
                   />
                 )}
-              </Field>
-
-              <Field name="buyeraddress">
-                {({ field, meta: { touched, error } }: FieldProps) => {
-                  return (
-                    <InputField
-                      label="Buyer"
-                      indentFields={false}
-                      variant="lg"
-                      canError
-                      placeholder="0x... or .eth"
-                      error={(touched && error) || undefined}
-                      {...field}
-                    />
-                  )
-                }}
               </Field>
 
               {txError && <PrintError errorMessage={formatContractError(txError)} />}

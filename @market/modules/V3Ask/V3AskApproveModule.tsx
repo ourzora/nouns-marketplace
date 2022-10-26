@@ -35,7 +35,7 @@ export function V3AskApproveModule({ onNext, ...props }: V3AskApproveModuleProps
         <Zorb size={52} />
         <V3AskHeadingDescription
           heading="Approve Module"
-          description="The V3 Asks Module allows a seller to initiate a private ERC-721 NFT sale, and for a buyer to complete the purchase."
+          description="The V3 Asks Module allows a seller to initiate a private ERC-721 NFT sale, or for a buyer to complete the purchase."
         />
         {error && <PrintError errorMessage={error} />}
       </Stack>

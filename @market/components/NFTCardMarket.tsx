@@ -15,6 +15,8 @@ export function NFTCardMarket({ nftObj, ...props }: NFTCardMarketProps) {
 
   if (!nftObj) return null
 
+  console.log('CARD MARKET')
+
   return hasRelevantAsk ? (
     <FillV3AskModal nftObj={nftObj} {...props} />
   ) : (

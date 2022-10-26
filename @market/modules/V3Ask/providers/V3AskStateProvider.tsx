@@ -17,20 +17,15 @@ interface V3AskProps {
 
 type V3AskTxDetails = {
   price: string
-  buyerAddress: string
-  rawBuyerAddress: string
+  buyerAddress?: string
+  rawBuyerAddress?: string
 }
-
-// export const V3_ASK: string = 'V3Ask'
-// export const PRIVATE_ASK: string = 'PrivateAsk'
-
-// export type ListForSaleFlow = typeof V3_ASK | typeof PRIVATE_ASK
 
 export const VIEW_V3ASK_LISTING = 'viewListing'
 // V3 Asks
 export const APPROVE_MODULE_FOR_CREATE_V3ASK = 'approveModuleForSale'
 export const APPROVE_MODULE_FOR_FILL_V3ASK = 'approveModuleForFill'
-export const APPROVE_TRANSFER_FOR_V3ASK = 'approveTransferHelper'
+export const APPROVE_TRANSFER_FOR_V3ASK = 'approveTransferHelperForV3Ask'
 export const CREATE_V3ASK = 'createV3Ask'
 export const CREATE_V3ASK_SUCCESS = 'createV3AskSuccess'
 export const UPDATE_V3ASK = 'updateV3Ask'
@@ -42,6 +37,7 @@ export const FILL_V3ASK_SUCCESS = 'fillV3AskSuccess'
 // Private Asks
 export const APPROVE_MODULE_FOR_CREATE_PRIVATEASK = 'approveModuleForPrivateSale'
 export const APPROVE_MODULE_FOR_FILL_PRIVATEASK = 'approveModuleForPrivateFill'
+export const APPROVE_TRANSFER_FOR_PRIVATEASK = 'approveTransferHelperForPrivateAsk'
 export const CREATE_PRIVATEASK = 'createPrivateAsk'
 export const CREATE_PRIVATEASK_SUCCESS = 'createPrivateAskSuccess'
 export const UPDATE_PRIVATEASK = 'updatePrivateAsk'
@@ -53,9 +49,11 @@ export const FILL_PRIVATEASK_SUCCESS = 'fillPrivateAskSuccess'
 export const RESET_V3ASK = 'resetV3Ask'
 
 export type PossibleV3AskState =
-  // Universal View
+  // Reset
+  | typeof RESET_V3ASK
+  // Universal View:
   | typeof VIEW_V3ASK_LISTING
-  // V3 Ask States
+  // V3 Ask States:
   | typeof APPROVE_MODULE_FOR_CREATE_V3ASK
   | typeof APPROVE_TRANSFER_FOR_V3ASK
   | typeof CREATE_V3ASK
@@ -67,8 +65,9 @@ export type PossibleV3AskState =
   | typeof APPROVE_MODULE_FOR_FILL_V3ASK
   | typeof FILL_V3ASK
   | typeof FILL_V3ASK_SUCCESS
-  // Private Ask States
+  // Private Ask States:
   | typeof APPROVE_MODULE_FOR_CREATE_PRIVATEASK
+  | typeof APPROVE_TRANSFER_FOR_PRIVATEASK
   | typeof CREATE_PRIVATEASK
   | typeof CREATE_PRIVATEASK_SUCCESS
   | typeof UPDATE_PRIVATEASK
@@ -78,12 +77,10 @@ export type PossibleV3AskState =
   | typeof APPROVE_MODULE_FOR_FILL_PRIVATEASK
   | typeof FILL_PRIVATEASK
   | typeof FILL_PRIVATEASK_SUCCESS
-  // Reset
-  | typeof RESET_V3ASK
 
 export const initialV3AskState = {
   status: 'approveModuleForSale' as const,
-  next: 'approveTransferHelper' as const,
+  next: 'approveTransferHelperForV3Ask' as const,
   flow: undefined,
 }
 
@@ -95,7 +92,7 @@ interface State {
 
 export type V3AskAction =
   | { type: typeof VIEW_V3ASK_LISTING }
-  // NORMAL V3 ASK FLOW
+  // NORMAL V3 ASK FLOW:
   | { type: typeof APPROVE_MODULE_FOR_CREATE_V3ASK }
   | { type: typeof APPROVE_TRANSFER_FOR_V3ASK }
   | { type: typeof CREATE_V3ASK }
@@ -107,8 +104,9 @@ export type V3AskAction =
   | { type: typeof APPROVE_MODULE_FOR_FILL_V3ASK }
   | { type: typeof FILL_V3ASK }
   | { type: typeof FILL_V3ASK_SUCCESS }
-  // PRIVATE ASK FLOW
+  // PRIVATE ASK FLOW:
   | { type: typeof APPROVE_MODULE_FOR_CREATE_PRIVATEASK }
+  | { type: typeof APPROVE_TRANSFER_FOR_PRIVATEASK }
   | { type: typeof CREATE_PRIVATEASK }
   | { type: typeof CREATE_PRIVATEASK_SUCCESS }
   | { type: typeof UPDATE_PRIVATEASK }
@@ -127,16 +125,14 @@ export function v3AskStateReducer(_state: State, action: V3AskAction): State {
   switch (action.type) {
     case RESET_V3ASK:
       return initialV3AskState
-    // V3 ASK FLOW
+
+    // V3 ASK FLOW:
     case APPROVE_MODULE_FOR_CREATE_V3ASK:
       return {
         status: APPROVE_MODULE_FOR_CREATE_V3ASK,
         next: CREATE_V3ASK,
         flow: V3_ASK,
       }
-
-    // case APPROVE_MODULE_FOR_CREATE_PRIVATEASK:
-    //   return initialV3AskState
     case APPROVE_TRANSFER_FOR_V3ASK:
       return {
         status: APPROVE_TRANSFER_FOR_V3ASK,
@@ -146,15 +142,15 @@ export function v3AskStateReducer(_state: State, action: V3AskAction): State {
     case CREATE_V3ASK:
       return { status: CREATE_V3ASK, next: CREATE_V3ASK_SUCCESS, flow: V3_ASK }
     case CREATE_V3ASK_SUCCESS:
-      return { status: CREATE_V3ASK_SUCCESS }
+      return { status: CREATE_V3ASK_SUCCESS, flow: V3_ASK }
     case UPDATE_V3ASK:
       return { status: UPDATE_V3ASK, next: UPDATE_V3ASK_SUCCESS, flow: V3_ASK }
     case UPDATE_V3ASK_SUCCESS:
-      return { status: UPDATE_V3ASK_SUCCESS }
+      return { status: UPDATE_V3ASK_SUCCESS, flow: V3_ASK }
     case CANCEL_V3ASK:
-      return { status: CANCEL_V3ASK, next: CANCEL_V3ASK_SUCCESS }
+      return { status: CANCEL_V3ASK, next: CANCEL_V3ASK_SUCCESS, flow: V3_ASK }
     case CANCEL_V3ASK_SUCCESS:
-      return { status: CANCEL_V3ASK_SUCCESS }
+      return { status: CANCEL_V3ASK_SUCCESS, flow: V3_ASK }
     case APPROVE_MODULE_FOR_FILL_V3ASK:
       return {
         status: APPROVE_MODULE_FOR_FILL_V3ASK,
@@ -164,8 +160,9 @@ export function v3AskStateReducer(_state: State, action: V3AskAction): State {
     case FILL_V3ASK:
       return { status: FILL_V3ASK, next: FILL_V3ASK_SUCCESS, flow: V3_ASK }
     case FILL_V3ASK_SUCCESS:
-      return { status: FILL_V3ASK_SUCCESS }
-    // PRIVATE ASK FLOW
+      return { status: FILL_V3ASK_SUCCESS, flow: V3_ASK }
+
+    // PRIVATE ASK FLOW:
     case APPROVE_MODULE_FOR_CREATE_PRIVATEASK:
       return {
         status: APPROVE_MODULE_FOR_CREATE_PRIVATEASK,
@@ -187,7 +184,7 @@ export function v3AskStateReducer(_state: State, action: V3AskAction): State {
         flow: PRIVATE_ASK,
       }
     case UPDATE_PRIVATEASK_SUCCESS:
-      return { status: UPDATE_PRIVATEASK_SUCCESS }
+      return { status: UPDATE_PRIVATEASK_SUCCESS, flow: PRIVATE_ASK }
     case CANCEL_PRIVATEASK:
       return {
         status: CANCEL_PRIVATEASK,
@@ -195,7 +192,7 @@ export function v3AskStateReducer(_state: State, action: V3AskAction): State {
         flow: PRIVATE_ASK,
       }
     case CANCEL_PRIVATEASK_SUCCESS:
-      return { status: CANCEL_PRIVATEASK_SUCCESS }
+      return { status: CANCEL_PRIVATEASK_SUCCESS, flow: PRIVATE_ASK }
     case APPROVE_MODULE_FOR_FILL_PRIVATEASK:
       return {
         status: APPROVE_MODULE_FOR_FILL_PRIVATEASK,
@@ -209,7 +206,7 @@ export function v3AskStateReducer(_state: State, action: V3AskAction): State {
         flow: PRIVATE_ASK,
       }
     case FILL_PRIVATEASK_SUCCESS:
-      return { status: FILL_PRIVATEASK_SUCCESS }
+      return { status: FILL_PRIVATEASK_SUCCESS, flow: PRIVATE_ASK }
     // VIEW
     case VIEW_V3ASK_LISTING:
       return { status: VIEW_V3ASK_LISTING }

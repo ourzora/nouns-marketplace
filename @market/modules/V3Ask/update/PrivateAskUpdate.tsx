@@ -47,8 +47,9 @@ export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
   const { markets } = nft
   const { ask } = useRelevantMarket(markets)
   const { buyerAddress } = useAskHelper({ ask })
-  const { txStatus, txInProgress, txError, finalizedTx, updatePrivateAsk } =
-    useV3AskTransaction({ nft: nft, askType: PRIVATE_ASK })
+  const { txStatus, txInProgress, txError, finalizedTx, updateAsk } = useV3AskTransaction(
+    { nft: nft, askType: PRIVATE_ASK }
+  )
 
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
 
@@ -59,7 +60,7 @@ export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
       validate={validate}
       onSubmit={async (values) => {
         const maybeBuyerAddressENS = await reverseLookupAddress(buyerAddress)
-        updatePrivateAsk({
+        updateAsk({
           price: values.amount,
           buyerAddress: buyerAddress,
           rawBuyerAddress: maybeBuyerAddressENS!,

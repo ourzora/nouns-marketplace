@@ -3,7 +3,7 @@ import { useAccount, useSigner } from 'wagmi'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
 import {
-  ASKS_V11_ADDRESS,
+  ASKS_CORE_ETH_ADDRESS,
   MODULE_MANAGER_ADDRESS,
   PRIVATE_ASKS_ADDRESS,
   defaultProvider,
@@ -20,7 +20,7 @@ const defaultModuleManager = ModuleManagerFactory.connect(
   defaultProvider
 )
 
-const defaultV3Asks = AsksCoreEth__factory.connect(ASKS_V11_ADDRESS, defaultProvider)
+const defaultV3Asks = AsksCoreEth__factory.connect(ASKS_CORE_ETH_ADDRESS, defaultProvider)
 const defaultPrivateAsks = AsksPrivateEth__factory.connect(
   PRIVATE_ASKS_ADDRESS,
   defaultProvider
@@ -57,17 +57,15 @@ const V3AskContractProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!signer) {
-      console.log('NO SIGNER')
       return
     }
     if (address && signer) {
-      console.log('HAS SIGNER')
       const authorisedModuleManager = ModuleManagerFactory.connect(
         MODULE_MANAGER_ADDRESS,
         signer
       )
       setModuleManager(authorisedModuleManager)
-      const authorizedV3Asks = AsksCoreEth__factory.connect(ASKS_V11_ADDRESS, signer)
+      const authorizedV3Asks = AsksCoreEth__factory.connect(ASKS_CORE_ETH_ADDRESS, signer)
       const authorizedPrivateAsks = AsksPrivateEth__factory.connect(
         PRIVATE_ASKS_ADDRESS,
         signer

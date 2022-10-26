@@ -1,9 +1,10 @@
 import { Button } from 'components/Button'
 
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import {
+  APPROVE_MODULE_FOR_FILL_PRIVATEASK,
   APPROVE_MODULE_FOR_FILL_V3ASK,
   useV3AskStateContext,
 } from '@market/modules/V3Ask/'
@@ -19,14 +20,29 @@ interface V3AskBuyerTriggerProps {
 export function V3AskBuyerTrigger({ nft, openModal }: V3AskBuyerTriggerProps) {
   const { dispatch } = useV3AskStateContext()
   const { ask } = useRelevantMarket(nft.markets)
-  const { displayAskAmount, usdAskAmount } = useAskHelper({ ask })
+  const { displayAskAmount, usdAskAmount, hasActivePrivateAsk, isValidPrivateAskBuyer } =
+    useAskHelper({ ask })
   const [disabled, setDisabled] = useState<boolean>(false)
+  const label = useMemo(
+    () => (hasActivePrivateAsk ? 'Private Listing' : 'Listing'),
+    [hasActivePrivateAsk]
+  )
+
+  const selectedAskFlow = useMemo(
+    () =>
+      hasActivePrivateAsk
+        ? APPROVE_MODULE_FOR_FILL_PRIVATEASK
+        : APPROVE_MODULE_FOR_FILL_V3ASK,
+    [hasActivePrivateAsk]
+  )
+
+  if (hasActivePrivateAsk && !isValidPrivateAskBuyer) return null
 
   return (
     <Well gap="x6" borderRadius="phat">
       {displayAskAmount && (
         <PriceWithLabel
-          label="Private Listing"
+          label={label}
           symbol="ETH"
           cryptoAmount={displayAskAmount}
           usdAmount={usdAskAmount}
@@ -37,7 +53,7 @@ export function V3AskBuyerTrigger({ nft, openModal }: V3AskBuyerTriggerProps) {
         w="100%"
         disabled={disabled}
         onClick={() => {
-          dispatch && dispatch({ type: APPROVE_MODULE_FOR_FILL_V3ASK }) // INITIAL STATE IN FLOW
+          dispatch && dispatch({ type: selectedAskFlow })
           openModal()
           setDisabled(true)
         }}

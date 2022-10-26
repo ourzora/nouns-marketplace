@@ -5,6 +5,7 @@ import {
   APPROVE_MODULE_FOR_CREATE_V3ASK,
   APPROVE_MODULE_FOR_FILL_PRIVATEASK,
   APPROVE_MODULE_FOR_FILL_V3ASK,
+  APPROVE_TRANSFER_FOR_PRIVATEASK,
   APPROVE_TRANSFER_FOR_V3ASK,
   CANCEL_PRIVATEASK,
   CANCEL_PRIVATEASK_SUCCESS,
@@ -47,6 +48,7 @@ import { V3AskViewListing } from './view'
 const componentMap = {
   [APPROVE_MODULE_FOR_CREATE_V3ASK]: V3AskApproveModule,
   [APPROVE_TRANSFER_FOR_V3ASK]: V3AskApproveTransferHelper,
+
   // [APPROVE_CURRENCY]: V3AskApproveERC20Currency, // TODO, not used in Noun.Market but should be available for non-nouns implementations
   [CREATE_V3ASK]: V3AskCreate,
   [CREATE_V3ASK_SUCCESS]: V3AskCreateSuccess,
@@ -60,13 +62,14 @@ const componentMap = {
 
   // PRIVATE ASKS:
   [APPROVE_MODULE_FOR_CREATE_PRIVATEASK]: PrivateAskApproveModule,
+  [APPROVE_TRANSFER_FOR_PRIVATEASK]: V3AskApproveTransferHelper,
   [CREATE_PRIVATEASK]: PrivateAskCreate,
   [CREATE_PRIVATEASK_SUCCESS]: V3AskCreateSuccess,
   [UPDATE_PRIVATEASK]: PrivateAskUpdate,
   [UPDATE_PRIVATEASK_SUCCESS]: V3AskUpdateSuccess,
   [CANCEL_PRIVATEASK]: V3AskCancel,
   [CANCEL_PRIVATEASK_SUCCESS]: V3AskCancelSuccess,
-  [APPROVE_MODULE_FOR_FILL_PRIVATEASK]: V3AskApproveModule,
+  [APPROVE_MODULE_FOR_FILL_PRIVATEASK]: PrivateAskApproveModule,
   [FILL_PRIVATEASK]: V3AskFillAsk,
   [FILL_PRIVATEASK_SUCCESS]: V3AskFillAskSuccess,
 

@@ -16,25 +16,29 @@ export interface NFTAskProps extends FlexProps {
 export function NFTAsks({ nftObj, ...props }: NFTAskProps) {
   const { markets } = nftObj
   const { ask } = useRelevantMarket(markets)
-  const { isOwner } = useIsOwner(nftObj)
-  const { hasRelevantAsk, isPrivateAsk } = useAskHelper({ ask })
+  // const { isOwner } = useIsOwner(nftObj)
+  // const { hasRelevantAsk, isPrivateAsk } = useAskHelper({ ask })
 
   console.log('ASK')
 
-  const marketComponent = useMemo(() => {
-    if (hasRelevantAsk) {
-      return isPrivateAsk ? (
-        // <PrivateAskSidebar nftObj={nftObj} borderRadius="phat" />
-        <V3AskSidebar nftObj={nftObj} borderRadius="phat" />
-      ) : (
-        <FillV3AskModal nftObj={nftObj} {...props} />
-      )
-    }
+  if (!nftObj) return null
 
-    if (isOwner) return <UniversalListAskModal nftObj={nftObj} />
+  return <V3AskSidebar nftObj={nftObj} borderRadius="phat" />
 
-    return null
-  }, [hasRelevantAsk, isOwner, isPrivateAsk, nftObj, props])
+  // const marketComponent = useMemo(() => {
+  //   if (hasRelevantAsk) {
+  //     return isPrivateAsk ? (
+  //       // <PrivateAskSidebar nftObj={nftObj} borderRadius="phat" />
+  //       <V3AskSidebar nftObj={nftObj} borderRadius="phat" />
+  //     ) : (
+  //       <FillV3AskModal nftObj={nftObj} {...props} />
+  //     )
+  //   }
 
-  return nftObj ? marketComponent : null
+  //   if (isOwner) return <UniversalListAskModal nftObj={nftObj} />
+
+  //   return null
+  // }, [hasRelevantAsk, isOwner, isPrivateAsk, nftObj, props])
+
+  // return nftObj ? marketComponent : null
 }
