@@ -30,7 +30,7 @@ export function CollectionLink({ collection }: { collection: CollectionsData }) 
         <Flex align="center" gap="x4">
           <CollectionThumbnail collectionAddress={collection.address} />
           <Stack gap="x1">
-            <Flex gap="x2">
+            <Flex gap="x2" align="center">
               <Label size="lg" className={leadingTight} color="text1">
                 {collection.name}
               </Label>

@@ -1,5 +1,5 @@
 import { Link } from 'components'
-import { clickAnimation, mediumFont } from 'styles/styles.css'
+import { mediumFont } from 'styles/styles.css'
 
 import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
 
@@ -50,7 +50,6 @@ export function NFTSidebar({ className, contractAddress, ...props }: NFTSidebarP
             pr="x5"
             backgroundColor="background2"
             borderRadius="round"
-            className={clickAnimation}
           />
         </Link>
       </Flex>

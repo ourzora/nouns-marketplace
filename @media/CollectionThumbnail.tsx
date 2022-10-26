@@ -48,6 +48,7 @@ export function CollectionThumbnail({
   useTitle = false,
   thumbnailStyle,
   initialNFT,
+  className,
   ...props
 }: CollectionThumbnailProps) {
   const { data: nft = initialNFT } = useNFT(collectionAddress, tokenId)
@@ -63,7 +64,7 @@ export function CollectionThumbnail({
   if (!collectionAddress) return null
 
   return (
-    <Flex align="center" gap="x4" {...props}>
+    <Flex align="center" gap="x4" {...props} className={className}>
       <Box
         h={thumbnailSize}
         borderRadius={radius}

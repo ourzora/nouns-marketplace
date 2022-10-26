@@ -5,12 +5,23 @@ import { atoms, color, media } from '@zoralabs/zord'
 
 export const daosWrapper = style([
   {
-    maxWidth: MAX_WIDTH.LG,
+    maxWidth: MAX_WIDTH.MED,
+    gridTemplateColumns: 'repeat(4, [col-start] 1fr)',
+    gridTemplateRows: 'auto',
+    '@media': {
+      [media.min1024]: {
+        gridTemplateColumns: 'repeat(12, [col-start] 1fr)',
+        maxWidth: MAX_WIDTH.XL,
+      },
+    },
   },
   atoms({
     w: '100%',
     m: 'auto',
-    gap: 'x4',
+    gap: {
+      '@initial': 'x4',
+      '@1024': 'x8',
+    },
   }),
 ])
 

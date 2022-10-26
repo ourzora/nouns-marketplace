@@ -15,14 +15,9 @@ export function AuctionRow({
   activeAuctionId: string
   name: string
 }) {
-  // console.log({ tokenId, activeAuctionId })
-
   const auctionComponent = useMemo(() => {
-    if (activeAuctionId === tokenId) {
-      return activeAuctionComponent
-    } else {
-      return auctionDataComponent
-    }
+    const isActiveAuction = activeAuctionId === tokenId
+    return isActiveAuction ? activeAuctionComponent : auctionDataComponent
   }, [activeAuctionComponent, activeAuctionId, auctionDataComponent, tokenId])
 
   if (!activeAuctionId) return <RowLoader name={name} />

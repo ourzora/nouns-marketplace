@@ -4,12 +4,12 @@ import { Box, Flex, Label } from '@zoralabs/zord'
 
 import * as styles from './Footer.css'
 
-export function FooterComposition() {
+export function Footer() {
   const { isLarge } = useWindowWidth()
 
   return (
-    <Flex className={styles.footerWrap}>
-      <Flex as="footer" className={styles.footerWrapper}>
+    <Flex as="footer" className={styles.footerWrap}>
+      <Flex className={styles.footer}>
         <Box gap="x2" className={styles.menu}>
           <Label px="x4" as="a" size="lg" href="/docs" passhref="/docs">
             Docs

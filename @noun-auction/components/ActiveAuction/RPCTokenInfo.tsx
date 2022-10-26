@@ -3,7 +3,7 @@ import NextLink from 'next/link'
 
 import { useToken } from 'hooks/useToken'
 
-import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
+import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
 import { Box, BoxProps, Flex, Heading, Label, Stack } from '@zoralabs/zord'
 
@@ -17,14 +17,12 @@ export interface RPCTokenInfoProps extends BoxProps {
 export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInfoProps) {
   const { token } = useToken({ address: contractAddress!, tokenId: tokenId! })
 
-  if (!tokenId || !contractAddress) return null
-
-  if (!tokenId || !contractAddress) return null
+  if (!token || !tokenId || !contractAddress) return null
 
   return (
-    <Flex className={['nounish-auction__token-info', tokenInfoWrapper]} {...props}>
+    <Flex className={['nounish-auction__token-info', styles.tokenInfoWrapper]} {...props}>
       <NextLink href={`/collections/${contractAddress}/${tokenId}`} passHref>
-        <Button as="a" variant="unset">
+        <Button as="a" variant="unset" className={styles.thumbnailLink}>
           <NounishThumbnail
             image={token?.image?.url!}
             tokenContract={contractAddress}
@@ -34,7 +32,7 @@ export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInf
       </NextLink>
       <Stack justify="space-between">
         <Heading size="sm" as="h3">
-          {token?.metadata?.name ? token?.metadata?.name : `${tokenId}`}
+          {token.collectionName}
         </Heading>
         <Box mb="x1">
           <NextLink href={`/collections/${contractAddress}`} passHref>

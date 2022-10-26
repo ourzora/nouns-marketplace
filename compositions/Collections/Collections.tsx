@@ -6,7 +6,9 @@ import { NFTGrid } from '@media/NFTGrid'
 import { nftGridWrapper } from '@media/NftMedia.css'
 import { useNounishAuctionQuery, useOneNounsDao } from '@noun-auction'
 import { NFTObject } from '@zoralabs/nft-hooks'
+import { Stack } from '@zoralabs/zord'
 
+import * as styles from './Collections.css'
 import { NounishActivityRow } from './NounishActivityRow'
 
 type CollectionsGridProps = {
@@ -29,6 +31,7 @@ export function CollectionGrid({
 }: CollectionsGridProps) {
   return (
     <Filter
+      className="collection-filter"
       grid={
         <NFTGrid
           items={items}
@@ -83,6 +86,7 @@ export function DaoGrid({
 
   return (
     <Filter
+      className="dao-filter"
       grid={
         <NFTGrid
           items={items} // filteredItems
@@ -104,20 +108,19 @@ export function Collections({ view = 'nfts', collectionAddress }: CollectionsPro
     filterStore: { clearFilters },
   } = useCollectionFilters()
   const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
-
   const dao = useOneNounsDao({ contractAddress: collectionAddress })
 
   const gridProps = { items, isReachingEnd, isValidating, handleLoadMore }
 
-  useEffect(() => {
-    clearFilters()
-  }, [clearFilters])
+  useEffect(() => clearFilters(), [clearFilters])
 
-  if (!dao) {
-    return <CollectionGrid {...gridProps} />
-  } else if (collectionAddress) {
-    return <DaoGrid collectionAddress={collectionAddress} view={view} {...gridProps} />
-  } else {
-    return null
-  }
+  return (
+    <Stack className={['zora-collections-filter-parent', styles.collections]}>
+      {dao ? (
+        <DaoGrid collectionAddress={collectionAddress} view={view} {...gridProps} />
+      ) : (
+        <CollectionGrid {...gridProps} />
+      )}
+    </Stack>
+  )
 }

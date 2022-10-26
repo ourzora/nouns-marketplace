@@ -3,17 +3,9 @@ import { HEADER_HEIGHT } from 'styles/style-constants'
 import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, ease, media, textVariants, typography, vars } from '@zoralabs/zord'
+import { atoms, ease, media, typography, vars } from '@zoralabs/zord'
 
 export const borderStyle = `2px solid ${vars.color.border}`
-
-export const homepageGrid = style({
-  '@media': {
-    [media.min768]: {
-      gridTemplateColumns: `1fr`,
-    },
-  },
-})
 
 export const errorText = style({ color: vars.color.negative })
 
@@ -226,25 +218,20 @@ export const activityModal = style([
     width: 230,
   },
   atoms({
-    pl: 'x0',
-    pr: 'x0',
-    pb: 'x0',
-    pt: 'x0',
+    p: 'x0',
   }),
 ])
 
 export const filterPropertySelect = style([
   {
     textAlign: 'left',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start!important', // TODO: remove !important invocations when zord has been vendored into marketplace
+    height: 'unset!important',
   },
 ])
 
 const pill = {
-  paddingLeft: vars.space.x3,
-  paddingRight: vars.space.x3,
-  paddingTop: 0,
-  paddingBottom: 0,
+  padding: `0 ${vars.space.x3}`,
   height: vars.space.x10,
   borderRadius: vars.radii.round,
   marginBottom: 0,

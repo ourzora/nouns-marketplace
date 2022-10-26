@@ -3,7 +3,7 @@ import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { Button } from 'components/Button'
 import { BigNumber as EthersBN } from 'ethers'
 
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { parseUnits } from '@ethersproject/units'
@@ -121,6 +121,23 @@ export function NounsBidFormComponent({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [bidAmount]
   )
+  const hasBidInput = useMemo(() => bidAmount !== '0', [bidAmount])
+  const isSufficientBid = useMemo(
+    () => (minBidAmount?.raw ? bidAmount >= minBidAmount?.raw : false),
+    [bidAmount, minBidAmount]
+  )
+
+  const hasError = useMemo(
+    // Error writing to contract OR error in contract write preparation (initial form setup)
+    () => hasBidInput && ((isError && writeContractError) || prepareError),
+    [isError, prepareError, writeContractError, hasBidInput]
+  )
+
+  const errorOutput = useMemo(() => {
+    if (isError && writeContractError) return formatContractError(writeContractError)
+    if (prepareError) return formatContractError(prepareError)
+    return null
+  }, [isError, prepareError, writeContractError])
 
   return (
     <Box {...props}>
@@ -172,12 +189,7 @@ export function NounsBidFormComponent({
           )}
           <Separator />
         </Stack>
-        {isError && writeContractError && (
-          <PrintError
-            errorMessage={formatContractError(writeContractError ?? prepareError)}
-            mb="x4"
-          />
-        )}
+        {hasError && <PrintError errorMessage={errorOutput} mb="x4" />}
         {!isSuccess ? (
           <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x2">
             <Button
@@ -188,7 +200,13 @@ export function NounsBidFormComponent({
             >
               Cancel
             </Button>
-            <Button type="submit" loading={isLoading} w="100%" borderRadius="curved">
+            <Button
+              type="submit"
+              loading={isLoading}
+              disabled={!isSufficientBid}
+              w="100%"
+              borderRadius="curved"
+            >
               Place Bid
             </Button>
           </Grid>
