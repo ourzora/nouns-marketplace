@@ -4,7 +4,6 @@ import { first } from 'lodash'
 
 import { LilNounsAuctionEventTypes, NounsAuctionEventTypes } from '@noun-auction'
 
-import { Event } from '../types/zora.api.generated'
 import { useIsAuctionSettled } from './useIsAuctionSettled'
 
 // FIXME

@@ -4,12 +4,14 @@ import * as Sentry from '@sentry/react'
 
 import { client } from './gqlClient'
 
-export async function zoraApiFetcher(query: DocumentNode, variables?: any) {
-  // FIXME: haha see what I did here
-  const network = { chain: 'GOERLI', network: 'ETHEREUM' }
+export async function zoraApiFetcher(query: DocumentNode, providedVariables?: any) {
+  let variables = {
+    network: { chain: 'MAINNET', network: 'ETHEREUM' },
+    ...providedVariables,
+  }
 
   try {
-    const response = await client.request(query, { ...variables, network })
+    const response = await client.request(query, variables)
     return response
   } catch (err) {
     Sentry.captureException(err)

@@ -1,21 +1,33 @@
 import { useAuctionCountdown } from 'hooks/useAuctionCountdown'
 
+import { TypeSafeNounsAuction } from 'validators/auction'
+
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
 import { Flex, Label } from '@zoralabs/zord'
+
+type Props = {
+  showLabels?: boolean
+  endedCopy?: string
+  label?: string
+  layoutDirection?: 'row' | 'column'
+  layout?: string
+  startTime: string
+  endTime: string
+  className?: string[]
+  styles: { [k in string]: any }
+}
 
 export function AuctionCountdown({
   showLabels,
   endedCopy = 'Bidding & Settling',
   label = 'Ends in',
   layoutDirection = 'row',
-  activeAuction,
-  setTimerComplete = () => {},
+  startTime,
+  endTime,
   layout,
-  // FIXME: any
-  ...props
-}: any) {
-  const { startTime, endTime } = activeAuction
+  styles,
+}: Props) {
   const { auctionCompleted, text } = useAuctionCountdown({ startTime, endTime })
 
   return (
@@ -23,7 +35,7 @@ export function AuctionCountdown({
       direction={layoutDirection}
       wrap="wrap"
       gap={layoutDirection === 'row' ? 'x2' : 'x0'}
-      {...props}
+      {...styles}
     >
       {showLabels && (
         <Label

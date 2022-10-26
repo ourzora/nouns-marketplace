@@ -41,12 +41,17 @@ export function ActiveAuctionRow({
       <Link href={`collections/${collectionAddress}`} passHref>
         <AuctionCountdown
           layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
-          showLabels={showLabels}
-          justify={'center'}
-          align={'flex-end'}
-          className={[layout === 'row' && responsiveRow, 'nounish-auction__countdown']}
-          cursor="pointer"
-          activeAuction={activeAuction}
+          showLabels={!!showLabels}
+          startTime={activeAuction.startTime}
+          endTime={activeAuction.endTime}
+          styles={{
+            justify: 'center',
+            align: 'flex-end',
+            cursor: 'pointer',
+          }}
+          className={['nounish-auction__countdown'].concat(
+            layout === 'row' ? responsiveRow : []
+          )}
         />
       </Link>
       <Link href={`collections/${collectionAddress}`} passHref>
@@ -94,9 +99,12 @@ export function ActiveAuctionRow({
       <AuctionCountdown
         layoutDirection="row"
         showLabels={showLabels}
-        justify="space-between"
-        className="nounish-auction__sidebar-top-contdown"
-        activeAuction={activeAuction}
+        styles={{
+          justify: 'space-between',
+        }}
+        className={['nounish-auction__sidebar-top-contdown']}
+        startTime={activeAuction.startTime}
+        endTime={activeAuction.endTime}
       />
     </Stack>
   )

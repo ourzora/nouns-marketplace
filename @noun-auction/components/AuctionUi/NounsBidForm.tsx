@@ -62,6 +62,22 @@ export function NounsBidFormComponent({
 
   const { address } = useAccount()
 
+  const contractInterface = [
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: 'nounId',
+          type: 'uint256',
+        },
+      ],
+      name: 'createBid',
+      outputs: [],
+      stateMutability: 'payable',
+      type: 'function',
+    },
+  ]
+
   const handleOnUpdate = useCallback(
     (value: string) => {
       let newValue: EthersBN
@@ -79,7 +95,7 @@ export function NounsBidFormComponent({
 
   const { config, error: prepareError } = usePrepareContractWrite({
     addressOrName: activeAuction.address,
-    contractInterface: dao.abi,
+    contractInterface,
     functionName: 'createBid',
     overrides: {
       from: address,
@@ -125,7 +141,14 @@ export function NounsBidFormComponent({
           />
         </Flex>
         <Stack gap="x4" mb="x4">
-          <AuctionCountdown layoutDirection="row" showLabels justify="space-between" />
+          <AuctionCountdown
+            startTime={activeAuction.startTime}
+            endTime={activeAuction.endTime}
+            layoutDirection="row"
+            layout="row"
+            showLabels
+            styles={{ justify: 'space-between' }}
+          />
           <Separator />
           <AuctionHighBid layoutDirection="row" showLabels justify="space-between" />
           <Separator />

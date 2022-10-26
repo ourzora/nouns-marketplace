@@ -9,7 +9,6 @@ import {
   titleHeading,
   titleWrapper,
 } from '@media/NftMedia.css'
-import { useNounishAuctionQuery } from '@noun-auction'
 import {
   activeAuctionCardData,
   auctionWrapperVariants,
@@ -93,7 +92,12 @@ export function ActiveAuctionCard({
         </Flex>
         <Separator mt="x1" />
         <Grid className={activeAuctionCardData}>
-          <AuctionCountdown showLabels align="flex-start" direction="column" />
+          <AuctionCountdown
+            startTime={startTime}
+            endTime={endTime}
+            showLabels
+            styles={{ align: 'flex-start', direction: 'column' }}
+          />
           <AuctionHighBid showLabels align="flex-start" direction="column" />
           <AuctionBidder
             layout={layout}
