@@ -4,12 +4,12 @@ import { Heading, Stack, StackProps } from '@zoralabs/zord'
 import { nftMarketWrapper } from './NFTPage.css'
 
 export interface NFTHistoryProps extends StackProps {
-  contractAddress: string
+  collectionAddress: string
   tokenId: string
 }
 
-export function NFTHistory({ contractAddress, tokenId, ...props }: NFTHistoryProps) {
-  const { dao } = useOneNounsDao({ contractAddress })
+export function NFTHistory({ collectionAddress, tokenId, ...props }: NFTHistoryProps) {
+  const { dao } = useOneNounsDao({ collectionAddress })
 
   if (!dao) return null
 

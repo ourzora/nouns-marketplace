@@ -9,7 +9,7 @@ import {
   bidHistoryWrapper,
   wrapperHover,
 } from '@noun-auction/styles/NounishStyles.css'
-import { Box, BoxProps, Grid, Separator, Stack } from '@zoralabs/zord'
+import { Box, BoxProps, Grid, Separator } from '@zoralabs/zord'
 
 import { ActiveAuctionRow } from './ActiveAuction/ActiveAuctionRow'
 import { AuctionHistory } from './AuctionHistory'

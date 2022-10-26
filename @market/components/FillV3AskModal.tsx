@@ -1,23 +1,25 @@
 import { Button } from 'components/Button'
 
+import { TypeSafeToken } from 'validators/token'
+
 import { FillV3AskWizard, NFTOwner } from '@market/components'
 import { useRelevantMarket } from '@market/hooks'
 import { ModalComposition, useModal } from '@modal'
 import { lightFont, useIsOwner } from '@shared'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { Box, Flex, FlexProps, Heading, Label, Stack } from '@zoralabs/zord'
 
 export interface FillV3AskModalProps extends FlexProps {
-  nftObj: NFTObject
+  token: TypeSafeToken
 }
 
-export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
-  const { nft, metadata, markets } = nftObj
+export function FillV3AskModal({ token, ...props }: FillV3AskModalProps) {
+  const { nft, metadata, markets } = token
+
   const { ask } = useRelevantMarket(markets)
 
   const { requestClose } = useModal()
-  const { isOwner } = useIsOwner(nftObj)
+  const { isOwner } = useIsOwner(token)
 
   if (!nft || !metadata || ask?.status === MARKET_INFO_STATUSES.INVALID) {
     return null
@@ -61,7 +63,7 @@ export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
                       tokenName={metadata.name}
                       askCurrency={ask.amount.address}
                       askPrice={ask.amount.amount.raw}
-                      nftObj={nftObj}
+                      nftObj={token}
                       onClose={requestClose}
                       cancelButton={
                         <Button onClick={requestClose} w="100%" variant="secondary">

@@ -8,12 +8,12 @@ import { TypeSafeDao, verifyDao } from 'validators/dao'
 
 import { zoraApiFetcher } from '@shared'
 
-export function useOneNounsDao({ contractAddress }: { contractAddress: string }) {
+export function useOneNounsDao({ collectionAddress }: { collectionAddress: string }) {
   const [cached, setCache] = useState<TypeSafeDao | undefined>()
 
   const { data, error } = useSWR<OneNounsDaoQuery>(
-    [`nounish-auction-${contractAddress}`],
-    () => zoraApiFetcher(ONE_NOUNS_DAO, { contractAddress })
+    [`nounish-auction-${collectionAddress}`],
+    () => zoraApiFetcher(ONE_NOUNS_DAO, { collectionAddress })
   )
   const dao = useMemo(() => {
     const newData = data?.nouns?.nounsDaos?.nodes[0]

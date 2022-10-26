@@ -1,16 +1,15 @@
-import { useMemo } from 'react'
+import { TypeSafeToken } from 'validators/token'
 
 import { FillV3AskModal } from '@market/components'
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { UniversalListAskModal } from '@market/modules/PrivateAsk/UniversalListAskModal'
-import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTCardMarketProps extends FlexProps {
-  nftObj: NFTObject
+  token: TypeSafeToken
 }
 
-export function NFTCardMarket({ nftObj, ...props }: NFTCardMarketProps) {
+export function NFTCardMarket({ token, ...props }: NFTCardMarketProps) {
   const { markets } = nftObj
   const { ask } = useRelevantMarket(markets)
   const { hasRelevantAsk } = useAskHelper({ ask })

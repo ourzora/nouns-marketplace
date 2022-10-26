@@ -12,6 +12,8 @@ import * as styles from './Collections.css'
 import { NounishActivityRow } from './NounishActivityRow'
 
 type CollectionsGridProps = {
+  collectionAddress: string
+  tokenId: string
   items: NFTObject[]
   isValidating: boolean
   isReachingEnd?: boolean
@@ -19,6 +21,7 @@ type CollectionsGridProps = {
 }
 
 export type CollectionsProps = {
+  tokenId: string
   collectionAddress: string
   view?: 'activity' | 'nfts' | string
 }
@@ -28,6 +31,8 @@ export function CollectionGrid({
   isReachingEnd,
   isValidating,
   handleLoadMore,
+  collectionAddress,
+  tokenId,
 }: CollectionsGridProps) {
   return (
     <Filter
@@ -38,7 +43,9 @@ export function CollectionGrid({
           handleLoadMore={handleLoadMore}
           isReachingEnd={isReachingEnd}
           isValidating={isValidating}
-          nftRenderer={<NFTCard />}
+          nftRenderer={
+            <NFTCard collectionAddress={collectionAddress} tokenId={tokenId} />
+          }
           className={nftGridWrapper()}
         />
       }
@@ -55,7 +62,6 @@ export function DaoGrid({
   collectionAddress,
 }: {
   view: CollectionsProps['view']
-  collectionAddress: string
 } & CollectionsGridProps) {
   const { activeAuction } = useNounishAuctionQuery({
     collectionAddress,
@@ -65,9 +71,9 @@ export function DaoGrid({
   const renderer = useMemo(() => {
     if (!tokenId) return <></>
     return view === 'nfts' ? (
-      <NFTCard />
+      <NFTCard tokenId={tokenId} collectionAddress={collectionAddress} />
     ) : (
-      <NounishActivityRow contractAddress={collectionAddress} tokenId={tokenId} />
+      <NounishActivityRow collectionAddress={collectionAddress} tokenId={tokenId} />
     )
   }, [collectionAddress, tokenId, view])
 
@@ -103,12 +109,16 @@ export function DaoGrid({
   )
 }
 
-export function Collections({ view = 'nfts', collectionAddress }: CollectionsProps) {
+export function Collections({
+  view = 'nfts',
+  collectionAddress,
+  tokenId,
+}: CollectionsProps) {
   const {
     filterStore: { clearFilters },
   } = useCollectionFilters()
   const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
-  const dao = useOneNounsDao({ contractAddress: collectionAddress })
+  const dao = useOneNounsDao({ collectionAddress })
 
   const gridProps = { items, isReachingEnd, isValidating, handleLoadMore }
 
@@ -117,9 +127,18 @@ export function Collections({ view = 'nfts', collectionAddress }: CollectionsPro
   return (
     <Stack className={['zora-collections-filter-parent', styles.collections]}>
       {dao ? (
-        <DaoGrid collectionAddress={collectionAddress} view={view} {...gridProps} />
+        <DaoGrid
+          collectionAddress={collectionAddress}
+          tokenId={tokenId}
+          view={view}
+          {...gridProps}
+        />
       ) : (
-        <CollectionGrid {...gridProps} />
+        <CollectionGrid
+          collectionAddress={collectionAddress}
+          tokenId={tokenId}
+          {...gridProps}
+        />
       )}
     </Stack>
   )

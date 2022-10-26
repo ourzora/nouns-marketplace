@@ -1,20 +1,20 @@
 import { NounishAuction, useOneNounsDao } from '@noun-auction'
 
 export function NounishActivityRow({
-  contractAddress,
+  collectionAddress,
   tokenId,
 }: {
-  contractAddress: string
+  collectionAddress: string
   tokenId: string
 }) {
-  const { dao } = useOneNounsDao({ contractAddress })
+  const { dao } = useOneNounsDao({ collectionAddress })
 
-  if (contractAddress || !tokenId) return null
+  if (collectionAddress || !tokenId) return null
   if (!dao) return null
 
   return (
     <NounishAuction
-      key={`${contractAddress}`}
+      key={`${collectionAddress}`}
       dao={dao}
       showLabels
       hideCollectionTitle={false}

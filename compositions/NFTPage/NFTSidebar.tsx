@@ -2,11 +2,11 @@ import { Link } from 'components'
 import { mediumFont } from 'styles/styles.css'
 
 import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
+import { useToken } from 'hooks/useToken'
 
 import { CollectionThumbnail } from '@media'
-import { useNFTProvider, useTitleWithFallback } from '@shared'
+import { useTitleWithFallback } from '@shared'
 import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
-import { useTokenHelper } from '@shared/hooks'
 import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
 
 import { NFTMarket } from './NFTMarket'
@@ -14,23 +14,38 @@ import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
 
 export interface NFTSidebarProps extends StackProps {
-  contractAddress: string
+  collectionAddress: string
+  tokenId: string
 }
 
-export function NFTSidebar({ className, contractAddress, ...props }: NFTSidebarProps) {
-  const { primarySalePrice } = usePrimarySalePrice({ contractAddress })
+export function NFTSidebar({ collectionAddress, tokenId, ...props }: NFTSidebarProps) {
+  if (!collectionAddress || !tokenId) return null
 
-  // FIXME: looks obsolete
-  const { nft, tokenId: tokenIdString } = useNFTProvider()
-  const { tokenID } = useTokenHelper(nft!)
+  return (
+    <NFTSidebarComponent
+      collectionAddress={collectionAddress}
+      tokenId={tokenId}
+      {...props}
+    />
+  )
+}
+
+export function NFTSidebarComponent({
+  className,
+  collectionAddress,
+  tokenId,
+  ...props
+}: NFTSidebarProps) {
+  const { primarySalePrice } = usePrimarySalePrice({ collectionAddress })
+  const { token } = useToken({ collectionAddress, tokenId })
 
   const { fallbackTitle } = useTitleWithFallback({
-    contractAddress,
-    tokenId: tokenIdString,
-    defaultTitle: nft?.metadata?.name,
+    collectionAddress,
+    tokenId,
+    defaultTitle: token?.collectionName,
   })
 
-  if (!nft || !tokenID || !contractAddress) return null
+  if (!token) return null
 
   return (
     <Stack
@@ -39,11 +54,10 @@ export function NFTSidebar({ className, contractAddress, ...props }: NFTSidebarP
       {...props}
     >
       <Flex>
-        <Link href={`/collections/${nft?.nft?.contract.address}`}>
+        <Link href={`/collections/${token.tokenContract}`}>
           <CollectionThumbnail
-            initialNFT={nft}
-            collectionAddress={nft?.nft?.contract.address}
-            useTitle
+            collectionAddress={token.collectionAddress}
+            showTitle
             size="xxs"
             radius="round"
             p="x2"
@@ -58,28 +72,25 @@ export function NFTSidebar({ className, contractAddress, ...props }: NFTSidebarP
           {fallbackTitle}
         </Heading>
       </Flex>
-      {nft?.metadata?.description && (
-        <DescriptionWithMaxLines
-          baseLineheight={30}
-          maxLines={2}
-          paragraphClassName={mediumFont}
-          overflowY="hidden"
-        >
-          {nft?.metadata?.description}
-        </DescriptionWithMaxLines>
-      )}
-      {nft?.nft && ( // Clamp to bottom of container
-        <Stack gap="x4" mt="auto">
-          {primarySalePrice && (
-            <NFTProvenance primarySalePrice={primarySalePrice} nft={nft} />
-          )}
-          <NFTMarket
-            contractAddress={nft.nft.contract.address}
-            tokenId={nft.nft.tokenId}
-            nft={nft}
-          />
-        </Stack>
-      )}
+
+      <DescriptionWithMaxLines
+        baseLineheight={30}
+        maxLines={2}
+        paragraphClassName={mediumFont}
+        overflowY="hidden"
+      >
+        {token.description}
+      </DescriptionWithMaxLines>
+      <Stack gap="x4" mt="auto">
+        {primarySalePrice && (
+          <NFTProvenance primarySalePrice={primarySalePrice} token={token} />
+        )}
+        <NFTMarket
+          collectionAddress={collectionAddress}
+          tokenId={tokenId}
+          token={token}
+        />
+      </Stack>
     </Stack>
   )
 }

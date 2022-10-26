@@ -1,11 +1,15 @@
 import gql from 'graphql-tag'
 
 export const TOKEN_QUERY = gql`
-  query Token($address: String!, $tokenId: String!, $network: NetworkInput) {
-    token(token: { address: $address, tokenId: $tokenId }, network: $network) {
+  query Token($collectionAddress: String!, $tokenId: String!, $network: NetworkInput) {
+    token(token: { address: $collectionAddress, tokenId: $tokenId }, network: $network) {
       token {
         collectionAddress
         collectionName
+        networkInfo {
+          chain
+          network
+        }
         attributes {
           displayType
           traitType
@@ -17,6 +21,21 @@ export const TOKEN_QUERY = gql`
               large
               poster
               original
+              thumbnail
+            }
+            ... on UnsupportedEncodingTypes {
+              __typename
+              original
+            }
+            ... on AudioEncodingTypes {
+              large
+              original
+            }
+            ... on VideoEncodingTypes {
+              large
+              poster
+              original
+              preview
               thumbnail
             }
           }
@@ -33,8 +52,42 @@ export const TOKEN_QUERY = gql`
           mimeType
           url
           size
+          mediaEncoding {
+            ... on ImageEncodingTypes {
+              large
+              poster
+              original
+              thumbnail
+            }
+            ... on VideoEncodingTypes {
+              large
+              poster
+              original
+              preview
+              thumbnail
+            }
+            ... on AudioEncodingTypes {
+              large
+              original
+            }
+            ... on UnsupportedEncodingTypes {
+              __typename
+              original
+            }
+          }
         }
         description
+        lastRefreshTime
+        owner
+        tokenContract {
+          totalSupply
+          symbol
+          network
+          name
+          description
+          collectionAddress
+          chain
+        }
       }
     }
   }

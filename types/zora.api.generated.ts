@@ -997,6 +997,9 @@ export enum NounsEventType {
 }
 
 export type NounsEventsQueryFilter = {
+  nounsBuilderAuctionEventType?: InputMaybe<NounsBuilderAuctionEventType>
+  nounsBuilderGovernorEventType?: InputMaybe<NounsBuilderGovernorEventType>
+  nounsBuilderManagerEventType?: InputMaybe<NounsBuilderManagerEventType>
   nounsEventTypes?: InputMaybe<Array<NounsEventType>>
   timeFilter?: InputMaybe<TimeFilter>
 }
@@ -2039,6 +2042,27 @@ export type VideoEncodingTypes = {
   thumbnail?: Maybe<Scalars['String']>
 }
 
+export type AggStatQueryVariables = Exact<{
+  address: Scalars['String']
+  network: NetworkInput
+}>
+
+export type AggStatQuery = {
+  __typename?: 'RootQuery'
+  aggregateStat: {
+    __typename?: 'AggregateStat'
+    floorPrice?: number | null
+    nftCount: number
+    ownerCount: number
+    salesVolume: {
+      __typename?: 'SalesVolume'
+      chainTokenPrice: number
+      totalCount: number
+      usdcPrice: number
+    }
+  }
+}
+
 export type NounishAuctionsQueryVariables = Exact<{
   collectionAddress: Scalars['String']
   network?: InputMaybe<NetworkInput>
@@ -2232,6 +2256,9 @@ export type TokenQuery = {
       name?: string | null
       metadata?: any | null
       description?: string | null
+      lastRefreshTime?: any | null
+      owner?: string | null
+      networkInfo: { __typename?: 'NetworkInfo'; chain: Chain; network: Network }
       attributes?: Array<{
         __typename?: 'TokenAttribute'
         displayType?: string | null
@@ -2244,7 +2271,7 @@ export type TokenQuery = {
         size?: string | null
         url?: string | null
         mediaEncoding?:
-          | { __typename?: 'AudioEncodingTypes' }
+          | { __typename?: 'AudioEncodingTypes'; large?: string | null; original: string }
           | {
               __typename?: 'ImageEncodingTypes'
               large?: string | null
@@ -2252,8 +2279,15 @@ export type TokenQuery = {
               original: string
               thumbnail?: string | null
             }
-          | { __typename?: 'UnsupportedEncodingTypes' }
-          | { __typename?: 'VideoEncodingTypes' }
+          | { __typename: 'UnsupportedEncodingTypes'; original: string }
+          | {
+              __typename?: 'VideoEncodingTypes'
+              large?: string | null
+              poster?: string | null
+              original: string
+              preview?: string | null
+              thumbnail?: string | null
+            }
           | null
       } | null
       image?: {
@@ -2261,6 +2295,35 @@ export type TokenQuery = {
         mimeType?: string | null
         url?: string | null
         size?: string | null
+        mediaEncoding?:
+          | { __typename?: 'AudioEncodingTypes'; large?: string | null; original: string }
+          | {
+              __typename?: 'ImageEncodingTypes'
+              large?: string | null
+              poster?: string | null
+              original: string
+              thumbnail?: string | null
+            }
+          | { __typename: 'UnsupportedEncodingTypes'; original: string }
+          | {
+              __typename?: 'VideoEncodingTypes'
+              large?: string | null
+              poster?: string | null
+              original: string
+              preview?: string | null
+              thumbnail?: string | null
+            }
+          | null
+      } | null
+      tokenContract?: {
+        __typename?: 'TokenContract'
+        totalSupply?: number | null
+        symbol?: string | null
+        network: string
+        name?: string | null
+        description?: string | null
+        collectionAddress: string
+        chain: number
       } | null
     }
   } | null

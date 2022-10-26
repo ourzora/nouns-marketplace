@@ -13,14 +13,14 @@ import { NounsBidForm } from './NounsBidForm'
 type PlaceNounsBidProps = {
   useModal?: boolean
   tokenId: string
-  contractAddress: string
+  collectionAddress: string
   layout: keyof typeof auctionWrapperVariants['layout']
 }
 
 export function PlaceNounsBid({
   layout,
   tokenId,
-  contractAddress,
+  collectionAddress,
   useModal = true,
 }: PlaceNounsBidProps) {
   return (
@@ -42,14 +42,18 @@ export function PlaceNounsBid({
           }
           content={
             <Stack p="x8">
-              <NFTSummary collectionAddress={contractAddress} tokenId={tokenId} />
-              <NounsBidForm collectionAddress={contractAddress} layout={layout} mt="x4" />
+              <NFTSummary collectionAddress={collectionAddress} tokenId={tokenId} />
+              <NounsBidForm
+                collectionAddress={collectionAddress}
+                layout={layout}
+                mt="x4"
+              />
             </Stack>
           }
         />
       ) : (
         <NounsBidForm
-          collectionAddress={contractAddress}
+          collectionAddress={collectionAddress}
           layout={layout}
           mt="x4"
           w="100%"

@@ -7,7 +7,11 @@ export function verifyType<T extends Object, K extends Object>(
   let result = {} as K
   for (const [key, value] of Object.entries(obj)) {
     if (!value && !optionalFields.includes(key)) {
-      throw Error(`Malformed auction, ${key} is not defined`)
+      result = {
+        ...result,
+        [key]: '...',
+      }
+      console.info(`Malformed entity: ${key} is not defined`)
     } else {
       result = {
         ...result,

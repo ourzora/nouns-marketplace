@@ -18,8 +18,17 @@ export type AuctionVolumeReturnType =
 
 export function useNounsDaos() {
   const [cached, setCache] = useState([] as TypeSafeDao[])
-  const { data, error } = useSWR<NounsDaosQuery>([`noundsDaos`], () =>
-    zoraApiFetcher(NOUNS_DAOS_QUERY)
+  const { data, error } = useSWR<NounsDaosQuery>(
+    [`noundsDaos`],
+    () => zoraApiFetcher(NOUNS_DAOS_QUERY),
+    {
+      onErrorRetry: (_, _1, _2, revalidate, { retryCount }) => {
+        // Only retry up to 10 times.
+        if (retryCount >= 10) return
+        // Retry after 5 seconds.
+        setTimeout(() => revalidate({ retryCount }), 5000)
+      },
+    }
   )
 
   const daos = useMemo(() => {

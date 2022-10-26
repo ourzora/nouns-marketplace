@@ -16,10 +16,10 @@ function getLatestBlockNumberForEvent(a: any, b: any) {
 }
 
 type Props = {
-  contractAddress: string
+  collectionAddress: string
 }
 
-export const usePrimarySalePrice = ({ contractAddress }: Props) => {
+export const usePrimarySalePrice = ({ collectionAddress }: Props) => {
   // FIXME: use contractAddress to get market type and events
   const marketType = 'NOUNS_AUCTION'
   const events = { nodes: [] }

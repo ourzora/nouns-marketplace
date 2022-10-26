@@ -21,7 +21,7 @@ const NFT = ({
   tokenId: string
 }) => {
   // FIXME
-  const dao = useOneNounsDao({ contractAddress: tokenAddress })
+  const dao = useOneNounsDao({ collectionAddress: tokenAddress })
   useMemo(() => returnDao(tokenAddress), [tokenAddress])
 
   return (
@@ -33,14 +33,14 @@ const NFT = ({
       />
       <NFTProvider initialData={nft} contractAddress={tokenAddress} tokenId={tokenId}>
         <Grid className={styles.nftPageWrapper}>
-          <NFTPageHero />
+          <NFTPageHero collectionAddress={tokenAddress} tokenId={tokenId} />
           {dao ? (
-            <NFTSidebar contractAddress={tokenAddress} />
+            <NFTSidebar collectionAddress={tokenAddress} tokenId={tokenId} />
           ) : (
-            <NFTSidebar contractAddress={tokenAddress} />
+            <NFTSidebar collectionAddress={tokenAddress} tokenId={tokenId} />
           )}
           <Stack className={styles.attributesHistoryWrapper}>
-            <NFTHistory contractAddress={tokenAddress} tokenId={tokenId} />
+            <NFTHistory collectionAddress={tokenAddress} tokenId={tokenId} />
             <NFTAttributes />
           </Stack>
         </Grid>

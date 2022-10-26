@@ -8215,6 +8215,42 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "nounsBuilderAuctionEventType",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "NounsBuilderAuctionEventType",
+              "ofType": null
+            },
+            "defaultValue": "null",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nounsBuilderGovernorEventType",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "NounsBuilderGovernorEventType",
+              "ofType": null
+            },
+            "defaultValue": "null",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "nounsBuilderManagerEventType",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "NounsBuilderManagerEventType",
+              "ofType": null
+            },
+            "defaultValue": "null",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "nounsEventTypes",
             "description": null,
             "type": {

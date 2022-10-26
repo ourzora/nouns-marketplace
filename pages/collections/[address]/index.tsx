@@ -6,7 +6,6 @@ import {
   CollectionHeader,
   Collections,
 } from 'compositions/Collections'
-import { returnDao } from 'constants/collection-addresses'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { CollectionServiceProps, collectionService } from 'services/collectionService'
 import * as styles from 'styles/styles.css'
@@ -17,14 +16,16 @@ import { useEffect } from 'react'
 
 import { CollectionFilterProvider } from '@filter'
 import { useCollection } from '@filter/hooks/useCollection'
-import { ActiveAuctionCard, useNounishAuctionQuery } from '@noun-auction'
+import { ActiveAuctionCard, useNounishAuctionQuery, useOneNounsDao } from '@noun-auction'
 import { useWindowWidth } from '@shared'
 import { Grid, Separator, Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { contractAddress, seo } = fallback
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const dao = returnDao(contractAddress)
+
+  const dao = useOneNounsDao({ contractAddress })
+
   const { isLarge } = useWindowWidth()
   const { aggregate } = useAggregate(contractAddress)
   // wrapper for useSWR
@@ -32,7 +33,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const collection = data || fallback?.collection
 
   const { activeAuction } = useNounishAuctionQuery({
-    collectionAddress: contractAddress,
+    contractAddress,
   })
 
   useEffect(() => {
@@ -105,7 +106,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         >
           <Stack>
             {dao ? <Separator /> : <CollectionActivityHeader />}
-            <Collections collectionAddress={contractAddress!} />
+            <Collections contractAddress={contractAddress} tokenId={tokenId} />
           </Stack>
         </CollectionFilterProvider>
       )}

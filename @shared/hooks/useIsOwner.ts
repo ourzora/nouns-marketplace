@@ -1,16 +1,16 @@
 import { useAccount } from 'wagmi'
 
 import { useMemo } from 'react'
+import { TypeSafeToken } from 'validators/token'
 
 import { isAddressMatch } from '@shared/utils'
-import { NFTObject } from '@zoralabs/nft-hooks'
 
-export function useIsOwner(nftObj: NFTObject | undefined) {
+export function useIsOwner(token: TypeSafeToken) {
   const { address } = useAccount()
 
   const isOwner = useMemo(
-    () => isAddressMatch(address, nftObj?.nft?.owner?.address),
-    [address, nftObj?.nft?.owner]
+    () => isAddressMatch(address, token.owner),
+    [address, token.owner]
   )
 
   return { isOwner }

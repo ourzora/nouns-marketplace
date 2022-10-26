@@ -10,22 +10,26 @@ import { Box, BoxProps, Flex, Heading, Label, Stack } from '@zoralabs/zord'
 import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 
 export interface RPCTokenInfoProps extends BoxProps {
-  contractAddress: string | undefined
-  tokenId: string | undefined
+  collectionAddress: string
+  tokenId: string
 }
 
-export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInfoProps) {
-  const { token } = useToken({ address: contractAddress!, tokenId: tokenId! })
+export function RPCTokenInfo({
+  collectionAddress,
+  tokenId,
+  ...props
+}: RPCTokenInfoProps) {
+  const { token } = useToken({ collectionAddress, tokenId: tokenId! })
 
-  if (!token || !tokenId || !contractAddress) return null
+  if (!token || !tokenId || !collectionAddress) return null
 
   return (
     <Flex className={['nounish-auction__token-info', styles.tokenInfoWrapper]} {...props}>
-      <NextLink href={`/collections/${contractAddress}/${tokenId}`} passHref>
+      <NextLink href={`/collections/${collectionAddress}/${tokenId}`} passHref>
         <Button as="a" variant="unset" className={styles.thumbnailLink}>
           <NounishThumbnail
             image={token?.image?.url!}
-            tokenContract={contractAddress}
+            tokenContract={token.tokenContract}
             tokenId={tokenId}
           />
         </Button>
@@ -35,9 +39,9 @@ export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInf
           {token.collectionName}
         </Heading>
         <Box mb="x1">
-          <NextLink href={`/collections/${contractAddress}`} passHref>
+          <NextLink href={`/collections/${collectionAddress}`} passHref>
             <Label as="a" color="tertiary" className={[lightFont]}>
-              {token?.metadata?.collection?.name}
+              {token?.name ?? '..'}
             </Label>
           </NextLink>
         </Box>

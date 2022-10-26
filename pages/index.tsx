@@ -1,19 +1,29 @@
 import { HomePageHeader, PageWrapper, Seo } from 'components'
 import { CollectionRanking, DaoTable } from 'compositions'
-import { collectionsService } from 'services/collectionsService'
+import { collectionAddresses } from 'constants/collection-addresses'
+import { collectionsService } from 'services'
 import * as styles from 'styles/styles.css'
 import { SWRConfig } from 'swr'
 import useSWR from 'swr'
 
-import React, { Profiler } from 'react'
+import { NOUNS_DAOS_QUERY } from 'data/nounsDaos'
 
+import { useNounsDaos } from 'hooks/useNounsDaos'
+
+import React from 'react'
+import { TypeSafeDao } from 'validators/dao'
+
+import * as Sentry from '@sentry/react'
+import { zdk, zoraApiFetcher } from '@shared'
+import { CollectionSortKey, SortDirection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { CollectionsQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Grid } from '@zoralabs/zord'
 
 export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
-function Home(props: { fallback: CollectionParsed }) {
+function Home(props: { fallback: CollectionParsed; daos: TypeSafeDao[] }) {
   const { data } = useSWR('collections', collectionsService)
+  const { daos: clientDaos } = useNounsDaos()
 
   return (
     <SWRConfig value={{ fallback: props.fallback }}>
@@ -30,7 +40,9 @@ function Home(props: { fallback: CollectionParsed }) {
             mt={{ '@initial': 'x6', '@1024': 'x24' }}
             mb={{ '@initial': 'x8', '@1024': 'x24' }}
           />
-          <DaoTable className={styles.homepageTable} />
+          {props.daos?.length > 0 ? (
+            <DaoTable daos={clientDaos || props.daos} className={styles.homepageTable} />
+          ) : null}
           <CollectionRanking
             collections={data?.props?.fallback}
             className={styles.homepageTable}
@@ -41,6 +53,37 @@ function Home(props: { fallback: CollectionParsed }) {
   )
 }
 
-export const getServerSideProps = collectionsService
+export async function getServerSideProps() {
+  try {
+    const data = await zdk.collections({
+      where: { collectionAddresses: collectionAddresses },
+      sort: { sortDirection: SortDirection.Asc, sortKey: CollectionSortKey.None },
+    })
+
+    const daos = await zoraApiFetcher(NOUNS_DAOS_QUERY)
+
+    const collections = data.collections
+
+    return {
+      props: {
+        fallback: collections?.nodes ?? null,
+        daos: daos?.nouns?.nounsDaos?.nodes ?? null,
+      },
+    }
+  } catch (err) {
+    Sentry.captureException(err)
+
+    if (err instanceof Error) {
+      if (err?.message.includes('404')) {
+        return {
+          notFound: true,
+          revalidate: 60,
+        }
+      }
+      console.warn(err.message)
+    }
+    throw err
+  }
+}
 
 export default Home

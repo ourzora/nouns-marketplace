@@ -24,7 +24,7 @@ export function CollectionRanking({
     [collections]
   )
   return (
-    <Stack className={[rankingWrapper, className]}>
+    <Stack className={[rankingWrapper, className]} {...props}>
       <Flex gap="x2" align="center">
         <Heading as="h2" size="lg">
           Collections
@@ -39,7 +39,7 @@ export function CollectionRanking({
             '@1024': 'x6',
           }}
         >
-          {collections!.map((collection) => (
+          {(collections ?? []).map((collection) => (
             <RankingRow key={collection.address} collection={collection} />
           ))}
         </Stack>

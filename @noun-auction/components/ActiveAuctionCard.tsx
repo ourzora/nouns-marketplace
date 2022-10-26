@@ -22,19 +22,19 @@ import { AuctionBidder, AuctionHighBid } from './DataRenderers'
 
 export function ActiveAuctionCard({
   tokenId,
-  contractAddress,
+  collectionAddress,
   startTime,
   endTime,
   layout,
 }: {
   tokenId: string
-  contractAddress: string
+  collectionAddress: string
   startTime: string
   endTime: string
   layout: keyof typeof auctionWrapperVariants['layout']
 }) {
   // FIXME: remove useNFT from useTitleWithFallback
-  const { fallbackTitle } = useTitleWithFallback({ contractAddress, tokenId })
+  const { fallbackTitle } = useTitleWithFallback({ collectionAddress, tokenId })
   const { auctionCompleted } = useAuctionCountdown({
     startTime,
     endTime,
@@ -48,10 +48,10 @@ export function ActiveAuctionCard({
       className={cardWrapper}
       style={{ maxWidth: '500px' }}
     >
-      <Link href={`/collections/${contractAddress}/${tokenId}`}>
+      <Link href={`/collections/${collectionAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
           {tokenId && (
-            <ImageWithNounFallback tokenContract={contractAddress} tokenId={tokenId} />
+            <ImageWithNounFallback tokenContract={collectionAddress} tokenId={tokenId} />
           )}
         </Box>
       </Link>
@@ -85,7 +85,7 @@ export function ActiveAuctionCard({
           ) : (
             <PlaceNounsBid
               tokenId={tokenId}
-              contractAddress={contractAddress}
+              collectionAddress={collectionAddress}
               layout={layout}
             />
           )}
@@ -102,7 +102,7 @@ export function ActiveAuctionCard({
           <AuctionBidder
             layout={layout}
             tokenId={tokenId}
-            collectionAddress={contractAddress}
+            collectionAddress={collectionAddress}
             align="flex-start"
             direction="column"
             showLabels
