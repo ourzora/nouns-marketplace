@@ -1,5 +1,6 @@
-import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, media, color, typography, radii } from '@zoralabs/zord'
+import { globalStyle, style } from '@vanilla-extract/css'
+import { atoms, color, media, radii, typography, vars } from '@zoralabs/zord'
+
 import {
   FOOTER_HEIGHT,
   FOOTER_HEIGHT_MOBILE,
@@ -120,29 +121,6 @@ globalStyle('.nouns-market-traits h3 > button', {
   marginBottom: 5,
 })
 
-export const clickAnimation = style({
-  transition:
-    'border 0.1s ease-in-out, background 0.1s ease-in-out, transform 0.1s ease-out',
-  userSelect: 'none',
-  selectors: {
-    '&:focus-visible': {
-      outline: '2px solid rgb(32, 103, 243)',
-      outlineStyle: 'auto',
-    },
-    '&:active': {
-      transform: 'scale(0.95)',
-    },
-    '&[disabled]': {
-      cursor: 'not-allowed',
-      pointerEvents: 'none',
-      opacity: 0.6,
-    },
-    '&[disabled]:active': {
-      transform: 'unset',
-    },
-  },
-})
-
 /* PAGE HEADER */
 export const pageHeadline = style([
   {
@@ -160,6 +138,7 @@ export const pageHeadline = style([
 export const pageHeaderWrapper = style([
   {
     maxWidth: MAX_WIDTH.SM,
+    gridColumn: 2,
   },
   atoms({
     width: '100%',
@@ -178,12 +157,17 @@ export const hideMobile = style({
 
 export const collectionHeaderWrapper = style([
   {
-    maxWidth: MAX_WIDTH.LG,
+    gridColumn: '1/span 4',
+    '@media': {
+      [media.min1024]: {
+        gridColumn: '1/span 12',
+      },
+    },
   },
   atoms({
-    w: '100vw',
+    w: '100%',
     overflowX: 'hidden',
-    m: 'auto',
+    mx: 'auto',
   }),
 ])
 
@@ -200,23 +184,6 @@ export const daoHeaderWrapper = style([
     pb: {
       '@initial': 'x2',
       '@1024': 'x6',
-    },
-  }),
-])
-
-export const collectionNameThumbDao = style([
-  {
-    gridTemplateColumns: '1fr',
-    '@media': {
-      [media.min1024]: {
-        gridTemplateColumns: '100px auto',
-      },
-    },
-  },
-  atoms({
-    gap: {
-      '@initial': 'x0',
-      '@1024': 'x4',
     },
   }),
 ])
@@ -240,3 +207,61 @@ export const marketStatsWrapper = atoms({
 export const stat = style({
   whiteSpace: 'nowrap',
 })
+
+export const pageGrid = style([
+  {
+    width: '100%',
+    maxWidth: MAX_WIDTH.MED,
+    gridTemplateColumns: 'repeat(4, [col-start] 1fr)',
+    gridTemplateRows: 'auto',
+    '@media': {
+      [media.min1024]: {
+        gridTemplateColumns: 'repeat(12, [col-start] 1fr)',
+        // maxWidth: MAX_WIDTH.XL,
+        maxWidth: `calc(${MAX_WIDTH.XL}px + (2 * ${vars.space.x8}))`,
+      },
+    },
+  },
+  atoms({
+    px: { '@initial': 'x0', '@1024': 'x8' },
+  }),
+])
+
+export const homepageTable = style({
+  gridColumn: '1/span 4',
+  '@media': {
+    [media.min1024]: {
+      gridColumn: '2/span 10',
+    },
+  },
+})
+
+export const homepageHeadline = style([
+  {
+    fontWeight: typography.fontWeight.display,
+    fontSize: 42, // one-off
+    lineHeight: 48,
+    '@media': {
+      [media.min1024]: {
+        fontSize: 96, // one-off
+        lineHeight: 94,
+      },
+    },
+  },
+])
+
+export const homepageHeaderWrapper = style([
+  {
+    gridColumn: '1/span 4',
+    '@media': {
+      [media.min1024]: {
+        gridColumn: '4/span 6',
+      },
+    },
+  },
+  atoms({
+    width: '100%',
+    mx: 'auto',
+    my: 'x0',
+  }),
+])

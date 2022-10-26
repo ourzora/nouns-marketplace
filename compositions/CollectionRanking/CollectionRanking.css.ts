@@ -11,7 +11,10 @@ export const rankingWrapper = style([
   atoms({
     w: '100%',
     m: 'auto',
-    gap: 'x4',
+    gap: {
+      '@initial': 'x4',
+      '@1024': 'x8',
+    },
     pt: {
       '@initial': 'x4',
       '@1024': 'x14',

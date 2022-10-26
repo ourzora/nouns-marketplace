@@ -343,6 +343,9 @@ export const nounishThumbnail = style([
     w: '100%',
   }),
 ])
+export const thumbnailLink = style({
+  height: 'unset!important',
+})
 
 export const nounishThumbnailImage = style([
   atoms({

@@ -1,5 +1,5 @@
 /**
- * Colections Index Page
+ * Collections Index Page
  */
 
 export const COLLECTIONS_INDEX_HEADLINE = 'Rankings'

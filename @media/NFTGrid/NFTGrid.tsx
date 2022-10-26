@@ -23,7 +23,7 @@ export function NFTGrid({
   return (
     <>
       <Stack gap="x14" pb="x10">
-        <Grid {...props}>
+        <Grid {...props} p="x0">
           {items.map((nft) => (
             <NFTProvider
               key={`${nft?.nft?.contract.address}-${nft?.nft?.tokenId}`}

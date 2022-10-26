@@ -9,6 +9,7 @@ import {
 import { returnDao } from 'constants/collection-addresses'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { CollectionServiceProps, collectionService } from 'services/collectionService'
+import * as styles from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
 
@@ -18,7 +19,7 @@ import { CollectionFilterProvider } from '@filter'
 import { useCollection } from '@filter/hooks/useCollection'
 import { ActiveAuctionCard } from '@noun-auction'
 import { useWindowWidth } from '@shared'
-import { Separator, Stack } from '@zoralabs/zord'
+import { Grid, Separator, Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { contractAddress, seo } = fallback
@@ -45,15 +46,22 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
-      {collection && (
-        <CollectionHeader
-          collection={collection}
-          layout={dao ? 'dao' : 'collection'}
-          currentAuction={dao ? <ActiveAuctionCard daoConfig={dao} /> : null}
-        >
-          <MarketStats contractAddress={contractAddress} />
-        </CollectionHeader>
-      )}
+      <Grid
+        className={[styles.pageGrid]}
+        px={{ '@initial': 'x0', '@1024': 'x8' }}
+        gap="x2"
+        alignSelf="center"
+      >
+        {collection && (
+          <CollectionHeader
+            collection={collection}
+            layout={dao ? 'dao' : 'collection'}
+            currentAuction={dao ? <ActiveAuctionCard daoConfig={dao} /> : null}
+          >
+            <MarketStats contractAddress={contractAddress} />
+          </CollectionHeader>
+        )}
+      </Grid>
       {contractAddress && (
         <CollectionFilterProvider
           useSidebarClearButton

@@ -1,5 +1,5 @@
 import { Button, Link } from 'components'
-import { clickAnimation, mediumFont } from 'styles/styles.css'
+import { mediumFont } from 'styles/styles.css'
 
 import { useMemo } from 'react'
 
@@ -27,9 +27,8 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
     () => userAddress && offchainOrders?.length > 0,
     [offchainOrders?.length, userAddress]
   )
-  const { tokenID, hasPreviousNFT, hasNextNFT, handlePrev, handleNext } = useTokenHelper(
-    nft!
-  )
+  const { tokenID } = useTokenHelper(nft!)
+
   // const { isValidated } = useValidateContractCall({
   //   callerAddress: userAddress!, // user address
   //   contractAddress: offchainOrders
@@ -81,7 +80,6 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
             pr="x5"
             backgroundColor="background2"
             borderRadius="round"
-            className={clickAnimation}
           />
         </Link>
       </Flex>
@@ -89,24 +87,6 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
         <Heading as="h1" size="xl">
           {fallbackTitle}
         </Heading>
-        <Flex w="x20">
-          <Button
-            className={[styles.nftNextButton]}
-            disabled={!hasPreviousNFT}
-            onClick={handlePrev}
-            variant="circle"
-          >
-            ←
-          </Button>
-          <Button
-            className={[styles.nftNextButton]}
-            disabled={!hasNextNFT}
-            onClick={handleNext}
-            variant="circle"
-          >
-            →
-          </Button>
-        </Flex>
       </Flex>
       {nft?.metadata?.description && (
         <DescriptionWithMaxLines
