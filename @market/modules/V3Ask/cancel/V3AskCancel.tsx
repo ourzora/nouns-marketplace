@@ -1,6 +1,6 @@
 import { Button } from 'components/Button'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { useListingDataTable } from '@market/hooks'
@@ -11,13 +11,18 @@ import { Flex, Stack } from '@zoralabs/zord'
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import * as styles from '../V3AskFlow.css'
 import { V3AskModalHeading } from '../V3AskModalHeading'
-import { useV3AskTransaction } from '../hooks/useV3AskTransaction'
+import { PRIVATE_ASK, V3_ASK, useV3AskTransaction } from '../hooks/useV3AskTransaction'
+import { useV3AskStateContext } from '../providers'
 
 interface V3AskCancelProps extends CommonV3AskComponentProps {}
 
 export function V3AskCancel({ onNext, ...props }: V3AskCancelProps) {
+  const { state } = useV3AskStateContext()
+  const { flow } = state
+  const askType = useMemo(() => (flow === PRIVATE_ASK ? PRIVATE_ASK : V3_ASK), [flow])
+
   const { isSubmitting, cancelAsk, txStatus, txInProgress, txError, finalizedTx } =
-    useV3AskTransaction({ nft: props.nft })
+    useV3AskTransaction({ nft: props.nft, askType: askType })
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
   const { requestClose } = useModal()
   const { formattedListingDataTable } = useListingDataTable({

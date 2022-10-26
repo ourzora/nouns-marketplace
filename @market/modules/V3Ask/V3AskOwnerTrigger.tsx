@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { Button } from 'components/Button'
 
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { PossibleV3AskState, useV3AskStateContext } from '@market/modules/V3Ask/'
@@ -17,7 +17,7 @@ interface V3AskOwnerTriggerProps {
   openModal: () => void
 }
 
-const dropdownOptions = [
+const v3AskDropdownOptions = [
   {
     label: 'Show Listing Data',
     action: 'viewListing' as const,
@@ -33,10 +33,39 @@ const dropdownOptions = [
   },
 ]
 
+const privateAskDropdownOptions = [
+  {
+    label: 'Show Listing Data',
+    action: 'viewListing' as const,
+  },
+  {
+    label: 'Update Listing',
+    action: 'updatePrivateAsk' as const,
+  },
+  {
+    label: 'Delist',
+    action: 'cancelPrivateAsk' as const,
+    destructive: true,
+  },
+]
+
 export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
   const { dispatch } = useV3AskStateContext()
   const { ask } = useRelevantMarket(nft.markets)
-  const { displayAskAmount, usdAskAmount, hasActiveV3Ask } = useAskHelper({ ask })
+  const {
+    displayAskAmount,
+    usdAskAmount,
+    hasActiveV3Ask,
+    hasActivePrivateAsk,
+    isActiveAsk,
+  } = useAskHelper({
+    ask,
+  })
+
+  const dropdownOptions = useMemo(
+    () => (hasActivePrivateAsk ? privateAskDropdownOptions : v3AskDropdownOptions),
+    [hasActivePrivateAsk]
+  )
 
   const [open, setOpen] = useState<boolean>(false)
   useKeyPress('Escape', open, () => setOpen(false))
@@ -50,7 +79,7 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
     [dispatch, openModal]
   )
 
-  if (hasActiveV3Ask) {
+  if (isActiveAsk) {
     return (
       <Well gap="x6" borderRadius="phat">
         {displayAskAmount && (
@@ -106,7 +135,7 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
 
   return (
     <Button w="100%" onClick={openModal}>
-      Create Private Listing
+      Create Listing
     </Button>
   )
 }

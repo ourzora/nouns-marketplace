@@ -23,6 +23,8 @@ export function NFTMarket({ className, contractAddress, tokenId, nft }: NFTMarke
     [activeAuction?.properties?.tokenId, dao, tokenId]
   )
 
+  console.log('NFT', nft)
+
   return hasNounishAuction ? (
     <NounishAuction
       daoConfig={dao!}

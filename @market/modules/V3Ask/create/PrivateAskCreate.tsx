@@ -17,9 +17,9 @@ import { Heading, InputField, Stack } from '@zoralabs/zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import { V3AskLearnMoreButton } from '../V3AskLearnMoreButton'
-import { useV3AskTransaction } from '../hooks/useV3AskTransaction'
+import { PRIVATE_ASK, useV3AskTransaction } from '../hooks/useV3AskTransaction'
 
-interface V3AskCreateProps extends CommonV3AskComponentProps {}
+interface PrivateAskCreateProps extends CommonV3AskComponentProps {}
 
 interface Values {
   buyeraddress: string
@@ -56,10 +56,9 @@ const validate = (values: Values) => {
   return errors
 }
 
-export function V3AskCreate({ onNext, ...props }: V3AskCreateProps) {
-  const { txStatus, txInProgress, txError, createAsk, finalizedTx } = useV3AskTransaction(
-    { nft: props.nft }
-  )
+export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
+  const { txStatus, txInProgress, txError, createPrivateAsk, finalizedTx } =
+    useV3AskTransaction({ nft: props.nft, askType: PRIVATE_ASK })
   useEffect(() => finalizedTx!! && onNext!(), [finalizedTx, onNext])
 
   return (
@@ -68,9 +67,11 @@ export function V3AskCreate({ onNext, ...props }: V3AskCreateProps) {
       isInitialValid={false}
       validate={validate}
       onSubmit={async (values) => {
-        // const resolvedBuyerAddress = await resolvePossibleENSAddress(values.buyeraddress)
-        createAsk({
+        const resolvedBuyerAddress = await resolvePossibleENSAddress(values.buyeraddress)
+        createPrivateAsk({
           price: values.amount,
+          buyerAddress: resolvedBuyerAddress!,
+          rawBuyerAddress: values.buyeraddress,
         })
       }}
     >
@@ -134,7 +135,7 @@ export function V3AskCreate({ onNext, ...props }: V3AskCreateProps) {
                 loading={isSubmitting}
                 disabled={!isValid}
               >
-                Create Listing
+                Create Private Listing
               </TransactionSubmitButton>
               <V3AskLearnMoreButton>
                 Learn more about modules on Zora

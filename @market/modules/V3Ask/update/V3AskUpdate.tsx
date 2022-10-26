@@ -44,9 +44,6 @@ const validate = (values: Values) => {
 
 export function V3AskUpdate({ onNext, ...props }: V3AskUpdateProps) {
   const { nft } = props
-  const { markets } = nft
-  const { ask } = useRelevantMarket(markets)
-  const { buyerAddress } = useAskHelper({ ask })
   const { txStatus, txInProgress, txError, finalizedTx, updateAsk } = useV3AskTransaction(
     { nft: nft }
   )
@@ -59,11 +56,8 @@ export function V3AskUpdate({ onNext, ...props }: V3AskUpdateProps) {
       isInitialValid={false}
       validate={validate}
       onSubmit={async (values) => {
-        const maybeBuyerAddressENS = await reverseLookupAddress(buyerAddress)
         updateAsk({
           price: values.amount,
-          buyerAddress: buyerAddress,
-          rawBuyerAddress: maybeBuyerAddressENS!,
         })
       }}
     >

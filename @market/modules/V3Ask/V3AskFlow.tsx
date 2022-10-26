@@ -1,16 +1,26 @@
 import React from 'react'
 
 import {
+  APPROVE_MODULE_FOR_CREATE_PRIVATEASK,
   APPROVE_MODULE_FOR_CREATE_V3ASK,
+  APPROVE_MODULE_FOR_FILL_PRIVATEASK,
   APPROVE_MODULE_FOR_FILL_V3ASK,
   APPROVE_TRANSFER_FOR_V3ASK,
+  CANCEL_PRIVATEASK,
+  CANCEL_PRIVATEASK_SUCCESS,
   CANCEL_V3ASK,
   CANCEL_V3ASK_SUCCESS,
+  CREATE_PRIVATEASK,
+  CREATE_PRIVATEASK_SUCCESS,
   CREATE_V3ASK,
   CREATE_V3ASK_SUCCESS,
+  FILL_PRIVATEASK,
+  FILL_PRIVATEASK_SUCCESS,
   FILL_V3ASK,
   FILL_V3ASK_SUCCESS,
   RESET_V3ASK,
+  UPDATE_PRIVATEASK,
+  UPDATE_PRIVATEASK_SUCCESS,
   UPDATE_V3ASK,
   UPDATE_V3ASK_SUCCESS,
   VIEW_V3ASK_LISTING,
@@ -19,14 +29,17 @@ import {
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Stack, StackProps } from '@zoralabs/zord'
 
+import { PrivateAskApproveModule } from './PrivateAskApproveModule'
 import { V3AskApproveModule } from './V3AskApproveModule'
 import { V3AskApproveTransferHelper } from './V3AskApproveTransferHelper'
 import { V3AskCancel } from './cancel/V3AskCancel'
 import { V3AskCancelSuccess } from './cancel/V3AskCancelSuccess'
+import { PrivateAskCreate } from './create/PrivateAskCreate'
 import { V3AskCreate } from './create/V3AskCreate'
 import { V3AskCreateSuccess } from './create/V3AskCreateSuccess'
 import { V3AskFillAsk } from './fill/V3AskFillAsk'
 import { V3AskFillAskSuccess } from './fill/V3AskFillAskSuccess'
+import { PrivateAskUpdate } from './update/PrivateAskUpdate'
 import { V3AskUpdate } from './update/V3AskUpdate'
 import { V3AskUpdateSuccess } from './update/V3AskUpdateSuccess'
 import { V3AskViewListing } from './view'
@@ -34,7 +47,7 @@ import { V3AskViewListing } from './view'
 const componentMap = {
   [APPROVE_MODULE_FOR_CREATE_V3ASK]: V3AskApproveModule,
   [APPROVE_TRANSFER_FOR_V3ASK]: V3AskApproveTransferHelper,
-  // // [APPROVE_CURRENCY]: V3AskApproveERC20Currency, // TODO, not used in Noun.Market but should be available for non-nouns implementations
+  // [APPROVE_CURRENCY]: V3AskApproveERC20Currency, // TODO, not used in Noun.Market but should be available for non-nouns implementations
   [CREATE_V3ASK]: V3AskCreate,
   [CREATE_V3ASK_SUCCESS]: V3AskCreateSuccess,
   [UPDATE_V3ASK]: V3AskUpdate,
@@ -44,6 +57,19 @@ const componentMap = {
   [APPROVE_MODULE_FOR_FILL_V3ASK]: V3AskApproveModule,
   [FILL_V3ASK]: V3AskFillAsk,
   [FILL_V3ASK_SUCCESS]: V3AskFillAskSuccess,
+
+  // PRIVATE ASKS:
+  [APPROVE_MODULE_FOR_CREATE_PRIVATEASK]: PrivateAskApproveModule,
+  [CREATE_PRIVATEASK]: PrivateAskCreate,
+  [CREATE_PRIVATEASK_SUCCESS]: V3AskCreateSuccess,
+  [UPDATE_PRIVATEASK]: PrivateAskUpdate,
+  [UPDATE_PRIVATEASK_SUCCESS]: V3AskUpdateSuccess,
+  [CANCEL_PRIVATEASK]: V3AskCancel,
+  [CANCEL_PRIVATEASK_SUCCESS]: V3AskCancelSuccess,
+  [APPROVE_MODULE_FOR_FILL_PRIVATEASK]: V3AskApproveModule,
+  [FILL_PRIVATEASK]: V3AskFillAsk,
+  [FILL_PRIVATEASK_SUCCESS]: V3AskFillAskSuccess,
+
   [VIEW_V3ASK_LISTING]: V3AskViewListing,
   [RESET_V3ASK]: () => null,
 }

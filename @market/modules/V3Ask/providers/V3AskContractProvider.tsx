@@ -57,9 +57,11 @@ const V3AskContractProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!signer) {
+      console.log('NO SIGNER')
       return
     }
     if (address && signer) {
+      console.log('HAS SIGNER')
       const authorisedModuleManager = ModuleManagerFactory.connect(
         MODULE_MANAGER_ADDRESS,
         signer

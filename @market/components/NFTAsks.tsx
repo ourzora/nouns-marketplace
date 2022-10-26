@@ -1,11 +1,13 @@
 import { useMemo } from 'react'
-import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { useAskHelper, useRelevantMarket } from '@market/hooks'
+
 import { FillV3AskModal } from '@market/components/FillV3AskModal'
-import { FlexProps } from '@zoralabs/zord'
+import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { PrivateAskSidebar } from '@market/modules/PrivateAsk/PrivateAskSidebar'
 import { UniversalListAskModal } from '@market/modules/PrivateAsk/UniversalListAskModal'
+import { V3AskSidebar } from '@market/modules/V3Ask'
 import { useIsOwner } from '@shared/hooks/useIsOwner'
+import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
+import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTAskProps extends FlexProps {
   nftObj: NFTObject
@@ -17,10 +19,13 @@ export function NFTAsks({ nftObj, ...props }: NFTAskProps) {
   const { isOwner } = useIsOwner(nftObj)
   const { hasRelevantAsk, isPrivateAsk } = useAskHelper({ ask })
 
+  console.log('ASK')
+
   const marketComponent = useMemo(() => {
     if (hasRelevantAsk) {
       return isPrivateAsk ? (
-        <PrivateAskSidebar nftObj={nftObj} borderRadius="phat" />
+        // <PrivateAskSidebar nftObj={nftObj} borderRadius="phat" />
+        <V3AskSidebar nftObj={nftObj} borderRadius="phat" />
       ) : (
         <FillV3AskModal nftObj={nftObj} {...props} />
       )

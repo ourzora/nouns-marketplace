@@ -1,51 +1,56 @@
 import { Button } from 'components/Button'
 
+import { useCallback } from 'react'
+
 import { SelectListFlow } from '@market/components/SelectListFlow'
 import { ModalComposition, useModal } from '@modal'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Box, FlexProps, Stack } from '@zoralabs/zord'
+import { Box, FlexProps } from '@zoralabs/zord'
 
-import { V3AskStateProvider } from './providers/V3AskStateProvider'
+import {
+  RESET_V3ASK, // V3AskStateProvider,
+  useV3AskStateContext,
+} from './providers/V3AskStateProvider'
 
 export interface UniversalAskModalProps extends FlexProps {
   nftObj: NFTObject
 }
 
-export function UniversalListAskModal({
-  nftObj,
-  className,
-  ...props
-}: UniversalAskModalProps) {
+export function UniversalListAskModal({ nftObj, ...props }: UniversalAskModalProps) {
   const { nft } = nftObj
   const { requestClose } = useModal()
+  const {
+    // flow,
+    state,
+    // setFlow,
+    dispatch,
+  } = useV3AskStateContext()
+
+  const handleClose = useCallback(() => {
+    console.log('HANDLE CLOSE?')
+    requestClose()
+    dispatch && dispatch({ type: RESET_V3ASK })
+  }, [dispatch, requestClose])
 
   if (!nft) {
     return null
   }
 
   return (
-    <V3AskStateProvider>
-      <Stack
-        {...props}
-        flex={1}
-        justify="flex-end"
-        className={['zora-universal-list-ask-modal', className]}
-      >
-        <ModalComposition
-          modalName={`list-${nft.tokenId}${nft.contract.address}`}
-          modalBehaviorRequiresAuth={true}
-          trigger={
-            <Button as="span" size="md" className="zora-market-cardMarketTrigger">
-              List
-            </Button>
-          }
-          content={
-            <Box p="x8">
-              <SelectListFlow nftObj={nftObj} closeModal={requestClose} />
-            </Box>
-          }
-        />
-      </Stack>
-    </V3AskStateProvider>
+    <ModalComposition
+      modalName={`list-${nft.tokenId}${nft.contract.address}`}
+      modalBehaviorRequiresAuth={true}
+      onClose={handleClose}
+      trigger={
+        <Button as="span" size="md" className="zora-market-cardMarketTrigger">
+          List
+        </Button>
+      }
+      content={
+        <Box p="x8">
+          <SelectListFlow nftObj={nftObj} closeModal={handleClose} />
+        </Box>
+      }
+    />
   )
 }

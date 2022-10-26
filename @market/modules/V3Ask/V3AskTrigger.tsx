@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { useRelevantMarket } from '@market/hooks'
 import { useIsOwner } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
 
@@ -13,7 +12,6 @@ interface V3AskTriggerProps {
 }
 
 export function V3AskTrigger({ nft, openModal }: V3AskTriggerProps) {
-  const { ask } = useRelevantMarket(nft.markets)
   const { isOwner } = useIsOwner(nft)
 
   if (isOwner) {

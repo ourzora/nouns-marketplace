@@ -31,7 +31,7 @@ export const CANCEL_PRIVATEASK = 'cancelPrivateAsk'
 export const CANCEL_PRIVATEASK_SUCCESS = 'cancelPrivateAskSuccess'
 export const FILL_PRIVATEASK = 'fillPrivateAsk'
 export const FILL_PRIVATEASK_SUCCESS = 'fillPrivateAskSuccess'
-export const RESET_PRIVATEASK = 'RESET_PRIVATEASKPrivateAsk'
+export const RESET_PRIVATEASK = 'resetPrivateAsk'
 
 export type PossibleState =
   | typeof VIEW_PRIVATEASK_LISTING
