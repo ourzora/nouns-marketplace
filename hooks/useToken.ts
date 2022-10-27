@@ -15,11 +15,17 @@ type Params = {
 
 export function useToken({ collectionAddress, tokenId }: Params) {
   const [cached, setCache] = useState<TypeSafeToken | undefined>()
-  const { data, error } = useSWR<TokenQuery>([`${collectionAddress}-${tokenId}`], () =>
-    zoraApiFetcher(TOKEN_QUERY, {
-      collectionAddress,
-      tokenId,
-    })
+  const { data, error } = useSWR<TokenQuery>(
+    [`${collectionAddress}-${tokenId}`],
+    () =>
+      zoraApiFetcher(TOKEN_QUERY, {
+        collectionAddress,
+        tokenId,
+      }),
+    {
+      dedupingInterval: 3000,
+      refreshInterval: 5000,
+    }
   )
 
   const token = useMemo(() => {

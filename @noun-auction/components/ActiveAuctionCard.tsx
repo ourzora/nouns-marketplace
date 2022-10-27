@@ -3,12 +3,15 @@ import { Link } from 'components/Link'
 
 import { useAuctionCountdown } from 'hooks/useAuctionCountdown'
 
+import { TypeSafeNounsAuction } from 'validators/auction'
+
 import {
   cardImageWrapper,
   cardWrapper,
   titleHeading,
   titleWrapper,
 } from '@media/NftMedia.css'
+import { useNounishAuctionQuery } from '@noun-auction/hooks'
 import {
   activeAuctionCardData,
   auctionWrapperVariants,
@@ -21,23 +24,48 @@ import { PlaceNounsBid, SettleAuction } from './AuctionUi'
 import { AuctionBidder, AuctionHighBid } from './DataRenderers'
 
 export function ActiveAuctionCard({
-  tokenId,
   collectionAddress,
-  startTime,
-  endTime,
-  layout,
+  ...props
 }: {
-  tokenId: string
   collectionAddress: string
-  startTime: string
-  endTime: string
   layout: keyof typeof auctionWrapperVariants['layout']
 }) {
+  const { activeAuction } = useNounishAuctionQuery({
+    collectionAddress,
+  })
+
+  // FIXME
+  if (!activeAuction) return <div>no active auction</div>
+
+  return (
+    <ActiveAuctionCardComponent
+      activeAuction={activeAuction}
+      tokenId={activeAuction.tokenId}
+      {...props}
+    />
+  )
+}
+
+export function ActiveAuctionCardComponent({
+  tokenId,
+  layout,
+  activeAuction,
+}: {
+  tokenId: string
+  layout: keyof typeof auctionWrapperVariants['layout']
+  activeAuction: TypeSafeNounsAuction
+}) {
   // FIXME: remove useNFT from useTitleWithFallback
-  const { fallbackTitle } = useTitleWithFallback({ collectionAddress, tokenId })
+  const { collectionAddress, startTime, endTime } = activeAuction
+
+  const { fallbackTitle } = useTitleWithFallback({
+    collectionAddress: activeAuction.collectionAddress,
+    tokenId,
+  })
+
   const { auctionCompleted } = useAuctionCountdown({
-    startTime,
-    endTime,
+    startTime: activeAuction?.startTime,
+    endTime: activeAuction?.endTime,
   })
 
   return (
@@ -101,10 +129,11 @@ export function ActiveAuctionCard({
           <AuctionHighBid showLabels align="flex-start" direction="column" />
           <AuctionBidder
             layout={layout}
-            tokenId={tokenId}
-            collectionAddress={collectionAddress}
-            align="flex-start"
-            direction="column"
+            activeAuction={activeAuction}
+            styles={{
+              align: 'flex-start',
+              direction: 'column',
+            }}
             showLabels
             useAvatar={false}
           />

@@ -75,7 +75,7 @@ export function CollectionFilterProvider({
     handleLoadMore,
   } = useTokensQuery({
     contractAllowList,
-    contractAddress: contractAddress ?? undefined,
+    contractAddress,
     ownerAddress,
     initialData: initialPage,
     sort: sortMethodToSortParams(

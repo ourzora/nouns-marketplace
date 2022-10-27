@@ -77,8 +77,10 @@ export function ActiveAuctionRow({
           <AuctionBidder
             layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
             showLabels={showLabels}
-            justify={'center'}
-            align={'flex-end'}
+            styles={{
+              justify: 'center',
+              align: 'flex-end',
+            }}
             className="nounish-auction__bidder"
             activeAuction={activeAuction}
           />
@@ -115,7 +117,7 @@ export function ActiveAuctionRow({
         <Link href={`collections/${collectionAddress}`} passHref>
           <RPCTokenInfo
             tokenId={tokenId}
-            contractAddress={collectionAddress}
+            collectionAddress={collectionAddress}
             cursor="pointer"
           />
         </Link>
@@ -163,7 +165,7 @@ export function ActiveAuctionRow({
           <PlaceNounsBid
             layout={layout!}
             tokenId={tokenId}
-            contractAddress={collectionAddress}
+            collectionAddress={collectionAddress}
             useModal={useModal}
           />
         )}

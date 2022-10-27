@@ -12,7 +12,17 @@ export function useAggregate(collectionAddress: string) {
       zdk.collectionStatsAggregate({
         collectionAddress: collectionAddress,
         network: NetworkInput,
-      })
+      }),
+    {
+      dedupingInterval: 3000,
+      refreshInterval: 10000,
+      onErrorRetry: (_, _1, _2, revalidate, { retryCount }) => {
+        // Only retry up to 10 times.
+        if (retryCount >= 10) return
+        // Retry after 5 seconds.
+        setTimeout(() => revalidate({ retryCount }), 5000)
+      },
+    }
   )
 
   return {

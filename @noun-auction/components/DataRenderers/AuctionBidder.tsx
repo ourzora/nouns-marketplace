@@ -13,16 +13,18 @@ import { Flex, Icon, Label } from '@zoralabs/zord'
 
 import { EnsAvatar } from './EnsAvatar'
 
-type AuctionBidderProps = Partial<{
+type AuctionBidderProps = {
   label?: string
   layoutDirection?: 'row' | 'column'
   showLabels?: boolean
   useAvatar?: boolean
   layout: keyof typeof auctionWrapperVariants['layout']
   activeAuction: TypeSafeNounsAuction
-  // FIXME
-  [key: string]: any
-}>
+  className?: string
+  styles: {
+    [key: string]: any
+  }
+}
 
 export function AuctionBidder({
   label = 'Top bidder',
@@ -31,18 +33,12 @@ export function AuctionBidder({
   useAvatar = true,
   layout,
   activeAuction,
+  className,
   ...props
 }: AuctionBidderProps) {
-  const { data: ensName } = useEnsName({
-    address: activeAuction?.highestBidder ?? undefined,
-  })
-
-  const shortAddress = useShortAddress(activeAuction?.highestBidder)
-  const highestBidder = useMemo(() => activeAuction?.highestBidder, [activeAuction])
-
   const highestBidderAddress = useMemo(
-    () => (activeAuction?.highestBidder ? activeAuction?.highestBidder : undefined),
-    [activeAuction?.highestBidder]
+    () => activeAuction.highestBidder,
+    [activeAuction.highestBidder]
   )
 
   const hasNonZeroHighestBidder = useMemo(
@@ -50,8 +46,15 @@ export function AuctionBidder({
     [highestBidderAddress]
   )
 
+  const { data: ensName } = useEnsName({
+    address: activeAuction.highestBidder,
+  })
+
+  const shortAddress = useShortAddress(activeAuction.highestBidder)
+
   return (
     <Flex
+      className={className}
       direction={layoutDirection}
       target="_blank"
       gap={layoutDirection === 'row' ? 'x2' : 'x0'}
@@ -62,7 +65,7 @@ export function AuctionBidder({
         '@initial': `${layout === 'row' ? 'none' : 'flex'}`,
         '@1024': 'flex',
       }}
-      {...props}
+      {...props.styles}
     >
       {showLabels && (
         <Label

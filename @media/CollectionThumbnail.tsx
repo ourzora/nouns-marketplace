@@ -48,13 +48,7 @@ export function CollectionThumbnail({
   const { token } = useToken({ collectionAddress, tokenId: '1' })
   if (!token) return null
 
-  return (
-    <CollectionThumbnailComponent
-      token={token}
-      collectionAddress={collectionAddress}
-      {...props}
-    />
-  )
+  return <CollectionThumbnailComponent token={token} {...props} />
 }
 
 export function CollectionThumbnailComponent({
@@ -65,7 +59,7 @@ export function CollectionThumbnailComponent({
   thumbnailStyle,
   className,
   ...props
-}: Omit<CollectionThumbnailProps, 'tokenId' | 'contractAdddress'> & {
+}: Omit<CollectionThumbnailProps, 'tokenId' | 'collectionAddress'> & {
   token: TypeSafeToken
 }) {
   const { image: rawImageFallback } = useRawImageTransform(token.image?.url ?? undefined)

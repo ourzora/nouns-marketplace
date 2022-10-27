@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 
 import { FillV3AskInfo, ModalTitleAndDescription } from '@market/components'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { ErrorBoundary } from '@sentry/nextjs'
 import { useAuth, useTitleWithFallback } from '@shared/hooks'
 import { Flex, Stack } from '@zoralabs/zord'
 
@@ -57,12 +58,14 @@ export function NFTSummary({
   if (!token || !collectionAddress || !tokenId) return null
 
   return (
-    <Stack gap="x4">
-      <Flex justify="space-between" align="flex-start">
-        <ModalTitleAndDescription title={modalTitle} />
-        <CollectionThumbnail collectionAddress={token.collectionAddress} />
-      </Flex>
-      {hasAsk && <FillV3AskInfo token={token} askPrice={askPrice} />}
-    </Stack>
+    <ErrorBoundary>
+      <Stack gap="x4">
+        <Flex justify="space-between" align="flex-start">
+          <ModalTitleAndDescription title={modalTitle} />
+          <CollectionThumbnail collectionAddress={token.collectionAddress} />
+        </Flex>
+        {hasAsk && <FillV3AskInfo token={token} askPrice={askPrice} />}
+      </Stack>
+    </ErrorBoundary>
   )
 }

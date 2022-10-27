@@ -22,7 +22,8 @@ import { Grid } from '@zoralabs/zord'
 export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
 function Home(props: { fallback: CollectionParsed; daos: TypeSafeDao[] }) {
-  const { data } = useSWR('collections', collectionsService)
+  // disable client-side refetch of collection agg stat in order to stop overloading backend
+  // const { data } = useSWR('collections', collectionsService)
   const { daos: clientDaos } = useNounsDaos()
 
   return (
@@ -44,7 +45,7 @@ function Home(props: { fallback: CollectionParsed; daos: TypeSafeDao[] }) {
             <DaoTable daos={clientDaos || props.daos} className={styles.homepageTable} />
           ) : null}
           <CollectionRanking
-            collections={data?.props?.fallback}
+            collections={props.fallback}
             className={styles.homepageTable}
           />
         </Grid>
