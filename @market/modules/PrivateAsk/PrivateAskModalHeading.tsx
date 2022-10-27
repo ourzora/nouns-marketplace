@@ -1,22 +1,24 @@
 import React from 'react'
-import { TypeSafeToken } from 'validators/token'
 
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import { Flex, Heading } from '@zoralabs/zord'
 
 interface PrivateAskModalHeadingProps {
-  token: TypeSafeToken
+  nftObj: NFTObject
   action?: string
 }
 
-export function PrivateAskModalHeading({ token, action }: PrivateAskModalHeadingProps) {
+export function PrivateAskModalHeading({ nftObj, action }: PrivateAskModalHeadingProps) {
   return (
     <Flex w="100%" justify="space-between" textAlign="left" gap="x6">
       <Heading as="h2" size="md">
-        {`${action} ${token.collectionName} #${token.tokenId}`}
+        {`${action} ${nftObj.metadata?.name} #${nftObj.nft?.tokenId}`}
       </Heading>
       {/* @BJ TODO: This component causes 500 error when it hits the useNounsToken contract call? */}
-      <CollectionThumbnail collectionAddress={token.collectionAddress} />
+      {nftObj.nft?.contract?.address && (
+        <CollectionThumbnail collectionAddress={nftObj.nft?.contract.address} />
+      )}
     </Flex>
   )
 }

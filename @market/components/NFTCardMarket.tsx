@@ -1,20 +1,27 @@
-import { TypeSafeToken } from 'validators/token'
-
 import { FillV3AskModal } from '@market/components'
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { UniversalListAskModal } from '@market/modules/PrivateAsk/UniversalListAskModal'
+import { useNFTProvider } from '@shared'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import { FlexProps } from '@zoralabs/zord'
 
-export interface NFTCardMarketProps extends FlexProps {
-  token: TypeSafeToken
+export interface NFTCardMarketProps extends FlexProps {}
+
+export function NFTCardMarket(props: NFTCardMarketProps) {
+  const { nft: nftObj } = useNFTProvider()
+
+  if (!nftObj) return null
+
+  return <NFTCardMarketComponent nftObj={nftObj} {...props} />
 }
 
-export function NFTCardMarket({ token, ...props }: NFTCardMarketProps) {
+export function NFTCardMarketComponent({
+  nftObj,
+  ...props
+}: { nftObj: NFTObject } & NFTCardMarketProps) {
   const { markets } = nftObj
   const { ask } = useRelevantMarket(markets)
   const { hasRelevantAsk } = useAskHelper({ ask })
-
-  if (!nftObj) return null
 
   return hasRelevantAsk ? (
     <FillV3AskModal nftObj={nftObj} {...props} />

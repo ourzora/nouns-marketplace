@@ -75,6 +75,7 @@ export function ActiveAuctionRow({
           cursor="pointer"
         >
           <AuctionBidder
+            layout="sideBarBid" // check this
             layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
             showLabels={showLabels}
             styles={{
@@ -94,7 +95,10 @@ export function ActiveAuctionRow({
       <AuctionBidder
         showLabels={showLabels}
         layoutDirection="row"
-        justify="space-between"
+        layout="sideBarBid" // check this
+        styles={{
+          justify: 'space-between',
+        }}
         className="nounish-auction__sidebar-top-bidder"
         activeAuction={activeAuction}
       />

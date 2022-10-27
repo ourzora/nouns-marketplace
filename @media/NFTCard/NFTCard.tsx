@@ -16,35 +16,41 @@ import {
   titleWrapper,
 } from '@media/NftMedia.css'
 import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
-import { useIsOwner } from '@shared'
+import { useIsOwner, useNFTProvider } from '@shared'
 import { Box, Flex, Heading, Separator, Stack } from '@zoralabs/zord'
 
 type Props = {
   collectionAddress: string
-  tokenId: string
 }
 
-export function NFTCard({ collectionAddress, tokenId }: Props) {
-  const { token } = useToken({ collectionAddress, tokenId })
-  if (!token || !collectionAddress || !tokenId) return null
+export function NFTCard({ collectionAddress }: Props) {
+  const { nft } = useNFTProvider()
+  const tokenId = nft?.nft?.tokenId
 
-  return (
-    <NFTCardComponent
-      token={token}
-      collectionAddress={collectionAddress}
-      tokenId={tokenId}
-    />
-  )
+  if (!tokenId || !collectionAddress) return null
+
+  return <NFTCardOuterComponent tokenId={tokenId} collectionAddress={collectionAddress} />
+}
+
+export function NFTCardOuterComponent({
+  collectionAddress,
+  tokenId,
+}: Props & { tokenId: string }) {
+  const { token } = useToken({ collectionAddress, tokenId })
+
+  if (!token || !collectionAddress) return null
+
+  return <NFTCardComponent token={token} collectionAddress={collectionAddress} />
 }
 
 export function NFTCardComponent({
   collectionAddress,
-  tokenId,
   token,
 }: Props & { token: TypeSafeToken }) {
   const { isOwner } = useIsOwner(token)
   const fallbackTitle = token.collectionName ?? '..'
   const srcImg = useOptionalImageURIDecode(token) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
+  const tokenId = token.tokenId
 
   const useTitleScroll = useMemo(() => {
     if (token?.metadata?.name) {
@@ -92,7 +98,7 @@ export function NFTCardComponent({
         {isOwner && (
           <>
             <Separator mt="x1" />
-            <NFTCardMarket token={token} />
+            <NFTCardMarket />
           </>
         )}
       </Stack>

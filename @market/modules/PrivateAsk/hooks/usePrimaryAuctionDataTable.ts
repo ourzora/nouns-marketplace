@@ -6,6 +6,7 @@ import { TypeSafeToken } from 'validators/token'
 import { useRelevantMarket } from '@market/hooks'
 import { shortenAddress } from '@shared'
 import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
+import { NFTObject, useNFT } from '@zoralabs/nft-hooks'
 
 interface NounishAuctionInfoProps {
   token: TypeSafeToken
@@ -16,7 +17,10 @@ export const usePrimaryAuctionDataTable = ({
   token,
   primarySalePrice,
 }: NounishAuctionInfoProps) => {
-  const { nft, markets } = token
+  const { data: nftObj } = useNFT(token.collectionAddress, token.tokenId)
+
+  const nft = nftObj?.nft
+  const markets = nftObj?.markets
   const { ask } = useRelevantMarket(markets)
 
   const askPrice = useMemo(() => ask?.amount?.eth?.value, [ask?.amount?.eth?.value])

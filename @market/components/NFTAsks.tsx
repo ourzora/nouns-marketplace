@@ -6,31 +6,32 @@ import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { PrivateAskSidebar } from '@market/modules/PrivateAsk/PrivateAskSidebar'
 import { UniversalListAskModal } from '@market/modules/PrivateAsk/UniversalListAskModal'
 import { useIsOwner } from '@shared/hooks/useIsOwner'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTAskProps extends FlexProps {
-  token: TypeSafeToken
+  nftObj: NFTObject
 }
 
-export function NFTAsks({ token, ...props }: NFTAskProps) {
-  const { markets } = token
+export function NFTAsks({ nftObj, ...props }: NFTAskProps) {
+  const { markets } = nftObj
   const { ask } = useRelevantMarket(markets)
-  const { isOwner } = useIsOwner(token)
+  const { isOwner } = useIsOwner(nftObj)
   const { hasRelevantAsk, isPrivateAsk } = useAskHelper({ ask })
 
   const marketComponent = useMemo(() => {
     if (hasRelevantAsk) {
       return isPrivateAsk ? (
-        <PrivateAskSidebar token={token} borderRadius="phat" />
+        <PrivateAskSidebar nftObj={nftObj} borderRadius="phat" />
       ) : (
-        <FillV3AskModal token={token} {...props} />
+        <FillV3AskModal nftObj={nftObj} {...props} />
       )
     }
 
-    if (isOwner) return <UniversalListAskModal token={token} />
+    if (isOwner) return <UniversalListAskModal nftObj={nftObj} />
 
     return null
-  }, [hasRelevantAsk, isOwner, isPrivateAsk, token, props])
+  }, [hasRelevantAsk, isOwner, isPrivateAsk, nftObj, props])
 
-  return token ? marketComponent : null
+  return nftObj ? marketComponent : null
 }

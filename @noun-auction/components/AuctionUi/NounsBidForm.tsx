@@ -175,7 +175,9 @@ export function NounsBidFormComponent({
             layoutDirection="row"
             showLabels
             useAvatar={false}
-            justify="space-between"
+            styles={{
+              justify: 'space-between',
+            }}
           />
           <Separator />
           {address && (

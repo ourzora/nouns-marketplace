@@ -18,7 +18,7 @@ export function Collections({ view = 'nfts', collectionAddress }: CollectionsPro
     filterStore: { clearFilters },
   } = useCollectionFilters()
   const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
-  const dao = useOneNounsDao({ collectionAddress })
+  const { dao } = useOneNounsDao({ collectionAddress })
 
   const gridProps = { items, isReachingEnd, isValidating, handleLoadMore }
 

@@ -34,7 +34,7 @@ export function DaoGrid({
   const renderer = useMemo(() => {
     if (!tokenId) return <>no tokenId provided</>
     return view === 'nfts' ? (
-      <NFTCard tokenId={tokenId} collectionAddress={collectionAddress} />
+      <NFTCard collectionAddress={collectionAddress} />
     ) : (
       <NounishActivityRow collectionAddress={collectionAddress} tokenId={tokenId} />
     )
