@@ -12,7 +12,7 @@ export function useOneNounsDao({ collectionAddress }: { collectionAddress: strin
   const [cached, setCache] = useState<TypeSafeDao | undefined>()
 
   const { data, error } = useSWR<OneNounsDaoQuery>(
-    [`nounish-auction-${collectionAddress}`],
+    [`nounish-dao-${collectionAddress}`],
     () => zoraApiFetcher(ONE_NOUNS_DAO, { collectionAddress })
   )
   const dao = useMemo(() => {

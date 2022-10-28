@@ -35,11 +35,11 @@ export async function collectionService({ params }: CollectionParamsProps) {
 
   if (!tokenAddress) return false
 
-  if (tokenAddress && !allAddresses.includes(tokenAddress)) {
-    return {
-      notFound: true,
-    }
-  }
+  // if (tokenAddress && !allAddresses.includes(tokenAddress)) {
+  //   return {
+  //     notFound: true,
+  //   }
+  // }
 
   try {
     const collection = await zdk.collection({

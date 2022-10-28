@@ -23,8 +23,6 @@ import { Grid, Separator, Stack } from '@zoralabs/zord'
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { contractAddress: collectionAddress, seo } = fallback
 
-  console.log({ fallback })
-
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
   const { dao } = useOneNounsDao({ collectionAddress })
 
@@ -49,10 +47,6 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
       setCurrentCollectionCount(undefined)
     }
   }, [aggregate, collection, setCurrentCollection, setCurrentCollectionCount])
-
-  // const tokenId = activeAuction.tokenId
-  // const startTime = activeAuction.startTime
-  // const endTime = activeAuction.endTime
 
   return (
     <PageWrapper direction="column" gap="x4">

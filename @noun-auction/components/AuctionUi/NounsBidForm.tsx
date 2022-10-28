@@ -19,6 +19,7 @@ import {
   AuctionHighBid,
   WalletBalance,
 } from '@noun-auction'
+import { contractInterface } from '@noun-auction/constants/abis'
 import { PrintError, formatContractError } from '@shared'
 import { Box, BoxProps, Flex, Grid, Input, Label, Separator, Stack } from '@zoralabs/zord'
 
@@ -62,22 +63,6 @@ export function NounsBidFormComponent({
 
   const { address } = useAccount()
 
-  const contractInterface = [
-    {
-      inputs: [
-        {
-          internalType: 'uint256',
-          name: 'nounId',
-          type: 'uint256',
-        },
-      ],
-      name: 'createBid',
-      outputs: [],
-      stateMutability: 'payable',
-      type: 'function',
-    },
-  ]
-
   const handleOnUpdate = useCallback(
     (value: string) => {
       let newValue: EthersBN
@@ -104,7 +89,6 @@ export function NounsBidFormComponent({
     args: [activeAuction.tokenId],
   })
 
-  /* @ts-ignore */
   const {
     isError,
     isLoading,

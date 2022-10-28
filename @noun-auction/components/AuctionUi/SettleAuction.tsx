@@ -4,6 +4,7 @@ import { Button } from 'components/Button'
 
 import { useEffect, useState } from 'react'
 
+import { contractInterface } from '@noun-auction/constants/abis'
 import { useNounishAuctionProvider } from '@noun-auction/providers'
 import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { PrintError } from '@shared'
@@ -18,13 +19,13 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
   const [showError, setShowError] = useState(false)
 
   const {
-    dao: { abi, auctionContractAddress },
+    dao: { auctionContractAddress },
     layout,
   } = useNounishAuctionProvider()
 
   const { config, error: prepareError } = usePrepareContractWrite({
-    addressOrName: auctionContractAddress as string,
-    contractInterface: abi,
+    addressOrName: auctionContractAddress,
+    contractInterface,
     functionName: 'settleCurrentAndCreateNewAuction',
   })
 
