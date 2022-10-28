@@ -35,6 +35,7 @@ export async function collectionService({ params }: CollectionParamsProps) {
 
   if (!tokenAddress) return false
 
+  // FIXME: dynamic list of daos here
   // if (tokenAddress && !allAddresses.includes(tokenAddress)) {
   //   return {
   //     notFound: true,
