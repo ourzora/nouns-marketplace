@@ -171,6 +171,8 @@ export function ActiveAuctionRow({
         {!useModal && <Separator mt="x1" />}
         {timerComplete ? (
           <SettleAuction
+            auctionContractAddress={activeAuction.address}
+            layout={layout!}
             useErrorMsg={useErrorMsg}
             className="nounish-auction__row-link"
           />
