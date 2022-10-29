@@ -120,8 +120,6 @@ export type V3AskAction =
   | { type: typeof RESET_V3ASK }
 
 export function v3AskStateReducer(_state: State, action: V3AskAction): State {
-  console.log(action.type)
-
   switch (action.type) {
     case RESET_V3ASK:
       return initialV3AskState
@@ -240,7 +238,6 @@ export function V3AskStateProvider({ children }: V3AskProps) {
   >(undefined)
 
   const { requestClose } = useModal()
-  console.log('STATE', state)
   const next = state.next as PossibleV3AskState
 
   const handleNext = useCallback(() => {

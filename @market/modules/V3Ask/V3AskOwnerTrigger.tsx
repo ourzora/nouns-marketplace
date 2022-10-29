@@ -54,9 +54,6 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
   const { dispatch } = useV3AskStateContext()
   const { ask } = useRelevantMarket(nft.markets)
 
-  console.log('MARKETS?', nft.markets)
-  console.log('ASK?', ask)
-
   const { displayAskAmount, usdAskAmount, hasActivePrivateAsk, isActiveAsk } =
     useAskHelper({
       ask,
@@ -83,8 +80,6 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
     () => (hasActivePrivateAsk ? 'Private Listing' : 'Listing'),
     [hasActivePrivateAsk]
   )
-
-  console.log('isActiveAsk?', isActiveAsk)
 
   if (isActiveAsk) {
     return (
@@ -139,8 +134,6 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
       </Well>
     )
   }
-
-  console.log('OUTPUTTING UNIVERSAL?')
 
   return <UniversalListAskFlow nftObj={nft} />
 }

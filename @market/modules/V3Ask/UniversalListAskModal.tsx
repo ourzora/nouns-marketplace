@@ -19,15 +19,9 @@ export interface UniversalAskModalProps extends FlexProps {
 export function UniversalListAskModal({ nftObj, ...props }: UniversalAskModalProps) {
   const { nft } = nftObj
   const { requestClose } = useModal()
-  const {
-    // flow,
-    state,
-    // setFlow,
-    dispatch,
-  } = useV3AskStateContext()
+  const { state, dispatch } = useV3AskStateContext()
 
   const handleClose = useCallback(() => {
-    console.log('HANDLE CLOSE?')
     requestClose()
     dispatch && dispatch({ type: RESET_V3ASK })
   }, [dispatch, requestClose])

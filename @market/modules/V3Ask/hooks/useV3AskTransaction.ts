@@ -21,11 +21,9 @@ export const UPDATE_V3_ASK: string = 'updateV3Ask'
 
 type V3AskTransaction =
   | typeof CREATE_V3_ASK
-  // | typeof CREATE_PRIVATE_ASK
   | typeof CANCEL_V3_ASK
   | typeof FILL_V3_ASK
   | typeof UPDATE_V3_ASK
-// | typeof UPDATE_PRIVATE_ASK
 
 interface AskTxValues {
   price?: string // as user-facing display value (eg. 0.0001 ETH), not raw BigNumber
@@ -56,19 +54,12 @@ export const useV3AskTransaction = ({
   const isPrivate: boolean = askType === PRIVATE_ASK
   const ActiveAskModule = isPrivate ? PrivateAsks : V3Asks
 
-  console.log('ATTEMPTING...')
-  console.log('askType', askType)
-  console.log('isPrivate?', isPrivate)
-  console.log('ActiveAskModule?', ActiveAskModule)
-
   async function makeAskTransaction(
     txType: V3AskTransaction,
     price?: string, // as user-facing display value (eg. 0.0001 ETH), not raw BigNumber
     buyerAddress?: string,
     rawBuyerAddress?: string
   ) {
-    console.log('txType', txType)
-
     const contractInitialized = (isPrivate && PrivateAsks) || (!isPrivate && V3Asks)
     const missingPrice =
       [CREATE_V3_ASK, UPDATE_V3_ASK, FILL_V3_ASK].includes(txType) && !price
@@ -99,8 +90,6 @@ export const useV3AskTransaction = ({
         nft?.tokenId,
         priceAsBigNumber,
       ]
-
-      console.log('createParams', createParams)
 
       setSubmitting(true)
 
