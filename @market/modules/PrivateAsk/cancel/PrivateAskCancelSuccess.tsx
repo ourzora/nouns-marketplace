@@ -6,7 +6,7 @@ import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 import { useModal } from '@modal'
 import { Stack } from '@zoralabs/zord'
 
-import { HeadingDescription } from '../HeadingDescription'
+import { HeadingDescription } from '../../../components/HeadingDescription'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 
 interface PrivateAskCancelSuccessProps extends CommonPrivateAskComponentProps {}

@@ -1,8 +1,13 @@
 import { useEnsName } from 'wagmi'
 
+import Link from 'next/link'
+
+import { useMemo } from 'react'
+
 import { SharedDataRendererProps, useNounishAuctionProvider } from '@noun-auction'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont, useShortAddress } from '@shared'
+import { addressToEtherscanLink } from '@shared/utils/addressToEtherscanLink'
 import { Flex, Icon, Label } from '@zoralabs/zord'
 
 import { EnsAvatar } from './EnsAvatar'
@@ -24,6 +29,11 @@ export function AuctionBidder({
   })
 
   const shortAddress = useShortAddress(highestBidderAddress)
+  const bidderEtherscanLink = useMemo(
+    () =>
+      highestBidderAddress ? addressToEtherscanLink(highestBidderAddress) : undefined,
+    [highestBidderAddress]
+  )
 
   return (
     <Flex
@@ -59,17 +69,30 @@ export function AuctionBidder({
         >
           {hasNonZeroHighestBidder ? (
             <Flex gap="x2" align="center">
-              <Label size="md" gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
-                {ensName ?? shortAddress}
-              </Label>
-              {useAvatar && (
-                <>
-                  {layout !== 'sideBarBid' && highestBidderAddress ? (
-                    <EnsAvatar address={highestBidderAddress} />
-                  ) : (
-                    <Icon id="ArrowRightAngle" />
-                  )}
-                </>
+              {bidderEtherscanLink && (
+                <Link href={bidderEtherscanLink} passHref>
+                  <a>
+                    <Flex gap="x1">
+                      <Label
+                        size="md"
+                        gap="x1"
+                        align={'center'}
+                        style={{ lineHeight: '1.15' }}
+                      >
+                        {ensName ?? shortAddress}
+                      </Label>
+                      {useAvatar && (
+                        <>
+                          {layout !== 'sideBarBid' && highestBidderAddress ? (
+                            <EnsAvatar address={highestBidderAddress} />
+                          ) : (
+                            <Icon id="ArrowRightAngle" />
+                          )}
+                        </>
+                      )}
+                    </Flex>
+                  </a>
+                </Link>
               )}
             </Flex>
           ) : (

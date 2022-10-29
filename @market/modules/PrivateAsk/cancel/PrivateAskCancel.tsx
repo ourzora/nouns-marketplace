@@ -2,6 +2,7 @@ import { Button } from 'components/Button'
 
 import React, { useEffect } from 'react'
 
+import { MarketModalHeading } from '@market/components'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { useListingDataTable } from '@market/hooks'
 import { useModal } from '@modal/useModal'
@@ -10,7 +11,6 @@ import { Flex, Stack } from '@zoralabs/zord'
 
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import * as styles from '../PrivateAskFlow.css'
-import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 
 interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {}
@@ -27,7 +27,7 @@ export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
   return (
     <Stack gap="x3" {...props}>
       <Stack gap="x4">
-        <PrivateAskModalHeading nftObj={props.nft} action="Delist" />
+        <MarketModalHeading nftObj={props.nft} action="Delist" />
 
         <DataTable
           rowSize="lg"

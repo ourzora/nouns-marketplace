@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, media, vars } from '@zoralabs/zord'
+import { atoms, media, radii, vars } from '@zoralabs/zord'
 
 export const buttonVariants = {
   loading: {
@@ -148,6 +148,7 @@ export const buttonVariants = {
       {
         aspectRatio: '1 / 1',
         minWidth: 0,
+        borderRadius: `${radii.round}!important`,
         selectors: {
           '&[disabled]': {
             color: vars.color.secondary,
@@ -168,7 +169,6 @@ export const buttonVariants = {
         justifyContent: 'center',
         borderColor: 'borderOnImage',
         borderWidth: 'thin',
-        borderRadius: 'round',
         backgroundColor: 'transparent',
       }),
     ],

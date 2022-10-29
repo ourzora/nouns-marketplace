@@ -1,9 +1,8 @@
-import { Button, Link } from 'components'
+import { Link } from 'components'
 import { mediumFont } from 'styles/styles.css'
 
 import { useMemo } from 'react'
 
-import { useOffchainOrders } from '@market/hooks'
 import { CollectionThumbnail } from '@media'
 import { useNounishAuctionProvider } from '@noun-auction'
 import { useNFTProvider, useTitleWithFallback } from '@shared'
@@ -16,43 +15,14 @@ import { NFTOffchainOrders } from './NFTOffchainOrders'
 import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
 
-export interface NFTSidebarProps extends StackProps {}
+export interface NFTSidebarProps extends StackProps {
+  offchainOrders?: any
+}
 
-export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
+export function NFTSidebar({ offchainOrders, className, ...props }: NFTSidebarProps) {
   const { primarySalePrice } = useNounishAuctionProvider()
   const { nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
-  const { data: offchainOrders } = useOffchainOrders(nft!)
-  const { address: userAddress } = useAuth()
-  const showOffchainOrders = useMemo(
-    () => userAddress && offchainOrders?.length > 0,
-    [offchainOrders?.length, userAddress]
-  )
   const { tokenID } = useTokenHelper(nft!)
-
-  // const { isValidated } = useValidateContractCall({
-  //   callerAddress: userAddress!, // user address
-  //   contractAddress: offchainOrders
-  //     ? offchainOrders[0]?.offchainOrder?.offchainOrder?.contractAddress
-  //     : '', // the contract that fills the orders, eg. Seaport
-  //   calldata: offchainOrders ? offchainOrders[0]?.offchainOrder?.callData : '', //
-  //   value: offchainOrders ? offchainOrders[0]?.price?.chainTokenPrice?.decimal : 0, // Price in Ether (Decimal price)
-  // })
-
-  // console.log('OFF_CHAIN', offchain)
-
-  // offchainOrder: {
-  //   callData: '',
-  //   contractAddress: ''
-  // }s
-  // price: {
-  //   chainTokenPrice: {
-  //     decimal: number
-  //   }
-  // }
-  // token: {
-  //   collectionName: '',
-  //   tokenId: ''
-  // }
 
   const { fallbackTitle } = useTitleWithFallback({
     contractAddress,
@@ -100,15 +70,16 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
       )}
       {nft?.nft && ( // Clamp to bottom of container
         <Stack gap="x4" mt="auto">
-          {showOffchainOrders && (
+          {/* {showOffchainOrders && (
             <NFTOffchainOrders
               nft={nft}
-              userAddress={userAddress!}
+              userAddress={userAddress}
               offchainOrders={offchainOrders}
             />
-          )}
+          )} */}
           {primarySalePrice && <NFTProvenance nft={nft} />}
           <NFTMarket
+            offchainOrders={offchainOrders}
             contractAddress={nft.nft.contract.address}
             tokenId={nft.nft.tokenId}
             nft={nft}

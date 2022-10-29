@@ -2,13 +2,13 @@ import React from 'react'
 
 import { Flex, FlexProps } from '@zoralabs/zord'
 
-import * as styles from './InfoIcon.css'
+import * as styles from './Icon.css'
 
-export interface IconProps extends FlexProps {}
+interface IconProps extends FlexProps {}
 
 export function InfoIcon({ id, ...props }: IconProps) {
   return (
-    <Flex {...props} className={[styles.infoIcon, props.className]}>
+    <Flex {...props} className={[styles.iconHover, props.className]}>
       <svg
         width="24"
         height="24"

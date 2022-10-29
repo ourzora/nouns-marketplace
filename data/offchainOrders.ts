@@ -6,7 +6,7 @@ import gql from 'graphql-tag'
 export const OFFCHAIN_ORDER_FOR_TOKEN_QUERY = gql`
   query offchainOrderForToken($tokenId: String!, $tokenAddress: String!) {
     offchainOrders(
-      where: { tokens: { address: "$tokenAddress", tokenId: "$tokenId" } }
+      where: { tokens: { address: $tokenAddress, tokenId: $tokenId } }
       networks: { network: ETHEREUM, chain: MAINNET }
     ) {
       nodes {
@@ -15,6 +15,9 @@ export const OFFCHAIN_ORDER_FOR_TOKEN_QUERY = gql`
           contractAddress
           price {
             chainTokenPrice {
+              decimal
+            }
+            usdcPrice {
               decimal
             }
           }
@@ -27,31 +30,3 @@ export const OFFCHAIN_ORDER_FOR_TOKEN_QUERY = gql`
     }
   }
 `
-
-export function offchainOrderForToken(tokenAddress: string, tokenId: string) {
-  if (!tokenAddress || !tokenId) return
-
-  // return OFFCHAIN_ORDER_FOR_TOKEN_QUERY
-  return `{
-    offchainOrders(
-      where: {tokens: {address: "${tokenAddress}", tokenId: "${tokenId}"}}
-      networks: {network: ETHEREUM, chain: MAINNET}
-    ) {
-      nodes {
-        offchainOrder {
-          calldata
-          contractAddress
-          price {
-            chainTokenPrice {
-              decimal
-            }
-          }
-        }
-        token {
-          collectionName
-          tokenId
-        }
-      }
-    }
-  }`
-}

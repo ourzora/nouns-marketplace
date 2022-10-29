@@ -26,11 +26,7 @@ export function AuctionCountdown({
   )
 
   useEffect(() => {
-    if (isEnded) {
-      setTimerComplete(true)
-    } else {
-      setTimerComplete(false)
-    }
+    setTimerComplete(isEnded)
   }, [
     isEnded,
     activeAuction,

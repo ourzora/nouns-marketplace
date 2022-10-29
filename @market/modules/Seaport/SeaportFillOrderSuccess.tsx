@@ -2,23 +2,21 @@ import { Button } from 'components/Button'
 
 import React from 'react'
 
-import { HeadingDescription, SuccessCheckmark } from '@market/components'
+import { HeadingDescription, SuccessCheckmark } from '@market/components/'
 import { useModal } from '@modal'
 import { Stack } from '@zoralabs/zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { CommonSeaportFillOrderProps } from './SeaportFillOrderFlow'
 
-interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}
-
-export function PrivateAskFillAskSuccess({ ...props }: PrivateAskFillAskSuccessProps) {
-  const { requestClose } = useModal()
+export function SeaportFillOrderSuccess({ ...props }: CommonSeaportFillOrderProps) {
+  const { requestClose, modalType } = useModal()
 
   return (
     <Stack gap="x8" {...props}>
       <SuccessCheckmark />
 
       <HeadingDescription
-        heading="Private Purchase Completed"
+        heading="Seaport Purchase Completed"
         description="Find this NFT in your collection soon."
       />
 

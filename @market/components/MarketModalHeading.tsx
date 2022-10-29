@@ -1,14 +1,15 @@
 import React from 'react'
+
+import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Flex, Heading } from '@zoralabs/zord'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
 
-interface PrivateAskModalHeadingProps {
+interface MarketModalHeadingProps {
   nftObj: NFTObject
   action?: string
 }
 
-export function PrivateAskModalHeading({ nftObj, action }: PrivateAskModalHeadingProps) {
+export function MarketModalHeading({ nftObj, action }: MarketModalHeadingProps) {
   const { nft } = nftObj
   return (
     <Flex w="100%" justify="space-between" textAlign="left" gap="x6">

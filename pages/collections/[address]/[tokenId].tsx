@@ -15,10 +15,12 @@ const NFT = ({
   nft,
   tokenAddress,
   tokenId,
+  offchainOrders,
 }: {
   nft: NFTObject | undefined
   tokenAddress: string
   tokenId: string
+  offchainOrders: any[]
 }) => {
   const dao = useMemo(() => returnDao(tokenAddress), [tokenAddress])
 
@@ -34,10 +36,10 @@ const NFT = ({
           <NFTPageHero />
           {dao ? (
             <NounishAuctionProvider daoConfig={dao} tokenId={tokenId}>
-              <NFTSidebar />
+              <NFTSidebar offchainOrders={offchainOrders} />
             </NounishAuctionProvider>
           ) : (
-            <NFTSidebar />
+            <NFTSidebar offchainOrders={offchainOrders} />
           )}
           <Stack className={styles.attributesHistoryWrapper}>
             <NFTHistory />

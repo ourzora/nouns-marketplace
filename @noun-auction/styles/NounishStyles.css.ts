@@ -88,7 +88,7 @@ export const wrapperHover = style([
             content: '',
             width: 'calc(100% + 30px)',
             height: 'calc(100% + 20px)',
-            transform: 'translateX(-15px) translateY(-10px)',
+            transform: 'translateX(-15px) translateY(-2px)',
             backgroundColor: color.background2, // should be black 5
             position: 'absolute',
             top: '0',
@@ -397,46 +397,6 @@ export const activeAuctionCardData = style([
       '@initial': 'x3',
       '@1024': 'x3',
     },
-  }),
-])
-
-export const activeAuctionRowWrapper = style([
-  {
-    '@media': {
-      [media.min1024]: {
-        gridTemplateColumns: '1fr 3.75fr 100px',
-        gridTemplateRows: '1fr',
-        borderRadius: 0,
-        border: 'none',
-      },
-      '(hover: hover)': {
-        overflow: 'visible',
-        zIndex: '10',
-        selectors: {
-          '&:after': {
-            content: '',
-            width: 'calc(100% + 30px)',
-            height: 'calc(100% + 20px)',
-            transform: 'translateX(-15px) translateY(-10px)',
-            backgroundColor: color.background2,
-            position: 'absolute',
-            top: '0',
-            left: '0',
-            borderRadius: radii.phat,
-            zIndex: '1',
-            pointerEvents: 'none',
-            opacity: 0,
-            transition: 'opacity 0.2s ease-out',
-          },
-          '&:hover&:after': {
-            opacity: 0.5,
-          },
-        },
-      },
-    },
-  },
-  atoms({
-    pos: 'relative',
   }),
 ])
 
