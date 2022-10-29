@@ -1,7 +1,4 @@
-import { useAuctionCountdown } from 'hooks/useAuctionCountdown'
-
-import { TypeSafeNounsAuction } from 'validators/auction'
-
+import { useCountdown } from '@noun-auction/hooks'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
 import { Flex, Label } from '@zoralabs/zord'
@@ -28,7 +25,7 @@ export function AuctionCountdown({
   layout,
   styles,
 }: Props) {
-  const { auctionCompleted, text } = useAuctionCountdown({ startTime, endTime })
+  const { isEnded: auctionCompleted, text } = useCountdown(startTime, endTime)
 
   return (
     <Flex

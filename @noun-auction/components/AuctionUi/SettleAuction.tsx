@@ -5,7 +5,6 @@ import { Button } from 'components/Button'
 import { useEffect, useState } from 'react'
 
 import { contractInterface } from '@noun-auction/constants/abis'
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { PrintError } from '@shared'
 import { useButtonRequiresAuth } from '@shared/hooks'
@@ -13,15 +12,17 @@ import { Box, Icon, Stack, StackProps, color } from '@zoralabs/zord'
 
 export interface SettleAuctionProps extends StackProps {
   useErrorMsg?: boolean
+  auctionContractAddress: string
+  layout: string
 }
 
-export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionProps) {
+export function SettleAuction({
+  useErrorMsg = false,
+  auctionContractAddress,
+  layout,
+  ...props
+}: SettleAuctionProps) {
   const [showError, setShowError] = useState(false)
-
-  const {
-    dao: { auctionContractAddress },
-    layout,
-  } = useNounishAuctionProvider()
 
   const { config, error: prepareError } = usePrepareContractWrite({
     addressOrName: auctionContractAddress,

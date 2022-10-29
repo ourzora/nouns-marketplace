@@ -30,34 +30,37 @@ export function MarketStats({ contractAddress, ...props }: MarketStatesProps) {
   )
   const floorPrice = aggregate?.aggregateStat?.floorPrice ?? '0'
 
-  return (
-    <Flex className={marketStatsWrapper} {...props}>
-      <Flex
-        gap="x4"
-        w="100%"
-        justify={{
-          '@initial': 'flex-start',
-          '@1024': 'center',
-        }}
-      >
-        <StatBlock statType="Owners" statValue={ownerCount} />
-        <StatBlock statType="Items" statValue={nftCount} />
-        <StatBlock statType="Floor Price" statValue={`${floorPrice} ETH`} />
-        {dao ? (
-          <DaoStats contractAddress={contractAddress} />
-        ) : (
-          <CollectionStats contractAddress={contractAddress} />
-        )}
-        <Box
-          style={{ paddingLeft: '1px' }}
-          h="100%"
-          position="relative"
-          display={{
-            '@initial': 'block',
-            '@1024': 'none',
+  return useMemo(
+    () => (
+      <Flex className={marketStatsWrapper} {...props}>
+        <Flex
+          gap="x4"
+          w="100%"
+          justify={{
+            '@initial': 'flex-start',
+            '@1024': 'center',
           }}
-        />
+        >
+          <StatBlock statType="Owners" statValue={ownerCount} />
+          <StatBlock statType="Items" statValue={nftCount} />
+          <StatBlock statType="Floor Price" statValue={`${floorPrice} ETH`} />
+          {dao ? (
+            <DaoStats contractAddress={contractAddress} />
+          ) : (
+            <CollectionStats contractAddress={contractAddress} />
+          )}
+          <Box
+            style={{ paddingLeft: '1px' }}
+            h="100%"
+            position="relative"
+            display={{
+              '@initial': 'block',
+              '@1024': 'none',
+            }}
+          />
+        </Flex>
       </Flex>
-    </Flex>
+    ),
+    [floorPrice, nftCount, ownerCount]
   )
 }

@@ -78,6 +78,8 @@ export function NounsBidFormComponent({
     [setBidAmount]
   )
 
+  console.log(activeAuction)
+
   const { config, error: prepareError } = usePrepareContractWrite({
     addressOrName: activeAuction.address,
     contractInterface,
@@ -151,7 +153,16 @@ export function NounsBidFormComponent({
             styles={{ justify: 'space-between' }}
           />
           <Separator />
-          <AuctionHighBid layoutDirection="row" showLabels justify="space-between" />
+          <AuctionHighBid
+            highestBid={activeAuction.highestBidPrice?.nativePrice?.raw}
+            collectionAddress={activeAuction.collectionAddress}
+            layout={layout}
+            showLabels
+            styles={{
+              layoutDirection: 'row',
+              justify: 'space-between',
+            }}
+          />
           <Separator />
           <AuctionBidder
             activeAuction={activeAuction}

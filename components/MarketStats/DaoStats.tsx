@@ -10,6 +10,8 @@ import { StatBlock } from './StatBlock'
 
 export function DaoStats({ contractAddress }: { contractAddress: string }) {
   return null
+  // FIXME: bring back
+
   // const { aggregate } = useAggregate(contractAddress)
   // const dao = returnDao(contractAddress)
   // const { data } = useAuctionVolume(

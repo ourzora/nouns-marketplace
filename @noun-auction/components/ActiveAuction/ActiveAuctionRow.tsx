@@ -56,13 +56,17 @@ export function ActiveAuctionRow({
       </Link>
       <Link href={`collections/${collectionAddress}`} passHref>
         <AuctionHighBid
-          layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
+          highestBid={activeAuction.highestBidPrice?.nativePrice?.raw}
+          collectionAddress={activeAuction.collectionAddress}
+          layout={layout!}
+          styles={{
+            layoutDirection: layout === 'row' || 'withHistory' ? 'column' : 'row',
+            justify: 'center',
+            align: 'flex-end',
+            cursor: 'pointer',
+          }}
           showLabels={showLabels}
-          justify={'center'}
-          align={'flex-end'}
           className={[layout === 'row' && responsiveRow, 'nounish-auction__high-bid']}
-          cursor="pointer"
-          activeAuction={activeAuction}
         />
       </Link>
       <Link href={`collections/${collectionAddress}`} passHref>
@@ -142,9 +146,14 @@ export function ActiveAuctionRow({
       >
         {layout === 'sideBarBid' && (
           <AuctionHighBid
-            layoutDirection="column"
+            layout={layout}
+            highestBid={activeAuction.highestBidPrice?.nativePrice?.raw}
+            collectionAddress={activeAuction.collectionAddress}
+            styles={{
+              layoutDirection: 'column',
+              justify: 'flex-start',
+            }}
             showLabels={showLabels}
-            justify="flex-start"
           />
         )}
         {layout === 'row' && (

@@ -33,10 +33,7 @@ export function NFTSummary({
     () => token && modalType === MODAL_TYPES.fillAsk && askPrice,
     [askPrice, token, modalType]
   )
-  const { fallbackTitle } = useTitleWithFallback({
-    collectionAddress,
-    tokenId,
-  })
+  const fallbackTitle = `${token?.collectionName} #${token?.tokenId}`
 
   const noWallet = useMemo(() => address === null, [address])
   const modalTitle = useMemo(

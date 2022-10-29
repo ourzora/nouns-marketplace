@@ -32,10 +32,6 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { data } = useCollection(collectionAddress)
   const collection = data || fallback?.collection
 
-  const { activeAuction } = useNounishAuctionQuery({
-    collectionAddress,
-  })
-
   useEffect(() => {
     if (collection?.name) {
       const nftCount = aggregate?.aggregateStat.nftCount

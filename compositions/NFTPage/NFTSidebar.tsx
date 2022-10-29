@@ -5,7 +5,6 @@ import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
 import { useToken } from 'hooks/useToken'
 
 import { CollectionThumbnail } from '@media'
-import { useTitleWithFallback } from '@shared'
 import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
 import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
 
@@ -38,12 +37,7 @@ export function NFTSidebarComponent({
 }: NFTSidebarProps) {
   const { primarySalePrice } = usePrimarySalePrice({ collectionAddress })
   const { token } = useToken({ collectionAddress, tokenId })
-
-  const { fallbackTitle } = useTitleWithFallback({
-    collectionAddress,
-    tokenId,
-    defaultTitle: token?.collectionName,
-  })
+  const fallbackTitle = `${token?.collectionName} #${token?.tokenId}`
 
   if (!token) return null
 

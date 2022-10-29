@@ -1,19 +1,37 @@
+import { TypeSafeNounsAuction } from 'validators/auction'
+
+import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import { sidebarHighBid } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
 import { Flex, Label } from '@zoralabs/zord'
 
 import { EthAmount } from './EthAmount'
 
+type Props = {
+  // activeAuction: TypeSafeNounsAuction
+  showLabels?: boolean
+  layout: string
+  highestBid?: string
+  collectionAddress: string
+  className?: any
+  styles: {
+    [k: string]: any
+  }
+}
+
 export function AuctionHighBid({
-  label = 'Current bid',
-  layoutDirection = 'row',
   showLabels,
-  activeAuction,
+  collectionAddress,
+  highestBid,
   layout,
-  timerComplete,
+  styles,
   ...props
-}: any) {
-  const highestBid = activeAuction?.highestBidPrice?.nativePrice?.raw
+}: Props) {
+  const timerComplete = useIsAuctionCompleted({
+    collectionAddress,
+  })
+  const label = styles.label || 'Current bid'
+  const layoutDirection = styles.layoutDirection || 'row'
 
   return (
     <Flex

@@ -1,8 +1,9 @@
 import { ImageWithNounFallback } from 'components'
 import { Link } from 'components/Link'
 
-import { useAuctionCountdown } from 'hooks/useAuctionCountdown'
+import { useToken } from 'hooks/useToken'
 
+import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import {
@@ -12,11 +13,11 @@ import {
   titleWrapper,
 } from '@media/NftMedia.css'
 import { useNounishAuctionQuery } from '@noun-auction/hooks'
+import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import {
   activeAuctionCardData,
   auctionWrapperVariants,
 } from '@noun-auction/styles/NounishStyles.css'
-import { useTitleWithFallback } from '@shared'
 import { Box, Flex, Grid, Heading, Separator, Stack } from '@zoralabs/zord'
 
 import { AuctionCountdown } from './ActiveAuction'
@@ -34,16 +35,24 @@ export function ActiveAuctionCard({
     collectionAddress,
   })
 
-  // FIXME
-  if (!activeAuction) return <div>no active auction</div>
-
-  return (
-    <ActiveAuctionCardComponent
-      activeAuction={activeAuction}
-      tokenId={activeAuction.tokenId}
-      {...props}
-    />
+  const compo = useMemo(
+    () =>
+      activeAuction ? (
+        <ActiveAuctionCardComponent
+          activeAuction={activeAuction}
+          tokenId={activeAuction.tokenId}
+          {...props}
+        />
+      ) : null,
+    [
+      activeAuction?.tokenId,
+      activeAuction?.startTime,
+      activeAuction?.endTime,
+      activeAuction?.highestBidPrice?.nativePrice.raw,
+    ]
   )
+
+  return compo
 }
 
 export function ActiveAuctionCardComponent({
@@ -55,18 +64,11 @@ export function ActiveAuctionCardComponent({
   layout: keyof typeof auctionWrapperVariants['layout']
   activeAuction: TypeSafeNounsAuction
 }) {
-  // FIXME: remove useNFT from useTitleWithFallback
   const { collectionAddress, startTime, endTime } = activeAuction
+  const auctionCompleted = useIsAuctionCompleted({ collectionAddress })
 
-  const { fallbackTitle } = useTitleWithFallback({
-    collectionAddress: activeAuction.collectionAddress,
-    tokenId,
-  })
-
-  const { auctionCompleted } = useAuctionCountdown({
-    startTime: activeAuction?.startTime,
-    endTime: activeAuction?.endTime,
-  })
+  const { token } = useToken({ collectionAddress, tokenId })
+  const fallbackTitle = `${token?.collectionName} #${token?.tokenId}`
 
   return (
     <Stack
@@ -78,9 +80,11 @@ export function ActiveAuctionCardComponent({
     >
       <Link href={`/collections/${collectionAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
-          {tokenId && (
-            <ImageWithNounFallback tokenContract={collectionAddress} tokenId={tokenId} />
-          )}
+          <ImageWithNounFallback
+            srcImg={token?.image.url?.toString()}
+            tokenContract={collectionAddress}
+            tokenId={tokenId}
+          />
         </Box>
       </Link>
       <Stack gap="x2" mt="x4" px="x4" pb="x4">
@@ -109,7 +113,10 @@ export function ActiveAuctionCardComponent({
             </Heading>
           </Flex>
           {auctionCompleted ? (
-            <SettleAuction />
+            <SettleAuction
+              auctionContractAddress={activeAuction.address}
+              layout={layout}
+            />
           ) : (
             <PlaceNounsBid
               tokenId={tokenId}
@@ -126,7 +133,16 @@ export function ActiveAuctionCardComponent({
             showLabels
             styles={{ align: 'flex-start', direction: 'column' }}
           />
-          <AuctionHighBid showLabels align="flex-start" direction="column" />
+          <AuctionHighBid
+            highestBid={activeAuction.highestBidPrice?.nativePrice?.raw}
+            collectionAddress={activeAuction.collectionAddress}
+            showLabels
+            layout={layout}
+            styles={{
+              align: 'flex-start',
+              direction: 'column',
+            }}
+          />
           <AuctionBidder
             layout={layout}
             activeAuction={activeAuction}
