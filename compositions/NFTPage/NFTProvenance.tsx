@@ -1,4 +1,4 @@
-import { usePrimaryAuctionDataTable } from '@market/modules/PrivateAsk/hooks/usePrimaryAuctionDataTable'
+import { usePrimaryAuctionDataTable } from '@market/modules/V3Ask/hooks'
 import { DataTable } from '@shared/components'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { BoxProps } from '@zoralabs/zord'
