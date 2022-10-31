@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { FillV3AskInfo, ModalTitleAndDescription } from '@market/components'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ErrorBoundary } from '@sentry/nextjs'
-import { useAuth, useTitleWithFallback } from '@shared/hooks'
+import { useAuth } from '@shared/hooks'
 import { Flex, Stack } from '@zoralabs/zord'
 
 export enum MODAL_TYPES {

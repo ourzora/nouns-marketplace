@@ -2,7 +2,7 @@ import { isAfter } from 'date-fns'
 
 import { TypeSafeDao } from 'validators/dao'
 
-import { useNounishAuctionQuery } from '@noun-auction'
+import { useCountdown, useNounishAuctionQuery } from '@noun-auction'
 import {
   auctionWrapper,
   auctionWrapperVariants,
@@ -58,9 +58,11 @@ export function NounishAuction({
   const { activeAuction } = useNounishAuctionQuery({
     collectionAddress: dao.collectionAddress,
   })
-  const timerComplete = activeAuction
-    ? isAfter(parseInt(activeAuction.endTime), Date.now() * 1000)
-    : false
+
+  const { isEnded: auctionCompleted } = useCountdown(
+    activeAuction?.startTime,
+    activeAuction?.endTime
+  )
 
   return (
     <Box className={[layout === 'row' && wrapperHover, className]} {...props}>
@@ -73,7 +75,7 @@ export function NounishAuction({
       >
         {showAuctionRow && activeAuction && (
           <ActiveAuctionRow
-            timerComplete={timerComplete}
+            timerComplete={auctionCompleted}
             layout={layout}
             activeAuction={activeAuction}
             routePrefix={routePrefix}

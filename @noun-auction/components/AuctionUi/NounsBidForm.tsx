@@ -51,8 +51,8 @@ export function NounsBidFormComponent({
   activeAuction,
   ...props
 }: NounsBidFormProps & { activeAuction: TypeSafeNounsAuction }) {
+  const { address } = useAccount()
   const { requestClose } = useModal()
-
   const [bidAmount, setBidAmount] = useState<string | '0'>('0')
 
   const { minBidAmount } = useNounBidIncrement(
@@ -60,8 +60,6 @@ export function NounsBidFormComponent({
     activeAuction.highestBidPrice?.chainTokenPrice?.raw,
     activeAuction.minBidIncrementPercentage
   )
-
-  const { address } = useAccount()
 
   const handleOnUpdate = useCallback(
     (value: string) => {
@@ -78,9 +76,12 @@ export function NounsBidFormComponent({
     [setBidAmount]
   )
 
-  console.log(activeAuction)
-
-  const { config, error: prepareError } = usePrepareContractWrite({
+  const {
+    config,
+    error: prepareError,
+    status,
+    ...rest
+  } = usePrepareContractWrite({
     addressOrName: activeAuction.address,
     contractInterface,
     functionName: 'createBid',
@@ -124,6 +125,12 @@ export function NounsBidFormComponent({
     if (prepareError) return formatContractError(prepareError)
     return null
   }, [isError, prepareError, writeContractError])
+
+  console.log({
+    config,
+    prepareError,
+    rest,
+  })
 
   return (
     <Box {...props}>
