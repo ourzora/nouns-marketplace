@@ -31,8 +31,9 @@ export function useNounsDaos() {
     }
   )
 
-  const daos = useMemo(() => {
+  return useMemo(() => {
     const newData = data?.nouns?.nounsDaos?.nodes
+    console.log({ newData })
 
     if (typeof newData !== 'undefined') {
       if ((newData?.length ?? []) > 0) {
@@ -47,9 +48,4 @@ export function useNounsDaos() {
     }
     // no need to update when cache changed!
   }, [data?.nouns?.nounsDaos?.nodes])
-
-  return {
-    daos,
-    error,
-  }
 }
