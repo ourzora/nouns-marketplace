@@ -42,10 +42,10 @@ function Home(props: { fallback: CollectionParsed; daos: TypeSafeDao[] }) {
           {props.daos?.length > 0 ? (
             <DaoTable daos={clientDaos || props.daos} className={styles.homepageTable} />
           ) : null}
-          {/* <CollectionRanking
+          <CollectionRanking
             collections={props.fallback}
             className={styles.homepageTable}
-          /> */}
+          />
         </Grid>
       </PageWrapper>
     </SWRConfig>

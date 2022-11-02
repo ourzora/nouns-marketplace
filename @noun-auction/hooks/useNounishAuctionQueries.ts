@@ -24,12 +24,6 @@ export function useNounishAuctionQuery({
       })
   )
 
-  console.log(error)
-
-  if (collectionAddress === '0xccbb1b4d6bab4e3e4f1aaa1c92c6f2d42ce255d3') {
-    console.log({ data, rest })
-  }
-
   const activeAuction = useMemo(() => {
     const newData = data?.nouns?.nounsActiveMarket
 
