@@ -45,7 +45,7 @@ export function SettleAuction({
       setIsLoading(true)
       try {
         event.preventDefault()
-        const tx = await BuilderNounsAuction?.settleAuction()
+        const tx = await BuilderNounsAuction?.settleCurrentAndCreateNewAuction()
         console.log({ tx })
         setIsSuccess(true)
       } catch (err: any) {
