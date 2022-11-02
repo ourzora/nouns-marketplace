@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { NounsBidFormProps } from '@noun-auction'
+import { PrintError } from '@shared'
 import {
   Auction as AuctionInterface,
   Auction__factory as BuilderNounsAuction__factory,
@@ -66,6 +67,8 @@ export const BuilderNounsBidForm = ({
       bidAmount={bidAmount}
       handleOnSubmit={handleOnSubmit}
       layout={rest.layout}
+      errorComponent={isError && <PrintError errorMessage={isError} mb="x4" />}
+      prepareError={null}
     />
   )
 }

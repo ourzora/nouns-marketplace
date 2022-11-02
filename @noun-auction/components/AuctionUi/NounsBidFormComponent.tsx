@@ -16,7 +16,6 @@ import {
   WalletBalance,
 } from '@noun-auction'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
-import { PrintError } from '@shared'
 import { Box, Flex, Grid, Input, Label, Separator, Stack } from '@zoralabs/zord'
 
 export type NounsBidFormComponentProps = {
@@ -27,9 +26,10 @@ export type NounsBidFormComponentProps = {
   isLoading: boolean
   setBidAmount: (s: string) => void
   bidAmount: string
-
   onConfirmation?: any
   layout: 'row' | 'historyOnly' | 'withHistory' | 'sideBarBid'
+  errorComponent?: JSX.Element | null | false
+  prepareError: Error | null
 }
 
 export function NounsBidFormComponent({
@@ -42,6 +42,8 @@ export function NounsBidFormComponent({
   isError,
   isLoading,
   isSuccess,
+  errorComponent,
+  prepareError,
   ...props
 }: NounsBidFormComponentProps) {
   const { address } = useAccount()
@@ -69,8 +71,6 @@ export function NounsBidFormComponent({
     },
     [setBidAmount]
   )
-
-  const hasBidInput = useMemo(() => bidAmount !== '0', [bidAmount])
 
   const bid = EthersBN.from(bidAmount)
   const min = EthersBN.from(minBidAmount.raw)
@@ -141,7 +141,7 @@ export function NounsBidFormComponent({
           )}
           <Separator />
         </Stack>
-        {isError && <PrintError errorMessage={isError} mb="x4" />}
+        {errorComponent}
         {!isSuccess ? (
           <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x2">
             <Button
@@ -155,7 +155,7 @@ export function NounsBidFormComponent({
             <Button
               type="submit"
               loading={isLoading}
-              disabled={!isSufficientBid}
+              disabled={!isSufficientBid || !!prepareError}
               w="100%"
               borderRadius="curved"
             >
