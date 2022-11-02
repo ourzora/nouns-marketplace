@@ -18,7 +18,7 @@ export type AuctionVolumeReturnType =
 
 export function useNounsDaos() {
   const [cached, setCache] = useState([] as TypeSafeDao[])
-  const { data, error } = useSWR<NounsDaosQuery>(
+  const { data } = useSWR<NounsDaosQuery>(
     [`noundsDaos`],
     () => zoraApiFetcher(NOUNS_DAOS_QUERY),
     {
@@ -33,18 +33,13 @@ export function useNounsDaos() {
 
   return useMemo(() => {
     const newData = data?.nouns?.nounsDaos?.nodes
-    console.log({ newData })
 
-    if (typeof newData !== 'undefined') {
-      if ((newData?.length ?? []) > 0) {
-        const verifiedData = newData.map(verifyDao)
-        setCache(verifiedData)
-        return verifiedData
-      } else {
-        return cached.length > 0 ? cached : []
-      }
+    if (newData && newData.length > 0) {
+      const verifiedData = newData.map(verifyDao)
+      setCache(verifiedData)
+      return verifiedData
     } else {
-      return []
+      return cached.length > 0 ? cached : []
     }
     // no need to update when cache changed!
   }, [data?.nouns?.nounsDaos?.nodes])

@@ -1,4 +1,3 @@
-import { useCountdown } from '@noun-auction/hooks'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
 import { Flex, Label } from '@zoralabs/zord'
@@ -12,6 +11,8 @@ type Props = {
   startTime: string
   endTime: string
   className?: string[]
+  auctionCompleted: boolean
+  countdownText: string
   styles: { [k in string]: any }
 }
 
@@ -20,12 +21,12 @@ export function AuctionCountdown({
   endedCopy = 'Bidding & Settling',
   label = 'Ends in',
   layoutDirection = 'row',
-  startTime,
-  endTime,
   layout,
   styles,
+  auctionCompleted,
+  countdownText,
 }: Props) {
-  const { isEnded: auctionCompleted, text } = useCountdown(startTime, endTime)
+  // console.log('AuctionCountdown', { auctionCompleted, countdownText })
 
   return (
     <Flex
@@ -52,7 +53,7 @@ export function AuctionCountdown({
           align={{ '@initial': 'left', '@1024': 'right' }}
           className={[layout === 'sideBarBid' && sideBarUpperLabel]}
         >
-          {text}
+          {countdownText}
         </Label>
       ) : (
         <Label
@@ -67,3 +68,5 @@ export function AuctionCountdown({
     </Flex>
   )
 }
+
+AuctionCountdown.whyDidYouRender = true

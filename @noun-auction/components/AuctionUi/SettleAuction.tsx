@@ -1,13 +1,17 @@
-import { useContractWrite, usePrepareContractWrite } from 'wagmi'
+import { useAccount, useContractWrite, usePrepareContractWrite, useSigner } from 'wagmi'
 
 import { Button } from 'components/Button'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { contractInterface } from '@noun-auction/constants/abis'
 import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { PrintError } from '@shared'
 import { useButtonRequiresAuth } from '@shared/hooks'
+import {
+  Auction as AuctionInterface,
+  Auction__factory as BuilderNounsAuction__factory,
+} from '@zoralabs/nouns-protocol/dist/typechain'
 import { Box, Icon, Stack, StackProps, color } from '@zoralabs/zord'
 
 export interface SettleAuctionProps extends StackProps {
@@ -22,31 +26,43 @@ export function SettleAuction({
   layout,
   ...props
 }: SettleAuctionProps) {
-  const [showError, setShowError] = useState(false)
-
-  const { config, error: prepareError } = usePrepareContractWrite({
-    addressOrName: auctionContractAddress,
-    contractInterface,
-    functionName: 'settleCurrentAndCreateNewAuction',
-  })
-
-  const {
-    isLoading,
-    error: writeContractError,
-    write: settleAuction,
-  } = useContractWrite(config)
-
-  const buttonBehavior = useButtonRequiresAuth(settleAuction)
+  const { data: signer } = useSigner()
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [BuilderNounsAuction, setBuilderNounsAuction] = useState<AuctionInterface>()
 
   useEffect(() => {
-    if (writeContractError) setShowError(true)
-  }, [writeContractError])
+    if (auctionContractAddress && signer) {
+      setBuilderNounsAuction(
+        BuilderNounsAuction__factory.connect(auctionContractAddress, signer)
+      )
+    }
+  }, [auctionContractAddress, signer])
+
+  const handleOnSubmit = useCallback(
+    async (event) => {
+      setIsLoading(true)
+      try {
+        event.preventDefault()
+        const tx = await BuilderNounsAuction?.settleAuction()
+        console.log({ tx })
+        setIsSuccess(true)
+      } catch (err: any) {
+        setIsError(err)
+        console.error(err)
+      } finally {
+        setIsLoading(false)
+      }
+    },
+    [BuilderNounsAuction]
+  )
 
   return (
     <>
       <Stack w={layout === 'sideBarBid' ? '100%' : 'auto'} {...props}>
         <Button
-          onClick={buttonBehavior}
+          onClick={handleOnSubmit}
           variant="secondary"
           className={styles.placeBidTrigger}
           w={layout === 'sideBarBid' ? '100%' : 'auto'}
@@ -55,20 +71,6 @@ export function SettleAuction({
           Settle Auction
         </Button>
       </Stack>
-      {useErrorMsg && showError && writeContractError && (
-        <Button
-          variant="unset"
-          onClick={() => setShowError(false)}
-          w="100%"
-          style={{ backgroundColor: color.background2 }}
-          className={styles.showError}
-        >
-          <PrintError w="100%" mt="x0" errorMessage={writeContractError.message} />
-          <Box pr="x2">
-            <Icon id="Close" />
-          </Box>
-        </Button>
-      )}
     </>
   )
 }

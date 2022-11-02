@@ -1,10 +1,8 @@
 import { HomePageHeader, PageWrapper, Seo } from 'components'
 import { CollectionRanking, DaoTable } from 'compositions'
 import { collectionAddresses } from 'constants/collection-addresses'
-import { collectionsService } from 'services'
 import * as styles from 'styles/styles.css'
 import { SWRConfig } from 'swr'
-import useSWR from 'swr'
 
 import { NOUNS_DAOS_QUERY } from 'data/nounsDaos'
 
@@ -24,7 +22,7 @@ export type CollectionParsed = CollectionsQuery['collections']['nodes']
 function Home(props: { fallback: CollectionParsed; daos: TypeSafeDao[] }) {
   // disable client-side refetch of collection agg stat in order to stop overloading backend
   // const { data } = useSWR('collections', collectionsService)
-  const { daos: clientDaos } = useNounsDaos()
+  const clientDaos = useNounsDaos()
 
   return (
     <SWRConfig value={{ fallback: props.fallback }}>
@@ -44,10 +42,10 @@ function Home(props: { fallback: CollectionParsed; daos: TypeSafeDao[] }) {
           {props.daos?.length > 0 ? (
             <DaoTable daos={clientDaos || props.daos} className={styles.homepageTable} />
           ) : null}
-          <CollectionRanking
+          {/* <CollectionRanking
             collections={props.fallback}
             className={styles.homepageTable}
-          />
+          /> */}
         </Grid>
       </PageWrapper>
     </SWRConfig>

@@ -1,7 +1,9 @@
 import Link from 'next/link'
 
+import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
+import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import {
   auctionWrapperVariants,
   responsiveRow,
@@ -10,6 +12,7 @@ import {
 } from '@noun-auction/styles/NounishStyles.css'
 import { Flex, Separator, Stack } from '@zoralabs/zord'
 
+import '../../../components/wdyr'
 import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
 import { AuctionBidder, AuctionHighBid, CollectionLink } from '../DataRenderers'
 import { TokenInfoConfig } from '../NounishAuction'
@@ -36,62 +39,79 @@ export function ActiveAuctionRow({
 }: ActiveAuctionRowProps) {
   const { tokenId, collectionAddress } = activeAuction
 
-  const rowLayout = (
-    <>
-      <Link href={`collections/${collectionAddress}`} passHref>
-        <AuctionCountdown
-          layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
-          showLabels={!!showLabels}
-          startTime={activeAuction.startTime}
-          endTime={activeAuction.endTime}
-          styles={{
-            justify: 'center',
-            align: 'flex-end',
-            cursor: 'pointer',
-          }}
-          className={['nounish-auction__countdown'].concat(
-            layout === 'row' ? responsiveRow : []
-          )}
-        />
-      </Link>
-      <Link href={`collections/${collectionAddress}`} passHref>
-        <AuctionHighBid
-          highestBid={activeAuction.highestBidPrice?.nativePrice?.raw}
-          collectionAddress={activeAuction.collectionAddress}
-          layout={layout!}
-          styles={{
-            layoutDirection: layout === 'row' || 'withHistory' ? 'column' : 'row',
-            justify: 'center',
-            align: 'flex-end',
-            cursor: 'pointer',
-          }}
-          showLabels={showLabels}
-          className={[layout === 'row' && responsiveRow, 'nounish-auction__high-bid']}
-        />
-      </Link>
-      <Link href={`collections/${collectionAddress}`} passHref>
-        <Flex
-          position="relative"
-          h="100%"
-          align="center"
-          w="100%"
-          justify="flex-end"
-          cursor="pointer"
-        >
-          <AuctionBidder
-            layout="sideBarBid" // check this
-            layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
-            showLabels={showLabels}
+  const { isEnded: auctionCompleted, countdownText } = useIsAuctionCompleted({
+    activeAuction,
+  })
+
+  const rowLayout = useMemo(
+    () => (
+      <>
+        <Link href={`collections/${collectionAddress}`} passHref>
+          <AuctionCountdown
+            auctionCompleted={auctionCompleted}
+            countdownText={countdownText}
+            layoutDirection={'row' || 'withHistory' ? 'column' : 'row'}
+            showLabels={!!showLabels}
+            startTime={activeAuction.startTime}
+            endTime={activeAuction.endTime}
             styles={{
               justify: 'center',
               align: 'flex-end',
+              cursor: 'pointer',
             }}
-            className="nounish-auction__bidder"
-            activeAuction={activeAuction}
+            className={['nounish-auction__countdown'].concat(
+              layout === 'row' ? responsiveRow : []
+            )}
           />
-        </Flex>
-      </Link>
-    </>
+        </Link>
+        <Link href={`collections/${collectionAddress}`} passHref>
+          <AuctionHighBid
+            auctionCompleted={auctionCompleted}
+            highestBid={activeAuction.highestBidPrice?.nativePrice?.raw}
+            collectionAddress={activeAuction.collectionAddress}
+            layout={layout!}
+            styles={{
+              layoutDirection: layout === 'row' || 'withHistory' ? 'column' : 'row',
+              justify: 'center',
+              align: 'flex-end',
+              cursor: 'pointer',
+            }}
+            showLabels={showLabels}
+            className={[layout === 'row' && responsiveRow, 'nounish-auction__high-bid']}
+          />
+        </Link>
+        <Link href={`collections/${collectionAddress}`} passHref>
+          <Flex
+            position="relative"
+            h="100%"
+            align="center"
+            w="100%"
+            justify="flex-end"
+            cursor="pointer"
+          >
+            <AuctionBidder
+              layout="sideBarBid" // check this
+              layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
+              showLabels={showLabels}
+              styles={{
+                justify: 'center',
+                align: 'flex-end',
+              }}
+              className="nounish-auction__bidder"
+              activeAuction={activeAuction}
+            />
+          </Flex>
+        </Link>
+      </>
+    ),
+    [
+      activeAuction,
+      auctionCompleted,
+      collectionAddress,
+      countdownText,
+      layout,
+      showLabels,
+    ]
   )
 
   const sideBarTop = (
@@ -107,6 +127,8 @@ export function ActiveAuctionRow({
         activeAuction={activeAuction}
       />
       <AuctionCountdown
+        auctionCompleted={auctionCompleted}
+        countdownText={countdownText}
         layoutDirection="row"
         showLabels={showLabels}
         styles={{
@@ -146,6 +168,7 @@ export function ActiveAuctionRow({
       >
         {layout === 'sideBarBid' && (
           <AuctionHighBid
+            auctionCompleted={auctionCompleted}
             layout={layout}
             highestBid={activeAuction.highestBidPrice?.nativePrice?.raw}
             collectionAddress={activeAuction.collectionAddress}

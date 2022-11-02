@@ -1,4 +1,5 @@
 import { isAfter } from 'date-fns'
+import { isBefore } from 'date-fns'
 
 import { TypeSafeDao } from 'validators/dao'
 
@@ -59,10 +60,19 @@ export function NounishAuction({
     collectionAddress: dao.collectionAddress,
   })
 
-  const { isEnded: auctionCompleted } = useCountdown(
-    activeAuction?.startTime,
-    activeAuction?.endTime
-  )
+  // const { isEnded: auctionCompleted } = useCountdown(
+  //   activeAuction?.startTime,
+  //   activeAuction?.endTime
+  // )
+
+  // FIXME: non-memoized version
+  const endTime = parseInt(activeAuction?.endTime || '0') * 1000
+  const now = Date.now()
+  const auctionCompleted = endTime ? now > endTime : false
+
+  if (!activeAuction) {
+    return null
+  }
 
   return (
     <Box className={[layout === 'row' && wrapperHover, className]} {...props}>

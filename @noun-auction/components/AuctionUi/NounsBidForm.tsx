@@ -1,15 +1,18 @@
-import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi'
+import { useAccount, useContractWrite, usePrepareContractWrite, useSigner } from 'wagmi'
 
 import { Button } from 'components/Button'
 import { BigNumber as EthersBN } from 'ethers'
 
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { parseUnits } from '@ethersproject/units'
+import { useContractContext } from '@market'
 import { useModal } from '@modal'
 import {
   auctionWrapperVariants,
+  lilNounsAbi,
+  nounsAbi,
   useNounBidIncrement,
   useNounishAuctionQuery,
 } from '@noun-auction'
@@ -20,7 +23,12 @@ import {
   WalletBalance,
 } from '@noun-auction'
 import { contractInterface } from '@noun-auction/constants/abis'
+import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import { PrintError, formatContractError } from '@shared'
+import {
+  Auction as AuctionInterface,
+  Auction__factory as BuilderNounsAuction__factory,
+} from '@zoralabs/nouns-protocol/dist/typechain'
 import { Box, BoxProps, Flex, Grid, Input, Label, Separator, Stack } from '@zoralabs/zord'
 
 interface NounsBidFormProps extends BoxProps {
@@ -53,7 +61,12 @@ export function NounsBidFormComponent({
 }: NounsBidFormProps & { activeAuction: TypeSafeNounsAuction }) {
   const { address } = useAccount()
   const { requestClose } = useModal()
+  const { data: signer } = useSigner()
   const [bidAmount, setBidAmount] = useState<string | '0'>('0')
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [BuilderNounsAuction, setBuilderNounsAuction] = useState<AuctionInterface>()
 
   const { minBidAmount } = useNounBidIncrement(
     activeAuction.reservePrice,
@@ -76,61 +89,60 @@ export function NounsBidFormComponent({
     [setBidAmount]
   )
 
-  const {
-    config,
-    error: prepareError,
-    status,
-    ...rest
-  } = usePrepareContractWrite({
-    addressOrName: activeAuction.address,
-    contractInterface,
-    functionName: 'createBid',
-    overrides: {
-      from: address,
-      value: bidAmount,
-    },
-    args: [activeAuction.tokenId],
+  const NOUNS_AUCTION_ADDRESS = '0x830bd73e4184cef73443c15111a1df14e495c706'
+  const LIL_NOUNS_AUCTION_ADDRESS = '0x55e0f7a3bb39a28bd7bcc458e04b3cf00ad3219e'
+
+  // console.log({
+  //   add: activeAuction.address,
+  //   NOUNS_AUCTION_ADDRESS,
+  //   LIL_NOUNS_AUCTION_ADDRESS,
+  // })
+
+  let abi =
+    activeAuction.address === NOUNS_AUCTION_ADDRESS
+      ? nounsAbi
+      : LIL_NOUNS_AUCTION_ADDRESS === activeAuction.address
+      ? lilNounsAbi
+      : contractInterface
+
+  const hasBidInput = useMemo(() => bidAmount !== '0', [bidAmount])
+
+  const bid = EthersBN.from(bidAmount)
+  const min = EthersBN.from(minBidAmount.raw)
+  const isSufficientBid = bidAmount === '0' ? false : bid.gte(min)
+
+  const { isEnded: auctionCompleted, countdownText } = useIsAuctionCompleted({
+    activeAuction,
   })
 
-  const {
-    isError,
-    isLoading,
-    isSuccess,
-    error: writeContractError,
-    write: placeBid,
-  } = useContractWrite(config)
+  useEffect(() => {
+    if (activeAuction.address && signer) {
+      setBuilderNounsAuction(
+        BuilderNounsAuction__factory.connect(activeAuction.address, signer)
+      )
+    }
+  }, [activeAuction.address, signer])
 
   const handleOnSubmit = useCallback(
-    (event) => {
-      event.preventDefault()
-      placeBid && placeBid()
+    async (event) => {
+      setIsLoading(true)
+      try {
+        event.preventDefault()
+        const tx = await BuilderNounsAuction?.createBid(activeAuction.tokenId, {
+          value: bidAmount,
+        })
+
+        console.log({ tx })
+        setIsSuccess(true)
+      } catch (err: any) {
+        setIsError(err)
+        console.error(err)
+      } finally {
+        setIsLoading(false)
+      }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [bidAmount]
+    [BuilderNounsAuction, activeAuction.tokenId, bidAmount]
   )
-  const hasBidInput = useMemo(() => bidAmount !== '0', [bidAmount])
-  const isSufficientBid = useMemo(
-    () => (minBidAmount?.raw ? bidAmount >= minBidAmount?.raw : false),
-    [bidAmount, minBidAmount]
-  )
-
-  const hasError = useMemo(
-    // Error writing to contract OR error in contract write preparation (initial form setup)
-    () => hasBidInput && ((isError && writeContractError) || prepareError),
-    [isError, prepareError, writeContractError, hasBidInput]
-  )
-
-  const errorOutput = useMemo(() => {
-    if (isError && writeContractError) return formatContractError(writeContractError)
-    if (prepareError) return formatContractError(prepareError)
-    return null
-  }, [isError, prepareError, writeContractError])
-
-  console.log({
-    config,
-    prepareError,
-    rest,
-  })
 
   return (
     <Box {...props}>
@@ -144,6 +156,7 @@ export function NounsBidFormComponent({
           <Input
             type="text"
             min={minBidAmount?.pretty}
+            disabled={isSuccess}
             pattern="[0-9.]*"
             placeholder={`${minBidAmount?.pretty} Ξ or more`}
             sizeVariant="lg"
@@ -152,6 +165,8 @@ export function NounsBidFormComponent({
         </Flex>
         <Stack gap="x4" mb="x4">
           <AuctionCountdown
+            auctionCompleted={auctionCompleted}
+            countdownText={countdownText}
             startTime={activeAuction.startTime}
             endTime={activeAuction.endTime}
             layoutDirection="row"
@@ -161,6 +176,7 @@ export function NounsBidFormComponent({
           />
           <Separator />
           <AuctionHighBid
+            auctionCompleted={auctionCompleted}
             highestBid={activeAuction.highestBidPrice?.nativePrice?.raw}
             collectionAddress={activeAuction.collectionAddress}
             layout={layout}
@@ -193,7 +209,7 @@ export function NounsBidFormComponent({
           )}
           <Separator />
         </Stack>
-        {hasError && <PrintError errorMessage={errorOutput} mb="x4" />}
+        {isError && <PrintError errorMessage={isError} mb="x4" />}
         {!isSuccess ? (
           <Grid style={{ gridTemplateColumns: '1fr 1fr' }} gap="x2">
             <Button

@@ -23,6 +23,12 @@ export function useToken({ collectionAddress, tokenId }: Params) {
         tokenId,
       }),
     {
+      onErrorRetry: (_, _1, _2, revalidate, { retryCount }) => {
+        // Only retry up to 10 times.
+        if (retryCount >= 10) return
+        // Retry after 5 seconds.
+        setTimeout(() => revalidate({ retryCount }), 5000)
+      },
       dedupingInterval: 3000,
       refreshInterval: 5000,
     }

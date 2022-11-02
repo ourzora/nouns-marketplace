@@ -65,7 +65,9 @@ export function ActiveAuctionCardComponent({
   activeAuction: TypeSafeNounsAuction
 }) {
   const { collectionAddress, startTime, endTime } = activeAuction
-  const auctionCompleted = useIsAuctionCompleted({ collectionAddress })
+  const { isEnded: auctionCompleted, countdownText } = useIsAuctionCompleted({
+    activeAuction,
+  })
 
   const { token } = useToken({ collectionAddress, tokenId })
   const fallbackTitle = `${token?.collectionName} #${token?.tokenId}`
@@ -114,7 +116,7 @@ export function ActiveAuctionCardComponent({
           </Flex>
           {auctionCompleted ? (
             <SettleAuction
-              auctionContractAddress={activeAuction.address}
+              auctionContractAddress={activeAuction.auction}
               layout={layout}
             />
           ) : (
@@ -128,12 +130,15 @@ export function ActiveAuctionCardComponent({
         <Separator mt="x1" />
         <Grid className={activeAuctionCardData}>
           <AuctionCountdown
+            auctionCompleted={auctionCompleted}
+            countdownText={countdownText}
             startTime={startTime}
             endTime={endTime}
             showLabels
             styles={{ align: 'flex-start', direction: 'column' }}
           />
           <AuctionHighBid
+            auctionCompleted={auctionCompleted}
             highestBid={activeAuction.highestBidPrice?.nativePrice?.raw}
             collectionAddress={activeAuction.collectionAddress}
             showLabels
