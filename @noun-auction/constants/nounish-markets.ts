@@ -51,13 +51,23 @@ export function returnMarketProps(marketType?: NounishMarketTypes) {
   return nounishMarketTypesLookup.find((market) => market.type === marketType)
 }
 
+export const NOUNS_AUCTION_ADDRESS = '0x830bd73e4184cef73443c15111a1df14e495c706'
+export const LIL_NOUNS_AUCTION_ADDRESS = '0x55e0f7a3bb39a28bd7bcc458e04b3cf00ad3219e'
+
 export const defaultMarketTypes = returnMarketProps('NOUNS_AUCTION')
 
-// export const defaultDaoConfig: DaoConfigProps = {
-//   name: 'Nouns',
-//   contractAddress: '0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03',
-//   auctionContractAddress: '0x830BD73E4184ceF73443C15111a1DF14e495C706',
-//   marketType: 'NOUNS_AUCTION',
-//   classifierPrefix: null,
-//   abi: nounsAbi,
-// }
+export const createBidAbiFragment = [
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'nounId',
+        type: 'uint256',
+      },
+    ],
+    name: 'createBid',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+]

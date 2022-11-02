@@ -4,7 +4,7 @@ import { Button } from 'components/Button'
 
 import { useCallback, useEffect, useState } from 'react'
 
-import { contractInterface } from '@noun-auction/constants/abis'
+import { createBidAbiFragment } from '@noun-auction/constants/nounish-markets'
 import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { PrintError } from '@shared'
 import { useButtonRequiresAuth } from '@shared/hooks'
