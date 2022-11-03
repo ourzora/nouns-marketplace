@@ -40,19 +40,6 @@ export function DaoGrid({
     )
   }, [collectionAddress, tokenId, view])
 
-  // const { data: activeAuction } = useActiveNounishAuction(dao?.marketType)
-  // const filteredItems = useMemo(() => {
-  //   try {
-  //     return items.filter(
-  //       (item) => activeAuction?.properties?.tokenId !== item?.nft?.tokenId
-  //     )
-  //   } catch (err: any) {
-  //     Sentry.captureException(err)
-  //     Sentry.captureMessage('DAO Grid filter error: ' + err.message)
-  //     return items
-  //   }
-  // }, [items, activeAuction?.properties?.tokenId])
-
   return (
     <Filter
       className="dao-filter"

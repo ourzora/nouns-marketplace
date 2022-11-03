@@ -16,7 +16,7 @@ import { useEffect } from 'react'
 
 import { CollectionFilterProvider } from '@filter'
 import { useCollection } from '@filter/hooks/useCollection'
-import { ActiveAuctionCard, useNounishAuctionQuery, useOneNounsDao } from '@noun-auction'
+import { ActiveAuctionCard, useOneNounsDao } from '@noun-auction'
 import { useWindowWidth } from '@shared'
 import { Grid, Separator, Stack } from '@zoralabs/zord'
 

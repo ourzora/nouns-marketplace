@@ -111,7 +111,6 @@ export function CollectionFilterProvider({
       value={{
         filterStore,
         items,
-        // items: tokensWithoutActiveMarkets,
         isValidating,
         isReachingEnd,
         isEmpty,
