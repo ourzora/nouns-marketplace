@@ -1,7 +1,5 @@
 import { useMemo } from 'react'
-import { TypeSafeNounsAuction } from 'validators/auction'
 
-import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import { sidebarHighBid } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
 import { Flex, Label } from '@zoralabs/zord'
@@ -22,24 +20,20 @@ type Props = {
 
 export function AuctionHighBid({
   showLabels,
-  collectionAddress,
   highestBid,
   layout,
   styles,
   auctionCompleted,
-  ...props
 }: Props) {
   const label = styles.label || 'Current bid'
   const layoutDirection = styles.layoutDirection || 'row'
-
-  // console.log('AuctionHighBid', { auctionCompleted, highestBid })
 
   return useMemo(
     () => (
       <Flex
         direction={layoutDirection}
         gap={layoutDirection === 'row' ? 'x2' : 'x0'}
-        {...props}
+        {...styles}
       >
         {showLabels && (
           <Label
@@ -64,6 +58,6 @@ export function AuctionHighBid({
         )}
       </Flex>
     ),
-    [highestBid, label, layout, layoutDirection, props, showLabels, auctionCompleted]
+    [layoutDirection, styles, showLabels, layout, auctionCompleted, label, highestBid]
   )
 }

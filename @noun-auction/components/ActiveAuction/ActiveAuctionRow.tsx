@@ -12,7 +12,6 @@ import {
 } from '@noun-auction/styles/NounishStyles.css'
 import { Flex, Separator, Stack } from '@zoralabs/zord'
 
-import '../../../components/wdyr'
 import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
 import { AuctionBidder, AuctionHighBid, CollectionLink } from '../DataRenderers'
 import { TokenInfoConfig } from '../NounishAuction'
@@ -90,7 +89,7 @@ export function ActiveAuctionRow({
             cursor="pointer"
           >
             <AuctionBidder
-              layout="sideBarBid" // check this
+              layout="row" // check this
               layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
               showLabels={showLabels}
               styles={{
@@ -174,7 +173,7 @@ export function ActiveAuctionRow({
             collectionAddress={activeAuction.collectionAddress}
             styles={{
               layoutDirection: 'column',
-              justify: 'flex-start',
+              justify: 'space-around',
             }}
             showLabels={showLabels}
           />
@@ -195,13 +194,13 @@ export function ActiveAuctionRow({
         {timerComplete ? (
           <SettleAuction
             auctionContractAddress={activeAuction.address}
-            layout={layout!}
+            layout={layout === 'sideBarBid' ? 'row' : 'historyOnly'}
             useErrorMsg={useErrorMsg}
             className="nounish-auction__row-link"
           />
         ) : (
           <PlaceNounsBid
-            layout={layout!}
+            layout={layout === 'sideBarBid' ? 'row' : 'historyOnly'}
             tokenId={tokenId}
             collectionAddress={collectionAddress}
             useModal={useModal}

@@ -34,6 +34,7 @@ export function AuctionBidder({
   layout,
   activeAuction,
   className,
+  styles,
   ...props
 }: AuctionBidderProps) {
   const highestBidderAddress = useMemo(
@@ -65,7 +66,7 @@ export function AuctionBidder({
         '@initial': `${layout === 'row' ? 'none' : 'flex'}`,
         '@1024': 'flex',
       }}
-      {...props.styles}
+      {...styles}
     >
       {showLabels && (
         <Label

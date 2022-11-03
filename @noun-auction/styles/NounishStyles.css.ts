@@ -11,7 +11,6 @@ export const auctionWrapperVariants = {
         gridAutoFlow: 'row',
         borderRadius: radii.phat,
         border: `2px solid ${color.background2}`,
-        height: '244px',
         '@media': {
           [media.min1024]: {
             gridTemplateColumns: '250px repeat(2, 1fr) 1.25fr 155px',
