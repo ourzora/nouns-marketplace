@@ -10,7 +10,7 @@ import { BoxProps } from '@zoralabs/zord'
 import { BuilderNounsBidForm } from './BuilderNounsBidForm'
 import { OGNounsBidForm } from './OGNounsBidForm'
 
-const isOGNounAddress = (a: string) => {
+export const isOGNounAddress = (a: string) => {
   return a === NOUNS_AUCTION_ADDRESS || a === LIL_NOUNS_AUCTION_ADDRESS
 }
 export interface NounsBidFormProps extends BoxProps {

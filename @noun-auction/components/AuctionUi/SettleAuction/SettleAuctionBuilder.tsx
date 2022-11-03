@@ -1,26 +1,18 @@
-import { useAccount, useContractWrite, usePrepareContractWrite, useSigner } from 'wagmi'
+import { useSigner } from 'wagmi'
 
-import { Button } from 'components/Button'
+import { ContractTransaction } from 'ethers'
 
 import { useCallback, useEffect, useState } from 'react'
 
-import { createBidAbiFragment } from '@noun-auction/constants/nounish-markets'
-import * as styles from '@noun-auction/styles/NounishStyles.css'
-import { PrintError } from '@shared'
-import { useButtonRequiresAuth } from '@shared/hooks'
 import {
   Auction as AuctionInterface,
   Auction__factory as BuilderNounsAuction__factory,
 } from '@zoralabs/nouns-protocol/dist/typechain'
-import { Box, Icon, Stack, StackProps, color } from '@zoralabs/zord'
 
-export interface SettleAuctionProps extends StackProps {
-  useErrorMsg?: boolean
-  auctionContractAddress: string
-  layout: string
-}
+import { SettleAuctionProps } from './SettleAuction'
+import { SettleAuctionComponent } from './SettleAuctionComponent'
 
-export function SettleAuction({
+export function SettleAuctionBuiler({
   useErrorMsg = false,
   auctionContractAddress,
   layout,
@@ -31,11 +23,14 @@ export function SettleAuction({
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
   const [BuilderNounsAuction, setBuilderNounsAuction] = useState<AuctionInterface>()
+  const [txSubmitted, setTxSubmitted] = useState<ContractTransaction | undefined>(
+    undefined
+  )
 
   useEffect(() => {
     if (auctionContractAddress && signer) {
       setBuilderNounsAuction(
-        BuilderNounsAuction__factory.connect(auctionContractAddress, signer)
+        BuilderNounsAuction__factory?.connect(auctionContractAddress, signer)
       )
     }
   }, [auctionContractAddress, signer])
@@ -46,7 +41,7 @@ export function SettleAuction({
       try {
         event.preventDefault()
         const tx = await BuilderNounsAuction?.settleCurrentAndCreateNewAuction()
-        console.log({ tx })
+        setTxSubmitted(tx)
         setIsSuccess(true)
       } catch (err: any) {
         setIsError(err)
@@ -59,18 +54,12 @@ export function SettleAuction({
   )
 
   return (
-    <>
-      <Stack w={layout === 'sideBarBid' ? '100%' : 'auto'} {...props}>
-        <Button
-          onClick={handleOnSubmit}
-          variant="secondary"
-          className={styles.placeBidTrigger}
-          w={layout === 'sideBarBid' ? '100%' : 'auto'}
-          loading={isLoading}
-        >
-          Settle Auction
-        </Button>
-      </Stack>
-    </>
+    <SettleAuctionComponent
+      {...props}
+      layout={layout}
+      handleOnSubmit={handleOnSubmit}
+      isLoading={isLoading}
+      txSubmitted={!!txSubmitted}
+    />
   )
 }
