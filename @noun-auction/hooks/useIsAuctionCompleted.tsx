@@ -4,7 +4,6 @@ import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useCountdown } from './useCountdown'
-import { useNounishAuctionQuery } from './useNounishAuctionQueries'
 
 // memoized version, because useCountdown is updated every tick causing re-renders
 export const useIsAuctionCompleted = ({

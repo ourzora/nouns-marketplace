@@ -1,9 +1,9 @@
-import { useAccount, useSigner } from 'wagmi'
+import { useAccount } from 'wagmi'
 
 import { Button } from 'components/Button'
 import { BigNumber as EthersBN } from 'ethers'
 
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { parseUnits } from '@ethersproject/units'
@@ -98,9 +98,7 @@ export function NounsBidFormComponent({
         <Stack gap="x4" mb="x4">
           <AuctionCountdown
             auctionCompleted={auctionCompleted}
-            countdownText={countdownText}
-            startTime={activeAuction.startTime}
-            endTime={activeAuction.endTime}
+            auctionEndTime={activeAuction.endTime}
             layoutDirection="row"
             layout="row"
             showLabels
@@ -120,7 +118,7 @@ export function NounsBidFormComponent({
           />
           <Separator />
           <AuctionBidder
-            activeAuction={activeAuction}
+            highestBidder={activeAuction.highestBidder}
             layout={layout}
             layoutDirection="row"
             showLabels

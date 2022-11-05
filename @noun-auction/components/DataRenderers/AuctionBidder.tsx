@@ -19,7 +19,7 @@ type AuctionBidderProps = {
   showLabels?: boolean
   useAvatar?: boolean
   layout: keyof typeof auctionWrapperVariants['layout']
-  activeAuction: TypeSafeNounsAuction
+  highestBidder?: string
   className?: string
   styles: {
     [key: string]: any
@@ -32,26 +32,20 @@ export function AuctionBidder({
   showLabels,
   useAvatar = true,
   layout,
-  activeAuction,
+  highestBidder,
   className,
   styles,
-  ...props
 }: AuctionBidderProps) {
-  const highestBidderAddress = useMemo(
-    () => activeAuction.highestBidder,
-    [activeAuction.highestBidder]
-  )
-
   const hasNonZeroHighestBidder = useMemo(
-    () => !isAddressMatch(highestBidderAddress, AddressZero),
-    [highestBidderAddress]
+    () => !isAddressMatch(highestBidder, AddressZero),
+    [highestBidder]
   )
 
   const { data: ensName } = useEnsName({
-    address: activeAuction.highestBidder,
+    address: highestBidder,
   })
 
-  const shortAddress = useShortAddress(activeAuction.highestBidder)
+  const shortAddress = useShortAddress(highestBidder)
 
   return (
     <Flex
@@ -93,8 +87,8 @@ export function AuctionBidder({
               </Label>
               {useAvatar && (
                 <>
-                  {layout !== 'sideBarBid' && highestBidderAddress ? (
-                    <EnsAvatar address={highestBidderAddress} />
+                  {layout !== 'sideBarBid' && highestBidder ? (
+                    <EnsAvatar address={highestBidder} />
                   ) : (
                     <Icon id="ArrowRightAngle" />
                   )}

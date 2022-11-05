@@ -19,9 +19,18 @@ export function useNounishAuctionQuery({
     `nounish-auction-${collectionAddress}`,
     async () =>
       zoraApiFetcher(NOUNISH_AUCTIONS_QUERY, {
-        // collectionAddress: utils.getAddress(collectionAddress),
         collectionAddress,
-      })
+      }),
+    {
+      onErrorRetry: (_, _1, _2, revalidate, { retryCount }) => {
+        // Only retry up to 10 times.
+        if (retryCount >= 10) return
+        // Retry after 5 seconds.
+        setTimeout(() => revalidate({ retryCount }), 5000)
+      },
+      dedupingInterval: 5000,
+      refreshInterval: 5000,
+    }
   )
 
   const activeAuction = useMemo(() => {

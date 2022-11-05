@@ -1,22 +1,22 @@
-import { isAfter } from 'date-fns'
-import { isBefore } from 'date-fns'
+import { ClassValue } from 'clsx'
 
+import { useEffect, useState } from 'react'
 import { TypeSafeDao } from 'validators/dao'
 
-import { useCountdown, useNounishAuctionQuery } from '@noun-auction'
+import { useNounishAuctionQuery } from '@noun-auction'
 import {
   auctionWrapper,
   auctionWrapperVariants,
   bidHistoryWrapper,
   wrapperHover,
 } from '@noun-auction/styles/NounishStyles.css'
+import { useInterval } from '@shared'
 import { Box, BoxProps, Grid, Separator } from '@zoralabs/zord'
 
 import { ActiveAuctionRow } from './ActiveAuction/ActiveAuctionRow'
 import { AuctionHistory } from './AuctionHistory'
 
 export interface TokenInfoConfig extends BoxProps {
-  /* ~ Move to provider as config object */
   hideThumbnail?: boolean
   hideTitle?: boolean
   hideCollectionTitle?: boolean
@@ -25,7 +25,6 @@ export interface TokenInfoConfig extends BoxProps {
 }
 
 export interface AuctionViewConfig extends TokenInfoConfig {
-  /* View Config ~ Move to provider as config object */
   showAuctionRow?: boolean
   showBidHistory?: boolean
   useInlineBid?: boolean
@@ -39,10 +38,77 @@ export interface NounishAuctionProps extends AuctionViewConfig {
   layout?: keyof typeof auctionWrapperVariants['layout']
 }
 
-export function NounishAuction({
+export function NounishAuction({ dao, ...props }: NounishAuctionProps) {
+  const { activeAuction } = useNounishAuctionQuery({
+    collectionAddress: dao.collectionAddress,
+  })
+
+  const [auctionCompleted, setAuctionCompleted] = useState(false)
+  const ttl = activeAuction ? Date.now() * 1000 - parseInt(activeAuction.endTime) : 0
+
+  useInterval(
+    () => {
+      setAuctionCompleted(true)
+    },
+    ttl > 0 ? ttl : 0
+  )
+
+  useEffect(() => {
+    if (activeAuction?.winner) setAuctionCompleted(true)
+  }, [activeAuction?.winner])
+
+  if (activeAuction) {
+    const minBidIncrementPercentage = activeAuction?.minBidIncrementPercentage
+    const highestBid = activeAuction?.highestBidPrice?.nativePrice?.raw || '0'
+    const highestBidder = activeAuction?.highestBidder
+    const tokenId = activeAuction?.tokenId
+    const collectionAddress = activeAuction?.collectionAddress
+    const auctionContractAddress = activeAuction?.address
+    const auctionEndTime = activeAuction?.endTime
+
+    return (
+      <NounishAuctionComponent
+        auctionCompleted={auctionCompleted}
+        minBidIncrementPercentage={minBidIncrementPercentage}
+        highestBid={highestBid}
+        highestBidder={highestBidder}
+        tokenId={tokenId}
+        collectionAddress={collectionAddress}
+        auctionContractAddress={auctionContractAddress}
+        auctionEndTime={auctionEndTime}
+        {...props}
+      />
+    )
+  } else {
+    return null
+  }
+}
+
+type NounishAuctionComponentProps = {
+  layout?: 'row' | 'historyOnly' | 'withHistory' | 'sideBarBid'
+  showBidHistory?: boolean
+  showTopBid?: boolean
+  useInlineBid?: boolean
+  hideThumbnail?: boolean
+  hideTitle?: boolean
+  useErrorMsg?: boolean
+  hideCollectionTitle?: boolean
+  routePrefix?: string
+  thumbnailSize?: string
+  className?: ClassValue | null
+  showLabels?: boolean
+  tokenId: string
+  auctionEndTime: string
+  collectionAddress: string
+  auctionContractAddress: string
+  auctionCompleted: boolean
+  minBidIncrementPercentage: number
+  highestBid: string
+  highestBidder?: string
+}
+
+export function NounishAuctionComponent({
   layout = 'row',
-  dao,
-  showAuctionRow = true,
   showBidHistory = false,
   showTopBid = true,
   useInlineBid = false,
@@ -54,49 +120,21 @@ export function NounishAuction({
   thumbnailSize = '100%',
   className,
   showLabels,
-  ...props
-}: NounishAuctionProps) {
-  const { activeAuction } = useNounishAuctionQuery({
-    collectionAddress: dao.collectionAddress,
-  })
-
-  // const { isEnded: auctionCompleted } = useCountdown(
-  //   activeAuction?.startTime,
-  //   activeAuction?.endTime
-  // )
-
-  // FIXME: non-memoized version
-  const endTime = parseInt(activeAuction?.endTime || '0') * 1000
-  const now = Date.now()
-  const auctionCompleted = endTime ? now > endTime : false
-
-  if (!activeAuction) {
-    return null
-  }
-
+  ...rest
+}: NounishAuctionComponentProps) {
   return (
-    <Box className={[layout === 'row' && wrapperHover, className]} {...props}>
+    <Box className={[layout === 'row' && wrapperHover, className]}>
       <Grid
         className={[
           'nounish-auction__auction-data-wrapper',
           `nounish-auction__${layout}`,
-          auctionWrapper({ layout: layout }),
+          auctionWrapper({ layout }),
         ]}
       >
-        {showAuctionRow && activeAuction && (
-          <ActiveAuctionRow
-            timerComplete={auctionCompleted}
-            layout={layout}
-            activeAuction={activeAuction}
-            routePrefix={routePrefix}
-            useModal={!useInlineBid}
-            showLabels={showLabels}
-            showTopBid={showTopBid}
-          />
-        )}
+        <ActiveAuctionRow {...rest} useModal={!useInlineBid} />
         {showBidHistory && (
           <AuctionHistory className={bidHistoryWrapper} mb="x2">
-            {showAuctionRow && <Separator mt="x4" mb="x3" />}
+            <Separator mt="x4" mb="x3" />
           </AuctionHistory>
         )}
       </Grid>

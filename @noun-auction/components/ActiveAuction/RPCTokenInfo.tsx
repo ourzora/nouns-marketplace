@@ -38,12 +38,12 @@ export function RPCTokenInfo({
       </NextLink>
       <Stack justify="space-between">
         <Heading size="sm" as="h3">
-          {shouldRenderContent ? token.collectionName : '...'}
+          {shouldRenderContent ? token.name : '...'}
         </Heading>
         <Box mb="x1">
           <NextLink href={`/collections/${collectionAddress}`} passHref>
             <Label as="a" color="tertiary" className={[lightFont]}>
-              {shouldRenderContent ? token?.name : '..'}
+              {shouldRenderContent ? token?.collectionName : '..'}
             </Label>
           </NextLink>
         </Box>

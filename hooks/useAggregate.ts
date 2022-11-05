@@ -14,8 +14,8 @@ export function useAggregate(collectionAddress: string) {
         network: NetworkInput,
       }),
     {
-      dedupingInterval: 3000,
-      refreshInterval: 10000,
+      dedupingInterval: 20000,
+      refreshInterval: 20000,
       onErrorRetry: (_, _1, _2, revalidate, { retryCount }) => {
         // Only retry up to 10 times.
         if (retryCount >= 10) return

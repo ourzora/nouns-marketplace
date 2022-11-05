@@ -1,3 +1,8 @@
+import { fromUnixTime, intervalToDuration } from 'date-fns'
+
+import { useMemo, useState } from 'react'
+
+import { useInterval } from '@noun-auction/hooks/useInterval'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
 import { Flex, Label } from '@zoralabs/zord'
@@ -8,11 +13,9 @@ type Props = {
   label?: string
   layoutDirection?: 'row' | 'column'
   layout?: string
-  startTime: string
-  endTime: string
   className?: string[]
   auctionCompleted: boolean
-  countdownText: string
+  auctionEndTime: string
   styles: { [k in string]: any }
 }
 
@@ -24,9 +27,22 @@ export function AuctionCountdown({
   layout,
   styles,
   auctionCompleted,
-  countdownText,
+  auctionEndTime,
 }: Props) {
-  // console.log('AuctionCountdown', { auctionCompleted, countdownText })
+  const [now, setNow] = useState(new Date())
+
+  const countdownText = useMemo(() => {
+    if (auctionCompleted || !auctionEndTime) return ''
+
+    const { hours, minutes, seconds } = intervalToDuration({
+      start: now,
+      end: fromUnixTime(parseInt(auctionEndTime)),
+    })
+
+    return [hours + 'h', minutes + 'm', seconds + 's'].join(' ')
+  }, [auctionCompleted, auctionEndTime, now])
+
+  useInterval(() => setNow(new Date()), 1000)
 
   return (
     <Flex

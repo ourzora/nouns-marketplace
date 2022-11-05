@@ -131,9 +131,7 @@ export function ActiveAuctionCardComponent({
         <Grid className={activeAuctionCardData}>
           <AuctionCountdown
             auctionCompleted={auctionCompleted}
-            countdownText={countdownText}
-            startTime={startTime}
-            endTime={endTime}
+            auctionEndTime={endTime}
             showLabels
             styles={{ align: 'flex-start', direction: 'column' }}
           />
@@ -149,8 +147,8 @@ export function ActiveAuctionCardComponent({
             }}
           />
           <AuctionBidder
+            highestBidder={activeAuction.highestBidder}
             layout={layout}
-            activeAuction={activeAuction}
             styles={{
               align: 'flex-start',
               direction: 'column',
