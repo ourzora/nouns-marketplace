@@ -12,25 +12,25 @@ import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 export interface RPCTokenInfoProps extends BoxProps {
   collectionAddress: string
   tokenId: string
+  collectionName?: string
+  tokenImage?: string
 }
 
 export function RPCTokenInfo({
   collectionAddress,
   tokenId,
+  collectionName,
+  tokenImage,
   ...props
 }: RPCTokenInfoProps) {
-  const { token } = useToken({ collectionAddress, tokenId: tokenId! })
-
-  const shouldRenderContent = token && tokenId && collectionAddress
-
   return (
     <Flex className={['nounish-auction__token-info', styles.tokenInfoWrapper]} {...props}>
       <NextLink href={`/collections/${collectionAddress}/${tokenId}`} passHref>
         <Button as="a" variant="unset" className={styles.thumbnailLink}>
-          {shouldRenderContent && (
+          {!tokenId && !!collectionAddress && (
             <NounishThumbnail
-              image={token?.image?.url!}
-              tokenContract={token.tokenContract}
+              image={tokenImage}
+              tokenContract={collectionAddress}
               tokenId={tokenId}
             />
           )}
@@ -38,12 +38,12 @@ export function RPCTokenInfo({
       </NextLink>
       <Stack justify="space-between">
         <Heading size="sm" as="h3">
-          {shouldRenderContent ? token.name : '...'}
+          {collectionName ?? '...'}
         </Heading>
         <Box mb="x1">
           <NextLink href={`/collections/${collectionAddress}`} passHref>
             <Label as="a" color="tertiary" className={[lightFont]}>
-              {shouldRenderContent ? token?.collectionName : '..'}
+              {collectionName ?? '..'}
             </Label>
           </NextLink>
         </Box>

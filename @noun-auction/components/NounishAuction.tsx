@@ -1,5 +1,7 @@
 import { ClassValue } from 'clsx'
 
+import { useToken } from 'hooks/useToken'
+
 import { useEffect, useState } from 'react'
 import { TypeSafeDao } from 'validators/dao'
 
@@ -44,11 +46,11 @@ export function NounishAuction({ dao, ...props }: NounishAuctionProps) {
   })
 
   const [auctionCompleted, setAuctionCompleted] = useState(false)
-  const ttl = activeAuction ? Date.now() * 1000 - parseInt(activeAuction.endTime) : 0
+  const ttl = activeAuction ? Date.now() - parseInt(activeAuction.endTime) * 1000 : 0
 
   useInterval(
     () => {
-      setAuctionCompleted(true)
+      ttl > 0 ? setAuctionCompleted(true) : setAuctionCompleted(false)
     },
     ttl > 0 ? ttl : 0
   )
@@ -122,6 +124,11 @@ export function NounishAuctionComponent({
   showLabels,
   ...rest
 }: NounishAuctionComponentProps) {
+  const { token } = useToken({
+    collectionAddress: rest.collectionAddress,
+    tokenId: rest.tokenId,
+  })
+
   return (
     <Box className={[layout === 'row' && wrapperHover, className]}>
       <Grid
@@ -131,7 +138,12 @@ export function NounishAuctionComponent({
           auctionWrapper({ layout }),
         ]}
       >
-        <ActiveAuctionRow {...rest} useModal={!useInlineBid} />
+        <ActiveAuctionRow
+          collectionName={token?.name}
+          tokenImage={token?.image}
+          {...rest}
+          useModal={!useInlineBid}
+        />
         {showBidHistory && (
           <AuctionHistory className={bidHistoryWrapper} mb="x2">
             <Separator mt="x4" mb="x3" />

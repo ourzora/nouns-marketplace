@@ -40,8 +40,14 @@ const useIpfsFile = ({ isIpfs, dataURI }: any) => {
 }
 
 function UnicodeDecodeB64(str: string) {
-  const res = decodeURIComponent(atob(str))
-  return JSON.parse(res)
+  let res = atob(str)
+  try {
+    return JSON.parse(res)
+  } catch (err) {
+    console.error(err)
+    console.log({ res })
+    return null
+  }
 }
 
 export function useNounsToken(contractAddress: string, tokenId: string) {
@@ -62,15 +68,18 @@ export function useNounsToken(contractAddress: string, tokenId: string) {
     let data = dataURI?.substring(29)
     if (isBase64) {
       data = UnicodeDecodeB64(dataURI?.replace('data:application/json;base64,', ''))
+      return data
     }
 
     if (dataURI) {
       try {
         const json = atob(data)
+        console.log({ json })
         const result = JSON.parse(json)
         return result
       } catch (err) {
         Sentry.captureException(err)
+        return null
       }
     }
   }, [dataURI, isBase64])

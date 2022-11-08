@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { TokenContentMedia } from 'types/zora.api.generated'
 
 import { useMemo } from 'react'
 
@@ -30,6 +31,8 @@ export interface ActiveAuctionRowProps {
   useErrorMsg?: boolean
   showTopBid?: boolean
   layout?: keyof typeof auctionWrapperVariants['layout']
+  tokenImage: TokenContentMedia | undefined
+  collectionName?: string
 }
 
 export function ActiveAuctionRow({
@@ -44,6 +47,8 @@ export function ActiveAuctionRow({
   highestBidder,
   auctionContractAddress,
   auctionEndTime,
+  tokenImage,
+  collectionName,
 }: ActiveAuctionRowProps) {
   const rowLayout = useMemo(
     () => (
@@ -148,6 +153,8 @@ export function ActiveAuctionRow({
       {layout !== 'sideBarBid' && (
         <Link href={`collections/${collectionAddress}`} passHref>
           <RPCTokenInfo
+            collectionName={collectionName}
+            tokenImage={tokenImage?.url ?? undefined}
             tokenId={tokenId}
             collectionAddress={collectionAddress}
             cursor="pointer"

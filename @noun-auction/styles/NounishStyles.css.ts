@@ -13,7 +13,7 @@ export const auctionWrapperVariants = {
         border: `2px solid ${color.background2}`,
         '@media': {
           [media.min1024]: {
-            gridTemplateColumns: '250px repeat(2, 1fr) 1.25fr 155px',
+            gridTemplateColumns: '350px repeat(2, 1fr) 1.25fr 155px',
             height: '68px',
             borderRadius: 0,
             border: 'none',
