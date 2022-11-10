@@ -1,10 +1,7 @@
 import { PageWrapper, Seo } from 'components'
 import { NFTAttributes, NFTHistory, NFTPageHero, NFTSidebar } from 'compositions'
 import * as styles from 'compositions/NFTPage/NFTPage.css'
-import { returnDao } from 'constants/collection-addresses'
 import { nftService } from 'services'
-
-import { useMemo } from 'react'
 
 import { useOneNounsDao } from '@noun-auction'
 import { NFTProvider } from '@shared/providers/NFTProvider'
@@ -20,9 +17,7 @@ const NFT = ({
   tokenAddress: string
   tokenId: string
 }) => {
-  // FIXME
   const dao = useOneNounsDao({ collectionAddress: tokenAddress })
-  useMemo(() => returnDao(tokenAddress), [tokenAddress])
 
   return (
     <PageWrapper direction="column">
@@ -34,13 +29,9 @@ const NFT = ({
       <NFTProvider initialData={nft} contractAddress={tokenAddress} tokenId={tokenId}>
         <Grid className={styles.nftPageWrapper}>
           <NFTPageHero collectionAddress={tokenAddress} tokenId={tokenId} />
-          {dao ? (
-            <NFTSidebar collectionAddress={tokenAddress} tokenId={tokenId} />
-          ) : (
-            <NFTSidebar collectionAddress={tokenAddress} tokenId={tokenId} />
-          )}
+          <NFTSidebar collectionAddress={tokenAddress} tokenId={tokenId} />
           <Stack className={styles.attributesHistoryWrapper}>
-            <NFTHistory collectionAddress={tokenAddress} tokenId={tokenId} />
+            {/* <NFTHistory collectionAddress={tokenAddress} tokenId={tokenId} /> */}
             <NFTAttributes />
           </Stack>
         </Grid>

@@ -38,5 +38,6 @@ globalStyle(`${errorBox} pre`, {
 })
 
 export const lightFont = style({
+  fontFamily: 'PTRootUIWebLight!important',
   fontWeight: 300,
 })

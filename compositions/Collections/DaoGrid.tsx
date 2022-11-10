@@ -32,7 +32,8 @@ export function DaoGrid({
   const tokenId = activeAuction?.tokenId
 
   const renderer = useMemo(() => {
-    if (!tokenId) return <>no tokenId provided</>
+    if (!tokenId) return <></>
+
     return view === 'nfts' ? (
       <NFTCard collectionAddress={collectionAddress} />
     ) : (

@@ -72,9 +72,8 @@ export function NFTSidebarComponent({
         maxLines={2}
         paragraphClassName={mediumFont}
         overflowY="hidden"
-      >
-        {token.description}
-      </DescriptionWithMaxLines>
+        description={token.description}
+      />
       <Stack gap="x4" mt="auto">
         {primarySalePrice && (
           <NFTProvenance primarySalePrice={primarySalePrice} token={token} />

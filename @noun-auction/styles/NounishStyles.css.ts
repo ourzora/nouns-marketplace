@@ -299,7 +299,7 @@ export const auctionEventRow = style([
 
 /* STYLE UTILS */
 export const lightFont = style({
-  fontWeight: 300,
+  fontWeight: '300!important',
   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
 })
 
@@ -307,7 +307,6 @@ export const lightFont = style({
 export const tokenInfoWrapper = style([
   {
     gridColumn: '1 / 3',
-    borderBottom: `1px solid ${color.background2}`,
     gridTemplateColumns: '68px auto',
     gridTemplateRows: '68px',
     '@media': {
@@ -444,3 +443,10 @@ export const showError = atoms({
   alignItems: 'center',
   justifyContent: 'center',
 })
+
+export const rowCollectionName = style([
+  {
+    fontSize: 'large',
+    fontWeight: 'bold',
+  },
+])
