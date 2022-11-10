@@ -29,7 +29,8 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
 
   const { token } = useToken({
     collectionAddress: dao.collectionAddress,
-    tokenId: activeAuction?.tokenId,
+    // FIXME: @oleg
+    tokenId: activeAuction?.tokenId ?? '',
   })
 
   if (!token || !activeAuction) return null
