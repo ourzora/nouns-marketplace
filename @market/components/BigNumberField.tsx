@@ -1,6 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'
 import { useField } from 'formik'
 import { FieldValidator } from 'formik/dist/types'
+
+import React, { useCallback, useEffect, useState } from 'react'
+
 import { BigNumber } from '@ethersproject/bignumber'
 import { formatUnits, parseUnits } from '@ethersproject/units'
 import { usePrevious } from '@reach/utils'

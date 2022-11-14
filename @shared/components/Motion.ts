@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 import {
   Box,
   Button,
@@ -12,7 +14,6 @@ import {
   Stack,
   Text,
 } from '@zoralabs/zord'
-import { motion } from 'framer-motion'
 
 export const MotionButton = motion(Button)
 export const MotionBox = motion(Box)

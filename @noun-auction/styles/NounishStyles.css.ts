@@ -1,6 +1,6 @@
-import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, space, color, typography, media, radii } from '@zoralabs/zord'
+import { globalStyle, style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
+import { atoms, color, media, radii, space, typography } from '@zoralabs/zord'
 
 export const auctionWrapperVariants = {
   layout: {
@@ -343,6 +343,9 @@ export const nounishThumbnail = style([
     w: '100%',
   }),
 ])
+export const thumbnailLink = style({
+  height: 'unset!important',
+})
 
 export const nounishThumbnailImage = style([
   atoms({
@@ -436,3 +439,9 @@ export const activeAuctionRowWrapper = style([
     pos: 'relative',
   }),
 ])
+
+export const showError = atoms({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+})

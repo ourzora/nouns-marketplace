@@ -1,18 +1,20 @@
-import { useMemo } from 'react'
-import { Stack, Box, Flex, Heading, Separator } from '@zoralabs/zord'
-import { Link } from 'components/Link'
-import { NFTCardMarket } from '@market'
-import {
-  cardWrapper,
-  titleWrapper,
-  titleScroll,
-  titleHeading,
-  cardImageWrapper,
-} from '@media/NftMedia.css'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ImageWithNounFallback } from 'components'
-import { useIsOwner, useNFTProvider, useTitleWithFallback } from '@shared'
+import { Link } from 'components/Link'
+
+import { useMemo } from 'react'
+
+import { NFTCardMarket } from '@market'
+import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import {
+  cardImageWrapper,
+  cardWrapper,
+  titleHeading,
+  titleScroll,
+  titleWrapper,
+} from '@media/NftMedia.css'
 import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
+import { useIsOwner, useNFTProvider, useTitleWithFallback } from '@shared'
+import { Box, Flex, Heading, Separator, Stack } from '@zoralabs/zord'
 
 export function NFTCard() {
   const { nft, contractAddress, tokenId } = useNFTProvider()
@@ -46,7 +48,7 @@ export function NFTCard() {
           )}
         </Box>
       </Link>
-      <Stack gap="x2" mt="x2" px="x4" pb="x4" flex="1">
+      <Stack gap="x2" mt="x2" px="x4" pb="x4" flex={1}>
         <Flex
           className={[titleWrapper, useTitleScroll && titleScroll]}
           style={{

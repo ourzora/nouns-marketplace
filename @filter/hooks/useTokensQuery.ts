@@ -1,3 +1,9 @@
+import useSWRInfinite from 'swr/infinite'
+
+import { useCallback } from 'react'
+
+import { flatten } from 'lodash'
+
 import { getAddress } from '@ethersproject/address'
 import { zdk } from '@shared/utils/zdk'
 import { transformNFTZDK } from '@zoralabs/nft-hooks/dist/backends'
@@ -9,11 +15,8 @@ import {
   TokensQueryFilter,
   TokensQueryInput,
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { flatten } from 'lodash'
-import { useCallback } from 'react'
-import useSWRInfinite from 'swr/infinite'
 
-const PAGE_SIZE = 24
+const PAGE_SIZE = 12 // must be divisible by 2,3,4 to ensure grid stays intact
 
 export interface UseTokenQueryProps {
   contractAllowList?: string[] | undefined
@@ -23,6 +26,7 @@ export interface UseTokenQueryProps {
   sort?: TokenSortInput
   filter?: TokensQueryFilter
   where?: TokensQueryInput
+  initialPageSize?: number
 }
 
 type GetNFTReturnType = {

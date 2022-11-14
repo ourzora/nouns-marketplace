@@ -1,18 +1,27 @@
-import { style } from '@vanilla-extract/css'
-import { atoms, media, color, space } from '@zoralabs/zord'
 import { HEADER_LAYER } from 'constants/layers'
-import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE } from 'styles/style-constants'
+import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
+
+import { style } from '@vanilla-extract/css'
+import { atoms, color, media, vars } from '@zoralabs/zord'
 
 export const headerWrapper = style([
+  atoms({
+    w: '100%',
+    justifyContent: 'center',
+  }),
+])
+
+export const header = style([
   {
+    width: MAX_WIDTH.XL,
     height: HEADER_HEIGHT_MOBILE,
     zIndex: HEADER_LAYER,
-    alignItems: 'center',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gridTemplateRows: 'auto',
     borderBottom: `2px solid ${color.background2}`,
+    gridColumn: '1/span 4',
     '@media': {
       [media.min1024]: {
+        maxWidth: `calc(${MAX_WIDTH.XL}px + (2 * ${vars.space.x8}))`,
+        gridColumn: '1/span 12',
         height: HEADER_HEIGHT,
         gridTemplateColumns: 'repeat(24, 1fr)',
         borderBottom: 'none',
@@ -21,51 +30,33 @@ export const headerWrapper = style([
   },
   atoms({
     w: '100%',
-    p: {
-      '@initial': 'x4',
-      '@1024': 'x4',
-    },
     pos: 'relative',
-    gap: 'x4',
+    alignItems: {
+      '@1024': 'center',
+    },
+    gap: {
+      '@initial': 'x2',
+      '@768': 'x6',
+    },
   }),
 ])
 
 export const nounsGlassesLink = style([
   {
-    gridColumn: '1',
-    gridRow: '1',
     aspectRatio: '70 / 24',
-    maxHeight: '30px',
   },
   atoms({
+    w: 'x25',
     cursor: 'pointer',
     pos: 'relative',
-    h: '100%',
   }),
 ])
 
 export const manageButton = style([
-  {
-    gridColumn: '2',
-    gridRow: '2',
-    height: 42,
-    paddingLeft: space.x5,
-    paddingRight: space.x5,
-    '@media': {
-      [media.min1024]: {
-        gridColumn: '23',
-        gridRow: '1',
-      },
-    },
-  },
   atoms({
-    w: 'auto',
     ml: 'auto',
     borderRadius: 'curved',
-    justifyContent: {
-      '@initial': 'center',
-      '@1024': 'center',
-    },
+    justifyContent: 'center',
   }),
 ])
 
@@ -84,34 +75,11 @@ export const modalWrapper = style([
 ])
 
 export const connectButton = style([
-  {
-    gridColumn: '2',
-    gridRow: '1',
-    '@media': {
-      [media.min1024]: {
-        gridColumn: '24',
-        gridRow: '1',
-      },
-    },
-  },
   atoms({
     w: '100%',
     justifyContent: {
       '@initial': 'flex-end',
       '@1024': 'flex-start',
     },
-  }),
-])
-
-export const docsLink = style([
-  {
-    height: 42,
-    paddingLeft: space.x1,
-    paddingRight: space.x3,
-    gap: space.x3,
-  },
-  atoms({
-    borderRadius: 'curved',
-    position: 'relative',
   }),
 ])

@@ -1,23 +1,39 @@
-import { Filter, useCollectionFilters } from '@filter'
-import { NFTGrid } from '@media/NFTGrid'
-import { NFTCard } from '@media/NFTCard'
-import { useEffect, useMemo } from 'react'
-import { nftGridWrapper } from '@media/NftMedia.css'
-import { NounishActivityRow } from './NounishActivityRow'
 import { returnDao } from 'constants/collection-addresses'
-import { useActiveNounishAuction } from '@noun-auction/hooks/useActiveNounishAuction'
-import * as Sentry from '@sentry/react'
+
+import { useEffect, useMemo } from 'react'
+
+import { Filter, useCollectionFilters } from '@filter'
+import { NFTCard } from '@media/NFTCard'
+import { NFTGrid } from '@media/NFTGrid'
+import { nftGridWrapper } from '@media/NftMedia.css'
+import { NFTObject } from '@zoralabs/nft-hooks'
+import { Stack } from '@zoralabs/zord'
+
+import * as styles from './Collections.css'
+// import * as Sentry from '@sentry/react'
+import { NounishActivityRow } from './NounishActivityRow'
+
+type CollectionsGridProps = {
+  items: NFTObject[]
+  isValidating: boolean
+  isReachingEnd?: boolean
+  handleLoadMore?: () => void
+}
 
 export type CollectionsProps = {
   collectionAddress?: string
   view?: 'activity' | 'nfts' | string
 }
 
-export function CollectionGrid() {
-  const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
-
+export function CollectionGrid({
+  items,
+  isReachingEnd,
+  isValidating,
+  handleLoadMore,
+}: CollectionsGridProps) {
   return (
     <Filter
+      className="collection-filter"
       grid={
         <NFTGrid
           items={items}
@@ -32,38 +48,41 @@ export function CollectionGrid() {
   )
 }
 
-export function DaoGrid({ dao, view }: { dao: any; view: CollectionsProps['view'] }) {
-  const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
-  const { data: activeAuction } = useActiveNounishAuction(dao?.marketType)
+export function DaoGrid({
+  dao,
+  view,
+  items,
+  isReachingEnd,
+  isValidating,
+  handleLoadMore,
+}: {
+  dao: any
+  view: CollectionsProps['view']
+} & CollectionsGridProps) {
+  // const { data: activeAuction } = useActiveNounishAuction(dao?.marketType)
+  // const filteredItems = useMemo(() => {
+  //   try {
+  //     return items.filter(
+  //       (item) => activeAuction?.properties?.tokenId !== item?.nft?.tokenId
+  //     )
+  //   } catch (err: any) {
+  //     Sentry.captureException(err)
+  //     Sentry.captureMessage('DAO Grid filter error: ' + err.message)
+  //     return items
+  //   }
+  // }, [items, activeAuction?.properties?.tokenId])
 
-  const filteredItems = useMemo(() => {
-    try {
-      return items.filter(
-        (item) => activeAuction?.properties?.tokenId !== item?.nft?.tokenId
-      )
-    } catch (err: any) {
-      Sentry.captureException(err)
-      Sentry.captureMessage('DAO Grid filter error: ' + err.message)
-      return items
-    }
-  }, [dao, items, activeAuction?.properties?.tokenId])
-
-  const renderer = useMemo(() => {
-    switch (view) {
-      case 'nfts':
-        return <NFTCard />
-      case 'activity':
-        return <NounishActivityRow />
-      default:
-        return <NFTCard />
-    }
-  }, [view])
+  const renderer = useMemo(
+    () => (view === 'nfts' ? <NFTCard /> : <NounishActivityRow />),
+    [view]
+  )
 
   return (
     <Filter
+      className="dao-filter"
       grid={
         <NFTGrid
-          items={filteredItems}
+          items={items} // filteredItems
           handleLoadMore={handleLoadMore}
           isReachingEnd={isReachingEnd}
           isValidating={isValidating}
@@ -77,20 +96,23 @@ export function DaoGrid({ dao, view }: { dao: any; view: CollectionsProps['view'
   )
 }
 
-export function Collections({ collectionAddress, view = 'nfts' }: CollectionsProps) {
+export function Collections({ view = 'nfts', collectionAddress }: CollectionsProps) {
   const {
     filterStore: { clearFilters },
   } = useCollectionFilters()
+  const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
+  const dao = useMemo(() => returnDao(collectionAddress), [collectionAddress])
+  const gridProps = { items, isReachingEnd, isValidating, handleLoadMore }
 
-  const dao = returnDao(collectionAddress)
+  useEffect(() => clearFilters(), [clearFilters])
 
-  useEffect(() => {
-    clearFilters()
-  }, [collectionAddress])
-
-  if (!dao) {
-    return <CollectionGrid />
-  } else {
-    return <DaoGrid dao={dao} view={view} />
-  }
+  return (
+    <Stack className={['zora-collections-filter-parent', styles.collections]}>
+      {dao ? (
+        <DaoGrid dao={dao} view={view} {...gridProps} />
+      ) : (
+        <CollectionGrid {...gridProps} />
+      )}
+    </Stack>
+  )
 }

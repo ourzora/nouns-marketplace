@@ -1,6 +1,8 @@
 import { useMemo } from 'react'
-import { gradientForAddress } from './utils/gradient'
+
 import { Box } from '@zoralabs/zord'
+
+import { gradientForAddress } from './utils/gradient'
 
 export interface ZorbProps {
   address?: string

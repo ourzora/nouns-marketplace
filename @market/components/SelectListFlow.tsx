@@ -1,10 +1,14 @@
+import { Button } from 'components/Button'
+
 import React, { useState } from 'react'
-import { Button, Eyebrow, Stack } from '@zoralabs/zord'
-import { SaleTypeButton } from '@market/modules/PrivateAsk/SaleTypeButton'
+
 import { LearnMoreButton } from '@market/modules/PrivateAsk/LearnMoreButton'
 import { PrivateAskFlow } from '@market/modules/PrivateAsk/PrivateAskFlow'
-import { ListV3AskWizard } from './ListV3AskWizard'
+import { SaleTypeButton } from '@market/modules/PrivateAsk/SaleTypeButton'
 import { NFTObject } from '@zoralabs/nft-hooks'
+import { Eyebrow, Stack } from '@zoralabs/zord'
+
+import { ListV3AskWizard } from './ListV3AskWizard'
 
 export const V3_ASK_LISTING: string = 'V3Ask'
 export const PRIVATE_ASK_LISTING: string = 'PrivateAsk'
@@ -56,7 +60,7 @@ export function SelectListFlow({ nftObj, closeModal, ...props }: SelectListFlowP
       onClose={closeModal}
       previewURL={media?.poster?.uri}
       cancelButton={
-        <Button onClick={closeModal} w="100%" variant="secondary" borderRadius="curved">
+        <Button onClick={closeModal} w="100%" variant="secondary">
           Cancel
         </Button>
       }

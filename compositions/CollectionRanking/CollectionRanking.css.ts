@@ -1,6 +1,7 @@
-import { style, globalStyle } from '@vanilla-extract/css'
-import { atoms, color, media, radii } from '@zoralabs/zord'
 import { MAX_WIDTH } from 'styles/style-constants'
+
+import { globalStyle, style } from '@vanilla-extract/css'
+import { atoms, color, media, radii } from '@zoralabs/zord'
 
 export const rankingWrapper = style([
   {
@@ -10,7 +11,10 @@ export const rankingWrapper = style([
   atoms({
     w: '100%',
     m: 'auto',
-    gap: 'x4',
+    gap: {
+      '@initial': 'x4',
+      '@1024': 'x8',
+    },
     pt: {
       '@initial': 'x4',
       '@1024': 'x14',

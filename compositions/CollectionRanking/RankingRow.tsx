@@ -1,16 +1,19 @@
+import { Link } from 'components/Link'
+
+import { CollectionsData, useAggregate } from 'hooks'
+
 import { useMemo } from 'react'
-import { Grid, Flex, Label, Stack, StackProps } from '@zoralabs/zord'
+
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { CollectionLink, numberFormatter, roundTwoDecimals } from '@shared'
+import { Flex, Grid, Label, Stack, StackProps } from '@zoralabs/zord'
+
 import {
   rankingRow,
-  rankingStats,
   rankingRowInfo,
   rankingRowLink,
+  rankingStats,
 } from './CollectionRanking.css'
-import { clickAnimation } from 'styles/styles.css'
-import { Link } from 'components/Link'
-import { useAggregate, CollectionsData } from 'hooks'
-import { roundTwoDecimals, CollectionLink, numberFormatter } from '@shared'
 
 /* todo: add a skeleton or some kind of loading state */
 
@@ -27,20 +30,16 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
         volume: `${roundTwoDecimals(
           aggregate?.aggregateStat?.salesVolume?.chainTokenPrice
         )} ETH`,
-        floor:
-          aggregate?.aggregateStat?.floorPrice &&
-          aggregate?.aggregateStat?.floorPrice !== null
-            ? `${numberFormatter(
-                roundTwoDecimals(aggregate.aggregateStat.floorPrice)
-              )} ETH`
-            : 'NA',
+        floor: aggregate?.aggregateStat?.floorPrice
+          ? `${numberFormatter(roundTwoDecimals(aggregate.aggregateStat.floorPrice))} ETH`
+          : 'NA',
       }
   }, [aggregate])
 
   return (
     <Stack {...props}>
       <Link href={`/collections/${collection.address}`} passHref>
-        <Grid className={[rankingRow, clickAnimation]}>
+        <Grid className={[rankingRow]}>
           <Flex className={[rankingRowInfo, 'collection-row__collection-info']}>
             <CollectionThumbnail
               collectionAddress={collection.address}
@@ -125,7 +124,6 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
             <CollectionLink
               variant="secondary"
               contractAddress={collection.address}
-              borderRadius="curved"
               style={{ height: 42 }}
             >
               View

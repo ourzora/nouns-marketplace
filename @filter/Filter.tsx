@@ -1,6 +1,6 @@
-import { Box, Flex, Grid, Stack } from '@zoralabs/zord'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { SortDropdown } from './SortDropdown'
+import { Box, Flex, Grid, Stack, StackProps } from '@zoralabs/zord'
+
 import {
   filterOpen,
   filterWrapper,
@@ -8,13 +8,19 @@ import {
   openFilterWrapper,
 } from './CollectionsFilter.css'
 import { FilterHeader } from './FilterHeader'
-import { FilterSidebar } from './FilterSidebar'
-import { SelectedFilters } from './SelectedFilters'
-import { useCollectionFilters } from './providers/CollectionFilterProvider'
-import { NoFilterResults } from './NoFilterResults'
 import { FilterResultsLoading } from './FilterResultsLoading'
+import { FilterSidebar } from './FilterSidebar'
+import { NoFilterResults } from './NoFilterResults'
+import { SelectedFilters } from './SelectedFilters'
+import { SortDropdown } from './SortDropdown'
+import { useCollectionFilters } from './providers/CollectionFilterProvider'
 
-export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[] }) {
+interface FilterProps extends StackProps {
+  grid?: JSX.Element
+  initialPage?: NFTObject[]
+}
+
+export function Filter({ grid, className, ...props }: FilterProps) {
   const {
     filterStore: { showFilters },
     useSortDropdown,
@@ -26,7 +32,7 @@ export function Filter({ grid }: { grid?: JSX.Element; initialPage?: NFTObject[]
   } = useCollectionFilters()
 
   return (
-    <Stack px="x4">
+    <Stack className={className} {...props}>
       {!showFilters && useSidebarFilter && (
         <FilterHeader>
           <>

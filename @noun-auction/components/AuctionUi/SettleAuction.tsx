@@ -1,9 +1,14 @@
-import { Button, Icon, Box, Stack, StackProps, color } from '@zoralabs/zord'
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
+
+import { Button } from 'components/Button'
+
 import { useEffect, useState } from 'react'
-import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
+
 import { useNounishAuctionProvider } from '@noun-auction/providers'
+import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { PrintError } from '@shared'
+import { useButtonRequiresAuth } from '@shared/hooks'
+import { Box, Icon, Stack, StackProps, color } from '@zoralabs/zord'
 
 export interface SettleAuctionProps extends StackProps {
   useErrorMsg?: boolean
@@ -29,6 +34,8 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
     write: settleAuction,
   } = useContractWrite(config)
 
+  const buttonBehavior = useButtonRequiresAuth(settleAuction)
+
   useEffect(() => {
     if (writeContractError) setShowError(true)
   }, [writeContractError])
@@ -37,10 +44,9 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
     <>
       <Stack w={layout === 'sideBarBid' ? '100%' : 'auto'} {...props}>
         <Button
-          onClick={settleAuction}
-          // variant="reverse"
+          onClick={buttonBehavior}
           variant="secondary"
-          className={placeBidTrigger}
+          className={styles.placeBidTrigger}
           w={layout === 'sideBarBid' ? '100%' : 'auto'}
           loading={isLoading}
         >
@@ -51,11 +57,9 @@ export function SettleAuction({ useErrorMsg = false, ...props }: SettleAuctionPr
         <Button
           variant="unset"
           onClick={() => setShowError(false)}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
           w="100%"
           style={{ backgroundColor: color.background2 }}
+          className={styles.showError}
         >
           <PrintError w="100%" mt="x0" errorMessage={writeContractError.message} />
           <Box pr="x2">

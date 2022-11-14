@@ -1,21 +1,20 @@
-import { style } from '@vanilla-extract/css'
-import { atoms } from '@zoralabs/zord'
 import { MAX_WIDTH } from 'styles/style-constants'
 
-export const footerWrap = style([
-  {
-    maxWidth: MAX_WIDTH.LG,
-  },
-  atoms({
-    paddingTop: 'x10',
-    my: 'x0',
-    mx: 'auto',
-  }),
-])
+import { style } from '@vanilla-extract/css'
+import { atoms } from '@zoralabs/zord'
 
-export const footerWrapper = style([
+export const footerWrap = atoms({
+  w: '100%',
+  justifyContent: 'center',
+  pt: 'x10',
+  my: 'x0',
+  mx: 'auto',
+})
+
+export const footer = style([
   {
     borderTop: `2px solid #F2F2F2`,
+    maxWidth: MAX_WIDTH.LG,
   },
   atoms({
     w: '100%',

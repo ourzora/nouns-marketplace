@@ -1,14 +1,15 @@
-import { Label, Box, Flex } from '@zoralabs/zord'
+import { useWindowWidth } from '@shared/hooks'
 import { PoweredByZora } from '@zora-brand'
-import * as styles from './Footer.css'
-import { useWindowWidth } from '@shared'
+import { Box, Flex, Label } from '@zoralabs/zord'
 
-export function FooterComposition() {
+import * as styles from './Footer.css'
+
+export function Footer() {
   const { isLarge } = useWindowWidth()
 
   return (
-    <Flex className={styles.footerWrap}>
-      <Flex as="footer" className={styles.footerWrapper}>
+    <Flex as="footer" className={styles.footerWrap}>
+      <Flex className={styles.footer}>
         <Box gap="x2" className={styles.menu}>
           <Label px="x4" as="a" size="lg" href="/docs" passhref="/docs">
             Docs

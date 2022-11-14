@@ -1,15 +1,18 @@
-import { background, close, content, overlay } from './Modal.css'
-import * as Dialog from '@radix-ui/react-dialog'
 import clsx, { ClassValue } from 'clsx'
+
 import React from 'react'
+
+import * as Dialog from '@radix-ui/react-dialog'
 import {
-  IconProps,
+  Atoms,
   Box,
   Icon,
+  IconProps,
   ThemeProvider as ZordProvider,
   mixins,
-  Atoms,
 } from '@zoralabs/zord'
+
+import { background, close, content, overlay } from './Modal.css'
 
 export interface ModalContentProps extends Dialog.DialogContentProps {
   title?: string
@@ -111,7 +114,7 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
 )
 
 interface CloseButtonProps extends React.ComponentProps<typeof Dialog.Close> {
-  /** Modal close button css overrides: vannila extract style object */
+  /** Modal close button css overrides: vanilla extract style object */
   modalCloseButtonOverrides?: any
   /** Define 1 of three preset icon sizes */
   closeIconSize?: IconProps['size']

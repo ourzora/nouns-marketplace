@@ -1,14 +1,15 @@
-import { useCallback } from 'react'
+import { Button } from 'components/Button'
 import { useRouter } from 'next/router'
-import { Stack, Flex, Heading, Button, Box } from '@zoralabs/zord'
+
+import { useCallback } from 'react'
+
+import * as styles from '@noun-auction/styles/NounishStyles.css'
+import { lightFont } from '@shared'
 import { useNFT } from '@zoralabs/nft-hooks'
+import { Box, Flex, Heading, Stack } from '@zoralabs/zord'
 
 import { TokenInfoConfig } from '../NounishAuction'
 import { NounishThumbnail } from './NounishThumbnail'
-import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
-
-// @shared (or zord)
-import { lightFont } from '@shared'
 
 export interface TokenInfoProps extends TokenInfoConfig {
   contractAddress: string
@@ -42,11 +43,11 @@ export function TokenInfo({
   }, [])
 
   return (
-    <Flex className={['nounish-auction__token-info', tokenInfoWrapper]} {...props}>
+    <Flex className={['nounish-auction__token-info', styles.tokenInfoWrapper]} {...props}>
       {data && (
         <>
           {!hideThumbnail && (
-            <Button onClick={tokenLinkHandler} variant="unset" w="unset">
+            <Button onClick={tokenLinkHandler} variant="unset" w="unset" h="unset">
               <NounishThumbnail
                 image={data?.media?.image?.uri}
                 tokenContract={contractAddress}
@@ -57,9 +58,8 @@ export function TokenInfo({
           <Stack justify="space-between">
             {!hideTitle && (
               <Heading size="sm" as="h3">
-                {data?.metadata?.name
-                  ? data?.metadata?.name
-                  : `${data?.nft?.contract?.name} ${data?.nft?.tokenId}`}
+                {data?.metadata?.name ??
+                  `${data?.nft?.contract?.name} ${data?.nft?.tokenId}`}
               </Heading>
             )}
             {!hideCollectionTitle && (

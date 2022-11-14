@@ -1,12 +1,13 @@
-import { Stack, Flex, Heading, Label, Box, Button, BoxProps } from '@zoralabs/zord'
-import { useNFT } from '@zoralabs/nft-hooks'
-import NextLink from 'next/link'
+import { Button } from 'components/Button'
 import { returnDao } from 'constants/collection-addresses'
-import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
-import { tokenInfoWrapper } from '@noun-auction/styles/NounishStyles.css'
+import NextLink from 'next/link'
 
-// @shared (or zord)
+import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
+import { useNFT } from '@zoralabs/nft-hooks'
+import { Box, BoxProps, Flex, Heading, Label, Stack } from '@zoralabs/zord'
+
+import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 
 export interface RPCTokenInfoProps extends BoxProps {
   contractAddress: string | undefined
@@ -20,9 +21,9 @@ export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInf
   if (!tokenId || !contractAddress) return null
 
   return (
-    <Flex className={['nounish-auction__token-info', tokenInfoWrapper]} {...props}>
+    <Flex className={['nounish-auction__token-info', styles.tokenInfoWrapper]} {...props}>
       <NextLink href={`/collections/${contractAddress}/${tokenId}`} passHref>
-        <Button as="a" variant="unset">
+        <Button as="a" variant="unset" className={styles.thumbnailLink}>
           <NounishThumbnail
             image={data?.media?.image?.uri}
             tokenContract={contractAddress}
@@ -32,7 +33,7 @@ export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInf
       </NextLink>
       <Stack justify="space-between">
         <Heading size="sm" as="h3">
-          {data?.metadata?.name ? data?.metadata?.name : `${dao?.name} ${tokenId}`}
+          {data?.metadata?.name ?? `${dao?.name} ${tokenId}`}
         </Heading>
         <Box mb="x1">
           <NextLink href={`/collections/${contractAddress}`} passHref>

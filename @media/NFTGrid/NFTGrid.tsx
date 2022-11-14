@@ -1,7 +1,8 @@
-import { Grid, Stack, GridProps } from '@zoralabs/zord'
-import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { NFTGridLoadMore } from './NFTGridLoadMore'
 import { NFTProvider } from '@shared'
+import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
+import { Grid, GridProps, Stack } from '@zoralabs/zord'
+
+import { NFTGridLoadMore } from './NFTGridLoadMore'
 
 export interface NFTGridProps extends GridProps {
   items: NFTObject[]
@@ -22,7 +23,7 @@ export function NFTGrid({
   return (
     <>
       <Stack gap="x14" pb="x10">
-        <Grid {...props}>
+        <Grid {...props} p="x0">
           {items.map((nft) => (
             <NFTProvider
               key={`${nft?.nft?.contract.address}-${nft?.nft?.tokenId}`}

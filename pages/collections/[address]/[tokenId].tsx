@@ -1,15 +1,17 @@
 import { PageWrapper, Seo } from 'components'
-import { nftService } from 'services/nftService'
-import { NFTObject } from '@zoralabs/nft-hooks'
-import { NFTPageHero, NFTSidebar, NFTAttributes, NFTHistory } from 'compositions/NFTPage'
-import { Button, Grid, Stack } from '@zoralabs/zord'
-import { NFTProvider } from '@shared/providers/NFTProvider'
-import { NounishAuctionProvider } from '@noun-auction'
-import { returnDao } from 'constants/collection-addresses'
-import { useCallback, useMemo, useState } from 'react'
+import { NFTAttributes, NFTHistory, NFTPageHero, NFTSidebar } from 'compositions'
 import * as styles from 'compositions/NFTPage/NFTPage.css'
+import { returnDao } from 'constants/collection-addresses'
+import { nftService } from 'services/nftService'
 
+import { useCallback, useMemo, useState } from 'react'
+
+import { NounishAuctionProvider } from '@noun-auction'
 // const NEXT_PUBLIC_REFRESH_METADATA_URL_ROOT = 'http://api.zora.co/refresh-nft-metadata'
+import { NFTProvider } from '@shared/providers/NFTProvider'
+import { NFTObject } from '@zoralabs/nft-hooks'
+import { Button, Grid, Stack } from '@zoralabs/zord'
+
 const REFRESH_METADATA_URL_ROOT = 'https://api.zora.co/refresh-nft-metadata'
 // const REFRESH_METADATA_URL_ROOT = 'http://api.zora.co'
 

@@ -1,9 +1,13 @@
+import { Button } from 'components/Button'
+
 import React from 'react'
-import { Button, Stack } from '@zoralabs/zord'
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
-import { useModal } from '@modal'
+
 import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
+import { useModal } from '@modal'
+import { Stack } from '@zoralabs/zord'
+
 import { HeadingDescription } from '../HeadingDescription'
+import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 
 interface PrivateAskCancelSuccessProps extends CommonPrivateAskComponentProps {}
 export function PrivateAskCancelSuccess({ ...props }: PrivateAskCancelSuccessProps) {
@@ -16,7 +20,7 @@ export function PrivateAskCancelSuccess({ ...props }: PrivateAskCancelSuccessPro
         heading="Private Listing Canceled"
         description="The listing is no longer available to the buyer."
       />
-      <Button variant="secondary" onClick={requestClose} borderRadius="curved">
+      <Button variant="secondary" onClick={requestClose}>
         Close
       </Button>
     </Stack>

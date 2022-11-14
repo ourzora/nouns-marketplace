@@ -1,12 +1,20 @@
+import { Button } from 'components/Button'
+
+import React, { useEffect } from 'react'
+
 import { useModal } from '@modal'
 import { DataTable } from '@shared/components/DataTable'
 import { useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
-import { Button, Heading, Stack } from '@zoralabs/zord'
-import React, { useEffect } from 'react'
-import { useFormattedPrivateAskInfo } from '../hooks'
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { useToast } from '@toast'
 import { ToastStatus, ToastVariant } from '@toast/toastReducer'
+import {
+  // Button,
+  Heading,
+  Stack,
+} from '@zoralabs/zord'
+
+import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { useFormattedPrivateAskInfo } from '../hooks'
 
 interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}
 
@@ -38,11 +46,9 @@ export function PrivateAskViewListing({ nft, ...props }: PrivateAskFillAskSucces
         {formattedAskDetails && <DataTable items={formattedAskDetails} />}
 
         <Stack gap="x3" borderRadius="curved">
-          <Button onClick={copy} borderRadius="curved">
-            Copy Listing Data
-          </Button>
+          <Button onClick={copy}>Copy Listing Data</Button>
 
-          <Button variant="secondary" onClick={requestClose} borderRadius="curved">
+          <Button variant="secondary" onClick={requestClose}>
             Close
           </Button>
         </Stack>

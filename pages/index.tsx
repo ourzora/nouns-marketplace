@@ -1,47 +1,47 @@
-import { Stack } from '@zoralabs/zord'
-import { PageHeader, PageWrapper, Seo } from 'components'
-import { CollectionRanking } from 'compositions/CollectionRanking'
-import { DaoTable } from 'compositions/Daos'
-import React, { Component, ErrorInfo, ReactNode } from 'react'
+import { HomePageHeader, PageWrapper, Seo } from 'components'
+import { CollectionRanking, DaoTable } from 'compositions'
+import { collectionsService } from 'services/collectionsService'
+import * as styles from 'styles/styles.css'
+import { SWRConfig } from 'swr'
+import useSWR from 'swr'
 
-interface Props {
-  children?: ReactNode
-}
+import React from 'react'
 
-interface State {
-  hasError: boolean
-}
+import { CollectionsQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
+import { Grid } from '@zoralabs/zord'
 
-class Home extends Component<Props, State> {
-  public state: State = {
-    hasError: false,
-  }
+export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
-  public static getDerivedStateFromError(_: Error): State {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true }
-  }
+function Home(props: { fallback: CollectionParsed }) {
+  const { data } = useSWR('collections', collectionsService)
 
-  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo)
-  }
-
-  public render() {
-    if (this.state.hasError) {
-      return <h1>Sorry.. there was an error</h1>
-    }
-
-    return (
-      <PageWrapper direction="column" gap="x6">
+  return (
+    <SWRConfig value={{ fallback: props.fallback }}>
+      <PageWrapper direction="column" gap="x6" align="center">
         <Seo />
-        <PageHeader headline="The Nouns Marketplace" />
-        <Stack px="x4">
-          <DaoTable />
-          <CollectionRanking />
-        </Stack>
+
+        <Grid
+          px={{ '@initial': 'x4', '@1024': 'x8' }}
+          gap="x2"
+          className={styles.pageGrid}
+          justify="center"
+        >
+          <HomePageHeader
+            headline="The Nouns Marketplace"
+            mt={{ '@initial': 'x6', '@1024': 'x24' }}
+            mb={{ '@initial': 'x8', '@1024': 'x24' }}
+          />
+          <DaoTable className={styles.homepageTable} />
+          <CollectionRanking
+            collections={data?.props?.fallback}
+            className={styles.homepageTable}
+          />
+        </Grid>
       </PageWrapper>
-    )
-  }
+    </SWRConfig>
+  )
 }
+
+export const getServerSideProps = collectionsService
 
 export default Home

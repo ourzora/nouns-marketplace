@@ -1,6 +1,9 @@
-import { Box, BoxProps } from '@zoralabs/zord'
-import { NOUNS_GLASSES } from 'styles/style-constants'
 import { APP_TITLE } from 'utils/env-vars'
+
+import { NOUNS_GLASSES } from 'styles/style-constants'
+
+import { Box, BoxProps } from '@zoralabs/zord'
+
 import { nounsGlasses } from './NounsGlasses.css'
 
 interface NounsGlassesProps extends BoxProps {}

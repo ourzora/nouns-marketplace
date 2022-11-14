@@ -1,7 +1,7 @@
-import { useNounishAuctionProvider } from '@noun-auction'
-
 // @shared
 import { RawDisplayer } from 'components/utils'
+
+import { useNounishAuctionProvider } from '@noun-auction'
 
 export function AuctionDebugger() {
   const { data, daoConfig } = useNounishAuctionProvider()

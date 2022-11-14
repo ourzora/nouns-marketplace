@@ -1,5 +1,5 @@
-import { atoms, vars } from '@zoralabs/zord'
 import { keyframes, style } from '@vanilla-extract/css'
+import { atoms, vars } from '@zoralabs/zord'
 
 const MODAL_BACKDROP_LAYER = 20
 
@@ -72,7 +72,7 @@ export const close = style([
     position: 'absolute',
     top: 'x0',
     right: 'x0',
-    p: 'x3',
+    p: 'x6',
     cursor: 'pointer',
   }),
 ])

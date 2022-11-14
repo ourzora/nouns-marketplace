@@ -13,10 +13,13 @@ export const offsetY = style({
 })
 
 export const button = style({
+  height: 'unset!important', // TODO: removeme when zord is vendored
+
   selectors: {
     '&:not([disabled]):hover': {
       cursor: 'pointer',
       backgroundColor: vars.color.background2,
+      borderRadius: '12px!important', // TODO: removeme when zord is vendored
     },
   },
 })
@@ -40,4 +43,7 @@ export const popupTrigger = style([
 ])
 export const popupWrapper = style({
   borderRadius: '16px',
+})
+export const stretch = atoms({
+  alignItems: 'stretch',
 })

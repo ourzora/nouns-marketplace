@@ -1,6 +1,7 @@
+import { useMemo } from 'react'
+
 import { gradientForAddress } from '@zora-brand/utils/gradient'
 import { Box, BoxProps } from '@zoralabs/zord'
-import { useMemo } from 'react'
 
 import { avatar, avatarVariants } from './Avatar.css'
 

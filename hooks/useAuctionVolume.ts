@@ -1,7 +1,10 @@
 import useSWR from 'swr'
-import { useEffect } from 'react'
-import { zoraApiFetcher } from '@shared'
+
 import { nounishAuctionVolume } from 'data'
+
+import { useEffect } from 'react'
+
+import { zoraApiFetcher } from '@shared'
 
 export type AuctionVolumeReturnType =
   | {

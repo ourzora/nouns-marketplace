@@ -1,38 +1,33 @@
-import type { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { getDefaultWallets, RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit'
-import '@rainbow-me/rainbowkit/styles.css'
-
-import '@zoralabs/zord/index.css'
-import '../styles/globals.css'
-import '../styles/reset.css'
-import 'styles/styles.css'
-
+import { GALACTUS_BASE_URL } from 'utils/env-vars'
 import * as gtag from 'utils/gtag'
-import { createClient, chain, configureChains, WagmiConfig } from 'wagmi'
+import { WagmiConfig, chain, configureChains, createClient } from 'wagmi'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 
-import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
-import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
-import { ModalContextProvider } from '@modal'
-import { ContractProvider } from '@market'
+import { Footer, Header } from 'compositions'
+import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
+import NextNProgress from 'nextjs-progressbar'
+import { BlocklistGuard, CollectionsProvider } from 'providers'
+import 'styles/styles.css'
+import { SWRConfig } from 'swr'
 
-import { GALACTUS_BASE_URL } from 'utils/env-vars'
-
-import { CollectionsProvider } from 'providers/CollectionsProvider'
 import { useCollections } from 'hooks'
 
-import { SWRConfig } from 'swr'
-import NextNProgress from 'nextjs-progressbar'
+import { useEffect } from 'react'
 
-import { HeaderComposition } from 'compositions/Header'
-import { FooterComposition } from 'compositions/Footer'
-import { BlocklistGuard } from 'providers/BlocklistProvider'
-import { PrivateAskContractProvider } from '@market/modules/PrivateAsk/providers/'
+import { ContractProvider } from '@market'
+import { PrivateAskContractProvider } from '@market'
+import { ModalContextProvider } from '@modal'
+import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/rainbowkit'
+import '@rainbow-me/rainbowkit/styles.css'
 import { ToastContextProvider } from '@toast'
-import * as Sentry from '@sentry/react'
+import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
+import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
+import '@zoralabs/zord/index.css'
+
+import '../styles/globals.css'
+import '../styles/reset.css'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 
@@ -68,56 +63,51 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [router.events])
 
-  try {
-    return (
-      <WagmiConfig client={wagmiClient}>
-        <SWRConfig
-          value={{
-            refreshInterval: 3000,
-            fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
-          }}
-        >
-          <NFTFetchConfiguration networkId="1" strategy={strategy}>
-            <RainbowKitProvider
-              chains={chains}
-              coolMode
-              theme={lightTheme({
-                accentColor: 'black',
-                borderRadius: 'large',
-              })}
-            >
-              <BlocklistGuard>
-                <CollectionsProvider collections={collections} daos={daos}>
-                  <ModalContextProvider>
-                    <ToastContextProvider>
-                      <ContractProvider>
-                        <PrivateAskContractProvider>
-                          <HeaderComposition />
-                          <NextNProgress
-                            color="rgba(0,0,0,.5)"
-                            startPosition={0.125}
-                            stopDelayMs={200}
-                            height={2}
-                            showOnShallow={true}
-                            options={{ showSpinner: false }}
-                          />
-                          <Component {...pageProps} />
-                          <FooterComposition />
-                        </PrivateAskContractProvider>
-                      </ContractProvider>
-                    </ToastContextProvider>
-                  </ModalContextProvider>
-                </CollectionsProvider>
-              </BlocklistGuard>
-            </RainbowKitProvider>
-          </NFTFetchConfiguration>
-        </SWRConfig>
-      </WagmiConfig>
-    )
-  } catch (err) {
-    Sentry.captureException(err)
-    return <h1>Something is wrong. Devs are doing something.</h1>
-  }
+  return (
+    <WagmiConfig client={wagmiClient}>
+      <SWRConfig
+        value={{
+          refreshInterval: 3000,
+          fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
+        }}
+      >
+        <NFTFetchConfiguration networkId="1" strategy={strategy}>
+          <RainbowKitProvider
+            chains={chains}
+            coolMode
+            theme={lightTheme({
+              accentColor: 'black',
+              borderRadius: 'large',
+            })}
+          >
+            <BlocklistGuard>
+              <CollectionsProvider collections={collections} daos={daos}>
+                <ModalContextProvider>
+                  <ToastContextProvider>
+                    <ContractProvider>
+                      <PrivateAskContractProvider>
+                        <Header />
+                        <NextNProgress
+                          color="rgba(0,0,0,.5)"
+                          startPosition={0.125}
+                          stopDelayMs={200}
+                          height={2}
+                          showOnShallow={true}
+                          options={{ showSpinner: false }}
+                        />
+                        <Component {...pageProps} />
+                        <Footer />
+                      </PrivateAskContractProvider>
+                    </ContractProvider>
+                  </ToastContextProvider>
+                </ModalContextProvider>
+              </CollectionsProvider>
+            </BlocklistGuard>
+          </RainbowKitProvider>
+        </NFTFetchConfiguration>
+      </SWRConfig>
+    </WagmiConfig>
+  )
 }
 
 export default MyApp

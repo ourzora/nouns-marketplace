@@ -1,0 +1,21 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 90,
+  "no-console": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderSeparation": true,
+  "importOrder": [
+    "^[components]",
+    "^[compositions]",
+    "^[constants]",
+    "^[data]",
+    "^[docs]",
+    "^[hooks]",
+    "^[services]",
+    "^[styles]",
+    "^[types]",
+    "^@(.*)$",
+    "^[./]"
+  ]
+}
