@@ -41,6 +41,8 @@ export function NFTSidebarComponent({
 
   if (!token) return null
 
+  console.log(token)
+
   return (
     <Stack
       id="nft-info-sidebar"
@@ -48,7 +50,7 @@ export function NFTSidebarComponent({
       {...props}
     >
       <Flex>
-        <Link href={`/collections/${token.tokenContract}`}>
+        <Link href={`/collections/${token.collectionAddress}`}>
           <CollectionThumbnail
             collectionAddress={token.collectionAddress}
             showTitle

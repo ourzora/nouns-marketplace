@@ -29,7 +29,6 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
 
   const { token } = useToken({
     collectionAddress: dao.collectionAddress,
-    // FIXME: @oleg
     tokenId: activeAuction?.tokenId ?? '',
   })
 
@@ -38,7 +37,7 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
   const highestBid = activeAuction?.highestBidPrice?.chainTokenPrice?.raw || '0'
   const tokenId = activeAuction?.tokenId
   const collectionAddress = activeAuction?.collectionAddress
-  const auctionStatus = activeAuction?.status === 'ACTIVE' ? 'Live' : 'Settling'
+  const auctionStatus = activeAuction?.winner ? 'Settling' : 'Live'
 
   return (
     <DaoRowComponent
@@ -75,11 +74,7 @@ export const DaoRowComponent = ({
   treasuryAddress,
   auctionStatus,
 }: DaoRowProps) => {
-  const {
-    data: treasury,
-    isError,
-    isLoading,
-  } = useBalance({
+  const { data: treasury } = useBalance({
     addressOrName: treasuryAddress,
   })
 
@@ -122,7 +117,7 @@ export const DaoRowComponent = ({
               Treasury
             </Label>
             {treasury?.formatted ? numberFormatter(treasury?.formatted) : '...'}
-            {` ${treasury?.symbol}`}
+            {` ${treasury?.symbol ?? ''}`}
           </Box>
           <Box className={mobileCell}>
             <Label color="tertiary" className={[lightFont]}>
