@@ -110,7 +110,7 @@ export const filterCounter = style({
 
 export const filterSidebar = style([
   {
-    overflowY: 'scroll',
+    // overflowY: 'scroll',
     height: `calc(100% - ${HEADER_HEIGHT}px)`,
     '@media': {
       'screen and (max-width: 768px)': {

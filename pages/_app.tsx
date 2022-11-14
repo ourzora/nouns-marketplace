@@ -14,13 +14,11 @@ import { SWRConfig } from 'swr'
 
 import { useCollections } from 'hooks'
 
-import { useEffect } from 'react'
+import { StrictMode, useEffect } from 'react'
+import React from 'react'
 
 import { ContractProvider } from '@market'
-import {
-  // PrivateAskContractProvider,
-  V3AskContractProvider,
-} from '@market'
+import { V3AskContractProvider } from '@market'
 import { ModalContextProvider } from '@modal'
 import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
@@ -34,7 +32,7 @@ import '../styles/reset.css'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 
-const { chains, provider } = configureChains(
+export const { chains, provider } = configureChains(
   [chain.mainnet],
   [alchemyProvider({ apiKey: alchemyKey }), publicProvider()]
 )

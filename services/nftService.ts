@@ -1,6 +1,5 @@
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
 
-import { allAddresses } from 'constants/collection-addresses'
 import { GetServerSideProps } from 'next'
 
 import assert from 'assert'
@@ -37,6 +36,16 @@ export async function nftService({ params }: NFTParamsProps) {
 
   try {
     const nft = prepareJson(await zdkFetchStrategy.fetchNFT(tokenAddress, tokenId))
+
+    // technically in order to serve ONLY NOUNS we need to fetch all nouns builder address
+    // upfront, but it makes little to no sense to penalty the performance of app
+    // so we only return 404 when backend does not return valid data
+    if (!nft) {
+      return {
+        notFound: true,
+      }
+    }
+
     return {
       props: {
         nft,

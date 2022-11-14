@@ -1,5 +1,5 @@
 import { V3AskSidebar } from '@market/modules/V3Ask'
-import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTAskProps extends FlexProps {
@@ -8,5 +8,5 @@ export interface NFTAskProps extends FlexProps {
 
 export function NFTAsks({ nftObj, ...props }: NFTAskProps) {
   if (!nftObj) return null
-  return <V3AskSidebar nftObj={nftObj} borderRadius="phat" />
+  return <V3AskSidebar nftObj={nftObj} borderRadius="phat" {...props} />
 }

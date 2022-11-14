@@ -1,31 +1,38 @@
-import { returnDao } from 'constants/collection-addresses'
-
 import { useMemo } from 'react'
+import { TypeSafeToken } from 'validators/token'
 
 import { NFTAsks } from '@market/components/NFTAsks'
-import { NounishAuction, useActiveNounishAuction } from '@noun-auction'
-import { NFTObject } from '@zoralabs/nft-hooks'
+import { NounishAuction, useActiveOGNounishAuction, useOneNounsDao } from '@noun-auction'
+import { useNFT } from '@zoralabs/nft-hooks'
 import { BoxProps } from '@zoralabs/zord'
 
 import { nftMarketWrapper } from './NFTPage.css'
 
 interface NFTMarketProps extends BoxProps {
-  contractAddress: string
+  collectionAddress: string
   tokenId: string
-  nft: NFTObject
+  token: TypeSafeToken
 }
 
-export function NFTMarket({ className, contractAddress, tokenId, nft }: NFTMarketProps) {
-  const dao = returnDao(contractAddress)
-  const { data: activeAuction } = useActiveNounishAuction(dao?.marketType)
+export function NFTMarket({
+  className,
+  collectionAddress,
+  token,
+  tokenId,
+}: NFTMarketProps) {
+  const { dao } = useOneNounsDao({ collectionAddress })
+  const { data: activeAuction } = useActiveOGNounishAuction()
+  const { data: nftObj } = useNFT(collectionAddress, tokenId)
+
   const hasNounishAuction = useMemo(
     () => activeAuction?.properties?.tokenId === tokenId && dao,
     [activeAuction?.properties?.tokenId, dao, tokenId]
   )
 
-  return hasNounishAuction ? (
+  // FIXME: superlame, handle states accordingly
+  return hasNounishAuction && dao ? (
     <NounishAuction
-      daoConfig={dao!}
+      dao={dao}
       hideThumbnail
       hideTitle
       hideCollectionTitle
@@ -34,13 +41,13 @@ export function NFTMarket({ className, contractAddress, tokenId, nft }: NFTMarke
       useErrorMsg
       className={className}
     />
-  ) : (
+  ) : nftObj ? (
     <NFTAsks
       className={[nftMarketWrapper, className]}
-      nftObj={nft}
+      nftObj={nftObj}
       p="x4"
       align="flex-start"
       direction="column"
     />
-  )
+  ) : null
 }
