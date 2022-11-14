@@ -33,7 +33,7 @@ const NounsAuctionContext = createContext<{
   highestBidderAddress?: string
   hasNonZeroHighestBidder?: boolean
 }>({} as any)
-
+// FIXME: remove when AuctionEvents refactored
 export function useNounishAuctionProvider() {
   return useContext(NounsAuctionContext)
 }

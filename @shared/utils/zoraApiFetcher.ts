@@ -11,6 +11,7 @@ export async function zoraApiFetcher(query: DocumentNode, providedVariables?: an
   }
 
   try {
+    // FIXME @oleg: type
     const response = await client.request(query, variables)
     return response
   } catch (err) {

@@ -29,6 +29,7 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
 
   const { token } = useToken({
     collectionAddress: dao.collectionAddress,
+    // FIXME: @oleg
     tokenId: activeAuction?.tokenId ?? '',
   })
 

@@ -1,9 +1,8 @@
 import { PageWrapper, Seo } from 'components'
-import { NFTAttributes, NFTHistory, NFTPageHero, NFTSidebar } from 'compositions'
+import { NFTAttributes, NFTPageHero, NFTSidebar } from 'compositions'
 import * as styles from 'compositions/NFTPage/NFTPage.css'
 import { nftService } from 'services'
 
-import { useOneNounsDao } from '@noun-auction'
 import { NFTProvider } from '@shared/providers/NFTProvider'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Grid, Stack } from '@zoralabs/zord'
@@ -17,8 +16,6 @@ const NFT = ({
   tokenAddress: string
   tokenId: string
 }) => {
-  const dao = useOneNounsDao({ collectionAddress: tokenAddress })
-
   return (
     <PageWrapper direction="column">
       <Seo

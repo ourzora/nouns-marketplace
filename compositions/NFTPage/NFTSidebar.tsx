@@ -41,8 +41,6 @@ export function NFTSidebarComponent({
 
   if (!token) return null
 
-  console.log(token)
-
   return (
     <Stack
       id="nft-info-sidebar"
