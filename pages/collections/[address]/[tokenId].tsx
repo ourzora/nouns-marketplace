@@ -34,7 +34,7 @@ const NFT = ({
   const handleUpdateTokenMetadata = useCallback(async () => {
     setIsUpdatingToken(true)
     try {
-      console.log('TRYING')
+      console.log('TRYING TOKEN REFRESH')
 
       const rawResponse = await fetch(
         // `${REFRESH_METADATA_URL_ROOT}/queueMetadataRefreshForToken`,
@@ -55,7 +55,7 @@ const NFT = ({
       )
       const content = await rawResponse.json()
 
-      console.log('CONTENT', content)
+      console.log('CONTENT for token update', content)
 
       // const response = await fetch(
       //   `${REFRESH_METADATA_URL_ROOT}/${tokenAddress}/${tokenId}`,
@@ -78,7 +78,7 @@ const NFT = ({
   const handleUpdateContractMetadata = useCallback(async () => {
     setIsUpdatingContract(true)
     try {
-      console.log('TRYING')
+      console.log('TRYING CONTRACT REFRESH')
 
       const rawResponse = await fetch(
         // `${REFRESH_METADATA_URL_ROOT}/queueMetadataRefreshForContractAddress`,
@@ -98,7 +98,7 @@ const NFT = ({
       )
       const content = await rawResponse.json()
 
-      console.log('CONTENT', content)
+      console.log('CONTENT for contract update', content)
 
       // const response = await fetch(
       //   `${REFRESH_METADATA_URL_ROOT}/${tokenAddress}/${tokenId}`,
