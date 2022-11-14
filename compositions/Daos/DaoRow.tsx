@@ -3,6 +3,8 @@ import { useBalance } from 'wagmi'
 import { Link } from 'components'
 import { Button } from 'components/Button'
 
+import { isAfter } from 'date-fns'
+
 import { useToken } from 'hooks/useToken'
 
 import { TypeSafeDao } from 'validators/dao'
@@ -38,7 +40,9 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
   const highestBid = activeAuction?.highestBidPrice?.chainTokenPrice?.raw || '0'
   const tokenId = activeAuction?.tokenId
   const collectionAddress = activeAuction?.collectionAddress
-  const auctionStatus = activeAuction?.winner ? 'Settling' : 'Live'
+
+  const auctionStatus =
+    Date.now() - parseInt(activeAuction.endTime) * 1000 > 0 ? 'Settling' : 'Live'
 
   return (
     <DaoRowComponent

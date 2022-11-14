@@ -33,7 +33,7 @@ export function useNounishAuctionQuery({
     }
   )
 
-  const activeAuction = useMemo(() => {
+  const activeAuction: TypeSafeNounsAuction | undefined = useMemo(() => {
     const newData = data?.nouns?.nounsActiveMarket
 
     if (newData) {
