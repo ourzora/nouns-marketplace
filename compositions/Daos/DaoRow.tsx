@@ -3,8 +3,6 @@ import { useBalance } from 'wagmi'
 import { Link } from 'components'
 import { Button } from 'components/Button'
 
-import { isAfter } from 'date-fns'
-
 import { useToken } from 'hooks/useToken'
 
 import { TypeSafeDao } from 'validators/dao'
