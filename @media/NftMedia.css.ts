@@ -107,7 +107,7 @@ export const nftThumbnail = style([
     },
   },
   atoms({
-    backgroundColor: 'tertiary',
+    backgroundColor: 'background2',
     position: 'relative',
     overflow: 'hidden',
   }),

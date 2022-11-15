@@ -72,7 +72,10 @@ export function ActiveAuctionCardComponent({
   })
 
   const srcImg = useOptionalImageURIDecode(token) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
-  const fallbackTitle = `${token?.collectionName} #${token?.tokenId}`
+  const fallbackTitle = useMemo(
+    () => (token ? `${token?.collectionName} #${token?.tokenId}` : '...'),
+    [token]
+  )
 
   return (
     <Stack
