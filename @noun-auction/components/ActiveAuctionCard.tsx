@@ -70,7 +70,7 @@ export function ActiveAuctionCardComponent({
   })
 
   const { token } = useToken({ collectionAddress, tokenId })
-  const fallbackTitle = `${token?.collectionName} #${token?.tokenId}`
+  const fallbackTitle = token ? `${token?.collectionName} #${token?.tokenId}` : '...'
 
   return (
     <Stack

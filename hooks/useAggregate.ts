@@ -25,8 +25,13 @@ export function useAggregate(collectionAddress: string) {
     }
   )
 
+  const nftCount = zdkAggregate?.aggregateStat?.nftCount || 0
+  const floorPrice = zdkAggregate?.aggregateStat?.floorPrice
+
   return {
     aggregate: zdkAggregate as CollectionStatsAggregateQuery,
+    nftCount,
+    floorPrice,
     error: zdkAggregateError,
   }
 }
