@@ -3,6 +3,8 @@ import { collectionHeaderWrapper, daoHeaderWrapper } from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
 
+import { useMemo } from 'react'
+
 import { AddressWithLink } from '@market'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
@@ -15,6 +17,31 @@ export interface CollectionHeaderProps extends GridProps {
   layout?: 'dao' | 'collection'
 }
 
+type Props = {
+  collectionAddress: string
+  name: string
+  layout: string
+}
+
+export function PageHeaderWithStats({ collectionAddress, name, layout }: Props) {
+  const { aggregate } = useAggregate(collectionAddress)
+
+  return useMemo(
+    () => (
+      <PageHeader
+        headline={name}
+        copy={`${aggregate?.aggregateStat?.nftCount ?? '...'} NFTs`}
+        align={{
+          '@initial': 'center',
+          '@1024': layout === 'collection' ? 'center' : 'flex-start',
+        }}
+        px={layout === 'collection' ? 'x4' : 'x0'}
+      />
+    ),
+    [aggregate?.aggregateStat?.nftCount]
+  )
+}
+
 export function CollectionHeader({
   collection,
   children,
@@ -23,8 +50,6 @@ export function CollectionHeader({
   className,
   ...props
 }: CollectionHeaderProps) {
-  const { aggregate } = useAggregate(collection.address)
-
   return (
     <Grid
       className={[
@@ -62,14 +87,10 @@ export function CollectionHeader({
               w="100%"
               style={{ justifyContent: 'center' }}
             />
-            <PageHeader
-              headline={collection.name}
-              copy={`${aggregate?.aggregateStat?.nftCount ?? '...'} NFTs`}
-              align={{
-                '@initial': 'center',
-                '@1024': layout === 'collection' ? 'center' : 'flex-start',
-              }}
-              px={layout === 'collection' ? 'x4' : 'x0'}
+            <PageHeaderWithStats
+              collectionAddress={collection.address}
+              layout={layout}
+              name={collection.name ?? ''}
             />
           </Flex>
           <Flex

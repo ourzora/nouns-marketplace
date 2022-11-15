@@ -189,7 +189,6 @@ export const daoHeaderWrapper = style([
 ])
 
 export const marketStatsWrapper = atoms({
-  overflowX: 'scroll',
   w: {
     '@initial': '100vw',
     '@1024': 'auto',

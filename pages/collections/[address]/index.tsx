@@ -6,7 +6,6 @@ import {
   CollectionHeader,
   Collections,
 } from 'compositions/Collections'
-import { returnDao } from 'constants/collection-addresses'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { CollectionServiceProps, collectionService } from 'services/collectionService'
 import * as styles from 'styles/styles.css'
@@ -17,18 +16,20 @@ import { useEffect } from 'react'
 
 import { CollectionFilterProvider } from '@filter'
 import { useCollection } from '@filter/hooks/useCollection'
-import { ActiveAuctionCard } from '@noun-auction'
+import { ActiveAuctionCard, useOneNounsDao } from '@noun-auction'
 import { useWindowWidth } from '@shared'
 import { Grid, Separator, Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
-  const { contractAddress, seo } = fallback
+  const { contractAddress: collectionAddress, seo } = fallback
+
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const dao = returnDao(contractAddress)
+  const { dao } = useOneNounsDao({ collectionAddress })
+
   const { isLarge } = useWindowWidth()
-  const { aggregate } = useAggregate(contractAddress)
+  const { aggregate } = useAggregate(collectionAddress)
   // wrapper for useSWR
-  const { data } = useCollection(contractAddress)
+  const { data } = useCollection(collectionAddress)
   const collection = data || fallback?.collection
 
   useEffect(() => {
@@ -52,43 +53,43 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         gap="x2"
         alignSelf="center"
       >
-        {collection && (
-          <CollectionHeader
-            collection={collection}
-            layout={dao ? 'dao' : 'collection'}
-            currentAuction={dao ? <ActiveAuctionCard daoConfig={dao} /> : null}
-          >
-            <MarketStats contractAddress={contractAddress} />
-          </CollectionHeader>
-        )}
-      </Grid>
-      {contractAddress && (
-        <CollectionFilterProvider
-          useSidebarClearButton
-          filtersVisible={isLarge}
-          contractAddress={contractAddress}
-          useSortDropdown
-          useCollectionProperties={{
-            header: 'Traits',
-            selector: 'nouns-market-traits',
-            hideBorder: true,
-          }}
-          usePriceRange={{
-            label: 'Price',
-            defaultState: 'open',
-            hideBorder: true,
-            hideCurrencySelect: true,
-          }}
-          strings={{
-            NO_FILTER_RESULTS_COPY: `Sorry no ${collection?.name} NFTs are available for purchase on chain.`,
-          }}
+        <CollectionHeader
+          collection={collection}
+          layout={dao ? 'dao' : 'collection'}
+          currentAuction={
+            dao ? (
+              <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
+            ) : null
+          }
         >
-          <Stack>
-            {dao ? <Separator /> : <CollectionActivityHeader />}
-            <Collections collectionAddress={contractAddress} />
-          </Stack>
-        </CollectionFilterProvider>
-      )}
+          <MarketStats contractAddress={collectionAddress} />
+        </CollectionHeader>
+      </Grid>
+      <CollectionFilterProvider
+        useSidebarClearButton
+        filtersVisible={isLarge}
+        contractAddress={collectionAddress}
+        useSortDropdown
+        useCollectionProperties={{
+          header: 'Traits',
+          selector: 'nouns-market-traits',
+          hideBorder: true,
+        }}
+        usePriceRange={{
+          label: 'Price',
+          defaultState: 'open',
+          hideBorder: true,
+          hideCurrencySelect: true,
+        }}
+        strings={{
+          NO_FILTER_RESULTS_COPY: `Sorry no ${collection?.name} NFTs are available for purchase on chain.`,
+        }}
+      >
+        <Stack>
+          {dao ? <Separator /> : <CollectionActivityHeader />}
+          <Collections collectionAddress={collectionAddress} />
+        </Stack>
+      </CollectionFilterProvider>
     </PageWrapper>
   )
 }

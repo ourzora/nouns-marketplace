@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
-import { Stack } from '@zoralabs/zord'
-import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { usePrivateAskTransferHelperApproval } from './hooks/usePrivateAskTransferHelperApproval'
 
+import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
+import { PrintError } from '@shared/components/PrintError'
+import { Zorb } from '@zora-brand'
+import { Stack } from '@zoralabs/zord'
+
+import { HeadingDescription } from './HeadingDescription'
 import { LearnMoreButton } from './LearnMoreButton'
 import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
 import { CommonPrivateAskComponentProps } from './PrivateAskFlow'
-import { PrintError } from '@shared/components/PrintError'
-import { Zorb } from '@zora-brand'
-import { HeadingDescription } from './HeadingDescription'
+import { usePrivateAskTransferHelperApproval } from './hooks/usePrivateAskTransferHelperApproval'
 
 interface PrivateAskApproveTransferHelperProps extends CommonPrivateAskComponentProps {}
 

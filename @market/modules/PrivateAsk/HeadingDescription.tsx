@@ -1,5 +1,6 @@
-import { Heading, Paragraph, Stack } from '@zoralabs/zord'
 import { mediumFont } from 'styles/styles.css'
+
+import { Heading, Paragraph, Stack } from '@zoralabs/zord'
 
 interface HeadingDescriptionProps {
   heading: string

@@ -6,19 +6,19 @@ import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
 import { Label, LabelProps } from '@zoralabs/zord'
 
 export interface CollectionLinkProps extends LabelProps {
-  contractAddress: string
+  collectionAddress: string
   children: ReactNode
   className?: any
 }
 
 export function CollectionLink({
-  contractAddress,
+  collectionAddress,
   children,
   className,
   ...props
 }: CollectionLinkProps) {
   return (
-    <NextLink passHref href={`/collections/${contractAddress}`}>
+    <NextLink passHref href={`/collections/${collectionAddress}`}>
       <Label className={[placeBidTrigger, className]} as="a" size="md" {...props}>
         {children}
       </Label>

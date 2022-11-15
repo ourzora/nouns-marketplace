@@ -1,30 +1,25 @@
-import { returnDao } from 'constants/collection-addresses'
+import { NounishAuction, useOneNounsDao } from '@noun-auction'
 
-import { NounishAuction } from '@noun-auction'
-import { useNFTProvider } from '@shared'
+export function NounishActivityRow({
+  collectionAddress,
+  tokenId,
+}: {
+  collectionAddress: string
+  tokenId: string
+}) {
+  const { dao } = useOneNounsDao({ collectionAddress })
 
-export function NounishActivityRow() {
-  const {
-    hooksData: { data },
-    contractAddress,
-    tokenId,
-  } = useNFTProvider()
-
-  if (!data || !contractAddress || !tokenId) return null
-
-  const dao = returnDao(contractAddress)
-
+  if (collectionAddress || !tokenId) return null
   if (!dao) return null
 
   return (
     <NounishAuction
-      key={`${contractAddress}`}
-      daoConfig={dao}
+      key={`${collectionAddress}`}
+      dao={dao}
       showLabels
       hideCollectionTitle={false}
       borderRadius="curved"
       borderColor="text3"
-      tokenId={tokenId}
       p="x4"
     />
   )

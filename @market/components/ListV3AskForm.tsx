@@ -1,19 +1,23 @@
-import * as Yup from 'yup'
-import { useCallback, useState } from 'react'
 import { Form, Formik, FormikHelpers } from 'formik'
-import { ContractTransaction } from '@ethersproject/contracts'
+
 import { BigNumber } from 'ethers'
-import { Flex, Label, Grid } from '@zoralabs/zord'
+
+import { useCallback, useState } from 'react'
+
+import * as Yup from 'yup'
+
+import { ContractTransaction } from '@ethersproject/contracts'
+import { BigNumberField, TransactionSubmitButton } from '@market/components'
+import { useContractContext } from '@market/providers'
+import * as Sentry from '@sentry/react'
 import {
+  Currency,
+  ETH_CURRENCY_SHIM,
   PrintError,
   useAuth,
   useContractTransaction,
-  ETH_CURRENCY_SHIM,
-  Currency,
 } from '@shared'
-import { TransactionSubmitButton, BigNumberField } from '@market/components'
-import { useContractContext } from '@market/providers'
-import * as Sentry from '@sentry/react'
+import { Flex, Grid, Label } from '@zoralabs/zord'
 
 export const fixedPriceSchema = Yup.object().shape({
   currency: Yup.object().required(),

@@ -23,7 +23,6 @@ interface RankingRowProps extends StackProps {
 
 export function RankingRow({ collection, ...props }: RankingRowProps) {
   const { aggregate } = useAggregate(collection.address)
-
   const collectionPriceData = useMemo(() => {
     if (aggregate)
       return {
@@ -43,7 +42,6 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
           <Flex className={[rankingRowInfo, 'collection-row__collection-info']}>
             <CollectionThumbnail
               collectionAddress={collection.address}
-              tokenId="1"
               radius="round"
               size="sm"
             />

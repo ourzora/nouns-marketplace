@@ -1,7 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
+
 import { useERC721TokenApproval } from '@market/hooks/useERC721TokenApproval'
-import { useContractTransaction } from '@shared/hooks/useContractTransaction'
 import { ERC721_TRANSFER_HELPER_ADDRESS } from '@shared/constants'
+import { useContractTransaction } from '@shared/hooks/useContractTransaction'
 
 interface TransferHelperApprovalProps {
   contractAddress?: string

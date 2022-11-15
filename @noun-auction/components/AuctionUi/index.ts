@@ -1,3 +1,3 @@
 export * from './NounsBidForm'
 export * from './PlaceNounsBid'
-export * from './SettleAuction'
+export * from './SettleAuction/SettleAuction'
