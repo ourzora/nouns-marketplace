@@ -1,10 +1,8 @@
 import { Link } from 'components/Link'
-import { returnDao } from 'constants/collection-addresses'
 import { leadingTight, lightFont, mediumFont } from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
 
-import { useMemo } from 'react'
 import { TypeSafeDao } from 'validators/dao'
 
 import { CollectionThumbnail } from '@media'
@@ -15,15 +13,7 @@ import * as styles from './CollectionMenu.css'
 
 export function CollectionLink({ collection }: { collection: TypeSafeDao }) {
   const { requestClose } = useModal()
-  const { aggregate, nftCount, floorPrice } = useAggregate(collection.collectionAddress)
-  // const nftCount = aggregate?.aggregateStat.nftCount
-  // const floorPrice = aggregate?.aggregateStat.floorPrice
-
-  const isDao = useMemo(
-    () => returnDao(collection.collectionAddress) !== undefined,
-    [collection.collectionAddress]
-  )
-  const tagText = useMemo(() => (isDao ? 'DAO' : 'COLLECTION'), [isDao])
+  const { nftCount, floorPrice } = useAggregate(collection.collectionAddress)
 
   return (
     <Link href={`/collections/${collection.collectionAddress}`} passHref>
@@ -36,7 +26,7 @@ export function CollectionLink({ collection }: { collection: TypeSafeDao }) {
                 {collection.name}
               </Label>
               <Tag inactive backgroundColor="background2">
-                {tagText}
+                DAO
               </Tag>
             </Flex>
             {floorPrice && (
