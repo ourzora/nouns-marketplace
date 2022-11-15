@@ -26,8 +26,6 @@ export function DescriptionWithMaxLines({
     [baseLineheight, maxLines]
   )
 
-  const d =
-    '12313123123234123423jsafdklsfjadkslfjasdfkl;adjsfl;aksdfjdsl;fkajdsfl;ksjdfadls;fjkads'
   return (
     <Box
       pos="relative"
