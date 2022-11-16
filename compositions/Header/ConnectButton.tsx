@@ -1,6 +1,6 @@
 import { useAccount, useDisconnect, useNetwork } from 'wagmi'
 
-import { Button } from 'components/Button'
+import { Button, NounButtonProps } from 'components/Button'
 import Link from 'next/link'
 import { noTextWrap } from 'styles/styles.css'
 
@@ -17,7 +17,11 @@ import {
   popUpWrapper,
 } from './Header.css'
 
-export const ConnectButton = ({ connectText = 'Connect', ...props }) => {
+interface ConnectButtonProps extends NounButtonProps {
+  connectText?: string
+}
+
+export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButtonProps) {
   const { disconnect } = useDisconnect({
     onError(error) {
       console.log('Error', error)
@@ -31,7 +35,13 @@ export const ConnectButton = ({ connectText = 'Connect', ...props }) => {
 
   if (!address || !chain) {
     return (
-      <Button className={connectButton} size="sm" onClick={openConnectModal} {...props}>
+      <Button
+        className={connectButton}
+        size="md"
+        w="auto"
+        onClick={openConnectModal}
+        {...props}
+      >
         {connectText}
       </Button>
     )
@@ -44,6 +54,8 @@ export const ConnectButton = ({ connectText = 'Connect', ...props }) => {
         px="x5"
         className={connectButton}
         onClick={openChainModal}
+        size="md"
+        w="auto"
         {...props}
       >
         <Text as="span" variant="paragraph-lg">
@@ -61,7 +73,7 @@ export const ConnectButton = ({ connectText = 'Connect', ...props }) => {
         placement="bottom-end"
         wrapperClassName={popUpWrapper}
         trigger={
-          <Button variant="ghost" type="button">
+          <Button variant="ghost" type="button" size="md" w="auto">
             <Box as="span">{displayName}</Box>
             <Icon id="ChevronDown" />
           </Button>

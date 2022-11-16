@@ -4,7 +4,6 @@ import * as styles from 'styles/styles.css'
 import { Flex, Grid } from '@zoralabs/zord'
 
 import { CollectionMenu } from '../CollectionMenu'
-import { AboutLink } from './AboutLink'
 import { ConnectButton } from './ConnectButton'
 import * as headerStyles from './Header.css'
 import { NounsLink } from './NounsLink'
@@ -42,7 +41,7 @@ export function Header() {
             justify={{ '@initial': 'flex-start', '@1024': 'space-between' }}
           >
             <AboutModal />
-            <ConnectButton />
+            <ConnectButton width="auto" />
           </Flex>
         </Flex>
       </Grid>

@@ -95,8 +95,6 @@ export const connectButton = style([
     },
   },
   atoms({
-    w: '100%',
-    ml: 'x6',
     justifyContent: {
       '@initial': 'flex-end',
       '@1024': 'flex-start',
