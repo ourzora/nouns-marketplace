@@ -22,7 +22,7 @@ export const poweredByContainer = style(
       '@media': {
         [media.min1024]: {
           marginTop: 0,
-          flexFlow: 'row-reverse',
+          // flexFlow: 'row-reverse',
         },
       },
     },
