@@ -1,7 +1,10 @@
 import { ImageWithNounFallback } from 'components'
 import { Link } from 'components/Link'
 
+import { useToken } from 'hooks/useToken'
+
 import { useMemo } from 'react'
+import { TypeSafeToken } from 'validators/token'
 
 import { NFTCardMarket } from '@market'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
@@ -13,35 +16,55 @@ import {
   titleWrapper,
 } from '@media/NftMedia.css'
 import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
-import { useIsOwner, useNFTProvider, useTitleWithFallback } from '@shared'
+import { useIsOwner, useNFTProvider } from '@shared'
 import { Box, Flex, Heading, Separator, Stack } from '@zoralabs/zord'
 
-export function NFTCard() {
-  const { nft, contractAddress, tokenId } = useNFTProvider()
-  const { isOwner } = useIsOwner(nft)
-  const { fallbackTitle } = useTitleWithFallback({
-    contractAddress,
-    tokenId,
-    defaultTitle: nft?.metadata?.name,
-  })
+type Props = {
+  collectionAddress: string
+}
 
-  const srcImg = useOptionalImageURIDecode(nft!) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
+export function NFTCard({ collectionAddress }: Props) {
+  const { nft } = useNFTProvider()
+  const tokenId = nft?.nft?.tokenId
+
+  if (!tokenId || !collectionAddress) return null
+
+  return <NFTCardOuterComponent tokenId={tokenId} collectionAddress={collectionAddress} />
+}
+
+export function NFTCardOuterComponent({
+  collectionAddress,
+  tokenId,
+}: Props & { tokenId: string }) {
+  const { token } = useToken({ collectionAddress, tokenId })
+
+  if (!token || !collectionAddress) return null
+
+  return <NFTCardComponent token={token} collectionAddress={collectionAddress} />
+}
+
+export function NFTCardComponent({
+  collectionAddress,
+  token,
+}: Props & { token: TypeSafeToken }) {
+  const { isOwner } = useIsOwner(token)
+  const fallbackTitle = token.collectionName ?? '..'
+  const srcImg = useOptionalImageURIDecode(token) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
+  const tokenId = token.tokenId
 
   const useTitleScroll = useMemo(() => {
-    if (nft?.metadata && nft?.metadata?.name) {
-      return nft?.metadata?.name.split('').length > 25
+    if (token?.metadata?.name) {
+      return token?.metadata?.name.split('').length > 25
     }
-  }, [nft?.metadata])
-
-  if (!nft || !contractAddress || !tokenId) return null
+  }, [token?.metadata?.name])
 
   return (
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
-      <Link href={`/collections/${contractAddress}/${tokenId}`}>
+      <Link href={`/collections/${collectionAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="background2">
-          {contractAddress && tokenId && (
+          {collectionAddress && tokenId && (
             <ImageWithNounFallback
-              tokenContract={contractAddress}
+              tokenContract={collectionAddress}
               tokenId={tokenId}
               srcImg={srcImg}
             />
@@ -57,26 +80,25 @@ export function NFTCard() {
           }}
         >
           <Heading as="h4" size="sm" className={titleHeading}>
-            {fallbackTitle}
+            {fallbackTitle} #{token.tokenId}
           </Heading>
         </Flex>
         <Flex align="center" gap="x2" justify="space-between">
-          <Link href={`/collections/${contractAddress}`}>
+          <Link href={`/collections/${collectionAddress}`}>
             <Flex align="center" gap="x2">
               <CollectionThumbnail
-                collectionAddress={contractAddress}
-                initialNFT={nft}
+                collectionAddress={collectionAddress}
                 radius="round"
                 size="xs"
               />
-              <Heading size="xs">{nft?.nft?.contract.name}</Heading>
+              <Heading size="xs">{token.collectionName}</Heading>
             </Flex>
           </Link>
         </Flex>
         {isOwner && (
           <>
             <Separator mt="x1" />
-            <NFTCardMarket nftObj={nft} />
+            <NFTCardMarket />
           </>
         )}
       </Stack>

@@ -114,7 +114,7 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
 )
 
 interface CloseButtonProps extends React.ComponentProps<typeof Dialog.Close> {
-  /** Modal close button css overrides: vannila extract style object */
+  /** Modal close button css overrides: vanilla extract style object */
   modalCloseButtonOverrides?: any
   /** Define 1 of three preset icon sizes */
   closeIconSize?: IconProps['size']

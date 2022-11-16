@@ -15,6 +15,7 @@ export const buttonVariants = {
         width: 'auto',
         borderRadius: '12px!important',
         fontSize: '16px!important',
+        height: `${vars.size.x10}!important`, // 40px
         '@media': {
           [media.min768]: {
             fontSize: '18px!important',
@@ -25,7 +26,6 @@ export const buttonVariants = {
         display: 'inline-flex',
         px: 'x4',
         py: 'x2',
-        height: 'x10', // 40px
         minWidth: 'x19',
         fontWeight: 'label',
       }),
@@ -33,14 +33,17 @@ export const buttonVariants = {
     md: [
       {
         fontSize: '16px!important',
+        height: `${vars.size.x10}!important`, // 40px
         '@media': {
           [media.min768]: {
             fontSize: '18px!important',
           },
+          [media.min1024]: {
+            height: `${vars.size.x14}!important`, // 52px
+          },
         },
       },
       atoms({
-        height: { '@initial': 'x10', '@1024': 'x14' }, // 40px -> 56px
         px: { '@initial': 'x4', '@1024': 'x6' },
         py: { '@initial': 'x2', '@1024': 'x4' },
         fontWeight: 'label',
@@ -49,16 +52,19 @@ export const buttonVariants = {
     lg: [
       {
         fontSize: '20px!important',
+        height: `${vars.size.x14}!important`, // 56px
         '@media': {
           [media.min768]: {
             fontSize: '22px!important',
+          },
+          [media.min1024]: {
+            height: `${vars.size.x18}!important`, // 72px
           },
         },
       },
       atoms({
         px: 'x6',
         py: { '@initial': 'x4', '@1024': 'x6' },
-        height: { '@initial': 'x14', '@1024': 'x18' }, // 56px -> 72px
         minWidth: 'x23',
         fontWeight: 'label',
       }),
@@ -190,7 +196,7 @@ export const buttonVariants = {
       borderStyle: 'unset',
       minWidth: 'unset',
       padding: 'unset',
-      height: 'unset',
+      height: 'unset!important',
       fontSize: 'unset',
       fontWeight: 'unset',
       borderRadius: 'unset!important',

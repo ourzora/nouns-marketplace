@@ -1,5 +1,4 @@
 import { Link } from 'components/Link'
-import { clickAnimation } from 'styles/styles.css'
 
 import { CollectionsData, useAggregate } from 'hooks'
 
@@ -24,31 +23,25 @@ interface RankingRowProps extends StackProps {
 
 export function RankingRow({ collection, ...props }: RankingRowProps) {
   const { aggregate } = useAggregate(collection.address)
-
   const collectionPriceData = useMemo(() => {
     if (aggregate)
       return {
         volume: `${roundTwoDecimals(
           aggregate?.aggregateStat?.salesVolume?.chainTokenPrice
         )} ETH`,
-        floor:
-          aggregate?.aggregateStat?.floorPrice &&
-          aggregate?.aggregateStat?.floorPrice !== null
-            ? `${numberFormatter(
-                roundTwoDecimals(aggregate.aggregateStat.floorPrice)
-              )} ETH`
-            : 'NA',
+        floor: aggregate?.aggregateStat?.floorPrice
+          ? `${numberFormatter(roundTwoDecimals(aggregate.aggregateStat.floorPrice))} ETH`
+          : 'NA',
       }
   }, [aggregate])
 
   return (
     <Stack {...props}>
       <Link href={`/collections/${collection.address}`} passHref>
-        <Grid className={[rankingRow, clickAnimation]}>
+        <Grid className={[rankingRow]}>
           <Flex className={[rankingRowInfo, 'collection-row__collection-info']}>
             <CollectionThumbnail
               collectionAddress={collection.address}
-              tokenId="1"
               radius="round"
               size="sm"
             />

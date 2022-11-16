@@ -1,8 +1,11 @@
 import { ImageWithNounFallback } from 'components'
 
-import { useMemo } from 'react'
+import { useToken } from 'hooks/useToken'
 
-import { NFTObject, useNFT } from '@zoralabs/nft-hooks'
+import { useMemo } from 'react'
+import { TypeSafeToken } from 'validators/token'
+
+import { useFirstTokenID } from '@shared/hooks'
 import { Box, BoxProps, Flex, Label } from '@zoralabs/zord'
 
 import { nftThumbnail } from './NftMedia.css'
@@ -31,28 +34,54 @@ export const returnThumbnailSize = (size: SizeProps) => {
 }
 
 export interface CollectionThumbnailProps extends BoxProps {
-  collectionAddress: string | undefined
-  tokenId?: string
-  initialNFT?: NFTObject
+  collectionAddress: string
   size?: SizeProps
   radius?: 'curved' | 'round' | 'phat'
-  useTitle?: boolean
+  showTitle?: boolean
   thumbnailStyle?: any
 }
 
 export function CollectionThumbnail({
   collectionAddress,
-  tokenId = '1',
-  size = 'md',
-  radius = 'curved',
-  useTitle = false,
-  thumbnailStyle,
-  initialNFT,
   ...props
 }: CollectionThumbnailProps) {
-  const { data: nft = initialNFT } = useNFT(collectionAddress, tokenId)
-  const { image: rawImageFallback } = useRawImageTransform(nft?.media?.image?.uri)
-  const decodedImgSrc = useOptionalImageURIDecode(nft!) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
+  // showing first token as CollectionThumbnail
+  const { firstTokenID } = useFirstTokenID(collectionAddress)
+  const { token } = useToken({ collectionAddress, tokenId: firstTokenID.toString() })
+  if (!token) return <CollectionThumbnailPlaceholder {...props} />
+
+  return <CollectionThumbnailComponent token={token} {...props} />
+}
+
+export function CollectionThumbnailPlaceholder({
+  size = 'md',
+  radius = 'curved',
+}: Omit<CollectionThumbnailProps, 'tokenId' | 'collectionAddress'>) {
+  const thumbnailSize = useMemo(() => returnThumbnailSize(size), [size])
+  return (
+    <Box
+      h={thumbnailSize}
+      borderRadius={radius}
+      className={['zora-media__nft-thumbnail', nftThumbnail]}
+    />
+  )
+}
+
+export function CollectionThumbnailComponent({
+  token,
+  size = 'md',
+  radius = 'curved',
+  showTitle = false,
+  thumbnailStyle,
+  className,
+  ...props
+}: Omit<CollectionThumbnailProps, 'tokenId' | 'collectionAddress'> & {
+  token: TypeSafeToken
+}) {
+  const { image: rawImageFallback } = useRawImageTransform(token.image?.url ?? undefined)
+
+  const decodedImgSrc = useOptionalImageURIDecode(token) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
+
   const srcImg = useMemo(
     () => decodedImgSrc ?? rawImageFallback,
     [decodedImgSrc, rawImageFallback]
@@ -60,10 +89,8 @@ export function CollectionThumbnail({
 
   const thumbnailSize = useMemo(() => returnThumbnailSize(size), [size])
 
-  if (!collectionAddress) return null
-
   return (
-    <Flex align="center" gap="x4" {...props}>
+    <Flex align="center" gap="x4" {...props} className={className}>
       <Box
         h={thumbnailSize}
         borderRadius={radius}
@@ -71,11 +98,11 @@ export function CollectionThumbnail({
       >
         <ImageWithNounFallback
           srcImg={srcImg}
-          tokenId={tokenId}
-          tokenContract={collectionAddress}
+          tokenId={token.tokenId}
+          tokenContract={token.collectionAddress}
         />
       </Box>
-      {useTitle && <Label size="lg">{nft?.nft?.contract?.name}</Label>}
+      {showTitle && <Label size="lg">{token.collectionName}</Label>}
     </Flex>
   )
 }

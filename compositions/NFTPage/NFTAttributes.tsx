@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { lightFont } from '@shared'
 import { useNFTProvider } from '@shared/providers/NFTProvider'
-import { BoxProps, Grid, Heading, Label, Stack, radii } from '@zoralabs/zord'
+import { Box, BoxProps, Grid, Heading, Label, Stack } from '@zoralabs/zord'
 
 import {
   nftAttribute,

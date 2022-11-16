@@ -1,10 +1,11 @@
-import { NFTObject } from '@zoralabs/nft-hooks'
 import React from 'react'
 
-import { useRelevantMarket, useAskHelper } from '@market/hooks'
+import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { useIsOwner } from '@shared'
-import { PrivateAskOwnerTrigger } from './PrivateAskOwnerTrigger'
+import { NFTObject } from '@zoralabs/nft-hooks'
+
 import { PrivateAskBuyerTrigger } from './PrivateAskBuyerTrigger'
+import { PrivateAskOwnerTrigger } from './PrivateAskOwnerTrigger'
 import { PrivateAskVisitorTrigger } from './PrivateAskVisitorTrigger'
 
 interface PrivateAskTriggerProps {

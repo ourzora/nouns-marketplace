@@ -13,9 +13,11 @@ export function formatContractError(error: TransactionError | Error) {
   if ('transaction' in error) {
     switch (error.reason) {
       case 'insufficient funds for intrinsic transaction cost':
-        return 'Your balance is too low to make this transaction'
+        return 'Your balance is too low to make this transaction.'
       case "execution reverted: Auction doesn't exist":
-        return 'Auction no longer exists'
+        return 'Auction no longer exists.'
+      case 'execution reverted: Must send at least reservePrice':
+        return 'Bid value must exceed reserve price.'
     }
 
     switch (error?.error?.message) {
@@ -46,7 +48,7 @@ export function formatContractError(error: TransactionError | Error) {
   }
 
   if (error?.message?.includes('user rejected transaction')) {
-    return 'User rejected transaction'
+    return 'User rejected transaction.'
   }
 
   return (

@@ -1,12 +1,9 @@
 import { PageHeader } from 'components/PageHeader'
-import {
-  clickAnimation,
-  collectionHeaderWrapper,
-  collectionNameThumbDao,
-  daoHeaderWrapper,
-} from 'styles/styles.css'
+import { collectionHeaderWrapper, daoHeaderWrapper } from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
+
+import { useMemo } from 'react'
 
 import { AddressWithLink } from '@market'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
@@ -20,21 +17,47 @@ export interface CollectionHeaderProps extends GridProps {
   layout?: 'dao' | 'collection'
 }
 
+type Props = {
+  collectionAddress: string
+  name: string
+  layout: string
+}
+
+export function PageHeaderWithStats({ collectionAddress, name, layout }: Props) {
+  const { aggregate } = useAggregate(collectionAddress)
+
+  return useMemo(
+    () => (
+      <PageHeader
+        headline={name}
+        copy={`${aggregate?.aggregateStat?.nftCount ?? '...'} NFTs`}
+        align={{
+          '@initial': 'center',
+          '@1024': layout === 'collection' ? 'center' : 'flex-start',
+        }}
+        px={layout === 'collection' ? 'x4' : 'x0'}
+      />
+    ),
+    [aggregate?.aggregateStat?.nftCount]
+  )
+}
+
 export function CollectionHeader({
   collection,
   children,
   currentAuction,
   layout = 'collection',
+  className,
   ...props
 }: CollectionHeaderProps) {
-  const { aggregate } = useAggregate(collection.address)
-
   return (
     <Grid
       className={[
         collectionHeaderWrapper,
         layout === 'dao' ? daoHeaderWrapper : 'collections-header-wrapper',
+        className,
       ]}
+      mt={{ '@initial': 'x6', '@1024': 'x8' }}
       {...props}
     >
       <Stack
@@ -50,45 +73,26 @@ export function CollectionHeader({
             '@1024': 'x0',
           }}
         >
-          <Grid
-            className={[layout === 'dao' ? collectionNameThumbDao : '']}
+          <Flex
             align="center"
-            pt={{
-              '@initial': 'x6',
-              '@1024': 'x0',
-            }}
-            gap={{
-              '@initial': 'x0',
-              '@1024': layout === 'dao' ? 'x0' : 'x3',
-            }}
+            direction={{ '@initial': 'column', '@1024': 'row' }}
+            gap={{ '@initial': 'x2', '@1024': 'x4' }}
           >
-            <Stack
+            <CollectionThumbnail
+              collectionAddress={collection.address}
+              radius="round"
+              m="auto"
+              size="lg"
               h={layout === 'dao' ? '100%' : 'auto'}
-              align={layout === 'dao' ? 'center' : 'flex-start'}
               w="100%"
-              position="relative"
-            >
-              <CollectionThumbnail
-                collectionAddress={collection.address}
-                radius="round"
-                m="auto"
-                size="lg"
-              />
-            </Stack>
-            <PageHeader
-              headline={collection.name}
-              copy={`${aggregate?.aggregateStat?.nftCount ?? '...'} NFTs`}
-              align={{
-                '@initial': 'center',
-                '@1024': layout === 'collection' ? 'center' : 'flex-start',
-              }}
-              px={layout === 'collection' ? 'x4' : 'x0'}
-              py={{
-                '@initial': 'x0',
-                '@1024': layout === 'dao' ? 'x4' : 'x0',
-              }}
+              style={{ justifyContent: 'center' }}
             />
-          </Grid>
+            <PageHeaderWithStats
+              collectionAddress={collection.address}
+              layout={layout}
+              name={collection.name ?? ''}
+            />
+          </Flex>
           <Flex
             w="100%"
             justify={{
@@ -99,7 +103,6 @@ export function CollectionHeader({
             <AddressWithLink
               address={collection.address}
               useEns={false}
-              className={clickAnimation}
               backgroundColor="background2"
               px="x4"
               py="x2"

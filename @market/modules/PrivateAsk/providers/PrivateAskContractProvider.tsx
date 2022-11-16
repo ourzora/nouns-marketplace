@@ -1,10 +1,12 @@
-import React, { createContext, useEffect, useState, useContext } from 'react'
 import { useAccount, useSigner } from 'wagmi'
-import { AsksPrivateEth as AsksPrivateEthInterface } from '@zoralabs/v3/dist/typechain/AsksPrivateEth'
-import { AsksPrivateEth__factory } from '@zoralabs/v3/dist/typechain/factories/AsksPrivateEth__factory'
-import { ZoraModuleManager as ZoraModuleManagerInterface } from '@zoralabs/v3/dist/typechain/ZoraModuleManager'
-import { ZoraModuleManager__factory as ModuleManagerFactory } from '@zoralabs/v3/dist/typechain/factories/ZoraModuleManager__factory'
+
+import React, { createContext, useContext, useEffect, useState } from 'react'
+
 import { MODULE_MANAGER_ADDRESS, PRIVATE_ASKS_ADDRESS, defaultProvider } from '@shared'
+import { AsksPrivateEth as AsksPrivateEthInterface } from '@zoralabs/v3/dist/typechain/AsksPrivateEth'
+import { ZoraModuleManager as ZoraModuleManagerInterface } from '@zoralabs/v3/dist/typechain/ZoraModuleManager'
+import { AsksPrivateEth__factory } from '@zoralabs/v3/dist/typechain/factories/AsksPrivateEth__factory'
+import { ZoraModuleManager__factory as ModuleManagerFactory } from '@zoralabs/v3/dist/typechain/factories/ZoraModuleManager__factory'
 
 const defaultModuleManager = ModuleManagerFactory.connect(
   MODULE_MANAGER_ADDRESS,

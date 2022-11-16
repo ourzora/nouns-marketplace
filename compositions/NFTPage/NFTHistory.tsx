@@ -1,17 +1,15 @@
-import { returnDao } from 'constants/collection-addresses'
-
-import { NounishAuction } from '@noun-auction'
-import { useNFTProvider } from '@shared'
+import { NounishAuction, useOneNounsDao } from '@noun-auction'
 import { Heading, Stack, StackProps } from '@zoralabs/zord'
 
 import { nftMarketWrapper } from './NFTPage.css'
 
-export interface NFTHistoryProps extends StackProps {}
+export interface NFTHistoryProps extends StackProps {
+  collectionAddress: string
+  tokenId: string
+}
 
-export function NFTHistory({ ...props }: NFTHistoryProps) {
-  const { contractAddress, tokenId } = useNFTProvider()
-
-  const dao = returnDao(contractAddress)
+export function NFTHistory({ collectionAddress, tokenId, ...props }: NFTHistoryProps) {
+  const { dao } = useOneNounsDao({ collectionAddress })
 
   if (!dao) return null
 
@@ -27,8 +25,7 @@ export function NFTHistory({ ...props }: NFTHistoryProps) {
         <Heading as="h3">History</Heading>
         <NounishAuction
           showAuctionRow={false}
-          daoConfig={dao}
-          tokenId={tokenId}
+          dao={dao}
           showBidHistory
           layout="historyOnly"
         />

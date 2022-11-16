@@ -10,12 +10,8 @@ import { NFTObject } from '@zoralabs/nft-hooks'
 export function useTokenHelper(nftObj: NFTObject) {
   const router = useRouter()
   const { nft } = nftObj
-  const { aggregate } = useAggregate(nft?.contract?.address!)
+  const { nftCount } = useAggregate(nft?.contract?.address!)
   const { firstTokenID, isFirstTokenIDZero } = useFirstTokenID(nft?.contract?.address!)
-  const nftCount = useMemo(
-    () => aggregate?.aggregateStat?.nftCount,
-    [aggregate?.aggregateStat?.nftCount]
-  )
 
   const tokenID = useMemo(
     () => (nft?.tokenId ? parseInt(nft?.tokenId) : undefined),
@@ -31,7 +27,8 @@ export function useTokenHelper(nftObj: NFTObject) {
   const hasNextNFT = useMemo(() => {
     // !0 === true
     if (tokenID === undefined) return false
-    const lastTokenId = nftCount - (isFirstTokenIDZero ? 1 : 0)
+    const lastTokenId =
+      nftCount === 0 ? nftCount : nftCount - (isFirstTokenIDZero ? 1 : 0)
     return lastTokenId > tokenID
   }, [nftCount, tokenID, isFirstTokenIDZero])
 

@@ -1,2 +1,1 @@
-export const roundFourDecimals = (value?: number) =>
-  value ? Math.round(value * 10000) / 10000 : 0
+export const roundFourDecimals = (value?: number) => (value ? value.toFixed(4) : 0)

@@ -10,7 +10,6 @@ export function useSearchQuery(query: string, entityType: SearchableEntity) {
       zdk
         .search({
           pagination: {},
-          /* @ts-ignore */
           query: query,
           filter: { entityType },
         })

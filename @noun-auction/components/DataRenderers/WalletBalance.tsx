@@ -2,7 +2,8 @@ import { useBalance } from 'wagmi'
 
 import { useMemo } from 'react'
 
-import { SharedDataRendererProps, useNounishAuctionProvider } from '@noun-auction'
+import { auctionWrapperVariants } from '@noun-auction'
+import { SharedDataRendererProps } from '@noun-auction'
 import { lightFont, roundFourDecimals } from '@shared'
 import { Flex, Label } from '@zoralabs/zord'
 
@@ -11,12 +12,12 @@ export function WalletBalance({
   layoutDirection = 'row',
   address,
   showLabels,
+  layout,
   ...props
 }: {
   address: string
+  layout: keyof typeof auctionWrapperVariants['layout']
 } & SharedDataRendererProps) {
-  const { layout } = useNounishAuctionProvider()
-
   const { data } = useBalance({
     addressOrName: address,
   })

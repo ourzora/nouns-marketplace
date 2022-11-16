@@ -4,7 +4,7 @@ import { WagmiConfig, chain, configureChains, createClient } from 'wagmi'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 
-import { FooterComposition, HeaderComposition } from 'compositions'
+import { Footer, Header } from 'compositions'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar'
@@ -14,7 +14,8 @@ import { SWRConfig } from 'swr'
 
 import { useCollections } from 'hooks'
 
-import { useEffect } from 'react'
+import { StrictMode, useEffect } from 'react'
+import React from 'react'
 
 import { ContractProvider } from '@market'
 import { PrivateAskContractProvider } from '@market'
@@ -31,7 +32,7 @@ import '../styles/reset.css'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 
-const { chains, provider } = configureChains(
+export const { chains, provider } = configureChains(
   [chain.mainnet],
   [alchemyProvider({ apiKey: alchemyKey }), publicProvider()]
 )
@@ -64,49 +65,51 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.events])
 
   return (
-    <WagmiConfig client={wagmiClient}>
-      <SWRConfig
-        value={{
-          refreshInterval: 3000,
-          fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
-        }}
-      >
-        <NFTFetchConfiguration networkId="1" strategy={strategy}>
-          <RainbowKitProvider
-            chains={chains}
-            coolMode
-            theme={lightTheme({
-              accentColor: 'black',
-              borderRadius: 'large',
-            })}
-          >
-            <BlocklistGuard>
-              <CollectionsProvider collections={collections} daos={daos}>
-                <ModalContextProvider>
-                  <ToastContextProvider>
-                    <ContractProvider>
-                      <PrivateAskContractProvider>
-                        <HeaderComposition />
-                        <NextNProgress
-                          color="rgba(0,0,0,.5)"
-                          startPosition={0.125}
-                          stopDelayMs={200}
-                          height={2}
-                          showOnShallow={true}
-                          options={{ showSpinner: false }}
-                        />
-                        <Component {...pageProps} />
-                        <FooterComposition />
-                      </PrivateAskContractProvider>
-                    </ContractProvider>
-                  </ToastContextProvider>
-                </ModalContextProvider>
-              </CollectionsProvider>
-            </BlocklistGuard>
-          </RainbowKitProvider>
-        </NFTFetchConfiguration>
-      </SWRConfig>
-    </WagmiConfig>
+    <StrictMode>
+      <WagmiConfig client={wagmiClient}>
+        <SWRConfig
+          value={{
+            refreshInterval: 3000,
+            fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
+          }}
+        >
+          <NFTFetchConfiguration networkId="1" strategy={strategy}>
+            <RainbowKitProvider
+              chains={chains}
+              coolMode
+              theme={lightTheme({
+                accentColor: 'black',
+                borderRadius: 'large',
+              })}
+            >
+              <BlocklistGuard>
+                <CollectionsProvider collections={collections} daos={daos}>
+                  <ModalContextProvider>
+                    <ToastContextProvider>
+                      <ContractProvider>
+                        <PrivateAskContractProvider>
+                          <Header />
+                          <NextNProgress
+                            color="rgba(0,0,0,.5)"
+                            startPosition={0.125}
+                            stopDelayMs={200}
+                            height={2}
+                            showOnShallow={true}
+                            options={{ showSpinner: false }}
+                          />
+                          <Component {...pageProps} />
+                          <Footer />
+                        </PrivateAskContractProvider>
+                      </ContractProvider>
+                    </ToastContextProvider>
+                  </ModalContextProvider>
+                </CollectionsProvider>
+              </BlocklistGuard>
+            </RainbowKitProvider>
+          </NFTFetchConfiguration>
+        </SWRConfig>
+      </WagmiConfig>
+    </StrictMode>
   )
 }
 

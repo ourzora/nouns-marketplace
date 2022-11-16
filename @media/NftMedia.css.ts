@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, media } from '@zoralabs/zord'
 import { recipe } from '@vanilla-extract/recipes'
+import { atoms, media } from '@zoralabs/zord'
 
 export const nftGridWrapperVariants = {
   layout: {
@@ -11,11 +11,9 @@ export const nftGridWrapperVariants = {
           [media.min576]: {
             gridTemplateColumns: 'repeat(2, 1fr)',
           },
-          [`(min-width: 1240px)`]: {
+          // [`(min-width: 1240px)`]: {
+          [media.min1440]: {
             gridTemplateColumns: 'repeat(3, 1fr)',
-          },
-          [`(min-width: 2000px)`]: {
-            gridTemplateColumns: 'repeat(4, 1fr)',
           },
         },
       },
@@ -32,6 +30,7 @@ export const nftGridWrapper = recipe({
       pos: 'relative',
       margin: 'auto',
       gap: 'x4',
+      p: 'x0',
     }),
   ]),
   defaultVariants: {
@@ -79,7 +78,12 @@ export const titleWrapper = style([
 
 export const titleScroll = style([
   {
-    overflowX: 'scroll',
+    overflowX: 'auto',
+    '@media': {
+      'screen and (max-width: 768px)': {
+        overflowX: 'scroll',
+      },
+    },
     maskImage:
       'linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))',
   },
@@ -103,7 +107,7 @@ export const nftThumbnail = style([
     },
   },
   atoms({
-    backgroundColor: 'tertiary',
+    backgroundColor: 'background2',
     position: 'relative',
     overflow: 'hidden',
   }),

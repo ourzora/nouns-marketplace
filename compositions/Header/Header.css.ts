@@ -1,19 +1,29 @@
-import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE } from 'styles/style-constants'
-import { MAX_WIDTH } from 'styles/style-constants'
+// import { HEADER_LAYER } from 'constants/layers'
+import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
 
 import { style } from '@vanilla-extract/css'
-import { atoms, color, media, space } from '@zoralabs/zord'
+import { atoms, color, media, space, vars } from '@zoralabs/zord'
 
 export const headerWrapper = style([
+  atoms({
+    w: '100%',
+    justifyContent: 'center',
+  }),
+])
+
+export const header = style([
   {
+    width: MAX_WIDTH.XL,
     height: HEADER_HEIGHT_MOBILE,
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottom: `2px solid ${color.background2}`,
-    maxWidth: MAX_WIDTH.XL,
+    gridColumn: '1/span 4',
     margin: '0 auto',
     '@media': {
       [media.min1024]: {
+        maxWidth: `calc(${MAX_WIDTH.XL}px + (2 * ${vars.space.x8}))`,
+        gridColumn: '1/span 12',
         height: HEADER_HEIGHT,
         borderBottom: 'none',
       },
@@ -21,7 +31,6 @@ export const headerWrapper = style([
   },
   atoms({
     w: '100%',
-    p: 'x4',
     pos: 'relative',
     alignItems: {
       '@1024': 'center',
@@ -50,7 +59,6 @@ export const nounsGlassesLink = style([
     mr: 'x6',
     cursor: 'pointer',
     pos: 'relative',
-    h: '100%',
   }),
 ])
 

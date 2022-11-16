@@ -14,7 +14,7 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
   }
 
   return (
-    <Stack className={useCollectionProperties?.selector}>
+    <Stack className={['filter-properties', useCollectionProperties?.selector]}>
       {useCollectionProperties?.header && (
         <Label className="zord-attributesHeading" mb="x4" size="lg">
           {useCollectionProperties?.header}
@@ -26,7 +26,7 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
           className={!useCollectionProperties?.hideBorder && filterOptionsWrapper}
         >
           <Accordion label={property.traitType ? property.traitType : ''}>
-            <Stack pb="x4" gap="x5">
+            <Stack pb="x4" gap="x5" className={['filter-properties-list']}>
               {property.valueMetrics.map((valueMetric) => (
                 <FilterPropertySelect
                   key={valueMetric.value}

@@ -1,35 +1,81 @@
 import { ImageWithNounFallback } from 'components'
 import { Link } from 'components/Link'
 
+import { useToken } from 'hooks/useToken'
+
+import { useMemo } from 'react'
+import { TypeSafeNounsAuction } from 'validators/auction'
+import { TypeSafeToken } from 'validators/token'
+
 import {
   cardImageWrapper,
   cardWrapper,
   titleHeading,
   titleWrapper,
 } from '@media/NftMedia.css'
+import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
+import { useNounishAuctionQuery } from '@noun-auction/hooks'
+import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import {
-  NounishAuctionProvider,
-  useNounishAuctionProvider,
-} from '@noun-auction/providers'
-import { activeAuctionCardData } from '@noun-auction/styles/NounishStyles.css'
-import { DaoConfigProps } from '@noun-auction/typings'
-import { useTitleWithFallback } from '@shared'
+  activeAuctionCardData,
+  auctionWrapperVariants,
+} from '@noun-auction/styles/NounishStyles.css'
 import { Box, Flex, Grid, Heading, Separator, Stack } from '@zoralabs/zord'
 
 import { AuctionCountdown } from './ActiveAuction'
 import { PlaceNounsBid, SettleAuction } from './AuctionUi'
 import { AuctionBidder, AuctionHighBid } from './DataRenderers'
 
-function CardContents() {
-  const {
-    daoConfig: { contractAddress },
-    tokenId,
-    timerComplete,
-  } = useNounishAuctionProvider()
+export function ActiveAuctionCard({
+  collectionAddress,
+  ...props
+}: {
+  collectionAddress: string
+  layout: keyof typeof auctionWrapperVariants['layout']
+}) {
+  const { activeAuction } = useNounishAuctionQuery({
+    collectionAddress,
+  })
 
-  const { fallbackTitle } = useTitleWithFallback({ contractAddress, tokenId })
+  const { token } = useToken({ collectionAddress, tokenId: activeAuction?.tokenId ?? '' })
 
-  if (!tokenId) return null
+  const compo = useMemo(
+    () =>
+      activeAuction && token ? (
+        <ActiveAuctionCardComponent
+          activeAuction={activeAuction}
+          tokenId={activeAuction.tokenId}
+          token={token}
+          {...props}
+        />
+      ) : null,
+    [activeAuction, token, props]
+  )
+
+  return compo
+}
+
+export function ActiveAuctionCardComponent({
+  tokenId,
+  layout,
+  activeAuction,
+  token,
+}: {
+  tokenId: string
+  layout: keyof typeof auctionWrapperVariants['layout']
+  activeAuction: TypeSafeNounsAuction
+  token: TypeSafeToken
+}) {
+  const { collectionAddress, endTime } = activeAuction
+  const { isEnded: auctionCompleted } = useIsAuctionCompleted({
+    activeAuction,
+  })
+
+  const srcImg = useOptionalImageURIDecode(token) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
+  const fallbackTitle = useMemo(
+    () => (token ? `${token?.collectionName} #${token?.tokenId}` : '...'),
+    [token]
+  )
 
   return (
     <Stack
@@ -39,11 +85,13 @@ function CardContents() {
       className={cardWrapper}
       style={{ maxWidth: '500px' }}
     >
-      <Link href={`/collections/${contractAddress}/${tokenId}`}>
-        <Box w="100%" className={cardImageWrapper} backgroundColor="background2">
-          {tokenId && (
-            <ImageWithNounFallback tokenContract={contractAddress} tokenId={tokenId} />
-          )}
+      <Link href={`/collections/${collectionAddress}/${tokenId}`}>
+        <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
+          <ImageWithNounFallback
+            srcImg={srcImg}
+            tokenContract={collectionAddress}
+            tokenId={tokenId}
+          />
         </Box>
       </Link>
       <Stack gap="x2" mt="x4" px="x4" pb="x4">
@@ -71,28 +119,50 @@ function CardContents() {
               {fallbackTitle}
             </Heading>
           </Flex>
-          {timerComplete ? <SettleAuction /> : <PlaceNounsBid useModal />}
+          {auctionCompleted ? (
+            <SettleAuction
+              auctionContractAddress={activeAuction.auction}
+              layout={layout}
+            />
+          ) : (
+            <PlaceNounsBid
+              tokenId={tokenId}
+              collectionAddress={collectionAddress}
+              layout={layout}
+            />
+          )}
         </Flex>
         <Separator mt="x1" />
         <Grid className={activeAuctionCardData}>
-          <AuctionCountdown showLabels align="flex-start" direction="column" />
-          <AuctionHighBid showLabels align="flex-start" direction="column" />
+          <AuctionCountdown
+            auctionCompleted={auctionCompleted}
+            auctionEndTime={endTime}
+            showLabels
+            styles={{ align: 'flex-start', direction: 'column' }}
+          />
+          <AuctionHighBid
+            auctionCompleted={auctionCompleted}
+            highestBid={activeAuction.highestBidPrice?.nativePrice?.raw}
+            collectionAddress={activeAuction.collectionAddress}
+            showLabels
+            layout={layout}
+            styles={{
+              align: 'flex-start',
+              direction: 'column',
+            }}
+          />
           <AuctionBidder
-            align="flex-start"
-            direction="column"
+            highestBidder={activeAuction.highestBidder}
+            layout={layout}
+            styles={{
+              align: 'flex-start',
+              direction: 'column',
+            }}
             showLabels
             useAvatar={false}
           />
         </Grid>
       </Stack>
     </Stack>
-  )
-}
-
-export function ActiveAuctionCard({ daoConfig }: { daoConfig: DaoConfigProps }) {
-  return (
-    <NounishAuctionProvider daoConfig={daoConfig}>
-      <CardContents />
-    </NounishAuctionProvider>
   )
 }
