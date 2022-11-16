@@ -1,28 +1,31 @@
-import { Flex, Label } from '@zoralabs/zord'
+import { Flex, FlexProps, Label } from '@zoralabs/zord'
 
-import { poweredByContainer, zoraBrand, zoraTagline } from './ZoraBrand.css'
-import { Zorb, ZorbProps } from './Zorb'
+import { poweredByContainer, zoraBrand } from './ZoraBrand.css'
+import { Zorb } from './Zorb'
 
-export function PoweredByZora({ vertical, ...props }: ZorbProps) {
+interface PoweredByProps extends FlexProps {
+  size?: number
+}
+
+export function PoweredByZora({ size = 32, className, ...props }: PoweredByProps) {
   return (
     <Flex
       as="a"
-      className={poweredByContainer}
+      className={[poweredByContainer, className]}
       align="center"
-      gap="x3"
+      justify="center"
+      gap="x2"
       href="https://zora.co"
       target="_blank"
       rel="noreferrer"
     >
-      <Zorb {...props} size={50} />
-      <Flex>
-        <Label size="lg" className={zoraTagline}>
-          Powered by
-        </Label>
-        <Label size="lg" textTransform="uppercase" className={zoraBrand}>
-          Zora
-        </Label>
-      </Flex>
+      <Label size="lg" textTransform="uppercase" className={zoraBrand}>
+        Made with
+      </Label>
+      <Zorb size={size} />
+      <Label size="lg" textTransform="uppercase" className={zoraBrand}>
+        on Ethereum
+      </Label>
     </Flex>
   )
 }
