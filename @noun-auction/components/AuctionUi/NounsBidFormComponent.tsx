@@ -48,7 +48,7 @@ export function NounsBidFormComponent({
 }: NounsBidFormComponentProps) {
   const { address } = useAccount()
   const { requestClose } = useModal()
-  const { isEnded: auctionCompleted, countdownText } = useIsAuctionCompleted({
+  const { isEnded: auctionCompleted } = useIsAuctionCompleted({
     activeAuction,
   })
   const { minBidAmount } = useNounBidIncrement(

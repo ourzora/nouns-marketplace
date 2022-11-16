@@ -34,7 +34,7 @@ export function V3AskApproveTransferHelper({
   return isAwaitingApprovalCheck ? (
     <V3AskCheckApprovalSpinner text="Checking Zora Transfer Helper Approval..." />
   ) : (
-    <Stack gap="x8">
+    <Stack gap="x8" {...props}>
       <Stack gap="x8" align="center">
         <Zorb size={52} />
         <V3AskHeadingDescription

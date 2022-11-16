@@ -80,7 +80,7 @@ export function NFTCardComponent({
           }}
         >
           <Heading as="h4" size="sm" className={titleHeading}>
-            {fallbackTitle}
+            {fallbackTitle} #{token.tokenId}
           </Heading>
         </Flex>
         <Flex align="center" gap="x2" justify="space-between">
