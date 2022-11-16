@@ -9,8 +9,6 @@ import { useFirstTokenID } from '@shared/hooks'
 import { Box, BoxProps, Flex, Label } from '@zoralabs/zord'
 
 import { nftThumbnail } from './NftMedia.css'
-import { useOptionalImageURIDecode } from './hooks/useImageURIDecode'
-import { useRawImageTransform } from './hooks/useRawImageTransform'
 
 export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
 
@@ -78,15 +76,6 @@ export function CollectionThumbnailComponent({
 }: Omit<CollectionThumbnailProps, 'tokenId' | 'collectionAddress'> & {
   token: TypeSafeToken
 }) {
-  const { image: rawImageFallback } = useRawImageTransform(token.image?.url ?? undefined)
-
-  const decodedImgSrc = useOptionalImageURIDecode(token) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
-
-  const srcImg = useMemo(
-    () => decodedImgSrc ?? rawImageFallback,
-    [decodedImgSrc, rawImageFallback]
-  )
-
   const thumbnailSize = useMemo(() => returnThumbnailSize(size), [size])
 
   return (
@@ -96,11 +85,7 @@ export function CollectionThumbnailComponent({
         borderRadius={radius}
         className={['zora-media__nft-thumbnail', nftThumbnail]}
       >
-        <ImageWithNounFallback
-          srcImg={srcImg}
-          tokenId={token.tokenId}
-          tokenContract={token.collectionAddress}
-        />
+        <ImageWithNounFallback token={token} />
       </Box>
       {showTitle && <Label size="lg">{token.collectionName}</Label>}
     </Flex>

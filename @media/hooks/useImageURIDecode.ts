@@ -10,13 +10,16 @@ import { TypeSafeToken } from 'validators/token'
 
 export function useOptionalImageURIDecode(token: TypeSafeToken) {
   return useMemo(() => {
+    const uri = token?.image?.url
     if (token?.image.mimeType === 'image/svg+xml') {
-      const uri = token?.image?.url
-      return uri?.includes('data:image/svg+xml') ? uri : `data:image/svg+xml,${uri}` // proper handling of URI-encoded SVG
+      return uri?.includes('data:image/svg+xml') || uri?.includes('https://api.zora.co')
+        ? uri
+        : `data:image/svg+xml,${uri}` // proper handling of URI-encoded SVG
     } else {
+      // console.log('ARWEAVE?', token?.image.mimeType)
       // FIXME: will take some data massage
       // @ts-ignore-next-line
-      return token?.image?.mediaEncoding?.poster ?? ''
+      return token?.image?.mediaEncoding?.poster ?? uri
     }
   }, [token?.image])
 }
