@@ -13,7 +13,6 @@ import {
   titleHeading,
   titleWrapper,
 } from '@media/NftMedia.css'
-import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
 import { useNounishAuctionQuery } from '@noun-auction/hooks'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import {
@@ -71,7 +70,6 @@ export function ActiveAuctionCardComponent({
     activeAuction,
   })
 
-  const srcImg = useOptionalImageURIDecode(token) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
   const fallbackTitle = useMemo(
     () => (token ? `${token?.collectionName} #${token?.tokenId}` : '...'),
     [token]
@@ -87,11 +85,7 @@ export function ActiveAuctionCardComponent({
     >
       <Link href={`/collections/${collectionAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
-          <ImageWithNounFallback
-            srcImg={srcImg}
-            tokenContract={collectionAddress}
-            tokenId={tokenId}
-          />
+          <ImageWithNounFallback token={token} />
         </Box>
       </Link>
       <Stack gap="x2" mt="x4" px="x4" pb="x4">

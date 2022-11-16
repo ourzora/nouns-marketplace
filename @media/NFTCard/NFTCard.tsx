@@ -15,7 +15,6 @@ import {
   titleScroll,
   titleWrapper,
 } from '@media/NftMedia.css'
-import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
 import { useIsOwner, useNFTProvider } from '@shared'
 import { Box, Flex, Heading, Separator, Stack } from '@zoralabs/zord'
 
@@ -49,7 +48,6 @@ export function NFTCardComponent({
 }: Props & { token: TypeSafeToken }) {
   const { isOwner } = useIsOwner(token)
   const fallbackTitle = token.collectionName ?? '..'
-  const srcImg = useOptionalImageURIDecode(token) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
   const tokenId = token.tokenId
 
   const useTitleScroll = useMemo(() => {
@@ -62,13 +60,7 @@ export function NFTCardComponent({
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
       <Link href={`/collections/${collectionAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="background2">
-          {collectionAddress && tokenId && (
-            <ImageWithNounFallback
-              tokenContract={collectionAddress}
-              tokenId={tokenId}
-              srcImg={srcImg}
-            />
-          )}
+          {collectionAddress && tokenId && <ImageWithNounFallback token={token} />}
         </Box>
       </Link>
       <Stack gap="x2" mt="x2" px="x4" pb="x4" flex={1}>
