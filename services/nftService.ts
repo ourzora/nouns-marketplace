@@ -62,7 +62,8 @@ export async function nftService({ params }: NFTParamsProps) {
         nft,
         tokenAddress: tokenAddress,
         tokenId: tokenId,
-        offchainOrders: validOffchainOrders,
+        // offchainOrders: validOffchainOrders,
+        offchainOrders: allOffchainOrders,
       },
     }
   } catch (err) {

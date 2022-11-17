@@ -1,5 +1,7 @@
 import { Button } from 'components/Button'
 import { OpenSeaIcon } from 'components/Icon'
+import { ArrowLeft } from 'components/Icon/ArrowLeft'
+import { ArrowRight } from 'components/Icon/ArrowRight'
 import { mediumFont } from 'styles/styles.css'
 
 import React, { useCallback, useMemo, useState } from 'react'
@@ -89,6 +91,7 @@ export function PriceCards({ nft, offchainOrders }: PriceCardsProps) {
   const cardCount = useMemo(() => offchainOrders.length, [offchainOrders])
   const [currentCard, setCurrentCard] = useState<number>(0)
   const { address: userAddress } = useAuth()
+
   const nextCard = useMemo(() => {
     const isLast = currentCard === cardCount - 1
     if (cardCount === 1) return undefined
@@ -112,19 +115,29 @@ export function PriceCards({ nft, offchainOrders }: PriceCardsProps) {
           <Flex gap="x1" pos="absolute" top="x4" right="x4">
             <Button
               size="sm"
-              w="x4"
-              variant="circle"
+              // w="x3"
+              w="x1"
+              variant="unset"
+              // padding="x1"
               onClick={() => setCurrentCard(prevCard)}
+              style={{
+                borderRadius: '100px!important',
+                padding: '4px',
+                border: '1px solid green',
+              }}
             >
-              ←
+              <ArrowLeft />
             </Button>
             <Button
               size="sm"
-              w="x4"
-              variant="circle"
+              // w="x3"
+              w="x1"
+              // variant="circle"
+              variant="unset"
+              // padding="x1"
               onClick={() => setCurrentCard(nextCard)}
             >
-              →
+              <ArrowRight />
             </Button>
           </Flex>
         )}
@@ -138,7 +151,7 @@ export function PriceCards({ nft, offchainOrders }: PriceCardsProps) {
         <Flex style={{ gap: '2px' }}>
           {offchainOrders.map(
             (
-              order, // order is unused here, but is necessary for the current card to be highlighted
+              _order, // <-- unused, but necessary for the current card to be highlighted
               idx
             ) => (
               <Box
