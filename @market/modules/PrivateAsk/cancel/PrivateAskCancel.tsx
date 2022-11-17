@@ -7,13 +7,16 @@ import { TransactionSubmitButton } from '@market/components/TransactionSubmitBut
 import { useListingDataTable } from '@market/hooks'
 import { useModal } from '@modal/useModal'
 import { DataTable, PrintError, formatContractError } from '@shared'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import { Flex, Stack } from '@zoralabs/zord'
 
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import * as styles from '../PrivateAskFlow.css'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 
-interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {}
+interface PrivateAskCancelProps extends CommonPrivateAskComponentProps {
+  nft: NFTObject
+}
 
 export function PrivateAskCancel({ onNext, ...props }: PrivateAskCancelProps) {
   const { isSubmitting, cancelAsk, txStatus, txInProgress, txError, finalizedTx } =

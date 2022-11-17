@@ -37,7 +37,7 @@ export enum LilNounsAuctionEventTypes {
 
 export type DaoConfigProps = {
   name: string
-  contractAddress: string
+  collectionAddress: string
   auctionContractAddress: string
   marketType: NounishMarketTypes
   classifierPrefix: ClassifierPrefixProps

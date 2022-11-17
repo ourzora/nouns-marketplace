@@ -78,7 +78,12 @@ export const titleWrapper = style([
 
 export const titleScroll = style([
   {
-    overflowX: 'scroll',
+    overflowX: 'auto',
+    '@media': {
+      'screen and (max-width: 768px)': {
+        overflowX: 'scroll',
+      },
+    },
     maskImage:
       'linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))',
   },
@@ -102,7 +107,7 @@ export const nftThumbnail = style([
     },
   },
   atoms({
-    backgroundColor: 'tertiary',
+    backgroundColor: 'background2',
     position: 'relative',
     overflow: 'hidden',
   }),

@@ -1,11 +1,15 @@
 import { Button } from 'components/Button'
 
+import { TypeSafeToken } from 'validators/token'
+
 import { FillV3AskWizard, NFTOwner } from '@market/components'
 import { useRelevantMarket } from '@market/hooks'
 import { ModalComposition, useModal } from '@modal'
 import { lightFont, useIsOwner } from '@shared'
-import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
+import {
+  MARKET_INFO_STATUSES,
+  NFTObject,
+} from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { Box, Flex, FlexProps, Heading, Label, Stack } from '@zoralabs/zord'
 
 export interface FillV3AskModalProps extends FlexProps {
@@ -14,6 +18,7 @@ export interface FillV3AskModalProps extends FlexProps {
 
 export function FillV3AskModal({ nftObj, ...props }: FillV3AskModalProps) {
   const { nft, metadata, markets } = nftObj
+
   const { ask } = useRelevantMarket(markets)
 
   const { requestClose } = useModal()

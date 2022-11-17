@@ -1,8 +1,6 @@
 import { ReactNode } from 'react'
 
 import { AuctionEvents, BidTransactionEvent, EventWithTimestamp } from '@noun-auction'
-// @noun-auction
-import { useNounishAuctionProvider } from '@noun-auction/providers'
 import { auctionEventRow } from '@noun-auction/styles/NounishStyles.css'
 import { Box, Stack, StackProps } from '@zoralabs/zord'
 
@@ -11,14 +9,17 @@ interface BidHistoryProps extends StackProps {
 }
 
 export function AuctionHistory({ children, ...props }: BidHistoryProps) {
-  const {
-    data,
-    daoConfig: { classifierPrefix },
-    noAuctionHistory,
-  } = useNounishAuctionProvider()
+  // const {
+  //   data,
+  //   dao: { classifierPrefix },
+  //   noAuctionHistory,
+  // } = useNounishAuctionProvider()
 
-  if (!data) return null
-  if (noAuctionHistory) return null
+  // FIXME
+  const classifierPrefix = {
+    keyPrefix: '',
+  }
+  const events = { nodes: [] }
 
   const auctionEventTypeKey = () =>
     classifierPrefix !== null
@@ -28,8 +29,8 @@ export function AuctionHistory({ children, ...props }: BidHistoryProps) {
   return (
     <Stack {...props} as="ul">
       {children}
-      {data.events.nodes.length &&
-        data.events.nodes.map((event: any) => (
+      {events.nodes.length &&
+        events.nodes.map((event: any) => (
           <Box
             as="li"
             className={auctionEventRow}

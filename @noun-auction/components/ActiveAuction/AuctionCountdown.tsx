@@ -1,45 +1,55 @@
-import { useEffect } from 'react'
+import { fromUnixTime, intervalToDuration } from 'date-fns'
 
-import { useCountdown } from '@noun-auction/hooks/useCountdown'
-// @noun-auction
-import { useNounishAuctionProvider } from '@noun-auction/providers'
+import { useMemo, useState } from 'react'
+
+import { useInterval } from '@noun-auction/hooks/useInterval'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
-import { SharedDataRendererProps } from '@noun-auction/typings'
-// @shared
 import { lightFont } from '@shared'
 import { Flex, Label } from '@zoralabs/zord'
+
+type Props = {
+  showLabels?: boolean
+  endedCopy?: string
+  label?: string
+  layoutDirection?: 'row' | 'column'
+  layout?: string
+  className?: string[]
+  auctionCompleted: boolean
+  auctionEndTime: string
+  styles: { [k in string]: any }
+}
 
 export function AuctionCountdown({
   showLabels,
   endedCopy = 'Bidding & Settling',
   label = 'Ends in',
   layoutDirection = 'row',
-  ...props
-}: {
-  endedCopy?: string
-} & SharedDataRendererProps) {
-  const { setTimerComplete, layout, activeAuction } = useNounishAuctionProvider()
+  layout,
+  styles,
+  auctionCompleted,
+  auctionEndTime,
+}: Props) {
+  const [now, setNow] = useState(new Date())
 
-  const { text, isEnded } = useCountdown(
-    activeAuction?.properties?.startTime,
-    activeAuction?.properties?.endTime
-  )
+  const countdownText = useMemo(() => {
+    if (auctionCompleted || !auctionEndTime) return ''
 
-  useEffect(() => {
-    setTimerComplete(isEnded)
-  }, [
-    isEnded,
-    activeAuction,
-    activeAuction?.properties?.startTime,
-    activeAuction?.properties?.endTime,
-  ])
+    const { hours, minutes, seconds } = intervalToDuration({
+      start: now,
+      end: fromUnixTime(parseInt(auctionEndTime)),
+    })
+
+    return [hours + 'h', minutes + 'm', seconds + 's'].join(' ')
+  }, [auctionCompleted, auctionEndTime, now])
+
+  useInterval(() => setNow(new Date()), 1000)
 
   return (
     <Flex
       direction={layoutDirection}
       wrap="wrap"
       gap={layoutDirection === 'row' ? 'x2' : 'x0'}
-      {...props}
+      {...styles}
     >
       {showLabels && (
         <Label
@@ -49,17 +59,17 @@ export function AuctionCountdown({
           style={{ lineHeight: '1.15' }}
           align={{ '@initial': 'left', '@1024': 'right' }}
         >
-          {!isEnded ? label : 'Status'}&nbsp;
+          {!auctionCompleted ? label : 'Status'}&nbsp;
         </Label>
       )}
-      {!isEnded ? (
+      {!auctionCompleted ? (
         <Label
           size="md"
           style={{ lineHeight: '1.15' }}
           align={{ '@initial': 'left', '@1024': 'right' }}
           className={[layout === 'sideBarBid' && sideBarUpperLabel]}
         >
-          {text}
+          {countdownText}
         </Label>
       ) : (
         <Label
@@ -74,3 +84,5 @@ export function AuctionCountdown({
     </Flex>
   )
 }
+
+AuctionCountdown.whyDidYouRender = true

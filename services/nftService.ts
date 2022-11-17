@@ -32,13 +32,6 @@ export async function nftService({ params }: NFTParamsProps) {
 
   if (!tokenAddress || !tokenId) return false
 
-  // Ensure token is a nounish collection/dao
-  if (tokenAddress && !allAddresses.includes(tokenAddress.toLowerCase())) {
-    return {
-      notFound: true,
-    }
-  }
-
   try {
     const nft = prepareJson(await zdkFetchStrategy.fetchNFT(tokenAddress, tokenId))
 
@@ -46,10 +39,23 @@ export async function nftService({ params }: NFTParamsProps) {
     const [allOffchainOrders] = await Promise.all([
       fetchOffchainOrdersForToken(tokenAddress, tokenId),
     ])
+
     const validOffchainOrders = await asyncFilter(
       allOffchainOrders,
       async (order: any) => await isSeaportOrderValid(order)
     )
+
+    // console.log('allOffchainOrders', allOffchainOrders)
+    console.log('validOffchainOrders', validOffchainOrders)
+
+    // technically in order to serve ONLY NOUNS we need to fetch all nouns builder address
+    // upfront, but it makes little to no sense to penalty the performance of app
+    // so we only return 404 when backend does not return valid data
+    if (!nft) {
+      return {
+        notFound: true,
+      }
+    }
 
     return {
       props: {

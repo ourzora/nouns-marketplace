@@ -4,39 +4,55 @@ import Link from 'next/link'
 
 import { useMemo } from 'react'
 
-import { SharedDataRendererProps, useNounishAuctionProvider } from '@noun-auction'
-import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
-import { lightFont, useShortAddress } from '@shared'
+import { AddressZero } from '@ethersproject/constants'
+import {
+  auctionWrapperVariants,
+  sideBarUpperLabel,
+} from '@noun-auction/styles/NounishStyles.css'
+import { isAddressMatch, lightFont, useShortAddress } from '@shared'
 import { addressToEtherscanLink } from '@shared/utils/addressToEtherscanLink'
-import { Flex, Icon, Label } from '@zoralabs/zord'
+import { Flex, FlexProps, Icon, Label } from '@zoralabs/zord'
 
 import { EnsAvatar } from './EnsAvatar'
+
+interface AuctionBidderProps extends FlexProps {
+  label?: string
+  layoutDirection?: 'row' | 'column'
+  showLabels?: boolean
+  useAvatar?: boolean
+  layout: keyof typeof auctionWrapperVariants['layout']
+  highestBidder?: string
+  className?: string
+}
 
 export function AuctionBidder({
   label = 'Top bidder',
   layoutDirection = 'row',
   showLabels,
   useAvatar = true,
+  layout,
+  highestBidder,
+  className,
   ...props
-}: {
-  useAvatar?: boolean
-} & SharedDataRendererProps) {
-  const { layout, highestBidderAddress, hasNonZeroHighestBidder } =
-    useNounishAuctionProvider()
+}: AuctionBidderProps) {
+  const hasNonZeroHighestBidder = useMemo(
+    () => !isAddressMatch(highestBidder, AddressZero),
+    [highestBidder]
+  )
 
   const { data: ensName } = useEnsName({
-    address: highestBidderAddress,
+    address: highestBidder,
   })
 
-  const shortAddress = useShortAddress(highestBidderAddress)
+  const shortAddress = useShortAddress(highestBidder)
   const bidderEtherscanLink = useMemo(
-    () =>
-      highestBidderAddress ? addressToEtherscanLink(highestBidderAddress) : undefined,
-    [highestBidderAddress]
+    () => (highestBidder ? addressToEtherscanLink(highestBidder) : undefined),
+    [highestBidder]
   )
 
   return (
     <Flex
+      className={className}
       direction={layoutDirection}
       target="_blank"
       gap={layoutDirection === 'row' ? 'x2' : 'x0'}
@@ -83,8 +99,8 @@ export function AuctionBidder({
                       </Label>
                       {useAvatar && (
                         <>
-                          {layout !== 'sideBarBid' && highestBidderAddress ? (
-                            <EnsAvatar address={highestBidderAddress} />
+                          {layout !== 'sideBarBid' && highestBidder ? (
+                            <EnsAvatar address={highestBidder} />
                           ) : (
                             <Icon id="ArrowRightAngle" />
                           )}

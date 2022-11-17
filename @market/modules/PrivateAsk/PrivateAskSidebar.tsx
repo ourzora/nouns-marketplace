@@ -1,6 +1,8 @@
 import React from 'react'
+
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Stack, StackProps } from '@zoralabs/zord'
+
 import { PrivateAskModal } from './PrivateAskModal'
 
 interface PrivateAskSidebarProps extends StackProps {

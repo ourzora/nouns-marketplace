@@ -1,7 +1,9 @@
+import { ethers } from 'ethers'
+
+import { useMemo } from 'react'
+
 import sdnlistDev from '../sdnlist.dev.json'
 import sdnlist from '../sdnlist.json'
-import { ethers } from 'ethers'
-import { useMemo } from 'react'
 
 const environment = process.env.NODE_ENV || 'development'
 

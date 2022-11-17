@@ -11,10 +11,9 @@ export const auctionWrapperVariants = {
         gridAutoFlow: 'row',
         borderRadius: radii.phat,
         border: `2px solid ${color.background2}`,
-        height: '244px',
         '@media': {
           [media.min1024]: {
-            gridTemplateColumns: '250px repeat(2, 1fr) 1.25fr 155px',
+            gridTemplateColumns: '350px repeat(2, 1fr) 1.25fr 155px',
             height: '68px',
             borderRadius: 0,
             border: 'none',
@@ -300,7 +299,7 @@ export const auctionEventRow = style([
 
 /* STYLE UTILS */
 export const lightFont = style({
-  fontWeight: 300,
+  fontWeight: '300!important',
   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
 })
 
@@ -308,7 +307,6 @@ export const lightFont = style({
 export const tokenInfoWrapper = style([
   {
     gridColumn: '1 / 3',
-    borderBottom: `1px solid ${color.background2}`,
     gridTemplateColumns: '68px auto',
     gridTemplateRows: '68px',
     '@media': {
@@ -405,3 +403,10 @@ export const showError = atoms({
   alignItems: 'center',
   justifyContent: 'center',
 })
+
+export const rowCollectionName = style([
+  {
+    fontSize: 'large',
+    fontWeight: 'bold',
+  },
+])

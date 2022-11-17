@@ -1,6 +1,7 @@
+import React from 'react'
+
 import { Zorb } from '@zora-brand'
 import { Paragraph, Stack, StackProps } from '@zoralabs/zord'
-import React from 'react'
 
 export interface PrivateAskCheckApprovalSpinnerProps extends StackProps {
   text: string

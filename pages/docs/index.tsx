@@ -7,7 +7,6 @@ import { Button, Icon, Stack, color } from '@zoralabs/zord'
 
 import NFTFilterReadme from '../../@filter/README.md'
 import ZoraMarketReadme from '../../@market/README.md'
-import NounishAuctionReadme from '../../@noun-auction/README.md'
 import ZordReadme from '../../docs/zord.md'
 import Readme from './../../README.md'
 
@@ -59,9 +58,6 @@ export default function TestPages() {
       />
       <Stack gap="x4">
         {tab === tabs.ABOUT && <Readme components={{ ...MDXComponents }} />}
-        {tab === tabs.NOUNISH_AUCTION && (
-          <NounishAuctionReadme components={{ ...MDXComponents }} />
-        )}
         {/*tab === tabs.ZORA_COMMON && (
           <ZoraCommonReadme components={{ ...MDXComponents }} />
         )*/}

@@ -19,7 +19,7 @@ export function useFirstTokenID(collectionAddress: string) {
       })
   )
 
-  const firstTokenID = useMemo(
+  const firstTokenID: number = useMemo(
     () => (tokenData?.token?.token.tokenId === '0' ? 0 : 1),
     [tokenData?.token?.token.tokenId]
   )

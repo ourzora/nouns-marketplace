@@ -1,6 +1,6 @@
 import {
   NOUNS_TREASURY_ADDRESS,
-  ZORA_CONTRACT_CALL_VALIDATION_ADDRESS,
+  SEAPORT_CONTRACT_CALL_VALIDATION_ADDRESS,
 } from '@shared/constants'
 
 // Validate that offchain orders are still valid
@@ -18,13 +18,13 @@ export async function isSeaportOrderValid(order?: any): Promise<boolean> {
   const { chainTokenPrice } = price
 
   const contractCall = {
-    caller_address: NOUNS_TREASURY_ADDRESS, // This is a clever hack. The Seaport validation endpoint checks a) if the order is open and b) if the address can afford to buy the NFT. So we use
+    caller_address: NOUNS_TREASURY_ADDRESS, // This is a clever hack. The Seaport validation endpoint checks a) if the order is open and b) if the address can afford to buy the NFT. So we use the treasury address, which is likely to be quite full
     contract_address: contractAddress,
     calldata: calldata,
     value: chainTokenPrice.decimal, // Price in Ether (Decimal price)
   }
 
-  const rawResponse = await fetch(ZORA_CONTRACT_CALL_VALIDATION_ADDRESS, {
+  const rawResponse = await fetch(SEAPORT_CONTRACT_CALL_VALIDATION_ADDRESS, {
     method: 'POST',
     /* @ts-ignore */
     headers: {

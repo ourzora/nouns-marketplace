@@ -1,11 +1,13 @@
-import { isAddress, shortenAddress } from '@shared'
 import { useMemo } from 'react'
+
+import { useAskHelper, useRelevantMarket } from '@market/hooks'
+import { isAddress, shortenAddress } from '@shared'
+import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
+import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
 import { NFTObject } from '@zoralabs/nft-hooks'
+
 import { usePrivateAskContractContext } from '../providers/PrivateAskContractProvider'
 import { usePrivateAskStateContext } from '../providers/PrivateAskStateProvider'
-import { useAskHelper, useRelevantMarket } from '@market/hooks'
-import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
-import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
 
 interface PrivateAskInfoProps {
   nft: NFTObject

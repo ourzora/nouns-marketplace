@@ -1,4 +1,3 @@
-import { useModal } from '@modal'
 import React, {
   createContext,
   useCallback,
@@ -7,6 +6,8 @@ import React, {
   useReducer,
   useState,
 } from 'react'
+
+import { useModal } from '@modal'
 
 interface PrivateAskProps {
   children: React.ReactNode

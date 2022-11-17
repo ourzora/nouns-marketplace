@@ -11,6 +11,7 @@ interface MaxLinesProps extends BoxProps {
   baseLineheight: number
   maxLines: number
   paragraphClassName?: string
+  description: string
 }
 
 export function DescriptionWithMaxLines({
@@ -18,12 +19,13 @@ export function DescriptionWithMaxLines({
   maxLines = 2, // 2 lines @ 30px
   paragraphClassName,
   className,
-  children,
+  description,
 }: MaxLinesProps) {
   const initialHeight = useMemo(
     () => baseLineheight * maxLines,
     [baseLineheight, maxLines]
   )
+
   return (
     <Box
       pos="relative"
@@ -32,26 +34,30 @@ export function DescriptionWithMaxLines({
       overflow="hidden"
     >
       <Paragraph as="p" size="lg" inline color="text3" className={paragraphClassName}>
-        {children}
+        {description}
       </Paragraph>
       <ModalComposition
         className={styles.button}
         modalName={`nft-description`}
         trigger={
-          <Button
-            pos="absolute"
-            bottom="x0"
-            right="x0"
-            variant="unset"
-            size="sm"
-            className={styles.button}
-            style={{
-              padding: '0 8px',
-              backgroundColor: 'white',
-            }}
-          >
-            ...more
-          </Button>
+          description.length > 120 ? (
+            <Button
+              pos="absolute"
+              bottom="x0"
+              right="x0"
+              variant="unset"
+              size="sm"
+              className={styles.button}
+              style={{
+                padding: '0 8px',
+                backgroundColor: 'white',
+              }}
+            >
+              ...more
+            </Button>
+          ) : (
+            <></>
+          )
         }
         content={
           <Stack p="x8" gap="x8">
@@ -63,7 +69,7 @@ export function DescriptionWithMaxLines({
               color="text3"
               className={paragraphClassName}
             >
-              {children}
+              {description}
             </Paragraph>
           </Stack>
         }

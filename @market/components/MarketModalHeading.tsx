@@ -14,14 +14,12 @@ export function MarketModalHeading({ nftObj, action }: MarketModalHeadingProps) 
   return (
     <Flex w="100%" justify="space-between" textAlign="left" gap="x6">
       <Heading as="h2" size="md">
-        {`${action} ${nft?.contract.name} #${nft?.tokenId}`}
+        {`${action} ${nftObj.nft?.contract.name} #${nft?.tokenId}`}
       </Heading>
       {/* @BJ TODO: This component causes 500 error when it hits the useNounsToken contract call? */}
-      <CollectionThumbnail
-        initialNFT={nftObj}
-        collectionAddress={nft?.contract.address}
-        tokenId={nft?.tokenId}
-      />
+      {nft?.contract?.address && (
+        <CollectionThumbnail collectionAddress={nft?.contract.address} />
+      )}
     </Flex>
   )
 }

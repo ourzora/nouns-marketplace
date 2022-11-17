@@ -1,6 +1,8 @@
-import { ContractTransaction } from '@ethersproject/contracts'
 import { useAccount } from 'wagmi'
+
 import useSWR from 'swr'
+
+import { ContractTransaction } from '@ethersproject/contracts'
 import { useContractContext } from '@market/providers'
 
 /**

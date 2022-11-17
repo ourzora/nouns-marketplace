@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { ZORA_CONTRACT_CALL_VALIDATION_ADDRESS, formatContractError } from '@shared'
+import { SEAPORT_CONTRACT_CALL_VALIDATION_ADDRESS, formatContractError } from '@shared'
 
 import { SeaportContractCall } from '../types/SeaportContractCall'
 import { formatSeaportErrorMsg } from '../utils/formatSeaportErrorMsg'
@@ -18,7 +18,7 @@ export function useValidateSeaportContractCall(contractCallData?: SeaportContrac
   useEffect(() => {
     const validateSeaportContractCall = async () => {
       try {
-        const rawResponse = await fetch(ZORA_CONTRACT_CALL_VALIDATION_ADDRESS, {
+        const rawResponse = await fetch(SEAPORT_CONTRACT_CALL_VALIDATION_ADDRESS, {
           method: 'POST',
           /* @ts-ignore */
           headers: {
