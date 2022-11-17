@@ -46,7 +46,7 @@ export async function nftService({ params }: NFTParamsProps) {
     )
 
     // console.log('allOffchainOrders', allOffchainOrders)
-    console.log('validOffchainOrders', validOffchainOrders)
+    // console.log('validOffchainOrders', validOffchainOrders)
 
     // technically in order to serve ONLY NOUNS we need to fetch all nouns builder address
     // upfront, but it makes little to no sense to penalty the performance of app
@@ -62,8 +62,8 @@ export async function nftService({ params }: NFTParamsProps) {
         nft,
         tokenAddress: tokenAddress,
         tokenId: tokenId,
-        // offchainOrders: validOffchainOrders,
-        offchainOrders: allOffchainOrders,
+        offchainOrders: validOffchainOrders,
+        // offchainOrders: allOffchainOrders, // enable temporarily to be able to debug / develop with multiple cards visible
       },
     }
   } catch (err) {

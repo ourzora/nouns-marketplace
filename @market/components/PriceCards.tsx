@@ -13,6 +13,8 @@ import { numberFormatterUSDC } from '@shared/utils'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Box, Flex, Heading, Paragraph, Stack, Well } from '@zoralabs/zord'
 
+import * as styles from './PriceCards.css'
+
 export interface PriceCardsProps {
   nft: NFTObject
   offchainOrders: any[]
@@ -115,29 +117,19 @@ export function PriceCards({ nft, offchainOrders }: PriceCardsProps) {
           <Flex gap="x1" pos="absolute" top="x4" right="x4">
             <Button
               size="sm"
-              // w="x3"
-              w="x1"
               variant="unset"
-              // padding="x1"
               onClick={() => setCurrentCard(prevCard)}
-              style={{
-                borderRadius: '100px!important',
-                padding: '4px',
-                border: '1px solid green',
-              }}
+              className={styles.arrowButton}
             >
-              <ArrowLeft />
+              <ArrowLeft w="x4" h="x4" align="center" className={styles.arrow} />
             </Button>
             <Button
               size="sm"
-              // w="x3"
-              w="x1"
-              // variant="circle"
               variant="unset"
-              // padding="x1"
               onClick={() => setCurrentCard(nextCard)}
+              className={styles.arrowButton}
             >
-              <ArrowRight />
+              <ArrowRight w="x4" h="x4" align="center" className={styles.arrow} />
             </Button>
           </Flex>
         )}
