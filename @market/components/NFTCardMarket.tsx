@@ -1,7 +1,7 @@
-import { FillV3AskModal } from '@market/components'
+import { FillV3AskModal, NFTOwner } from '@market/components'
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { UniversalListAskModal } from '@market/modules/PrivateAsk/UniversalListAskModal'
-import { useNFTProvider } from '@shared'
+import { useIsOwner, useNFTProvider } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { FlexProps } from '@zoralabs/zord'
 
@@ -20,12 +20,17 @@ export function NFTCardMarketComponent({
   ...props
 }: { nftObj: NFTObject } & NFTCardMarketProps) {
   const { markets } = nftObj
+  const { isOwner } = useIsOwner(nftObj)
   const { ask } = useRelevantMarket(markets)
   const { hasRelevantAsk } = useAskHelper({ ask })
 
-  return hasRelevantAsk ? (
-    <FillV3AskModal nftObj={nftObj} {...props} />
-  ) : (
-    <UniversalListAskModal nftObj={nftObj} {...props} />
-  )
+  if (hasRelevantAsk) {
+    return <FillV3AskModal nftObj={nftObj} {...props} />
+  }
+
+  if (isOwner) {
+    return <UniversalListAskModal nftObj={nftObj} {...props} />
+  }
+
+  return <NFTOwner size="md" align="left" address={nftObj.nft?.owner?.address} />
 }

@@ -111,8 +111,9 @@ export function PriceCards({ nft, offchainOrders }: PriceCardsProps) {
   if (cardCount === 0) return null
 
   return (
-    <Stack gap="x2" align="center">
-      <Well p="x4" borderRadius="phat">
+    // <Stack gap={"x2"} align="center" className={styles.wrap}>
+    <Stack gap={'x5'} align="center" className={cardCount > 1 ? styles.wrap : null}>
+      <Well p="x4" borderRadius="phat" className={styles.cardStack}>
         {showArrows && (
           <Flex gap="x1" pos="absolute" top="x4" right="x4">
             <Button

@@ -40,6 +40,7 @@ export async function nftService({ params }: NFTParamsProps) {
       fetchOffchainOrdersForToken(tokenAddress, tokenId),
     ])
 
+    // Filter resolved promises
     const validOffchainOrders = await asyncFilter(
       allOffchainOrders,
       async (order: any) => await isSeaportOrderValid(order)
