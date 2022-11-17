@@ -7,7 +7,7 @@ import React, { Dispatch, SetStateAction, useEffect, useMemo } from 'react'
 import { MarketModalHeading } from '@market/components'
 import { useValidateSeaportContractCall } from '@market/modules/Seaport/hooks/useValidateSeaportContractCall'
 import { useModal } from '@modal'
-import { NOUNS_TREASURY_ADDRESS, formatContractError, useAuth } from '@shared'
+import { formatContractError, useAuth } from '@shared'
 import { PrintError } from '@shared/components/PrintError'
 import { Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
 
@@ -38,8 +38,7 @@ export function SeaportFillOrder({
 
   const contractCall = useMemo(() => {
     return {
-      // caller_address: userAddress!, // user address ||||| TODO: okay, this is stupid. But the SeaPort validation requires that the user has sufficient funds. If we want to validate regardless, maybe we just use some whala's address for confirmation (eg. the Nouns DAO treasury address)
-      caller_address: NOUNS_TREASURY_ADDRESS, // user address ||||| TODO: okay, this is stupid. But the SeaPort validation requires that the user has sufficient funds. If we want to validate regardless, maybe we just use some whala's address for confirmation (eg. the Nouns DAO treasury address)
+      caller_address: userAddress!, // user address ||||| TODO: okay, this is stupid. But the SeaPort validation requires that the user has sufficient funds. If we want to validate regardless, maybe we just use some whala's address for confirmation (eg. the Nouns DAO treasury address)
       contract_address: contractAddress, // the contract that fills the orders, eg. Seaport
       calldata: calldata, //
       value: ethPrice, // Price in Ether (Decimal price)
@@ -47,8 +46,10 @@ export function SeaportFillOrder({
   }, [calldata, contractAddress, userAddress, ethPrice])
 
   // @BJ TODO: keep the userAddress above, + do a wallet check to ensure sufficient funds
-  const hasSufficientFunds =
-    walletBalance && parseFloat(walletBalance?.formatted) > ethPrice
+  const hasSufficientFunds = useMemo(
+    () => walletBalance && parseFloat(walletBalance?.formatted) >= ethPrice,
+    [ethPrice, walletBalance]
+  )
 
   const {
     isValidated,
@@ -63,16 +64,18 @@ export function SeaportFillOrder({
     [ethPrice]
   )
 
-  const error = useMemo(() => txError ?? validationError, [txError, validationError])
+  const error = useMemo(() => {
+    if (!hasSufficientFunds) {
+      return new Error('Wallet has insufficient ETH to make this purchase')
+    }
+    return txError ?? validationError
+  }, [hasSufficientFunds, txError, validationError])
 
   useEffect(() => finalizedTx!! && setIsFilled(true), [finalizedTx, setIsFilled])
 
   return (
     <Stack gap="x8" {...props}>
       <MarketModalHeading nftObj={nft} action="Buy" />
-      <Flex>{walletBalance?.formatted}</Flex>
-      <Flex>{hasSufficientFunds ? 'YES' : 'NO'}</Flex>
-      {/* <Flex>{chainTokenPrice.}</Flex> */}
       <Stack gap="x3" {...props}>
         <Flex justify="space-between">
           <Paragraph size="lg" inline color="text2" className={[mediumFont]}>

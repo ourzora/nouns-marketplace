@@ -6,7 +6,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 
 import { SeaportFillOrderFlow } from '@market/modules'
 import { ModalComposition, useModal } from '@modal'
-import { useAuth } from '@shared'
+import { useAuth, useButtonRequiresAuth } from '@shared'
 import { numberFormatterUSDC } from '@shared/utils'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Box, Flex, Heading, Paragraph, Stack, Well } from '@zoralabs/zord'
@@ -42,6 +42,8 @@ function PriceCard({
     requestOpen(modalName)
   }, [requestOpen])
 
+  const buttonBehavior = useButtonRequiresAuth(modalHandler)
+
   return (
     <Stack gap="x4">
       <Stack>
@@ -69,7 +71,7 @@ function PriceCard({
         modalName={modalName}
         modalBehaviorRequiresAuth={true}
         trigger={
-          <Button w="100%" onClick={() => modalHandler()}>
+          <Button w="100%" onClick={buttonBehavior}>
             Buy Now
           </Button>
         }
