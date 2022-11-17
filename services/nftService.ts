@@ -1,6 +1,5 @@
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
 
-import { allAddresses } from 'constants/collection-addresses'
 import { GetServerSideProps } from 'next'
 
 import assert from 'assert'
