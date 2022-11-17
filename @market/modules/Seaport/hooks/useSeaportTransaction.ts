@@ -23,7 +23,7 @@ export function useSeaportTransaction() {
       const tx = {
         from: contractCallData?.caller_address,
         to: contractCallData?.contract_address, // Contract that fills the order e.g. Seaport
-        value: priceInWEI, // Price in Wei
+        value: priceInWEI,
         data: contractCallData?.calldata,
       }
 

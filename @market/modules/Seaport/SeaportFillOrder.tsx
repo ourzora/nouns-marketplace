@@ -33,14 +33,11 @@ export function SeaportFillOrder({
   const ethPrice = useMemo(() => chainTokenPrice.decimal, [chainTokenPrice])
   const { balance: walletBalance } = useAuth()
 
-  console.log('chainTokenPrice', chainTokenPrice)
-  console.log('walletBalance', walletBalance)
-
   const contractCall = useMemo(() => {
     return {
-      caller_address: userAddress!, // user address ||||| TODO: okay, this is stupid. But the SeaPort validation requires that the user has sufficient funds. If we want to validate regardless, maybe we just use some whala's address for confirmation (eg. the Nouns DAO treasury address)
+      caller_address: userAddress!,
       contract_address: contractAddress, // the contract that fills the orders, eg. Seaport
-      calldata: calldata, //
+      calldata: calldata,
       value: ethPrice, // Price in Ether (Decimal price)
     }
   }, [calldata, contractAddress, userAddress, ethPrice])
@@ -60,7 +57,7 @@ export function SeaportFillOrder({
   const { txError, txInProgress, finalizedTx, fillSeaportOrder } = useSeaportTransaction()
 
   const savings = useMemo(
-    () => (ethPrice ? (parseFloat(ethPrice) * 0.025).toFixed(5) : '0'),
+    () => (ethPrice ? (parseFloat(ethPrice) * 0.025).toFixed(5) : '0'), // using OpenSea commission as the reference percentage.
     [ethPrice]
   )
 

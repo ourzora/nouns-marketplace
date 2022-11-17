@@ -1,3 +1,5 @@
+import { OffchainOrderWithToken } from 'types/zora.api.generated'
+
 import { useMemo } from 'react'
 import { TypeSafeToken } from 'validators/token'
 
@@ -12,7 +14,7 @@ interface NFTMarketProps extends BoxProps {
   collectionAddress: string
   tokenId: string
   token: TypeSafeToken
-  offchainOrders?: any
+  offchainOrders?: OffchainOrderWithToken[]
 }
 
 export function NFTMarket({

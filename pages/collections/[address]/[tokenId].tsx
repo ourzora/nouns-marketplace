@@ -2,6 +2,7 @@ import { PageWrapper, Seo } from 'components'
 import { NFTAttributes, NFTPageHero, NFTSidebar } from 'compositions'
 import * as styles from 'compositions/NFTPage/NFTPage.css'
 import { nftService } from 'services'
+import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import { NFTProvider } from '@shared/providers/NFTProvider'
 import { NFTObject } from '@zoralabs/nft-hooks'
@@ -16,7 +17,7 @@ const NFT = ({
   nft: NFTObject | undefined
   tokenAddress: string
   tokenId: string
-  offchainOrders: any[]
+  offchainOrders: OffchainOrderWithToken[]
 }) => {
   return (
     <PageWrapper direction="column">

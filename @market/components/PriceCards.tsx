@@ -111,7 +111,6 @@ export function PriceCards({ nft, offchainOrders }: PriceCardsProps) {
   if (cardCount === 0) return null
 
   return (
-    // <Stack gap={"x2"} align="center" className={styles.wrap}>
     <Stack gap={'x5'} align="center" className={cardCount > 1 ? styles.wrap : null}>
       <Well p="x4" borderRadius="phat" className={styles.cardStack}>
         {showArrows && (
@@ -142,20 +141,15 @@ export function PriceCards({ nft, offchainOrders }: PriceCardsProps) {
       </Well>
       {cardCount > 1 && (
         <Flex style={{ gap: '2px' }}>
-          {offchainOrders.map(
-            (
-              _order, // <-- unused, but necessary for the current card to be highlighted
-              idx
-            ) => (
-              <Box
-                key={idx}
-                borderRadius="round"
-                h="x1"
-                w="x1"
-                backgroundColor={idx === currentCard ? 'accent' : 'background2'}
-              />
-            )
-          )}
+          {offchainOrders.map((_order, idx) => (
+            <Box
+              key={idx}
+              borderRadius="round"
+              h="x1"
+              w="x1"
+              backgroundColor={idx === currentCard ? 'accent' : 'background2'}
+            />
+          ))}
         </Flex>
       )}
     </Stack>

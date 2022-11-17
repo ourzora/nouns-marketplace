@@ -14,7 +14,6 @@ const client = new GraphQLClient(process.env.NEXT_PUBLIC_GALACTUS_BASE_URL, {
     'X-ENABLE-NOUNS': 'true',
   }),
   mode: 'no-cors',
-  cache: 'no-store',
 })
 
 export { client }

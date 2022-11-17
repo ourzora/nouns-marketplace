@@ -1,6 +1,7 @@
 import { GALACTUS_BASE_URL } from 'utils/env-vars'
 
 import { GetServerSideProps } from 'next'
+import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import assert from 'assert'
 
@@ -40,9 +41,9 @@ export async function nftService({ params }: NFTParamsProps) {
     ])
 
     // Filter resolved promises
-    const validOffchainOrders = await asyncFilter(
+    const validOffchainOrders: OffchainOrderWithToken[] = await asyncFilter(
       allOffchainOrders,
-      async (order: any) => await isSeaportOrderValid(order)
+      async (order: OffchainOrderWithToken) => await isSeaportOrderValid(order)
     )
 
     // console.log('allOffchainOrders', allOffchainOrders)
