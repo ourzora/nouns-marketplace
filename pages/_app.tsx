@@ -18,7 +18,7 @@ import { StrictMode, useEffect } from 'react'
 import React from 'react'
 
 import { ContractProvider } from '@market'
-import { PrivateAskContractProvider } from '@market'
+import { PrivateAskContractProvider } from '@market/modules/PrivateAsk/providers/PrivateAskContractProvider'
 import { ModalContextProvider } from '@modal'
 import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
