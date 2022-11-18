@@ -1,4 +1,3 @@
-import { utils } from 'ethers'
 import useSWR from 'swr'
 import { NounishAuctionsQuery } from 'types/zora.api.generated'
 
