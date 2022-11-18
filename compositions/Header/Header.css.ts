@@ -1,7 +1,5 @@
 import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
 
-import { unset } from 'lodash'
-
 import { globalStyle, style } from '@vanilla-extract/css'
 import { atoms, color, media, radii, space, vars } from '@zoralabs/zord'
 
@@ -43,18 +41,6 @@ export const header = style([
   }),
 ])
 
-export const leftContainer = style([
-  {
-    alignItems: 'center',
-  },
-])
-
-export const rightContainer = style([
-  {
-    alignItems: 'center',
-  },
-])
-
 export const nounsGlassesLink = style([
   atoms({
     mr: 'x6',
@@ -68,8 +54,6 @@ export const manageButton = style([
     gridColumn: '2',
     gridRow: '2',
     height: 42,
-    paddingLeft: space.x5,
-    paddingRight: space.x5,
     '@media': {
       [media.min1024]: {
         gridColumn: '2',
@@ -79,6 +63,7 @@ export const manageButton = style([
   },
   atoms({
     ml: 'auto',
+    px: 'x5',
     borderRadius: 'curved',
     justifyContent: 'center',
   }),
@@ -155,13 +140,7 @@ export const popupContent = style([
 ])
 
 export const popupTrigger = style({
-  // padding: 'unset',
-  // // maxWidth: '40px'
-  // 'selectors': {
-  //   'button': {
-  //     padding: 'unset'
-  //   }
-  // }
+  // Vanilla extract quirk, just need a defined style so we can define the following globalStyle
 })
 
 globalStyle(`${popupTrigger} button`, {
@@ -216,22 +195,6 @@ export const connectMenuItem = style([
     py: 'x3',
   }),
 ])
-
-export const aboutButton = style({
-  // borderRadius: '8px!important',
-  // backgroundColor: 'unset',
-  // gap: 'unset',
-  // borderColor: 'unset',
-  // borderWidth: 'unset',
-  // borderStyle: 'unset',
-  // minWidth: 'unset',
-  // // padding: unset;
-  // // background: 'unset',
-  // height: 'unset',
-  // fontSize: 'unset',
-  // fontWeight: 'unset'
-  // ,padding:
-})
 
 export const disconnectButton = style([
   {

@@ -61,6 +61,6 @@ export function MarketStats({ contractAddress, ...props }: MarketStatesProps) {
         </Flex>
       </Flex>
     ),
-    [floorPrice, nftCount, ownerCount]
+    [contractAddress, dao, floorPrice, nftCount, ownerCount, props]
   )
 }

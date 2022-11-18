@@ -1,6 +1,5 @@
 import * as styles from 'styles/styles.css'
 
-import { useWindowWidth } from '@shared'
 import { Flex, Grid } from '@zoralabs/zord'
 
 import { CollectionMenu } from '../CollectionMenu'
@@ -12,11 +11,7 @@ import { NounsLink } from './NounsLink'
 export function Header() {
   return (
     <Flex className={headerStyles.headerWrapper}>
-      <Grid
-        className={['header-grid', styles.pageGrid]}
-        // py={{ '@initial': 'x3', '@1024': 'x0' }}
-        gap="x2"
-      >
+      <Grid className={['header-grid', styles.pageGrid]} gap="x2">
         <Flex
           as="header"
           className={[headerStyles.header]}

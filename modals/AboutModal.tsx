@@ -16,7 +16,6 @@ export function AboutModal() {
       trigger={
         <Button
           variant="unset"
-          className={[styles.aboutButton]}
           px={{ '@initial': 'x0', '@1024': 'x4' }}
           w="100%"
           h="100%"
