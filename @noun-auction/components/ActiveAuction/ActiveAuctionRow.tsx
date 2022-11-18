@@ -57,13 +57,11 @@ export function ActiveAuctionRow({
           <AuctionCountdown
             auctionEndTime={auctionEndTime}
             auctionCompleted={auctionCompleted}
-            layoutDirection={'row' || 'withHistory' ? 'column' : 'row'}
+            direction={'row' || 'withHistory' ? 'column' : 'row'}
             showLabels={!!showLabels}
-            styles={{
-              justify: 'center',
-              align: 'flex-end',
-              cursor: 'pointer',
-            }}
+            justify="center"
+            align="flex-end"
+            cursor="pointer"
             className={['nounish-auction__countdown'].concat(
               layout === 'row' ? responsiveRow : []
             )}
@@ -75,12 +73,10 @@ export function ActiveAuctionRow({
             highestBid={highestBid}
             collectionAddress={collectionAddress}
             layout={layout!}
-            styles={{
-              layoutDirection: layout === 'row' || 'withHistory' ? 'column' : 'row',
-              justify: 'center',
-              align: 'flex-end',
-              cursor: 'pointer',
-            }}
+            direction={layout === 'row' || 'withHistory' ? 'column' : 'row'}
+            justify="center"
+            align="flex-end"
+            cursor="pointer"
             showLabels={showLabels}
             className={[layout === 'row' && responsiveRow, 'nounish-auction__high-bid']}
           />
@@ -97,12 +93,10 @@ export function ActiveAuctionRow({
             <AuctionBidder
               highestBidder={highestBidder}
               layout="row"
-              layoutDirection={layout === 'row' || 'withHistory' ? 'column' : 'row'}
+              direction={layout === 'row' || 'withHistory' ? 'column' : 'row'}
               showLabels={showLabels}
-              styles={{
-                justify: 'center',
-                align: 'flex-end',
-              }}
+              justify="center"
+              align={'flex-end'}
               className="nounish-auction__bidder"
             />
           </Flex>
@@ -126,21 +120,17 @@ export function ActiveAuctionRow({
         <AuctionBidder
           highestBidder={highestBidder}
           showLabels={showLabels}
-          layoutDirection="row"
+          direction="row"
           layout="sideBarBid" // check this
-          styles={{
-            justify: 'space-between',
-          }}
+          justify="space-between"
           className="nounish-auction__sidebar-top-bidder"
         />
         <AuctionCountdown
           auctionCompleted={auctionCompleted}
           auctionEndTime={auctionEndTime}
-          layoutDirection="row"
+          direction="row"
           showLabels={showLabels}
-          styles={{
-            justify: 'space-between',
-          }}
+          justify="space-between"
           className={['nounish-auction__sidebar-top-contdown']}
         />
       </Stack>
@@ -181,10 +171,8 @@ export function ActiveAuctionRow({
             layout={layout}
             highestBid={highestBid}
             collectionAddress={collectionAddress}
-            styles={{
-              layoutDirection: 'column',
-              justify: 'space-around',
-            }}
+            direction="column"
+            justify="space-around"
             showLabels={showLabels}
           />
         )}

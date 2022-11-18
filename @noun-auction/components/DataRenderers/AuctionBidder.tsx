@@ -17,7 +17,6 @@ import { EnsAvatar } from './EnsAvatar'
 
 interface AuctionBidderProps extends FlexProps {
   label?: string
-  layoutDirection?: 'row' | 'column'
   showLabels?: boolean
   useAvatar?: boolean
   layout: keyof typeof auctionWrapperVariants['layout']
@@ -27,7 +26,7 @@ interface AuctionBidderProps extends FlexProps {
 
 export function AuctionBidder({
   label = 'Top bidder',
-  layoutDirection = 'row',
+  direction = 'row',
   showLabels,
   useAvatar = true,
   layout,
@@ -53,11 +52,11 @@ export function AuctionBidder({
   return (
     <Flex
       className={className}
-      direction={layoutDirection}
+      direction={direction}
       target="_blank"
-      gap={layoutDirection === 'row' ? 'x2' : 'x0'}
+      gap={direction === 'row' ? 'x2' : 'x0'}
       rel="noreferrer"
-      align={layoutDirection === 'row' ? 'center' : 'flex-start'}
+      align={direction === 'row' ? 'center' : 'flex-start'}
       wrap="wrap"
       display={{
         '@initial': `${layout === 'row' ? 'none' : 'flex'}`,

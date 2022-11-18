@@ -132,7 +132,8 @@ export function ActiveAuctionCardComponent({
             auctionCompleted={auctionCompleted}
             auctionEndTime={endTime}
             showLabels
-            styles={{ align: 'flex-start', direction: 'column' }}
+            align="flex-start"
+            direction="column"
           />
           <AuctionHighBid
             auctionCompleted={auctionCompleted}
@@ -140,10 +141,8 @@ export function ActiveAuctionCardComponent({
             collectionAddress={activeAuction.collectionAddress}
             showLabels
             layout={layout}
-            styles={{
-              align: 'flex-start',
-              direction: 'column',
-            }}
+            align="flex-start"
+            direction="column"
           />
           <AuctionBidder
             highestBidder={activeAuction.highestBidder}
