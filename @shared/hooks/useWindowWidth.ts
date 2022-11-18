@@ -13,16 +13,21 @@ export function useWindowWidth() {
   }, [])
 
   const isLarge = useMemo(() => {
-    return windowWidth && windowWidth >= 1024 ? true : false
+    return windowWidth && windowWidth >= 1024
   }, [windowWidth])
 
   const isMedium = useMemo(() => {
-    return windowWidth && windowWidth >= 576 ? true : false
+    return windowWidth && windowWidth >= 576
+  }, [windowWidth])
+
+  const isSmall = useMemo(() => {
+    return windowWidth && windowWidth < 576
   }, [windowWidth])
 
   return {
     isLarge,
     isMedium,
+    isSmall,
     windowWidth,
   }
 }

@@ -1,8 +1,9 @@
-// import { HEADER_LAYER } from 'constants/layers'
 import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
 
-import { style } from '@vanilla-extract/css'
-import { atoms, color, media, space, vars } from '@zoralabs/zord'
+import { unset } from 'lodash'
+
+import { globalStyle, style } from '@vanilla-extract/css'
+import { atoms, color, media, radii, space, vars } from '@zoralabs/zord'
 
 export const headerWrapper = style([
   atoms({
@@ -89,7 +90,7 @@ export const connectButton = style([
     borderRadius: 16,
     '@media': {
       [media.min1024]: {
-        height: '52px',
+        height: '56px',
         fontSize: 16,
       },
     },
@@ -140,14 +141,97 @@ export const modalContent = style([
   }),
 ])
 
-export const menuItem = style([
+export const popupContent = style([
+  {
+    width: '300px',
+    borderRadius: radii.phat,
+    '@media': {
+      [media.min1024]: {
+        width: 'unset',
+        borderRadius: 'unset',
+      },
+    },
+  },
+])
+
+export const popupTrigger = style({
+  // padding: 'unset',
+  // // maxWidth: '40px'
+  // 'selectors': {
+  //   'button': {
+  //     padding: 'unset'
+  //   }
+  // }
+})
+
+globalStyle(`${popupTrigger} button`, {
+  padding: space.x3,
+  borderRadius: 16,
+})
+
+export const topMenuItem = style({
+  height: '32px!important',
+})
+
+export const linksMenuItem = style([
+  {
+    display: 'flex',
+    borderRadius: '8px',
+    ':hover': {
+      cursor: 'pointer',
+      backgroundColor: color.background2,
+    },
+    '@media': {
+      [media.min1024]: {
+        borderRadius: 'unset',
+        ':hover': {
+          backgroundColor: 'unset',
+        },
+      },
+    },
+  },
   atoms({
     alignItems: 'center',
-    borderRadius: 'phat',
-    px: 'x5',
-    py: 'x5',
+    w: '100%',
+    px: 'x4',
+    py: 'x3',
   }),
 ])
+
+export const connectMenuItem = style([
+  {
+    width: '100%',
+    display: 'block',
+    borderRadius: '8px',
+    userSelect: 'none',
+    ':hover': {
+      cursor: 'pointer',
+      backgroundColor: color.background2,
+    },
+  },
+  atoms({
+    alignItems: 'center',
+    w: '100%',
+    px: 'x4',
+    py: 'x3',
+  }),
+])
+
+export const aboutButton = style({
+  // borderRadius: '8px!important',
+  // backgroundColor: 'unset',
+  // gap: 'unset',
+  // borderColor: 'unset',
+  // borderWidth: 'unset',
+  // borderStyle: 'unset',
+  // minWidth: 'unset',
+  // // padding: unset;
+  // // background: 'unset',
+  // height: 'unset',
+  // fontSize: 'unset',
+  // fontWeight: 'unset'
+  // ,padding:
+})
 
 export const disconnectButton = style([
   {

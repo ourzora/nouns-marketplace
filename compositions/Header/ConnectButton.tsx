@@ -9,13 +9,7 @@ import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit'
 import { useEnsData } from '@shared/hooks'
 import { Box, Flex, Icon, PopUp, Separator, Stack, Text } from '@zoralabs/zord'
 
-import {
-  connectButton,
-  disconnectButton,
-  menuItem,
-  modalContent,
-  popUpWrapper,
-} from './Header.css'
+import * as styles from './Header.css'
 
 interface ConnectButtonProps extends NounButtonProps {
   connectText?: string
@@ -24,7 +18,7 @@ interface ConnectButtonProps extends NounButtonProps {
 export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButtonProps) {
   const { disconnect } = useDisconnect({
     onError(error) {
-      console.log('Error', error)
+      console.error('Error', error)
     },
   })
   const { address } = useAccount()
@@ -36,7 +30,7 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
   if (!address || !chain) {
     return (
       <Button
-        className={connectButton}
+        className={styles.connectButton}
         size="md"
         w="auto"
         onClick={openConnectModal}
@@ -52,7 +46,7 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
       <Button
         variant="destructive"
         px="x5"
-        className={connectButton}
+        className={styles.connectButton}
         onClick={openChainModal}
         size="md"
         w="auto"
@@ -67,11 +61,11 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
   }
 
   return (
-    <Flex className={connectButton} gap="x3">
+    <Flex className={styles.connectButton} gap="x3">
       <PopUp
         padding="x0"
         placement="bottom-end"
-        wrapperClassName={popUpWrapper}
+        wrapperClassName={styles.popUpWrapper}
         trigger={
           <Button variant="ghost" type="button" size="md" w="auto">
             <Box as="span">{displayName}</Box>
@@ -79,10 +73,10 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
           </Button>
         }
       >
-        <Stack className={modalContent} gap="x0">
-          <Flex className={menuItem} justify="space-between">
+        <Stack className={styles.modalContent} gap="x0" p="x2">
+          <Flex justify="space-between" p="x2">
             <Link passHref href="/collections">
-              <Button as="a" variant="unset">
+              <Button size="md" as="a" variant="unset" className={styles.topMenuItem}>
                 <EnsAvatar address={address} />
                 <Box ml={'x2'} as="span" className={[noTextWrap]}>
                   {displayName}
@@ -90,16 +84,21 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
               </Button>
             </Link>
             <Button
+              size="md"
               variant="unset"
               onClick={() => disconnect()}
-              className={[disconnectButton]}
+              className={[styles.disconnectButton, styles.topMenuItem]}
             >
               Disconnect
             </Button>
           </Flex>
           <Separator />
-          <Box className={menuItem}>
-            <Link href={`/manage/${address}`}>Manage NFTs</Link>
+          <Box as="ul" pt="x2">
+            <Flex as="li">
+              <Link href={`/manage/${address}`}>
+                <a className={styles.connectMenuItem}>Manage NFTs</a>
+              </Link>
+            </Flex>
           </Box>
         </Stack>
       </PopUp>

@@ -1,11 +1,12 @@
-import { AboutModal } from 'modals/AboutModal'
 import * as styles from 'styles/styles.css'
 
+import { useWindowWidth } from '@shared'
 import { Flex, Grid } from '@zoralabs/zord'
 
 import { CollectionMenu } from '../CollectionMenu'
 import { ConnectButton } from './ConnectButton'
 import * as headerStyles from './Header.css'
+import { HeaderLinks } from './HeaderLinks'
 import { NounsLink } from './NounsLink'
 
 export function Header() {
@@ -13,13 +14,15 @@ export function Header() {
     <Flex className={headerStyles.headerWrapper}>
       <Grid
         className={['header-grid', styles.pageGrid]}
-        py={{ '@initial': 'x3', '@1024': 'x0' }}
+        // py={{ '@initial': 'x3', '@1024': 'x0' }}
         gap="x2"
       >
         <Flex
           as="header"
           className={[headerStyles.header]}
           justify="space-between"
+          align={{ '@initial': 'flex-start', '@1024': 'center' }}
+          py={{ '@initial': 'x3', '@1024': 'x0' }}
           px={{ '@initial': 'x4', '@1024': 'x0' }}
         >
           <Flex
@@ -35,12 +38,13 @@ export function Header() {
           </Flex>
 
           <Flex
+            as="nav"
             gap={{ '@initial': 'x4', '@1024': 'x6' }}
-            direction={{ '@initial': 'column', '@1024': 'row' }}
-            align={{ '@initial': 'flex-start', '@1024': 'center' }}
+            direction="row"
+            align="center"
             justify={{ '@initial': 'flex-start', '@1024': 'space-between' }}
           >
-            <AboutModal />
+            <HeaderLinks />
             <ConnectButton width="auto" />
           </Flex>
         </Flex>
