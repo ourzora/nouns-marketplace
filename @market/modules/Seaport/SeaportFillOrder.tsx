@@ -13,6 +13,7 @@ import { Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
 
 import { CommonSeaportFillOrderProps } from './SeaportFillOrderFlow'
 import { useSeaportTransaction } from './hooks/useSeaportTransaction'
+import { SeaportContractCall } from './types/SeaportContractCall'
 
 interface SeaportFillOrderProps extends CommonSeaportFillOrderProps {
   setIsFilled: Dispatch<SetStateAction<boolean>>
@@ -25,27 +26,62 @@ export function SeaportFillOrder({
   setIsFilled,
   ...props
 }: SeaportFillOrderProps) {
-  const { requestClose } = useModal()
-
   const { offchainOrder } = order
   const { calldata, contractAddress, price } = offchainOrder
   const { chainTokenPrice } = price
-  const ethPrice = useMemo(() => chainTokenPrice.decimal, [chainTokenPrice])
-  const { balance: walletBalance } = useAuth()
+  const ethPrice = useMemo(() => chainTokenPrice?.decimal, [chainTokenPrice])
 
-  const contractCall = useMemo(() => {
-    return {
-      caller_address: userAddress!,
-      contract_address: contractAddress, // the contract that fills the orders, eg. Seaport
-      calldata: calldata,
-      value: ethPrice, // Price in Ether (Decimal price)
-    }
+  const contractCall: SeaportContractCall | undefined = useMemo(() => {
+    return ethPrice
+      ? {
+          caller_address: userAddress!,
+          contract_address: contractAddress, // the contract that fills the orders, eg. Seaport
+          calldata: calldata!,
+          value: ethPrice.toString(), // Price in Ether (Decimal price)
+        }
+      : undefined
   }, [calldata, contractAddress, userAddress, ethPrice])
 
-  // @BJ TODO: keep the userAddress above, + do a wallet check to ensure sufficient funds
+  if (contractCall) {
+    return (
+      <SeaportFillOrderWithVerifiedContractCall
+        order={order}
+        nft={nft}
+        contractCall={contractCall}
+        userAddress={userAddress}
+        setIsFilled={setIsFilled}
+        {...props}
+      />
+    )
+  }
+
+  return <></>
+}
+
+function SeaportFillOrderWithVerifiedContractCall({
+  order,
+  nft,
+  userAddress,
+  contractCall,
+  setIsFilled,
+  ...props
+}: SeaportFillOrderProps & { contractCall: SeaportContractCall }) {
+  const { requestClose } = useModal()
+
+  const { offchainOrder } = order
+  const { price } = offchainOrder
+  const { chainTokenPrice } = price
+  const ethPrice = useMemo(() => chainTokenPrice?.decimal, [chainTokenPrice])
+  const { balance: walletBalance } = useAuth()
+
   const hasSufficientFunds = useMemo(
-    () => walletBalance && parseFloat(walletBalance?.formatted) >= ethPrice,
+    () => ethPrice && walletBalance && parseFloat(walletBalance?.formatted) >= ethPrice,
     [ethPrice, walletBalance]
+  )
+
+  const savings = useMemo(
+    () => (ethPrice ? (ethPrice * 0.025).toFixed(5) : '0'), // using OpenSea commission as the reference percentage.
+    [ethPrice]
   )
 
   const {
@@ -55,11 +91,6 @@ export function SeaportFillOrder({
   } = useValidateSeaportContractCall(contractCall)
 
   const { txError, txInProgress, finalizedTx, fillSeaportOrder } = useSeaportTransaction()
-
-  const savings = useMemo(
-    () => (ethPrice ? (parseFloat(ethPrice) * 0.025).toFixed(5) : '0'), // using OpenSea commission as the reference percentage.
-    [ethPrice]
-  )
 
   const error = useMemo(() => {
     if (!hasSufficientFunds) {
@@ -71,59 +102,61 @@ export function SeaportFillOrder({
   useEffect(() => finalizedTx!! && setIsFilled(true), [finalizedTx, setIsFilled])
 
   return (
-    <Stack gap="x8" {...props}>
-      <MarketModalHeading nftObj={nft} action="Buy" />
-      <Stack gap="x3" {...props}>
-        <Flex justify="space-between">
-          <Paragraph size="lg" inline color="text2" className={[mediumFont]}>
-            Marketplace
-          </Paragraph>
-          <Flex gap="x2">
-            <Paragraph size="lg" inline color="text1">
-              Seaport
+    contractCall && (
+      <Stack gap="x8" {...props}>
+        <MarketModalHeading nftObj={nft} action="Buy" />
+        <Stack gap="x3" {...props}>
+          <Flex justify="space-between">
+            <Paragraph size="lg" inline color="text2" className={[mediumFont]}>
+              Marketplace
             </Paragraph>
-            <OpenSeaIcon />
+            <Flex gap="x2">
+              <Paragraph size="lg" inline color="text1">
+                Seaport
+              </Paragraph>
+              <OpenSeaIcon />
+            </Flex>
           </Flex>
-        </Flex>
-        <Separator />
-        <Flex justify="space-between">
-          <Paragraph size="lg" inline color="text2" className={[mediumFont]}>
-            Savings
+          <Separator />
+          <Flex justify="space-between">
+            <Paragraph size="lg" inline color="text2" className={[mediumFont]}>
+              Savings
+            </Paragraph>
+            <Paragraph size="lg" inline color="text1">
+              ~{savings} ETH
+            </Paragraph>
+          </Flex>
+          <Paragraph size="md" color="text2" className={[mediumFont]}>
+            vs. competing marketplaces that charge a 2.5% fee
           </Paragraph>
-          <Paragraph size="lg" inline color="text1">
-            ~{savings} ETH
-          </Paragraph>
-        </Flex>
-        <Paragraph size="md" color="text2" className={[mediumFont]}>
-          vs. competing marketplaces that charge a 2.5% fee
-        </Paragraph>
-        <Separator />
-        <Flex justify="space-between">
-          <Paragraph size="lg" inline color="text2" className={[mediumFont]}>
-            Price
-          </Paragraph>
-          <Heading as="h1" color="text1">
-            {ethPrice} ETH
-          </Heading>
-        </Flex>
+          <Separator />
+          <Flex justify="space-between">
+            <Paragraph size="lg" inline color="text2" className={[mediumFont]}>
+              Price
+            </Paragraph>
+            <Heading as="h1" color="text1">
+              {ethPrice} ETH
+            </Heading>
+          </Flex>
 
-        {error && <PrintError errorMessage={formatContractError(error)} />}
-        <Stack gap="x4">
-          <Flex gap="x2" justify="space-between" pt="x3" align="stretch">
-            <Button flex={1} variant="secondary" onClick={requestClose}>
-              Cancel
-            </Button>
-            <Button
-              loading={loadingValidation || txInProgress}
-              disabled={!isValidated}
-              flex={1}
-              onClick={() => fillSeaportOrder(contractCall)}
-            >
-              Buy NFT
-            </Button>
-          </Flex>
+          {error && <PrintError errorMessage={formatContractError(error)} />}
+          <Stack gap="x4">
+            <Flex gap="x2" justify="space-between" pt="x3" align="stretch">
+              <Button flex={1} variant="secondary" onClick={requestClose}>
+                Cancel
+              </Button>
+              <Button
+                loading={loadingValidation || txInProgress}
+                disabled={!isValidated}
+                flex={1}
+                onClick={() => fillSeaportOrder(contractCall)}
+              >
+                Buy NFT
+              </Button>
+            </Flex>
+          </Stack>
         </Stack>
       </Stack>
-    </Stack>
+    )
   )
 }

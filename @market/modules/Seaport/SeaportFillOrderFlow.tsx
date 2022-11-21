@@ -1,3 +1,5 @@
+import { OffchainOrderWithToken } from 'types/zora.api.generated'
+
 import React, { useState } from 'react'
 
 import { NFTObject } from '@zoralabs/nft-hooks'
@@ -7,7 +9,7 @@ import { SeaportFillOrder } from './SeaportFillOrder'
 import { SeaportFillOrderSuccess } from './SeaportFillOrderSuccess'
 
 export interface CommonSeaportFillOrderProps extends StackProps {
-  order: any
+  order: OffchainOrderWithToken
   nft: NFTObject
   userAddress?: string
 }

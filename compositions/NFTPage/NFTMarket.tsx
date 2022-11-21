@@ -29,11 +29,11 @@ export function NFTMarket({
   const { data: nftObj } = useNFT(collectionAddress, tokenId)
 
   const hasNounishAuction = useMemo(
-    () => activeAuction?.properties?.tokenId === tokenId && dao,
-    [activeAuction?.properties?.tokenId, dao, tokenId]
+    () => activeAuction?.properties?.tokenId === tokenId,
+    [activeAuction?.properties?.tokenId, tokenId]
   )
 
-  if (hasNounishAuction) {
+  if (hasNounishAuction && dao) {
     return (
       <NounishAuction
         dao={dao!}

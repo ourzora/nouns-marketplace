@@ -1,3 +1,5 @@
+import { OffchainOrderWithToken } from 'types/zora.api.generated'
+
 import {
   NOUNS_TREASURY_ADDRESS,
   SEAPORT_CONTRACT_CALL_VALIDATION_ADDRESS,
@@ -10,7 +12,9 @@ export function isSeaportValidationResponseValid(response: any) {
   return response?.message?.includes('successfully simulated contract call')
 }
 
-export async function isSeaportOrderValid(order?: any): Promise<boolean> {
+export async function isSeaportOrderValid(
+  order?: OffchainOrderWithToken
+): Promise<boolean> {
   if (!order) return false
 
   const { offchainOrder } = order
@@ -21,7 +25,7 @@ export async function isSeaportOrderValid(order?: any): Promise<boolean> {
     caller_address: NOUNS_TREASURY_ADDRESS, // This is a clever hack. The Seaport validation endpoint checks a) if the order is open and b) if the address can afford to buy the NFT. So we use the treasury address, which is likely to be quite full
     contract_address: contractAddress,
     calldata: calldata,
-    value: chainTokenPrice.decimal, // Price in Ether (Decimal price)
+    value: chainTokenPrice?.decimal, // Price in Ether (Decimal price)
   }
 
   const rawResponse = await fetch(SEAPORT_CONTRACT_CALL_VALIDATION_ADDRESS, {

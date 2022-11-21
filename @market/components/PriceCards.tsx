@@ -3,6 +3,7 @@ import { OpenSeaIcon } from 'components/Icon'
 import { ArrowLeft } from 'components/Icon/ArrowLeft'
 import { ArrowRight } from 'components/Icon/ArrowRight'
 import { mediumFont } from 'styles/styles.css'
+import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import React, { useCallback, useMemo, useState } from 'react'
 
@@ -17,7 +18,7 @@ import * as styles from './PriceCards.css'
 
 export interface PriceCardsProps {
   nft: NFTObject
-  offchainOrders: any[]
+  offchainOrders: OffchainOrderWithToken[]
   userAddress?: string
 }
 
@@ -29,7 +30,7 @@ function PriceCard({
   userAddress,
   nft,
 }: {
-  order: any
+  order: OffchainOrderWithToken
   nft: NFTObject
   userAddress?: string
 }) {
@@ -38,9 +39,14 @@ function PriceCard({
   const { chainTokenPrice, usdcPrice } = price
 
   const formattedUSD = useMemo(
-    () => numberFormatterUSDC(usdcPrice.decimal),
-    [usdcPrice.decimal]
+    () => (usdcPrice ? numberFormatterUSDC(usdcPrice?.decimal) : '...'),
+    [usdcPrice]
   )
+  const formattedETH = useMemo(
+    () => (chainTokenPrice ? `${chainTokenPrice?.decimal} ETH` : '...'),
+    [chainTokenPrice]
+  )
+
   const { requestOpen } = useModal()
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
@@ -61,7 +67,7 @@ function PriceCard({
         <Flex gap="x2">
           <OpenSeaIcon w="x8" />
           <Heading as="h2" size="sm" inline>
-            {chainTokenPrice.decimal} ETH
+            {formattedETH}
           </Heading>
         </Flex>
         {usdcPrice && (
