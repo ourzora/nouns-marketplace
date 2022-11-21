@@ -5,7 +5,6 @@ import { useAggregate } from 'hooks'
 
 import { useMemo } from 'react'
 
-import { numberFormatter } from '@shared'
 import { Box, Flex, FlexProps } from '@zoralabs/zord'
 
 import { CollectionStats } from './CollectionStats'
@@ -17,18 +16,8 @@ export interface MarketStatesProps extends FlexProps {
 }
 
 export function MarketStats({ contractAddress, ...props }: MarketStatesProps) {
-  const { aggregate } = useAggregate(contractAddress)
+  const { floorPrice, nftCount, ownerCount } = useAggregate(contractAddress)
   const dao = returnDao(contractAddress)
-
-  const ownerCount = useMemo(
-    () => numberFormatter(aggregate?.aggregateStat?.ownerCount),
-    [aggregate?.aggregateStat?.ownerCount]
-  )
-  const nftCount = useMemo(
-    () => numberFormatter(aggregate?.aggregateStat?.nftCount),
-    [aggregate?.aggregateStat?.nftCount]
-  )
-  const floorPrice = aggregate?.aggregateStat?.floorPrice ?? '0'
 
   return useMemo(
     () => (
