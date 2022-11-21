@@ -2,39 +2,31 @@ import { useMemo } from 'react'
 
 import { sidebarHighBid } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
-import { Flex, Label } from '@zoralabs/zord'
+import { Flex, FlexProps, Label } from '@zoralabs/zord'
 
 import { EthAmount } from './EthAmount'
 
-type Props = {
+interface HighBidProps extends FlexProps {
   showLabels?: boolean
   layout: string
   highestBid?: string
   collectionAddress: string
   className?: any
   auctionCompleted: boolean
-  styles: {
-    [k: string]: any
-  }
+  label?: string
 }
 
 export function AuctionHighBid({
   showLabels,
   highestBid,
   layout,
-  styles,
+  direction = 'row',
+  label = 'Current bid',
   auctionCompleted,
-}: Props) {
-  const label = styles.label || 'Current bid'
-  const layoutDirection = styles.layoutDirection || 'row'
-
+}: HighBidProps) {
   return useMemo(
     () => (
-      <Flex
-        direction={layoutDirection}
-        gap={layoutDirection === 'row' ? 'x2' : 'x0'}
-        {...styles}
-      >
+      <Flex direction={direction} gap={direction === 'row' ? 'x2' : 'x0'}>
         {showLabels && (
           <Label
             size={layout === 'sideBarBid' ? 'lg' : 'md'}
@@ -58,6 +50,6 @@ export function AuctionHighBid({
         )}
       </Flex>
     ),
-    [layoutDirection, styles, showLabels, layout, auctionCompleted, label, highestBid]
+    [direction, showLabels, layout, auctionCompleted, label, highestBid]
   )
 }

@@ -1,3 +1,5 @@
+import { OffchainOrderWithToken } from 'types/zora.api.generated'
+
 import { useMemo } from 'react'
 import { TypeSafeToken } from 'validators/token'
 
@@ -12,9 +14,11 @@ interface NFTMarketProps extends BoxProps {
   collectionAddress: string
   tokenId: string
   token: TypeSafeToken
+  offchainOrders?: OffchainOrderWithToken[]
 }
 
 export function NFTMarket({
+  offchainOrders,
   className,
   collectionAddress,
   token,
@@ -25,29 +29,37 @@ export function NFTMarket({
   const { data: nftObj } = useNFT(collectionAddress, tokenId)
 
   const hasNounishAuction = useMemo(
-    () => activeAuction?.properties?.tokenId === tokenId && dao,
-    [activeAuction?.properties?.tokenId, dao, tokenId]
+    () => activeAuction?.properties?.tokenId === tokenId,
+    [activeAuction?.properties?.tokenId, tokenId]
   )
 
-  // FIXME: superlame, handle states accordingly
-  return hasNounishAuction && dao ? (
-    <NounishAuction
-      dao={dao}
-      hideThumbnail
-      hideTitle
-      hideCollectionTitle
-      showLabels
-      layout="sideBarBid"
-      useErrorMsg
-      className={className}
-    />
-  ) : nftObj ? (
-    <NFTAsks
-      className={[nftMarketWrapper, className]}
-      nftObj={nftObj}
-      p="x4"
-      align="flex-start"
-      direction="column"
-    />
-  ) : null
+  if (hasNounishAuction && dao) {
+    return (
+      <NounishAuction
+        dao={dao!}
+        hideThumbnail
+        hideTitle
+        hideCollectionTitle
+        showLabels
+        layout="sideBarBid"
+        useErrorMsg
+        className={className}
+      />
+    )
+  }
+
+  if (nftObj) {
+    return (
+      <NFTAsks
+        offchainOrders={offchainOrders}
+        className={[nftMarketWrapper, className]}
+        nftObj={nftObj}
+        p="x4"
+        align="flex-start"
+        direction="column"
+      />
+    )
+  }
+
+  return null
 }

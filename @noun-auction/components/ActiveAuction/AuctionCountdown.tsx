@@ -5,30 +5,27 @@ import { useMemo, useState } from 'react'
 import { useInterval } from '@noun-auction/hooks/useInterval'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
-import { Flex, Label } from '@zoralabs/zord'
+import { Flex, FlexProps, Label } from '@zoralabs/zord'
 
-type Props = {
+interface CountdownProps extends FlexProps {
   showLabels?: boolean
   endedCopy?: string
   label?: string
-  layoutDirection?: 'row' | 'column'
   layout?: string
   className?: string[]
   auctionCompleted: boolean
   auctionEndTime: string
-  styles: { [k in string]: any }
 }
 
 export function AuctionCountdown({
   showLabels,
   endedCopy = 'Bidding & Settling',
   label = 'Ends in',
-  layoutDirection = 'row',
+  direction = 'row',
   layout,
-  styles,
   auctionCompleted,
   auctionEndTime,
-}: Props) {
+}: CountdownProps) {
   const [now, setNow] = useState(new Date())
 
   const countdownText = useMemo(() => {
@@ -45,12 +42,7 @@ export function AuctionCountdown({
   useInterval(() => setNow(new Date()), 1000)
 
   return (
-    <Flex
-      direction={layoutDirection}
-      wrap="wrap"
-      gap={layoutDirection === 'row' ? 'x2' : 'x0'}
-      {...styles}
-    >
+    <Flex direction={direction} wrap="wrap" gap={direction === 'row' ? 'x2' : 'x0'}>
       {showLabels && (
         <Label
           size="md"

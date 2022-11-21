@@ -8,7 +8,7 @@ import { useToast } from '@toast'
 import { ToastStatus, ToastVariant } from '@toast/toastReducer'
 import { Stack } from '@zoralabs/zord'
 
-import { HeadingDescription } from '../HeadingDescription'
+import { HeadingDescription } from '../../../components/HeadingDescription'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 
 interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
