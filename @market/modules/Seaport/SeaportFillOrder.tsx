@@ -124,7 +124,6 @@ function SeaportFillOrderWithVerifiedContractCall({
               <Paragraph size="lg" inline color="text1">
                 {platformName}
               </Paragraph>
-              {/* <OpenSeaIcon /> */}
               <PlatformLogo />
             </Flex>
           </Flex>
