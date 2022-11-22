@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { color, space } from '@zoralabs/zord'
+import { color } from '@zoralabs/zord'
 
 export const arrowButton = style({
   // @TODO BJ: remove !important when zord has been vendored in
@@ -24,4 +24,12 @@ export const wrap = style({
 
 export const cardStack = style({
   boxShadow: `0 10px 0 -5px #FFF, 0 10px 2px -4px ${color.border}, 0 20px 0 -10px #FFF,0 20px 2px -9px ${color.border}`,
+})
+
+export const buyNowButton = style({
+  selectors: {
+    '&:hover': {
+      opacity: 0.8,
+    },
+  },
 })

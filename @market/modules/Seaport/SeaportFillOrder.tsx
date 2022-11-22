@@ -5,6 +5,7 @@ import { mediumFont } from 'styles/styles.css'
 import React, { Dispatch, SetStateAction, useEffect, useMemo } from 'react'
 
 import { MarketModalHeading } from '@market/components'
+import { useOffchainOrderAttribution } from '@market/hooks'
 import { useValidateSeaportContractCall } from '@market/modules/Seaport/hooks/useValidateSeaportContractCall'
 import { useModal } from '@modal'
 import { formatContractError, useAuth } from '@shared'
@@ -90,6 +91,15 @@ function SeaportFillOrderWithVerifiedContractCall({
     loading: loadingValidation,
   } = useValidateSeaportContractCall(contractCall)
 
+  const {
+    attribution,
+    logo: PlatformLogo,
+    platformName,
+  } = useOffchainOrderAttribution(
+    offchainOrder.calldata!,
+    offchainOrder?.properties?.salt
+  )
+
   const { txError, txInProgress, finalizedTx, fillSeaportOrder } = useSeaportTransaction()
 
   const error = useMemo(() => {
@@ -112,9 +122,10 @@ function SeaportFillOrderWithVerifiedContractCall({
             </Paragraph>
             <Flex gap="x2">
               <Paragraph size="lg" inline color="text1">
-                Seaport
+                {platformName}
               </Paragraph>
-              <OpenSeaIcon />
+              {/* <OpenSeaIcon /> */}
+              <PlatformLogo />
             </Flex>
           </Flex>
           <Separator />

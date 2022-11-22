@@ -1,12 +1,11 @@
 import { Button } from 'components/Button'
-import { OpenSeaIcon } from 'components/Icon'
-import { ArrowLeft } from 'components/Icon/ArrowLeft'
-import { ArrowRight } from 'components/Icon/ArrowRight'
+import { ArrowLeft, ArrowRight } from 'components/Icon'
 import { mediumFont } from 'styles/styles.css'
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import React, { useCallback, useMemo, useState } from 'react'
 
+import { useOffchainOrderAttribution } from '@market/hooks'
 import { SeaportFillOrderFlow } from '@market/modules'
 import { ModalComposition, useModal } from '@modal'
 import { useAuth, useButtonRequiresAuth } from '@shared'
@@ -22,7 +21,6 @@ export interface PriceCardsProps {
   userAddress?: string
 }
 
-const label = 'SeaPort'
 const modalName = 'seaport-fill-modal'
 
 function PriceCard({
@@ -47,6 +45,18 @@ function PriceCard({
     [chainTokenPrice]
   )
 
+  const {
+    attribution,
+    logo: PlatformLogo,
+    platformName,
+    platformButtonColor,
+  } = useOffchainOrderAttribution(
+    offchainOrder?.properties?.salt,
+    offchainOrder?.calldata ?? undefined
+  )
+
+  console.log('PRICECARDS ATTR', attribution)
+
   const { requestOpen } = useModal()
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
@@ -58,14 +68,14 @@ function PriceCard({
     <Stack gap="x4">
       <Stack>
         <Flex w="100%" justify="space-between">
-          {label && (
+          {platformName && (
             <Paragraph inline className={mediumFont} color="text2">
-              Price on {label}
+              Price on {platformName}
             </Paragraph>
           )}
         </Flex>
         <Flex gap="x2">
-          <OpenSeaIcon w="x8" />
+          <PlatformLogo w="x8" />
           <Heading as="h2" size="sm" inline>
             {formattedETH}
           </Heading>
@@ -81,7 +91,13 @@ function PriceCard({
         modalName={modalName}
         modalBehaviorRequiresAuth={true}
         trigger={
-          <Button w="100%" onClick={buttonBehavior}>
+          <Button
+            w="100%"
+            onClick={buttonBehavior}
+            //  backgroundColor={platformButtonColor}
+            style={{ backgroundColor: platformButtonColor }}
+            className={styles.buyNowButton}
+          >
             Buy Now
           </Button>
         }
@@ -118,7 +134,11 @@ export function PriceCards({ nft, offchainOrders }: PriceCardsProps) {
 
   return (
     <Stack gap={'x5'} align="center" className={cardCount > 1 ? styles.wrap : null}>
-      <Well p="x4" borderRadius="phat" className={styles.cardStack}>
+      <Well
+        p="x4"
+        borderRadius="phat"
+        className={cardCount > 1 ? styles.cardStack : null}
+      >
         {showArrows && (
           <Flex gap="x1" pos="absolute" top="x4" right="x4">
             <Button
