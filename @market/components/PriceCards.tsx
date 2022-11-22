@@ -55,8 +55,6 @@ function PriceCard({
     offchainOrder?.calldata ?? undefined
   )
 
-  console.log('PRICECARDS ATTR', attribution)
-
   const { requestOpen } = useModal()
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
@@ -94,7 +92,6 @@ function PriceCard({
           <Button
             w="100%"
             onClick={buttonBehavior}
-            //  backgroundColor={platformButtonColor}
             style={{ backgroundColor: platformButtonColor }}
             className={styles.buyNowButton}
           >
