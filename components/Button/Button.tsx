@@ -9,7 +9,7 @@ export interface NounButtonProps extends ButtonProps {
   size?: keyof typeof buttonVariants['size']
   title?: string
   target?: string
-  as?: React.ReactNode
+  as?: React.ElementType<any>
   onClick?: MouseEventHandler<HTMLButtonElement> | (() => void)
 }
 
