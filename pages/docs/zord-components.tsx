@@ -183,7 +183,7 @@ export default function NounsAuctionHistory() {
             </Flex>
             <Flex direction="column">
               <Eyebrow>Responsive Text</Eyebrow>
-              <Text fontWeight="display" fontSize={{ '@initial': '48', '@576': '65' }}>
+              <Text fontWeight="display" fontSize={{ '@initial': 48, '@576': 65 }}>
                 Custom size which gets smaller at 576px breakpoint
               </Text>
             </Flex>

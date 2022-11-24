@@ -91,7 +91,7 @@ export function NounsBidFormComponent({
             disabled={isSuccess}
             pattern="[0-9.]*"
             placeholder={`${minBidAmount?.pretty} Ξ or more`}
-            sizeVariant="lg"
+            size="lg"
             onChange={(event: any) => handleOnUpdate(event.target.value)}
           />
         </Flex>

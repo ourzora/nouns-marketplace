@@ -22,18 +22,14 @@ interface RankingRowProps extends StackProps {
 }
 
 export function RankingRow({ collection, ...props }: RankingRowProps) {
-  const { aggregate } = useAggregate(collection.address)
+  const { salesVolume, aggregate, floorPrice } = useAggregate(collection.address)
   const collectionPriceData = useMemo(() => {
     if (aggregate)
       return {
-        volume: `${roundTwoDecimals(
-          aggregate?.aggregateStat?.salesVolume?.chainTokenPrice
-        )} ETH`,
-        floor: aggregate?.aggregateStat?.floorPrice
-          ? `${numberFormatter(roundTwoDecimals(aggregate.aggregateStat.floorPrice))} ETH`
-          : 'NA',
+        volume: `${roundTwoDecimals(salesVolume?.chainTokenPrice)} ETH`,
+        floor: floorPrice ? `${numberFormatter(roundTwoDecimals(floorPrice))} ETH` : 'NA',
       }
-  }, [aggregate])
+  }, [aggregate, floorPrice, salesVolume?.chainTokenPrice])
 
   return (
     <Stack {...props}>
