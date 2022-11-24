@@ -32,7 +32,10 @@ export function MarketStats({ contractAddress, ...props }: MarketStatesProps) {
         >
           <StatBlock statType="Owners" statValue={ownerCount} />
           <StatBlock statType="Items" statValue={nftCount} />
-          <StatBlock statType="Floor Price" statValue={`${floorPrice} ETH`} />
+          <StatBlock
+            statType="Floor Price"
+            statValue={floorPrice ? `${floorPrice} ETH` : '...'}
+          />
           {dao ? (
             <DaoStats contractAddress={contractAddress} />
           ) : (
