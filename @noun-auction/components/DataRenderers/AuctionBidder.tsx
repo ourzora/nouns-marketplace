@@ -54,7 +54,6 @@ export function AuctionBidder({
       className={className}
       direction={direction}
       gap={direction === 'row' ? 'x2' : 'x0'}
-      rel="noreferrer"
       align={direction === 'row' ? 'center' : 'flex-start'}
       wrap="wrap"
       display={{
@@ -84,7 +83,12 @@ export function AuctionBidder({
           {hasNonZeroHighestBidder ? (
             <Flex gap="x2" align="center">
               {bidderEtherscanLink && (
-                <Link href={bidderEtherscanLink} passHref>
+                <Link
+                  href={bidderEtherscanLink}
+                  passHref
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <a>
                     <Flex gap="x1">
                       <Label
