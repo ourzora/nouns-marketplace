@@ -53,7 +53,6 @@ export function AuctionBidder({
     <Flex
       className={className}
       direction={direction}
-      target="_blank"
       gap={direction === 'row' ? 'x2' : 'x0'}
       rel="noreferrer"
       align={direction === 'row' ? 'center' : 'flex-start'}
