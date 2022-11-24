@@ -17,20 +17,14 @@ export function FilterPropertySelect({
     filterStore: { setCollectionAttributes, filters },
   } = useCollectionFilters()
 
-  // const selectedValue = useMemo(
-  //   () =>
-  //     filters.collectionAttributes.filter((val) => val.traitType === traitType)[0]?.value,
-  //   [filters.collectionAttributes, traitType]
-  // )
+  // console.log('hmmmm', filters.collectionAttributes)
 
-  // console.log('FILTfilters)
-  console.log('hmmmm', filters.collectionAttributes)
-
-  const isReset = !filters.collectionAttributes.length
+  const isReset = useMemo(
+    () => !filters.collectionAttributes.length,
+    [filters.collectionAttributes.length]
+  )
 
   // console.log('selectedValue', selectedValue)
-
-  // @BJ TODO: reset the dropdowns when the filters have been cleared
 
   return (
     <Flex
@@ -38,12 +32,9 @@ export function FilterPropertySelect({
       position="relative"
       // className={[styles.selectDropdown]}
     >
-      {/* <Select name="filter-property" id="filter-property"></Select> */}
-      {/* {traitType}
-      {selectedValue ? ` ${selectedValue}` : null} */}
       <Label
         as="label"
-        for="filter-property"
+        htmlFor="filter-property"
         position="absolute"
         className={styles.selectLabel}
       >
@@ -65,29 +56,14 @@ export function FilterPropertySelect({
         }
         // className={[styles.selectDropdown]}
       >
-        {/* <Box
-          as="option"
-          value=""
-          // disabled
-          default
-          selected
-          hidden
-          key={`${traitType}-default`}
-          w="100%"
-        >
-          {traitType}
-          {selectedValue ? ` ${selectedValue}` : null}
-        </Box> */}
         <Box
           as="option"
-          default
-          // selected={isReset}
+          // default
+          selected={isReset}
           value=""
           key={`${traitType}-default`}
           w="100%"
-        >
-          --
-        </Box>
+        />
         {valueMetrics.map((valueMetric) => (
           <Box as="option" value={valueMetric.value} key={valueMetric.value} w="100%">
             {valueMetric.value}
