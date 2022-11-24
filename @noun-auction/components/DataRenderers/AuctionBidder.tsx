@@ -91,12 +91,7 @@ export function AuctionBidder({
                 >
                   <a>
                     <Flex gap="x1">
-                      <Label
-                        size="md"
-                        gap="x1"
-                        align={'center'}
-                        style={{ lineHeight: '1.15' }}
-                      >
+                      <Label size="md" align={'center'} style={{ lineHeight: '1.15' }}>
                         {ensName ?? shortAddress}
                       </Label>
                       {useAvatar && (
