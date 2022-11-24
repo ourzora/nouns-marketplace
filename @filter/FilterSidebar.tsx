@@ -39,14 +39,14 @@ export function FilterSidebar() {
     },
     ownerAddress,
     contractAddress,
-    useMarketStatus,
-    useOwnerStatus,
-    useMediaTypes,
-    usePriceRange,
+    enableMarketStatus,
+    enableOwnerStatus,
+    enableMediaTypes,
+    enablePriceRange,
     useFilterOwnerCollections,
-    useCollectionSearch,
+    enableCollectionSearch,
     useCollectionProperties,
-    useSidebarClearButton,
+    enableSidebarClearButton,
   } = useCollectionFilters()
 
   const [hasScrolled, setHasScrolled] = useState(false)
@@ -76,8 +76,8 @@ export function FilterSidebar() {
       className={[filterSidebar, 'zora-filterSidebar']}
       ref={parentRef}
     >
-      <Box position="relative" ref={childRef}>
-        {useMarketStatus && (
+      <Stack gap="x2" position="relative" ref={childRef}>
+        {enableMarketStatus && (
           <FilterOptions
             label="Market Status"
             options={marketStatusOptions}
@@ -86,7 +86,7 @@ export function FilterSidebar() {
             showCheckbox
           />
         )}
-        {useOwnerStatus && ownerAddress && (
+        {enableOwnerStatus && ownerAddress && (
           <FilterOptions
             label="Owner Status"
             options={ownerStatusOptions}
@@ -95,7 +95,7 @@ export function FilterSidebar() {
             showCheckbox
           />
         )}
-        {useMediaTypes && (
+        {enableMediaTypes && (
           <FilterOptions
             label="Media Type"
             options={mediaTypeOptions}
@@ -105,12 +105,12 @@ export function FilterSidebar() {
           />
         )}
         {ownerAddress && useFilterOwnerCollections && <FilterOwnerCollections />}
-        {usePriceRange && <FilterPriceRange />}
+        {enablePriceRange && <FilterPriceRange />}
         {contractAddress && useCollectionProperties && (
           <FilterProperties collectionAddress={contractAddress} />
         )}
-        {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
-        {useSidebarClearButton ? (
+        {enableCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
+        {enableSidebarClearButton && (
           <ClearFilters
             w="100%"
             display={{
@@ -118,8 +118,8 @@ export function FilterSidebar() {
               '@1024': 'block',
             }}
           />
-        ) : null}
-      </Box>
+        )}
+      </Stack>
     </Stack>
   )
 

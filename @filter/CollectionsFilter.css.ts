@@ -1,9 +1,10 @@
+import { PRIMARY_LAYER } from 'constants/layers'
 import { HEADER_HEIGHT } from 'styles/style-constants'
 
 import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, ease, media, typography, vars } from '@zoralabs/zord'
+import { atoms, color, ease, media, radii, space, typography, vars } from '@zoralabs/zord'
 
 export const borderStyle = `2px solid ${vars.color.border}`
 
@@ -343,3 +344,26 @@ export const mobileFiltersFooter = style([
     w: '100%',
   }),
 ])
+
+export const selectLabel = style({
+  zIndex: PRIMARY_LAYER,
+  lineHeight: `${typography.lineHeight[40]}!important`, // should be 55 per designs, revisit
+  textIndent: space.x4,
+  userSelect: 'none',
+  pointerEvents: 'none',
+  textTransform: 'capitalize',
+})
+
+export const selectDropdown = style({
+  appearance: 'none',
+  backgroundColor: color.background2,
+  borderRadius: `${radii.curved}!important`,
+  border: '2px solid transparent',
+  textAlign: 'right',
+  userSelect: 'none',
+  selectors: {
+    '&:focus': {
+      borderColor: color.accent,
+    },
+  },
+})

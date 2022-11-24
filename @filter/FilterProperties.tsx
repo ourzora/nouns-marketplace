@@ -1,5 +1,5 @@
 import { useCollectionFilters } from '@filter/providers'
-import { Accordion, Box, Label, Stack } from '@zoralabs/zord'
+import { Box, Label, Stack } from '@zoralabs/zord'
 
 import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { FilterPropertySelect } from './FilterPropertySelect'
@@ -14,30 +14,28 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
   }
 
   return (
-    <Stack className={['filter-properties', useCollectionProperties?.selector]}>
+    <Stack gap="x2" className={['filter-properties', useCollectionProperties?.selector]}>
       {useCollectionProperties?.header && (
-        <Label className="zord-attributesHeading" mb="x4" size="lg">
+        <Label className="zord-attributesHeading" size="lg">
           {useCollectionProperties?.header}
         </Label>
       )}
-      {data?.attributes.map((property) => (
-        <Box
-          key={property.traitType}
-          className={!useCollectionProperties?.hideBorder && filterOptionsWrapper}
-        >
-          <Accordion label={property.traitType ? property.traitType : ''}>
-            <Stack pb="x4" gap="x5" className={['filter-properties-list']}>
-              {property.valueMetrics.map((valueMetric) => (
-                <FilterPropertySelect
-                  key={valueMetric.value}
-                  traitType={property.traitType || ''}
-                  valueMetric={valueMetric}
-                />
-              ))}
-            </Stack>
-          </Accordion>
-        </Box>
-      ))}
+      <Stack gap="x2">
+        {data?.attributes.map((property) => (
+          <Box
+            key={property.traitType}
+            className={[
+              'filter-properties-list',
+              !useCollectionProperties?.hideBorder && filterOptionsWrapper,
+            ]}
+          >
+            <FilterPropertySelect
+              traitType={property.traitType || ''}
+              valueMetrics={property.valueMetrics}
+            />
+          </Box>
+        ))}
+      </Stack>
     </Stack>
   )
 }

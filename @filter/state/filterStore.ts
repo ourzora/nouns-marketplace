@@ -169,16 +169,39 @@ export function useFilterStore(
   )
 
   const setCollectionAttributes = useCallback(
+    // Only one value can be selected for each trait
+    // If a trait has an existing selection, replace it
     (attribute: CollectionAttributeFilterValue) => {
+      const shouldResetTrait = attribute.value === ''
+
       const index = filters.collectionAttributes.findIndex(
-        (a) => a.traitType === attribute.traitType && a.value === attribute.value
+        (a) => a.traitType === attribute.traitType
       )
+
+      const hasSelectedAttributeForTrait = index >= 0
+
+      const updateAttributes = () => {
+        let newAttributes
+
+        if (shouldResetTrait) {
+          // Remove
+          newAttributes = removeItemAtIndex(filters.collectionAttributes, index)
+        } else if (hasSelectedAttributeForTrait) {
+          // Remove + Replace
+          newAttributes = [
+            ...removeItemAtIndex(filters.collectionAttributes, index),
+            attribute,
+          ]
+        } else {
+          // Set
+          newAttributes = [...filters.collectionAttributes, attribute]
+        }
+        return newAttributes
+      }
+
       setFilters({
         ...filters,
-        collectionAttributes:
-          index >= 0
-            ? removeItemAtIndex(filters.collectionAttributes, index)
-            : [...filters.collectionAttributes, attribute],
+        collectionAttributes: updateAttributes(),
       })
     },
     [filters]

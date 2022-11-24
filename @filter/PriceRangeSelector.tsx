@@ -29,7 +29,7 @@ export function PriceRangeSelector({
   const [maxValue, setMaxValue] = useState(0)
   const [currency, setCurrency] = useState<Currency>(currencyOptions[0])
 
-  const { usePriceRange } = useCollectionFilters()
+  const { enablePriceRange } = useCollectionFilters()
 
   const minHandler = useCallback(
     (e) => {
@@ -92,7 +92,7 @@ export function PriceRangeSelector({
           min={0}
           size="sm"
         />
-        {!usePriceRange?.hideCurrencySelect && (
+        {!enablePriceRange?.hideCurrencySelect && (
           <CurrencySelect
             options={currencyOptions}
             name="currency"

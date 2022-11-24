@@ -66,16 +66,16 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         </CollectionHeader>
       </Grid>
       <CollectionFilterProvider
-        useSidebarClearButton
+        enableSidebarClearButton
         filtersVisible={isLarge}
         contractAddress={collectionAddress}
-        useSortDropdown
+        enableSortDropdown
         useCollectionProperties={{
           header: 'Traits',
           selector: 'nouns-market-traits',
           hideBorder: true,
         }}
-        usePriceRange={{
+        enablePriceRange={{
           label: 'Price',
           defaultState: 'open',
           hideBorder: true,

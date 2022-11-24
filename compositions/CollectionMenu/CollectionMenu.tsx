@@ -48,7 +48,7 @@ export function CollectionMenu() {
           className={[styles.collectionTrigger, noTextWrap]}
         >
           {currentCollection}
-          {currentCollectionCount ? (
+          {currentCollectionCount && (
             <Label
               as="span"
               color="text3"
@@ -61,7 +61,7 @@ export function CollectionMenu() {
             >
               {currentCollectionCount}
             </Label>
-          ) : null}
+          )}
           <Icon id="ChevronDown" size="md" color="secondary" />
         </Button>
       }

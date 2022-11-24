@@ -34,19 +34,19 @@ export function FilterOptions({
 
   return (
     <Box className={filterOptionsWrapper}>
-      <Accordion label={label}>
-        <Flex gap="x2" wrap="wrap" pb="x3">
-          {options.map((option: any) => (
-            <FilterOptionButton
-              key={option.value}
-              label={option.label}
-              showCheckbox={showCheckbox}
-              checked={option.value === selectedOption}
-              onClick={() => optionHandler(option.value)}
-            />
-          ))}
-        </Flex>
-      </Accordion>
+      {/* <Accordion label={label}> */}
+      <Flex gap="x2" wrap="wrap" pb="x3">
+        {options.map((option: any) => (
+          <FilterOptionButton
+            key={option.value}
+            label={option.label}
+            showCheckbox={showCheckbox}
+            checked={option.value === selectedOption}
+            onClick={() => optionHandler(option.value)}
+          />
+        ))}
+      </Flex>
+      {/* </Accordion> */}
     </Box>
   )
 }

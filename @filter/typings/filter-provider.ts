@@ -25,19 +25,19 @@ export type PropertiesConfig = {
 
 export interface FilterConfigProps {
   filtersVisible?: boolean
-  useMarketStatus?: boolean
-  useOwnerStatus?: boolean
-  useMediaTypes?: boolean
-  useSortDropdown?: boolean
-  usePriceRange?: PriceRangeFilterConfig | undefined
-  useCollectionSearch?: boolean
-  useCollectionProperties?: PropertiesConfig | undefined
-  useSidebarClearButton?: boolean
+  enableMarketStatus?: boolean
+  enableOwnerStatus?: boolean
+  enableMediaTypes?: boolean
+  enableSortDropdown?: boolean
+  enablePriceRange?: PriceRangeFilterConfig | undefined //@BJ todo: this shouldn't be a boolean AND a configuration, it's confusing
+  enableCollectionSearch?: boolean
+  useCollectionProperties?: PropertiesConfig | undefined //@BJ todo: this shouldn't be a boolean AND a configuration, it's confusing
+  enableSidebarClearButton?: boolean
   /**
    * Flag to show or hide the Filter sidebar and visibility toggle button
    * @default true
    */
-  useSidebarFilter?: boolean
+  enableSidebarFilter?: boolean
   useFilterOwnerCollections?: boolean
   strings?: Partial<Strings>
   theme?: Partial<Theme>

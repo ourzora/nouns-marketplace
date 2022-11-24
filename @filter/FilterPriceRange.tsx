@@ -10,25 +10,25 @@ import { PriceRangeSelector } from './PriceRangeSelector'
 export function FilterPriceRange() {
   const {
     filterStore: { setPriceRange, priceRangeSelection, invalidPriceRange },
-    usePriceRange,
+    enablePriceRange,
   } = useCollectionFilters()
 
   return (
-    <Box className={!usePriceRange?.hideBorder && filterOptionsWrapper} pb="x0">
-      <Accordion
-        label={usePriceRange?.label || 'Price Range'}
-        defaultState={usePriceRange?.defaultState}
-      >
-        <Stack gap="x4" pb="x4">
-          <PriceRangeSelector
-            onSelect={priceRangeSelection}
-            currencyOptions={[ETH_CURRENCY_SHIM]}
-          />
-          <Button variant="outline" disabled={invalidPriceRange} onClick={setPriceRange}>
-            Apply
-          </Button>
-        </Stack>
-      </Accordion>
+    <Box className={!enablePriceRange?.hideBorder && filterOptionsWrapper} pb="x0">
+      {/* <Accordion
+        label={enablePriceRange?.label || 'Price Range'}
+        defaultState={enablePriceRange?.defaultState}
+      > */}
+      <Stack gap="x4" pb="x4">
+        <PriceRangeSelector
+          onSelect={priceRangeSelection}
+          currencyOptions={[ETH_CURRENCY_SHIM]}
+        />
+        <Button variant="outline" disabled={invalidPriceRange} onClick={setPriceRange}>
+          Apply
+        </Button>
+      </Stack>
+      {/* </Accordion> */}
     </Box>
   )
 }

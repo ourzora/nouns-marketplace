@@ -23,21 +23,21 @@ interface FilterProps extends StackProps {
 export function Filter({ grid, className, ...props }: FilterProps) {
   const {
     filterStore: { showFilters },
-    useSortDropdown,
+    enableSortDropdown,
     items,
     isValidating,
     isEmpty,
-    useSidebarFilter,
+    enableSidebarFilter,
     getString,
   } = useCollectionFilters()
 
   return (
     <Stack className={className} {...props}>
-      {!showFilters && useSidebarFilter && (
+      {!showFilters && enableSidebarFilter && (
         <FilterHeader>
           <>
             <SelectedFilters />
-            {useSortDropdown && <SortDropdown />}
+            {enableSortDropdown && <SortDropdown />}
           </>
         </FilterHeader>
       )}
@@ -53,7 +53,7 @@ export function Filter({ grid, className, ...props }: FilterProps) {
           },
         ]}
       >
-        {useSidebarFilter && (
+        {enableSidebarFilter && (
           <Box
             position="sticky"
             top="x0"
@@ -80,7 +80,7 @@ export function Filter({ grid, className, ...props }: FilterProps) {
           {showFilters && (
             <Flex justify="space-between" align="center">
               <SelectedFilters />
-              {useSortDropdown && <SortDropdown />}
+              {enableSortDropdown && <SortDropdown />}
             </Flex>
           )}
           {items.length ? (
