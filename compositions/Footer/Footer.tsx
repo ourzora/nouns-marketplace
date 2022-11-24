@@ -8,7 +8,7 @@ export function Footer() {
     <Flex as="footer" className={styles.footerWrap}>
       <Flex className={styles.footer}>
         <Flex gap="x6">
-          <Label as="a" size="lg" href="/docs" passhref="/docs">
+          <Label as="a" size="lg" href="/docs">
             Docs
           </Label>
           <Label as="a" size="lg" href="#">

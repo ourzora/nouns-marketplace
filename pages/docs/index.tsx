@@ -76,7 +76,6 @@ export default function TestPages() {
                   align="center"
                   gap="x3"
                   display="flex"
-                  alignItems="center"
                 >
                   {link.name}
                   <Icon id="ArrowRight" size="lg" />

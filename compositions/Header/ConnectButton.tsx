@@ -1,69 +1,107 @@
-import { Button } from 'components/Button'
-import { hideMobile, noTextWrap } from 'styles/styles.css'
+import { useAccount, useDisconnect, useNetwork } from 'wagmi'
+
+import { Button, NounButtonProps } from 'components/Button'
+import Link from 'next/link'
+import { noTextWrap } from 'styles/styles.css'
 
 import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
-import { ConnectButton as RKConnectButton } from '@rainbow-me/rainbowkit'
-import { Box, Flex, FlexProps, Icon } from '@zoralabs/zord'
+import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit'
+import { useEnsData } from '@shared/hooks'
+import { Box, Flex, Icon, PopUp, Separator, Stack, Text } from '@zoralabs/zord'
 
-import { connectButton } from './Header.css'
+import * as styles from './Header.css'
 
-export interface ConnectButtonProps extends FlexProps {}
+interface ConnectButtonProps extends NounButtonProps {
+  connectText?: string
+}
 
-export const ConnectButton = ({ ...props }: ConnectButtonProps) => {
+export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButtonProps) {
+  const { disconnect } = useDisconnect({
+    onError(error) {
+      console.error('Error', error)
+    },
+  })
+  const { address } = useAccount()
+  const { chain } = useNetwork()
+  const { openConnectModal } = useConnectModal()
+  const { openChainModal } = useChainModal()
+  const { displayName } = useEnsData({ address })
+
+  if (!address || !chain) {
+    return (
+      <Button
+        className={styles.connectButton}
+        size="md"
+        w="auto"
+        onClick={openConnectModal}
+        {...props}
+      >
+        {connectText}
+      </Button>
+    )
+  }
+
+  if (chain.unsupported) {
+    return (
+      <Button
+        variant="destructive"
+        px="x5"
+        className={styles.connectButton}
+        onClick={openChainModal}
+        size="md"
+        w="auto"
+        {...props}
+      >
+        <Text as="span" variant="paragraph-lg">
+          &#x26A0;
+        </Text>{' '}
+        Wrong network
+      </Button>
+    )
+  }
+
   return (
-    <Flex {...props} className={[connectButton, 'connect-button-wrapper']}>
-      <RKConnectButton.Custom>
-        {({ account, chain, openAccountModal, openConnectModal, mounted }) => {
-          return (
-            <Box
-              {...(!mounted && {
-                'aria-hidden': true,
-                style: {
-                  opacity: 0,
-                  pointerEvents: 'none',
-                  userSelect: 'none',
-                },
-              })}
+    <Flex className={styles.connectButton} gap="x3">
+      <PopUp
+        padding="x0"
+        placement="bottom-end"
+        wrapperClassName={styles.popupWrapper}
+        trigger={
+          <Button variant="ghost" type="button" size="md" w="auto">
+            <Box as="span">{displayName}</Box>
+            <Icon id="ChevronDown" />
+          </Button>
+        }
+      >
+        <Stack className={styles.modalContent} gap="x0" p="x2">
+          <Flex justify="space-between" p="x2">
+            <Link passHref href="/collections">
+              <Button size="md" as="a" variant="unset" className={styles.topMenuItem}>
+                <EnsAvatar address={address} />
+                <Box ml={'x2'} as="span" className={[noTextWrap]}>
+                  {displayName}
+                </Box>{' '}
+              </Button>
+            </Link>
+            <Button
+              size="md"
+              variant="unset"
+              onClick={() => disconnect()}
+              className={[styles.disconnectButton, styles.topMenuItem]}
             >
-              {(() => {
-                if (!mounted || !account || !chain) {
-                  return (
-                    <Button
-                      px="x4"
-                      onClick={openConnectModal}
-                      borderRadius="curved"
-                      style={{
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      Connect Wallet
-                    </Button>
-                  )
-                }
-                return (
-                  <Flex>
-                    <Button
-                      variant="secondary"
-                      onClick={openAccountModal}
-                      type="button"
-                      style={{
-                        gap: 8,
-                        minWidth: 0,
-                      }}
-                    >
-                      <EnsAvatar address={account.address} />
-                      <Box as="span" className={[hideMobile, noTextWrap]}>
-                        {account.displayName}
-                      </Box>{' '}
-                      <Icon id="ChevronDown" />
-                    </Button>
-                  </Flex>
-                )
-              })()}
-            </Box>
-          )
-        }}
-      </RKConnectButton.Custom>
+              Disconnect
+            </Button>
+          </Flex>
+          <Separator />
+          <Box as="ul" pt="x2">
+            <Flex as="li">
+              <Link href={`/manage/${address}`}>
+                <a className={styles.connectMenuItem}>Manage NFTs</a>
+              </Link>
+            </Flex>
+          </Box>
+        </Stack>
+      </PopUp>
     </Flex>
   )
 }

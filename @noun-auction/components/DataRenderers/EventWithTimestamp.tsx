@@ -13,9 +13,7 @@ export interface EventWithTimestampProps extends StackProps {
 export function EventWithTimestamp({ transactionInfo, label }: EventWithTimestampProps) {
   return (
     <Stack>
-      <Label gap="x1" style={{ textTransform: 'capitalize' }}>
-        {label}
-      </Label>
+      <Label style={{ textTransform: 'capitalize' }}>{label}</Label>
       <TxTimestamp transactionInfo={transactionInfo} />
     </Stack>
   )

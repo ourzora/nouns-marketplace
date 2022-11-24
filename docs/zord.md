@@ -537,7 +537,7 @@ Note the different methods used to apply media queries inside the normal `style(
 
 ## Selectors
 
-[Vanilla Extract' Styling API](https://github.com/seek-oss/vanilla-extract#styling-api) requires that special selectors like ':hover' and '&[data-state="checked"]&:hover&:not([disabled])' must be nested inside of a `selectors:{}` object, and there are rules about targeting with which you should familiarize yourself.
+[Vanilla Extract' Styling API](https://github.com/seek-oss/vanilla-extract#styling-api) requires that special selectors like `:hover` and `&[data-state="checked"]&:hover&:not([disabled])` must be nested inside of a `selectors:{}` object, and there are rules about targeting with which you should familiarize yourself.
 
 ```ts
 export const link = style([

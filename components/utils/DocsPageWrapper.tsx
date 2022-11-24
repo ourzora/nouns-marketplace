@@ -22,7 +22,6 @@ export function BackButton() {
         as="a"
         align="center"
         display="flex"
-        alignItems="center"
         variant="secondary"
         size="sm"
       >
