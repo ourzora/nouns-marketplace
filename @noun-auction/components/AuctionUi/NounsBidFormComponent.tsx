@@ -99,10 +99,10 @@ export function NounsBidFormComponent({
           <AuctionCountdown
             auctionCompleted={auctionCompleted}
             auctionEndTime={activeAuction.endTime}
-            layoutDirection="row"
+            direction="row"
             layout="row"
             showLabels
-            styles={{ justify: 'space-between' }}
+            justify="space-between"
           />
           <Separator />
           <AuctionHighBid
@@ -111,21 +111,17 @@ export function NounsBidFormComponent({
             collectionAddress={activeAuction.collectionAddress}
             layout={layout}
             showLabels
-            styles={{
-              layoutDirection: 'row',
-              justify: 'space-between',
-            }}
+            direction="row"
+            justify="space-between"
           />
           <Separator />
           <AuctionBidder
             highestBidder={activeAuction.highestBidder}
             layout={layout}
-            layoutDirection="row"
+            direction="row"
             showLabels
             useAvatar={false}
-            styles={{
-              justify: 'space-between',
-            }}
+            justify="space-between"
           />
           <Separator />
           {address && (

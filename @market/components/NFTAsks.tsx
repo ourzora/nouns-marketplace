@@ -1,5 +1,7 @@
+import { NFTOffchainOrders } from 'compositions'
+import { OffchainOrderWithToken } from 'types/zora.api.generated'
+
 import { useMemo } from 'react'
-import { TypeSafeToken } from 'validators/token'
 
 import { FillV3AskModal } from '@market/components/FillV3AskModal'
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
@@ -11,13 +13,19 @@ import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTAskProps extends FlexProps {
   nftObj: NFTObject
+  offchainOrders?: OffchainOrderWithToken[]
 }
 
-export function NFTAsks({ nftObj, ...props }: NFTAskProps) {
+export function NFTAsks({ nftObj, offchainOrders, ...props }: NFTAskProps) {
   const { markets } = nftObj
   const { ask } = useRelevantMarket(markets)
   const { isOwner } = useIsOwner(nftObj)
   const { hasRelevantAsk, isPrivateAsk } = useAskHelper({ ask })
+
+  const showOffchainOrders = useMemo(
+    () => offchainOrders && offchainOrders?.length > 0 && !isOwner,
+    [isOwner, offchainOrders]
+  )
 
   const marketComponent = useMemo(() => {
     if (hasRelevantAsk) {
@@ -28,10 +36,22 @@ export function NFTAsks({ nftObj, ...props }: NFTAskProps) {
       )
     }
 
+    if (showOffchainOrders) {
+      return <NFTOffchainOrders nft={nftObj} offchainOrders={offchainOrders!} />
+    }
+
     if (isOwner) return <UniversalListAskModal nftObj={nftObj} />
 
     return null
-  }, [hasRelevantAsk, isOwner, isPrivateAsk, nftObj, props])
+  }, [
+    hasRelevantAsk,
+    isOwner,
+    isPrivateAsk,
+    nftObj,
+    offchainOrders,
+    props,
+    showOffchainOrders,
+  ])
 
   return nftObj ? marketComponent : null
 }

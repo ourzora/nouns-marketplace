@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 
-import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
+import { HeadingDescription, TransactionSubmitButton } from '@market/components'
 import { PrintError } from '@shared/components/PrintError'
 import { Zorb } from '@zora-brand'
 import { Stack } from '@zoralabs/zord'
 
-import { HeadingDescription } from './HeadingDescription'
 import { LearnMoreButton } from './LearnMoreButton'
 import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
 import { CommonPrivateAskComponentProps } from './PrivateAskFlow'

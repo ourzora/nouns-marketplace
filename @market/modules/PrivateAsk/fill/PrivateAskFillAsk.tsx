@@ -3,6 +3,7 @@ import { mediumFont } from 'styles/styles.css'
 
 import React, { useEffect, useMemo } from 'react'
 
+import { MarketModalHeading } from '@market/components'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { useAskHelper } from '@market/hooks/useAskHelper'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
@@ -14,7 +15,6 @@ import { Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import { LearnMoreButton } from '../LearnMoreButton'
 import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import * as styles from '../PrivateAskFlow.css'
-import { PrivateAskModalHeading } from '../PrivateAskModalHeading'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 
 interface PrivateAskFillAskProps extends CommonPrivateAskComponentProps {}
@@ -52,7 +52,7 @@ export function PrivateAskFillAsk({ onNext, ...props }: PrivateAskFillAskProps) 
 
   return (
     <Stack gap="x3" {...props}>
-      <PrivateAskModalHeading nftObj={props.nft} action="Buy" />
+      <MarketModalHeading nftObj={props.nft} action="Buy" />
 
       <Flex justify="space-between">
         <Paragraph size="lg" inline color="text3" className={[mediumFont]}>

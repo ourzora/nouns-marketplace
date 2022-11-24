@@ -12,10 +12,7 @@ export function useIsOwner(token: TypeSafeToken | NFTObject) {
   let o: any = token
 
   const isOwner = useMemo(
-    () =>
-      o?.owner
-        ? isAddressMatch(address, o.owner)
-        : isAddressMatch(address, o.nft?.owner?.address),
+    () => isAddressMatch(address, o.owner ?? o.nft?.owner?.address),
     [address, o]
   )
 

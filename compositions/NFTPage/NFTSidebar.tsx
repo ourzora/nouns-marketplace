@@ -1,29 +1,38 @@
 import { Link } from 'components'
 import { mediumFont } from 'styles/styles.css'
+import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
 import { useToken } from 'hooks/useToken'
 
 import { CollectionThumbnail } from '@media'
-import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
+import { DescriptionWithMaxLines } from '@shared/components'
 import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
 
 import { NFTMarket } from './NFTMarket'
+import { NFTOffchainOrders } from './NFTOffchainOrders'
 import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
 
 export interface NFTSidebarProps extends StackProps {
   collectionAddress: string
   tokenId: string
+  offchainOrders?: OffchainOrderWithToken[]
 }
 
-export function NFTSidebar({ collectionAddress, tokenId, ...props }: NFTSidebarProps) {
+export function NFTSidebar({
+  collectionAddress,
+  tokenId,
+  offchainOrders,
+  ...props
+}: NFTSidebarProps) {
   if (!collectionAddress || !tokenId) return null
 
   return (
     <NFTSidebarComponent
       collectionAddress={collectionAddress}
       tokenId={tokenId}
+      offchainOrders={offchainOrders}
       {...props}
     />
   )
@@ -33,6 +42,7 @@ export function NFTSidebarComponent({
   className,
   collectionAddress,
   tokenId,
+  offchainOrders,
   ...props
 }: NFTSidebarProps) {
   const { primarySalePrice } = usePrimarySalePrice({ collectionAddress })
@@ -80,6 +90,7 @@ export function NFTSidebarComponent({
         )}
         <NFTMarket
           collectionAddress={collectionAddress}
+          offchainOrders={offchainOrders}
           tokenId={tokenId}
           token={token}
         />

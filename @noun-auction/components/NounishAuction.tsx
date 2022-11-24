@@ -9,14 +9,12 @@ import { useNounishAuctionQuery } from '@noun-auction'
 import {
   auctionWrapper,
   auctionWrapperVariants,
-  bidHistoryWrapper,
   wrapperHover,
 } from '@noun-auction/styles/NounishStyles.css'
 import { useInterval } from '@shared'
 import { Box, BoxProps, Grid, Separator } from '@zoralabs/zord'
 
 import { ActiveAuctionRow } from './ActiveAuction/ActiveAuctionRow'
-import { AuctionHistory } from './AuctionHistory'
 
 export interface TokenInfoConfig extends BoxProps {
   hideThumbnail?: boolean
@@ -144,11 +142,6 @@ export function NounishAuctionComponent({
           {...rest}
           useModal={!useInlineBid}
         />
-        {showBidHistory && (
-          <AuctionHistory className={bidHistoryWrapper} mb="x2">
-            <Separator mt="x4" mb="x3" />
-          </AuctionHistory>
-        )}
       </Grid>
     </Box>
   )

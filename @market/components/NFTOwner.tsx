@@ -6,10 +6,12 @@ import { AddressWithLink } from './AddressWithLink'
 export function NFTOwner({
   address,
   align = 'right',
+  size = 'lg',
 }: {
   /** Must be a valid ETH address */
   address: string | undefined
   align?: 'right' | 'left'
+  size?: 'md' | 'lg'
 }) {
   if (!address) {
     return null
@@ -21,7 +23,7 @@ export function NFTOwner({
       justify="space-between"
       flex={1}
     >
-      <Label size="lg" align={align} className={lightFont} color="text3">
+      <Label size={size} align={align} className={lightFont} color="text3">
         Owned by
       </Label>
       <AddressWithLink address={address} />
