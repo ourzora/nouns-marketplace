@@ -205,7 +205,7 @@ export const disconnectButton = style([
   },
 ])
 
-export const popUpWrapper = style([
+export const popupWrapper = style([
   {
     // only works with !important
     borderRadius: '20px!important',

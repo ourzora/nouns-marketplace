@@ -39,7 +39,7 @@ function MobileLinks() {
     <PopUp
       padding="x0"
       placement="bottom-end"
-      wrapperClassName={styles.popUpWrapper}
+      wrapperClassName={styles.popupWrapper}
       triggerClassName={styles.popupTrigger}
     >
       <Links />
@@ -48,7 +48,7 @@ function MobileLinks() {
 }
 
 export function HeaderLinks() {
-  const { isSmall } = useWindowWidth()
+  const { isLarge } = useWindowWidth()
 
-  return isSmall ? <MobileLinks /> : <Links />
+  return isLarge ? <Links /> : <MobileLinks />
 }

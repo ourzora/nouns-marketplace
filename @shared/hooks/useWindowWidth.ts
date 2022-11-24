@@ -17,7 +17,7 @@ export function useWindowWidth() {
   }, [windowWidth])
 
   const isMedium: boolean = useMemo(() => {
-    return !!(windowWidth && windowWidth >= 576)
+    return !!(windowWidth && windowWidth >= 576 && windowWidth < 1024)
   }, [windowWidth])
 
   const isSmall: boolean = useMemo(() => {
