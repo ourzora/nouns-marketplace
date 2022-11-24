@@ -12,16 +12,16 @@ export function useWindowWidth() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  const isLarge = useMemo(() => {
-    return windowWidth && windowWidth >= 1024
+  const isLarge: boolean = useMemo(() => {
+    return !!(windowWidth && windowWidth >= 1024)
   }, [windowWidth])
 
-  const isMedium = useMemo(() => {
-    return windowWidth && windowWidth >= 576
+  const isMedium: boolean = useMemo(() => {
+    return !!(windowWidth && windowWidth >= 576)
   }, [windowWidth])
 
-  const isSmall = useMemo(() => {
-    return windowWidth && windowWidth < 576
+  const isSmall: boolean = useMemo(() => {
+    return !!(windowWidth && windowWidth < 576)
   }, [windowWidth])
 
   return {
