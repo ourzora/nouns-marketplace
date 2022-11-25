@@ -1,8 +1,7 @@
 import { useCallback } from 'react'
 
-import { Accordion, Box, Flex } from '@zoralabs/zord'
+import { Flex, Label, Stack } from '@zoralabs/zord'
 
-import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { FilterOptionButton } from './FilterOptionButton'
 
 export interface FilterOption {
@@ -33,20 +32,22 @@ export function FilterOptions({
   )
 
   return (
-    <Box className={filterOptionsWrapper}>
-      {/* <Accordion label={label}> */}
-      <Flex gap="x2" wrap="wrap" pb="x3">
+    <Stack gap="x2">
+      <Label className="zord-attributesHeading" size="lg">
+        {label}
+      </Label>
+      <Flex gap="x2" wrap="wrap">
         {options.map((option: any) => (
           <FilterOptionButton
             key={option.value}
             label={option.label}
             showCheckbox={showCheckbox}
+            useBorder={false}
             checked={option.value === selectedOption}
             onClick={() => optionHandler(option.value)}
           />
         ))}
       </Flex>
-      {/* </Accordion> */}
-    </Box>
+    </Stack>
   )
 }

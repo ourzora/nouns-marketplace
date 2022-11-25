@@ -1,7 +1,6 @@
 import { useCollectionFilters } from '@filter/providers'
 import { Box, Label, Stack } from '@zoralabs/zord'
 
-import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { FilterPropertySelect } from './FilterPropertySelect'
 import { useCollection } from './hooks/useCollection'
 
@@ -22,13 +21,7 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
       )}
       <Stack gap="x2">
         {data?.attributes.map((property) => (
-          <Box
-            key={property.traitType}
-            className={[
-              'filter-properties-list',
-              !useCollectionProperties?.hideBorder && filterOptionsWrapper,
-            ]}
-          >
+          <Box key={property.traitType} className={['filter-properties-list']}>
             <FilterPropertySelect
               traitType={property.traitType || ''}
               valueMetrics={property.valueMetrics}

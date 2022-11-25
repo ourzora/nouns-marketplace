@@ -207,10 +207,6 @@ export const filterOption = style({
   },
 })
 
-export const filterOptionsWrapper = style({
-  borderBottom: `2px solid ${vars.color.border}`,
-})
-
 export const activityModal = style([
   {
     zIndex: 100,
@@ -345,25 +341,31 @@ export const mobileFiltersFooter = style([
   }),
 ])
 
-export const selectLabel = style({
-  zIndex: PRIMARY_LAYER,
-  lineHeight: `${typography.lineHeight[40]}!important`, // should be 55 per designs, revisit
-  textIndent: space.x4,
-  userSelect: 'none',
-  pointerEvents: 'none',
-  textTransform: 'capitalize',
-})
+export const selectLabel = style(
+  {
+    zIndex: PRIMARY_LAYER,
+    lineHeight: `${typography.lineHeight[40]}!important`, // should be 55 per designs, revisit
+    textIndent: space.x4,
+  },
+  atoms({
+    pointerEvents: 'none',
+    userSelect: 'none',
+  })
+)
 
-export const selectDropdown = style({
-  appearance: 'none',
-  backgroundColor: color.background2,
-  borderRadius: `${radii.curved}!important`,
-  border: '2px solid transparent',
-  textAlign: 'right',
-  userSelect: 'none',
-  selectors: {
-    '&:focus': {
-      borderColor: color.accent,
+export const selectDropdown = style(
+  {
+    appearance: 'none',
+    borderRadius: `${radii.curved}!important`,
+    border: '2px solid transparent',
+    selectors: {
+      '&:focus': {
+        borderColor: color.accent,
+      },
     },
   },
-})
+  atoms({
+    userSelect: 'none',
+    backgroundColor: 'background2',
+  })
+)

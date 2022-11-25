@@ -113,7 +113,7 @@ export function useFilterStore(
       ...filters,
       priceRange,
     })
-  }, [filters, priceRange])
+  }, [filters])
 
   const setMarketStatus = useCallback(
     (marketStatus: MarketStatusFilter) => {

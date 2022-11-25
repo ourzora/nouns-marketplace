@@ -104,7 +104,6 @@ globalStyle('.zord-accordionTrigger > span', {
 globalStyle('.zord-attributesHeading', {
   fontFamily: "'Londrina Solid', cursive!important",
   fontSize: typography.fontSize[20],
-  paddingTop: 10,
 })
 
 globalStyle('.nouns-market-traits h3 > button > span', {

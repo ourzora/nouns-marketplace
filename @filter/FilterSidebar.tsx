@@ -76,7 +76,8 @@ export function FilterSidebar() {
       className={[filterSidebar, 'zora-filterSidebar']}
       ref={parentRef}
     >
-      <Stack gap="x2" position="relative" ref={childRef}>
+      <Stack gap="x8" position="relative" ref={childRef}>
+        {enablePriceRange && <FilterPriceRange />}
         {enableMarketStatus && (
           <FilterOptions
             label="Market Status"
@@ -105,7 +106,6 @@ export function FilterSidebar() {
           />
         )}
         {ownerAddress && useFilterOwnerCollections && <FilterOwnerCollections />}
-        {enablePriceRange && <FilterPriceRange />}
         {contractAddress && useCollectionProperties && (
           <FilterProperties collectionAddress={contractAddress} />
         )}

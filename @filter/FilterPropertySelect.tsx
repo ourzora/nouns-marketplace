@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 
+import { lightFont } from '@shared'
 import { CollectionAttributeValue } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Box, Flex, Label, Select } from '@zoralabs/zord'
 
@@ -37,6 +38,8 @@ export function FilterPropertySelect({
         htmlFor="filter-property"
         position="absolute"
         className={styles.selectLabel}
+        textTransform="capitalize"
+        pointerEvents="none"
       >
         {traitType}
       </Label>
@@ -49,7 +52,8 @@ export function FilterPropertySelect({
         // p="x2"
         // py="x4"
         color="text1"
-        className={[styles.selectDropdown]}
+        textAlign="right"
+        className={[styles.selectDropdown, lightFont]}
         //  @BJ TODO: add required bool to zord
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
           setCollectionAttributes({ traitType, value: e.target.value })
