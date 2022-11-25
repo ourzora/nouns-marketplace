@@ -32,7 +32,7 @@ export function FilterOptions({
   )
 
   return (
-    <Stack gap="x2">
+    <Stack gap="x4">
       <Label className="zord-attributesHeading" size="lg">
         {label}
       </Label>

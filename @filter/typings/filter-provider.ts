@@ -11,7 +11,6 @@ export type Theme = typeof themeDefaults
 export type FilterOptionConfig = {
   label?: string
   defaultState?: 'open' | undefined
-  hideBorder?: boolean
   selector?: string
 }
 
@@ -29,6 +28,8 @@ export interface FilterConfigProps {
   enableOwnerStatus?: boolean
   enableMediaTypes?: boolean
   enableSortDropdown?: boolean
+  enableSelectedFiltersPanel?: boolean
+  enableFilterToggleButton?: boolean
   enablePriceRange?: PriceRangeFilterConfig | undefined //@BJ todo: this shouldn't be a boolean AND a configuration, it's confusing
   enableCollectionSearch?: boolean
   useCollectionProperties?: PropertiesConfig | undefined //@BJ todo: this shouldn't be a boolean AND a configuration, it's confusing

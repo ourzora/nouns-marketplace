@@ -1,12 +1,7 @@
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 import { Box, Flex, Grid, Stack, StackProps } from '@zoralabs/zord'
 
-import {
-  filterOpen,
-  filterWrapper,
-  filterWrapperContainer,
-  openFilterWrapper,
-} from './CollectionsFilter.css'
+import * as styles from './CollectionsFilter.css'
 import { FilterHeader } from './FilterHeader'
 import { FilterResultsLoading } from './FilterResultsLoading'
 import { FilterSidebar } from './FilterSidebar'
@@ -24,6 +19,7 @@ export function Filter({ grid, className, ...props }: FilterProps) {
   const {
     filterStore: { showFilters },
     enableSortDropdown,
+    enableSelectedFiltersPanel,
     items,
     isValidating,
     isEmpty,
@@ -36,7 +32,7 @@ export function Filter({ grid, className, ...props }: FilterProps) {
       {!showFilters && enableSidebarFilter && (
         <FilterHeader>
           <>
-            <SelectedFilters />
+            {enableSelectedFiltersPanel && <SelectedFilters />}
             {enableSortDropdown && <SortDropdown />}
           </>
         </FilterHeader>
@@ -46,10 +42,10 @@ export function Filter({ grid, className, ...props }: FilterProps) {
         position="sticky"
         gap="x8"
         className={[
-          filterWrapperContainer,
+          styles.filterWrapperContainer,
           'zora-collectionsFilterWrapperContainer',
           {
-            [filterOpen]: showFilters,
+            [styles.filterOpen]: showFilters,
           },
         ]}
       >
@@ -66,10 +62,10 @@ export function Filter({ grid, className, ...props }: FilterProps) {
               '--filter-offset-desktop': `${getString('FILTER_OPEN_STICKY_OFFSET')}px`,
             }}
             className={[
-              filterWrapper,
+              styles.filterWrapper,
               'zora-collectionFilterWrapper',
               {
-                [openFilterWrapper]: showFilters,
+                [styles.openFilterWrapper]: showFilters,
               },
             ]}
           >
@@ -78,8 +74,16 @@ export function Filter({ grid, className, ...props }: FilterProps) {
         )}
         <Stack>
           {showFilters && (
-            <Flex justify="space-between" align="center">
-              <SelectedFilters />
+            <Flex
+              className={styles.gridFilterHeaderPanel}
+              align="center"
+              justify={
+                enableSelectedFiltersPanel && enableSortDropdown
+                  ? 'space-between'
+                  : 'flex-end'
+              }
+            >
+              {enableSelectedFiltersPanel && <SelectedFilters />}
               {enableSortDropdown && <SortDropdown />}
             </Flex>
           )}
@@ -87,11 +91,8 @@ export function Filter({ grid, className, ...props }: FilterProps) {
             grid
           ) : (
             <>
-              {isEmpty ? (
-                <NoFilterResults noResultsString="NO_FILTER_RESULTS_COPY" />
-              ) : isValidating ? (
-                <FilterResultsLoading />
-              ) : null}
+              {isEmpty && <NoFilterResults noResultsString="NO_FILTER_RESULTS_COPY" />}
+              {isValidating && <FilterResultsLoading />}
             </>
           )}
         </Stack>

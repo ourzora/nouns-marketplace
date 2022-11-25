@@ -13,7 +13,7 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
   }
 
   return (
-    <Stack gap="x2" className={['filter-properties', useCollectionProperties?.selector]}>
+    <Stack gap="x4" className={['filter-properties', useCollectionProperties?.selector]}>
       {useCollectionProperties?.header && (
         <Label className="zord-attributesHeading" size="lg">
           {useCollectionProperties?.header}

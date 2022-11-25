@@ -27,14 +27,13 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { dao } = useOneNounsDao({ collectionAddress })
 
   const { isLarge } = useWindowWidth()
-  const { aggregate } = useAggregate(collectionAddress)
+  const { nftCount } = useAggregate(collectionAddress)
   // wrapper for useSWR
   const { data } = useCollection(collectionAddress)
   const collection = data || fallback?.collection
 
   useEffect(() => {
     if (collection?.name) {
-      const nftCount = aggregate?.aggregateStat.nftCount
       setCurrentCollection(collection.name)
       setCurrentCollectionCount(nftCount ? `${nftCount} NFTs` : '... NFTs')
     }
@@ -42,7 +41,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
       setCurrentCollection('Explore...')
       setCurrentCollectionCount(undefined)
     }
-  }, [aggregate, collection, setCurrentCollection, setCurrentCollectionCount])
+  }, [nftCount, collection, setCurrentCollection, setCurrentCollectionCount])
 
   return (
     <PageWrapper direction="column" gap="x4">
@@ -57,9 +56,9 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
           collection={collection}
           layout={dao ? 'dao' : 'collection'}
           currentAuction={
-            dao ? (
+            dao && (
               <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
-            ) : null
+            )
           }
         >
           <MarketStats contractAddress={collectionAddress} />
@@ -70,15 +69,14 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         filtersVisible={isLarge}
         contractAddress={collectionAddress}
         enableSortDropdown
+        // enableSelectedFiltersPanel
         useCollectionProperties={{
           header: 'Traits',
           selector: 'nouns-market-traits',
-          hideBorder: true,
         }}
         enablePriceRange={{
           label: 'Price',
           defaultState: 'open',
-          hideBorder: true,
           hideCurrencySelect: true,
         }}
         strings={{

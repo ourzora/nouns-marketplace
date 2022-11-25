@@ -83,7 +83,7 @@ export function SortDropdown() {
       open={open}
       trigger={
         <Button
-          variant="secondary"
+          variant="ghost"
           borderRadius="round"
           size="sm"
           icon="ChevronDown"

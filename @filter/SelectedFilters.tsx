@@ -2,7 +2,6 @@ import { Button } from 'components/Button'
 
 import { useCallback, useMemo } from 'react'
 
-import { FILTER_HEADER_HEIGHT } from '@filter/constants'
 import { useCollectionFilters } from '@filter/providers'
 import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filter/state'
 import {
@@ -14,7 +13,7 @@ import {
 } from '@filter/typings'
 import { Flex } from '@zoralabs/zord'
 
-import { textButton, textSmall } from './CollectionsFilter.css'
+import * as styles from './CollectionsFilter.css'
 import { FilterOptionButton } from './FilterOptionButton'
 import { SelectedCollection } from './SelectedCollection'
 import { SelectedPriceRange } from './SelectedPriceRange'
@@ -87,12 +86,12 @@ export function SelectedFilters() {
       align="center"
       justify="space-between"
       w="100%"
-      style={{ height: FILTER_HEADER_HEIGHT }}
       pl={`${showFilters ? 'x0' : 'x2'}`}
       display={{
         '@initial': 'none',
         '@1024': 'flex',
       }}
+      className={styles.gridFilterHeaderPanel}
     >
       <Flex align="center" gap="x2">
         <Flex>
@@ -119,7 +118,7 @@ export function SelectedFilters() {
         {hasFilters && (
           <Button
             variant="unset"
-            className={[textButton, textSmall]}
+            className={[styles.textButton, styles.textSmall]}
             color="accent"
             onClick={clearFilters}
           >

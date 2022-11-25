@@ -1,21 +1,10 @@
 import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
-import { Button, Flex, Text } from '@zoralabs/zord'
+import { Button, Flex } from '@zoralabs/zord'
 
 import { ActiveFilterCounter } from './ActiveFilterCounter'
-import {
-  filterCounter,
-  filterHeader,
-  filtersButton,
-  stickyFilterHeader,
-} from './CollectionsFilter.css'
+import { filterHeader, filtersButton, stickyFilterHeader } from './CollectionsFilter.css'
 
-export function FilterHeader({
-  children,
-  itemCount = 0,
-}: {
-  children?: JSX.Element
-  itemCount?: number
-}) {
+export function FilterHeader({ children }: { children?: JSX.Element }) {
   const {
     filterStore: { toggleShowFilters, showFilters, activeFilterCount },
   } = useCollectionFilters()
@@ -23,6 +12,7 @@ export function FilterHeader({
   return (
     <Flex
       className={[
+        'filter-header',
         filterHeader,
         {
           [stickyFilterHeader]: !showFilters,
@@ -41,18 +31,6 @@ export function FilterHeader({
           Filters
           <ActiveFilterCounter />
         </Button>
-        {itemCount > 0 && (
-          <Text
-            className={filterCounter}
-            as="span"
-            variant="paragraph-sm"
-            color="text3"
-            pl="x1"
-            pr="x10"
-          >
-            {itemCount} items
-          </Text>
-        )}
       </Flex>
       {children}
     </Flex>

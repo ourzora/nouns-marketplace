@@ -75,6 +75,14 @@ export const filterOpen = style({
   gridTemplateColumns: `${FILTER_SIDEBAR_WIDTH + 32}px 1fr`,
 })
 
+export const gridFilterHeaderPanel = style({
+  '@media': {
+    [media.min1024]: {
+      height: FILTER_HEADER_HEIGHT,
+    },
+  },
+})
+
 export const filterHeader = style([
   {
     zIndex: 1,
@@ -97,16 +105,10 @@ export const filterHeader = style([
 
 export const stickyFilterHeader = style({
   top: `0px`,
-  //backdropFilter: 'blur(20px)',
-  //backgroundColor: 'rgba(255, 255, 255, 0.92)',
 })
 
 export const avatarPadding = style({
   paddingLeft: '3px',
-})
-
-export const filterCounter = style({
-  whiteSpace: 'nowrap',
 })
 
 export const filterSidebar = style([

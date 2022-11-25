@@ -1,6 +1,6 @@
 import { Button } from 'components/Button'
 
-import { useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useMemo, useRef, useState } from 'react'
 
 import { useCollectionFilters } from '@filter/providers'
 import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filter/state'
@@ -25,18 +25,13 @@ import { FilterPriceRange } from './FilterPriceRange'
 import { FilterProperties } from './FilterProperties'
 import { MobileFiltersFooter } from './MobileFiltersFooter'
 
-export function FilterSidebar() {
-  const { requestClose } = useModal()
-
+export function FilterSidebarContents({
+  setHasScrolled,
+}: {
+  setHasScrolled?: Dispatch<SetStateAction<boolean>>
+}) {
   const {
-    filterStore: {
-      showFilters,
-      setMarketStatus,
-      setMediaType,
-      setOwnerStatus,
-      filters,
-      toggleShowFilters,
-    },
+    filterStore: { setMarketStatus, setMediaType, setOwnerStatus, filters },
     ownerAddress,
     contractAddress,
     enableMarketStatus,
@@ -49,13 +44,11 @@ export function FilterSidebar() {
     enableSidebarClearButton,
   } = useCollectionFilters()
 
-  const [hasScrolled, setHasScrolled] = useState(false)
   const parentRef = useRef<HTMLDivElement>(null)
   const childRef = useRef<HTMLDivElement>(null)
-
   useScrollPosition(
     ({ currPos }) => {
-      setHasScrolled(currPos.y > 4)
+      setHasScrolled && setHasScrolled(currPos.y > 4)
     },
     [],
     // @ts-ignore-next-line
@@ -64,10 +57,7 @@ export function FilterSidebar() {
     10,
     parentRef
   )
-
-  const { isLarge } = useWindowWidth()
-
-  const sidebarComposition = (
+  return (
     <Stack
       gap="x2"
       w="100%"
@@ -122,8 +112,15 @@ export function FilterSidebar() {
       </Stack>
     </Stack>
   )
+}
 
-  const sideBarMobile = (
+export function FilterSidebarMobile() {
+  const { requestClose } = useModal()
+
+  const {
+    filterStore: { showFilters, toggleShowFilters },
+  } = useCollectionFilters()
+  return (
     <Modal open={showFilters} onOpenChange={requestClose}>
       <ModalContent
         title="modal"
@@ -141,20 +138,31 @@ export function FilterSidebar() {
               <Icon id="Close" size="md" />
             </Button>
           </Flex>
-          {sidebarComposition}
+          <FilterSidebarContents />
           <MobileFiltersFooter />
         </Stack>
       </ModalContent>
     </Modal>
   )
+}
+
+export function FilterSidebar() {
+  const {
+    enableFilterToggleButton,
+    filterStore: { showFilters },
+  } = useCollectionFilters()
+
+  const { isLarge } = useWindowWidth()
+  const [hasScrolled, setHasScrolled] = useState(false)
 
   return (
     <>
       {isLarge ? (
         <Box h="100%" w="100%" position="sticky" display={showFilters ? 'block' : 'none'}>
-          <FilterHeader />
+          {enableFilterToggleButton && <FilterHeader />}
           <Box
             position="relative"
+            mt={enableFilterToggleButton ? 'x0' : 'x8'}
             className={[
               sideBarSeparator,
               {
@@ -162,10 +170,10 @@ export function FilterSidebar() {
               },
             ]}
           />
-          {sidebarComposition}
+          <FilterSidebarContents setHasScrolled={setHasScrolled} />
         </Box>
       ) : (
-        sideBarMobile
+        <FilterSidebarMobile />
       )}
     </>
   )
