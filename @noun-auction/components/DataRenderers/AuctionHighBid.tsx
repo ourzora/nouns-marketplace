@@ -26,7 +26,7 @@ export function AuctionHighBid({
 }: HighBidProps) {
   return useMemo(
     () => (
-      <Flex direction={direction} gap={direction === 'row' ? 'x2' : 'x0'}>
+      <Flex direction={direction} gap={direction === 'row' ? 'x2' : 'x2'}>
         {showLabels && (
           <Label
             size={layout === 'sideBarBid' ? 'lg' : 'md'}

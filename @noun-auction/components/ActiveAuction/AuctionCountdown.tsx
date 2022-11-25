@@ -42,7 +42,7 @@ export function AuctionCountdown({
   useInterval(() => setNow(new Date()), 1000)
 
   return (
-    <Flex direction={direction} wrap="wrap" gap={direction === 'row' ? 'x2' : 'x0'}>
+    <Flex direction={direction} wrap="wrap" gap={direction === 'row' ? 'x2' : 'x2'}>
       {showLabels && (
         <Label
           size="md"
