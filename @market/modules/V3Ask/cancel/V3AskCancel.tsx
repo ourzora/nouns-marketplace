@@ -19,7 +19,7 @@ interface V3AskCancelProps extends CommonV3AskComponentProps {
   nft: NFTObject
 }
 
-export function V3AskCancel({ onNext, ...props }: V3AskCancelProps) {
+export function V3AskCancel({ onNext, nft, ...props }: V3AskCancelProps) {
   const { state } = useV3AskStateContext()
   const { flow } = state
   const askType = useMemo(() => (flow === PRIVATE_ASK ? PRIVATE_ASK : V3_ASK), [flow])
@@ -29,13 +29,13 @@ export function V3AskCancel({ onNext, ...props }: V3AskCancelProps) {
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
   const { requestClose } = useModal()
   const { formattedListingDataTable } = useListingDataTable({
-    nft: props.nft,
+    nft: nft,
   })
 
   return (
     <Stack gap="x3" {...props}>
       <Stack gap="x4">
-        <MarketModalHeading nftObj={props.nft} action="Delist" />
+        <MarketModalHeading nftObj={nft} action="Delist" />
 
         <DataTable
           rowSize="lg"
