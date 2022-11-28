@@ -32,7 +32,7 @@ export const returnThumbnailSize = (size: SizeProps) => {
 export interface NounishThumbnailProps extends BoxProps {
   image?: string
   size?: SizeProps
-  radius?: 'curved' | 'round' | 'phat' | ''
+  radius?: 'curved' | 'round' | 'phat'
   thumbnailStyle?: any
   tokenId: string
   tokenContract: string

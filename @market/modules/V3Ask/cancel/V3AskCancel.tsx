@@ -2,19 +2,22 @@ import { Button } from 'components/Button'
 
 import React, { useEffect, useMemo } from 'react'
 
+import { MarketModalHeading } from '@market/components'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { useListingDataTable } from '@market/hooks'
 import { useModal } from '@modal/useModal'
 import { DataTable, PrintError, formatContractError } from '@shared'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import { Flex, Stack } from '@zoralabs/zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import * as styles from '../V3AskFlow.css'
-import { V3AskModalHeading } from '../V3AskModalHeading'
 import { PRIVATE_ASK, V3_ASK, useV3AskTransaction } from '../hooks/useV3AskTransaction'
 import { useV3AskStateContext } from '../providers'
 
-interface V3AskCancelProps extends CommonV3AskComponentProps {}
+interface V3AskCancelProps extends CommonV3AskComponentProps {
+  nft: NFTObject
+}
 
 export function V3AskCancel({ onNext, ...props }: V3AskCancelProps) {
   const { state } = useV3AskStateContext()
@@ -22,7 +25,7 @@ export function V3AskCancel({ onNext, ...props }: V3AskCancelProps) {
   const askType = useMemo(() => (flow === PRIVATE_ASK ? PRIVATE_ASK : V3_ASK), [flow])
 
   const { isSubmitting, cancelAsk, txStatus, txInProgress, txError, finalizedTx } =
-    useV3AskTransaction({ nft: props.nft, askType: askType })
+    useV3AskTransaction({ nft: nft, askType: askType })
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
   const { requestClose } = useModal()
   const { formattedListingDataTable } = useListingDataTable({
@@ -32,7 +35,7 @@ export function V3AskCancel({ onNext, ...props }: V3AskCancelProps) {
   return (
     <Stack gap="x3" {...props}>
       <Stack gap="x4">
-        <V3AskModalHeading nftObj={props.nft} action="Delist" />
+        <MarketModalHeading nftObj={props.nft} action="Delist" />
 
         <DataTable
           rowSize="lg"

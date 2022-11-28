@@ -1,7 +1,7 @@
 import { stat } from 'styles/styles.css'
 
 import { lightFont } from '@shared'
-import { Stack, Text } from '@zoralabs/zord'
+import { Label, Stack, Text } from '@zoralabs/zord'
 
 export function StatBlock({
   statType,
@@ -12,20 +12,24 @@ export function StatBlock({
 }) {
   return (
     <Stack
-      p="x4"
+      px="x4"
+      py="x3"
+      gap="x4"
       borderColor="border"
       borderStyle="solid"
       borderWidth="thin"
       borderRadius="phat"
     >
-      <Text
-        variant={['heading-xs, heading-xl']}
-        color="text2"
+      <Label
+        // variant={['heading-xs, heading-xl']}
+        // variant="heading-xs"
+        inline
+        color="text3"
         className={[lightFont, stat]}
       >
         {statType}
-      </Text>
-      <Text variant="heading-xs" className={[lightFont, stat]}>
+      </Label>
+      <Text inline variant="heading-xs" className={[stat]}>
         {statValue}
       </Text>
     </Stack>

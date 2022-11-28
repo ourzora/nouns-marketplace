@@ -1,31 +1,55 @@
 import { Link } from 'components'
 import { mediumFont } from 'styles/styles.css'
+import { OffchainOrderWithToken } from 'types/zora.api.generated'
+
+import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
+import { useToken } from 'hooks/useToken'
 
 import { CollectionThumbnail } from '@media'
-import { useNounishAuctionProvider } from '@noun-auction'
-import { useNFTProvider, useTitleWithFallback } from '@shared'
-import { DescriptionWithMaxLines } from '@shared/components/DescriptionWithMaxLines/DescriptionWithMaxLines'
-import { useTokenHelper } from '@shared/hooks'
+import { DescriptionWithMaxLines } from '@shared/components'
 import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
 
 import { NFTMarket } from './NFTMarket'
+import { NFTOffchainOrders } from './NFTOffchainOrders'
 import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
 
-export interface NFTSidebarProps extends StackProps {}
+export interface NFTSidebarProps extends StackProps {
+  collectionAddress: string
+  tokenId: string
+  offchainOrders?: OffchainOrderWithToken[]
+}
 
-export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
-  const { primarySalePrice } = useNounishAuctionProvider()
-  const { nft, tokenId: tokenIdString, contractAddress } = useNFTProvider()
-  const { tokenID } = useTokenHelper(nft!)
+export function NFTSidebar({
+  collectionAddress,
+  tokenId,
+  offchainOrders,
+  ...props
+}: NFTSidebarProps) {
+  if (!collectionAddress || !tokenId) return null
 
-  const { fallbackTitle } = useTitleWithFallback({
-    contractAddress,
-    tokenId: tokenIdString,
-    defaultTitle: nft?.metadata?.name,
-  })
+  return (
+    <NFTSidebarComponent
+      collectionAddress={collectionAddress}
+      tokenId={tokenId}
+      offchainOrders={offchainOrders}
+      {...props}
+    />
+  )
+}
 
-  if (!nft || !tokenID || !contractAddress) return null
+export function NFTSidebarComponent({
+  className,
+  collectionAddress,
+  tokenId,
+  offchainOrders,
+  ...props
+}: NFTSidebarProps) {
+  const { primarySalePrice } = usePrimarySalePrice({ collectionAddress })
+  const { token } = useToken({ collectionAddress, tokenId })
+  const fallbackTitle = `${token?.collectionName} #${token?.tokenId}`
+
+  if (!token) return null
 
   return (
     <Stack
@@ -34,11 +58,10 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
       {...props}
     >
       <Flex>
-        <Link href={`/collections/${nft?.nft?.contract.address}`}>
+        <Link href={`/collections/${token.collectionAddress}`}>
           <CollectionThumbnail
-            initialNFT={nft}
-            collectionAddress={nft?.nft?.contract.address}
-            useTitle
+            collectionAddress={token.collectionAddress}
+            showTitle
             size="xxs"
             radius="round"
             p="x2"
@@ -53,26 +76,25 @@ export function NFTSidebar({ className, ...props }: NFTSidebarProps) {
           {fallbackTitle}
         </Heading>
       </Flex>
-      {nft?.metadata?.description && (
-        <DescriptionWithMaxLines
-          baseLineheight={30}
-          maxLines={2}
-          paragraphClassName={mediumFont}
-          overflowY="hidden"
-        >
-          {nft?.metadata?.description}
-        </DescriptionWithMaxLines>
-      )}
-      {nft?.nft && ( // Clamp to bottom of container
-        <Stack gap="x4" mt="auto">
-          {primarySalePrice && <NFTProvenance nft={nft} />}
-          <NFTMarket
-            contractAddress={nft.nft.contract.address}
-            tokenId={nft.nft.tokenId}
-            nft={nft}
-          />
-        </Stack>
-      )}
+
+      <DescriptionWithMaxLines
+        baseLineheight={30}
+        maxLines={2}
+        paragraphClassName={mediumFont}
+        overflowY="hidden"
+        description={token.description}
+      />
+      <Stack gap="x4" mt="auto">
+        {primarySalePrice && (
+          <NFTProvenance primarySalePrice={primarySalePrice} token={token} />
+        )}
+        <NFTMarket
+          collectionAddress={collectionAddress}
+          offchainOrders={offchainOrders}
+          tokenId={tokenId}
+          token={token}
+        />
+      </Stack>
     </Stack>
   )
 }

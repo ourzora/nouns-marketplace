@@ -3,6 +3,7 @@ import { mediumFont } from 'styles/styles.css'
 
 import React, { useEffect, useMemo } from 'react'
 
+import { MarketModalHeading } from '@market/components'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { useAskHelper } from '@market/hooks/useAskHelper'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
@@ -53,7 +54,7 @@ export function V3AskFillAsk({ onNext, ...props }: V3AskFillAskProps) {
 
   return (
     <Stack gap="x3" {...props}>
-      <V3AskModalHeading nftObj={props.nft} action="Buy" />
+      <MarketModalHeading nftObj={props.nft} action="Buy" />
 
       <Flex justify="space-between">
         <Paragraph size="lg" inline color="text3" className={[mediumFont]}>

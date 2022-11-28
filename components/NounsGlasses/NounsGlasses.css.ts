@@ -1,6 +1,6 @@
 import { atoms } from '@zoralabs/zord'
 
 export const nounsGlasses = atoms({
-  h: '100%',
+  h: 'x8',
   inset: 'x0',
 })

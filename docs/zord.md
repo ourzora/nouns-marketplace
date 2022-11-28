@@ -29,12 +29,12 @@ Adding to your project boils down to:
 
 ```tsx
 // pages/_app.tsx
+import type { AppProps } from 'next/app'
 
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/600.css'
-import '@zoralabs/zord/index.css'
 import { ThemeProvider, lightTheme } from '@zoralabs/zord'
-import type { AppProps } from 'next/app'
+import '@zoralabs/zord/index.css'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -266,7 +266,7 @@ Multiple implementations of a ThemeContract can exist on a single site, and the 
 Each theme maps 1-1 with the ThemeContract:
 
 ```ts
-import { colorTheme, border, ease, radii, size, space, typography } from './tokens'
+import { border, colorTheme, ease, radii, size, space, typography } from './tokens'
 
 export const lightTheme = createTheme(theme, {
   fonts: {
@@ -537,7 +537,7 @@ Note the different methods used to apply media queries inside the normal `style(
 
 ## Selectors
 
-[Vanilla Extract' Styling API](https://github.com/seek-oss/vanilla-extract#styling-api) requires that special selectors like ':hover' and '&[data-state="checked"]&:hover&:not([disabled])' must be nested inside of a `selectors:{}` object, and there are rules about targeting with which you should familiarize yourself.
+[Vanilla Extract' Styling API](https://github.com/seek-oss/vanilla-extract#styling-api) requires that special selectors like `:hover` and `&[data-state="checked"]&:hover&:not([disabled])` must be nested inside of a `selectors:{}` object, and there are rules about targeting with which you should familiarize yourself.
 
 ```ts
 export const link = style([

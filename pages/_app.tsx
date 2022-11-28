@@ -14,13 +14,11 @@ import { SWRConfig } from 'swr'
 
 import { useCollections } from 'hooks'
 
-import { useEffect } from 'react'
+import { StrictMode, useEffect } from 'react'
+import React from 'react'
 
 import { ContractProvider } from '@market'
-import {
-  // PrivateAskContractProvider,
-  V3AskContractProvider,
-} from '@market'
+import { V3AskContractProvider } from '@market/modules/V3Ask'
 import { ModalContextProvider } from '@modal'
 import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
@@ -34,7 +32,7 @@ import '../styles/reset.css'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 
-const { chains, provider } = configureChains(
+export const { chains, provider } = configureChains(
   [chain.mainnet],
   [alchemyProvider({ apiKey: alchemyKey }), publicProvider()]
 )
@@ -67,49 +65,51 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.events])
 
   return (
-    <WagmiConfig client={wagmiClient}>
-      <SWRConfig
-        value={{
-          refreshInterval: 3000,
-          fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
-        }}
-      >
-        <NFTFetchConfiguration networkId="1" strategy={strategy}>
-          <RainbowKitProvider
-            chains={chains}
-            coolMode
-            theme={lightTheme({
-              accentColor: 'black',
-              borderRadius: 'large',
-            })}
-          >
-            <BlocklistGuard>
-              <CollectionsProvider collections={collections} daos={daos}>
-                <ModalContextProvider>
-                  <ToastContextProvider>
-                    <ContractProvider>
-                      <V3AskContractProvider>
-                        <Header />
-                        <NextNProgress
-                          color="rgba(0,0,0,.5)"
-                          startPosition={0.125}
-                          stopDelayMs={200}
-                          height={2}
-                          showOnShallow={true}
-                          options={{ showSpinner: false }}
-                        />
-                        <Component {...pageProps} />
-                        <Footer />
-                      </V3AskContractProvider>
-                    </ContractProvider>
-                  </ToastContextProvider>
-                </ModalContextProvider>
-              </CollectionsProvider>
-            </BlocklistGuard>
-          </RainbowKitProvider>
-        </NFTFetchConfiguration>
-      </SWRConfig>
-    </WagmiConfig>
+    <StrictMode>
+      <WagmiConfig client={wagmiClient}>
+        <SWRConfig
+          value={{
+            refreshInterval: 3000,
+            fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
+          }}
+        >
+          <NFTFetchConfiguration networkId="1" strategy={strategy}>
+            <RainbowKitProvider
+              chains={chains}
+              coolMode
+              theme={lightTheme({
+                accentColor: 'black',
+                borderRadius: 'large',
+              })}
+            >
+              <BlocklistGuard>
+                <CollectionsProvider collections={collections} daos={daos}>
+                  <ModalContextProvider>
+                    <ToastContextProvider>
+                      <ContractProvider>
+                        <V3AskContractProvider>
+                          <Header />
+                          <NextNProgress
+                            color="rgba(0,0,0,.5)"
+                            startPosition={0.125}
+                            stopDelayMs={200}
+                            height={2}
+                            showOnShallow={true}
+                            options={{ showSpinner: false }}
+                          />
+                          <Component {...pageProps} />
+                          <Footer />
+                        </V3AskContractProvider>
+                      </ContractProvider>
+                    </ToastContextProvider>
+                  </ModalContextProvider>
+                </CollectionsProvider>
+              </BlocklistGuard>
+            </RainbowKitProvider>
+          </NFTFetchConfiguration>
+        </SWRConfig>
+      </WagmiConfig>
+    </StrictMode>
   )
 }
 

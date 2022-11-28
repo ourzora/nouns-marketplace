@@ -189,7 +189,6 @@ export const daoHeaderWrapper = style([
 ])
 
 export const marketStatsWrapper = atoms({
-  overflowX: 'scroll',
   w: {
     '@initial': '100vw',
     '@1024': 'auto',
@@ -206,6 +205,7 @@ export const marketStatsWrapper = atoms({
 
 export const stat = style({
   whiteSpace: 'nowrap',
+  lineHeight: `1!important`,
 })
 
 export const pageGrid = style([
@@ -217,7 +217,6 @@ export const pageGrid = style([
     '@media': {
       [media.min1024]: {
         gridTemplateColumns: 'repeat(12, [col-start] 1fr)',
-        // maxWidth: MAX_WIDTH.XL,
         maxWidth: `calc(${MAX_WIDTH.XL}px + (2 * ${vars.space.x8}))`,
       },
     },

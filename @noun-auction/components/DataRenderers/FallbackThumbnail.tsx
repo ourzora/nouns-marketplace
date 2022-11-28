@@ -14,7 +14,11 @@ export function FallbackThumbnail({
   tokenContract,
   ...props
 }: FallbackThumbnailProps) {
-  const { tokenData } = useNounsToken(tokenContract, tokenId) // @BJ <--- THIS HOOK SEEMS TO FAIL, cause 500?
+  const { tokenData } = useNounsToken(tokenContract, tokenId) //
+  /* 
+    @BJ: THIS HOOK SEEMS TO FAIL, cause 500?
+    @Oleg: HELL YES IT DOES!
+  **/
 
   if (!tokenData) return null
 

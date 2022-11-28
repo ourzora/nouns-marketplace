@@ -12,22 +12,17 @@ import {
 import { StatBlock } from './StatBlock'
 
 export function CollectionStats({ contractAddress }: { contractAddress: string }) {
-  const { aggregate } = useAggregate(contractAddress)
+  const { salesVolume } = useAggregate(contractAddress)
 
   const volume = useMemo(
     () =>
-      `${numberFormatter(
-        roundFourDecimals(aggregate?.aggregateStat?.salesVolume?.chainTokenPrice)
-      )} ETH` ?? '...',
-    [aggregate]
+      `${numberFormatter(roundFourDecimals(salesVolume?.chainTokenPrice))} ETH` ?? '...',
+    [salesVolume]
   )
 
   const usdcPrice = useMemo(
-    () =>
-      `${numberFormatterUSDC(
-        roundTwoDecimals(aggregate?.aggregateStat?.salesVolume?.usdcPrice)
-      )}` ?? '...',
-    [aggregate]
+    () => `${numberFormatterUSDC(roundTwoDecimals(salesVolume?.usdcPrice))}` ?? '...',
+    [salesVolume]
   )
 
   return (

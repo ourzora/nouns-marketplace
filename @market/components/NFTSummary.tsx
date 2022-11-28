@@ -1,9 +1,11 @@
+import { useToken } from 'hooks/useToken'
+
 import { useMemo } from 'react'
 
 import { FillV3AskInfo, ModalTitleAndDescription } from '@market/components'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { useAuth, useTitleWithFallback } from '@shared/hooks'
-import { useNFT } from '@zoralabs/nft-hooks'
+import { ErrorBoundary } from '@sentry/nextjs'
+import { useAuth } from '@shared/hooks'
 import { Flex, Stack } from '@zoralabs/zord'
 
 export enum MODAL_TYPES {
@@ -18,22 +20,20 @@ export function NFTSummary({
   askPrice,
   modalType,
 }: {
-  collectionAddress: string | undefined
-  tokenId: string | undefined
+  collectionAddress: string
+  tokenId: string
   askPrice?: string
   /** Additional NFT info to display based on use context */
   modalType?: MODAL_TYPES.fillAsk | MODAL_TYPES.list | MODAL_TYPES.auction
 }) {
-  const { data: nft } = useNFT(collectionAddress, tokenId)
+  const { token } = useToken({ collectionAddress, tokenId })
+
   const { address } = useAuth()
   const hasAsk = useMemo(
-    () => nft && modalType === MODAL_TYPES.fillAsk && askPrice,
-    [askPrice, nft, modalType]
+    () => token && modalType === MODAL_TYPES.fillAsk && askPrice,
+    [askPrice, token, modalType]
   )
-  const { fallbackTitle } = useTitleWithFallback({
-    contractAddress: collectionAddress,
-    tokenId,
-  })
+  const fallbackTitle = `${token?.collectionName} #${token?.tokenId}`
 
   const noWallet = useMemo(() => address === null, [address])
   const modalTitle = useMemo(
@@ -48,23 +48,21 @@ export function NFTSummary({
               : MODAL_TYPES.auction
               ? 'Bid on'
               : ''
-          } ${nft && nft.metadata?.name ? nft.metadata.name : fallbackTitle}`,
-    [nft, fallbackTitle, modalType, noWallet]
+          } ${token?.collectionName ?? fallbackTitle}`,
+    [token, fallbackTitle, modalType, noWallet]
   )
 
-  if (!collectionAddress || !tokenId) return null
+  if (!token || !collectionAddress || !tokenId) return null
 
   return (
-    <Stack gap="x4">
-      <Flex justify="space-between" align="flex-start">
-        <ModalTitleAndDescription title={modalTitle} />
-        <CollectionThumbnail
-          initialNFT={nft}
-          collectionAddress={collectionAddress}
-          tokenId={tokenId}
-        />
-      </Flex>
-      {hasAsk && <FillV3AskInfo nft={nft!} askPrice={askPrice} />}
-    </Stack>
+    <ErrorBoundary>
+      <Stack gap="x4">
+        <Flex justify="space-between" align="flex-start">
+          <ModalTitleAndDescription title={modalTitle} />
+          <CollectionThumbnail collectionAddress={token.collectionAddress} />
+        </Flex>
+        {hasAsk && <FillV3AskInfo token={token} askPrice={askPrice} />}
+      </Stack>
+    </ErrorBoundary>
   )
 }

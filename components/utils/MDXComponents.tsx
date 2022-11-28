@@ -29,8 +29,10 @@ export function slugify(string?: string) {
 }
 
 export const H1 = ({ ...props }) => {
-  const id = props?.children ? slugify(props?.children) : ''
-  return <Heading id={id} as="h1" size="xl" {...props} className={[h1Selector]} />
+  const id = props?.children ? slugify(props?.children) : undefined
+  return (
+    <Heading id={id ?? undefined} as="h1" size="xl" {...props} className={[h1Selector]} />
+  )
 }
 
 export const H2 = ({ ...props }) => <Heading as="h2" size="md" {...props} />

@@ -4,10 +4,13 @@ import { Collections } from 'compositions'
 import { allAddresses } from 'constants/collection-addresses'
 import { ManageNFTsServiceProps, manageNftsService } from 'services'
 
+import { useBlocklist } from '@blocklist/src/blocklist'
 import { CollectionFilterProvider } from '@filter'
 import { Separator } from '@zoralabs/zord'
 
 const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
+  // FIXME
+  const collectionAddress = ''
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={`Manage | ${ownerAddress}`}></Seo>
@@ -29,7 +32,7 @@ const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
           // useFilterOwnerCollections
           useSidebarFilter={false}
         >
-          <Collections />
+          <Collections collectionAddress={collectionAddress} />
         </CollectionFilterProvider>
       )}
     </PageWrapper>

@@ -1,19 +1,20 @@
 import BigNumber from 'bignumber.js'
 
-import { BigNumberish, BigNumber as EthersBN, utils } from 'ethers'
+import { BigNumber as EthersBN, utils } from 'ethers'
+import { PriceAtTime } from 'types/zora.api.generated'
 
 import { useMemo } from 'react'
 
 export function useNounBidIncrement(
-  reservePrice: BigNumberish,
+  reservePrice?: PriceAtTime,
   rawCurrentBidAmount?: string,
   minBidIncrementPercentage?: number
 ) {
   const computeMinBid = useMemo(() => {
     if (!minBidIncrementPercentage || !rawCurrentBidAmount) {
       return {
-        raw: reservePrice.valueOf(),
-        pretty: reservePrice.toString(),
+        raw: reservePrice?.valueOf(),
+        pretty: reservePrice?.toString(),
       }
     }
 
@@ -33,7 +34,9 @@ export function useNounBidIncrement(
     }
   }, [minBidIncrementPercentage, rawCurrentBidAmount, reservePrice])
 
-  return {
-    minBidAmount: computeMinBid,
-  }
+  return reservePrice
+    ? {
+        minBidAmount: computeMinBid,
+      }
+    : { minBidAmount: { raw: 0, pretty: 0 } }
 }

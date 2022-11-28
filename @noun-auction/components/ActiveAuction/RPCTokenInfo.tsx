@@ -1,46 +1,54 @@
 import { Button } from 'components/Button'
-import { returnDao } from 'constants/collection-addresses'
 import NextLink from 'next/link'
+import Link from 'next/link'
 
 import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
-import { useNFT } from '@zoralabs/nft-hooks'
-import { Box, BoxProps, Flex, Heading, Label, Stack } from '@zoralabs/zord'
+import { Box, BoxProps, Flex, Label, Stack } from '@zoralabs/zord'
 
 import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 
 export interface RPCTokenInfoProps extends BoxProps {
-  contractAddress: string | undefined
-  tokenId: string | undefined
+  collectionAddress: string
+  tokenId: string
+  collectionName?: string
+  tokenImage?: string
 }
 
-export function RPCTokenInfo({ contractAddress, tokenId, ...props }: RPCTokenInfoProps) {
-  const dao = returnDao(contractAddress)
-  const { data } = useNFT(contractAddress, tokenId)
-
-  if (!tokenId || !contractAddress) return null
-
+export function RPCTokenInfo({
+  collectionAddress,
+  tokenId,
+  collectionName,
+  tokenImage,
+  ...props
+}: RPCTokenInfoProps) {
   return (
     <Flex className={['nounish-auction__token-info', styles.tokenInfoWrapper]} {...props}>
-      <NextLink href={`/collections/${contractAddress}/${tokenId}`} passHref>
+      <NextLink href={`/collections/${collectionAddress}/${tokenId}`} passHref>
         <Button as="a" variant="unset" className={styles.thumbnailLink}>
-          <NounishThumbnail
-            image={data?.media?.image?.uri}
-            tokenContract={contractAddress}
-            tokenId={tokenId}
-          />
+          {!!tokenId && !!collectionAddress && (
+            <NounishThumbnail
+              image={tokenImage}
+              tokenContract={collectionAddress}
+              tokenId={tokenId}
+            />
+          )}
         </Button>
       </NextLink>
-      <Stack justify="space-between">
-        <Heading size="sm" as="h3">
-          {data?.metadata?.name ?? `${dao?.name} ${tokenId}`}
-        </Heading>
-        <Box mb="x1">
-          <NextLink href={`/collections/${contractAddress}`} passHref>
-            <Label as="a" color="text3" className={[lightFont]}>
-              {dao?.name}
+      <Stack justify="space-around">
+        <Box>
+          <Box className={styles.rowCollectionName}>
+            <Link href={`/collections/${collectionAddress}`} passHref>
+              {`${collectionName} #${tokenId}` ?? '...'}
+            </Link>
+          </Box>
+          <Box mt="x1">
+            <Label as="a" color="tertiary" className={[lightFont]}>
+              <Link href={`/collections/${collectionAddress}`} passHref>
+                {collectionName ?? '...'}
+              </Link>
             </Label>
-          </NextLink>
+          </Box>
         </Box>
       </Stack>
     </Flex>

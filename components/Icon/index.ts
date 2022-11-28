@@ -1,1 +1,6 @@
 export * from './InfoIcon'
+export * from './OpenSeaIcon'
+export * from './LooksRareIcon'
+export * from './X2Y2Icon'
+export * from './ArrowLeft'
+export * from './ArrowRight'

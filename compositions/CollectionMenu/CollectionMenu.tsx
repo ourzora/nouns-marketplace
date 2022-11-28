@@ -3,6 +3,8 @@ import { SearchInput } from 'compositions'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { mediumFont, noTextWrap } from 'styles/styles.css'
 
+import { useNounsDaos } from 'hooks/useNounsDaos'
+
 import { useCallback, useMemo, useState } from 'react'
 
 import { ModalComposition } from '@modal'
@@ -14,18 +16,14 @@ import * as styles from './CollectionMenu.css'
 import { CollectionNavList } from './CollectionNavList'
 
 export function CollectionMenu() {
-  const { collections, daos, currentCollection, currentCollectionCount } =
-    useCollectionsContext()
-  const menuItems = useMemo(() => daos.concat(collections), [collections, daos])
-  const menuItemCount = useMemo(() => menuItems.length, [menuItems])
+  const { currentCollection, currentCollectionCount } = useCollectionsContext()
+  const daos = useNounsDaos()
+  const daoCount = useMemo(() => daos.length, [daos])
   const { hasScrolled, scrollEvent } = useHasScrolled()
   const [filter, setFilter] = useState<string>('')
   const filteredItems = useMemo(
-    () =>
-      menuItems.filter((item) =>
-        item?.name?.toLowerCase().includes(filter.toLowerCase())
-      ),
-    [filter, menuItems]
+    () => daos.filter((item) => item?.name?.toLowerCase().includes(filter.toLowerCase())),
+    [filter, daos]
   )
   const hasResults = useMemo(() => filteredItems.length > 0, [filteredItems])
 
@@ -73,7 +71,7 @@ export function CollectionMenu() {
             <Heading as="h2">
               Browse
               <Text as="span" color="text3" ml="x2">
-                {menuItemCount}
+                {daoCount}
               </Text>
             </Heading>
             <SearchInput

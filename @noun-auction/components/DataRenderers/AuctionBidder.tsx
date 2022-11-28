@@ -1,37 +1,60 @@
 import { useEnsName } from 'wagmi'
 
-import { SharedDataRendererProps, useNounishAuctionProvider } from '@noun-auction'
-import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
-import { lightFont, useShortAddress } from '@shared'
-import { Flex, Icon, Label } from '@zoralabs/zord'
+import Link from 'next/link'
+
+import { useMemo } from 'react'
+
+import { AddressZero } from '@ethersproject/constants'
+import {
+  auctionWrapperVariants,
+  sideBarUpperLabel,
+} from '@noun-auction/styles/NounishStyles.css'
+import { isAddressMatch, lightFont, useShortAddress } from '@shared'
+import { addressToEtherscanLink } from '@shared/utils/addressToEtherscanLink'
+import { Flex, FlexProps, Icon, Label } from '@zoralabs/zord'
 
 import { EnsAvatar } from './EnsAvatar'
 
+interface AuctionBidderProps extends FlexProps {
+  label?: string
+  showLabels?: boolean
+  useAvatar?: boolean
+  layout: keyof typeof auctionWrapperVariants['layout']
+  highestBidder?: string
+  className?: string
+}
+
 export function AuctionBidder({
   label = 'Top bidder',
-  layoutDirection = 'row',
+  direction = 'row',
   showLabels,
   useAvatar = true,
+  layout,
+  highestBidder,
+  className,
   ...props
-}: {
-  useAvatar?: boolean
-} & SharedDataRendererProps) {
-  const { layout, highestBidderAddress, hasNonZeroHighestBidder } =
-    useNounishAuctionProvider()
+}: AuctionBidderProps) {
+  const hasNonZeroHighestBidder = useMemo(
+    () => !isAddressMatch(highestBidder, AddressZero),
+    [highestBidder]
+  )
 
   const { data: ensName } = useEnsName({
-    address: highestBidderAddress,
+    address: highestBidder,
   })
 
-  const shortAddress = useShortAddress(highestBidderAddress)
+  const shortAddress = useShortAddress(highestBidder)
+  const bidderEtherscanLink = useMemo(
+    () => (highestBidder ? addressToEtherscanLink(highestBidder) : undefined),
+    [highestBidder]
+  )
 
   return (
     <Flex
-      direction={layoutDirection}
-      target="_blank"
-      gap={layoutDirection === 'row' ? 'x2' : 'x0'}
-      rel="noreferrer"
-      align={layoutDirection === 'row' ? 'center' : 'flex-start'}
+      className={className}
+      direction={direction}
+      gap={direction === 'row' ? 'x2' : 'x0'}
+      align={direction === 'row' ? 'center' : 'flex-start'}
       wrap="wrap"
       display={{
         '@initial': `${layout === 'row' ? 'none' : 'flex'}`,
@@ -59,17 +82,30 @@ export function AuctionBidder({
         >
           {hasNonZeroHighestBidder ? (
             <Flex gap="x2" align="center">
-              <Label size="md" gap="x1" align={'center'} style={{ lineHeight: '1.15' }}>
-                {ensName ?? shortAddress}
-              </Label>
-              {useAvatar && (
-                <>
-                  {layout !== 'sideBarBid' && highestBidderAddress ? (
-                    <EnsAvatar address={highestBidderAddress} />
-                  ) : (
-                    <Icon id="ArrowRightAngle" />
-                  )}
-                </>
+              {bidderEtherscanLink && (
+                <Link
+                  href={bidderEtherscanLink}
+                  passHref
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <a>
+                    <Flex gap="x1">
+                      <Label size="md" align={'center'} style={{ lineHeight: '1.15' }}>
+                        {ensName ?? shortAddress}
+                      </Label>
+                      {useAvatar && (
+                        <>
+                          {layout !== 'sideBarBid' && highestBidder ? (
+                            <EnsAvatar address={highestBidder} />
+                          ) : (
+                            <Icon id="ArrowRightAngle" />
+                          )}
+                        </>
+                      )}
+                    </Flex>
+                  </a>
+                </Link>
               )}
             </Flex>
           ) : (

@@ -83,6 +83,7 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
     return (
       <Dialog.DialogContent
         ref={ref}
+        onOpenAutoFocus={(e) => e.preventDefault()}
         onPointerDownOutside={
           disableCloseOnClickOutside ? (e) => e.preventDefault() : undefined
         }

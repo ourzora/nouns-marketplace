@@ -11,10 +11,9 @@ export const auctionWrapperVariants = {
         gridAutoFlow: 'row',
         borderRadius: radii.phat,
         border: `2px solid ${color.background2}`,
-        height: '244px',
         '@media': {
           [media.min1024]: {
-            gridTemplateColumns: '250px repeat(2, 1fr) 1.25fr 155px',
+            gridTemplateColumns: '350px repeat(2, 1fr) 1.25fr 155px',
             height: '68px',
             borderRadius: 0,
             border: 'none',
@@ -88,7 +87,7 @@ export const wrapperHover = style([
             content: '',
             width: 'calc(100% + 30px)',
             height: 'calc(100% + 20px)',
-            transform: 'translateX(-15px) translateY(-10px)',
+            transform: 'translateX(-15px) translateY(-2px)',
             backgroundColor: color.background2, // should be black 5
             position: 'absolute',
             top: '0',
@@ -300,7 +299,7 @@ export const auctionEventRow = style([
 
 /* STYLE UTILS */
 export const lightFont = style({
-  fontWeight: 300,
+  fontWeight: '300!important',
   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
 })
 
@@ -308,7 +307,6 @@ export const lightFont = style({
 export const tokenInfoWrapper = style([
   {
     gridColumn: '1 / 3',
-    borderBottom: `1px solid ${color.background2}`,
     gridTemplateColumns: '68px auto',
     gridTemplateRows: '68px',
     '@media': {
@@ -400,48 +398,15 @@ export const activeAuctionCardData = style([
   }),
 ])
 
-export const activeAuctionRowWrapper = style([
-  {
-    '@media': {
-      [media.min1024]: {
-        gridTemplateColumns: '1fr 3.75fr 100px',
-        gridTemplateRows: '1fr',
-        borderRadius: 0,
-        border: 'none',
-      },
-      '(hover: hover)': {
-        overflow: 'visible',
-        zIndex: '10',
-        selectors: {
-          '&:after': {
-            content: '',
-            width: 'calc(100% + 30px)',
-            height: 'calc(100% + 20px)',
-            transform: 'translateX(-15px) translateY(-10px)',
-            backgroundColor: color.background2,
-            position: 'absolute',
-            top: '0',
-            left: '0',
-            borderRadius: radii.phat,
-            zIndex: '1',
-            pointerEvents: 'none',
-            opacity: 0,
-            transition: 'opacity 0.2s ease-out',
-          },
-          '&:hover&:after': {
-            opacity: 0.5,
-          },
-        },
-      },
-    },
-  },
-  atoms({
-    pos: 'relative',
-  }),
-])
-
 export const showError = atoms({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
 })
+
+export const rowCollectionName = style([
+  {
+    fontSize: 'large',
+    fontWeight: 'bold',
+  },
+])
