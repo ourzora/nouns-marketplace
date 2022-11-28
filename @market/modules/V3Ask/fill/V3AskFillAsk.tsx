@@ -15,7 +15,6 @@ import { Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import * as styles from '../V3AskFlow.css'
 import { V3AskLearnMoreButton } from '../V3AskLearnMoreButton'
-import { V3AskModalHeading } from '../V3AskModalHeading'
 import { useV3AskTransaction } from '../hooks/useV3AskTransaction'
 
 interface V3AskFillAskProps extends CommonV3AskComponentProps {}
