@@ -43,7 +43,6 @@ export const header = style([
 
 export const nounsGlassesLink = style([
   atoms({
-    mr: 'x6',
     cursor: 'pointer',
     pos: 'relative',
   }),
