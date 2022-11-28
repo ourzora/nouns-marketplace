@@ -9,7 +9,7 @@ export function NounsLink() {
   return (
     <Link href="/" passHref>
       <Flex as="a" className={[nounsGlassesLink]}>
-        <NounsGlasses w="100%" alignSelf="flex-start" />
+        <NounsGlasses alignSelf="flex-start" />
       </Flex>
     </Link>
   )
