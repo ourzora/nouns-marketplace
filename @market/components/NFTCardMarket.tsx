@@ -29,7 +29,7 @@ export function NFTCardMarketComponent({
   }
 
   if (isOwner) {
-    return <UniversalListAskModal nftObj={nftObj} {...props} />
+    return <UniversalListAskFlow nftObj={nftObj} {...props} />
   }
 
   return <NFTOwner size="md" align="left" address={nftObj.nft?.owner?.address} />
