@@ -7,20 +7,22 @@ import { useToken } from 'hooks/useToken'
 
 import { CollectionThumbnail } from '@media'
 import { DescriptionWithMaxLines } from '@shared/components'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
 
 import { NFTMarket } from './NFTMarket'
-import { NFTOffchainOrders } from './NFTOffchainOrders'
 import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
 
 export interface NFTSidebarProps extends StackProps {
+  nft: NFTObject
   collectionAddress: string
   tokenId: string
   offchainOrders?: OffchainOrderWithToken[]
 }
 
 export function NFTSidebar({
+  nft,
   collectionAddress,
   tokenId,
   offchainOrders,
@@ -30,6 +32,7 @@ export function NFTSidebar({
 
   return (
     <NFTSidebarComponent
+      nft={nft}
       collectionAddress={collectionAddress}
       tokenId={tokenId}
       offchainOrders={offchainOrders}
@@ -39,6 +42,7 @@ export function NFTSidebar({
 }
 
 export function NFTSidebarComponent({
+  nft,
   className,
   collectionAddress,
   tokenId,
@@ -93,6 +97,7 @@ export function NFTSidebarComponent({
           offchainOrders={offchainOrders}
           tokenId={tokenId}
           token={token}
+          nftObj={nft}
         />
       </Stack>
     </Stack>

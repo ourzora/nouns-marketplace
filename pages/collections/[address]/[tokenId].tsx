@@ -14,11 +14,12 @@ const NFT = ({
   tokenId,
   offchainOrders,
 }: {
-  nft: NFTObject | undefined
+  nft: NFTObject
   tokenAddress: string
   tokenId: string
   offchainOrders: OffchainOrderWithToken[]
 }) => {
+  console.log('NFT', nft)
   return (
     <PageWrapper direction="column">
       <Seo
@@ -30,6 +31,7 @@ const NFT = ({
         <Grid className={styles.nftPageWrapper}>
           <NFTPageHero collectionAddress={tokenAddress} tokenId={tokenId} />
           <NFTSidebar
+            nft={nft}
             collectionAddress={tokenAddress}
             tokenId={tokenId}
             offchainOrders={offchainOrders}

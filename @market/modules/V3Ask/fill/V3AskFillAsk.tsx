@@ -26,7 +26,9 @@ export function V3AskFillAsk({ onNext, ...props }: V3AskFillAskProps) {
   const { displayAskAmount, hasSufficientFunds } = useAskHelper({
     ask,
   })
+
   const askPriceSummary = useMemo(
+    // todo: get this data from usePrimaryAuctionDataTable when we've switched from NFTObject to TypeSafeToken
     () =>
       displayAskAmount
         ? {
