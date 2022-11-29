@@ -70,7 +70,6 @@ export function ModalComposition({
       </Box>
       <Modal
         open={modalType === modalName}
-        // onOpenChange={requestClose}
         onOpenChange={handleClose}
         modalOverlayOverrides={modalOverlayOverrides}
       >

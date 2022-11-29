@@ -19,7 +19,6 @@ const NFT = ({
   tokenId: string
   offchainOrders: OffchainOrderWithToken[]
 }) => {
-  console.log('NFT', nft)
   return (
     <PageWrapper direction="column">
       <Seo

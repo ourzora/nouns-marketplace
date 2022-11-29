@@ -30,22 +30,14 @@ export function NFTMarket({
 }: NFTMarketProps) {
   const { dao } = useOneNounsDao({ collectionAddress })
   const { data: activeAuction } = useActiveOGNounishAuction()
-  // const { data: nftObj } = useNFT(collectionAddress, tokenId)
+  // const { data: nftObj, initial } = useNFT(collectionAddress, tokenId,{fallbackData: nftObj})
 
   const hasNounishAuction = useMemo(
     () => activeAuction?.properties?.tokenId === tokenId,
     [activeAuction?.properties?.tokenId, tokenId]
   )
 
-  // const { markets } = nftObj!
-  // const { ask } = useRelevantMarket(markets)
-  // const { isOwner } = useIsOwner(nftObj)
-
-  console.log('In NFTMarket')
-  console.log('TOKEN', token)
-
   if (hasNounishAuction && dao) {
-    console.log('DAO')
     return (
       <NounishAuction
         dao={dao!}
@@ -61,7 +53,6 @@ export function NFTMarket({
   }
 
   if (nftObj) {
-    console.log('HAS NFT OBJ')
     return (
       <NFTAsks
         offchainOrders={offchainOrders}

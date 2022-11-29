@@ -19,26 +19,20 @@ export function NFTAsks({ nftObj, offchainOrders, ...props }: NFTAskProps) {
   const { markets } = nftObj
   const { ask } = useRelevantMarket(markets)
   const { isOwner } = useIsOwner(nftObj)
-  const {
-    hasRelevantAsk,
-    // , isPrivateAsk
-  } = useAskHelper({ ask })
+  const { hasRelevantAsk } = useAskHelper({ ask })
   const showOffchainOrders = useMemo(
     () => offchainOrders && offchainOrders?.length > 0 && !isOwner,
     [isOwner, offchainOrders]
   )
 
   if (hasRelevantAsk) {
-    console.log('RELEVANT ASK')
     return <V3AskSidebar nftObj={nftObj} borderRadius="phat" />
   }
 
   if (showOffchainOrders) {
-    console.log('HAS OFFCHAIN')
     return <NFTOffchainOrders nft={nftObj} offchainOrders={offchainOrders!} />
   }
 
-  console.log('IS OWNER?')
   if (isOwner) return <UniversalListAskFlow nftObj={nftObj} />
 
   return null
