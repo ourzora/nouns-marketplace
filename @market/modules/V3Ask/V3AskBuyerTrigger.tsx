@@ -1,6 +1,6 @@
 import { Button } from 'components/Button'
 
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import {
@@ -8,6 +8,7 @@ import {
   APPROVE_MODULE_FOR_FILL_V3ASK,
   useV3AskStateContext,
 } from '@market/modules/V3Ask/'
+import { useButtonRequiresAuth } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Well } from '@zoralabs/zord'
@@ -36,6 +37,14 @@ export function V3AskBuyerTrigger({ nft, openModal }: V3AskBuyerTriggerProps) {
     [hasActivePrivateAsk]
   )
 
+  const buyNow = useCallback(() => {
+    dispatch && dispatch({ type: selectedAskFlow })
+    openModal()
+    setDisabled(true)
+  }, [dispatch, openModal, selectedAskFlow])
+
+  const buttonBehavior = useButtonRequiresAuth(buyNow)
+
   if (hasActivePrivateAsk && !isValidPrivateAskBuyer) return null
 
   return (
@@ -49,15 +58,7 @@ export function V3AskBuyerTrigger({ nft, openModal }: V3AskBuyerTriggerProps) {
         />
       )}
 
-      <Button
-        w="100%"
-        disabled={disabled}
-        onClick={() => {
-          dispatch && dispatch({ type: selectedAskFlow })
-          openModal()
-          setDisabled(true)
-        }}
-      >
+      <Button w="100%" disabled={disabled} onClick={buttonBehavior}>
         Buy Now
       </Button>
     </Well>
