@@ -17,6 +17,7 @@ import { useCollections } from 'hooks'
 import { StrictMode, useEffect } from 'react'
 import React from 'react'
 
+import '@fontsource/inter/500.css'
 import { ContractProvider, PrivateAskContractProvider } from '@market'
 import { ModalContextProvider } from '@modal'
 import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/rainbowkit'

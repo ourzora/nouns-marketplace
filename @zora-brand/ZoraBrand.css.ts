@@ -1,8 +1,12 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, media } from '@zoralabs/zord'
+import { atoms, media, typography } from '@zoralabs/zord'
 
 export const zoraBrand = style({
   fontWeight: 500,
+  fontFamily: "'Inter', sans-serif",
+  fontSize: `${typography.fontSize[12]}!important`,
+  lineHeight: `${typography.lineHeight[20]}!important`,
+  color: '#808080',
 })
 
 export const poweredByContainer = style(
