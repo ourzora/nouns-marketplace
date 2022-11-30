@@ -1,6 +1,6 @@
 import { TypeSafeToken } from 'validators/token'
 
-import { usePrimaryAuctionDataTable } from '@market/modules/PrivateAsk/hooks/usePrimaryAuctionDataTable'
+import { usePrimaryAuctionDataTable } from '@market/modules/V3Ask/hooks'
 import { DataTable } from '@shared/components'
 import { BoxProps } from '@zoralabs/zord'
 

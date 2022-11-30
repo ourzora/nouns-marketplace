@@ -17,7 +17,8 @@ import { useCollections } from 'hooks'
 import { StrictMode, useEffect } from 'react'
 import React from 'react'
 
-import { ContractProvider, PrivateAskContractProvider } from '@market'
+import { ContractProvider } from '@market'
+import { V3AskContractProvider } from '@market/modules/V3Ask'
 import { ModalContextProvider } from '@modal'
 import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
@@ -86,7 +87,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <ModalContextProvider>
                     <ToastContextProvider>
                       <ContractProvider>
-                        <PrivateAskContractProvider>
+                        <V3AskContractProvider>
                           <Header />
                           <NextNProgress
                             color="rgba(0,0,0,.5)"
@@ -98,7 +99,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                           />
                           <Component {...pageProps} />
                           <Footer />
-                        </PrivateAskContractProvider>
+                        </V3AskContractProvider>
                       </ContractProvider>
                     </ToastContextProvider>
                   </ModalContextProvider>

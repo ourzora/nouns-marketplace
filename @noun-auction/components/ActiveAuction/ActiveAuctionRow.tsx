@@ -26,7 +26,7 @@ export interface ActiveAuctionRowProps {
   auctionContractAddress: string
   minBidIncrementPercentage: number
   routePrefix?: string
-  useModal?: boolean
+  enableModal?: boolean
   showLabels?: boolean
   useErrorMsg?: boolean
   showTopBid?: boolean
@@ -37,7 +37,7 @@ export interface ActiveAuctionRowProps {
 }
 
 export function ActiveAuctionRow({
-  useModal,
+  enableModal,
   showLabels,
   useErrorMsg,
   layout,
@@ -191,7 +191,7 @@ export function ActiveAuctionRow({
             View Collection
           </CollectionLink>
         )}
-        {!useModal && <Separator mt="x1" />}
+        {!enableModal && <Separator mt="x1" />}
         {auctionCompleted ? (
           <SettleAuction
             auctionContractAddress={auctionContractAddress}
@@ -204,7 +204,7 @@ export function ActiveAuctionRow({
             layout={layout === 'sideBarBid' ? 'row' : 'historyOnly'}
             tokenId={tokenId}
             collectionAddress={collectionAddress}
-            useModal={useModal}
+            enableModal={enableModal}
           />
         )}
       </Flex>

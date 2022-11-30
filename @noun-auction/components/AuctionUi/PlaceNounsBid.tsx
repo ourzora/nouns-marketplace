@@ -11,7 +11,7 @@ import { Stack } from '@zoralabs/zord'
 import { NounsBidForm } from './NounsBidForm'
 
 type PlaceNounsBidProps = {
-  useModal?: boolean
+  enableModal?: boolean
   tokenId: string
   collectionAddress: string
   layout: keyof typeof auctionWrapperVariants['layout']
@@ -21,11 +21,11 @@ export function PlaceNounsBid({
   layout,
   tokenId,
   collectionAddress,
-  useModal = true,
+  enableModal = true,
 }: PlaceNounsBidProps) {
   return (
     <>
-      {useModal ? (
+      {enableModal ? (
         <ModalComposition
           modalName={`nouns-bid-${tokenId}`}
           modalBehaviorRequiresAuth={true}

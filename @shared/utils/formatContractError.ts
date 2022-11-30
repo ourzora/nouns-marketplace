@@ -52,6 +52,9 @@ export function formatContractError(error: TransactionError | Error) {
   if (error?.message?.includes('user rejected transaction')) {
     return 'User rejected transaction.'
   }
+  if (error?.message?.includes('UNPREDICTABLE_GAS_LIMIT')) {
+    return 'Unpredictable gas limit: may indicate an unknown transaction failure, or a gas limit misconfiguration'
+  }
 
   return (
     error?.message || 'An unknown error occurred, please try again or contact support.'

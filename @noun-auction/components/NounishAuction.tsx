@@ -155,7 +155,7 @@ export function NounishAuctionComponent({
           tokenName={token?.name}
           tokenImage={token?.image}
           {...rest}
-          useModal={!useInlineBid}
+          enableModal={!useInlineBid}
         />
       </Grid>
     </Box>

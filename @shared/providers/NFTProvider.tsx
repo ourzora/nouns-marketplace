@@ -38,7 +38,9 @@ export function NFTProvider({
   children,
   ...props
 }: NFTProps) {
-  const { data, error, currencyLoaded, marketError } = useNFT(contractAddress, tokenId)
+  const { data, error, currencyLoaded, marketError } = useNFT(contractAddress, tokenId, {
+    fallbackData: initialData,
+  })
 
   return (
     <NFTContext.Provider
@@ -49,7 +51,7 @@ export function NFTProvider({
           currencyLoaded,
           marketError,
         },
-        nft: data ?? initialData,
+        nft: data,
         tokenId,
         contractAddress,
       }}

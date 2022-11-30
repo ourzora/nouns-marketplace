@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
+import { useCountdown } from '@noun-auction'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import { isAddressMatch, numberFormatterUSDC, roundTwoDecimals } from '@shared'
 import { useAuth } from '@shared/hooks'
@@ -11,7 +12,7 @@ interface NounishAuctionHelperProps {
 }
 
 export const useNounishAuctionHelper = ({ auction }: NounishAuctionHelperProps) => {
-  const { endTime, highestBidPrice, highestBidder, winner } = auction
+  const { endTime, highestBidPrice, highestBidder, winner, startTime } = auction
 
   const { isEnded } = useIsAuctionCompleted({
     activeAuction: auction,
@@ -22,6 +23,8 @@ export const useNounishAuctionHelper = ({ auction }: NounishAuctionHelperProps) 
   // const highBidAddress = useMemo(() => winner ?? winner,[winner])
   const hasWinner = !!winnerAddress
   const hasBid = !!highestBidder
+
+  const { now } = useCountdown(startTime, endTime)
 
   // const { balance: walletBalance, address: userAddress } = useAuth()
   // const buyerAddress = useMemo(() => ask?.raw?.properties?.buyer, [ask])
@@ -66,5 +69,7 @@ export const useNounishAuctionHelper = ({ auction }: NounishAuctionHelperProps) 
     highestBidPrice,
     hasWinner,
     winnerAddress,
+    highestBidder,
+    now,
   }
 }

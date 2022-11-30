@@ -75,7 +75,7 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
       >
         <Stack className={styles.modalContent} gap="x0" p="x2">
           <Flex justify="space-between" p="x2">
-            <Link passHref href="/collections">
+            <Link passHref href={`/manage/${address}`}>
               <Button size="md" as="a" variant="unset" className={styles.topMenuItem}>
                 <EnsAvatar address={address} />
                 <Box ml={'x2'} as="span" className={[noTextWrap]}>

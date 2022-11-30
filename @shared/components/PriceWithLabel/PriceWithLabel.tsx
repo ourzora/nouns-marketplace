@@ -9,6 +9,7 @@ export interface PriceWithLabelProps {
   symbol: string
   label?: string
   usdAmount?: string
+  invertColor?: boolean
 }
 
 export function PriceWithLabel({
@@ -16,23 +17,29 @@ export function PriceWithLabel({
   usdAmount,
   symbol,
   label,
+  invertColor,
 }: PriceWithLabelProps) {
   return (
     <Stack gap="x1">
       {label && (
-        <Eyebrow inline className={mediumFont}>
+        <Eyebrow inline className={mediumFont} color={invertColor ? 'text2' : 'text3'}>
           {label}
         </Eyebrow>
       )}
 
-      <Heading as="h2" size="sm" inline>
+      <Heading as="h2" size="sm" inline color={invertColor ? 'onAccent' : 'text1'}>
         {cryptoAmount} {symbol}
       </Heading>
       {usdAmount && (
-        <Eyebrow color="text2" inline>
-          <Label size="xs" className={mediumFont}>
-            ${usdAmount} USD
-          </Label>
+        <Eyebrow
+          // color="text2"
+          inline
+          className={mediumFont}
+          color={invertColor ? 'text2' : 'text2'}
+        >
+          {/* <Label size="xs" className={mediumFont}> */}
+          {usdAmount} USD
+          {/* </Label> */}
         </Eyebrow>
       )}
     </Stack>

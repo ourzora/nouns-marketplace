@@ -10,7 +10,7 @@ import {
   useNounishAuctionQuery,
   useOneNounsDao,
 } from '@noun-auction'
-import { useNFT } from '@zoralabs/nft-hooks'
+import { NFTObject, useNFT } from '@zoralabs/nft-hooks'
 import { BoxProps } from '@zoralabs/zord'
 
 import { nftMarketWrapper } from './NFTPage.css'
@@ -19,10 +19,12 @@ interface NFTMarketProps extends BoxProps {
   collectionAddress: string
   tokenId: string
   token: TypeSafeToken
+  // nftObj: NFTObject
   offchainOrders?: OffchainOrderWithToken[]
 }
 
 export function NFTMarket({
+  // nftObj,
   offchainOrders,
   className,
   collectionAddress,
@@ -56,7 +58,7 @@ export function NFTMarket({
     console.log('ACTIVE', activeAuction)
     console.log('DAO', dao)
 
-    return <NFTPrimaryAuction primaryAuction={activeAuction!} />
+    return <NFTPrimaryAuction nftObj={nftObj} primaryAuction={activeAuction!} />
 
     // return (
     //   <NounishAuction

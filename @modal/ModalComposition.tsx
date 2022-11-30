@@ -27,6 +27,8 @@ export interface ModalCompositionProps extends BoxProps {
   disableCloseOnClickOutside?: boolean
   /** Optionally trigger RainbowWallet connect prompt if modal behavior requires auth  */
   modalBehaviorRequiresAuth?: boolean
+  /** Optionally trigger behavior when closing modal */
+  onClose?: () => void
 }
 
 /* TODO: Modify Zord ModalContent component to accept custom styling */
@@ -40,6 +42,7 @@ export function ModalComposition({
   disableCloseOnClickOutside = false,
   modalOverlayOverrides,
   modalBehaviorRequiresAuth = false,
+  onClose,
 }: ModalCompositionProps) {
   const { modalType, requestClose, requestOpen } = useModal()
 
@@ -53,6 +56,11 @@ export function ModalComposition({
     [variableButtonBehavior, modalBehaviorRequiresAuth, modalHandler]
   )
 
+  const handleClose = useCallback(() => {
+    requestClose()
+    onClose && onClose()
+  }, [onClose, requestClose])
+
   return (
     <>
       <Box className={['zora-modal-trigger-wrapper', className]} onClick={buttonAction}>
@@ -62,7 +70,7 @@ export function ModalComposition({
       </Box>
       <Modal
         open={modalType === modalName}
-        onOpenChange={requestClose}
+        onOpenChange={handleClose}
         modalOverlayOverrides={modalOverlayOverrides}
       >
         <ModalContent
