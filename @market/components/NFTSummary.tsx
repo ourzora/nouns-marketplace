@@ -2,7 +2,7 @@ import { useToken } from 'hooks/useToken'
 
 import { useMemo } from 'react'
 
-import { FillV3AskInfo, ModalTitleAndDescription } from '@market/components'
+import { ModalTitleAndDescription, ViewV3AskInfo } from '@market/components'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ErrorBoundary } from '@sentry/nextjs'
 import { useAuth } from '@shared/hooks'
@@ -61,7 +61,7 @@ export function NFTSummary({
           <ModalTitleAndDescription title={modalTitle} />
           <CollectionThumbnail collectionAddress={token.collectionAddress} />
         </Flex>
-        {hasAsk && <FillV3AskInfo token={token} askPrice={askPrice} />}
+        {hasAsk && <ViewV3AskInfo token={token} askPrice={askPrice} />}
       </Stack>
     </ErrorBoundary>
   )

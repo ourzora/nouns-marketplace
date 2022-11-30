@@ -45,6 +45,7 @@ export function useToken({ collectionAddress, tokenId }: Params) {
       return cached
     }
     // no need to update when cache changed!
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.token?.token])
 
   return {

@@ -8,6 +8,9 @@ export const MODULE_MANAGER_ADDRESS =
 export const ASKS_V11_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? mainnetV3.AsksV1_1 : goerliV3.AsksV1_1
 
+export const ASKS_CORE_ETH_ADDRESS =
+  NETWORK_CHAIN_ID === 1 ? mainnetV3.AsksCoreEth : 'TODO:ADDME_FOR_GORLI'
+
 export const ERC721_TRANSFER_HELPER_ADDRESS =
   NETWORK_CHAIN_ID === 1 ? mainnetV3.ERC721TransferHelper : goerliV3.ERC721TransferHelper
 
