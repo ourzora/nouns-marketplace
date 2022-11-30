@@ -3,7 +3,12 @@ import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useCountdown } from '@noun-auction'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
-import { isAddressMatch, numberFormatterUSDC, roundTwoDecimals } from '@shared'
+import {
+  formatCryptoVal,
+  isAddressMatch,
+  numberFormatterUSDC,
+  roundTwoDecimals,
+} from '@shared'
 import { useAuth } from '@shared/hooks'
 import { FixedPriceLike, MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types'
 
@@ -18,49 +23,24 @@ export const useNounishAuctionHelper = ({ auction }: NounishAuctionHelperProps) 
     activeAuction: auction,
   })
 
-  // const highBidAddress = useMemo(() => isEnded ? highestBidder: undefined,[highestBidder, isEnded])
   const winnerAddress = useMemo(() => winner ?? winner, [winner])
-  // const highBidAddress = useMemo(() => winner ?? winner,[winner])
   const hasWinner = !!winnerAddress
   const hasBid = !!highestBidder
 
-  const { now } = useCountdown(startTime, endTime)
-
-  // const { balance: walletBalance, address: userAddress } = useAuth()
-  // const buyerAddress = useMemo(() => ask?.raw?.properties?.buyer, [ask])
-  // const isPrivateAsk = useMemo(() => buyerAddress || false, [buyerAddress])
-  // const isActiveAsk = useMemo(
-  //   () => ask?.status === MARKET_INFO_STATUSES.ACTIVE || false,
-  //   [ask]
-  // )
-  // const hasActivePrivateAsk = useMemo(
-  //   () => isActiveAsk && isPrivateAsk,
-  //   [isActiveAsk, isPrivateAsk]
-  // )
-  // const isCompletedAsk = useMemo(
-  //   () => ask?.status === MARKET_INFO_STATUSES.COMPLETE || false,
-  //   [ask]
-  // )
-  // const hasAsk = useMemo(() => ask !== undefined, [ask])
-  // const hasRelevantAsk = useMemo(() => hasAsk && isActiveAsk, [hasAsk, isActiveAsk])
-
-  // const rawAskAmount = useMemo(() => ask?.amount?.amount.raw.toString(), [ask])
-  // const displayAskAmount = useMemo(() => ask?.amount?.amount.value.toString(), [ask])
-  // const usdAskAmount = useMemo(
-  //   () =>
-  //     ask?.amount?.usd?.value
-  //       ? numberFormatterUSDC(roundTwoDecimals(ask.amount.usd.value))
-  //       : '...',
-  //   [ask]
-  // )
-  // const hasSufficientFunds = useMemo(
-  //   () => (rawAskAmount ? walletBalance?.value.gte(rawAskAmount) : false),
-  //   [rawAskAmount, walletBalance?.value]
-  // )
-  // const isValidPrivateAskBuyer = useMemo(
-  //   () => hasActivePrivateAsk && isAddressMatch(userAddress, buyerAddress),
-  //   [buyerAddress, hasActivePrivateAsk, userAddress]
-  // )
+  const formattedCryptoHighestBidPrice = useMemo(
+    () =>
+      highestBidPrice?.nativePrice.raw
+        ? formatCryptoVal(parseFloat(highestBidPrice?.nativePrice.raw))
+        : '...',
+    [highestBidPrice?.nativePrice.raw]
+  )
+  const formattedUSDHighestBidPrice = useMemo(
+    () =>
+      highestBidPrice?.usdcPrice?.decimal
+        ? numberFormatterUSDC(highestBidPrice?.usdcPrice?.decimal)
+        : '...',
+    [highestBidPrice?.usdcPrice?.decimal]
+  )
 
   return {
     isEnded,
@@ -70,6 +50,7 @@ export const useNounishAuctionHelper = ({ auction }: NounishAuctionHelperProps) 
     hasWinner,
     winnerAddress,
     highestBidder,
-    now,
+    formattedCryptoHighestBidPrice,
+    formattedUSDHighestBidPrice,
   }
 }

@@ -54,7 +54,7 @@ export function NFTMarket({
   // otherwise: show the active auction amount before it's claimed
   // if active: show the countdown + allow bids
 
-  if (hasActiveAuction && dao) {
+  if (hasActiveAuction && dao && nftObj) {
     console.log('ACTIVE', activeAuction)
     console.log('DAO', dao)
 
