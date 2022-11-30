@@ -32,8 +32,6 @@ export function NFTPrimaryAuction({
     [isEnded, hasWinner, userAddress, winnerAddress]
   )
 
-  console.log('PRIMARY', primaryAuction)
-
   if (!primaryAuction) return null
 
   //if (isEnded) {     // Anyone can settle auction

@@ -1,16 +1,11 @@
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
-import { useMemo } from 'react'
 import { TypeSafeToken } from 'validators/token'
 
 import { NFTPrimaryAuction } from '@market'
 import { NFTAsks } from '@market/components/NFTAsks'
-import {
-  //NounishAuction, // useActiveOGNounishAuction,
-  useNounishAuctionQuery,
-  useOneNounsDao,
-} from '@noun-auction'
-import { NFTObject, useNFT } from '@zoralabs/nft-hooks'
+import { useNounishAuctionQuery } from '@noun-auction'
+import { useNFT } from '@zoralabs/nft-hooks'
 import { BoxProps } from '@zoralabs/zord'
 
 import { nftMarketWrapper } from './NFTPage.css'
@@ -31,47 +26,13 @@ export function NFTMarket({
   token,
   tokenId,
 }: NFTMarketProps) {
-  const { dao } = useOneNounsDao({ collectionAddress })
-  // const { data: activeOGAuction } = useActiveOGNounishAuction()
   const { data: nftObj } = useNFT(collectionAddress, tokenId)
-
-  // const hasActiveOGAuction = useMemo( // Nouns / LilNouns auction
-  //   () => activeOGAuction?.properties?.tokenId === tokenId,
-  //   [activeOGAuction?.properties?.tokenId, tokenId]
-  // )
-
   const { activeAuction, hasActiveAuction } = useNounishAuctionQuery({
-    // All other auctions
     collectionAddress,
   })
 
-  // const { collectionAddress: activeAuctionCollectionAddress, endTime } = activeAuction
-  // const { isEnded: auctionCompleted } = useIsAuctionCompleted({
-  //   activeAuction,
-  // })
-
-  // claim: if you're the bidder
-  // otherwise: show the active auction amount before it's claimed
-  // if active: show the countdown + allow bids
-
-  if (hasActiveAuction && dao && nftObj) {
-    console.log('ACTIVE', activeAuction)
-    console.log('DAO', dao)
-
+  if (hasActiveAuction && nftObj) {
     return <NFTPrimaryAuction nftObj={nftObj} primaryAuction={activeAuction!} />
-
-    // return (
-    //   <NounishAuction
-    //     dao={dao!}
-    //     hideThumbnail
-    //     hideTitle
-    //     hideCollectionTitle
-    //     showLabels
-    //     layout="sideBarBid"
-    //     useErrorMsg
-    //     className={className}
-    //   />
-    // )
   }
 
   if (nftObj) {

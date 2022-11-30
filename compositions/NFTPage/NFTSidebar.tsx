@@ -53,8 +53,6 @@ export function NFTSidebarComponent({
     collectionAddress,
   })
   const { token } = useToken({ collectionAddress, tokenId })
-  const showProvenance = primarySalePrice !== '0'
-  console.log('PRIMARY', primarySalePrice)
 
   if (!token) return null
 
