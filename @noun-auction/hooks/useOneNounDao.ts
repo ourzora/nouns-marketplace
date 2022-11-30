@@ -26,6 +26,7 @@ export function useOneNounsDao({ collectionAddress }: { collectionAddress: strin
       return cached
     }
     // no need to update when cache changed!
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.nouns?.nounsDaos?.nodes])
 
   return {

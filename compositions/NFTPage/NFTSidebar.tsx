@@ -47,7 +47,8 @@ export function NFTSidebarComponent({
 }: NFTSidebarProps) {
   const { primarySalePrice } = usePrimarySalePrice({ collectionAddress })
   const { token } = useToken({ collectionAddress, tokenId })
-  const fallbackTitle = `${token?.collectionName} #${token?.tokenId}`
+  const showProvenance = primarySalePrice !== '0'
+  console.log('PRIMARY', primarySalePrice)
 
   if (!token) return null
 
@@ -73,7 +74,7 @@ export function NFTSidebarComponent({
       </Flex>
       <Flex justify="space-between" align="center">
         <Heading as="h1" size="xl">
-          {fallbackTitle}
+          {token?.name}
         </Heading>
       </Flex>
 
@@ -85,7 +86,7 @@ export function NFTSidebarComponent({
         description={token.description}
       />
       <Stack gap="x4" mt="auto">
-        {primarySalePrice && (
+        {showProvenance && (
           <NFTProvenance primarySalePrice={primarySalePrice} token={token} />
         )}
         <NFTMarket

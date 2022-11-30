@@ -5,6 +5,8 @@ export * from './FillV3AskInfo'
 
 export * from './ListV3AskForm'
 export * from './ListV3AskWizard'
+export * from './NFTAsks'
+export * from './NFTPrimaryAuction'
 
 /* Approval Forms */
 export * from './V3ApprovalForm'

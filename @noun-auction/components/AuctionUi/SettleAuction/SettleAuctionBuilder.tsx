@@ -12,7 +12,7 @@ import {
 import { SettleAuctionProps } from './SettleAuction'
 import { SettleAuctionComponent } from './SettleAuctionComponent'
 
-export function SettleAuctionBuiler({
+export function SettleAuctionBuilder({
   useErrorMsg = false,
   auctionContractAddress,
   layout,

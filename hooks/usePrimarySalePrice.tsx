@@ -1,5 +1,7 @@
 import { formatUnits } from 'ethers/lib/utils'
 
+import { useMemo } from 'react'
+
 import { first } from 'lodash'
 
 import { LilNounsAuctionEventTypes, NounsAuctionEventTypes } from '@noun-auction'
@@ -25,9 +27,7 @@ export const usePrimarySalePrice = ({ collectionAddress }: Props) => {
   const events = { nodes: [] }
 
   const isSettled = useIsAuctionSettled({ marketType, events })
-  const noAuctionHistory = events?.nodes.length === 0
-
-  if (noAuctionHistory || !isSettled) return { primarySalePrice: '0' }
+  // const noAuctionHistory = events?.nodes.length === 0
 
   const bidEventType =
     marketType === 'NOUNS_AUCTION'
@@ -43,9 +43,13 @@ export const usePrimarySalePrice = ({ collectionAddress }: Props) => {
     )
     .sort(getLatestBlockNumberForEvent)
 
-  const firstPrice = Array.isArray(bidEvents)
-    ? formatUnits(first(bidEvents).properties.properties.value, 18)
-    : '0'
+  const primarySalePrice = useMemo(
+    () =>
+      isSettled && Array.isArray(bidEvents)
+        ? formatUnits(first(bidEvents).properties.properties.value, 18)
+        : '0',
+    [bidEvents, isSettled]
+  )
 
-  return { primarySalePrice: firstPrice }
+  return { primarySalePrice }
 }

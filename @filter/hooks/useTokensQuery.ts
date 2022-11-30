@@ -1,6 +1,6 @@
 import useSWRInfinite from 'swr/infinite'
 
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import { flatten } from 'lodash'
 
@@ -92,6 +92,7 @@ UseTokenQueryProps) {
   })
 
   const data = resp?.map((r) => r.tokens)
+  const flattenedData = useMemo(() => flatten(data), [data])
 
   const handleLoadMore = useCallback(() => setSize(size + 1), [setSize, size])
 
@@ -103,7 +104,7 @@ UseTokenQueryProps) {
   const isRefreshing = isValidating && data && data.length === size
 
   return {
-    data: flatten(data),
+    data: flattenedData,
     isValidating,
     isRefreshing,
     isLoadingMore,

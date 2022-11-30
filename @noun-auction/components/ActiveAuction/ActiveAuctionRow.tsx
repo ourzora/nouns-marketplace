@@ -33,6 +33,7 @@ export interface ActiveAuctionRowProps {
   layout?: keyof typeof auctionWrapperVariants['layout']
   tokenImage: TokenContentMedia | undefined
   collectionName?: string
+  tokenName?: string
 }
 
 export function ActiveAuctionRow({
@@ -49,6 +50,7 @@ export function ActiveAuctionRow({
   auctionEndTime,
   tokenImage,
   collectionName,
+  tokenName,
 }: ActiveAuctionRowProps) {
   const rowLayout = useMemo(
     () => (
@@ -143,6 +145,7 @@ export function ActiveAuctionRow({
       {layout !== 'sideBarBid' && (
         <Link href={`collections/${collectionAddress}`} passHref>
           <RPCTokenInfo
+            tokenName={tokenName}
             collectionName={collectionName}
             tokenImage={tokenImage?.url ?? undefined}
             tokenId={tokenId}

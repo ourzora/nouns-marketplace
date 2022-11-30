@@ -2,7 +2,7 @@ import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
 import { StackProps } from '@zoralabs/zord'
 
 import { isOGNounAddress } from '../NounsBidForm'
-import { SettleAuctionBuiler } from './SettleAuctionBuilder'
+import { SettleAuctionBuilder } from './SettleAuctionBuilder'
 import { SettleAuctionOGNouns } from './SettleAuctionOGNouns'
 
 export interface SettleAuctionProps extends StackProps {
@@ -18,7 +18,7 @@ export function SettleAuction({ auctionContractAddress, ...rest }: SettleAuction
     )
   } else {
     return (
-      <SettleAuctionBuiler auctionContractAddress={auctionContractAddress} {...rest} />
+      <SettleAuctionBuilder auctionContractAddress={auctionContractAddress} {...rest} />
     )
   }
 }

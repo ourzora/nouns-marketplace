@@ -33,9 +33,13 @@ export function useNounishAuctionQuery({
   )
 
   const activeAuction: TypeSafeNounsAuction | undefined = useMemo(() => {
+    console.log('DATA', data)
+    error && console.log('ERROR', error)
+
     const newData = data?.nouns?.nounsActiveMarket
 
     if (newData) {
+      console.log('DATA IS NEWDATA')
       const verifiedData = verifyAuction(newData)
       setCache(verifiedData)
       return verifiedData
@@ -43,10 +47,14 @@ export function useNounishAuctionQuery({
       return cached
     }
     // no need to update when cache changed!
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.nouns?.nounsActiveMarket])
+
+  const hasActiveAuction = !!activeAuction
 
   return {
     activeAuction,
+    hasActiveAuction,
     error,
   }
 }
