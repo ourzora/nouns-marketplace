@@ -18,7 +18,7 @@ import { StrictMode, useEffect } from 'react'
 import React from 'react'
 
 import '@fontsource/inter/500.css'
-import { ContractProvider, PrivateAskContractProvider } from '@market'
+import { ContractProvider, V3AskContractProvider } from '@market'
 import { ModalContextProvider } from '@modal'
 import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
@@ -87,7 +87,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <ModalContextProvider>
                     <ToastContextProvider>
                       <ContractProvider>
-                        <PrivateAskContractProvider>
+                        <V3AskContractProvider>
                           <Header />
                           <NextNProgress
                             color="rgba(0,0,0,.5)"
@@ -99,7 +99,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                           />
                           <Component {...pageProps} />
                           <Footer />
-                        </PrivateAskContractProvider>
+                        </V3AskContractProvider>
                       </ContractProvider>
                     </ToastContextProvider>
                   </ModalContextProvider>

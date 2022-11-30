@@ -31,7 +31,7 @@ export function PriceWithLabel({
       {usdAmount && (
         <Eyebrow color="text2" inline>
           <Label size="xs" className={mediumFont}>
-            ${usdAmount} USD
+            {usdAmount} USD
           </Label>
         </Eyebrow>
       )}

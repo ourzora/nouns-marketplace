@@ -2,7 +2,7 @@ import { Button } from 'components/Button'
 
 import React from 'react'
 
-import { HeadingDescription, SuccessCheckmark } from '@market/components/'
+import { ModalTitleAndDescription, SuccessCheckmark } from '@market/components/'
 import { useModal } from '@modal'
 import { Stack } from '@zoralabs/zord'
 
@@ -15,8 +15,8 @@ export function SeaportFillOrderSuccess({ ...props }: CommonSeaportFillOrderProp
     <Stack gap="x8" {...props}>
       <SuccessCheckmark />
 
-      <HeadingDescription
-        heading="Seaport Purchase Completed"
+      <ModalTitleAndDescription
+        title="Seaport Purchase Completed"
         description="Find this NFT in your collection soon."
       />
 
