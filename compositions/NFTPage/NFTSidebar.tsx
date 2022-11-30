@@ -49,7 +49,9 @@ export function NFTSidebarComponent({
   offchainOrders,
   ...props
 }: NFTSidebarProps) {
-  const { primarySalePrice } = usePrimarySalePrice({ collectionAddress })
+  const { primarySalePrice, hasPrimarySalePrice } = usePrimarySalePrice({
+    collectionAddress,
+  })
   const { token } = useToken({ collectionAddress, tokenId })
   const showProvenance = primarySalePrice !== '0'
   console.log('PRIMARY', primarySalePrice)
@@ -90,7 +92,7 @@ export function NFTSidebarComponent({
         description={token.description}
       />
       <Stack gap="x4" mt="auto">
-        {showProvenance && (
+        {hasPrimarySalePrice && (
           <NFTProvenance primarySalePrice={primarySalePrice} token={token} />
         )}
         <NFTMarket
@@ -98,7 +100,6 @@ export function NFTSidebarComponent({
           offchainOrders={offchainOrders}
           tokenId={tokenId}
           token={token}
-          nftObj={nft}
         />
       </Stack>
     </Stack>

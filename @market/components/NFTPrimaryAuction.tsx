@@ -1,16 +1,16 @@
-import { NFTOffchainOrders } from 'compositions'
-import { OffchainOrderWithToken } from 'types/zora.api.generated'
-
 import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
-import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
-import { useIsOwner } from '@shared/hooks/useIsOwner'
+import { isAddressMatch, useAuth } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Box, FlexProps } from '@zoralabs/zord'
 
-import { NFTPrimaryAuctionActive } from './NFTPrimaryAuctionActive'
+import {
+  NFTPrimaryAuctionActive,
+  NFTPrimaryAuctionEndedSettlement,
+  NFTPrimaryAuctionEndedSummary,
+} from './'
 
 export interface NFTPrimaryAuctionProps extends FlexProps {
   nftObj: NFTObject
@@ -22,26 +22,44 @@ export function NFTPrimaryAuction({
   primaryAuction,
   ...props
 }: NFTPrimaryAuctionProps) {
-  // const { markets } = nftObj
-  // const { ask } = useRelevantMarket(markets)
-  // const { isOwner } = useIsOwner(nftObj)
-  const { hasWinner, winnerAddress, highestBidPrice, isEnded } = useNounishAuctionHelper({
+  const { address: userAddress } = useAuth()
+  const { hasWinner, winnerAddress, isEnded } = useNounishAuctionHelper({
     auction: primaryAuction,
   })
-  // const { hasRelevantAsk, isPrivateAsk } = useAskHelper({ ask })
+  const isClaimable = useMemo(
+    // User is winner, can claim NFT
+    () => isEnded && hasWinner && isAddressMatch(userAddress, winnerAddress),
+    [isEnded, hasWinner, userAddress, winnerAddress]
+  )
 
   console.log('PRIMARY', primaryAuction)
 
   if (!primaryAuction) return null
 
-  if (isEnded) {
-    return <Box>AUCTION HAS ENDED, REPLACE ME</Box>
-    //   // 1. claim: if you're the bidder
-    //   // 2. otherwise: show the active auction amount before it's claimed
+  //if (isEnded) {     // Anyone can settle auction
+  if (isClaimable) {
+    // User is winner, can claim NFT
+
+    return (
+      <NFTPrimaryAuctionEndedSettlement
+        nftObj={nftObj}
+        primaryAuction={primaryAuction}
+        {...props}
+      />
+    )
   }
 
-  return <NFTPrimaryAuctionActive nftObj={nftObj} primaryAuction={primaryAuction} />
+  if (isEnded) {
+    return (
+      <NFTPrimaryAuctionEndedSummary
+        nftObj={nftObj}
+        primaryAuction={primaryAuction}
+        {...props}
+      />
+    )
+  }
 
-  // return <Box>I AM AN UNENDED PRIMARY AUCTION</Box> // show sidebar panel with: active price / countdown + Place Bid button
-  // return <Box>I AM AN UNENDED PRIMARY AUCTION</Box> // show sidebar panel with: active price / countdown + Place Bid button
+  return (
+    <NFTPrimaryAuctionActive nftObj={nftObj} primaryAuction={primaryAuction} {...props} />
+  )
 }

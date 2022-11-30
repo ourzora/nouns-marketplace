@@ -51,5 +51,7 @@ export const usePrimarySalePrice = ({ collectionAddress }: Props) => {
     [bidEvents, isSettled]
   )
 
-  return { primarySalePrice }
+  const hasPrimarySalePrice = primarySalePrice !== '0'
+
+  return { primarySalePrice, hasPrimarySalePrice }
 }

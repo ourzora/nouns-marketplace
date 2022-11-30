@@ -6,7 +6,7 @@ import { TypeSafeToken } from 'validators/token'
 import { NFTPrimaryAuction } from '@market'
 import { NFTAsks } from '@market/components/NFTAsks'
 import {
-  NounishAuction, // useActiveOGNounishAuction,
+  //NounishAuction, // useActiveOGNounishAuction,
   useNounishAuctionQuery,
   useOneNounsDao,
 } from '@noun-auction'

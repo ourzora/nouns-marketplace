@@ -20,26 +20,18 @@ export function PriceWithLabel({
   invertColor,
 }: PriceWithLabelProps) {
   return (
-    <Stack gap="x1">
+    <Stack>
       {label && (
         <Eyebrow inline className={mediumFont} color={invertColor ? 'text2' : 'text3'}>
           {label}
         </Eyebrow>
       )}
-
       <Heading as="h2" size="sm" inline color={invertColor ? 'onAccent' : 'text1'}>
         {cryptoAmount} {symbol}
       </Heading>
       {usdAmount && (
-        <Eyebrow
-          // color="text2"
-          inline
-          className={mediumFont}
-          color={invertColor ? 'text2' : 'text2'}
-        >
-          {/* <Label size="xs" className={mediumFont}> */}
+        <Eyebrow color="text2" inline className={mediumFont}>
           {usdAmount} USD
-          {/* </Label> */}
         </Eyebrow>
       )}
     </Stack>
