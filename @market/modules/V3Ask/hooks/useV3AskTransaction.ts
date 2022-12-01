@@ -86,8 +86,8 @@ export const useV3AskTransaction = ({
       const priceAsBigNumber = parseUnits(price?.toString() || '0', 'ether') // Convert from human-readable number to WEI
 
       const createParams: [string, string, BigNumber] = [
-        nft?.contract.address,
-        nft?.tokenId,
+        nft.contract.address,
+        nft.tokenId,
         priceAsBigNumber,
       ]
 
@@ -99,21 +99,20 @@ export const useV3AskTransaction = ({
         case CREATE_V3_ASK:
           promise = isPrivate
             ? PrivateAsks.createAsk(...createParams, buyerAddress!)
-            : V3Asks.createAsk(nft?.contract.address, nft?.tokenId, priceAsBigNumber)
+            : V3Asks.createAsk(nft.contract.address, nft.tokenId, priceAsBigNumber)
           break
         case UPDATE_V3_ASK:
-          // case UPDATE_PRIVATE_ASK:
           promise = ActiveAskModule.setAskPrice(
-            nft?.contract.address,
-            nft?.tokenId,
+            nft.contract.address,
+            nft.tokenId,
             priceAsBigNumber
           )
           break
         case CANCEL_V3_ASK:
-          promise = ActiveAskModule.cancelAsk(nft?.contract.address, nft?.tokenId)
+          promise = ActiveAskModule.cancelAsk(nft.contract.address, nft.tokenId)
           break
         case FILL_V3_ASK:
-          promise = ActiveAskModule.fillAsk(nft?.contract.address, nft?.tokenId, {
+          promise = ActiveAskModule.fillAsk(nft.contract.address, nft.tokenId, {
             value: priceAsBigNumber, // optional override param actually required :)
           })
           break
@@ -129,8 +128,7 @@ export const useV3AskTransaction = ({
 
       setFinalizedTx(tx)
     } catch (err: any) {
-      console.log('ERR in useTx', err)
-
+      console.error('ERR in useV3AskTransaction', err)
       setTxError(err || new Error("There's been an error, please try again."))
       Sentry.captureException(err)
     } finally {
@@ -140,16 +138,16 @@ export const useV3AskTransaction = ({
 
   async function createAsk({
     price,
-    buyerAddress, // unneeded for V3Asks
-    rawBuyerAddress, // unneeded for V3Asks
+    buyerAddress, // for Private Asks only, unneeded for V3Asks
+    rawBuyerAddress, // for Private Asks only, unneeded for V3Asks
   }: WriteAskTxValues) {
     makeAskTransaction(CREATE_V3_ASK, price, buyerAddress, rawBuyerAddress)
   }
 
   async function updateAsk({
     price,
-    buyerAddress, // unneeded for V3Asks
-    rawBuyerAddress, // unneeded for V3Asks
+    buyerAddress, // for Private Asks only, unneeded for V3Asks
+    rawBuyerAddress, // for Private Asks only, unneeded for V3Asks
   }: WriteAskTxValues) {
     makeAskTransaction(UPDATE_V3_ASK, price, buyerAddress, rawBuyerAddress)
   }

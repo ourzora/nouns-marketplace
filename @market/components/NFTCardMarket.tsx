@@ -25,12 +25,12 @@ export function NFTCardMarketComponent({
   const { ask } = useRelevantMarket(markets)
   const { hasRelevantAsk } = useAskHelper({ ask })
 
-  if (hasRelevantAsk && !isOwner) {
-    return <V3AskModal modalName="V3AskV3" nftObj={nftObj} />
-  }
-
   if (isOwner) {
     return <UniversalListAskFlow nftObj={nftObj} {...props} />
+  }
+
+  if (hasRelevantAsk) {
+    return <V3AskModal modalName="V3AskV3" nftObj={nftObj} />
   }
 
   return <NFTOwner size="md" align="left" address={nftObj.nft?.owner?.address} />
