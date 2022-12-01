@@ -4,12 +4,12 @@ import React from 'react'
 
 import { HeadingDescription, SuccessCheckmark } from '@market/components/'
 import { useModal } from '@modal'
-import { Stack } from '@zoralabs/zord'
+import { Stack } from '@zord'
 
-import { CommonSeaportFillOrderProps } from './SeaportFillOrderFlow'
+import { CommonSeaportFillOrderProps } from '../common'
 
 export function SeaportFillOrderSuccess({ ...props }: CommonSeaportFillOrderProps) {
-  const { requestClose, modalType } = useModal()
+  const { requestClose } = useModal()
 
   return (
     <Stack gap="x8" {...props}>

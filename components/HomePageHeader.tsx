@@ -1,7 +1,7 @@
 import * as styles from 'styles/styles.css'
 
 import { Maybe } from '@zoralabs/nft-hooks/dist/backends/zora-indexer-v1/zora-indexer-types'
-import { FlexProps, Paragraph, Stack, Text } from '@zoralabs/zord'
+import { FlexProps, Paragraph, Stack, Text } from '@zord'
 
 export interface HomePageHeaderProps extends FlexProps {
   headline: Maybe<string> | undefined

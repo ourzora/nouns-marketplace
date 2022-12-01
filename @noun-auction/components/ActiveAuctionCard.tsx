@@ -19,7 +19,7 @@ import {
   activeAuctionCardData,
   auctionWrapperVariants,
 } from '@noun-auction/styles/NounishStyles.css'
-import { Box, Flex, Grid, Heading, Separator, Stack } from '@zoralabs/zord'
+import { Box, Flex, Grid, Heading, Separator, Stack } from '@zord'
 
 import { AuctionCountdown } from './ActiveAuction'
 import { PlaceNounsBid, SettleAuction } from './AuctionUi'

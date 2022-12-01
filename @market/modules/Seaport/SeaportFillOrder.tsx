@@ -1,18 +1,17 @@
 import { Button } from 'components/Button'
-import { OpenSeaIcon } from 'components/Icon'
 import { mediumFont } from 'styles/styles.css'
 
 import React, { Dispatch, SetStateAction, useEffect, useMemo } from 'react'
 
+import { useValidateSeaportContractCall } from '@market'
 import { MarketModalHeading } from '@market/components'
 import { useOffchainOrderAttribution } from '@market/hooks'
-import { useValidateSeaportContractCall } from '@market/modules/Seaport/hooks/useValidateSeaportContractCall'
 import { useModal } from '@modal'
 import { formatContractError, useAuth } from '@shared'
 import { PrintError } from '@shared/components/PrintError'
-import { Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
+import { Flex, Heading, Paragraph, Separator, Stack } from '@zord'
 
-import { CommonSeaportFillOrderProps } from './SeaportFillOrderFlow'
+import { CommonSeaportFillOrderProps } from '../common'
 import { useSeaportTransaction } from './hooks/useSeaportTransaction'
 import { SeaportContractCall } from './types/SeaportContractCall'
 

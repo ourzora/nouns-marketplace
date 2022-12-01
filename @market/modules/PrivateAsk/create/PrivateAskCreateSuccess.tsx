@@ -6,10 +6,10 @@ import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 import { useCopyToClipboard } from '@shared'
 import { useToast } from '@toast'
 import { ToastStatus, ToastVariant } from '@toast/toastReducer'
-import { Stack } from '@zoralabs/zord'
+import { Stack } from '@zord'
 
 import { HeadingDescription } from '../../../components/HeadingDescription'
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { CommonPrivateAskComponentProps } from '../../common'
 
 interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
 

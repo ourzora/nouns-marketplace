@@ -15,9 +15,9 @@ import {
   UPDATE_SUCCESS,
   VIEW_LISTING,
   usePrivateAskStateContext,
-} from '@market/modules/PrivateAsk/providers/PrivateAskStateProvider'
+} from '@market/modules/PrivateAsk'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Stack, StackProps } from '@zoralabs/zord'
+import { Stack } from '@zord'
 
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
 import { PrivateAskApproveTransferHelper } from './PrivateAskApproveTransferHelper'
@@ -50,11 +50,6 @@ const componentMap = {
 
 interface PrivateAskModalProps {
   nft: NFTObject
-}
-
-export interface CommonPrivateAskComponentProps extends StackProps {
-  nft: NFTObject
-  onNext?: () => void
 }
 
 export function PrivateAskFlow({ nft }: PrivateAskModalProps) {

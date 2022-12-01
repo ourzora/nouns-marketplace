@@ -3,7 +3,7 @@ import { Button } from 'components/Button'
 import { Dispatch, MouseEvent, SetStateAction, useCallback } from 'react'
 
 import { lightFont } from '@shared'
-import { Box, Flex, FlexProps } from '@zoralabs/zord'
+import { Box, Flex, FlexProps } from '@zord'
 
 import { horizontalMenuButton, horizontalMenuWrapper } from './HorizontalMenu.css'
 

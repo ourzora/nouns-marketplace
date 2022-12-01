@@ -6,7 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { formatUnits, parseUnits } from '@ethersproject/units'
 import { usePrevious } from '@reach/utils'
-import { Input } from '@zoralabs/zord'
+import { Input } from '@zord'
 
 export interface BigNumberFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string

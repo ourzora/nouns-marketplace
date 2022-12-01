@@ -2,7 +2,7 @@ import { mediumFont } from 'styles/styles.css'
 
 import React from 'react'
 
-import { Eyebrow, Heading, Label, Stack } from '@zoralabs/zord'
+import { Eyebrow, Heading, Label, Stack } from '@zord'
 
 export interface PriceWithLabelProps {
   cryptoAmount: string

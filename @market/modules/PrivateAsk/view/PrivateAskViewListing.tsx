@@ -7,9 +7,9 @@ import { DataTable } from '@shared/components/DataTable'
 import { useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
 import { useToast } from '@toast'
 import { ToastStatus, ToastVariant } from '@toast/toastReducer'
-import { Heading, Stack } from '@zoralabs/zord'
+import { Heading, Stack } from '@zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { CommonPrivateAskComponentProps } from '../../common'
 import { useFormattedPrivateAskInfo } from '../hooks'
 
 interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}

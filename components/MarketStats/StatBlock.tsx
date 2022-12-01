@@ -1,7 +1,7 @@
 import { stat } from 'styles/styles.css'
 
 import { lightFont } from '@shared'
-import { Label, Stack, Text } from '@zoralabs/zord'
+import { Label, Stack, Text } from '@zord'
 
 export function StatBlock({
   statType,

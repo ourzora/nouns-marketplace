@@ -4,7 +4,7 @@ import { avatarSizes } from 'styles/avatarSizes.css'
 import React, { useMemo } from 'react'
 
 import { AddressZero } from '@ethersproject/constants'
-import { Box, BoxProps } from '@zoralabs/zord'
+import { Box, BoxProps } from '@zord'
 
 import { Avatar } from '../Avatar'
 import { ImageBoundaryWithFallback } from '../ImageBoundaryWithFallback'

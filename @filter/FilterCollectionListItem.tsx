@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { isAddressMatch, shortenAddress } from '@shared'
 import { numberFormatter } from '@shared'
 import { Zorb } from '@zora-brand'
-import { Box, Flex, Stack, Text, mixins } from '@zoralabs/zord'
+import { Box, Flex, Stack, Text, mixins } from '@zord'
 
 import {
   collectionBlock,

@@ -13,7 +13,7 @@ import {
   Paragraph,
   Stack,
   Text,
-} from '@zoralabs/zord'
+} from '@zord'
 
 export const MotionButton = motion(Button)
 export const MotionBox = motion(Box)

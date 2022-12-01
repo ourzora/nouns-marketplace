@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, media } from '@zoralabs/zord'
+import { atoms, media } from '@zord'
 
 export const zoraBrand = style({
   fontWeight: 500,

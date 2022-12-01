@@ -2,7 +2,7 @@ import React, { useCallback, useLayoutEffect, useRef, useState } from 'react'
 
 import { isAddressMatch } from '@shared'
 import { Currency } from '@shared'
-import { Box, BoxComponentProps, Select, Text } from '@zoralabs/zord'
+import { Box, BoxComponentProps, Select, Text } from '@zord'
 
 import * as styles from './CollectionsFilter.css'
 

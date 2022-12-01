@@ -12,7 +12,7 @@ import {
 } from '@market/components'
 import { useERC721TokenApproval, useZoraV3ModuleApproval } from '@market/hooks'
 import { ASKS_V11_ADDRESS, ERC721_TRANSFER_HELPER_ADDRESS } from '@shared'
-import { Paragraph, Stack } from '@zoralabs/zord'
+import { Paragraph, Stack } from '@zord'
 
 type ListNFTStep =
   | 'CheckApprovals'

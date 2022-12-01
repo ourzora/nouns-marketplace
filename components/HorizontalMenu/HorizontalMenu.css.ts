@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, color, media, typography } from '@zoralabs/zord'
+import { atoms, color, media, typography } from '@zord'
 
 export const horizontalMenuButton = style([
   {

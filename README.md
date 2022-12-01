@@ -87,7 +87,7 @@ Direct message [@ZORAEngineering](https://twitter.com/ZORAEngineering) on Twitte
 - ["@zoralabs/zdk"](https://github.com/ourzora/zdk)
 - ["@zoralabs/v3"](https://github.com/ourzora/v3)
 - ["@zoralabs/core"](https://github.com/ourzora/core)
-- ["@zoralabs/zord"](https://www.npmjs.com/package/@zoralabs/zord)
+- ["@zord"](https://www.npmjs.com/package/@zord)
 
 #### **_A note on Zord!_**
 

@@ -4,9 +4,9 @@ import React from 'react'
 
 import { HeadingDescription, SuccessCheckmark } from '@market/components'
 import { useModal } from '@modal'
-import { Stack } from '@zoralabs/zord'
+import { Stack } from '@zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { CommonPrivateAskComponentProps } from '../../common'
 
 interface PrivateAskFillAskSuccessProps extends CommonPrivateAskComponentProps {}
 

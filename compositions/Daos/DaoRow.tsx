@@ -9,7 +9,7 @@ import { TypeSafeDao } from 'validators/dao'
 
 import { EthAmount, RPCTokenInfo, lightFont, useNounishAuctionQuery } from '@noun-auction'
 import { numberFormatter, useWindowWidth } from '@shared'
-import { Box, Flex, Label } from '@zoralabs/zord'
+import { Box, Flex, Label } from '@zord'
 
 import {
   cardHeader,

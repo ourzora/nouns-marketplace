@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { CollectionLink, numberFormatter, roundTwoDecimals } from '@shared'
-import { Flex, Grid, Label, Stack, StackProps } from '@zoralabs/zord'
+import { Flex, Grid, Label, Stack, StackProps } from '@zord'
 
 import {
   rankingRow,

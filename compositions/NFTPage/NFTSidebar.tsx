@@ -7,7 +7,7 @@ import { useToken } from 'hooks/useToken'
 
 import { CollectionThumbnail } from '@media'
 import { DescriptionWithMaxLines } from '@shared/components'
-import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
+import { Flex, Heading, Stack, StackProps } from '@zord'
 
 import { NFTMarket } from './NFTMarket'
 import { NFTOffchainOrders } from './NFTOffchainOrders'

@@ -11,9 +11,9 @@ import { PrintError } from '@shared/components/PrintError'
 import { formatContractError } from '@shared/utils'
 import { reverseLookupAddress } from '@shared/utils/reverseLookupAddress'
 import { validateCurrency } from '@shared/utils/validateCurrency'
-import { Heading, InputField, Stack } from '@zoralabs/zord'
+import { Heading, InputField, Stack } from '@zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { CommonPrivateAskComponentProps } from '../../common'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 
 interface PrivateAskUpdateProps extends CommonPrivateAskComponentProps {}

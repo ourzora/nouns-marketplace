@@ -10,10 +10,10 @@ import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { useModal } from '@modal'
 import { formatContractError } from '@shared'
 import { PrintError } from '@shared/components/PrintError'
-import { Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
+import { Flex, Heading, Paragraph, Separator, Stack } from '@zord'
 
+import { CommonPrivateAskComponentProps } from '../../common'
 import { LearnMoreButton } from '../LearnMoreButton'
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import * as styles from '../PrivateAskFlow.css'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 

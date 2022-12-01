@@ -3,7 +3,7 @@ import { mediumFont } from 'styles/styles.css'
 
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from '@modal/Modal.css'
-import { Heading, Paragraph, Stack } from '@zoralabs/zord'
+import { Heading, Paragraph, Stack } from '@zord'
 
 export function DAODescriptionModal() {
   const { requestClose } = useModal()

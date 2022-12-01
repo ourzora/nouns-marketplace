@@ -6,7 +6,7 @@ import { TypeSafeToken } from 'validators/token'
 import { NFTAsks } from '@market/components/NFTAsks'
 import { NounishAuction, useActiveOGNounishAuction, useOneNounsDao } from '@noun-auction'
 import { useNFT } from '@zoralabs/nft-hooks'
-import { BoxProps } from '@zoralabs/zord'
+import { BoxProps } from '@zord'
 
 import { nftMarketWrapper } from './NFTPage.css'
 

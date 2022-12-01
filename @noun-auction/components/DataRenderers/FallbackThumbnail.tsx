@@ -2,7 +2,7 @@ import { ImageElement } from 'components'
 
 import { useNounsToken } from '@noun-auction/hooks/useNounsToken'
 import { nounishThumbnailImage } from '@noun-auction/styles/NounishStyles.css'
-import { BoxProps } from '@zoralabs/zord'
+import { BoxProps } from '@zord'
 
 export interface FallbackThumbnailProps extends BoxProps {
   tokenId: string

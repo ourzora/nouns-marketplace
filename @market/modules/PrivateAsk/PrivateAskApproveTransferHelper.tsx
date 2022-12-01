@@ -3,11 +3,11 @@ import React, { useEffect } from 'react'
 import { HeadingDescription, TransactionSubmitButton } from '@market/components'
 import { PrintError } from '@shared/components/PrintError'
 import { Zorb } from '@zora-brand'
-import { Stack } from '@zoralabs/zord'
+import { Stack } from '@zord'
 
+import { CommonPrivateAskComponentProps } from '../common'
 import { LearnMoreButton } from './LearnMoreButton'
 import { PrivateAskCheckApprovalSpinner } from './PrivateAskCheckApprovalSpinner'
-import { CommonPrivateAskComponentProps } from './PrivateAskFlow'
 import { usePrivateAskTransferHelperApproval } from './hooks/usePrivateAskTransferHelperApproval'
 
 interface PrivateAskApproveTransferHelperProps extends CommonPrivateAskComponentProps {}

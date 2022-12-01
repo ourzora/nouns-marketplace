@@ -1,7 +1,7 @@
 import { Button } from 'components/Button'
 
 import * as styles from '@noun-auction/styles/NounishStyles.css'
-import { BoxProps, Stack } from '@zoralabs/zord'
+import { BoxProps, Stack } from '@zord'
 
 type SettleAuctionComponentProps = {
   layout: keyof typeof styles.auctionWrapperVariants['layout']

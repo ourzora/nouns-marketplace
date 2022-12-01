@@ -1,5 +1,5 @@
 import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
-import { Button, Flex, Text } from '@zoralabs/zord'
+import { Button, Flex, Text } from '@zord'
 
 import { ActiveFilterCounter } from './ActiveFilterCounter'
 import {

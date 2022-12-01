@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useCollectionFilters } from '@filter'
 import { useOneNounsDao } from '@noun-auction'
-import { Stack } from '@zoralabs/zord'
+import { Stack } from '@zord'
 
 import { CollectionGrid } from './CollectionGrid'
 import * as styles from './Collections.css'

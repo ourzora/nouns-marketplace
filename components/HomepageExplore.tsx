@@ -1,4 +1,4 @@
-import { Flex, Label } from '@zoralabs/zord'
+import { Flex, Label } from '@zord'
 
 import { Link } from './Link'
 

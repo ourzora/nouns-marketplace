@@ -10,7 +10,7 @@ import {
   MARKET_INFO_STATUSES,
   NFTObject,
 } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { Box, Flex, FlexProps, Heading, Label, Stack } from '@zoralabs/zord'
+import { Box, Flex, FlexProps, Heading, Label, Stack } from '@zord'
 
 export interface FillV3AskModalProps extends FlexProps {
   nftObj: NFTObject

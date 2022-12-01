@@ -4,7 +4,7 @@ import { useCallback, useMemo } from 'react'
 
 import { Modal, ModalContent, useModal } from '@modal'
 import { useButtonRequiresAuth } from '@shared'
-import { Box, BoxProps } from '@zoralabs/zord'
+import { Box, BoxProps } from '@zord'
 
 import { customBackground, customContent } from './Modal.css'
 

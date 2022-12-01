@@ -3,7 +3,7 @@ import { RawDisplayer } from 'components/utils'
 import { useMemo } from 'react'
 
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Accordion, Stack } from '@zoralabs/zord'
+import { Accordion, Stack } from '@zord'
 
 import { FilterCollectionListItem } from './FilterCollectionListItem'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'

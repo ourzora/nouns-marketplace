@@ -1,5 +1,5 @@
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { Box, Flex, Grid, Stack, StackProps } from '@zoralabs/zord'
+import { Box, Flex, Grid, Stack, StackProps } from '@zord'
 
 import {
   filterOpen,

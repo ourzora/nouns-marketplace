@@ -5,7 +5,7 @@ import { TypeSafeDao } from 'validators/dao'
 
 import { lightFont } from '@noun-auction'
 import { useWindowWidth } from '@shared'
-import { Box, Flex, Heading, Label, Stack, StackProps } from '@zoralabs/zord'
+import { Box, Flex, Heading, Label, Stack, StackProps } from '@zord'
 
 import { DaoRow } from './DaoRow'
 import {

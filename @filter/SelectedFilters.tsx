@@ -12,7 +12,7 @@ import {
   SelectOption,
   Status,
 } from '@filter/typings'
-import { Flex } from '@zoralabs/zord'
+import { Flex } from '@zord'
 
 import { textButton, textSmall } from './CollectionsFilter.css'
 import { FilterOptionButton } from './FilterOptionButton'

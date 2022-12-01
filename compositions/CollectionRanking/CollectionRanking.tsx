@@ -3,7 +3,7 @@ import { CollectionParsed } from 'pages'
 
 import { useMemo } from 'react'
 
-import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
+import { Flex, Heading, Stack, StackProps } from '@zord'
 
 import { rankingWrapper } from './CollectionRanking.css'
 import { RankingRow } from './RankingRow'

@@ -12,7 +12,7 @@ import { TypeSafeDao } from 'validators/dao'
 import * as Sentry from '@sentry/react'
 import { zoraApiFetcher } from '@shared'
 import { CollectionsQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Grid } from '@zoralabs/zord'
+import { Grid } from '@zord'
 
 export type CollectionParsed = CollectionsQuery['collections']['nodes']
 

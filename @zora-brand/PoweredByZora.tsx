@@ -1,4 +1,4 @@
-import { Flex, FlexProps, Label } from '@zoralabs/zord'
+import { Flex, FlexProps, Label } from '@zord'
 
 import { poweredByContainer, zoraBrand } from './ZoraBrand.css'
 import { Zorb } from './Zorb'

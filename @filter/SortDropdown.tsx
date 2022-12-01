@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { useClickOutside, useKeyPress } from '@shared/hooks'
-import { Button, Icon, PopUp, Stack, Text } from '@zoralabs/zord'
+import { Button, Icon, PopUp, Stack, Text } from '@zord'
 
 import { activityButton } from './CollectionsFilter.css'
 import { useCollectionFilters } from './providers'

@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { color } from '@zoralabs/zord'
+import { color } from '@zord'
 
 export const arrowButton = style({
   // @TODO BJ: remove !important when zord has been vendored in

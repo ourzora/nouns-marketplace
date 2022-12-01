@@ -18,7 +18,7 @@ import { CollectionFilterProvider } from '@filter'
 import { useCollection } from '@filter/hooks/useCollection'
 import { ActiveAuctionCard, useOneNounsDao } from '@noun-auction'
 import { useWindowWidth } from '@shared'
-import { Grid, Separator, Stack } from '@zoralabs/zord'
+import { Grid, Separator, Stack } from '@zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { contractAddress: collectionAddress, seo } = fallback

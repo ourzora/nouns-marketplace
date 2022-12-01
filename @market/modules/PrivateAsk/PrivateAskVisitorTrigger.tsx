@@ -6,7 +6,7 @@ import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { VIEW_LISTING, usePrivateAskStateContext } from '@market/modules/PrivateAsk/'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Well } from '@zoralabs/zord'
+import { Well } from '@zord'
 
 interface PrivateAskVisitorTriggerProps {
   nft: NFTObject

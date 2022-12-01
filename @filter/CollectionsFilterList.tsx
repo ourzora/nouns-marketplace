@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { SearchableEntity } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Accordion, InputField, Stack } from '@zoralabs/zord'
+import { Accordion, InputField, Stack } from '@zord'
 
 import { FilterCollectionListItem } from './FilterCollectionListItem'
 import { useSearchQuery } from './hooks/useSearchQuery'

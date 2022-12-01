@@ -10,7 +10,7 @@ import {
 import { useContractContext } from '@market/providers'
 import * as Sentry from '@sentry/react'
 import { PrintError, isAddressMatch, useAuth, useContractTransaction } from '@shared'
-import { Box, Grid, Separator } from '@zoralabs/zord'
+import { Box, Grid, Separator } from '@zord'
 
 export type FillV3AskWizardProps = {
   tokenId: string

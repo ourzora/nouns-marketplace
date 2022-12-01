@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { auctionWrapperVariants } from '@noun-auction'
 import { SharedDataRendererProps } from '@noun-auction'
 import { lightFont, roundFourDecimals } from '@shared'
-import { Flex, Label } from '@zoralabs/zord'
+import { Flex, Label } from '@zord'
 
 export function WalletBalance({
   label = 'Your balance',

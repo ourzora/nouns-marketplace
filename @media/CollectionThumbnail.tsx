@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 import { TypeSafeToken } from 'validators/token'
 
 import { useFirstTokenID } from '@shared/hooks'
-import { Box, BoxProps, Flex, Label } from '@zoralabs/zord'
+import { Box, BoxProps, Flex, Label } from '@zord'
 
 import { nftThumbnail } from './NftMedia.css'
 

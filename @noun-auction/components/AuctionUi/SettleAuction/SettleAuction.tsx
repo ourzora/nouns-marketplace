@@ -1,15 +1,8 @@
-import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
-import { StackProps } from '@zoralabs/zord'
+import { SettleAuctionProps } from '@noun-auction/components/common'
 
 import { isOGNounAddress } from '../NounsBidForm'
 import { SettleAuctionBuiler } from './SettleAuctionBuilder'
 import { SettleAuctionOGNouns } from './SettleAuctionOGNouns'
-
-export interface SettleAuctionProps extends StackProps {
-  useErrorMsg?: boolean
-  auctionContractAddress: string
-  layout: keyof typeof auctionWrapperVariants['layout']
-}
 
 export function SettleAuction({ auctionContractAddress, ...rest }: SettleAuctionProps) {
   if (isOGNounAddress(auctionContractAddress)) {

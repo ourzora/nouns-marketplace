@@ -8,7 +8,7 @@ import { useMemo } from 'react'
 import { AddressWithLink } from '@market'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Flex, Grid, GridProps, Paragraph, Stack } from '@zoralabs/zord'
+import { Flex, Grid, GridProps, Paragraph, Stack } from '@zord'
 
 export interface CollectionHeaderProps extends GridProps {
   collection: Collection

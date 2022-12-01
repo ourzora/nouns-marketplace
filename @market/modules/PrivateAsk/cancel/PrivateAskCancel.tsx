@@ -8,9 +8,9 @@ import { useListingDataTable } from '@market/hooks'
 import { useModal } from '@modal/useModal'
 import { DataTable, PrintError, formatContractError } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Flex, Stack } from '@zoralabs/zord'
+import { Flex, Stack } from '@zord'
 
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { CommonPrivateAskComponentProps } from '../../common'
 import * as styles from '../PrivateAskFlow.css'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 

@@ -5,7 +5,7 @@ import { useAggregate } from 'hooks'
 
 import { useMemo } from 'react'
 
-import { Box, Flex, FlexProps } from '@zoralabs/zord'
+import { Box, Flex, FlexProps } from '@zord'
 
 import { CollectionStats } from './CollectionStats'
 import { DaoStats } from './DaoStats'

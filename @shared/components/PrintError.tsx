@@ -1,4 +1,4 @@
-import { Box, BoxProps } from '@zoralabs/zord'
+import { Box, BoxProps } from '@zord'
 
 import { errorBox } from '../SharedStyles.css'
 

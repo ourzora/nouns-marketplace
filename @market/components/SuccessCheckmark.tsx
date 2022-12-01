@@ -1,4 +1,4 @@
-import { Icon, IconProps } from '@zoralabs/zord'
+import { Icon, IconProps } from '@zord'
 
 export function SuccessCheckmark({ ...props }: IconProps) {
   return (

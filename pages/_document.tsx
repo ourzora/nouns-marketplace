@@ -1,6 +1,6 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document'
 
-import { ThemeProvider, lightTheme } from '@zoralabs/zord'
+import { ThemeProvider, lightTheme } from '@zord'
 
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID
 

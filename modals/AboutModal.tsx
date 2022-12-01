@@ -5,7 +5,7 @@ import { mediumFont } from 'styles/styles.css'
 
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from '@modal/Modal.css'
-import { Heading, Label, Paragraph, Stack } from '@zoralabs/zord'
+import { Heading, Label, Paragraph, Stack } from '@zord'
 
 export function AboutModal() {
   const { requestClose } = useModal()

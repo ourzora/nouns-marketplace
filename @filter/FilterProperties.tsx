@@ -1,5 +1,5 @@
 import { useCollectionFilters } from '@filter/providers'
-import { Accordion, Box, Label, Stack } from '@zoralabs/zord'
+import { Accordion, Box, Label, Stack } from '@zord'
 
 import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { FilterPropertySelect } from './FilterPropertySelect'

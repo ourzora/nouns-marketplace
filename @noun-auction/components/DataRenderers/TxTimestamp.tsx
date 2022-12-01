@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 
 import * as Sentry from '@sentry/react'
 import { lightFont } from '@shared'
-import { Flex, FlexProps, Icon, Label, Stack } from '@zoralabs/zord'
+import { Flex, FlexProps, Icon, Label, Stack } from '@zord'
 
 export interface TxTimestampProps extends FlexProps {
   transactionInfo: {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Stack, StackProps } from '@zoralabs/zord'
+import { Stack, StackProps } from '@zord'
 
 import * as styles from './Toast.css'
 

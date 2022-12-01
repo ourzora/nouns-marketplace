@@ -1,5 +1,5 @@
 import { PoweredByZora } from '@zora-brand'
-import { Flex, Label } from '@zoralabs/zord'
+import { Flex, Label } from '@zord'
 
 import * as styles from './Footer.css'
 

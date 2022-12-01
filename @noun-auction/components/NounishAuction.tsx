@@ -12,7 +12,7 @@ import {
   wrapperHover,
 } from '@noun-auction/styles/NounishStyles.css'
 import { useInterval } from '@shared'
-import { Box, BoxProps, Grid, Separator } from '@zoralabs/zord'
+import { Box, BoxProps, Grid, Separator } from '@zord'
 
 import { ActiveAuctionRow } from './ActiveAuction/ActiveAuctionRow'
 

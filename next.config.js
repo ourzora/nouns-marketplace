@@ -2,6 +2,8 @@ const { createVanillaExtractPlugin } = require('@vanilla-extract/next-plugin')
 const withVanillaExtract = createVanillaExtractPlugin()
 const { withSentryConfig } = require('@sentry/nextjs')
 const SentryWebpackPlugin = require('@sentry/webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin')
 
 const { NEXT_PUBLIC_SENTRY_DSN, SENTRY_ORG, SENTRY_PROJECT } = process.env
 
@@ -12,7 +14,8 @@ const nextConfig = {
     hideSourceMaps: true,
     disableServerWebpackPlugin: true,
   },
-  // experimental: {  // @BJ: disabled due to out-of-mem errors
+  // @BJ: disabled due to out-of-mem errors
+  // experimental: {
   //   esmExternals: false,
   // },
 
@@ -24,9 +27,10 @@ const nextConfig = {
     ],
   },
 
-  webpack: (config, options) => {
+  webpack: (config) => {
     config.module.rules.push({
-      test: /\.(ts)?$/,
+      test: /\.(ts|tsx)?$/,
+      exclude: ['/node_modules/'],
       use: [
         {
           loader: 'ts-loader',
@@ -57,6 +61,19 @@ const nextConfig = {
         })
       )
     }
+
+    config.plugins.push(
+      new ForkTsCheckerWebpackPlugin({
+        typescript: {
+          diagnosticOptions: {
+            semantic: true,
+            syntactic: true,
+          },
+        },
+      }),
+      new VanillaExtractPlugin()
+    )
+
     return config
   },
 }
@@ -65,6 +82,7 @@ const sentryWebpackPluginOptions = {
   silent: false,
 }
 
-module.exports = withVanillaExtract(
-  withSentryConfig(nextConfig, sentryWebpackPluginOptions)
+module.exports = withSentryConfig(
+  withVanillaExtract(nextConfig),
+  sentryWebpackPluginOptions
 )

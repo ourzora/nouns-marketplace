@@ -1,6 +1,6 @@
 import { Fragment, ReactNode } from 'react'
 
-import { Checkbox, Flex, Icon, Text } from '@zoralabs/zord'
+import { Checkbox, Flex, Icon, Text } from '@zord'
 
 import { avatarPadding, filterOption } from './CollectionsFilter.css'
 

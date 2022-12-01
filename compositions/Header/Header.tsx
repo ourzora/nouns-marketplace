@@ -1,6 +1,6 @@
 import * as styles from 'styles/styles.css'
 
-import { Flex, Grid } from '@zoralabs/zord'
+import { Flex, Grid } from '@zord'
 
 import { CollectionMenu } from '../CollectionMenu'
 import { ConnectButton } from './ConnectButton'

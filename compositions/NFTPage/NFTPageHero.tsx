@@ -5,7 +5,7 @@ import { useToken } from 'hooks/useToken'
 import { TypeSafeToken } from 'validators/token'
 
 import { cardImageWrapper } from '@media/NftMedia.css'
-import { Box, BoxProps } from '@zoralabs/zord'
+import { Box, BoxProps } from '@zord'
 
 import { nftPageHero } from './NFTPage.css'
 

@@ -13,10 +13,10 @@ import {
   validateENSAddress,
 } from '@shared'
 import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
-import { Heading, InputField, Stack } from '@zoralabs/zord'
+import { Heading, InputField, Stack } from '@zord'
 
+import { CommonPrivateAskComponentProps } from '../../common'
 import { LearnMoreButton } from '../LearnMoreButton'
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
 import { usePrivateAskTransaction } from '../hooks/usePrivateAskTransaction'
 
 interface PrivateAskCreateProps extends CommonPrivateAskComponentProps {}

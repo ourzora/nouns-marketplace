@@ -1,5 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css'
-import { atoms, color, radii, space, typography } from '@zoralabs/zord'
+import { atoms, color, radii, space, typography } from '@zord'
 
 export const codeWrapper = style([
   atoms({

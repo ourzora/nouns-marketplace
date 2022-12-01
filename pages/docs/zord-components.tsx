@@ -32,7 +32,7 @@ import {
   TextArea,
   Well,
   color,
-} from '@zoralabs/zord'
+} from '@zord'
 
 import ZordMarkup from '../../docs/zordMarkup.md'
 

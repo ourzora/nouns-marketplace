@@ -9,7 +9,7 @@ import { PrivateAskSidebar } from '@market/modules/PrivateAsk/PrivateAskSidebar'
 import { UniversalListAskModal } from '@market/modules/PrivateAsk/UniversalListAskModal'
 import { useIsOwner } from '@shared/hooks/useIsOwner'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { FlexProps } from '@zoralabs/zord'
+import { FlexProps } from '@zord'
 
 export interface NFTAskProps extends FlexProps {
   nftObj: NFTObject

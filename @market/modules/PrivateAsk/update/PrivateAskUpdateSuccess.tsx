@@ -3,10 +3,10 @@ import { Button } from 'components/Button'
 import React from 'react'
 
 import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
-import { Stack } from '@zoralabs/zord'
+import { Stack } from '@zord'
 
 import { HeadingDescription } from '../../../components/HeadingDescription'
-import { CommonPrivateAskComponentProps } from '../PrivateAskFlow'
+import { CommonPrivateAskComponentProps } from '../../common'
 
 interface PrivateAskCreateSuccessProps extends CommonPrivateAskComponentProps {}
 

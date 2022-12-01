@@ -14,7 +14,7 @@ import {
 import { useKeyPress } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { PopUp, Stack, Text, Well } from '@zoralabs/zord'
+import { PopUp, Stack, Text, Well } from '@zord'
 
 import * as styles from './PrivateAskFlow.css'
 

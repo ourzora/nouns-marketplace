@@ -1,5 +1,5 @@
 import { lightFont } from '@shared'
-import { Label, Stack } from '@zoralabs/zord'
+import { Label, Stack } from '@zord'
 
 import { AddressWithLink } from './AddressWithLink'
 

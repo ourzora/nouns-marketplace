@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { Accordion, Box, Flex } from '@zoralabs/zord'
+import { Accordion, Box, Flex } from '@zord'
 
 import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { FilterOptionButton } from './FilterOptionButton'

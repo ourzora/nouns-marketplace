@@ -6,7 +6,7 @@ import { LearnMoreButton } from '@market/modules/PrivateAsk/LearnMoreButton'
 import { PrivateAskFlow } from '@market/modules/PrivateAsk/PrivateAskFlow'
 import { SaleTypeButton } from '@market/modules/PrivateAsk/SaleTypeButton'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Eyebrow, Stack } from '@zoralabs/zord'
+import { Eyebrow, Stack } from '@zord'
 
 import { ListV3AskWizard } from './ListV3AskWizard'
 

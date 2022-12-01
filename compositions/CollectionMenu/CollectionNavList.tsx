@@ -1,7 +1,7 @@
 import React from 'react'
 import { TypeSafeDao } from 'validators/dao'
 
-import { Stack, StackProps } from '@zoralabs/zord'
+import { Stack, StackProps } from '@zord'
 
 import { CollectionLink } from './CollectionLink'
 

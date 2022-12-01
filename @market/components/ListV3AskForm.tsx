@@ -17,7 +17,7 @@ import {
   useAuth,
   useContractTransaction,
 } from '@shared'
-import { Flex, Grid, Label } from '@zoralabs/zord'
+import { Flex, Grid, Label } from '@zord'
 
 export const fixedPriceSchema = Yup.object().shape({
   currency: Yup.object().required(),

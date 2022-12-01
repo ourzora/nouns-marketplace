@@ -3,7 +3,7 @@ import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { UniversalListAskModal } from '@market/modules/PrivateAsk/UniversalListAskModal'
 import { useIsOwner, useNFTProvider } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { FlexProps } from '@zoralabs/zord'
+import { FlexProps } from '@zord'
 
 export interface NFTCardMarketProps extends FlexProps {}
 

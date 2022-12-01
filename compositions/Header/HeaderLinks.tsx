@@ -1,7 +1,7 @@
 import { AboutModal } from 'modals/AboutModal'
 
 import { useWindowWidth } from '@shared'
-import { Box, Flex, Label, PopUp } from '@zoralabs/zord'
+import { Box, Flex, Label, PopUp } from '@zord'
 
 import * as styles from './Header.css'
 

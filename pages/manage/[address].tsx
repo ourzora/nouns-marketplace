@@ -6,7 +6,7 @@ import { ManageNFTsServiceProps, manageNftsService } from 'services'
 
 import { useBlocklist } from '@blocklist/src/blocklist'
 import { CollectionFilterProvider } from '@filter'
-import { Separator } from '@zoralabs/zord'
+import { Separator } from '@zord'
 
 const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
   // FIXME

@@ -1,7 +1,7 @@
 import { HorizontalMenu, HorizontalMenuProps } from 'components'
 
 import { useCollectionFilters } from '@filter'
-import { Stack, color } from '@zoralabs/zord'
+import { Stack, color } from '@zord'
 
 export function CollectionActivityHeader() {
   const {
