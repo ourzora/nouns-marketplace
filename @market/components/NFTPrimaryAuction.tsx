@@ -1,16 +1,10 @@
-import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
-import { isAddressMatch, useAuth } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Box, FlexProps } from '@zoralabs/zord'
+import { FlexProps } from '@zoralabs/zord'
 
-import {
-  NFTPrimaryAuctionActive,
-  NFTPrimaryAuctionEndedSettlement,
-  NFTPrimaryAuctionEndedSummary,
-} from './'
+import { NFTPrimaryAuctionActive, NFTPrimaryAuctionEndedSettlement } from './'
 
 export interface NFTPrimaryAuctionProps extends FlexProps {
   nftObj: NFTObject
@@ -22,21 +16,14 @@ export function NFTPrimaryAuction({
   primaryAuction,
   ...props
 }: NFTPrimaryAuctionProps) {
-  const { address: userAddress } = useAuth()
-  const { hasWinner, winnerAddress, isEnded } = useNounishAuctionHelper({
+  const { isEnded } = useNounishAuctionHelper({
     auction: primaryAuction,
   })
-  const isClaimable = useMemo(
-    // User is winner, can claim NFT
-    () => isEnded && hasWinner && isAddressMatch(userAddress, winnerAddress),
-    [isEnded, hasWinner, userAddress, winnerAddress]
-  )
 
   if (!primaryAuction) return null
 
-  //if (isEnded) {     // Anyone can settle auction
-  if (isClaimable) {
-    // User is winner, can claim NFT
+  if (isEnded) {
+    // Anyone can settle auction
 
     return (
       <NFTPrimaryAuctionEndedSettlement
@@ -47,15 +34,15 @@ export function NFTPrimaryAuction({
     )
   }
 
-  if (isEnded) {
-    return (
-      <NFTPrimaryAuctionEndedSummary
-        nftObj={nftObj}
-        primaryAuction={primaryAuction}
-        {...props}
-      />
-    )
-  }
+  // if (isEnded) { // Won't be shown.
+  //   return (
+  //     <NFTPrimaryAuctionEndedSummary
+  //       nftObj={nftObj}
+  //       primaryAuction={primaryAuction}
+  //       {...props}
+  //     />
+  //   )
+  // }
 
   return (
     <NFTPrimaryAuctionActive nftObj={nftObj} primaryAuction={primaryAuction} {...props} />
