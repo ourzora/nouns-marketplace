@@ -1,11 +1,9 @@
 import { mediumFont } from 'styles/styles.css'
 
-import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { SettleAuction } from '@noun-auction'
-import { isAddressMatch, useAuth } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { FlexProps, Paragraph, Well } from '@zoralabs/zord'
 
@@ -25,17 +23,9 @@ export function NFTPrimaryAuctionEndedSettlement({
   primaryAuction,
   ...props
 }: SettlementProps) {
-  const { isEnded, hasWinner, winnerAddress } = useNounishAuctionHelper({
+  const { isClaimable } = useNounishAuctionHelper({
     auction: primaryAuction,
   })
-
-  const { address: userAddress } = useAuth()
-
-  const isClaimable = useMemo(
-    // User is winner, can claim NFT
-    () => isEnded && hasWinner && isAddressMatch(userAddress, winnerAddress),
-    [isEnded, hasWinner, userAddress, winnerAddress]
-  )
 
   return (
     <Well gap="x4" p="x6" borderRadius="phat" {...props}>

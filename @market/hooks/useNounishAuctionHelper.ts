@@ -1,31 +1,29 @@
 import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
-import { useCountdown } from '@noun-auction'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
-import {
-  formatCryptoVal,
-  isAddressMatch,
-  numberFormatterUSDC,
-  roundTwoDecimals,
-} from '@shared'
+import { formatCryptoVal, isAddressMatch, numberFormatterUSDC } from '@shared'
 import { useAuth } from '@shared/hooks'
-import { FixedPriceLike, MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types'
 
 interface NounishAuctionHelperProps {
   auction: TypeSafeNounsAuction
 }
 
 export const useNounishAuctionHelper = ({ auction }: NounishAuctionHelperProps) => {
+  const { address: userAddress } = useAuth()
+
   const { endTime, highestBidPrice, highestBidder, winner, startTime } = auction
 
   const { isEnded } = useIsAuctionCompleted({
     activeAuction: auction,
   })
 
-  const winnerAddress = useMemo(() => winner ?? winner, [winner])
-  const hasWinner = !!winnerAddress
+  const hasWinner = !!winner
   const hasBid = !!highestBidder
+  const auctionStatus = useMemo(
+    () => (Date.now() - parseInt(endTime) * 1000 > 0 ? 'Settling' : 'Live'),
+    [endTime]
+  )
 
   const formattedCryptoHighestBidPrice = useMemo(
     () =>
@@ -41,14 +39,21 @@ export const useNounishAuctionHelper = ({ auction }: NounishAuctionHelperProps) 
         : '...',
     [highestBidPrice?.usdcPrice?.decimal]
   )
+  const isClaimable = useMemo(
+    // User is winner, can claim NFT
+    () => isEnded && hasWinner && isAddressMatch(userAddress, winner),
+    [isEnded, hasWinner, userAddress, winner]
+  )
 
   return {
     isEnded,
+    isClaimable,
     endTime,
     hasBid,
     highestBidPrice,
     hasWinner,
-    winnerAddress,
+    winnerAddress: winner,
+    auctionStatus,
     highestBidder,
     formattedCryptoHighestBidPrice,
     formattedUSDHighestBidPrice,
