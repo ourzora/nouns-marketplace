@@ -7,7 +7,7 @@ import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { SettleAuction } from '@noun-auction'
 import { isAddressMatch, useAuth } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { FlexProps, Paragraph, Stack, Well } from '@zoralabs/zord'
+import { FlexProps, Paragraph, Well } from '@zoralabs/zord'
 
 interface SettlementProps extends FlexProps {
   nftObj: NFTObject
@@ -17,7 +17,7 @@ interface SettlementProps extends FlexProps {
 const paragraphCopy = {
   claimant: 'Ownership will be transferred after you claim the NFT',
   everyoneElse:
-    'Ownership will be transferred to the winner after you settle the auction',
+    'Ownership will be transferred to the winner after you settle the auction', // @BJ TODO: add copy for other users
 }
 
 export function NFTPrimaryAuctionEndedSettlement({
