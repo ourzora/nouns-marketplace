@@ -13,14 +13,18 @@ export function useERC721TokenApproval(contractAddress?: string, spender?: strin
       return
     }
 
-    return Erc721Factory.connect(contractAddress, signer)
+    return Erc721Factory.connect(contractAddress.toLowerCase(), signer)
   }, [contractAddress, signer])
 
   const { data: approved, ...rest } = useSWR(
     contract && contractAddress && account && spender
       ? ['isApprovedForAll', contract, account, spender]
       : null,
-    (_, contract, userAddress, spender) => contract.isApprovedForAll(userAddress, spender)
+    (_, contract, userAddress, spender) =>
+      contract.isApprovedForAll(userAddress, spender),
+    {
+      refreshInterval: 10000,
+    }
   )
 
   function approve(): Promise<ContractTransaction> {

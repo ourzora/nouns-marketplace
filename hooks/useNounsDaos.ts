@@ -19,7 +19,7 @@ export type AuctionVolumeReturnType =
 export function useNounsDaos() {
   const [cached, setCache] = useState([] as TypeSafeDao[])
   const { data } = useSWR<NounsDaosQuery>(
-    [`noundsDaos`],
+    [`nounsDaos`],
     () => zoraApiFetcher(NOUNS_DAOS_QUERY),
     {
       onErrorRetry: (_, _1, _2, revalidate, { retryCount }) => {
@@ -42,5 +42,6 @@ export function useNounsDaos() {
       return cached.length > 0 ? cached : []
     }
     // no need to update when cache changed!
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.nouns?.nounsDaos?.nodes])
 }

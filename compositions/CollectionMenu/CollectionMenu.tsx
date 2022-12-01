@@ -67,7 +67,11 @@ export function CollectionMenu() {
       }
       content={
         <Stack as="menu" gap="x6" className={styles.modalWrapper}>
-          <Stack px="x8" pt="x8" gap="x6">
+          <Stack
+            px={{ '@initial': 'x5', '@1024': 'x8' }}
+            pt={{ '@initial': 'x5', '@1024': 'x8' }}
+            gap="x6"
+          >
             <Heading as="h2">
               Browse
               <Text as="span" color="text3" ml="x2">
@@ -84,8 +88,8 @@ export function CollectionMenu() {
             />
           </Stack>
           <Box
-            px="x8"
-            pb="x8"
+            px={{ '@initial': 'x5', '@1024': 'x8' }}
+            pb="x10" // don't match paddingTop, extra p needed to bump above address bar
             className={[styles.filterUnscrolled, hasScrolled && styles.filterScrolled]}
           >
             <Box

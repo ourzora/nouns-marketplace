@@ -60,7 +60,7 @@ export function useNounsToken(contractAddress: string, tokenId: string) {
 
   const isIpfs = dataURI?.startsWith('ipfs://')
   const isBase64 = dataURI?.startsWith('data:application/json;base64')
-  const isHttp = dataURI?.startsWith('https://')
+  // const isHttp = dataURI?.startsWith('https://')
 
   useIpfsFile({ isIpfs, dataURI })
 
@@ -74,7 +74,7 @@ export function useNounsToken(contractAddress: string, tokenId: string) {
     if (dataURI) {
       try {
         const json = atob(data)
-        console.log({ json })
+        // console.log({ json })
         const result = JSON.parse(json)
         return result
       } catch (err) {

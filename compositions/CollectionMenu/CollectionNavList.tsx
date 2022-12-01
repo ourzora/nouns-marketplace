@@ -1,13 +1,11 @@
 import React from 'react'
 import { TypeSafeDao } from 'validators/dao'
 
-import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Stack, StackProps } from '@zoralabs/zord'
 
 import { CollectionLink } from './CollectionLink'
 
 export interface CollectionNavListProps extends StackProps {
-  // items: Collection[]
   items: TypeSafeDao[]
 }
 

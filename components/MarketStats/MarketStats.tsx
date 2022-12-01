@@ -11,11 +11,11 @@ import { CollectionStats } from './CollectionStats'
 import { DaoStats } from './DaoStats'
 import { StatBlock } from './StatBlock'
 
-export interface MarketStatesProps extends FlexProps {
+export interface MarketStatsProps extends FlexProps {
   contractAddress: string
 }
 
-export function MarketStats({ contractAddress, ...props }: MarketStatesProps) {
+export function MarketStats({ contractAddress, ...props }: MarketStatsProps) {
   const { floorPrice, nftCount, ownerCount } = useAggregate(contractAddress)
   const dao = returnDao(contractAddress)
 

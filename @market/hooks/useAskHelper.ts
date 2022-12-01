@@ -20,6 +20,10 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
     () => isActiveAsk && isPrivateAsk,
     [isActiveAsk, isPrivateAsk]
   )
+  const hasActiveV3Ask = useMemo(
+    () => isActiveAsk && !isPrivateAsk,
+    [isActiveAsk, isPrivateAsk]
+  )
   const isCompletedAsk = useMemo(
     () => ask?.status === MARKET_INFO_STATUSES.COMPLETE || false,
     [ask]
@@ -50,6 +54,7 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
     hasRelevantAsk,
     isPrivateAsk,
     isActiveAsk,
+    hasActiveV3Ask,
     hasActivePrivateAsk,
     isCompletedAsk,
     buyerAddress,
