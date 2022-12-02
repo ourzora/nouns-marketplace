@@ -1,12 +1,10 @@
-import { format, fromUnixTime, intervalToDuration } from 'date-fns'
+import { fromUnixTime, intervalToDuration } from 'date-fns'
 
 import { useMemo, useState } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { shortenAddress, useInterval } from '@shared'
-// import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
-import { NFTObject } from '@zoralabs/nft-hooks'
 
 import { useNounishAuctionHelper } from './useNounishAuctionHelper'
 
@@ -15,15 +13,7 @@ interface AuctionDataTableProps {
 }
 
 export const useAuctionDataTable = ({ primaryAuction }: AuctionDataTableProps) => {
-  // const { markets } = nftObj
-
-  const {
-    highestBidder,
-    endTime,
-    isEnded,
-    // now
-    // countdownText
-  } = useNounishAuctionHelper({
+  const { highestBidder, endTime, isEnded } = useNounishAuctionHelper({
     auction: primaryAuction,
   })
 
@@ -42,9 +32,6 @@ export const useAuctionDataTable = ({ primaryAuction }: AuctionDataTableProps) =
 
   useInterval(() => setNow(new Date()), 1000)
 
-  // const { ask } = useRelevantMarket(markets)
-  // const { isPrivateAsk } = useAskHelper({ ask })
-
   const formattedAuctionDataTable = useMemo<DataTableItemProps[] | undefined>(
     () => [
       {
@@ -53,7 +40,6 @@ export const useAuctionDataTable = ({ primaryAuction }: AuctionDataTableProps) =
       },
       {
         label: 'Ends in',
-        // value: `10min`,
         value: countdownText,
       },
     ],
