@@ -6,6 +6,7 @@ import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
 import { useToken } from 'hooks/useToken'
 
 import { CollectionThumbnail } from '@media'
+import { useNFTProvider } from '@shared'
 import { DescriptionWithMaxLines } from '@shared/components'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
@@ -22,7 +23,7 @@ export interface NFTSidebarProps extends StackProps {
 }
 
 export function NFTSidebar({
-  nft,
+  // nft,
   collectionAddress,
   tokenId,
   offchainOrders,
@@ -32,7 +33,7 @@ export function NFTSidebar({
 
   return (
     <NFTSidebarComponent
-      nft={nft}
+      // nft={nft}
       collectionAddress={collectionAddress}
       tokenId={tokenId}
       offchainOrders={offchainOrders}
@@ -42,7 +43,7 @@ export function NFTSidebar({
 }
 
 export function NFTSidebarComponent({
-  nft,
+  // nft,
   className,
   collectionAddress,
   tokenId,
@@ -96,8 +97,6 @@ export function NFTSidebarComponent({
         <NFTMarket
           collectionAddress={collectionAddress}
           offchainOrders={offchainOrders}
-          tokenId={tokenId}
-          token={token}
         />
       </Stack>
     </Stack>

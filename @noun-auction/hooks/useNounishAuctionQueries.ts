@@ -33,13 +33,9 @@ export function useNounishAuctionQuery({
   )
 
   const activeAuction: TypeSafeNounsAuction | undefined = useMemo(() => {
-    console.log('DATA', data)
-    error && console.log('ERROR', error)
-
     const newData = data?.nouns?.nounsActiveMarket
 
     if (newData) {
-      console.log('DATA IS NEWDATA')
       const verifiedData = verifyAuction(newData)
       setCache(verifiedData)
       return verifiedData

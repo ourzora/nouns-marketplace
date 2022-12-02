@@ -45,7 +45,6 @@ export const BuilderNounsBidForm = ({
           value: bidAmount,
         })
 
-        console.log({ tx })
         setIsSuccess(true)
       } catch (err: any) {
         setIsError(err)

@@ -34,7 +34,7 @@ export function NFTPrimaryAuction({
     )
   }
 
-  // if (isEnded) { // Won't be shown.
+  // if (isEnded) { // @Oleg: please ignore for now. Won't be shown.
   //   return (
   //     <NFTPrimaryAuctionEndedSummary
   //       nftObj={nftObj}
