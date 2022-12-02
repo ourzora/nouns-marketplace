@@ -2,7 +2,7 @@ import { Seo } from 'components'
 import { MarketStats } from 'components/MarketStats/MarketStats'
 import { PageWrapper } from 'components/PageWrapper'
 import {
-  CollectionActivityHeader,
+  // CollectionActivityHeader,
   CollectionHeader,
   Collections,
 } from 'compositions/Collections'
@@ -12,27 +12,34 @@ import * as styles from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { CollectionFilterProvider } from '@filter'
 import { useCollection } from '@filter/hooks/useCollection'
-import { ActiveAuctionCard, useOneNounsDao } from '@noun-auction'
+import {
+  ActiveAuctionCard, // useOneNounsDao
+} from '@noun-auction'
 import { useWindowWidth } from '@shared'
 import { Grid, Separator, Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
-  const { contractAddress: collectionAddress, seo } = fallback
-
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const { dao } = useOneNounsDao({ collectionAddress })
+  const { contractAddress: collectionAddress, seo } = fallback
+  // const { dao } = useOneNounsDao({ collectionAddress })
 
   const { isLarge } = useWindowWidth()
   const { nftCount } = useAggregate(collectionAddress)
   // wrapper for useSWR
   const { data } = useCollection(collectionAddress)
-  const collection = data || fallback?.collection
+  const collection = useMemo(
+    () => data || fallback?.collection,
+    [data, fallback?.collection]
+  )
+
+  console.log('COLLECTION PAGE')
 
   useEffect(() => {
+    // console.log('useEffect')
     if (collection?.name) {
       setCurrentCollection(collection.name)
       setCurrentCollectionCount(nftCount ? `${nftCount} NFTs` : '... NFTs')
@@ -46,7 +53,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
-      <Grid
+      {/* <Grid
         className={[styles.pageGrid]}
         px={{ '@initial': 'x0', '@1024': 'x8' }}
         gap="x2"
@@ -54,16 +61,14 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
       >
         <CollectionHeader
           collection={collection}
-          layout={dao ? 'dao' : 'collection'}
+          layout={'dao'}
           currentAuction={
-            dao && (
-              <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
-            )
+            <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
           }
         >
           <MarketStats contractAddress={collectionAddress} />
         </CollectionHeader>
-      </Grid>
+      </Grid> */}
       <CollectionFilterProvider
         enableSidebarClearButton
         filtersVisible={isLarge}
@@ -84,7 +89,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         }}
       >
         <Stack>
-          {dao ? <Separator /> : <CollectionActivityHeader />}
+          <Separator />
           <Collections collectionAddress={collectionAddress} />
         </Stack>
       </CollectionFilterProvider>

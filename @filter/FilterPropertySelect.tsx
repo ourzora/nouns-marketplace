@@ -47,8 +47,10 @@ export function FilterPropertySelect({
         name="filter-property"
         id="filter-property"
         defaultValue=""
+        value={isReset ? '' : undefined}
         // pos="relative"
         w="100%"
+        // @BJ TODO: Add 'value' to zord Select, non-standard to set selected on option
         // p="x2"
         // py="x4"
         color="text1"
@@ -63,7 +65,7 @@ export function FilterPropertySelect({
         <Box
           as="option"
           // default
-          selected={isReset}
+          // selected={isReset}
           value=""
           key={`${traitType}-default`}
           w="100%"

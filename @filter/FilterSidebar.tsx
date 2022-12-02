@@ -62,7 +62,7 @@ export function FilterSidebarContents({
       gap="x2"
       w="100%"
       pb="x8"
-      position="absolute"
+      position={{ '@initial': 'relative', '@768': 'absolute' }}
       className={[filterSidebar, 'zora-filterSidebar']}
       ref={parentRef}
     >
@@ -128,6 +128,7 @@ export function FilterSidebarMobile() {
         padding="x0"
         modalContentOverrides={filterSidebarModalContent}
         modalBackgroundOverrides={filterSidebarModalBackground}
+        fullscreen
       >
         <Stack px="x4" pt="x8">
           <Flex w="100%" justify="space-between" pb="x6">

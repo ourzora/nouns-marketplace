@@ -27,6 +27,8 @@ export function Filter({ grid, className, ...props }: FilterProps) {
     getString,
   } = useCollectionFilters()
 
+  console.log('FILTER')
+
   return (
     <Stack className={className} {...props}>
       {!showFilters && enableSidebarFilter && (
@@ -42,8 +44,8 @@ export function Filter({ grid, className, ...props }: FilterProps) {
         position="sticky"
         gap="x8"
         className={[
-          styles.filterWrapperContainer,
           'zora-collectionsFilterWrapperContainer',
+          styles.filterWrapperContainer,
           {
             [styles.filterOpen]: showFilters,
           },
@@ -62,8 +64,8 @@ export function Filter({ grid, className, ...props }: FilterProps) {
               '--filter-offset-desktop': `${getString('FILTER_OPEN_STICKY_OFFSET')}px`,
             }}
             className={[
-              styles.filterWrapper,
               'zora-collectionFilterWrapper',
+              styles.filterWrapper,
               {
                 [styles.openFilterWrapper]: showFilters,
               },

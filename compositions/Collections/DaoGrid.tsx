@@ -1,8 +1,7 @@
 import { useMemo } from 'react'
 
 import { Filter } from '@filter'
-import { NFTCard } from '@media/NFTCard'
-import { NFTGrid } from '@media/NFTGrid'
+import { NFTCard, NFTGrid } from '@media'
 import { nftGridWrapper } from '@media/NftMedia.css'
 import { useNounishAuctionQuery } from '@noun-auction'
 import { NFTObject } from '@zoralabs/nft-hooks'
@@ -29,24 +28,26 @@ export function DaoGrid({
   const { activeAuction } = useNounishAuctionQuery({
     collectionAddress,
   })
-  const tokenId = activeAuction?.tokenId
 
   const renderer = useMemo(() => {
-    if (!tokenId) return <></>
+    // if (!activeAuction?.tokenId) return <></>
 
-    return view === 'nfts' ? (
+    return view === 'nfts' || !activeAuction?.tokenId ? (
       <NFTCard collectionAddress={collectionAddress} />
     ) : (
-      <NounishActivityRow collectionAddress={collectionAddress} tokenId={tokenId} />
+      <NounishActivityRow
+        collectionAddress={collectionAddress}
+        tokenId={activeAuction?.tokenId}
+      />
     )
-  }, [collectionAddress, tokenId, view])
+  }, [collectionAddress, activeAuction?.tokenId, view])
 
   return (
     <Filter
       className="dao-filter"
       grid={
         <NFTGrid
-          items={items} // filteredItems
+          items={items}
           handleLoadMore={handleLoadMore}
           isReachingEnd={isReachingEnd}
           isValidating={isValidating}

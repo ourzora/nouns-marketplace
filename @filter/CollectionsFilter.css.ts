@@ -103,29 +103,33 @@ export const filterHeader = style([
   }),
 ])
 
-export const stickyFilterHeader = style({
-  top: `0px`,
-})
+export const stickyFilterHeader = atoms({ top: 'x0' })
 
 export const avatarPadding = style({
   paddingLeft: '3px',
 })
 
-export const filterSidebar = style([
-  {
-    // overflowY: 'scroll',
-    height: `calc(100% - ${HEADER_HEIGHT}px)`,
-    '@media': {
-      'screen and (max-width: 768px)': {
-        position: 'relative',
-        background: vars.color.background1,
-        width: '100%',
-        paddingRight: '0',
-        height: '100%',
+export const filterSidebar = style(
+  [
+    {
+      // overflowY: 'scroll',
+      height: `calc(100% - ${HEADER_HEIGHT}px)`,
+      '@media': {
+        'screen and (max-width: 768px)': {
+          // background: vars.color.background1,
+          // width: '100%',
+          // paddingRight: '0',
+          height: '100%',
+        },
       },
     },
-  },
-])
+  ],
+  atoms({
+    backgroundColor: 'background1',
+    pr: { '@initial': 'x0' },
+    w: '100%',
+  })
+)
 
 export const sideBarSeparator = style({
   borderTop: borderStyle,
@@ -338,7 +342,8 @@ export const mobileFiltersFooter = style([
     left: 'x0',
     p: 'x4',
     gap: 'x4',
-    backgroundColor: 'primary',
+    // backgroundColor: 'primary',
+    // backgroundColor: 'primary',
     w: '100%',
   }),
 ])

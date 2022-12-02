@@ -12,7 +12,8 @@ import {
   mixins,
 } from '@zoralabs/zord'
 
-import { background, close, content, overlay } from './Modal.css'
+// import { background, close, content, fullScreen, overlay } from './Modal.css'
+import * as styles from './Modal.css'
 
 export interface ModalContentProps extends Dialog.DialogContentProps {
   title?: string
@@ -27,6 +28,8 @@ export interface ModalContentProps extends Dialog.DialogContentProps {
   modalTheme?: ClassValue | undefined
   /** Disallow clicking outside of container to close modal */
   disableCloseOnClickOutside?: boolean
+  /** Show modal as fullscreen overlay */
+  fullscreen?: boolean
 }
 
 export interface ModalProps extends Dialog.DialogProps {
@@ -48,7 +51,7 @@ export function Modal({
     <Dialog.Root {...props}>
       <Dialog.Portal>
         <Dialog.DialogOverlay
-          className={clsx('zord-modal-overlay', overlay, modalOverlayOverrides)}
+          className={clsx('zord-modal-overlay', styles.overlay, modalOverlayOverrides)}
         />
         <Box p="x12" key={props.open ? 'open' : 'closed'} className="zord-modal-wrapper">
           {children}
@@ -74,6 +77,7 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
       className,
       children,
       title,
+      fullscreen = false,
       showClose = true,
       padding = 'x6',
       ...props
@@ -88,8 +92,9 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
           disableCloseOnClickOutside ? (e) => e.preventDefault() : undefined
         }
         className={clsx(
-          mixins({ center: 'xy' }),
-          content,
+          !fullscreen && mixins({ center: 'xy' }),
+          fullscreen && styles.fullScreen,
+          styles.content,
           modalContentOverrides,
           className,
           'zord-modal-content'
@@ -99,7 +104,7 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
         <ZordProvider theme={modalTheme} style={{ backgroundColor: 'transparent' }}>
           <Box
             className={clsx(
-              background,
+              styles.background,
               modalBackgroundOverrides,
               'zord-modal-background'
             )}
