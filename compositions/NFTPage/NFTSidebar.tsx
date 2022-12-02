@@ -7,7 +7,6 @@ import { useToken } from 'hooks/useToken'
 
 import { CollectionThumbnail } from '@media'
 import { DescriptionWithMaxLines } from '@shared/components'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
 
 import { NFTMarket } from './NFTMarket'
@@ -15,14 +14,12 @@ import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
 
 export interface NFTSidebarProps extends StackProps {
-  nft: NFTObject
   collectionAddress: string
   tokenId: string
   offchainOrders?: OffchainOrderWithToken[]
 }
 
 export function NFTSidebar({
-  nft,
   collectionAddress,
   tokenId,
   offchainOrders,
@@ -32,7 +29,6 @@ export function NFTSidebar({
 
   return (
     <NFTSidebarComponent
-      nft={nft}
       collectionAddress={collectionAddress}
       tokenId={tokenId}
       offchainOrders={offchainOrders}
@@ -42,16 +38,16 @@ export function NFTSidebar({
 }
 
 export function NFTSidebarComponent({
-  nft,
   className,
   collectionAddress,
   tokenId,
   offchainOrders,
   ...props
 }: NFTSidebarProps) {
-  const { primarySalePrice } = usePrimarySalePrice({ collectionAddress })
+  const { primarySalePrice, hasPrimarySalePrice } = usePrimarySalePrice({
+    collectionAddress,
+  })
   const { token } = useToken({ collectionAddress, tokenId })
-  const fallbackTitle = `${token?.collectionName} #${token?.tokenId}`
 
   if (!token) return null
 
@@ -77,7 +73,7 @@ export function NFTSidebarComponent({
       </Flex>
       <Flex justify="space-between" align="center">
         <Heading as="h1" size="xl">
-          {fallbackTitle}
+          {token?.name}
         </Heading>
       </Flex>
 
@@ -89,15 +85,12 @@ export function NFTSidebarComponent({
         description={token.description}
       />
       <Stack gap="x4" mt="auto">
-        {primarySalePrice && (
+        {hasPrimarySalePrice && (
           <NFTProvenance primarySalePrice={primarySalePrice} token={token} />
         )}
         <NFTMarket
           collectionAddress={collectionAddress}
           offchainOrders={offchainOrders}
-          tokenId={tokenId}
-          token={token}
-          nftObj={nft}
         />
       </Stack>
     </Stack>

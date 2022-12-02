@@ -35,9 +35,9 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
 
   if (!token || !activeAuction) return null
 
-  const highestBid = activeAuction?.highestBidPrice?.chainTokenPrice?.raw || '0'
-  const tokenId = activeAuction?.tokenId
-  const collectionAddress = activeAuction?.collectionAddress
+  const highestBid = activeAuction.highestBidPrice?.chainTokenPrice?.raw || '0'
+  const tokenId = activeAuction.tokenId
+  const collectionAddress = activeAuction.collectionAddress
 
   const auctionStatus =
     Date.now() - parseInt(activeAuction.endTime) * 1000 > 0 ? 'Settling' : 'Live'
@@ -46,8 +46,9 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
     <DaoRowComponent
       index={index}
       tokenId={tokenId}
+      tokenName={token.name}
       collectionAddress={collectionAddress}
-      collectionName={dao.name ?? '...'}
+      collectionName={dao.name ?? token.collectionName ?? '...'}
       highestBid={highestBid}
       treasuryAddress={dao.treasuryAddress}
       tokenImage={token?.image.url ?? undefined}
@@ -62,6 +63,7 @@ type DaoRowProps = {
   collectionAddress: string
   tokenImage?: string
   collectionName: string
+  tokenName: string
   highestBid: string
   treasuryAddress: string
   auctionStatus: string
@@ -72,6 +74,7 @@ export const DaoRowComponent = ({
   collectionAddress,
   tokenId,
   tokenImage,
+  tokenName,
   collectionName,
   highestBid,
   treasuryAddress,
@@ -137,6 +140,7 @@ export const DaoRowComponent = ({
       <Box className={[daoMeta]}>
         <RPCTokenInfo
           tokenImage={tokenImage}
+          tokenName={tokenName}
           tokenId={tokenId}
           collectionAddress={collectionAddress}
           collectionName={collectionName}

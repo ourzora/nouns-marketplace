@@ -43,7 +43,7 @@ export function DataTableItem({
 
   return (
     <Flex justify="space-between" w="100%" {...props} className={styles.row({ variant })}>
-      <Paragraph size={size} inline color="text2" className={[lightFont]}>
+      <Paragraph size={size} inline color="text3" className={[lightFont]}>
         {children}
       </Paragraph>
 

@@ -198,7 +198,7 @@ export const sidebarHighBid = style([
     fontWeight: 400,
   },
   atoms({
-    color: 'onAccent',
+    color: 'text1',
   }),
 ])
 

@@ -12,6 +12,7 @@ export interface RPCTokenInfoProps extends BoxProps {
   collectionAddress: string
   tokenId: string
   collectionName?: string
+  tokenName?: string
   tokenImage?: string
 }
 
@@ -19,6 +20,7 @@ export function RPCTokenInfo({
   collectionAddress,
   tokenId,
   collectionName,
+  tokenName,
   tokenImage,
   ...props
 }: RPCTokenInfoProps) {
@@ -39,7 +41,7 @@ export function RPCTokenInfo({
         <Box>
           <Box className={styles.rowCollectionName}>
             <Link href={`/collections/${collectionAddress}`} passHref>
-              {`${collectionName} #${tokenId}` ?? '...'}
+              {tokenName ?? '...'}
             </Link>
           </Box>
           <Box mt="x1">

@@ -64,7 +64,7 @@ export function AuctionBidder({
     >
       {showLabels && (
         <Label
-          size="md"
+          size={layout === 'sideBarBid' ? 'lg' : 'md'}
           className={[layout === 'sideBarBid' && sideBarUpperLabel, lightFont]}
           color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
           style={{ lineHeight: '1.15' }}
