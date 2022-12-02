@@ -16,7 +16,7 @@ export function CollectionLink({
   ...props
 }: CollectionLinkProps) {
   return (
-    <NextLink passHref href={`/collections/${contractAddress}`}>
+    <NextLink passHref href={`/daos/${contractAddress}`}>
       <Button as="a" {...props}>
         {children}
       </Button>

@@ -33,12 +33,12 @@ export function useTokenHelper(nftObj: NFTObject) {
   }, [nftCount, tokenID, isFirstTokenIDZero])
 
   const handlePrev = useCallback(() => {
-    tokenID && router.push(`/collections/${nft?.contract.address}/${tokenID - 1}`)
+    tokenID && router.push(`/daos/${nft?.contract.address}/${tokenID - 1}`)
   }, [nft?.contract.address, tokenID, router])
 
   const handleNext = useCallback(() => {
     if (hasNextNFT) {
-      tokenID && router.push(`/collections/${nft?.contract.address}/${tokenID + 1}`)
+      tokenID && router.push(`/daos/${nft?.contract.address}/${tokenID + 1}`)
     }
   }, [hasNextNFT, tokenID, router, nft?.contract.address])
 

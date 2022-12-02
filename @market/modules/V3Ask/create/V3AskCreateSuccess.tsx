@@ -30,7 +30,7 @@ export function V3AskCreateSuccess({
   ...props
 }: V3AskCreateSuccessProps) {
   const { nft } = nftObj
-  const askURL = `https://noun.market/collections/${nft?.contract.address}/${nft?.tokenId}`
+  const askURL = `https://noun.market/daos/${nft?.contract.address}/${nft?.tokenId}`
   const [_, copied, copy] = useCopyToClipboard(askURL)
   const { toastDispatch } = useToast()
   const { state } = useV3AskStateContext()

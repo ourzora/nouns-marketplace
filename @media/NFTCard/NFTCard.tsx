@@ -58,7 +58,7 @@ export function NFTCardComponent({
 
   return (
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
-      <Link href={`/collections/${collectionAddress}/${tokenId}`}>
+      <Link href={`/daos/${collectionAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="background2">
           {collectionAddress && tokenId && <ImageWithNounFallback token={token} />}
         </Box>
@@ -76,7 +76,7 @@ export function NFTCardComponent({
           </Heading>
         </Flex>
         <Flex align="center" gap="x2" justify="space-between">
-          <Link href={`/collections/${collectionAddress}`}>
+          <Link href={`/daos/${collectionAddress}`}>
             <Flex align="center" gap="x2">
               <CollectionThumbnail
                 collectionAddress={collectionAddress}

@@ -62,7 +62,7 @@ export function NFTSidebarComponent({
       {...props}
     >
       <Flex>
-        <Link href={`/collections/${token.collectionAddress}`}>
+        <Link href={`/daos/${token.collectionAddress}`}>
           <CollectionThumbnail
             collectionAddress={token.collectionAddress}
             showTitle
