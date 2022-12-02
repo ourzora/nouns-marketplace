@@ -55,15 +55,14 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
       >
         <CollectionHeader
           collection={collection}
-          layout={dao ? 'dao' : 'collection'}
-          currentAuction={
-            dao ? (
-              <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
-            ) : null
-          }
-        >
-          <MarketStats contractAddress={collectionAddress} />
-        </CollectionHeader>
+          // layout={dao ? 'dao' : 'collection'}
+          // layout={dao ? 'dao' : 'collection'}
+          // currentAuction={
+          //   dao && (
+          //     <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
+          //   )
+          // }
+        />
       </Grid>
       <CollectionFilterProvider
         useSidebarClearButton
@@ -86,7 +85,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         }}
       >
         <Stack>
-          {dao ? <Separator /> : <CollectionActivityHeader />}
+          <Separator />
           <Collections collectionAddress={collectionAddress} />
         </Stack>
       </CollectionFilterProvider>

@@ -155,38 +155,21 @@ export const hideMobile = style({
   },
 })
 
-export const collectionHeaderWrapper = style([
-  {
-    gridColumn: '1/span 4',
-    '@media': {
-      [media.min1024]: {
-        gridColumn: '1/span 12',
-      },
-    },
-  },
-  atoms({
-    w: '100%',
-    overflowX: 'hidden',
-    mx: 'auto',
-  }),
-])
-
-export const daoHeaderWrapper = style([
-  {
-    gridTemplateColumns: '1fr',
-    '@media': {
-      [media.min1024]: {
-        gridTemplateColumns: '1fr 1fr',
-      },
-    },
-  },
-  atoms({
-    pb: {
-      '@initial': 'x2',
-      '@1024': 'x6',
-    },
-  }),
-])
+// export const collectionHeaderWrapper = style([
+//   {
+//     gridColumn: '1/span 4',
+//     '@media': {
+//       [media.min1024]: {
+//         gridColumn: '1/span 12',
+//       },
+//     },
+//   },
+//   atoms({
+//     w: '100%',
+//     overflowX: 'hidden',
+//     mx: 'auto',
+//   }),
+// ])
 
 export const marketStatsWrapper = atoms({
   w: {

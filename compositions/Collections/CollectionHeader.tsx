@@ -1,20 +1,24 @@
+import { MarketStats } from 'components/MarketStats'
 import { PageHeader } from 'components/PageHeader'
-import { collectionHeaderWrapper, daoHeaderWrapper } from 'styles/styles.css'
 
+// import { daoHeaderWrapper } from 'styles/styles.css'
 import { useAggregate } from 'hooks'
 
-import { useMemo } from 'react'
-
+// import { useMemo } from 'react'
 import { AddressWithLink } from '@market'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { useActiveOGNounishAuction, useNounishAuctionQuery } from '@noun-auction'
+import { useNFT } from '@zoralabs/nft-hooks'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Flex, Grid, GridProps, Paragraph, Stack } from '@zoralabs/zord'
+
+import * as styles from './CollectionHeader.css'
 
 export interface CollectionHeaderProps extends GridProps {
   collection: Collection
   children?: JSX.Element
   currentAuction?: JSX.Element | null
-  layout?: 'dao' | 'collection'
+  // layout?: 'dao' | 'collection'
 }
 
 type Props = {
@@ -24,21 +28,18 @@ type Props = {
 }
 
 export function PageHeaderWithStats({ collectionAddress, name, layout }: Props) {
-  const { aggregate } = useAggregate(collectionAddress)
+  const { nftCount } = useAggregate(collectionAddress)
 
-  return useMemo(
-    () => (
-      <PageHeader
-        headline={name}
-        copy={`${aggregate?.aggregateStat?.nftCount ?? '...'} NFTs`}
-        align={{
-          '@initial': 'center',
-          '@1024': layout === 'collection' ? 'center' : 'flex-start',
-        }}
-        px={layout === 'collection' ? 'x4' : 'x0'}
-      />
-    ),
-    [aggregate?.aggregateStat?.nftCount]
+  return (
+    <PageHeader
+      headline={name}
+      copy={`${nftCount ?? '...'} NFTs`}
+      align={{
+        '@initial': 'center',
+        '@1024': layout === 'collection' ? 'center' : 'flex-start',
+      }}
+      px={layout === 'collection' ? 'x4' : 'x0'}
+    />
   )
 }
 
@@ -46,27 +47,41 @@ export function CollectionHeader({
   collection,
   children,
   currentAuction,
-  layout = 'collection',
+  // layout = 'collection',
   className,
   ...props
 }: CollectionHeaderProps) {
+  // const { dao } = useOneNounsDao({ collectionAddress })
+  // const { dao } = useActiveOGNounishAuction({ collectionAddress })
+  // const { dao } = useActiveOGNounishAuction({ collectionAddress })
+  const { activeAuction } = useNounishAuctionQuery({
+    collectionAddress: collection.address,
+  })
+
+  const { data: nft } = useNFT(collection.address, activeAuction?.tokenId)
+
+  console.log('activeAuction', activeAuction)
+
   return (
-    <Grid
-      className={[
-        collectionHeaderWrapper,
-        layout === 'dao' ? daoHeaderWrapper : 'collections-header-wrapper',
-        className,
-      ]}
-      mt={{ '@initial': 'x6', '@1024': 'x8' }}
-      {...props}
-    >
-      <Stack
-        align={{
-          '@initial': 'center',
-          '@1024': layout === 'collection' ? 'center' : 'flex-start',
-        }}
-        gap="x4"
+    <Stack w="100%" className={[styles.daoPageHero, className]} display="grid">
+      <Grid
+        className={[styles.activeAuction]}
+        mt={{ '@initial': 'x6', '@1024': 'x8' }}
+        borderColor="negative"
+        w="100%"
+        {...props}
       >
+        <Stack
+          align={{
+            '@initial': 'center',
+            '@1024': 'flex-start',
+          }}
+          gap="x4"
+        >
+          {nft && <Flex> MAIN IMAGE GOES HERE{nft?.nft?.tokenId}</Flex>}
+        </Stack>
+      </Grid>
+      <Flex w="100%" justify="space-between" alignSelf="flex-start">
         <Stack
           px={{
             '@initial': 'x4',
@@ -83,13 +98,13 @@ export function CollectionHeader({
               radius="round"
               m="auto"
               size="lg"
-              h={layout === 'dao' ? '100%' : 'auto'}
+              h="100%"
               w="100%"
               style={{ justifyContent: 'center' }}
             />
             <PageHeaderWithStats
               collectionAddress={collection.address}
-              layout={layout}
+              layout="dao"
               name={collection.name ?? ''}
             />
           </Flex>
@@ -97,7 +112,7 @@ export function CollectionHeader({
             w="100%"
             justify={{
               '@initial': 'center',
-              '@1024': layout === 'dao' ? 'flex-start' : 'center',
+              '@1024': 'flex-start',
             }}
           >
             <AddressWithLink
@@ -114,31 +129,16 @@ export function CollectionHeader({
         </Stack>
         <Flex
           w="100%"
-          justify={{
-            '@initial': 'center',
-            '@1024': layout === 'dao' ? 'flex-start' : 'center',
-          }}
-        >
-          {children}
-        </Flex>
-      </Stack>
-      {currentAuction && (
-        <Flex
-          w="100%"
+          // alignItems="flex-start"
+          alignSelf="flex-start"
           justify={{
             '@initial': 'center',
             '@1024': 'flex-end',
           }}
-          pt={{
-            '@initial': 'x4',
-          }}
-          px={{
-            '@initial': 'x4',
-          }}
         >
-          {currentAuction}
+          <MarketStats contractAddress={collection.address} />
         </Flex>
-      )}
-    </Grid>
+      </Flex>
+    </Stack>
   )
 }
