@@ -26,5 +26,7 @@ export function numberFormatterUSDC(number: number | string) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-  }).format(parsed)
+  })
+    .format(parsed)
+    .replace('$', '')
 }
