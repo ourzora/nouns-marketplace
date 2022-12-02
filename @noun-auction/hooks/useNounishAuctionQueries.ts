@@ -43,10 +43,14 @@ export function useNounishAuctionQuery({
       return cached
     }
     // no need to update when cache changed!
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.nouns?.nounsActiveMarket])
+
+  const hasActiveAuction = !!activeAuction
 
   return {
     activeAuction,
+    hasActiveAuction,
     error,
   }
 }

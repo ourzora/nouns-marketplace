@@ -2,7 +2,7 @@ import { ClassValue } from 'clsx'
 
 import { useToken } from 'hooks/useToken'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { TypeSafeDao } from 'validators/dao'
 
 import { useNounishAuctionQuery } from '@noun-auction'
@@ -38,33 +38,39 @@ export interface NounishAuctionProps extends AuctionViewConfig {
   layout?: keyof typeof auctionWrapperVariants['layout']
 }
 
-export function NounishAuction({ dao, ...props }: NounishAuctionProps) {
+export function NounishAuction({
+  dao,
+  layout = 'row',
+  showBidHistory = false,
+  showTopBid = true,
+  ...props
+}: NounishAuctionProps) {
   const { activeAuction } = useNounishAuctionQuery({
     collectionAddress: dao.collectionAddress,
   })
 
   const [auctionCompleted, setAuctionCompleted] = useState(false)
-  const ttl = activeAuction ? Date.now() - parseInt(activeAuction.endTime) * 1000 : 0
-
-  useInterval(
-    () => {
-      ttl > 0 ? setAuctionCompleted(true) : setAuctionCompleted(false)
-    },
-    ttl > 0 ? ttl : 0
+  const ttl = useMemo(
+    () => (activeAuction ? Date.now() - parseInt(activeAuction.endTime) * 1000 : 0),
+    [activeAuction]
   )
+
+  useInterval(() => setAuctionCompleted(ttl > 0), ttl > 0 ? ttl : 0)
 
   useEffect(() => {
     if (activeAuction?.winner) setAuctionCompleted(true)
   }, [activeAuction?.winner])
 
   if (activeAuction) {
-    const minBidIncrementPercentage = activeAuction?.minBidIncrementPercentage
     const highestBid = activeAuction?.highestBidPrice?.nativePrice?.raw || '0'
-    const highestBidder = activeAuction?.highestBidder
-    const tokenId = activeAuction?.tokenId
-    const collectionAddress = activeAuction?.collectionAddress
-    const auctionContractAddress = activeAuction?.address
-    const auctionEndTime = activeAuction?.endTime
+    const {
+      minBidIncrementPercentage,
+      highestBidder,
+      tokenId,
+      collectionAddress,
+      address: auctionContractAddress,
+      endTime: auctionEndTime,
+    } = activeAuction
 
     return (
       <NounishAuctionComponent
@@ -79,9 +85,9 @@ export function NounishAuction({ dao, ...props }: NounishAuctionProps) {
         {...props}
       />
     )
-  } else {
-    return null
   }
+
+  return null
 }
 
 type NounishAuctionComponentProps = {
@@ -109,17 +115,8 @@ type NounishAuctionComponentProps = {
 
 export function NounishAuctionComponent({
   layout = 'row',
-  showBidHistory = false,
-  showTopBid = true,
   useInlineBid = false,
-  hideThumbnail = false,
-  hideTitle = false,
-  useErrorMsg = false,
-  hideCollectionTitle = false,
-  routePrefix = 'collections',
-  thumbnailSize = '100%',
   className,
-  showLabels,
   ...rest
 }: NounishAuctionComponentProps) {
   const { token } = useToken({
@@ -137,10 +134,12 @@ export function NounishAuctionComponent({
         ]}
       >
         <ActiveAuctionRow
-          collectionName={token?.name}
+          layout={layout}
+          collectionName={token?.collectionName}
+          tokenName={token?.name}
           tokenImage={token?.image}
           {...rest}
-          useModal={!useInlineBid}
+          enableModal={!useInlineBid}
         />
       </Grid>
     </Box>

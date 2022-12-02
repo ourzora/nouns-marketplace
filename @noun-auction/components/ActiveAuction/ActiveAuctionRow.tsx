@@ -26,17 +26,18 @@ export interface ActiveAuctionRowProps {
   auctionContractAddress: string
   minBidIncrementPercentage: number
   routePrefix?: string
-  useModal?: boolean
+  enableModal?: boolean
   showLabels?: boolean
   useErrorMsg?: boolean
   showTopBid?: boolean
   layout?: keyof typeof auctionWrapperVariants['layout']
   tokenImage: TokenContentMedia | undefined
   collectionName?: string
+  tokenName?: string
 }
 
 export function ActiveAuctionRow({
-  useModal,
+  enableModal,
   showLabels,
   useErrorMsg,
   layout,
@@ -49,6 +50,7 @@ export function ActiveAuctionRow({
   auctionEndTime,
   tokenImage,
   collectionName,
+  tokenName,
 }: ActiveAuctionRowProps) {
   const rowLayout = useMemo(
     () => (
@@ -143,6 +145,7 @@ export function ActiveAuctionRow({
       {layout !== 'sideBarBid' && (
         <Link href={`collections/${collectionAddress}`} passHref>
           <RPCTokenInfo
+            tokenName={tokenName}
             collectionName={collectionName}
             tokenImage={tokenImage?.url ?? undefined}
             tokenId={tokenId}
@@ -188,7 +191,7 @@ export function ActiveAuctionRow({
             View Collection
           </CollectionLink>
         )}
-        {!useModal && <Separator mt="x1" />}
+        {!enableModal && <Separator mt="x1" />}
         {auctionCompleted ? (
           <SettleAuction
             auctionContractAddress={auctionContractAddress}
@@ -201,7 +204,7 @@ export function ActiveAuctionRow({
             layout={layout === 'sideBarBid' ? 'row' : 'historyOnly'}
             tokenId={tokenId}
             collectionAddress={collectionAddress}
-            useModal={useModal}
+            enableModal={enableModal}
           />
         )}
       </Flex>

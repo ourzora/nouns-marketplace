@@ -22,7 +22,6 @@ export interface UseTokenQueryProps {
   contractAllowList?: string[] | undefined
   contractAddress?: string | null
   ownerAddress?: string
-  // initialData?: NFTObject[]
   initialData?: GetNFTReturnType
   sort?: TokenSortInput
   filter?: TokensQueryFilter
@@ -59,7 +58,7 @@ export function useTokensQuery({
   refreshInterval = 5000,
 }: // initialData,
 UseTokenQueryProps) {
-  console.log('useTokensQuery')
+  // console.log('useTokensQuery')
 
   const getKey = (pageIndex: number, previousPageData: GetNFTReturnType) => {
     if (pageIndex > 0 && !previousPageData.nextCursor) return null // reached the end

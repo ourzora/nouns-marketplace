@@ -51,28 +51,17 @@ export function AuctionCountdown({
           style={{ lineHeight: '1.15' }}
           align={{ '@initial': 'left', '@1024': 'right' }}
         >
-          {!auctionCompleted ? label : 'Status'}&nbsp;
+          {auctionCompleted ? 'Status' : label}&nbsp;
         </Label>
       )}
-      {!auctionCompleted ? (
-        <Label
-          size="md"
-          style={{ lineHeight: '1.15' }}
-          align={{ '@initial': 'left', '@1024': 'right' }}
-          className={[layout === 'sideBarBid' && sideBarUpperLabel]}
-        >
-          {countdownText}
-        </Label>
-      ) : (
-        <Label
-          size="md"
-          style={{ lineHeight: '1.15' }}
-          align={{ '@initial': 'left', '@1024': 'right' }}
-          className={[layout === 'sideBarBid' && sideBarUpperLabel]}
-        >
-          {endedCopy}
-        </Label>
-      )}
+      <Label
+        size="md"
+        style={{ lineHeight: '1.15' }}
+        align={{ '@initial': 'left', '@1024': 'right' }}
+        className={[layout === 'sideBarBid' && sideBarUpperLabel]}
+      >
+        {auctionCompleted ? endedCopy : countdownText}
+      </Label>
     </Flex>
   )
 }

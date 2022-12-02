@@ -1,24 +1,25 @@
+import { buttonVariants } from 'components/Button/Button.css'
+
 import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
 import { StackProps } from '@zoralabs/zord'
 
 import { isOGNounAddress } from '../NounsBidForm'
-import { SettleAuctionBuiler } from './SettleAuctionBuilder'
+import { SettleAuctionBuilder } from './SettleAuctionBuilder'
+import { SettlementType } from './SettleAuctionComponent'
 import { SettleAuctionOGNouns } from './SettleAuctionOGNouns'
 
 export interface SettleAuctionProps extends StackProps {
   useErrorMsg?: boolean
   auctionContractAddress: string
+  settlementType?: SettlementType
   layout: keyof typeof auctionWrapperVariants['layout']
+  buttonVariant?: keyof typeof buttonVariants['variant']
 }
 
 export function SettleAuction({ auctionContractAddress, ...rest }: SettleAuctionProps) {
-  if (isOGNounAddress(auctionContractAddress)) {
-    return (
-      <SettleAuctionOGNouns auctionContractAddress={auctionContractAddress} {...rest} />
-    )
-  } else {
-    return (
-      <SettleAuctionBuiler auctionContractAddress={auctionContractAddress} {...rest} />
-    )
-  }
+  return isOGNounAddress(auctionContractAddress) ? (
+    <SettleAuctionOGNouns auctionContractAddress={auctionContractAddress} {...rest} />
+  ) : (
+    <SettleAuctionBuilder auctionContractAddress={auctionContractAddress} {...rest} />
+  )
 }

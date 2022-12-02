@@ -1,4 +1,4 @@
-import { fromUnixTime, getUnixTime, intervalToDuration } from 'date-fns'
+import { getUnixTime } from 'date-fns'
 
 import { useEffect, useMemo, useState } from 'react'
 

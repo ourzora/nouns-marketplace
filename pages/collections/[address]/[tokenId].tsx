@@ -30,7 +30,6 @@ const NFT = ({
         <Grid className={styles.nftPageWrapper}>
           <NFTPageHero collectionAddress={tokenAddress} tokenId={tokenId} />
           <NFTSidebar
-            nft={nft}
             collectionAddress={tokenAddress}
             tokenId={tokenId}
             offchainOrders={offchainOrders}
