@@ -40,16 +40,9 @@ export interface NounishAuctionProps extends AuctionViewConfig {
 
 export function NounishAuction({
   dao,
-
   layout = 'row',
   showBidHistory = false,
   showTopBid = true,
-  // hideThumbnail = false,
-  // hideTitle = false,
-  // useErrorMsg = false,
-  // hideCollectionTitle = false,
-  // routePrefix = 'collections',
-  // thumbnailSize = '100%',
   ...props
 }: NounishAuctionProps) {
   const { activeAuction } = useNounishAuctionQuery({
@@ -122,17 +115,8 @@ type NounishAuctionComponentProps = {
 
 export function NounishAuctionComponent({
   layout = 'row',
-  // showBidHistory = false,
-  // showTopBid = true,
   useInlineBid = false,
-  // hideThumbnail = false,
-  // hideTitle = false,
-  // useErrorMsg = false,
-  // hideCollectionTitle = false,
-  // routePrefix = 'collections',
-  // thumbnailSize = '100%',
   className,
-  // showLabels,
   ...rest
 }: NounishAuctionComponentProps) {
   const { token } = useToken({
