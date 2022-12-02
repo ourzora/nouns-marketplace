@@ -48,7 +48,7 @@ export function NFTSidebarComponent({
     collectionAddress,
   })
   const { token } = useToken({ collectionAddress, tokenId })
-
+  console.log('test')
   if (!token) return null
 
   return (
