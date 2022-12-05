@@ -20,6 +20,7 @@ export interface ActiveAuctionRowProps {
   tokenId: string
   collectionAddress: string
   auctionCompleted: boolean
+  auctionStartTime: string
   auctionEndTime: string
   highestBid: string
   highestBidder?: string
@@ -47,6 +48,7 @@ export function ActiveAuctionRow({
   highestBid,
   highestBidder,
   auctionContractAddress,
+  auctionStartTime,
   auctionEndTime,
   tokenImage,
   collectionName,
@@ -57,6 +59,7 @@ export function ActiveAuctionRow({
       <>
         <Link href={`collections/${collectionAddress}`} passHref>
           <AuctionCountdown
+            auctionStartTime={auctionStartTime}
             auctionEndTime={auctionEndTime}
             auctionCompleted={auctionCompleted}
             direction={'row' || 'withHistory' ? 'column' : 'row'}
@@ -107,6 +110,7 @@ export function ActiveAuctionRow({
     ),
     [
       auctionCompleted,
+      auctionStartTime,
       auctionEndTime,
       collectionAddress,
       highestBid,
@@ -129,6 +133,7 @@ export function ActiveAuctionRow({
         />
         <AuctionCountdown
           auctionCompleted={auctionCompleted}
+          auctionStartTime={auctionStartTime}
           auctionEndTime={auctionEndTime}
           direction="row"
           showLabels={showLabels}
@@ -137,7 +142,7 @@ export function ActiveAuctionRow({
         />
       </Stack>
     ),
-    [auctionCompleted, auctionEndTime, highestBidder, showLabels]
+    [auctionCompleted, auctionEndTime, auctionStartTime, highestBidder, showLabels]
   )
 
   return (
