@@ -12,7 +12,7 @@ import * as styles from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { CollectionFilterProvider } from '@filter'
 import { useCollection } from '@filter/hooks/useCollection'
@@ -24,17 +24,19 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { contractAddress: collectionAddress, seo } = fallback
 
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const { dao } = useOneNounsDao({ collectionAddress })
+  // const { dao } = useOneNounsDao({ collectionAddress })
 
   const { isLarge } = useWindowWidth()
-  const { aggregate } = useAggregate(collectionAddress)
+  const { nftCount } = useAggregate(collectionAddress)
   // wrapper for useSWR
   const { data } = useCollection(collectionAddress)
-  const collection = data || fallback?.collection
+  const collection = useMemo(
+    () => data || fallback?.collection,
+    [data, fallback.collection]
+  )
 
   useEffect(() => {
     if (collection?.name) {
-      const nftCount = aggregate?.aggregateStat.nftCount
       setCurrentCollection(collection.name)
       setCurrentCollectionCount(nftCount ? `${nftCount} NFTs` : '... NFTs')
     }
@@ -42,27 +44,19 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
       setCurrentCollection('Explore...')
       setCurrentCollectionCount(undefined)
     }
-  }, [aggregate, collection, setCurrentCollection, setCurrentCollectionCount])
+  }, [nftCount, collection, setCurrentCollection, setCurrentCollectionCount])
 
   return (
-    <PageWrapper direction="column" gap="x4">
+    <PageWrapper direction="column" gap="x13">
       <Seo title={seo.title} description={seo.description} />
       <Grid
         className={[styles.pageGrid]}
-        px={{ '@initial': 'x0', '@1024': 'x8' }}
-        gap="x2"
+        px={{ '@initial': 'x0', '@1024': 'x4' }}
+        // gap="x2"
+        // gap="x6"
         alignSelf="center"
       >
-        <CollectionHeader
-          collection={collection}
-          // layout={dao ? 'dao' : 'collection'}
-          // layout={dao ? 'dao' : 'collection'}
-          // currentAuction={
-          //   dao && (
-          //     <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
-          //   )
-          // }
-        />
+        <CollectionHeader collection={collection} />
       </Grid>
       <CollectionFilterProvider
         useSidebarClearButton

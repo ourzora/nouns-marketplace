@@ -4,10 +4,20 @@ import { TypeSafeToken } from 'validators/token'
 import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 import { FallbackThumbnail } from '@noun-auction'
+import { BoxProps } from '@zoralabs/zord'
 
 import { ImageElement } from './ImageElement'
 
-export function ImageWithNounFallback({ token }: { token: TypeSafeToken }) {
+interface ImageWithNounFallbackProps extends BoxProps {
+  token: TypeSafeToken
+  pos?: 'absolute' | 'relative'
+}
+
+export function ImageWithNounFallback({
+  token,
+  pos = 'absolute',
+  ...props
+}: ImageWithNounFallbackProps) {
   const { image: rawImageFallback } = useRawImageTransform(token.image?.url ?? undefined)
 
   const decodedImgSrc = useOptionalImageURIDecode(token) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
@@ -23,9 +33,10 @@ export function ImageWithNounFallback({ token }: { token: TypeSafeToken }) {
         src={srcImg}
         w="100%"
         h="100%"
-        position="absolute"
+        position={pos}
         inset="x0"
         objectFit="cover"
+        {...props}
       />
     )
   }

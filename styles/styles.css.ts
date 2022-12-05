@@ -206,6 +206,7 @@ export const pageGrid = style([
   },
   atoms({
     px: { '@initial': 'x0', '@1024': 'x8' },
+    gap: { '@initial': 'x4', '@1024': 'x6' },
   }),
 ])
 
