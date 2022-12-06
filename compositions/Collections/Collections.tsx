@@ -1,9 +1,6 @@
-// import { useEffect, useMemo } from 'react'
 import { useCollectionFilters } from '@filter'
-// import { useOneNounsDao } from '@noun-auction'
 import { Stack } from '@zoralabs/zord'
 
-// import { CollectionGrid } from './CollectionGrid'
 import * as styles from './Collections.css'
 import { DaoGrid } from './DaoGrid'
 
@@ -13,17 +10,7 @@ export type CollectionsProps = {
 }
 
 export function Collections({ view = 'nfts', collectionAddress }: CollectionsProps) {
-  // const {
-  //   filterStore: { clearFilters },
-  // } = useCollectionFilters()
-  const {
-    // filterStore: { clearFilters },
-    items,
-    isValidating,
-    isReachingEnd,
-    handleLoadMore,
-  } = useCollectionFilters()
-  // const { dao } = useOneNounsDao({ collectionAddress })
+  const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
 
   const gridProps = {
     items,
@@ -32,17 +19,11 @@ export function Collections({ view = 'nfts', collectionAddress }: CollectionsPro
     handleLoadMore,
   }
 
-  // useEffect(() => clearFilters(), [clearFilters])
-
   console.log('COLLECTIONS')
 
   return (
     <Stack className={['zora-collections-filter-parent', styles.collections]}>
-      {/* {dao ? ( */}
       <DaoGrid collectionAddress={collectionAddress} view={view} {...gridProps} />
-      {/* ) : ( */}
-      {/* <CollectionGrid collectionAddress={collectionAddress} {...gridProps} /> */}
-      {/* )} */}
     </Stack>
   )
 }

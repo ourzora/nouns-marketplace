@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Currency } from '@shared'
-import { Flex, Input, Paragraph } from '@zoralabs/zord'
+import { Flex, InputField, Paragraph } from '@zoralabs/zord'
 
 import { errorText } from './CollectionsFilter.css'
 import { CurrencySelect } from './CurrencySelect'
@@ -74,21 +74,23 @@ export function PriceRangeSelector({
   return (
     <Flex direction="column" gap="x3">
       <Flex gap="x3">
-        <Input
+        <InputField
+          name="from"
           step={step}
           type="number"
           onChange={minHandler}
           placeholder={minPlaceholder}
           min={0}
-          size="sm"
+          affix="ETH"
         />
-        <Input
+        <InputField
+          name="to"
           step={step}
           type="number"
           onChange={maxHandler}
           placeholder={maxPlaceholder}
           min={0}
-          size="sm"
+          affix="ETH"
         />
         {!enablePriceRange?.hideCurrencySelect && (
           <CurrencySelect

@@ -7,7 +7,7 @@ import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filt
 import { Modal, ModalContent, useModal } from '@modal'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { useWindowWidth } from '@shared'
-import { Box, Flex, Heading, Icon, Stack } from '@zoralabs/zord'
+import { Box, Flex, Heading, Icon, Separator, Stack } from '@zoralabs/zord'
 
 import { ClearFilters } from './ClearFilters'
 import {
@@ -99,15 +99,18 @@ export function FilterSidebarContents({
         {contractAddress && useCollectionProperties && (
           <FilterProperties collectionAddress={contractAddress} />
         )}
-        {enableCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
+        {enableCollectionSearch && !contractAddress && <CollectionsFilterList />}
         {enableSidebarClearButton && (
-          <ClearFilters
-            w="100%"
-            display={{
-              '@initial': 'none',
-              '@1024': 'block',
-            }}
-          />
+          <Stack gap="x4">
+            <Separator />
+            <ClearFilters
+              w="100%"
+              display={{
+                '@initial': 'none',
+                '@1024': 'block',
+              }}
+            />
+          </Stack>
         )}
       </Stack>
     </Stack>
