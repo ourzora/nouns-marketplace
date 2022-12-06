@@ -1,9 +1,7 @@
-import { fromUnixTime, intervalToDuration } from 'date-fns'
-
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
-import { shortenAddress, useInterval } from '@shared'
+import { shortenAddress } from '@shared'
 import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
 
 import { useNounishAuctionHelper } from './useNounishAuctionHelper'
@@ -13,38 +11,29 @@ interface AuctionDataTableProps {
 }
 
 export const useAuctionDataTable = ({ primaryAuction }: AuctionDataTableProps) => {
-  const { highestBidder, endTime, isEnded } = useNounishAuctionHelper({
+  const { highestBidder, isEnded, countdownText, hasBid } = useNounishAuctionHelper({
     auction: primaryAuction,
   })
 
-  const [now, setNow] = useState(new Date())
+  const formattedAuctionDataTable = useMemo<DataTableItemProps[] | undefined>(() => {
+    let table = hasBid
+      ? [
+          {
+            label: 'Top bidder',
+            value: shortenAddress(highestBidder),
+          },
+        ]
+      : []
 
-  const countdownText = useMemo(() => {
-    if (isEnded || !endTime) return ''
+    const endsIn = {
+      label: 'Ends in',
+      value: isEnded ? 'ENDED' : countdownText,
+    }
 
-    const { hours, minutes, seconds } = intervalToDuration({
-      start: now,
-      end: fromUnixTime(parseInt(endTime)),
-    })
+    table.push(endsIn)
 
-    return [hours + 'h', minutes + 'm', seconds + 's'].join(' ')
-  }, [isEnded, endTime, now])
-
-  useInterval(() => setNow(new Date()), 1000)
-
-  const formattedAuctionDataTable = useMemo<DataTableItemProps[] | undefined>(
-    () => [
-      {
-        label: 'Top bidder',
-        value: shortenAddress(highestBidder),
-      },
-      {
-        label: 'Ends in',
-        value: countdownText,
-      },
-    ],
-    [countdownText, highestBidder]
-  )
+    return table
+  }, [countdownText, hasBid, highestBidder, isEnded])
 
   return {
     formattedAuctionDataTable,

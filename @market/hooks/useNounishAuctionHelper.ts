@@ -1,6 +1,8 @@
 import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
+import { AddressZero } from '@ethersproject/constants'
+import { useCountdown } from '@noun-auction'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import { formatCryptoVal, isAddressMatch, numberFormatterUSDC } from '@shared'
 import { useAuth } from '@shared/hooks'
@@ -14,12 +16,14 @@ export const useNounishAuctionHelper = ({ auction }: NounishAuctionHelperProps) 
 
   const { endTime, highestBidPrice, highestBidder, winner, startTime } = auction
 
+  const { countdownText } = useCountdown(startTime, endTime)
+
   const { isEnded } = useIsAuctionCompleted({
     activeAuction: auction,
   })
 
   const hasWinner = !!winner
-  const hasBid = !!highestBidder
+  const hasBid = !!highestBidder && !isAddressMatch(highestBidder, AddressZero)
   const auctionStatus = useMemo(
     () => (Date.now() - parseInt(endTime) * 1000 > 0 ? 'Settling' : 'Live'),
     [endTime]
@@ -57,5 +61,6 @@ export const useNounishAuctionHelper = ({ auction }: NounishAuctionHelperProps) 
     highestBidder,
     formattedCryptoHighestBidPrice,
     formattedUSDHighestBidPrice,
+    countdownText,
   }
 }

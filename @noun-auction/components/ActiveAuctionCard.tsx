@@ -65,7 +65,7 @@ export function ActiveAuctionCardComponent({
   activeAuction: TypeSafeNounsAuction
   token: TypeSafeToken
 }) {
-  const { collectionAddress, endTime } = activeAuction
+  const { collectionAddress, endTime, startTime } = activeAuction
   const { isEnded: auctionCompleted } = useIsAuctionCompleted({
     activeAuction,
   })
@@ -130,6 +130,7 @@ export function ActiveAuctionCardComponent({
         <Grid className={activeAuctionCardData}>
           <AuctionCountdown
             auctionCompleted={auctionCompleted}
+            auctionStartTime={startTime}
             auctionEndTime={endTime}
             showLabels
             align="flex-start"
