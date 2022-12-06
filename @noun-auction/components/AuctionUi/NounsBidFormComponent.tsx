@@ -98,6 +98,7 @@ export function NounsBidFormComponent({
         <Stack gap="x4" mb="x4">
           <AuctionCountdown
             auctionCompleted={auctionCompleted}
+            auctionStartTime={activeAuction.startTime}
             auctionEndTime={activeAuction.endTime}
             direction="row"
             layout="row"
