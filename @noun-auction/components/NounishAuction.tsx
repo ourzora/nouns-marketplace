@@ -70,6 +70,7 @@ export function NounishAuction({
       collectionAddress,
       address: auctionContractAddress,
       endTime: auctionEndTime,
+      startTime: auctionStartTime,
     } = activeAuction
 
     return (
@@ -81,6 +82,7 @@ export function NounishAuction({
         tokenId={tokenId}
         collectionAddress={collectionAddress}
         auctionContractAddress={auctionContractAddress}
+        auctionStartTime={auctionStartTime}
         auctionEndTime={auctionEndTime}
         {...props}
       />
@@ -104,6 +106,7 @@ type NounishAuctionComponentProps = {
   className?: ClassValue | null
   showLabels?: boolean
   tokenId: string
+  auctionStartTime: string
   auctionEndTime: string
   collectionAddress: string
   auctionContractAddress: string
