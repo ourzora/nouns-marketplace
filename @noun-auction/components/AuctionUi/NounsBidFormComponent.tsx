@@ -16,6 +16,7 @@ import {
   WalletBalance,
 } from '@noun-auction'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
+import { useButtonRequiresAuth } from '@shared'
 import { Box, Flex, Grid, Input, Label, Separator, Stack } from '@zoralabs/zord'
 
 export type NounsBidFormComponentProps = {
@@ -27,7 +28,7 @@ export type NounsBidFormComponentProps = {
   setBidAmount: (s: string) => void
   bidAmount: string
   onConfirmation?: any
-  layout: 'row' | 'historyOnly' | 'withHistory' | 'sideBarBid'
+  layout: 'row' | 'historyOnly' | 'withHistory' | 'sideBarBid' | 'collectionHero'
   errorComponent?: JSX.Element | null | false
   prepareError: Error | null
 }
@@ -48,6 +49,9 @@ export function NounsBidFormComponent({
 }: NounsBidFormComponentProps) {
   const { address } = useAccount()
   const { requestClose } = useModal()
+
+  const variableButtonBehavior = useButtonRequiresAuth(undefined)
+
   const { isEnded: auctionCompleted } = useIsAuctionCompleted({
     activeAuction,
   })
@@ -153,6 +157,7 @@ export function NounsBidFormComponent({
               disabled={!isSufficientBid || !!prepareError}
               w="100%"
               borderRadius="curved"
+              onClick={variableButtonBehavior}
             >
               Place Bid
             </Button>

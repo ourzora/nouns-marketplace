@@ -124,12 +124,13 @@ export function CollectionHero({ activeAuction, ...props }: HeroProps) {
 
               <AuctionCountdown
                 auctionEndTime={activeAuction.endTime}
+                auctionStartTime={activeAuction.startTime}
                 auctionCompleted={auctionCompleted}
               />
             </Stack>
           </Flex>
           <PlaceNounsBid
-            enableModal
+            // enableModal={false}
             layout="collectionHero"
             collectionAddress={activeAuction.collectionAddress}
             tokenId={activeAuction.tokenId}
@@ -197,6 +198,7 @@ export function CollectionHeader({
             '@1024': 'x0',
           }}
           gap={{ '@initial': 'x4', '@1024': 'x6' }}
+          align="flex-start"
         >
           <Flex
             align="center"
