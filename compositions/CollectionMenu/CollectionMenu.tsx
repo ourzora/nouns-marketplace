@@ -17,7 +17,7 @@ import { CollectionNavList } from './CollectionNavList'
 
 export function CollectionMenu() {
   const { currentCollection, currentCollectionCount } = useCollectionsContext()
-  const daos = useNounsDaos()
+  const daos = useNounsDaos({ limit: 50 })
   const daoCount = useMemo(() => daos.length, [daos])
   const { hasScrolled, scrollEvent } = useHasScrolled()
   const [filter, setFilter] = useState<string>('')
