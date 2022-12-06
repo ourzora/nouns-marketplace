@@ -17,7 +17,7 @@ import {
 export function marketStatusToSortAxis(marketType: MarketStatusFilter) {
   switch (marketType) {
     case 'buy-now':
-      return undefined //MarketCategory.Ask
+      return MarketCategory.Ask
     case 'reserve-not-met':
       return MarketCategory.Auction
     case 'live':

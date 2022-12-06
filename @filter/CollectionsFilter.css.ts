@@ -342,8 +342,6 @@ export const mobileFiltersFooter = style([
     left: 'x0',
     p: 'x4',
     gap: 'x4',
-    // backgroundColor: 'primary',
-    // backgroundColor: 'primary',
     w: '100%',
   }),
 ])

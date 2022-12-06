@@ -7,13 +7,12 @@ import { Box, Flex, Label, Select } from '@zoralabs/zord'
 import * as styles from './CollectionsFilter.css'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 
-export function FilterPropertySelect({
-  traitType,
-  valueMetrics,
-}: {
+export type FilterProperty = {
   traitType: string
   valueMetrics: CollectionAttributeValue[]
-}) {
+}
+
+export function FilterPropertySelect({ traitType, valueMetrics }: FilterProperty) {
   const {
     filterStore: { setCollectionAttributes, filters },
   } = useCollectionFilters()
@@ -46,7 +45,7 @@ export function FilterPropertySelect({
       <Select
         name="filter-property"
         id="filter-property"
-        defaultValue=""
+        // defaultValue=""
         value={isReset ? '' : undefined}
         // pos="relative"
         w="100%"

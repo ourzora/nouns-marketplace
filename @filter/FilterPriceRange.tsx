@@ -2,7 +2,7 @@ import { Button } from 'components/Button'
 
 import { useCollectionFilters } from '@filter/providers'
 import { ETH_CURRENCY_SHIM } from '@shared'
-import { Box, Label, Stack } from '@zoralabs/zord'
+import { Label, Stack } from '@zoralabs/zord'
 
 import { PriceRangeSelector } from './PriceRangeSelector'
 
@@ -20,8 +20,15 @@ export function FilterPriceRange() {
       <PriceRangeSelector
         onSelect={priceRangeSelection}
         currencyOptions={[ETH_CURRENCY_SHIM]}
+        minPlaceholder="From"
+        maxPlaceholder="To"
       />
-      <Button variant="outline" disabled={invalidPriceRange} onClick={setPriceRange}>
+      <Button
+        size="md"
+        variant="secondary"
+        disabled={invalidPriceRange}
+        onClick={setPriceRange}
+      >
         Apply
       </Button>
     </Stack>

@@ -25,8 +25,8 @@ export function useAggregate(collectionAddress: string) {
       },
     }
   )
-  console.log('~~ useAggregate ~~')
-  const nftCount = zdkAggregate?.aggregateStat?.nftCount // || 0
+
+  const nftCount = zdkAggregate?.aggregateStat?.nftCount
   const ownerCount = zdkAggregate?.aggregateStat?.ownerCount
   const floorPrice = zdkAggregate?.aggregateStat?.floorPrice
   const salesVolume = zdkAggregate?.aggregateStat?.salesVolume

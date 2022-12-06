@@ -1,14 +1,14 @@
 import { useCollectionFilters } from '@filter/providers'
 import { Box, Label, Stack } from '@zoralabs/zord'
 
-import { FilterPropertySelect } from './FilterPropertySelect'
-import { useCollection } from './hooks/useCollection'
+import { FilterProperty, FilterPropertySelect } from './FilterPropertySelect'
+import { useCollectionAttributes } from './hooks/useCollectionAttributes'
 
 export function FilterProperties({ collectionAddress }: { collectionAddress: string }) {
-  const { data } = useCollection(collectionAddress)
+  const { data } = useCollectionAttributes(collectionAddress)
   const { useCollectionProperties } = useCollectionFilters()
 
-  if (!data?.attributes) {
+  if (!data?.aggregateAttributes) {
     return null
   }
 
@@ -20,7 +20,7 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
         </Label>
       )}
       <Stack gap="x2">
-        {data?.attributes.map((property) => (
+        {data?.aggregateAttributes.map((property: FilterProperty) => (
           <Box key={property.traitType} className={['filter-properties-list']}>
             <FilterPropertySelect
               traitType={property.traitType || ''}
