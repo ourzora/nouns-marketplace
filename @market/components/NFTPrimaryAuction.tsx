@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
@@ -9,11 +10,13 @@ import { NFTPrimaryAuctionActive, NFTPrimaryAuctionEndedSettlement } from './'
 export interface NFTPrimaryAuctionProps extends FlexProps {
   nftObj: NFTObject
   primaryAuction: TypeSafeNounsAuction
+  isActiveAuctionToken: boolean
 }
 
 export function NFTPrimaryAuction({
   nftObj,
   primaryAuction,
+  isActiveAuctionToken,
   ...props
 }: NFTPrimaryAuctionProps) {
   const { isEnded } = useNounishAuctionHelper({
@@ -44,7 +47,15 @@ export function NFTPrimaryAuction({
   //   )
   // }
 
-  return (
-    <NFTPrimaryAuctionActive nftObj={nftObj} primaryAuction={primaryAuction} {...props} />
-  )
+  if (isActiveAuctionToken) {
+    return (
+      <NFTPrimaryAuctionActive
+        nftObj={nftObj}
+        primaryAuction={primaryAuction}
+        {...props}
+      />
+    )
+  }
+
+  return null
 }
