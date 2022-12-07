@@ -1,13 +1,14 @@
 import { ManageHeader, PageWrapper, Seo } from 'components'
-import { Collections } from 'compositions'
 import { ManageNFTsServiceProps, manageNftsService } from 'services'
 
-import { CollectionFilterProvider } from '@filter'
-import { NFTCard, NFTGrid } from '@media'
+import { useTokensByAddress } from 'hooks/useTokensByAddress'
+
+import { NFTGrid2 } from '@media/NFTGrid2'
 import { nftGridWrapper } from '@media/NftMedia.css'
 import { Separator } from '@zoralabs/zord'
 
 const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
+  const { tokensByAddress } = useTokensByAddress({ ownerAddress })
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={`Manage | ${ownerAddress}`}></Seo>
@@ -22,17 +23,7 @@ const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
           '@1024': 'x2',
         }}
       />
-      {ownerAddress && (
-        // <CollectionFilterProvider
-        //   ownerAddress={ownerAddress}
-        //   contractAllowList={allAddresses}
-        //   // useFilterOwnerCollections
-        //   useSidebarFilter={false}
-        // >
-        // <Collections collectionAddress={collectionAddress} />
-        <NFTGrid items={items} className={nftGridWrapper()} />
-        // </CollectionFilterProvider>
-      )}
+      <NFTGrid2 items={tokensByAddress} className={nftGridWrapper()} isOwner={true} />
     </PageWrapper>
   )
 }
