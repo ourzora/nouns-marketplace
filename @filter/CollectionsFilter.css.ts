@@ -1,7 +1,12 @@
 import { PRIMARY_LAYER } from 'constants/layers'
 import { HEADER_HEIGHT } from 'styles/style-constants'
 
-import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
+import {
+  FILTER_HEADER_HEIGHT,
+  FILTER_OPEN_STICKY_OFFSET,
+  FILTER_OPEN_STICKY_OFFSET_MOBILE,
+  FILTER_SIDEBAR_WIDTH,
+} from '@filter/constants'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 import { atoms, color, ease, media, radii, space, typography, vars } from '@zoralabs/zord'
@@ -44,18 +49,18 @@ export const activityButton = atoms({
 })
 
 export const filterWrapper = style({
-  top: `var(--filter-offset-desktop)`,
+  top: `${FILTER_OPEN_STICKY_OFFSET}px`,
   background: 'white',
   zIndex: 2,
   '@media': {
     'screen and (max-width: 768px)': {
-      top: `var(--filter-offset-mobile)`,
+      top: `${FILTER_OPEN_STICKY_OFFSET_MOBILE}px`,
     },
   },
 })
 
 export const openFilterWrapper = style({
-  height: `calc(100vh - var(--filter-offset-desktop))`,
+  height: `calc(100vh - ${FILTER_OPEN_STICKY_OFFSET}px)`,
   '@media': {
     'screen and (max-width: 768px)': {
       position: 'fixed',

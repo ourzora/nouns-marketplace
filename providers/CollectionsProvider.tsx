@@ -1,4 +1,7 @@
-import { collectionAddresses, daoAddresses } from 'constants/collection-addresses'
+import {
+  // collectionAddresses,
+  daoAddresses,
+} from 'constants/collection-addresses'
 
 import { CollectionsData } from 'hooks'
 
@@ -12,18 +15,18 @@ import {
 } from 'react'
 
 const CollectionsContext = createContext<{
-  collections: CollectionsData[]
+  // collections: CollectionsData[]
   daos: CollectionsData[]
-  collectionAmount: number
+  // collectionAmount: number
   daosAmount: number
   currentCollection: string
   setCurrentCollection: Dispatch<SetStateAction<string>>
   currentCollectionCount: string | undefined
   setCurrentCollectionCount: Dispatch<SetStateAction<string | undefined>>
 }>({
-  collections: [],
+  // collections: [],
   daos: [],
-  collectionAmount: collectionAddresses.length,
+  // collectionAmount: collectionAddresses.length,
   daosAmount: daoAddresses.length,
   currentCollection: 'Browse...',
   setCurrentCollection: () => {},
@@ -33,7 +36,7 @@ const CollectionsContext = createContext<{
 
 type CollectionsProps = {
   children?: ReactNode
-  collections: CollectionsData[] | undefined
+  // collections: CollectionsData[] | undefined
   daos: CollectionsData[] | undefined
 }
 
@@ -41,7 +44,11 @@ export function useCollectionsContext() {
   return useContext(CollectionsContext)
 }
 
-export function CollectionsProvider({ children, collections, daos }: CollectionsProps) {
+export function CollectionsProvider({
+  children,
+  //  collections,
+  daos,
+}: CollectionsProps) {
   const [currentCollection, setCurrentCollection] = useState<string>('Browse...')
   const [currentCollectionCount, setCurrentCollectionCount] = useState<
     string | undefined
@@ -50,8 +57,8 @@ export function CollectionsProvider({ children, collections, daos }: Collections
   return (
     <CollectionsContext.Provider
       value={{
-        collections: collections ?? [],
-        collectionAmount: collectionAddresses.length,
+        // collections: collections ?? [],
+        // collectionAmount: collectionAddresses.length,
         daos: daos ?? [],
         daosAmount: daoAddresses.length,
         currentCollection,

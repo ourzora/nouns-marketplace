@@ -6,7 +6,7 @@ import { nftGridWrapper } from '@media/NftMedia.css'
 import { useNounishAuctionQuery } from '@noun-auction'
 import { NFTObject } from '@zoralabs/nft-hooks'
 
-import { NounishActivityRow } from './NounishActivityRow'
+// import { NounishActivityRow } from './NounishActivityRow'
 
 type DaoGridProps = {
   collectionAddress: string
@@ -14,33 +14,37 @@ type DaoGridProps = {
   isValidating: boolean
   isReachingEnd?: boolean
   handleLoadMore?: () => void
-  view?: 'activity' | 'nfts' | string
+  // view?: 'activity' | 'nfts' | string
 }
 
 export function DaoGrid({
-  view,
+  // view,
   items,
   isReachingEnd,
   isValidating,
   handleLoadMore,
   collectionAddress,
 }: DaoGridProps) {
-  const { activeAuction } = useNounishAuctionQuery({
-    collectionAddress,
-  })
+  // const { activeAuction } = useNounishAuctionQuery({
+  //   collectionAddress,
+  // })
 
   const renderer = useMemo(() => {
     // if (!activeAuction?.tokenId) return <></>
 
-    return view === 'nfts' || !activeAuction?.tokenId ? (
-      <NFTCard collectionAddress={collectionAddress} />
-    ) : (
-      <NounishActivityRow
-        collectionAddress={collectionAddress}
-        tokenId={activeAuction?.tokenId}
-      />
-    )
-  }, [collectionAddress, activeAuction?.tokenId, view])
+    // return view === 'nfts' || !activeAuction?.tokenId ? (
+    return <NFTCard collectionAddress={collectionAddress} />
+    // ) : (
+    //   <NounishActivityRow
+    //     collectionAddress={collectionAddress}
+    //     tokenId={activeAuction?.tokenId}
+    //   />
+    // )
+  }, [
+    collectionAddress,
+    // activeAuction?.tokenId,
+    //  view
+  ])
 
   return (
     <Filter
@@ -53,7 +57,8 @@ export function DaoGrid({
           isValidating={isValidating}
           nftRenderer={renderer}
           className={nftGridWrapper({
-            layout: view === 'nfts' ? 'grid' : 'activityRows',
+            // layout: view === 'nfts' ? 'grid' : 'activityRows',
+            layout: 'grid',
           })}
         />
       }

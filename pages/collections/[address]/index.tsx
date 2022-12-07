@@ -74,7 +74,8 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         filtersVisible={isLarge}
         contractAddress={collectionAddress}
         enableSortDropdown
-        // enableSelectedFiltersPanel
+        // enableSidebarFilter={false}
+        enableSelectedFiltersPanel
         useCollectionProperties={{
           header: 'Traits',
           selector: 'nouns-market-traits',

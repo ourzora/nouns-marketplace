@@ -46,7 +46,6 @@
     "dompurify": "^2.3.6",
     "ethers": "^5.6.5",
     "formik": "^2.2.9",
-    "framer-motion": "^6.3.3",
     "lodash": "^4.17.21",
     "next": "12.3.1",
     "nextjs-progressbar": "^0.0.14",

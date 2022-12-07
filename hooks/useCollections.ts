@@ -1,4 +1,7 @@
-import { collectionAddresses, daoAddresses } from 'constants/collection-addresses'
+import {
+  // collectionAddresses,
+  daoAddresses,
+} from 'constants/collection-addresses'
 
 import { useEffect, useState } from 'react'
 
@@ -11,27 +14,27 @@ export type CollectionsData = Collection
 export function useCollections() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<any>(undefined)
-  const [collections, setCollections] = useState<Collection[] | undefined>(undefined)
+  // const [collections, setCollections] = useState<Collection[] | undefined>(undefined)
   const [daos, setDaos] = useState<Collection[] | undefined>(undefined)
 
-  useEffect(() => {
-    const fetchCollections = async () => {
-      try {
-        setLoading(true)
-        /* @ts-ignore */
-        const data = await zdk.collections({
-          where: { collectionAddresses: collectionAddresses },
-        })
-        setCollections(data?.collections?.nodes)
-        setLoading(false)
-      } catch (error) {
-        setError(error)
-        Sentry.captureException(error)
-        setLoading(false)
-      }
-    }
-    fetchCollections()
-  }, [])
+  // useEffect(() => {
+  //   const fetchCollections = async () => {
+  //     try {
+  //       setLoading(true)
+  //       /* @ts-ignore */
+  //       const data = await zdk.collections({
+  //         where: { collectionAddresses: collectionAddresses },
+  //       })
+  //       setCollections(data?.collections?.nodes)
+  //       setLoading(false)
+  //     } catch (error) {
+  //       setError(error)
+  //       Sentry.captureException(error)
+  //       setLoading(false)
+  //     }
+  //   }
+  //   fetchCollections()
+  // }, [])
 
   useEffect(() => {
     const fetchDaos = async () => {
@@ -43,8 +46,10 @@ export function useCollections() {
         })
         setDaos(data?.collections?.nodes)
         setLoading(false)
-      } catch (err) {
-        Sentry.captureException(err)
+      } catch (error) {
+        setError(error)
+        Sentry.captureException(error)
+        setLoading(false)
       }
     }
     fetchDaos()
@@ -53,7 +58,7 @@ export function useCollections() {
   return {
     loading,
     error,
-    collections,
+    // collections,
     daos,
   }
 }

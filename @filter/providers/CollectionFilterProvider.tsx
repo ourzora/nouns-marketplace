@@ -56,7 +56,7 @@ export function CollectionFilterProvider({
   enableOwnerStatus = true,
   enableMediaTypes = true,
   enableSortDropdown = true,
-  enableSelectedFiltersPanel = false,
+  enableSelectedFiltersPanel = true,
   enableFilterToggleButton = false,
   enableCollectionSearch = true,
   enablePriceRange,

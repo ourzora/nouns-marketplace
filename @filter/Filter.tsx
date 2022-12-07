@@ -1,13 +1,9 @@
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { Box, Flex, Grid, Stack, StackProps } from '@zoralabs/zord'
+import { Grid, Stack, StackProps } from '@zoralabs/zord'
 
+import { FilterGridHeader, FilterHeader, FilterResultsLoading, FilterSidebar } from './'
 import * as styles from './CollectionsFilter.css'
-import { FilterHeader } from './FilterHeader'
-import { FilterResultsLoading } from './FilterResultsLoading'
-import { FilterSidebar } from './FilterSidebar'
 import { NoFilterResults } from './NoFilterResults'
-import { SelectedFilters } from './SelectedFilters'
-import { SortDropdown } from './SortDropdown'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 
 interface FilterProps extends StackProps {
@@ -18,27 +14,16 @@ interface FilterProps extends StackProps {
 export function Filter({ grid, className, ...props }: FilterProps) {
   const {
     filterStore: { showFilters },
-    enableSortDropdown,
-    enableSelectedFiltersPanel,
     items,
     isValidating,
     isEmpty,
     enableSidebarFilter,
-    getString,
   } = useCollectionFilters()
 
   console.log('FILTER')
-
   return (
     <Stack className={className} {...props}>
-      {!showFilters && enableSidebarFilter && (
-        <FilterHeader>
-          <>
-            {enableSelectedFiltersPanel && <SelectedFilters />}
-            {enableSortDropdown && <SortDropdown />}
-          </>
-        </FilterHeader>
-      )}
+      <FilterHeader />
       <Grid
         w="100%"
         position="sticky"
@@ -46,49 +31,12 @@ export function Filter({ grid, className, ...props }: FilterProps) {
         className={[
           'zora-collectionsFilterWrapperContainer',
           styles.filterWrapperContainer,
-          {
-            [styles.filterOpen]: showFilters,
-          },
+          showFilters && styles.filterOpen,
         ]}
       >
-        {enableSidebarFilter && (
-          <Box
-            position="sticky"
-            top="x0"
-            w="100%"
-            style={{
-              /* @ts-ignore */
-              '--filter-offset-mobile': `${getString(
-                'FILTER_OPEN_STICKY_OFFSET_MOBILE'
-              )}px`,
-              '--filter-offset-desktop': `${getString('FILTER_OPEN_STICKY_OFFSET')}px`,
-            }}
-            className={[
-              'zora-collectionFilterWrapper',
-              styles.filterWrapper,
-              {
-                [styles.openFilterWrapper]: showFilters,
-              },
-            ]}
-          >
-            <FilterSidebar />
-          </Box>
-        )}
+        {enableSidebarFilter && <FilterSidebar />}
         <Stack>
-          {showFilters && (
-            <Flex
-              className={styles.gridFilterHeaderPanel}
-              align="center"
-              justify={
-                enableSelectedFiltersPanel && enableSortDropdown
-                  ? 'space-between'
-                  : 'flex-end'
-              }
-            >
-              {enableSelectedFiltersPanel && <SelectedFilters />}
-              {enableSortDropdown && <SortDropdown />}
-            </Flex>
-          )}
+          <FilterGridHeader />
           {items.length ? (
             grid
           ) : (

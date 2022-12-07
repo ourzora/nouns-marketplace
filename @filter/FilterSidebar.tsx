@@ -1,6 +1,6 @@
 import { Button } from 'components/Button'
 
-import { Dispatch, SetStateAction, useMemo, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useRef, useState } from 'react'
 
 import { useCollectionFilters } from '@filter/providers'
 import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filter/state'
@@ -10,13 +10,7 @@ import { useWindowWidth } from '@shared'
 import { Box, Flex, Heading, Icon, Separator, Stack } from '@zoralabs/zord'
 
 import { ClearFilters } from './ClearFilters'
-import {
-  filterSidebar,
-  filterSidebarModalBackground,
-  filterSidebarModalContent,
-  filterSidebarScrolled,
-  sideBarSeparator,
-} from './CollectionsFilter.css'
+import * as styles from './CollectionsFilter.css'
 import { CollectionsFilterList } from './CollectionsFilterList'
 import { FilterHeader } from './FilterHeader'
 import { FilterOptions } from './FilterOptions'
@@ -63,7 +57,7 @@ export function FilterSidebarContents({
       w="100%"
       pb="x8"
       position={{ '@initial': 'relative', '@768': 'absolute' }}
-      className={[filterSidebar, 'zora-filterSidebar']}
+      className={[styles.filterSidebar, 'zora-filterSidebar']}
       ref={parentRef}
     >
       <Stack gap="x8" position="relative" ref={childRef}>
@@ -129,8 +123,8 @@ export function FilterSidebarMobile() {
         title="modal"
         showClose={false}
         padding="x0"
-        modalContentOverrides={filterSidebarModalContent}
-        modalBackgroundOverrides={filterSidebarModalBackground}
+        modalContentOverrides={styles.filterSidebarModalContent}
+        modalBackgroundOverrides={styles.filterSidebarModalBackground}
         fullscreen
       >
         <Stack px="x4" pt="x8">
@@ -160,7 +154,16 @@ export function FilterSidebar() {
   const [hasScrolled, setHasScrolled] = useState(false)
 
   return (
-    <>
+    <Box
+      position="sticky"
+      top="x0"
+      w="100%"
+      className={[
+        'zora-collectionFilterWrapper',
+        styles.filterWrapper,
+        showFilters && styles.openFilterWrapper,
+      ]}
+    >
       {isLarge ? (
         <Box h="100%" w="100%" position="sticky" display={showFilters ? 'block' : 'none'}>
           {enableFilterToggleButton && <FilterHeader />}
@@ -168,10 +171,8 @@ export function FilterSidebar() {
             position="relative"
             mt={enableFilterToggleButton ? 'x0' : 'x8'}
             className={[
-              sideBarSeparator,
-              {
-                [filterSidebarScrolled]: hasScrolled,
-              },
+              styles.sideBarSeparator,
+              hasScrolled && styles.filterSidebarScrolled,
             ]}
           />
           <FilterSidebarContents setHasScrolled={setHasScrolled} />
@@ -179,6 +180,6 @@ export function FilterSidebar() {
       ) : (
         <FilterSidebarMobile />
       )}
-    </>
+    </Box>
   )
 }
