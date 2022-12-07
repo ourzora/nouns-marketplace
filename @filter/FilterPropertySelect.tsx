@@ -12,10 +12,20 @@ export type FilterProperty = {
   valueMetrics: CollectionAttributeValue[]
 }
 
+function sortTraitsByName(a: CollectionAttributeValue, b: CollectionAttributeValue) {
+  return a.value < b.value ? -1 : 1
+}
+
 export function FilterPropertySelect({ traitType, valueMetrics }: FilterProperty) {
   const {
     filterStore: { setCollectionAttributes, filters },
   } = useCollectionFilters()
+
+  const sortedValueMetrics = useMemo(
+    // TODO: Can we have this functionality on the back-end?
+    () => valueMetrics.sort(sortTraitsByName),
+    [valueMetrics]
+  )
 
   // console.log('hmmmm', filters.collectionAttributes)
 
@@ -69,7 +79,7 @@ export function FilterPropertySelect({ traitType, valueMetrics }: FilterProperty
           key={`${traitType}-default`}
           w="100%"
         />
-        {valueMetrics.map((valueMetric) => (
+        {sortedValueMetrics.map((valueMetric) => (
           <Box as="option" value={valueMetric.value} key={valueMetric.value} w="100%">
             {valueMetric.value}
           </Box>
