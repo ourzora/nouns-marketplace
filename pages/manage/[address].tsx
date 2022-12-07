@@ -1,16 +1,14 @@
 import { ManageHeader, PageWrapper, Seo } from 'components'
-import { Collections } from 'compositions'
-// apparently 'constants' is reserved in Next.js (?)
-import { allAddresses } from 'constants/collection-addresses'
 import { ManageNFTsServiceProps, manageNftsService } from 'services'
 
-import { useBlocklist } from '@blocklist/src/blocklist'
-import { CollectionFilterProvider } from '@filter'
+import { useTokensByAddress } from 'hooks/useTokensByAddress'
+
+import { NFTGrid2 } from '@media/NFTGrid2'
+import { nftGridWrapper } from '@media/NftMedia.css'
 import { Separator } from '@zoralabs/zord'
 
 const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
-  // FIXME
-  const collectionAddress = ''
+  const { tokensByAddress } = useTokensByAddress({ ownerAddress })
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={`Manage | ${ownerAddress}`}></Seo>
@@ -25,16 +23,7 @@ const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
           '@1024': 'x2',
         }}
       />
-      {ownerAddress && (
-        <CollectionFilterProvider
-          ownerAddress={ownerAddress}
-          contractAllowList={allAddresses}
-          // useFilterOwnerCollections
-          useSidebarFilter={false}
-        >
-          <Collections collectionAddress={collectionAddress} />
-        </CollectionFilterProvider>
-      )}
+      <NFTGrid2 items={tokensByAddress} className={nftGridWrapper()} isOwner={true} />
     </PageWrapper>
   )
 }

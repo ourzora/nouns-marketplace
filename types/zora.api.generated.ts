@@ -1909,9 +1909,17 @@ export type V3AskEventProperties =
   | V3AskCreatedEventProperties
   | V3AskFilledEventProperties
   | V3AskPriceUpdatedEventProperties
+  | V3AsksCoreEthAskEventProperties
+  | V3AsksCoreEthAskFilledEventProperties
+  | V3AsksCoreEthRoyaltyPayoutEventProperties
   | V3PrivateAskEventProperties
 
 export enum V3AskEventType {
+  V3AsksCoreEthCanceled = 'V3_ASKS_CORE_ETH_CANCELED',
+  V3AsksCoreEthCreated = 'V3_ASKS_CORE_ETH_CREATED',
+  V3AsksCoreEthFilled = 'V3_ASKS_CORE_ETH_FILLED',
+  V3AsksCoreEthPriceUpdated = 'V3_ASKS_CORE_ETH_PRICE_UPDATED',
+  V3AsksCoreEthRoyaltyPayout = 'V3_ASKS_CORE_ETH_ROYALTY_PAYOUT',
   V3AskCanceled = 'V3_ASK_CANCELED',
   V3AskCreated = 'V3_ASK_CREATED',
   V3AskFilled = 'V3_ASK_FILLED',
@@ -1942,6 +1950,37 @@ export type V3AskPriceUpdatedEventProperties = {
   price: PriceAtTime
   seller: Scalars['String']
   sellerFundsRecipient: Scalars['String']
+}
+
+export type V3AsksCoreEthAskEventProperties = {
+  __typename?: 'V3AsksCoreEthAskEventProperties'
+  askCurrency: Scalars['String']
+  askPrice: Scalars['String']
+  price: PriceAtTime
+  seller: Scalars['String']
+  tokenContract: Scalars['String']
+  tokenId: Scalars['String']
+}
+
+export type V3AsksCoreEthAskFilledEventProperties = {
+  __typename?: 'V3AsksCoreEthAskFilledEventProperties'
+  askCurrency: Scalars['String']
+  askPrice: Scalars['String']
+  buyer: Scalars['String']
+  price: PriceAtTime
+  seller: Scalars['String']
+  tokenContract: Scalars['String']
+  tokenId: Scalars['String']
+}
+
+export type V3AsksCoreEthRoyaltyPayoutEventProperties = {
+  __typename?: 'V3AsksCoreEthRoyaltyPayoutEventProperties'
+  amount: PriceAtTime
+  askCurrency: Scalars['String']
+  askPrice: Scalars['String']
+  recipient: Scalars['String']
+  tokenContract: Scalars['String']
+  tokenId: Scalars['String']
 }
 
 export type V3ModuleManagerEvent = {
@@ -2218,6 +2257,8 @@ export type NounsDaosQuery = {
 export type OffchainOrderForTokenQueryVariables = Exact<{
   tokenId: Scalars['String']
   tokenAddress: Scalars['String']
+  network: Network
+  chain: Chain
 }>
 
 export type OffchainOrderForTokenQuery = {
@@ -2365,4 +2406,124 @@ export type TokenQuery = {
       } | null
     }
   } | null
+}
+
+export type NounsTokensByOwnerAddressQueryVariables = Exact<{
+  ownerAddress: Scalars['String']
+}>
+
+export type NounsTokensByOwnerAddressQuery = {
+  __typename?: 'RootQuery'
+  tokens: {
+    __typename?: 'TokenWithMarketsSummaryConnection'
+    nodes: Array<{
+      __typename?: 'TokenWithMarketsSummary'
+      token: {
+        __typename?: 'Token'
+        collectionAddress: string
+        collectionName?: string | null
+        description?: string | null
+        lastRefreshTime?: any | null
+        metadata?: any | null
+        name?: string | null
+        tokenId: string
+        image?: {
+          __typename?: 'TokenContentMedia'
+          url?: string | null
+          size?: string | null
+          mimeType?: string | null
+          mediaEncoding?:
+            | { __typename?: 'AudioEncodingTypes' }
+            | {
+                __typename?: 'ImageEncodingTypes'
+                large?: string | null
+                poster?: string | null
+              }
+            | { __typename?: 'UnsupportedEncodingTypes' }
+            | { __typename?: 'VideoEncodingTypes' }
+            | null
+        } | null
+        tokenContract?: {
+          __typename?: 'TokenContract'
+          collectionAddress: string
+          symbol?: string | null
+          totalSupply?: number | null
+        } | null
+      }
+      marketsSummary: Array<{
+        __typename?: 'Market'
+        collectionAddress?: string | null
+        marketAddress: string
+        marketType: MarketType
+        properties?:
+          | { __typename?: 'LilNounsAuction' }
+          | { __typename?: 'NounsAuction' }
+          | { __typename?: 'NounsBuilderAuction' }
+          | { __typename?: 'V1Ask' }
+          | { __typename?: 'V1BidShare' }
+          | { __typename?: 'V1Offer' }
+          | { __typename?: 'V2Auction' }
+          | {
+              __typename?: 'V3Ask'
+              address: string
+              askCurrency: string
+              buyer?: string | null
+              collectionAddress: string
+              seller: string
+              tokenId: string
+              v3AskStatus: string
+              askPrice: { __typename?: 'PriceAtTime'; blockNumber: number }
+            }
+          | {
+              __typename?: 'V3ReserveAuction'
+              estimatedDurationTime?: any | null
+              address: string
+              collectionAddress: string
+              currency: string
+              duration: string
+              extended: boolean
+              finder: string
+              findersFeeBps: string
+              firstBid: boolean
+              firstBidTime: string
+              highestBid: string
+              highestBidder: string
+              reserve: string
+              seller: string
+              sellerFundsRecipient: string
+              startTime: string
+              status: string
+              tokenId: string
+              highestBidPrice?: {
+                __typename?: 'PriceAtTime'
+                blockNumber: number
+                usdcPrice?: {
+                  __typename?: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                } | null
+                nativePrice: {
+                  __typename?: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                }
+              } | null
+              reservePrice: {
+                __typename?: 'PriceAtTime'
+                usdcPrice?: {
+                  __typename?: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                } | null
+                nativePrice: {
+                  __typename?: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                }
+              }
+            }
+          | null
+      }>
+    }>
+  }
 }
