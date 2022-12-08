@@ -19,9 +19,15 @@ import { useV3AskTransaction } from '../hooks/useV3AskTransaction'
 
 interface V3AskFillAskProps extends CommonV3AskComponentProps {}
 
-export function V3AskFillAsk({ onNext, ...props }: V3AskFillAskProps) {
+export function V3AskFillAsk({
+  onNext,
+  tokenId,
+  contractAddress,
+  collectionName,
+  markets,
+  ...props
+}: V3AskFillAskProps) {
   const { requestClose } = useModal()
-  const { markets } = props.nft
   const { ask } = useRelevantMarket(markets)
   const { displayAskAmount, hasSufficientFunds } = useAskHelper({
     ask,
@@ -45,7 +51,8 @@ export function V3AskFillAsk({ onNext, ...props }: V3AskFillAskProps) {
   )
 
   const { txStatus, txInProgress, txError, finalizedTx, fillAsk } = useV3AskTransaction({
-    nft: props.nft,
+    tokenId,
+    contractAddress,
   })
   const isDisabled = useMemo(
     () => txInProgress || !hasSufficientFunds || !displayAskAmount,
@@ -55,7 +62,12 @@ export function V3AskFillAsk({ onNext, ...props }: V3AskFillAskProps) {
 
   return (
     <Stack gap="x3" {...props}>
-      <MarketModalHeading nftObj={props.nft} action="Buy" />
+      <MarketModalHeading
+        tokenId={tokenId}
+        contractAddress={contractAddress}
+        collectionName={collectionName}
+        action="Buy"
+      />
 
       <Flex justify="space-between">
         <Paragraph size="lg" inline color="text3" className={[mediumFont]}>

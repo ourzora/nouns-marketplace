@@ -1,9 +1,8 @@
 import { ImageElement } from 'components'
 import { Link } from 'components/Link'
-import {
-  ImageEncodingTypes,
-  NounsTokensByOwnerAddressQuery,
-} from 'types/zora.api.generated'
+import { NounsTokensByOwnerAddressQuery } from 'types/zora.api.generated'
+
+import { useToken } from 'hooks/useToken'
 
 import { useMemo } from 'react'
 
@@ -18,16 +17,7 @@ import {
 } from '@media/NftMedia.css'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 import { FallbackThumbnail } from '@noun-auction'
-import { useIsOwner } from '@shared'
 import { Box, Flex, Heading, Separator, Stack } from '@zoralabs/zord'
-
-/** 
-  tokenId
-  collectionAddress
-  collectionName
-  tokenOwner 
-  token?.image?.url or token?.image?.mediaEncoding?.poster
-*/
 
 type ImageType = NounsTokensByOwnerAddressQuery['tokens']['nodes'][0]['token']['image']
 type Props = {
@@ -38,6 +28,8 @@ type Props = {
   // optionally set this as flag for /manage page (where we know for sure that user is owner)
   isOwner?: boolean
   image: ImageType
+  ownerAddress?: string
+  markets: ReturnType<typeof useToken>['markets']
 }
 
 export function NFTCard2({
@@ -46,6 +38,8 @@ export function NFTCard2({
   collectionName,
   image,
   tokenName,
+  ownerAddress,
+  markets,
 }: Props) {
   console.log('NFTCard2', collectionAddress, tokenId, collectionName)
   // maybe it makes sense to have fallback for image here
@@ -53,11 +47,13 @@ export function NFTCard2({
 
   return (
     <NFTCardComponent
+      markets={markets}
       tokenId={tokenId}
       collectionAddress={collectionAddress}
       collectionName={collectionName}
       image={image}
       tokenName={tokenName}
+      ownerAddress={ownerAddress}
     />
   )
 }
@@ -115,6 +111,8 @@ export function NFTCardComponent({
   isOwner,
   tokenName,
   image,
+  ownerAddress,
+  markets,
 }: Props) {
   const fallbackTitle = collectionName ?? '..'
 
@@ -159,8 +157,15 @@ export function NFTCardComponent({
             </Flex>
           </Link>
         </Flex>
-        {/* <Separator mt="x1" />
-        <NFTCardMarket /> */}
+        <Separator mt="x1" />
+        <NFTCardMarket
+          ownerAddress={ownerAddress}
+          tokenId={tokenId}
+          contractAddress={collectionAddress}
+          collectionName={collectionName ?? '..'}
+          markets={markets}
+          isOwner={isOwner}
+        />
       </Stack>
     </Stack>
   )

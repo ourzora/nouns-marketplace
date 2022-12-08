@@ -18,11 +18,14 @@ import { SeaportContractCall } from './types/SeaportContractCall'
 
 interface SeaportFillOrderProps extends CommonSeaportFillOrderProps {
   setIsFilled: Dispatch<SetStateAction<boolean>>
+  tokenId: string
+  collectionName: string
 }
 
 export function SeaportFillOrder({
   order,
-  nft,
+  tokenId,
+  collectionName,
   userAddress,
   setIsFilled,
   ...props
@@ -47,7 +50,8 @@ export function SeaportFillOrder({
     return (
       <SeaportFillOrderWithVerifiedContractCall
         order={order}
-        nft={nft}
+        tokenId={tokenId}
+        collectionName={collectionName}
         contractCall={contractCall}
         userAddress={userAddress}
         setIsFilled={setIsFilled}
@@ -61,10 +65,12 @@ export function SeaportFillOrder({
 
 function SeaportFillOrderWithVerifiedContractCall({
   order,
-  nft,
   userAddress,
   contractCall,
   setIsFilled,
+  contractAddress,
+  collectionName,
+  tokenId,
   ...props
 }: SeaportFillOrderProps & { contractCall: SeaportContractCall }) {
   const { requestClose } = useModal()
@@ -91,11 +97,7 @@ function SeaportFillOrderWithVerifiedContractCall({
     loading: loadingValidation,
   } = useValidateSeaportContractCall(contractCall)
 
-  const {
-    attribution,
-    logo: PlatformLogo,
-    platformName,
-  } = useOffchainOrderAttribution(
+  const { logo: PlatformLogo, platformName } = useOffchainOrderAttribution(
     offchainOrder.calldata!,
     offchainOrder?.properties?.salt
   )
@@ -114,7 +116,12 @@ function SeaportFillOrderWithVerifiedContractCall({
   return (
     contractCall && (
       <Stack gap="x8" {...props}>
-        <MarketModalHeading nftObj={nft} action="Buy" />
+        <MarketModalHeading
+          collectionName={collectionName}
+          contractAddress={contractAddress}
+          tokenId={tokenId}
+          action="Buy"
+        />
         <Stack gap="x3" {...props}>
           <Flex justify="space-between">
             <Paragraph size="lg" inline color="text2" className={[mediumFont]}>

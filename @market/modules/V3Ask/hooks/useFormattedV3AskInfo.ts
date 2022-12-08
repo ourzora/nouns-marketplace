@@ -1,26 +1,32 @@
+import { useToken } from 'hooks/useToken'
+
 import { useMemo } from 'react'
 
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { isAddress, shortenAddress } from '@shared'
 import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
 import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
-import { NFTObject } from '@zoralabs/nft-hooks'
 
 import { useV3AskContractContext } from '../providers/V3AskContractProvider'
 import { useV3AskStateContext } from '../providers/V3AskStateProvider'
 
 interface V3AskInfoProps {
-  nft: NFTObject
+  contractAddress: string
+  tokenId: string
+  markets: ReturnType<typeof useToken>['markets'] // FIXME
 }
 
-export const useFormattedV3AskInfo = ({ nft: nftObj }: V3AskInfoProps) => {
+export const useFormattedV3AskInfo = ({
+  contractAddress,
+  tokenId,
+  markets,
+}: V3AskInfoProps) => {
   const { V3Asks, PrivateAsks } = useV3AskContractContext()
   const { finalizedV3AskDetails } = useV3AskStateContext()
-  const { nft, markets } = nftObj
 
   // Prioritize data from a just-created ask, or fall back to the relevant ask in the NFT's market obj
   const { ask } = useRelevantMarket(markets)
-  const { hasActiveV3Ask, hasActivePrivateAsk, isActiveAsk } = useAskHelper({ ask })
+  const { hasActivePrivateAsk, isActiveAsk } = useAskHelper({ ask })
   const hasRelevantV3Ask = useMemo(
     // () => finalizedV3AskDetails || hasActiveV3Ask,
     () => finalizedV3AskDetails || isActiveAsk,
@@ -29,13 +35,13 @@ export const useFormattedV3AskInfo = ({ nft: nftObj }: V3AskInfoProps) => {
 
   const askPrice = useMemo(() => {
     if (!hasRelevantV3Ask) return '...'
-    return finalizedV3AskDetails?.price ?? ask?.amount?.eth?.value
-  }, [ask?.amount?.eth?.value, finalizedV3AskDetails?.price, hasRelevantV3Ask])
+    return finalizedV3AskDetails?.price ?? ask?.price?.nativePrice?.decimal
+  }, [ask?.price?.nativePrice?.decimal, finalizedV3AskDetails?.price, hasRelevantV3Ask])
   const possibleENSBuyerAddress = useMemo(() => {
     if (!hasRelevantV3Ask || !hasActivePrivateAsk) return null
-    return finalizedV3AskDetails?.rawBuyerAddress ?? ask?.raw.properties.buyer
+    return finalizedV3AskDetails?.rawBuyerAddress ?? ask?.properties?.buyer
   }, [
-    ask?.raw.properties.buyer,
+    ask?.properties?.buyer,
     finalizedV3AskDetails?.rawBuyerAddress,
     hasRelevantV3Ask,
     hasActivePrivateAsk,
@@ -82,20 +88,20 @@ export const useFormattedV3AskInfo = ({ nft: nftObj }: V3AskInfoProps) => {
       },
       {
         label: 'Token contract',
-        value: shortenAddress(nft?.contract.address),
-        copyValue: nft?.contract.address!,
+        value: shortenAddress(contractAddress),
+        copyValue: contractAddress,
         url: {
-          href: `https://etherscan.io/address/${nft?.contract.address}`,
+          href: `https://etherscan.io/address/${contractAddress}`,
           target: '_blank',
           rel: 'noreferrer',
         },
       },
       {
         label: 'Token ID',
-        value: nft?.tokenId!,
-        copyValue: nft?.tokenId!,
+        value: tokenId,
+        copyValue: tokenId,
         url: {
-          href: `https://zora.co/collections/${nft?.contract.address}/${nft?.tokenId}`,
+          href: `https://zora.co/collections/${contractAddress}/${tokenId}`,
           target: '_blank',
           rel: 'noreferrer',
         },
@@ -131,8 +137,8 @@ export const useFormattedV3AskInfo = ({ nft: nftObj }: V3AskInfoProps) => {
     hasRelevantV3Ask,
     asksContractAddressLabel,
     asksContractAddress,
-    nft?.contract.address,
-    nft?.tokenId,
+    contractAddress,
+    tokenId,
     askPrice,
     buyerAsENSorShortenedAddress,
     possibleENSBuyerAddress,

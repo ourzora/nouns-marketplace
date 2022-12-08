@@ -5,7 +5,10 @@ import { OffchainOrderWithToken } from 'types/zora.api.generated'
 import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
 import { useToken } from 'hooks/useToken'
 
+import { TypeSafeToken } from 'validators/token'
+
 import { CollectionThumbnail } from '@media'
+import { useIsOwner } from '@shared'
 import { DescriptionWithMaxLines } from '@shared/components'
 import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
 
@@ -17,6 +20,8 @@ export interface NFTSidebarProps extends StackProps {
   collectionAddress: string
   tokenId: string
   offchainOrders?: OffchainOrderWithToken[]
+  token: TypeSafeToken
+  markets: ReturnType<typeof useToken>['markets']
 }
 
 export function NFTSidebar({
@@ -24,14 +29,18 @@ export function NFTSidebar({
   tokenId,
   offchainOrders,
   ...props
-}: NFTSidebarProps) {
-  if (!collectionAddress || !tokenId) return null
+}: Omit<NFTSidebarProps, 'token' | 'markets'>) {
+  const { token, markets } = useToken({ collectionAddress, tokenId })
+
+  if (!token) return null
 
   return (
     <NFTSidebarComponent
+      markets={markets}
       collectionAddress={collectionAddress}
       tokenId={tokenId}
       offchainOrders={offchainOrders}
+      token={token}
       {...props}
     />
   )
@@ -42,14 +51,15 @@ export function NFTSidebarComponent({
   collectionAddress,
   tokenId,
   offchainOrders,
+  token,
+  markets,
   ...props
 }: NFTSidebarProps) {
   const { primarySalePrice, hasPrimarySalePrice } = usePrimarySalePrice({
     collectionAddress,
   })
-  const { token } = useToken({ collectionAddress, tokenId })
 
-  if (!token) return null
+  const { isOwner } = useIsOwner(token)
 
   return (
     <Stack
@@ -89,7 +99,11 @@ export function NFTSidebarComponent({
           <NFTProvenance primarySalePrice={primarySalePrice} token={token} />
         )}
         <NFTMarket
-          collectionAddress={collectionAddress}
+          markets={markets}
+          isOwner={isOwner}
+          tokenId={tokenId}
+          collectionAddress={token.collectionAddress}
+          collectionName={token.collectionName}
           offchainOrders={offchainOrders}
         />
       </Stack>

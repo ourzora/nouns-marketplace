@@ -2325,6 +2325,96 @@ export type TokenQuery = {
   __typename?: 'RootQuery'
   token?: {
     __typename?: 'TokenWithFullMarketHistory'
+    markets: Array<{
+      __typename?: 'Market'
+      collectionAddress?: string | null
+      marketAddress: string
+      marketType: MarketType
+      status: string
+      tokenId?: string | null
+      properties?:
+        | { __typename?: 'LilNounsAuction' }
+        | { __typename?: 'NounsAuction' }
+        | { __typename?: 'NounsBuilderAuction' }
+        | { __typename?: 'V1Ask' }
+        | { __typename?: 'V1BidShare' }
+        | {
+            __typename: 'V1Offer'
+            address: string
+            bidder: string
+            collectionAddress: string
+            currency: string
+            recipient: string
+            sellOnShare: string
+            tokenId: string
+            v1OfferStatus: string
+            amount: {
+              __typename?: 'PriceAtTime'
+              nativePrice: { __typename?: 'CurrencyAmount'; decimal: number; raw: string }
+              usdcPrice?: {
+                __typename?: 'CurrencyAmount'
+                decimal: number
+                raw: string
+              } | null
+            }
+          }
+        | { __typename?: 'V2Auction' }
+        | {
+            __typename: 'V3Ask'
+            address: string
+            askCurrency: string
+            buyer?: string | null
+            collectionAddress: string
+            seller: string
+            tokenId: string
+            v3AskStatus: string
+            askPrice: {
+              __typename?: 'PriceAtTime'
+              nativePrice: { __typename?: 'CurrencyAmount'; decimal: number; raw: string }
+              usdcPrice?: {
+                __typename?: 'CurrencyAmount'
+                decimal: number
+                raw: string
+              } | null
+            }
+          }
+        | {
+            __typename: 'V3ReserveAuction'
+            estimatedDurationTime?: any | null
+            address: string
+            collectionAddress: string
+            currency: string
+            duration: string
+            extended: boolean
+            finder: string
+            findersFeeBps: string
+            firstBid: boolean
+            firstBidTime: string
+            highestBid: string
+            highestBidder: string
+            reserve: string
+            seller: string
+            sellerFundsRecipient: string
+            startTime: string
+            status: string
+            tokenId: string
+            price?: {
+              __typename?: 'PriceAtTime'
+              nativePrice: { __typename?: 'CurrencyAmount'; decimal: number; raw: string }
+              usdcPrice?: {
+                __typename?: 'CurrencyAmount'
+                decimal: number
+                raw: string
+              } | null
+            } | null
+          }
+        | null
+      price?: {
+        __typename?: 'PriceAtTime'
+        nativePrice: { __typename?: 'CurrencyAmount'; decimal: number; raw: string }
+        usdcPrice?: { __typename?: 'CurrencyAmount'; decimal: number; raw: string } | null
+      } | null
+    }>
     token: {
       __typename?: 'Token'
       collectionAddress: string
@@ -2427,6 +2517,7 @@ export type NounsTokensByOwnerAddressQuery = {
         metadata?: any | null
         name?: string | null
         tokenId: string
+        owner?: string | null
         image?: {
           __typename?: 'TokenContentMedia'
           url?: string | null

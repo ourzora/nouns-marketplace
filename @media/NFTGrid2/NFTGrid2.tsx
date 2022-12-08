@@ -19,15 +19,19 @@ export function NFTGrid2({ items, ...props }: NFTGridProps) {
             const collectionAddress = nft.token.collectionAddress
             const tokenId = nft.token.tokenId
 
+            console.log(nft.marketsSummary)
+
             return (
               <NFTCard2
                 isOwner={props.isOwner}
+                ownerAddress={nft?.token?.owner ?? undefined}
                 key={`${collectionAddress}-${tokenId}`}
                 tokenId={tokenId}
                 collectionAddress={collectionAddress}
                 collectionName={nft?.token?.collectionName ?? '..'}
                 tokenName={nft?.token?.name ?? '..'}
                 image={nft?.token?.image ?? null}
+                markets={nft.marketsSummary}
               />
             )
           })}

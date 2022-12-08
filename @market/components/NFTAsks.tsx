@@ -1,39 +1,79 @@
 import { NFTOffchainOrders } from 'compositions'
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
+import { useToken } from 'hooks/useToken'
+
 import { useMemo } from 'react'
 
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { V3AskSidebar } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
-import { useIsOwner } from '@shared/hooks/useIsOwner'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTAskProps extends FlexProps {
-  nftObj: NFTObject
+  tokenId: string
+  contractAddress: string
+  collectionName: string
+  markets: ReturnType<typeof useToken>['markets']
   offchainOrders?: OffchainOrderWithToken[]
+  isOwner: boolean
 }
 
-export function NFTAsks({ nftObj, offchainOrders, ...props }: NFTAskProps) {
-  const { markets } = nftObj
+// ask?.amount?.eth?.value
+// inalizedV3AskDetails?.rawBuyerAddress ?? ask?.raw.properties.buyer
+// finalizedV3AskDetails?.price
+
+export function NFTAsks({
+  tokenId,
+  contractAddress,
+  collectionName,
+  markets,
+  offchainOrders,
+  isOwner,
+}: NFTAskProps) {
   const { ask } = useRelevantMarket(markets)
-  const { isOwner } = useIsOwner(nftObj)
   const { hasRelevantAsk } = useAskHelper({ ask })
   const showOffchainOrders = useMemo(
     () => offchainOrders && offchainOrders?.length > 0 && !isOwner,
     [isOwner, offchainOrders]
   )
 
+  console.log({ ask, hasRelevantAsk })
+
   if (hasRelevantAsk) {
-    return <V3AskSidebar nftObj={nftObj} borderRadius="phat" />
+    return (
+      <V3AskSidebar
+        isOwner={isOwner}
+        tokenId={tokenId}
+        contractAddress={contractAddress}
+        collectionName={collectionName}
+        markets={markets}
+        borderRadius="phat"
+      />
+    )
   }
 
   if (showOffchainOrders) {
-    return <NFTOffchainOrders nft={nftObj} offchainOrders={offchainOrders!} />
+    return (
+      <NFTOffchainOrders
+        tokenId={tokenId}
+        contractAddress={contractAddress}
+        collectionName={collectionName}
+        markets={markets}
+        offchainOrders={offchainOrders!}
+      />
+    )
   }
 
-  if (isOwner) return <UniversalListAskFlow nftObj={nftObj} />
+  if (isOwner)
+    return (
+      <UniversalListAskFlow
+        tokenId={tokenId}
+        contractAddress={contractAddress}
+        collectionName={collectionName}
+        markets={markets}
+      />
+    )
 
   return null
 }

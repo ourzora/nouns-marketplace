@@ -56,9 +56,14 @@ const validate = (values: Values) => {
   return errors
 }
 
-export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
+export function PrivateAskCreate({
+  onNext,
+  contractAddress,
+  tokenId,
+  ...props
+}: PrivateAskCreateProps) {
   const { txStatus, txInProgress, txError, createAsk, finalizedTx } = useV3AskTransaction(
-    { nft: props.nft, askType: PRIVATE_ASK }
+    { contractAddress, tokenId, askType: PRIVATE_ASK }
   )
   useEffect(() => finalizedTx!! && onNext!(), [finalizedTx, onNext])
 

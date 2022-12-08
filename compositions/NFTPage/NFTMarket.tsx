@@ -1,9 +1,10 @@
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
+import { useToken } from 'hooks/useToken'
+
 import { NFTPrimaryAuction } from '@market'
 import { NFTAsks } from '@market/components/NFTAsks'
 import { useNounishAuctionQuery } from '@noun-auction'
-import { useNFTProvider } from '@shared'
 import { BoxProps } from '@zoralabs/zord'
 
 import { nftMarketWrapper } from './NFTPage.css'
@@ -11,34 +12,49 @@ import { nftMarketWrapper } from './NFTPage.css'
 interface NFTMarketProps extends BoxProps {
   collectionAddress: string
   offchainOrders?: OffchainOrderWithToken[]
+  tokenId: string
+  collectionName: string
+  isOwner: boolean
+  markets: ReturnType<typeof useToken>['markets']
 }
 
 export function NFTMarket({
   offchainOrders,
   className,
   collectionAddress,
+  tokenId,
+  collectionName,
+  isOwner,
+  markets,
 }: NFTMarketProps) {
-  const { nft: nftObj } = useNFTProvider()
   const { activeAuction, hasActiveAuction } = useNounishAuctionQuery({
     collectionAddress,
   })
 
-  if (hasActiveAuction && nftObj) {
-    return <NFTPrimaryAuction nftObj={nftObj} primaryAuction={activeAuction!} />
-  }
+  console.log({ markets })
 
-  if (nftObj) {
+  if (hasActiveAuction) {
     return (
-      <NFTAsks
-        offchainOrders={offchainOrders}
-        className={[nftMarketWrapper, className]}
-        nftObj={nftObj}
-        p="x4"
-        align="flex-start"
-        direction="column"
+      <NFTPrimaryAuction
+        collectionAddress={collectionAddress}
+        tokenId={tokenId}
+        primaryAuction={activeAuction!}
       />
     )
   }
 
-  return null
+  return (
+    <NFTAsks
+      isOwner={isOwner}
+      offchainOrders={offchainOrders}
+      className={[nftMarketWrapper, className]}
+      tokenId={tokenId}
+      contractAddress={collectionAddress}
+      collectionName={collectionName}
+      markets={markets}
+      p="x4"
+      align="flex-start"
+      direction="column"
+    />
+  )
 }

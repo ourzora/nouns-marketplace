@@ -1,10 +1,11 @@
 import clsx from 'clsx'
 
+import { useToken } from 'hooks/useToken'
+
 import React, { useCallback } from 'react'
 
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from '@modal/Modal.css'
-import { NFTObject } from '@zoralabs/nft-hooks'
 
 import { V3AskFlow } from './V3AskFlow'
 import * as styles from './V3AskModal.css'
@@ -12,13 +13,21 @@ import { V3AskTrigger } from './V3AskTrigger'
 import { V3AskStateProvider } from './providers/V3AskStateProvider'
 
 interface V3AskModalProps {
-  nftObj: NFTObject
+  tokenId: string
+  contractAddress: string
+  collectionName: string
   modalName: string
   disableCloseOnClickOutside?: boolean
+  markets: ReturnType<typeof useToken>['markets']
+  isOwner: boolean
 }
 
 export function V3AskModal({
-  nftObj,
+  tokenId,
+  contractAddress,
+  collectionName,
+  markets,
+  isOwner,
   modalName,
   disableCloseOnClickOutside = false,
 }: V3AskModalProps) {
@@ -26,18 +35,23 @@ export function V3AskModal({
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
   }, [modalName, requestOpen])
-  const { nft } = nftObj
-
-  if (!nft) {
-    return null
-  }
 
   return (
     <V3AskStateProvider>
       <Modal
         open={modalType === modalName}
         onOpenChange={requestClose}
-        trigger={<V3AskTrigger nft={nftObj} openModal={modalHandler} />}
+        trigger={
+          <V3AskTrigger
+            isOwner={isOwner}
+            modalName={modalName}
+            tokenId={tokenId}
+            contractAddress={contractAddress}
+            collectionName={collectionName}
+            markets={markets}
+            openModal={modalHandler}
+          />
+        }
       >
         <ModalContent
           className={clsx(styles.content, styles.modalBackground)}
@@ -47,7 +61,12 @@ export function V3AskModal({
           showClose={false}
           padding="x8"
         >
-          <V3AskFlow nft={nftObj} />
+          <V3AskFlow
+            tokenId={tokenId}
+            contractAddress={contractAddress}
+            collectionName={collectionName}
+            markets={markets}
+          />
         </ModalContent>
       </Modal>
     </V3AskStateProvider>

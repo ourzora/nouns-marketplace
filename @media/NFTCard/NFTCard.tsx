@@ -16,6 +16,7 @@ import {
   titleWrapper,
 } from '@media/NftMedia.css'
 import { useIsOwner, useNFTProvider } from '@shared'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import { Box, Flex, Heading, Separator, Stack } from '@zoralabs/zord'
 
 type Props = {
@@ -28,24 +29,34 @@ export function NFTCard({ collectionAddress }: Props) {
 
   if (!tokenId || !collectionAddress) return null
 
-  return <NFTCardOuterComponent tokenId={tokenId} collectionAddress={collectionAddress} />
+  return (
+    <NFTCardOuterComponent
+      nft={nft}
+      tokenId={tokenId}
+      collectionAddress={collectionAddress}
+    />
+  )
 }
 
 export function NFTCardOuterComponent({
   collectionAddress,
   tokenId,
-}: Props & { tokenId: string }) {
+  nft,
+}: Props & { tokenId: string; nft: NFTObject }) {
   const { token } = useToken({ collectionAddress, tokenId })
 
   if (!token || !collectionAddress) return null
 
-  return <NFTCardComponent token={token} collectionAddress={collectionAddress} />
+  return (
+    <NFTCardComponent nft={nft} token={token} collectionAddress={collectionAddress} />
+  )
 }
 
 export function NFTCardComponent({
   collectionAddress,
   token,
-}: Props & { token: TypeSafeToken }) {
+  nft,
+}: Props & { token: TypeSafeToken; nft: NFTObject }) {
   const { isOwner } = useIsOwner(token)
   const fallbackTitle = token.collectionName ?? '..'
   const tokenId = token.tokenId
@@ -88,7 +99,14 @@ export function NFTCardComponent({
           </Link>
         </Flex>
         <Separator mt="x1" />
-        <NFTCardMarket />
+        <NFTCardMarket
+          isOwner={isOwner}
+          ownerAddress={token.owner}
+          tokenId={tokenId}
+          contractAddress={token.collectionAddress}
+          collectionName={token.collectionName}
+          markets={nft.markets}
+        />
       </Stack>
     </Stack>
   )

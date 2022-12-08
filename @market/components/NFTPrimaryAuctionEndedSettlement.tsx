@@ -4,11 +4,9 @@ import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { SettleAuction } from '@noun-auction'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { FlexProps, Paragraph, Well } from '@zoralabs/zord'
 
 interface SettlementProps extends FlexProps {
-  nftObj: NFTObject
   primaryAuction: TypeSafeNounsAuction
 }
 
@@ -19,7 +17,6 @@ const paragraphCopy = {
 }
 
 export function NFTPrimaryAuctionEndedSettlement({
-  nftObj,
   primaryAuction,
   ...props
 }: SettlementProps) {

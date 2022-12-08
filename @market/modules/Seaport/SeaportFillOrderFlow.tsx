@@ -1,8 +1,9 @@
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
+import { useToken } from 'hooks/useToken'
+
 import React, { useState } from 'react'
 
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { StackProps } from '@zoralabs/zord'
 
 import { SeaportFillOrder } from './SeaportFillOrder'
@@ -10,13 +11,19 @@ import { SeaportFillOrderSuccess } from './SeaportFillOrderSuccess'
 
 export interface CommonSeaportFillOrderProps extends StackProps {
   order: OffchainOrderWithToken
-  nft: NFTObject
+  tokenId: string
+  contractAddress: string
+  collectionName: string
+  markets: ReturnType<typeof useToken>['markets']
   userAddress?: string
 }
 
 export function SeaportFillOrderFlow({
   order,
-  nft,
+  tokenId,
+  contractAddress,
+  collectionName,
+  markets,
   userAddress,
   ...props
 }: CommonSeaportFillOrderProps) {
@@ -24,12 +31,22 @@ export function SeaportFillOrderFlow({
 
   return !isFilled ? (
     <SeaportFillOrder
-      nft={nft}
+      tokenId={tokenId}
+      contractAddress={contractAddress}
+      collectionName={collectionName}
+      markets={markets}
       order={order}
       userAddress={userAddress}
       setIsFilled={setIsFilled}
     />
   ) : (
-    <SeaportFillOrderSuccess userAddress={userAddress} order={order} nft={nft} />
+    <SeaportFillOrderSuccess
+      userAddress={userAddress}
+      order={order}
+      tokenId={tokenId}
+      contractAddress={contractAddress}
+      collectionName={collectionName}
+      markets={markets}
+    />
   )
 }

@@ -42,13 +42,17 @@ const validate = (values: Values) => {
   return errors
 }
 
-export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
-  const { nft } = props
-  const { markets } = nft
+export function PrivateAskUpdate({
+  onNext,
+  tokenId,
+  contractAddress,
+  markets,
+  ...props
+}: PrivateAskUpdateProps) {
   const { ask } = useRelevantMarket(markets)
   const { buyerAddress } = useAskHelper({ ask })
   const { txStatus, txInProgress, txError, finalizedTx, updateAsk } = useV3AskTransaction(
-    { nft: nft, askType: PRIVATE_ASK }
+    { contractAddress, tokenId, askType: PRIVATE_ASK }
   )
 
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])

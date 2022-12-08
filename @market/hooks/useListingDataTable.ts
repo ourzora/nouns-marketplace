@@ -1,17 +1,17 @@
 import { format } from 'date-fns'
 
+import { useToken } from 'hooks/useToken'
+
 import { useMemo } from 'react'
 
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
-import { NFTObject } from '@zoralabs/nft-hooks'
 
 interface ListingDataTableProps {
-  nft: NFTObject
+  markets: ReturnType<typeof useToken>['markets']
 }
 
-export const useListingDataTable = ({ nft: nftObj }: ListingDataTableProps) => {
-  const { markets } = nftObj
+export const useListingDataTable = ({ markets }: ListingDataTableProps) => {
   const { ask } = useRelevantMarket(markets)
   const { isPrivateAsk } = useAskHelper({ ask })
 
@@ -23,14 +23,15 @@ export const useListingDataTable = ({ nft: nftObj }: ListingDataTableProps) => {
       },
       {
         label: 'Listed for',
-        value: `${ask?.amount?.eth?.value} ETH`,
+        value: `${ask?.price?.nativePrice?.decimal} ETH`,
       },
-      {
-        label: 'Listed at',
-        value: format(new Date(ask.createdAt.timestamp), 'MMM d, y HH:mm:ss xxx'),
-      },
+      // not timestamp in db, only block number
+      // {
+      //   label: 'Listed at',
+      //   value: format(new Date(ask.createdAt.timestamp), 'MMM d, y HH:mm:ss xxx'),
+      // },
     ],
-    [ask?.amount?.eth?.value, ask.createdAt, isPrivateAsk]
+    [ask?.price?.nativePrice?.decimal, isPrivateAsk]
   )
 
   return {

@@ -50,6 +50,7 @@ export function useToken({ collectionAddress, tokenId }: Params) {
 
   return {
     token,
+    markets: data?.token?.markets ?? [],
     error,
   }
 }

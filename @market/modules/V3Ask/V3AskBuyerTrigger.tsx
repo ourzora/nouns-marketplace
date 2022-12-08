@@ -1,5 +1,7 @@
 import { Button } from 'components/Button'
 
+import { useToken } from 'hooks/useToken'
+
 import React, { useCallback, useMemo, useState } from 'react'
 
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
@@ -10,17 +12,16 @@ import {
 } from '@market/modules/V3Ask/'
 import { useButtonRequiresAuth } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { Well } from '@zoralabs/zord'
 
 interface V3AskBuyerTriggerProps {
-  nft: NFTObject
+  markets: ReturnType<typeof useToken>['markets']
   openModal: () => void
 }
 
-export function V3AskBuyerTrigger({ nft, openModal }: V3AskBuyerTriggerProps) {
+export function V3AskBuyerTrigger({ markets, openModal }: V3AskBuyerTriggerProps) {
   const { dispatch } = useV3AskStateContext()
-  const { ask } = useRelevantMarket(nft.markets)
+  const { ask } = useRelevantMarket(markets)
   const { displayAskAmount, usdAskAmount, hasActivePrivateAsk, isValidPrivateAskBuyer } =
     useAskHelper({ ask })
   const [disabled, setDisabled] = useState<boolean>(false)

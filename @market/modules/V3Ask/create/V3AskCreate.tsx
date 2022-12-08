@@ -38,9 +38,17 @@ const validate = (values: Values) => {
   return errors
 }
 
-export function V3AskCreate({ onNext, ...props }: V3AskCreateProps) {
+export function V3AskCreate({
+  onNext,
+  contractAddress,
+  tokenId,
+  ...props
+}: V3AskCreateProps) {
   const { txStatus, txInProgress, txError, createAsk, finalizedTx } = useV3AskTransaction(
-    { nft: props.nft }
+    {
+      contractAddress,
+      tokenId,
+    }
   )
   useEffect(() => finalizedTx!! && onNext!(), [finalizedTx, onNext])
 

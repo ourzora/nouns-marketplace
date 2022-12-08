@@ -30,7 +30,7 @@ export function V3AskApproveModule({ onNext, ...props }: V3AskApproveModuleProps
   return isAwaitingApprovalCheck ? (
     <V3AskCheckApprovalSpinner text="Checking V3 Ask Module Approval..." />
   ) : (
-    <Stack gap="x8">
+    <Stack gap="x8" {...props}>
       <Stack gap="x8" align="center">
         <Zorb size={52} />
         <V3AskHeadingDescription

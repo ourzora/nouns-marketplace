@@ -1,3 +1,5 @@
+import { useToken } from 'hooks/useToken'
+
 import React from 'react'
 
 import {
@@ -27,7 +29,6 @@ import {
   VIEW_V3ASK_LISTING,
   useV3AskStateContext,
 } from '@market/modules/V3Ask/providers/V3AskStateProvider'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { Stack, StackProps } from '@zoralabs/zord'
 
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
@@ -77,22 +78,33 @@ const componentMap = {
   [RESET_V3ASK]: () => null,
 }
 
-interface V3AskModalProps {
-  nft: NFTObject
-}
-
 export interface CommonV3AskComponentProps extends StackProps {
-  nft: NFTObject
   onNext?: () => void
+  tokenId: string
+  contractAddress: string
+  collectionName: string
+  markets: ReturnType<typeof useToken>['markets']
 }
 
-export function V3AskFlow({ nft }: V3AskModalProps) {
+export function V3AskFlow({
+  tokenId,
+  contractAddress,
+  collectionName,
+  markets,
+}: CommonV3AskComponentProps) {
   const { state, handleNext } = useV3AskStateContext()
   const Component = componentMap[state.status]
 
   return (
     <Stack justify="center">
-      <Component key={state.status} nft={nft} onNext={handleNext} />
+      <Component
+        key={state.status}
+        onNext={handleNext}
+        tokenId={tokenId}
+        contractAddress={contractAddress}
+        collectionName={collectionName}
+        markets={markets}
+      />
     </Stack>
   )
 }

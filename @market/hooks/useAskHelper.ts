@@ -1,3 +1,5 @@
+import { useToken } from 'hooks/useToken'
+
 import { useMemo } from 'react'
 
 import { isAddressMatch, numberFormatterUSDC, roundTwoDecimals } from '@shared'
@@ -8,14 +10,69 @@ interface AskHelperProps {
   ask: FixedPriceLike
 }
 
-export const useAskHelper = ({ ask }: AskHelperProps) => {
+// export const useAskHelper = ({ ask }: AskHelperProps) => {
+//   const { balance: walletBalance, address: userAddress } = useAuth()
+//   const buyerAddress = useMemo(() => ask?.raw?.properties?.buyer, [ask])
+//   const isPrivateAsk = useMemo(() => buyerAddress || false, [buyerAddress])
+//   const isActiveAsk = useMemo(
+//     () => ask?.status === MARKET_INFO_STATUSES.ACTIVE || false,
+//     [ask]
+//   )
+//   const hasActivePrivateAsk = useMemo(
+//     () => isActiveAsk && isPrivateAsk,
+//     [isActiveAsk, isPrivateAsk]
+//   )
+//   const hasActiveV3Ask = useMemo(
+//     () => isActiveAsk && !isPrivateAsk,
+//     [isActiveAsk, isPrivateAsk]
+//   )
+//   const isCompletedAsk = useMemo(
+//     () => ask?.status === MARKET_INFO_STATUSES.COMPLETE || false,
+//     [ask]
+//   )
+//   const hasAsk = useMemo(() => ask !== undefined, [ask])
+//   const hasRelevantAsk = useMemo(() => hasAsk && isActiveAsk, [hasAsk, isActiveAsk])
+
+//   const rawAskAmount = useMemo(() => ask?.amount?.amount.raw.toString(), [ask])
+//   const displayAskAmount = useMemo(() => ask?.amount?.amount.value.toString(), [ask])
+//   const usdAskAmount = useMemo(
+//     () =>
+//       ask?.amount?.usd?.value
+//         ? numberFormatterUSDC(roundTwoDecimals(ask.amount.usd.value))
+//         : '...',
+//     [ask]
+//   )
+//   const hasSufficientFunds = useMemo(
+//     () => (rawAskAmount ? walletBalance?.value.gte(rawAskAmount) : false),
+//     [rawAskAmount, walletBalance?.value]
+//   )
+//   const isValidPrivateAskBuyer = useMemo(
+//     () => hasActivePrivateAsk && isAddressMatch(userAddress, buyerAddress),
+//     [buyerAddress, hasActivePrivateAsk, userAddress]
+//   )
+
+//   return {
+//     hasAsk,
+//     hasRelevantAsk,
+//     isPrivateAsk,
+//     isActiveAsk,
+//     hasActiveV3Ask,
+//     hasActivePrivateAsk,
+//     isCompletedAsk,
+//     buyerAddress,
+//     isValidPrivateAskBuyer,
+//     rawAskAmount,
+//     displayAskAmount,
+//     usdAskAmount,
+//     hasSufficientFunds,
+//   }
+// }
+
+export const useAskHelper = ({ ask }: ReturnType<typeof useToken>['markets'][0]) => {
   const { balance: walletBalance, address: userAddress } = useAuth()
-  const buyerAddress = useMemo(() => ask?.raw?.properties?.buyer, [ask])
+  const buyerAddress = useMemo(() => ask?.properties?.buyer, [ask])
   const isPrivateAsk = useMemo(() => buyerAddress || false, [buyerAddress])
-  const isActiveAsk = useMemo(
-    () => ask?.status === MARKET_INFO_STATUSES.ACTIVE || false,
-    [ask]
-  )
+  const isActiveAsk = useMemo(() => ask?.status === 'ACTIVE' || false, [ask])
   const hasActivePrivateAsk = useMemo(
     () => isActiveAsk && isPrivateAsk,
     [isActiveAsk, isPrivateAsk]
@@ -31,15 +88,9 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
   const hasAsk = useMemo(() => ask !== undefined, [ask])
   const hasRelevantAsk = useMemo(() => hasAsk && isActiveAsk, [hasAsk, isActiveAsk])
 
-  const rawAskAmount = useMemo(() => ask?.amount?.amount.raw.toString(), [ask])
-  const displayAskAmount = useMemo(() => ask?.amount?.amount.value.toString(), [ask])
-  const usdAskAmount = useMemo(
-    () =>
-      ask?.amount?.usd?.value
-        ? numberFormatterUSDC(roundTwoDecimals(ask.amount.usd.value))
-        : '...',
-    [ask]
-  )
+  const rawAskAmount = useMemo(() => ask?.price?.nativePrice.raw, [ask])
+  const displayAskAmount = useMemo(() => ask?.price?.nativePrice.value, [ask])
+  const usdAskAmount = ask?.price.usdPrice
   const hasSufficientFunds = useMemo(
     () => (rawAskAmount ? walletBalance?.value.gte(rawAskAmount) : false),
     [rawAskAmount, walletBalance?.value]
@@ -48,6 +99,8 @@ export const useAskHelper = ({ ask }: AskHelperProps) => {
     () => hasActivePrivateAsk && isAddressMatch(userAddress, buyerAddress),
     [buyerAddress, hasActivePrivateAsk, userAddress]
   )
+
+  console.log({ isActiveAsk })
 
   return {
     hasAsk,

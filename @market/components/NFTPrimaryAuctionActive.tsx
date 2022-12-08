@@ -1,21 +1,21 @@
-import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useAuctionDataTable } from '@market/hooks'
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { PlaceNounsBid } from '@noun-auction'
 import { DataTable, PriceWithLabel } from '@shared'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { FlexProps, Stack } from '@zoralabs/zord'
 
 interface NFTPrimaryAuctionActiveProps extends FlexProps {
-  nftObj: NFTObject
   primaryAuction: TypeSafeNounsAuction
+  collectionAddress: string
+  tokenId: string
 }
 
 export function NFTPrimaryAuctionActive({
-  nftObj,
   primaryAuction,
+  collectionAddress,
+  tokenId,
   ...props
 }: NFTPrimaryAuctionActiveProps) {
   const {
@@ -44,14 +44,12 @@ export function NFTPrimaryAuctionActive({
             invertColor
           />
         )}
-        {nftObj?.nft?.contract.address && (
-          <PlaceNounsBid
-            layout="sideBarBid"
-            collectionAddress={nftObj.nft?.contract.address}
-            tokenId={nftObj.nft?.tokenId}
-            enableModal
-          />
-        )}
+        <PlaceNounsBid
+          layout="sideBarBid"
+          collectionAddress={collectionAddress}
+          tokenId={tokenId}
+          enableModal
+        />
       </Stack>
     </Stack>
   )

@@ -3,6 +3,98 @@ import gql from 'graphql-tag'
 export const TOKEN_QUERY = gql`
   query Token($collectionAddress: String!, $tokenId: String!, $network: NetworkInput) {
     token(token: { address: $collectionAddress, tokenId: $tokenId }, network: $network) {
+      markets(sort: { sortKey: CREATED, sortDirection: DESC }) {
+        collectionAddress
+        marketAddress
+        marketType
+        properties {
+          ... on V1Offer {
+            __typename
+            address
+            amount {
+              nativePrice {
+                decimal
+                raw
+              }
+              usdcPrice {
+                decimal
+                raw
+              }
+            }
+            bidder
+            collectionAddress
+            currency
+            recipient
+            sellOnShare
+            tokenId
+            v1OfferStatus
+          }
+          ... on V3Ask {
+            __typename
+            address
+            askCurrency
+            askPrice {
+              nativePrice {
+                decimal
+                raw
+              }
+              usdcPrice {
+                decimal
+                raw
+              }
+            }
+            buyer
+            collectionAddress
+            seller
+            tokenId
+            v3AskStatus
+          }
+          ... on V3ReserveAuction {
+            __typename
+            estimatedDurationTime
+            address
+            collectionAddress
+            currency
+            duration
+            extended
+            finder
+            findersFeeBps
+            firstBid
+            firstBidTime
+            highestBid
+            highestBidder
+            reserve
+            seller
+            sellerFundsRecipient
+            startTime
+            status
+            tokenId
+            price {
+              nativePrice {
+                decimal
+                raw
+              }
+              usdcPrice {
+                decimal
+                raw
+              }
+            }
+          }
+        }
+        price {
+          nativePrice {
+            decimal
+            raw
+          }
+          usdcPrice {
+            decimal
+            raw
+          }
+        }
+        status
+        tokenId
+      }
+
       token {
         collectionAddress
         collectionName

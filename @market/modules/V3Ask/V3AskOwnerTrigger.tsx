@@ -1,20 +1,24 @@
 import clsx from 'clsx'
 import { Button } from 'components/Button'
 
+import { useToken } from 'hooks/useToken'
+
 import React, { useCallback, useMemo, useState } from 'react'
 
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { PossibleV3AskState, useV3AskStateContext } from '@market/modules/V3Ask/'
 import { useKeyPress } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { PopUp, Stack, Text, Well } from '@zoralabs/zord'
 
 import { UniversalListAskFlow } from './UniversalListAskFlow'
 import * as styles from './V3AskFlow.css'
 
 interface V3AskOwnerTriggerProps {
-  nft: NFTObject
+  tokenId: string
+  contractAddress: string
+  collectionName: string
+  markets: ReturnType<typeof useToken>['markets']
   openModal: () => void
 }
 
@@ -50,9 +54,15 @@ const privateAskDropdownOptions = [
   },
 ]
 
-export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
+export function V3AskOwnerTrigger({
+  contractAddress,
+  tokenId,
+  collectionName,
+  markets,
+  openModal,
+}: V3AskOwnerTriggerProps) {
   const { dispatch } = useV3AskStateContext()
-  const { ask } = useRelevantMarket(nft.markets)
+  const { ask } = useRelevantMarket(markets)
 
   const { displayAskAmount, usdAskAmount, hasActivePrivateAsk, isActiveAsk } =
     useAskHelper({
@@ -135,5 +145,12 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
     )
   }
 
-  return <UniversalListAskFlow nftObj={nft} />
+  return (
+    <UniversalListAskFlow
+      tokenId={tokenId}
+      contractAddress={contractAddress}
+      collectionName={collectionName}
+      markets={markets}
+    />
+  )
 }

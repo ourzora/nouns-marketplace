@@ -15,7 +15,7 @@ interface V3AskApproveTransferHelperProps extends CommonV3AskComponentProps {}
 
 export function V3AskApproveTransferHelper({
   onNext,
-  nft,
+  contractAddress,
   ...props
 }: V3AskApproveTransferHelperProps) {
   const {
@@ -25,7 +25,7 @@ export function V3AskApproveTransferHelper({
     isAwaitingApprovalCheck,
     error,
     handleApproveERC721ForSpender,
-  } = useV3AskTransferHelperApproval({ contractAddress: nft.nft?.contract.address })
+  } = useV3AskTransferHelperApproval({ contractAddress })
 
   useEffect(() => {
     isApproved && onNext && onNext()
@@ -34,7 +34,7 @@ export function V3AskApproveTransferHelper({
   return isAwaitingApprovalCheck ? (
     <V3AskCheckApprovalSpinner text="Checking Zora Transfer Helper Approval..." />
   ) : (
-    <Stack gap="x8">
+    <Stack gap="x8" {...props}>
       <Stack gap="x8" align="center">
         <Zorb size={52} />
         <V3AskHeadingDescription

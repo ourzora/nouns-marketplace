@@ -28,6 +28,7 @@ export const TOKENS_BY_ADDRESS_QUERY = gql`
             totalSupply
           }
           tokenId
+          owner
         }
         marketsSummary {
           collectionAddress

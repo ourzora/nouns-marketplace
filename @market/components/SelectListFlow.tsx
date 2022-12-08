@@ -1,3 +1,5 @@
+import { useToken } from 'hooks/useToken'
+
 import React from 'react'
 
 import {
@@ -8,22 +10,26 @@ import {
 } from '@market/modules/V3Ask'
 import { SaleTypeButton } from '@market/modules/V3Ask/SaleTypeButton'
 import { V3AskLearnMoreButton } from '@market/modules/V3Ask/V3AskLearnMoreButton'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { Eyebrow, Stack } from '@zoralabs/zord'
 
 interface SelectListFlowProps {
   closeModal?: () => void
-  nftObj: NFTObject
+  tokenId: string
+  contractAddress: string
+  collectionName: string
+  markets: ReturnType<typeof useToken>['markets']
 }
 
-export function SelectListFlow({ nftObj, closeModal, ...props }: SelectListFlowProps) {
+export function SelectListFlow({
+  tokenId,
+  contractAddress,
+  collectionName,
+  markets,
+  closeModal,
+  ...props
+}: SelectListFlowProps) {
   const { state, dispatch } = useV3AskStateContext()
-  const { nft } = nftObj
   const { flow } = state
-
-  if (!nft) {
-    return null
-  }
 
   if (!flow) {
     return (
@@ -49,5 +55,12 @@ export function SelectListFlow({ nftObj, closeModal, ...props }: SelectListFlowP
     )
   }
 
-  return <V3AskFlow nft={nftObj} />
+  return (
+    <V3AskFlow
+      tokenId={tokenId}
+      contractAddress={contractAddress}
+      collectionName={collectionName}
+      markets={markets}
+    />
+  )
 }
