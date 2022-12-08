@@ -16,7 +16,7 @@ import {
   titleWrapper,
 } from '@media/NftMedia.css'
 import { useIsOwner, useNFTProvider } from '@shared'
-import { Box, Flex, Heading, Separator, Stack } from '@zoralabs/zord'
+import { Box, Flex, Heading, Label, Separator, Stack } from '@zoralabs/zord'
 
 type Props = {
   collectionAddress: string
@@ -82,7 +82,9 @@ export function NFTCardComponent({
                 radius="round"
                 size="xs"
               />
-              <Heading size="xs">{token.collectionName}</Heading>
+              <Label size="lg" color="text1">
+                {token.collectionName}
+              </Label>
             </Flex>
           </Link>
         </Flex>

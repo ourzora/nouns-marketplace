@@ -5,7 +5,7 @@ import { allAddresses } from 'constants/collection-addresses'
 import { GetServerSideProps } from 'next'
 
 import * as Sentry from '@sentry/react'
-import { zdk } from '@shared'
+import { GetNFTReturnType, zdk } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import {
   Collection,
@@ -13,7 +13,7 @@ import {
 } from '@zoralabs/zdk/dist/queries/queries-sdk'
 
 export type CollectionServiceProps = {
-  initialPage: NFTObject[]
+  initialPage: GetNFTReturnType
   contractAddress: string
   aggregateStats: CollectionStatsAggregateQuery
   collection: Collection // SSR data
@@ -57,7 +57,6 @@ export async function collectionService({ params }: CollectionParamsProps) {
     }
 
     const { name, symbol } = collection
-
     const seo = buildCollectionSEO(name, symbol)
 
     return {
@@ -65,6 +64,8 @@ export async function collectionService({ params }: CollectionParamsProps) {
         fallback: {
           contractAddress: tokenAddress,
           collection,
+          // todo: add initialPage of tokens() from tokens query
+          // replace ZDK on collections page with a direct GraphQL query
           seo,
         },
       },

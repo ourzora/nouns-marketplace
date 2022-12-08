@@ -8,14 +8,12 @@ import {
 } from 'compositions/Collections'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { CollectionServiceProps, collectionService } from 'services/collectionService'
-import * as styles from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
 
 import { useEffect, useMemo } from 'react'
 
 import { CollectionFilterProvider } from '@filter'
-import { useCollection } from '@filter/hooks/useCollection'
 import {
   ActiveAuctionCard, // useOneNounsDao
 } from '@noun-auction'
@@ -24,22 +22,12 @@ import { Grid, Separator, Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const { contractAddress: collectionAddress, seo } = fallback
-  // const { dao } = useOneNounsDao({ collectionAddress })
+  const { contractAddress: collectionAddress, collection, initialPage, seo } = fallback
 
   const { isLarge } = useWindowWidth()
   const { nftCount } = useAggregate(collectionAddress)
-  // wrapper for useSWR
-  const { data } = useCollection(collectionAddress)
-  const collection = useMemo(
-    () => data || fallback?.collection,
-    [data, fallback?.collection]
-  )
-
-  console.log('COLLECTION PAGE')
 
   useEffect(() => {
-    // console.log('useEffect')
     if (collection?.name) {
       setCurrentCollection(collection.name)
       setCurrentCollectionCount(nftCount ? `${nftCount} NFTs` : '... NFTs')
@@ -53,12 +41,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
-      {/* <Grid
-        className={[styles.pageGrid]}
-        px={{ '@initial': 'x0', '@1024': 'x8' }}
-        gap="x2"
-        alignSelf="center"
-      >
+      {/* 
         <CollectionHeader
           collection={collection}
           layout={'dao'}
@@ -68,8 +51,9 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         >
           <MarketStats contractAddress={collectionAddress} />
         </CollectionHeader>
-      </Grid> */}
+       */}
       <CollectionFilterProvider
+        // initialPage={{ tokens: initialPage, nextCursor: null }}
         enableSidebarClearButton
         filtersVisible={isLarge}
         contractAddress={collectionAddress}

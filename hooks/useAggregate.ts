@@ -17,7 +17,6 @@ export function useAggregate(collectionAddress: string) {
       dedupingInterval: 60000,
       refreshInterval: 60000,
       onErrorRetry: (_, _1, _2, revalidate, { retryCount }) => {
-        console.log('RETRY')
         // Only retry up to 10 times.
         if (retryCount >= 10) return
         // Retry after 10 seconds.

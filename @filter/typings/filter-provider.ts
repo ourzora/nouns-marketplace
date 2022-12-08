@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
 import { stringDefaults, themeDefaults } from '@filter/constants'
+import { GetNFTReturnType } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
 
 import { FilterStore } from './filter-store'
@@ -67,5 +68,6 @@ export interface CollectionFilterContextTypes extends TokenQueryReturnTypes {
 
 export interface CollectionFilterProviderProps extends FilterContextInputProps {
   children?: ReactNode
-  initialPage?: NFTObject[]
+  // initialPage?: NFTObject[]
+  initialPage?: GetNFTReturnType
 }

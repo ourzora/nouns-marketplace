@@ -11,15 +11,17 @@ import { useCollectionAttributes } from './hooks/useCollectionAttributes'
 
 export function FilterProperties({ collectionAddress }: { collectionAddress: string }) {
   const { filterPropertiesList, setFilterPropertiesList } = useCollectionsContext()
-  const { data } = useCollectionAttributes(collectionAddress)
+  const { aggregateAttributes } = useCollectionAttributes({
+    addresses: collectionAddress,
+  })
   const { useCollectionProperties } = useCollectionFilters()
 
   useEffect(() => {
-    if (!data?.aggregateAttributes) return
-    setFilterPropertiesList(data?.aggregateAttributes as AggregateAttribute[])
-  }, [data?.aggregateAttributes, setFilterPropertiesList])
+    if (!aggregateAttributes) return
+    setFilterPropertiesList(aggregateAttributes)
+  }, [aggregateAttributes, setFilterPropertiesList])
 
-  if (!filterPropertiesList) {
+  if (!filterPropertiesList || filterPropertiesList.length === 0) {
     return null
   }
 

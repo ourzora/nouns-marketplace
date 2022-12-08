@@ -5,6 +5,7 @@ import { useCallback, useMemo } from 'react'
 import { flatten } from 'lodash'
 
 import { getAddress } from '@ethersproject/address'
+import { GetNFTReturnType } from '@shared'
 import { zdk } from '@shared/utils/zdk'
 import { transformNFTZDK } from '@zoralabs/nft-hooks/dist/backends'
 import { prepareJson } from '@zoralabs/nft-hooks/dist/fetcher/NextUtils'
@@ -30,11 +31,6 @@ export interface UseTokenQueryProps {
   refreshInterval?: number
 }
 
-type GetNFTReturnType = {
-  tokens: NFTObject[]
-  nextCursor?: string | null
-}
-
 async function getNFTs(query: TokensQueryArgs): Promise<GetNFTReturnType> {
   const resp = await zdk.tokens(query)
   const tokens = resp.tokens.nodes
@@ -55,11 +51,8 @@ export function useTokensQuery({
   filter,
   where,
   initialData,
-  refreshInterval = 5000,
-}: // initialData,
-UseTokenQueryProps) {
-  // console.log('useTokensQuery')
-
+  refreshInterval = 30000,
+}: UseTokenQueryProps) {
   const getKey = (pageIndex: number, previousPageData: GetNFTReturnType) => {
     if (pageIndex > 0 && !previousPageData.nextCursor) return null // reached the end
     return {
