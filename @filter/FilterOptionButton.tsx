@@ -57,21 +57,23 @@ export function FilterOptionButton({
       color="accent"
       onClick={onClick}
     >
-      {children}
-      {showCheckbox && (
-        <Checkbox
-          disabled={disabled}
-          defaultChecked
-          checked={!!checked}
-          id={label}
-          name={label}
-          onChange={onClick}
-        />
-      )}
-      <Text variant="paragraph-sm" inline color={disabled ? 'text3' : 'text1'}>
-        {label}
-      </Text>
-      {showCloseIcon && <Icon id="Close" size="sm" />}
+      <>
+        {children}
+        {showCheckbox && (
+          <Checkbox
+            disabled={disabled}
+            defaultChecked
+            checked={!!checked}
+            id={label}
+            name={label}
+            onChange={onClick}
+          />
+        )}
+        <Text variant="paragraph-sm" inline color={disabled ? 'text3' : 'text1'}>
+          {label}
+        </Text>
+        {showCloseIcon && <Icon id="Close" size="sm" />}
+      </>
     </Flex>
   )
 }
