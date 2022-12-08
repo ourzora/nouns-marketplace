@@ -46,7 +46,6 @@ export function NFTCardComponent({
   collectionAddress,
   token,
 }: Props & { token: TypeSafeToken }) {
-  const { isOwner } = useIsOwner(token)
   const fallbackTitle = token.collectionName ?? '..'
   const tokenId = token.tokenId
 

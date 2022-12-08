@@ -1,14 +1,25 @@
+import { useCollectionsContext } from 'providers'
+import { AggregateAttribute } from 'types/zora.api.generated'
+
+import { useEffect } from 'react'
+
 import { useCollectionFilters } from '@filter/providers'
 import { Box, Label, Stack } from '@zoralabs/zord'
 
-import { FilterProperty, FilterPropertySelect } from './FilterPropertySelect'
+import { FilterPropertySelect } from './FilterPropertySelect'
 import { useCollectionAttributes } from './hooks/useCollectionAttributes'
 
 export function FilterProperties({ collectionAddress }: { collectionAddress: string }) {
+  const { filterPropertiesList, setFilterPropertiesList } = useCollectionsContext()
   const { data } = useCollectionAttributes(collectionAddress)
   const { useCollectionProperties } = useCollectionFilters()
 
-  if (!data?.aggregateAttributes) {
+  useEffect(() => {
+    if (!data?.aggregateAttributes) return
+    setFilterPropertiesList(data?.aggregateAttributes as AggregateAttribute[])
+  }, [data?.aggregateAttributes, setFilterPropertiesList])
+
+  if (!filterPropertiesList) {
     return null
   }
 
@@ -20,7 +31,7 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
         </Label>
       )}
       <Stack gap="x2">
-        {data?.aggregateAttributes.map((property: FilterProperty) => (
+        {filterPropertiesList.map((property: AggregateAttribute) => (
           <Box key={property.traitType} className={['filter-properties-list']}>
             <FilterPropertySelect
               traitType={property.traitType || ''}

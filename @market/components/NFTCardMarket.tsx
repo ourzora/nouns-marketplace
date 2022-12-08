@@ -25,6 +25,8 @@ export function NFTCardMarketComponent({
   const { ask } = useRelevantMarket(markets)
   const { hasRelevantAsk } = useAskHelper({ ask })
 
+  console.log('NFTCardMarketComponent')
+
   if (isOwner) {
     return <UniversalListAskFlow nftObj={nftObj} {...props} />
   }

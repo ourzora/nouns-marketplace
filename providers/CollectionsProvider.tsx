@@ -1,3 +1,5 @@
+import { AggregateAttribute } from 'types/zora.api.generated'
+
 import {
   Dispatch,
   ReactNode,
@@ -12,11 +14,15 @@ const CollectionsContext = createContext<{
   setCurrentCollection: Dispatch<SetStateAction<string>>
   currentCollectionCount: string | undefined
   setCurrentCollectionCount: Dispatch<SetStateAction<string | undefined>>
+  filterPropertiesList: AggregateAttribute[]
+  setFilterPropertiesList: Dispatch<SetStateAction<AggregateAttribute[]>>
 }>({
   currentCollection: 'Browse...',
   setCurrentCollection: () => {},
   currentCollectionCount: undefined,
   setCurrentCollectionCount: () => {},
+  filterPropertiesList: [],
+  setFilterPropertiesList: () => {},
 })
 
 type CollectionsProps = {
@@ -29,6 +35,9 @@ export function useCollectionsContext() {
 
 export function CollectionsProvider({ children }: CollectionsProps) {
   const [currentCollection, setCurrentCollection] = useState<string>('Browse...')
+  const [filterPropertiesList, setFilterPropertiesList] = useState<
+    AggregateAttribute[] | []
+  >([])
   const [currentCollectionCount, setCurrentCollectionCount] = useState<
     string | undefined
   >(undefined)
@@ -40,6 +49,8 @@ export function CollectionsProvider({ children }: CollectionsProps) {
         setCurrentCollection,
         currentCollectionCount,
         setCurrentCollectionCount,
+        filterPropertiesList,
+        setFilterPropertiesList,
       }}
     >
       {children}

@@ -2247,6 +2247,7 @@ export type NounishAuctionsQuery = {
 
 export type NounsDaosQueryVariables = Exact<{
   network: NetworkInput
+  limit: Scalars['Int']
 }>
 
 export type NounsDaosQuery = {

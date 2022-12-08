@@ -1,3 +1,5 @@
+import { AggregateAttribute, AggregateAttributeValue } from 'types/zora.api.generated'
+
 import { useMemo } from 'react'
 
 import { lightFont } from '@shared'
@@ -7,16 +9,18 @@ import { Box, Flex, Label, Select } from '@zoralabs/zord'
 import * as styles from './CollectionsFilter.css'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 
-export type FilterProperty = {
-  traitType: string
-  valueMetrics: CollectionAttributeValue[]
-}
+// AggregateAttribute
 
-function sortTraitsByName(a: CollectionAttributeValue, b: CollectionAttributeValue) {
+// export type FilterProperty = {
+//   traitType: string
+//   valueMetrics: CollectionAttributeValue[]
+// }
+
+function sortTraitsByName(a: AggregateAttributeValue, b: AggregateAttributeValue) {
   return a.value < b.value ? -1 : 1
 }
 
-export function FilterPropertySelect({ traitType, valueMetrics }: FilterProperty) {
+export function FilterPropertySelect({ traitType, valueMetrics }: AggregateAttribute) {
   const {
     filterStore: { setCollectionAttributes, filters },
   } = useCollectionFilters()
