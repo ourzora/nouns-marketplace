@@ -20,8 +20,6 @@ export function useCollectionAttributes({
     }
   )
 
-  console.log('useCollectionAttributes', data?.aggregateAttributes)
-
   return {
     data: data,
     aggregateAttributes: data?.aggregateAttributes as AggregateAttribute[],

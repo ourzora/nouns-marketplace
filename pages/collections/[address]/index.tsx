@@ -53,7 +53,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         </CollectionHeader>
        */}
       <CollectionFilterProvider
-        // initialPage={{ tokens: initialPage, nextCursor: null }}
+        initialPage={initialPage}
         enableSidebarClearButton
         filtersVisible={isLarge}
         contractAddress={collectionAddress}
