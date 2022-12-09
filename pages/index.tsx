@@ -1,6 +1,6 @@
 import { HomePageHeader, PageWrapper, Seo } from 'components'
 import { DaoTable } from 'compositions'
-import { DAO_PAGE_LIMIT, TOTAL_DAO_COUNT_ESTIMATE } from 'constants/pagination'
+import { DAO_PAGE_LIMIT } from 'constants/pagination'
 import * as styles from 'styles/styles.css'
 
 import { NOUNS_DAOS_QUERY } from 'data/nounsDaos'
@@ -12,22 +12,16 @@ import { TypeSafeDao } from 'validators/dao'
 
 import * as Sentry from '@sentry/react'
 import { zoraApiFetcher } from '@shared'
-import { usePagination } from '@shared/hooks/usePagination'
 import { CollectionsQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Button, Grid } from '@zoralabs/zord'
+import { Button, Eyebrow, Grid } from '@zoralabs/zord'
 
 export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
 function Home(props: { daos: TypeSafeDao[] }) {
   const [paginationCursor, setPaginationCursor] = useState<string>('')
-
   const { daos: clientDaos, pageInfo } = useNounsDaos({
     limit: DAO_PAGE_LIMIT,
     after: paginationCursor,
-  })
-  const pagination = usePagination({
-    length: TOTAL_DAO_COUNT_ESTIMATE,
-    maxPerPage: DAO_PAGE_LIMIT,
   })
   const daos = useMemo(() => clientDaos ?? props.daos, [clientDaos, props.daos])
   const hasDaos = useMemo(() => daos?.length > 0, [daos])
@@ -54,23 +48,17 @@ function Home(props: { daos: TypeSafeDao[] }) {
           mb={{ '@initial': 'x8', '@1024': 'x24' }}
         />
         {hasDaos && <DaoTable daos={daos} className={styles.homepageTable} />}
-
-        {/* <Pagination
-          isFirst={pagination.isFirst}
-          isLast={pagination.isLast}
-          onNext={pagination.actions.next}
-          onPrevious={pagination.actions.previous}
-          totalPages={pagination.totalPages}
-        >
-          <PaginationProximityList
-            index={pagination.index}
-            items={pagination.proximity}
-            setIndex={pagination.actions.set}
-            totalPages={pagination.totalPages}
-          />
-        </Pagination> */}
       </Grid>
-      <Button onClick={pageNext}>Load More</Button>
+
+      {hasDaos && (
+        <>
+          {pageInfo?.hasNextPage ? (
+            <Button onClick={pageNext}>Load More DAOs</Button>
+          ) : (
+            <Eyebrow>All Daos Loaded</Eyebrow>
+          )}
+        </>
+      )}
     </PageWrapper>
   )
 }
