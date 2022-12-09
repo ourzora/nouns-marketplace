@@ -107,7 +107,7 @@ export function SelectedFilters() {
                     showCloseIcon
                     useBorder
                     rightPad
-                    onClick={toggleOptionHandler(options.label, option.value)}
+                    onClick={() => toggleOptionHandler(options.label, option.value)}
                   />
                 ))}
               </Flex>

@@ -14,13 +14,11 @@ import * as Sentry from '@sentry/react'
 import { zoraApiFetcher } from '@shared'
 import { usePagination } from '@shared/hooks/usePagination'
 import { CollectionsQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Button, Grid, Pagination, PaginationProximityList } from '@zoralabs/zord'
+import { Button, Grid } from '@zoralabs/zord'
 
 export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
 function Home(props: { daos: TypeSafeDao[] }) {
-  // const { collections } = useCollections(pagination.index)
-
   const [paginationCursor, setPaginationCursor] = useState<string>('')
 
   const { daos: clientDaos, pageInfo } = useNounsDaos({
@@ -36,7 +34,7 @@ function Home(props: { daos: TypeSafeDao[] }) {
 
   const pageNext = useCallback(() => {
     pageInfo?.endCursor && setPaginationCursor(pageInfo?.endCursor)
-  }, [])
+  }, [pageInfo?.endCursor])
 
   console.log('DAOS', daos, daos.length)
   console.log('AFTER', pageInfo?.endCursor)
