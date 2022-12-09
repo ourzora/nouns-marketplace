@@ -1909,9 +1909,17 @@ export type V3AskEventProperties =
   | V3AskCreatedEventProperties
   | V3AskFilledEventProperties
   | V3AskPriceUpdatedEventProperties
+  | V3AsksCoreEthAskEventProperties
+  | V3AsksCoreEthAskFilledEventProperties
+  | V3AsksCoreEthRoyaltyPayoutEventProperties
   | V3PrivateAskEventProperties
 
 export enum V3AskEventType {
+  V3AsksCoreEthCanceled = 'V3_ASKS_CORE_ETH_CANCELED',
+  V3AsksCoreEthCreated = 'V3_ASKS_CORE_ETH_CREATED',
+  V3AsksCoreEthFilled = 'V3_ASKS_CORE_ETH_FILLED',
+  V3AsksCoreEthPriceUpdated = 'V3_ASKS_CORE_ETH_PRICE_UPDATED',
+  V3AsksCoreEthRoyaltyPayout = 'V3_ASKS_CORE_ETH_ROYALTY_PAYOUT',
   V3AskCanceled = 'V3_ASK_CANCELED',
   V3AskCreated = 'V3_ASK_CREATED',
   V3AskFilled = 'V3_ASK_FILLED',
@@ -1942,6 +1950,37 @@ export type V3AskPriceUpdatedEventProperties = {
   price: PriceAtTime
   seller: Scalars['String']
   sellerFundsRecipient: Scalars['String']
+}
+
+export type V3AsksCoreEthAskEventProperties = {
+  __typename?: 'V3AsksCoreEthAskEventProperties'
+  askCurrency: Scalars['String']
+  askPrice: Scalars['String']
+  price: PriceAtTime
+  seller: Scalars['String']
+  tokenContract: Scalars['String']
+  tokenId: Scalars['String']
+}
+
+export type V3AsksCoreEthAskFilledEventProperties = {
+  __typename?: 'V3AsksCoreEthAskFilledEventProperties'
+  askCurrency: Scalars['String']
+  askPrice: Scalars['String']
+  buyer: Scalars['String']
+  price: PriceAtTime
+  seller: Scalars['String']
+  tokenContract: Scalars['String']
+  tokenId: Scalars['String']
+}
+
+export type V3AsksCoreEthRoyaltyPayoutEventProperties = {
+  __typename?: 'V3AsksCoreEthRoyaltyPayoutEventProperties'
+  amount: PriceAtTime
+  askCurrency: Scalars['String']
+  askPrice: Scalars['String']
+  recipient: Scalars['String']
+  tokenContract: Scalars['String']
+  tokenId: Scalars['String']
 }
 
 export type V3ModuleManagerEvent = {
@@ -2189,6 +2228,8 @@ export type NounishAuctionsQuery = {
 
 export type NounsDaosQueryVariables = Exact<{
   network: NetworkInput
+  limit: Scalars['Int']
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type NounsDaosQuery = {
@@ -2211,6 +2252,12 @@ export type NounsDaosQuery = {
         contractAddress?: string | null
         networkInfo: { __typename?: 'NetworkInfo'; chain: Chain; network: Network }
       }>
+      pageInfo: {
+        __typename?: 'PageInfo'
+        hasNextPage: boolean
+        endCursor?: string | null
+        limit: number
+      }
     }
   }
 }
@@ -2218,6 +2265,8 @@ export type NounsDaosQuery = {
 export type OffchainOrderForTokenQueryVariables = Exact<{
   tokenId: Scalars['String']
   tokenAddress: Scalars['String']
+  network: Network
+  chain: Chain
 }>
 
 export type OffchainOrderForTokenQuery = {

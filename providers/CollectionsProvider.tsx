@@ -33,8 +33,8 @@ const CollectionsContext = createContext<{
 
 type CollectionsProps = {
   children?: ReactNode
-  collections: CollectionsData[] | undefined
-  daos: CollectionsData[] | undefined
+  collections?: CollectionsData[] | undefined
+  daos?: CollectionsData[] | undefined
 }
 
 export function useCollectionsContext() {

@@ -28,7 +28,7 @@ export function useNounishAuctionQuery({
         setTimeout(() => revalidate({ retryCount }), 5000)
       },
       dedupingInterval: 5000,
-      refreshInterval: 5000,
+      refreshInterval: 30000,
     }
   )
 
