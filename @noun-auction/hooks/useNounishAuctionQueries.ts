@@ -50,6 +50,7 @@ export function useNounishAuctionQuery({
 
   return {
     activeAuction,
+    auctionContractAddress: activeAuction?.address,
     hasActiveAuction,
     error,
   }

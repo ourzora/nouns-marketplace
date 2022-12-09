@@ -1,10 +1,10 @@
 import { ManageHeader, PageWrapper, Seo } from 'components'
 import { Collections } from 'compositions'
 // apparently 'constants' is reserved in Next.js (?)
-import { allAddresses } from 'constants/collection-addresses'
+// import { allAddresses } from 'constants/collection-addresses'
 import { ManageNFTsServiceProps, manageNftsService } from 'services'
 
-import { useBlocklist } from '@blocklist/src/blocklist'
+// import { useBlocklist } from '@blocklist/src/blocklist'
 import { CollectionFilterProvider } from '@filter'
 import { Separator } from '@zoralabs/zord'
 
@@ -28,7 +28,7 @@ const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
       {ownerAddress && (
         <CollectionFilterProvider
           ownerAddress={ownerAddress}
-          contractAllowList={allAddresses}
+          // contractAllowList={allAddresses}
           // useFilterOwnerCollections
           enableSidebarFilter={false}
         >

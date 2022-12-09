@@ -1,7 +1,6 @@
 import { NetworkInput } from 'utils/network'
 import { SeoProps, buildCollectionSEO } from 'utils/seo'
 
-import { allAddresses } from 'constants/collection-addresses'
 import { GetServerSideProps } from 'next'
 
 import * as Sentry from '@sentry/react'

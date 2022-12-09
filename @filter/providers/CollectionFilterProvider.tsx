@@ -79,7 +79,8 @@ export function CollectionFilterProvider({
     contractAllowList,
     contractAddress,
     ownerAddress,
-    initialData: initialPage && { tokens: initialPage },
+    // initialData: initialPage && { tokens: initialPage },
+    initialData: initialPage && initialPage,
     refreshInterval: 60000,
     sort: sortMethodToSortParams(filters.sortMethod, filters.marketStatus),
     filter: {
