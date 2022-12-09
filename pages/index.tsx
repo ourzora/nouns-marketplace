@@ -19,7 +19,11 @@ export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
 function Home(props: { daos: TypeSafeDao[] }) {
   const [paginationCursor, setPaginationCursor] = useState<string>('')
-  const { daos: clientDaos, pageInfo } = useNounsDaos({
+  const {
+    daos: clientDaos,
+    pageInfo,
+    isValidating,
+  } = useNounsDaos({
     limit: DAO_PAGE_LIMIT,
     after: paginationCursor,
   })
@@ -27,7 +31,9 @@ function Home(props: { daos: TypeSafeDao[] }) {
   const hasDaos = useMemo(() => daos?.length > 0, [daos])
 
   const pageNext = useCallback(() => {
-    pageInfo?.endCursor && setPaginationCursor(pageInfo?.endCursor)
+    pageInfo?.endCursor &&
+      pageInfo?.endCursor !== paginationCursor &&
+      setPaginationCursor(pageInfo?.endCursor)
   }, [pageInfo?.endCursor])
 
   console.log('DAOS', daos, daos.length)
@@ -53,7 +59,9 @@ function Home(props: { daos: TypeSafeDao[] }) {
       {hasDaos && (
         <>
           {pageInfo?.hasNextPage ? (
-            <Button onClick={pageNext}>Load More DAOs</Button>
+            <Button loading={isValidating} onClick={pageNext}>
+              Load More DAOs
+            </Button>
           ) : (
             <Eyebrow>All Daos Loaded</Eyebrow>
           )}

@@ -29,7 +29,7 @@ export function useNounsDaos({
   keyModifier = '',
 }: NounsDaos) {
   const [cached, setCache] = useState([] as TypeSafeDao[])
-  const { data } = useSWR<NounsDaosQuery>(
+  const { data, isValidating } = useSWR<NounsDaosQuery>(
     [keyModifier ? `nounsDaos-${keyModifier}` : `nounsDaos`],
     () =>
       zoraApiFetcher(NOUNS_DAOS_QUERY, {
@@ -64,5 +64,6 @@ export function useNounsDaos({
     response: data,
     daos,
     pageInfo: data?.nouns.nounsDaos.pageInfo,
+    isValidating,
   }
 }
