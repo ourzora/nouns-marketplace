@@ -88,7 +88,7 @@ UseTokenQueryProps) {
     isValidating,
   } = useSWRInfinite<GetNFTReturnType>(getKey, getNFTs, {
     // fallbackData: [initialData],
-    refreshInterval: 5000,
+    refreshInterval: 180000,
   })
 
   const data = resp?.map((r) => r.tokens)

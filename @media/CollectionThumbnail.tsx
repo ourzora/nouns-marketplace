@@ -46,6 +46,9 @@ export function CollectionThumbnail({
   // showing first token as CollectionThumbnail
   const { firstTokenID } = useFirstTokenID(collectionAddress)
   const { token } = useToken({ collectionAddress, tokenId: firstTokenID.toString() })
+
+  // console.log('TOKEN in CollectionThumbnail', token)
+
   if (!token) return <CollectionThumbnailPlaceholder {...props} />
 
   return <CollectionThumbnailComponent token={token} {...props} />
@@ -77,6 +80,8 @@ export function CollectionThumbnailComponent({
   token: TypeSafeToken
 }) {
   const thumbnailSize = useMemo(() => returnThumbnailSize(size), [size])
+
+  // console.log('TOKEN in CollectionThumbnail')
 
   return (
     <Flex align="center" gap="x4" {...props} className={className}>

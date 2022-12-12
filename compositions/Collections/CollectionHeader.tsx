@@ -24,13 +24,13 @@ type Props = {
 }
 
 export function PageHeaderWithStats({ collectionAddress, name, layout }: Props) {
-  const { aggregate } = useAggregate(collectionAddress)
+  const { nftCount } = useAggregate(collectionAddress)
 
   return useMemo(
     () => (
       <PageHeader
         headline={name}
-        copy={`${aggregate?.aggregateStat?.nftCount ?? '...'} NFTs`}
+        copy={`${nftCount ?? '...'} NFTs`}
         align={{
           '@initial': 'center',
           '@1024': layout === 'collection' ? 'center' : 'flex-start',
@@ -38,7 +38,7 @@ export function PageHeaderWithStats({ collectionAddress, name, layout }: Props) 
         px={layout === 'collection' ? 'x4' : 'x0'}
       />
     ),
-    [aggregate?.aggregateStat?.nftCount]
+    [nftCount]
   )
 }
 

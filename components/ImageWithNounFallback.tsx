@@ -10,7 +10,11 @@ import { ImageElement } from './ImageElement'
 export function ImageWithNounFallback({ token }: { token: TypeSafeToken }) {
   const { image: rawImageFallback } = useRawImageTransform(token.image?.url ?? undefined)
 
+  // token?.tokenId === '9' && console.log('TOKEN', token)
+  token?.tokenId === '9' && console.log('TOKEN.IMG', token.image)
+
   const decodedImgSrc = useOptionalImageURIDecode(token) // Handle non-base64 SVGs by decoding URI. This should be replaced when handled properly API-side
+  // console.log('decoded', decodedImgSrc)
 
   const srcImg = useMemo(
     () => decodedImgSrc ?? rawImageFallback,

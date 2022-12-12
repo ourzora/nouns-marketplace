@@ -11,7 +11,7 @@ const client = new GraphQLClient(process.env.NEXT_PUBLIC_GALACTUS_BASE_URL, {
   headers: new Headers({
     'Content-Type': 'application/json',
     'X-API-KEY': process.env.NEXT_PUBLIC_ZORA_API_KEY,
-    'X-ENABLE-NOUNS': 'true',
+    // 'X-ENABLE-NOUNS': 'true',
   }),
   mode: 'no-cors',
 })

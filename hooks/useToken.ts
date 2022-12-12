@@ -14,7 +14,7 @@ type Params = {
 }
 
 export function useToken({ collectionAddress, tokenId }: Params) {
-  const [cached, setCache] = useState<TypeSafeToken | undefined>()
+  // const [cached, setCache] = useState<TypeSafeToken | undefined>()
   const { data, error } = useSWR<TokenQuery>(
     [`${collectionAddress}-${tokenId}`],
     () =>
@@ -27,29 +27,33 @@ export function useToken({ collectionAddress, tokenId }: Params) {
         // Only retry up to 1 times.
         if (retryCount >= 2) return
         // Retry after 5 seconds.
-        setTimeout(() => revalidate({ retryCount }), 5000)
+        setTimeout(() => revalidate({ retryCount }), 15000)
       },
       dedupingInterval: 10000,
-      refreshInterval: 5000,
+      refreshInterval: 30000,
     }
   )
+  data?.token?.token.tokenId === '9' && console.log('DATA', data)
 
-  const token = useMemo(() => {
-    const newData = data?.token?.token
+  // data?.token?.token.tokenId === "9" && console.log('CACHEDDATA', cached)
 
-    if (typeof newData !== 'undefined') {
-      const verifiedData = verifyToken(newData)
-      setCache(verifiedData)
-      return verifiedData
-    } else {
-      return cached
-    }
-    // no need to update when cache changed!
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.token?.token])
+  // const token = useMemo(() => {
+
+  //   const newData = data?.token?.token
+
+  //   if (typeof newData !== 'undefined') {
+  //     const verifiedData = verifyToken(newData)
+  //     setCache(verifiedData)
+  //     return verifiedData
+  //   } else {
+  //     return cached
+  //   }
+  //   // no need to update when cache changed!
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [data?.token?.token])
 
   return {
-    token,
+    token: data?.token?.token,
     error,
   }
 }

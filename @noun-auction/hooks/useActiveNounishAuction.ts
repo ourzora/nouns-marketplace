@@ -16,7 +16,7 @@ export function useActiveOGNounishAuction(marketType?: NounishMarketTypes) {
         `
       ),
     {
-      refreshInterval: 1500,
+      refreshInterval: 15000,
     }
   )
 
