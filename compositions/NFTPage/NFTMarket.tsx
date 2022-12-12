@@ -31,8 +31,6 @@ export function NFTMarket({
     collectionAddress,
   })
 
-  console.log({ markets })
-
   if (hasActiveAuction) {
     return (
       <NFTPrimaryAuction
