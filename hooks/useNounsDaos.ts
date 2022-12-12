@@ -9,14 +9,6 @@ import { TypeSafeDao, verifyDao } from 'validators/dao'
 
 import { zoraApiFetcher } from '@shared'
 
-export type AuctionVolumeReturnType =
-  | {
-      chainTokenPrice: number
-      totalCount: number
-      usdcPrice: number
-    }
-  | undefined
-
 interface NounsDaos {
   limit?: number
   after?: string
