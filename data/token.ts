@@ -51,8 +51,39 @@ export const TOKEN_QUERY = gql`
         mintInfo {
           toAddress
           originatorAddress
+          price {
+            blockNumber
+            chainTokenPrice {
+              currency {
+                address
+                decimals
+                name
+              }
+              decimal
+              raw
+            }
+            nativePrice {
+              currency {
+                address
+                decimals
+                name
+              }
+              decimal
+              raw
+            }
+            usdcPrice {
+              currency {
+                address
+                decimals
+                name
+              }
+              decimal
+              raw
+            }
+          }
           mintContext {
             blockTimestamp
+            blockNumber
           }
         }
         image {

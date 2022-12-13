@@ -2393,7 +2393,48 @@ export type TokenQuery = {
         __typename?: 'MintInfo'
         toAddress: string
         originatorAddress: string
-        mintContext: { __typename?: 'TransactionInfo'; blockTimestamp: any }
+        price?: {
+          __typename?: 'PriceAtTime'
+          blockNumber: number
+          chainTokenPrice?: {
+            __typename?: 'CurrencyAmount'
+            decimal: number
+            raw: string
+            currency: {
+              __typename?: 'Currency'
+              address: string
+              decimals: number
+              name: string
+            }
+          } | null
+          nativePrice: {
+            __typename?: 'CurrencyAmount'
+            decimal: number
+            raw: string
+            currency: {
+              __typename?: 'Currency'
+              address: string
+              decimals: number
+              name: string
+            }
+          }
+          usdcPrice?: {
+            __typename?: 'CurrencyAmount'
+            decimal: number
+            raw: string
+            currency: {
+              __typename?: 'Currency'
+              address: string
+              decimals: number
+              name: string
+            }
+          } | null
+        } | null
+        mintContext: {
+          __typename?: 'TransactionInfo'
+          blockTimestamp: any
+          blockNumber: number
+        }
       } | null
       image?: {
         __typename?: 'TokenContentMedia'
