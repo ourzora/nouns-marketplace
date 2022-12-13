@@ -17,9 +17,10 @@ import { MediaType } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { removeItemAtIndex } from '../utils/store'
 
 export const marketStatusOptions: SelectOption<MarketStatusFilter>[] = [
-  { label: 'Live Auction', value: 'live' },
   { label: 'Buy Now', value: 'buy-now' },
-  { label: 'Reserve Not Met', value: 'reserve-not-met' },
+  { label: 'Sold', value: 'buy-now-completed' },
+  // { label: 'Live Auction', value: 'live' },
+  // { label: 'Reserve Not Met', value: 'reserve-not-met' }, // re-enable if using Zora V2 auctions
 ]
 
 export const ownerStatusOptions: SelectOption<OwnerStatusFilter>[] = [

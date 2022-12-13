@@ -118,18 +118,13 @@ export const filterSidebar = style(
   [
     {
       overflowY: 'scroll',
-      height: `calc(100% - ${HEADER_HEIGHT}px)`,
-      '@media': {
-        'screen and (max-width: 768px)': {
-          height: '100%',
-        },
-      },
     },
   ],
   atoms({
     backgroundColor: 'background1',
     pr: { '@initial': 'x0' },
     w: '100%',
+    h: { '@initial': '100%', '@768': '100vh' },
   })
 )
 
