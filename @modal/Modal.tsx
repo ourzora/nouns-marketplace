@@ -17,7 +17,9 @@ import * as styles from './Modal.css'
 export interface ModalContentProps extends Dialog.DialogContentProps {
   title?: string
   showClose?: boolean
-  padding?: Atoms['p']
+  // @ts-ignore-next-line // @BJ TODO: investigate why Atoms have stopped working?
+  padding?: Atoms['padding']
+  // padding?: string
   /** Modal background css overrides: vanilla extract style object */
   modalBackgroundOverrides?: any
   /** Modal content css overrides: vanilla extract style object */
