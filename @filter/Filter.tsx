@@ -19,7 +19,6 @@ export function Filter({ children, className, ...props }: FilterProps) {
     enableSidebarFilter,
   } = useCollectionFilters()
 
-  console.log('FILTER')
   return (
     <Stack className={className} {...props}>
       <FilterHeader />

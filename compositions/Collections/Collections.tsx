@@ -26,8 +26,6 @@ export function Collections({
     }
   }, [items, isReachingEnd, isValidating, handleLoadMore])
 
-  console.log('COLLECTIONS')
-
   return (
     <Stack className={['zora-collections-filter-parent', styles.collections]}>
       <DaoGrid
