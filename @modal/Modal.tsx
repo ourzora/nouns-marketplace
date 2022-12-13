@@ -12,7 +12,6 @@ import {
   mixins,
 } from '@zoralabs/zord'
 
-// import { background, close, content, fullScreen, overlay } from './Modal.css'
 import * as styles from './Modal.css'
 
 export interface ModalContentProps extends Dialog.DialogContentProps {
