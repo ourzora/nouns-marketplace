@@ -102,11 +102,11 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
       >
         <ZordProvider theme={modalTheme} style={{ backgroundColor: 'transparent' }}>
           <Box
-            className={clsx(
+            className={[
               styles.background,
               modalBackgroundOverrides,
-              'zord-modal-background'
-            )}
+              'zord-modal-background',
+            ]}
             p={padding}
           >
             {showClose && <CloseButton />}
