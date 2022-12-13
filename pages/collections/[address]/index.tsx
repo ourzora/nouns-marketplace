@@ -41,17 +41,17 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
-      {/* 
-        <CollectionHeader
-          collection={collection}
-          layout={'dao'}
-          currentAuction={
-            <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
-          }
-        >
-          <MarketStats contractAddress={collectionAddress} />
-        </CollectionHeader>
-       */}
+
+      <CollectionHeader
+        collection={collection}
+        layout={'dao'}
+        currentAuction={
+          <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
+        }
+      >
+        <MarketStats contractAddress={collectionAddress} />
+      </CollectionHeader>
+
       <CollectionFilterProvider
         initialPage={initialPage}
         enableSidebarClearButton

@@ -127,7 +127,7 @@ export function FilterSidebarMobile() {
         modalBackgroundOverrides={styles.filterSidebarModalBackground}
         fullscreen
       >
-        <Stack px="x4" pt="x8">
+        <Stack px="x6" pt="x6">
           <Flex w="100%" justify="space-between" pb="x6">
             <Heading as="h1" size="sm">
               Filters

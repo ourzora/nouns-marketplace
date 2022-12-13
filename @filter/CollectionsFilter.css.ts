@@ -117,13 +117,10 @@ export const avatarPadding = style({
 export const filterSidebar = style(
   [
     {
-      // overflowY: 'scroll',
+      overflowY: 'scroll',
       height: `calc(100% - ${HEADER_HEIGHT}px)`,
       '@media': {
         'screen and (max-width: 768px)': {
-          // background: vars.color.background1,
-          // width: '100%',
-          // paddingRight: '0',
           height: '100%',
         },
       },
