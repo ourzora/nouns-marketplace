@@ -49,15 +49,15 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   return (
     <PageWrapper direction="column" gap="x13">
       <Seo title={seo.title} description={seo.description} />
-      <Grid
+      {/* <Grid
         className={[styles.pageGrid]}
         px={{ '@initial': 'x0', '@1024': 'x4' }}
         // gap="x2"
         // gap="x6"
         alignSelf="center"
-      >
-        <CollectionHeader collection={collection} />
-      </Grid>
+      > */}
+      <CollectionHeader collection={collection} />
+      {/* </Grid> */}
       <CollectionFilterProvider
         useSidebarClearButton
         filtersVisible={isLarge}

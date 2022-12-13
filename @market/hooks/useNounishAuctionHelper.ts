@@ -4,7 +4,12 @@ import { TypeSafeNounsAuction } from 'validators/auction'
 import { AddressZero } from '@ethersproject/constants'
 import { useCountdown } from '@noun-auction'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
-import { formatCryptoVal, isAddressMatch, numberFormatterUSDC } from '@shared'
+import {
+  formatCryptoVal,
+  isAddressMatch,
+  numberFormatterUSDC,
+  shortenAddress,
+} from '@shared'
 import { useAuth } from '@shared/hooks'
 
 interface NounishAuctionHelperProps {
@@ -15,6 +20,11 @@ export const useNounishAuctionHelper = ({ auction }: NounishAuctionHelperProps) 
   const { address: userAddress } = useAuth()
 
   const { endTime, highestBidPrice, highestBidder, winner, startTime } = auction
+
+  const shortenedHighestBidder = useMemo(
+    () => shortenAddress(highestBidder),
+    [highestBidder]
+  )
 
   const { countdownText } = useCountdown(startTime, endTime)
 
@@ -59,6 +69,7 @@ export const useNounishAuctionHelper = ({ auction }: NounishAuctionHelperProps) 
     winnerAddress: winner,
     auctionStatus,
     highestBidder,
+    shortenedHighestBidder,
     formattedCryptoHighestBidPrice,
     formattedUSDHighestBidPrice,
     countdownText,
