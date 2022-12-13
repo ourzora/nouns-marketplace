@@ -1,5 +1,3 @@
-import { RawDisplayer } from 'components/utils'
-
 import { useMemo } from 'react'
 
 import { NFTObject } from '@zoralabs/nft-hooks'

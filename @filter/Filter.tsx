@@ -7,11 +7,10 @@ import { NoFilterResults } from './NoFilterResults'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 
 interface FilterProps extends StackProps {
-  grid?: JSX.Element
   initialPage?: NFTObject[]
 }
 
-export function Filter({ grid, className, ...props }: FilterProps) {
+export function Filter({ children, className, ...props }: FilterProps) {
   const {
     filterStore: { showFilters },
     items,
@@ -38,7 +37,7 @@ export function Filter({ grid, className, ...props }: FilterProps) {
         <Stack>
           <FilterGridHeader />
           {items.length ? (
-            grid
+            children
           ) : (
             <>
               {isEmpty && <NoFilterResults noResultsString="NO_FILTER_RESULTS_COPY" />}

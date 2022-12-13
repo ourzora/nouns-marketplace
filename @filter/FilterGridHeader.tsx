@@ -1,17 +1,15 @@
 import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
-import { Button, Flex } from '@zoralabs/zord'
+import { Flex } from '@zoralabs/zord'
 
-import { ActiveFilterCounter } from './ActiveFilterCounter'
 import * as styles from './CollectionsFilter.css'
 import { SelectedFilters } from './SelectedFilters'
 import { SortDropdown } from './SortDropdown'
 
-export function FilterGridHeader({}: { children?: JSX.Element }) {
+export function FilterGridHeader() {
   const {
     enableSortDropdown,
     enableSelectedFiltersPanel,
-    enableSidebarFilter,
-    filterStore: { toggleShowFilters, showFilters, activeFilterCount },
+    filterStore: { showFilters },
   } = useCollectionFilters()
 
   if (showFilters) {

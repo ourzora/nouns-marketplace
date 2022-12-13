@@ -47,21 +47,18 @@ export function DaoGrid({
   ])
 
   return (
-    <Filter
-      className="dao-filter"
-      grid={
-        <NFTGrid
-          items={items}
-          handleLoadMore={handleLoadMore}
-          isReachingEnd={isReachingEnd}
-          isValidating={isValidating}
-          nftRenderer={renderer}
-          className={nftGridWrapper({
-            // layout: view === 'nfts' ? 'grid' : 'activityRows',
-            layout: 'grid',
-          })}
-        />
-      }
-    />
+    <Filter className="dao-filter">
+      <NFTGrid
+        items={items}
+        handleLoadMore={handleLoadMore}
+        isReachingEnd={isReachingEnd}
+        isValidating={isValidating}
+        nftRenderer={renderer}
+        className={nftGridWrapper({
+          // layout: view === 'nfts' ? 'grid' : 'activityRows',
+          layout: 'grid',
+        })}
+      />
+    </Filter>
   )
 }
