@@ -1,4 +1,3 @@
-// import { returnDao } from 'constants/collection-addresses'
 import { useAggregate, useAuctionVolume } from 'hooks'
 
 import { useMemo } from 'react'

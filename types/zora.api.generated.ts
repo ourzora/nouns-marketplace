@@ -2389,6 +2389,12 @@ export type TokenQuery = {
             }
           | null
       } | null
+      mintInfo?: {
+        __typename?: 'MintInfo'
+        toAddress: string
+        originatorAddress: string
+        mintContext: { __typename?: 'TransactionInfo'; blockTimestamp: any }
+      } | null
       image?: {
         __typename?: 'TokenContentMedia'
         mimeType?: string | null
