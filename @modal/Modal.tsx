@@ -135,7 +135,7 @@ function CloseButton({
   return (
     <ModalClose
       className={clsx(
-        close,
+        styles.close,
         modalCloseButtonOverrides,
         className,
         'zord-modal-close-button'

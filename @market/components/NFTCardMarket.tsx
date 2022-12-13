@@ -33,11 +33,5 @@ export function NFTCardMarketComponent({
     return <V3AskModal modalName="V3AskV3" nftObj={nftObj} />
   }
 
-  return (
-    <NFTCardMarketOwner
-      size="md"
-      // align="left"
-      address={nftObj.nft?.owner?.address}
-    />
-  )
+  return <NFTCardMarketOwner size="md" address={nftObj.nft?.owner?.address} />
 }
