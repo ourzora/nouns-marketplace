@@ -48,6 +48,13 @@ export const TOKEN_QUERY = gql`
         tokenId
         name
         metadata
+        mintInfo {
+          toAddress
+          originatorAddress
+          mintContext {
+            blockTimestamp
+          }
+        }
         image {
           mimeType
           url

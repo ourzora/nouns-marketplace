@@ -15,7 +15,7 @@ import {
   titleScroll,
   titleWrapper,
 } from '@media/NftMedia.css'
-import { useIsOwner, useNFTProvider } from '@shared'
+import { useNFTProvider } from '@shared'
 import { Box, Flex, Heading, Label, Separator, Stack } from '@zoralabs/zord'
 
 type Props = {
