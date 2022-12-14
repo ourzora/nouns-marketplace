@@ -32,10 +32,11 @@ export function SortDropdown() {
               method.value !== 'highest-price' && method.value !== 'lowest-price'
           )
 
-      activeOptions =
-        marketStatus !== 'live'
-          ? activeOptions.filter((method) => method.value !== 'ending-soon')
-          : activeOptions
+      // Re-enable if using Zora V2 auctions
+      // activeOptions =
+      //   marketStatus !== 'live'
+      //     ? activeOptions.filter((method) => method.value !== 'ending-soon')
+      //     : activeOptions
 
       return activeOptions
     },
