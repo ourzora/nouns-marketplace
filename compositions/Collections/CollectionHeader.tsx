@@ -152,28 +152,12 @@ export function CollectionHeader({
   collection,
   children,
   currentAuction,
-  // layout = 'collection',
   className,
   ...props
 }: CollectionHeaderProps) {
-  // const { dao } = useOneNounsDao({ collectionAddress })
-  // const { dao } = useActiveOGNounishAuction({ collectionAddress })
-  // const { dao } = useActiveOGNounishAuction({ collectionAddress })
   const { activeAuction } = useNounishAuctionQuery({
     collectionAddress: collection.address,
   })
-
-  console.log('COLLECTION', collection)
-
-  // const { token } = useToken({
-  //   collection: collection.address,
-  //   tokenId: activeAuction?.tokenId,
-  // })
-  // const { token } = useToken({ collectionAddress, tokenId: firstTokenID.toString() })
-
-  // const { data: nft } = useNFT(collection.address, activeAuction?.tokenId)
-
-  console.log('activeAuction', activeAuction)
 
   return (
     <Grid
@@ -198,19 +182,8 @@ export function CollectionHeader({
           w="100%"
           justify="space-between"
           alignSelf="flex-start"
-          // px={{
-          //   '@initial': 'x4',
-          //   '@1024': 'x0',
-          // }}
         >
-          <Stack
-            // px={{
-            //   '@initial': 'x4',
-            //   '@1024': 'x0',
-            // }}
-            gap={{ '@initial': 'x4', '@1024': 'x6' }}
-            align="flex-start"
-          >
+          <Stack gap={{ '@initial': 'x4', '@1024': 'x6' }} align="flex-start">
             <Flex
               align="center"
               direction={{ '@initial': 'column', '@1024': 'row' }}
@@ -221,16 +194,10 @@ export function CollectionHeader({
                 collectionAddress={collection.address}
                 radius="round"
                 m="auto"
-                // size="lg"
                 size="md"
                 h="100%"
                 w="100%"
               />
-              {/* <PageHeaderWithStats
-                collectionAddress={collection.address}
-                layout="dao"
-                name={collection.name ?? ''}
-              /> */}
               <PageHeader
                 headline={collection.name ?? ''}
                 // copy={`${nftCount ?? '...'} NFTs`}
@@ -241,7 +208,7 @@ export function CollectionHeader({
                 px="x0"
               />
             </Flex>
-            {/* {collection.description && <Paragraph>{collection.description}</Paragraph>} */}
+            {/* {collection.description && <Paragraph className={[lightFont]}>{collection.description}</Paragraph>} */}
 
             <Paragraph className={[lightFont]}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate deserunt
@@ -253,7 +220,7 @@ export function CollectionHeader({
           <Flex
             w="100%"
             gap="x2"
-            direction="column" // not per design
+            direction="column"
             alignSelf="flex-start"
             align={{
               '@initial': 'flex-start',
@@ -263,10 +230,6 @@ export function CollectionHeader({
               '@initial': 'center',
               '@1024': 'flex-end',
             }}
-            // px={{
-            //   '@initial': 'x4',
-            //   '@1024': 'x0',
-            // }}
           >
             <AddressWithLink
               address={collection.address}
