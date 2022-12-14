@@ -2,39 +2,33 @@ import { Seo } from 'components'
 import { MarketStats } from 'components/MarketStats/MarketStats'
 import { PageWrapper } from 'components/PageWrapper'
 import {
-  CollectionActivityHeader,
+  // CollectionActivityHeader,
   CollectionHeader,
   Collections,
 } from 'compositions/Collections'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { CollectionServiceProps, collectionService } from 'services/collectionService'
-import * as styles from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { CollectionFilterProvider } from '@filter'
-import { useCollection } from '@filter/hooks/useCollection'
-import { ActiveAuctionCard, useOneNounsDao } from '@noun-auction'
+import {
+  ActiveAuctionCard, // useOneNounsDao
+} from '@noun-auction'
 import { useWindowWidth } from '@shared'
 import { Grid, Separator, Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
-  const { contractAddress: collectionAddress, seo } = fallback
-
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const { dao } = useOneNounsDao({ collectionAddress })
+  const { contractAddress: collectionAddress, collection, initialPage, seo } = fallback
 
   const { isLarge } = useWindowWidth()
-  const { aggregate } = useAggregate(collectionAddress)
-  // wrapper for useSWR
-  const { data } = useCollection(collectionAddress)
-  const collection = data || fallback?.collection
+  const { nftCount } = useAggregate(collectionAddress)
 
   useEffect(() => {
     if (collection?.name) {
-      const nftCount = aggregate?.aggregateStat.nftCount
       setCurrentCollection(collection.name)
       setCurrentCollectionCount(nftCount ? `${nftCount} NFTs` : '... NFTs')
     }
@@ -42,43 +36,37 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
       setCurrentCollection('Explore...')
       setCurrentCollectionCount(undefined)
     }
-  }, [aggregate, collection, setCurrentCollection, setCurrentCollectionCount])
+  }, [nftCount, collection, setCurrentCollection, setCurrentCollectionCount])
 
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={seo.title} description={seo.description} />
-      <Grid
-        className={[styles.pageGrid]}
-        px={{ '@initial': 'x0', '@1024': 'x8' }}
-        gap="x2"
-        alignSelf="center"
+
+      <CollectionHeader
+        collection={collection}
+        layout={'dao'}
+        currentAuction={
+          <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
+        }
       >
-        <CollectionHeader
-          collection={collection}
-          layout={dao ? 'dao' : 'collection'}
-          currentAuction={
-            dao ? (
-              <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
-            ) : null
-          }
-        >
-          <MarketStats contractAddress={collectionAddress} />
-        </CollectionHeader>
-      </Grid>
+        <MarketStats contractAddress={collectionAddress} />
+      </CollectionHeader>
+
       <CollectionFilterProvider
-        useSidebarClearButton
+        initialPage={initialPage}
+        enableSidebarClearButton
         filtersVisible={isLarge}
         contractAddress={collectionAddress}
-        useSortDropdown
+        enableSortDropdown
+        // enableSidebarFilter={false}
+        enableSelectedFiltersPanel
         useCollectionProperties={{
           header: 'Traits',
           selector: 'nouns-market-traits',
-          hideBorder: true,
         }}
-        usePriceRange={{
+        enablePriceRange={{
           label: 'Price',
           defaultState: 'open',
-          hideBorder: true,
           hideCurrencySelect: true,
         }}
         strings={{
@@ -86,7 +74,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         }}
       >
         <Stack>
-          {dao ? <Separator /> : <CollectionActivityHeader />}
+          <Separator />
           <Collections collectionAddress={collectionAddress} />
         </Stack>
       </CollectionFilterProvider>

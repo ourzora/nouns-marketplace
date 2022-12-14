@@ -14,18 +14,18 @@ export function useAggregate(collectionAddress: string) {
         network: NetworkInput,
       }),
     {
-      dedupingInterval: 20000,
-      refreshInterval: 20000,
+      dedupingInterval: 60000,
+      refreshInterval: 60000,
       onErrorRetry: (_, _1, _2, revalidate, { retryCount }) => {
         // Only retry up to 10 times.
         if (retryCount >= 10) return
-        // Retry after 5 seconds.
-        setTimeout(() => revalidate({ retryCount }), 5000)
+        // Retry after 10 seconds.
+        setTimeout(() => revalidate({ retryCount }), 10000)
       },
     }
   )
 
-  const nftCount = zdkAggregate?.aggregateStat?.nftCount || 0
+  const nftCount = zdkAggregate?.aggregateStat?.nftCount
   const ownerCount = zdkAggregate?.aggregateStat?.ownerCount
   const floorPrice = zdkAggregate?.aggregateStat?.floorPrice
   const salesVolume = zdkAggregate?.aggregateStat?.salesVolume

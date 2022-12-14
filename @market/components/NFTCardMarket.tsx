@@ -1,4 +1,4 @@
-import { NFTOwner } from '@market/components'
+import { NFTCardMarketOwner } from '@market/components'
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
 import { V3AskModal } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
@@ -33,5 +33,5 @@ export function NFTCardMarketComponent({
     return <V3AskModal modalName="V3AskV3" nftObj={nftObj} />
   }
 
-  return <NFTOwner size="md" align="left" address={nftObj.nft?.owner?.address} />
+  return <NFTCardMarketOwner size="md" address={nftObj.nft?.owner?.address} />
 }

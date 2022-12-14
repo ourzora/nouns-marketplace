@@ -29,6 +29,7 @@ export function useNounsDaos({ limit = 30 }: NounsDaos) {
         limit,
       }),
     {
+      refreshInterval: 30000,
       onErrorRetry: (_, _1, _2, revalidate, { retryCount }) => {
         // Only retry up to 10 times.
         if (retryCount >= 10) return
