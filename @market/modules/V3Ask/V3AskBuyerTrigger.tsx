@@ -4,7 +4,7 @@ import { useToken } from 'hooks/useToken'
 
 import React, { useCallback, useMemo, useState } from 'react'
 
-import { useAskHelper, useRelevantMarket } from '@market/hooks'
+import { useRelevantMarket } from '@market/hooks'
 import {
   APPROVE_MODULE_FOR_FILL_PRIVATEASK,
   APPROVE_MODULE_FOR_FILL_V3ASK,
@@ -21,9 +21,8 @@ interface V3AskBuyerTriggerProps {
 
 export function V3AskBuyerTrigger({ markets, openModal }: V3AskBuyerTriggerProps) {
   const { dispatch } = useV3AskStateContext()
-  const { ask } = useRelevantMarket(markets)
   const { displayAskAmount, usdAskAmount, hasActivePrivateAsk, isValidPrivateAskBuyer } =
-    useAskHelper({ ask })
+    useRelevantMarket(markets)
   const [disabled, setDisabled] = useState<boolean>(false)
   const label = useMemo(
     () => (hasActivePrivateAsk ? 'Private Listing' : 'Listing'),

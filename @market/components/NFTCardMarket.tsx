@@ -1,7 +1,7 @@
 import { useToken } from 'hooks/useToken'
 
 import { NFTOwner } from '@market/components'
-import { useAskHelper, useRelevantMarket } from '@market/hooks'
+import { useRelevantMarket } from '@market/hooks'
 import { V3AskModal } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
 import { FlexProps } from '@zoralabs/zord'
@@ -24,8 +24,7 @@ export function NFTCardMarket({
   ownerAddress,
   ...props
 }: NFTCardMarketProps) {
-  const { ask } = useRelevantMarket(markets)
-  const { hasRelevantAsk } = useAskHelper({ ask })
+  const { hasRelevantAsk } = useRelevantMarket(markets)
 
   if (isOwner) {
     return (

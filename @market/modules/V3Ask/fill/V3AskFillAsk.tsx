@@ -5,7 +5,6 @@ import React, { useEffect, useMemo } from 'react'
 
 import { MarketModalHeading } from '@market/components'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { useAskHelper } from '@market/hooks/useAskHelper'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { useModal } from '@modal'
 import { formatContractError } from '@shared'
@@ -28,10 +27,7 @@ export function V3AskFillAsk({
   ...props
 }: V3AskFillAskProps) {
   const { requestClose } = useModal()
-  const { ask } = useRelevantMarket(markets)
-  const { displayAskAmount, hasSufficientFunds } = useAskHelper({
-    ask,
-  })
+  const { displayAskAmount, hasSufficientFunds } = useRelevantMarket(markets)
 
   const askPriceSummary = useMemo(
     // todo: get this data from usePrimaryAuctionDataTable when we've switched from NFTObject to TypeSafeToken
@@ -46,7 +42,7 @@ export function V3AskFillAsk({
   )
 
   const savings = useMemo(
-    () => (displayAskAmount ? (parseFloat(displayAskAmount) * 0.025).toFixed(5) : '0'),
+    () => (displayAskAmount ? (displayAskAmount * 0.025).toFixed(5) : '0'),
     [displayAskAmount]
   )
 
@@ -101,7 +97,7 @@ export function V3AskFillAsk({
             type="submit"
             txStatus={txStatus}
             txInProgress={txInProgress}
-            onClick={() => fillAsk({ price: displayAskAmount })}
+            onClick={() => fillAsk({ price: displayAskAmount?.toString() })}
             disabled={isDisabled}
             w="auto"
             flex={1}

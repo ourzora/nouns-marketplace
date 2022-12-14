@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { NounsTokensByOwnerAddressQuery, TokenQuery } from 'types/zora.api.generated'
+import { NounsTokensByOwnerAddressQuery } from 'types/zora.api.generated'
 
 import { TOKENS_BY_ADDRESS_QUERY } from 'data/tokensByAddress'
 

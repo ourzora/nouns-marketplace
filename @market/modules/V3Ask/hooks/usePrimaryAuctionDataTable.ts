@@ -1,4 +1,4 @@
-import { returnDaoAuctionContract } from 'constants/collection-addresses'
+import { useToken } from 'hooks/useToken'
 
 import { useMemo } from 'react'
 import { TypeSafeToken } from 'validators/token'
@@ -6,7 +6,6 @@ import { TypeSafeToken } from 'validators/token'
 import { useRelevantMarket } from '@market/hooks'
 import { shortenAddress } from '@shared'
 import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
-import { NFTObject, useNFT } from '@zoralabs/nft-hooks'
 
 interface NounishAuctionInfoProps {
   token: TypeSafeToken
@@ -14,20 +13,31 @@ interface NounishAuctionInfoProps {
 }
 
 export const usePrimaryAuctionDataTable = ({
-  token,
+  token: t,
   primarySalePrice,
 }: NounishAuctionInfoProps) => {
-  const { data: nftObj } = useNFT(token.collectionAddress, token.tokenId)
+  const { collectionAddress, tokenId } = t
+  const { token, markets } = useToken({
+    collectionAddress: collectionAddress,
+    tokenId: tokenId,
+  })
 
-  const nft = nftObj?.nft
-  const markets = nftObj?.markets
+  // const nft = nftObj?.nft
+  // const markets = nftObj?.markets
   const { ask } = useRelevantMarket(markets)
 
-  const askPrice = useMemo(() => ask?.amount?.eth?.value, [ask?.amount?.eth?.value])
-  const auctionContractAddress = useMemo(
-    () => (nft ? returnDaoAuctionContract(nft?.contract.address) : null),
-    [nft]
+  const askPrice = useMemo(
+    () => ask?.price?.nativePrice.decimal,
+    [ask?.price?.nativePrice.decimal]
   )
+
+  const auctionContractAddress = useMemo(
+    () => () => t?.collectionAddress,
+    [t?.collectionAddress]
+  )
+  //   () => (nft ? returnDaoAuctionContract(nft?.contract.address) : null),
+  //   [nft]
+  // )
 
   const askPriceSummary = useMemo(
     () =>
@@ -44,18 +54,18 @@ export const usePrimaryAuctionDataTable = ({
     const summary = [
       {
         label: 'Owned by',
-        value: shortenAddress(nft?.owner?.address),
+        value: shortenAddress(t?.owner),
         url: {
-          href: `https://market.zora.co/${nft?.owner?.address}`,
+          href: `https://market.zora.co/${t?.owner}`,
           target: '_blank',
           rel: 'noreferrer',
         },
       },
       {
         label: 'Minted by',
-        value: shortenAddress(nft?.minted.address),
+        value: shortenAddress(t?.mintInfo?.toAddress),
         url: {
-          href: `https://market.zora.co/${nft?.minted?.address}`,
+          href: `https://market.zora.co/${t?.mintInfo?.toAddress}`,
           target: '_blank',
           rel: 'noreferrer',
         },
@@ -76,7 +86,7 @@ export const usePrimaryAuctionDataTable = ({
     }
 
     return summary
-  }, [nft?.owner?.address, nft?.minted.address, primarySalePrice, auctionContractAddress])
+  }, [t?.owner, t?.mintInfo?.toAddress, primarySalePrice, auctionContractAddress])
 
   const copyableValue = useMemo(() => {
     if (!formattedAuctionDataTable) return ''

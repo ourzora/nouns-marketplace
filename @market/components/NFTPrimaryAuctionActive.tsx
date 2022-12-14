@@ -18,14 +18,10 @@ export function NFTPrimaryAuctionActive({
   tokenId,
   ...props
 }: NFTPrimaryAuctionActiveProps) {
-  const {
-    formattedCryptoHighestBidPrice,
-    formattedUSDHighestBidPrice,
-    highestBidder,
-    hasBid,
-  } = useNounishAuctionHelper({
-    auction: primaryAuction,
-  })
+  const { formattedCryptoHighestBidPrice, formattedUSDHighestBidPrice, hasBid } =
+    useNounishAuctionHelper({
+      auction: primaryAuction,
+    })
 
   const { formattedAuctionDataTable } = useAuctionDataTable({
     primaryAuction,
@@ -39,7 +35,7 @@ export function NFTPrimaryAuctionActive({
           <PriceWithLabel
             symbol="ETH"
             cryptoAmount={formattedCryptoHighestBidPrice}
-            usdAmount={hasBid ? formattedUSDHighestBidPrice : '$0'}
+            usdAmount={hasBid ? formattedUSDHighestBidPrice : 0}
             label="Current Bid"
             invertColor
           />

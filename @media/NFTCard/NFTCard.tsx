@@ -1,5 +1,6 @@
 import { ImageWithNounFallback } from 'components'
 import { Link } from 'components/Link'
+import { NounsTokensByOwnerAddressQuery } from 'types/zora.api.generated'
 
 import { useToken } from 'hooks/useToken'
 
@@ -43,20 +44,27 @@ export function NFTCardOuterComponent({
   tokenId,
   nft,
 }: Props & { tokenId: string; nft: NFTObject }) {
-  const { token } = useToken({ collectionAddress, tokenId })
+  const { token, markets } = useToken({ collectionAddress, tokenId })
 
   if (!token || !collectionAddress) return null
 
   return (
-    <NFTCardComponent nft={nft} token={token} collectionAddress={collectionAddress} />
+    <NFTCardComponent
+      markets={markets}
+      token={token}
+      collectionAddress={collectionAddress}
+    />
   )
 }
 
 export function NFTCardComponent({
   collectionAddress,
   token,
-  nft,
-}: Props & { token: TypeSafeToken; nft: NFTObject }) {
+  markets,
+}: Props & {
+  token: TypeSafeToken
+  markets: ReturnType<typeof useToken>['markets']
+}) {
   const { isOwner } = useIsOwner(token)
   const fallbackTitle = token.collectionName ?? '..'
   const tokenId = token.tokenId
@@ -105,7 +113,7 @@ export function NFTCardComponent({
           tokenId={tokenId}
           contractAddress={token.collectionAddress}
           collectionName={token.collectionName}
-          markets={nft.markets}
+          markets={markets}
         />
       </Stack>
     </Stack>

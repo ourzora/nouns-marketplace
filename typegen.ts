@@ -12,6 +12,9 @@ const config: CodegenConfig = {
       plugins: ['typescript', 'typescript-operations'],
       config: {
         skipTypename: false,
+        nonOptionalTypename: true,
+        flattenGeneratedTypes: true,
+        flattenGeneratedTypesIncludeFragments: true,
       },
     },
     './graphql.schema.json': {

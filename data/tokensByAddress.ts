@@ -35,11 +35,40 @@ export const TOKENS_BY_ADDRESS_QUERY = gql`
           marketAddress
           marketType
           properties {
+            ... on V1Offer {
+              __typename
+              address
+              amount {
+                nativePrice {
+                  decimal
+                  raw
+                }
+                usdcPrice {
+                  decimal
+                  raw
+                }
+              }
+              bidder
+              collectionAddress
+              currency
+              recipient
+              sellOnShare
+              tokenId
+              v1OfferStatus
+            }
             ... on V3Ask {
+              __typename
               address
               askCurrency
               askPrice {
-                blockNumber
+                nativePrice {
+                  decimal
+                  raw
+                }
+                usdcPrice {
+                  decimal
+                  raw
+                }
               }
               buyer
               collectionAddress
@@ -48,6 +77,7 @@ export const TOKENS_BY_ADDRESS_QUERY = gql`
               v3AskStatus
             }
             ... on V3ReserveAuction {
+              __typename
               estimatedDurationTime
               address
               collectionAddress
@@ -61,33 +91,121 @@ export const TOKENS_BY_ADDRESS_QUERY = gql`
               highestBid
               highestBidder
               reserve
-              highestBidPrice {
-                blockNumber
-                usdcPrice {
-                  decimal
-                  raw
-                }
-                nativePrice {
-                  decimal
-                  raw
-                }
-              }
-              reservePrice {
-                usdcPrice {
-                  decimal
-                  raw
-                }
-                nativePrice {
-                  decimal
-                  raw
-                }
-              }
               seller
               sellerFundsRecipient
               startTime
               status
               tokenId
+              price {
+                nativePrice {
+                  decimal
+                  raw
+                }
+                usdcPrice {
+                  decimal
+                  raw
+                }
+              }
             }
+          }
+          price {
+            nativePrice {
+              decimal
+              raw
+            }
+            usdcPrice {
+              decimal
+              raw
+            }
+          }
+          status
+          tokenId
+        }
+
+        token {
+          collectionAddress
+          collectionName
+          networkInfo {
+            chain
+            network
+          }
+          attributes {
+            displayType
+            traitType
+            value
+          }
+          content {
+            mediaEncoding {
+              ... on ImageEncodingTypes {
+                large
+                poster
+                original
+                thumbnail
+              }
+              ... on UnsupportedEncodingTypes {
+                __typename
+                original
+              }
+              ... on AudioEncodingTypes {
+                large
+                original
+              }
+              ... on VideoEncodingTypes {
+                large
+                poster
+                original
+                preview
+                thumbnail
+              }
+            }
+            mimeType
+            size
+            url
+          }
+          tokenUrlMimeType
+          tokenUrl
+          tokenId
+          name
+          metadata
+          image {
+            mimeType
+            url
+            size
+            mediaEncoding {
+              ... on ImageEncodingTypes {
+                large
+                poster
+                original
+                thumbnail
+              }
+              ... on VideoEncodingTypes {
+                large
+                poster
+                original
+                preview
+                thumbnail
+              }
+              ... on AudioEncodingTypes {
+                large
+                original
+              }
+              ... on UnsupportedEncodingTypes {
+                __typename
+                original
+              }
+            }
+          }
+          description
+          lastRefreshTime
+          owner
+          tokenContract {
+            totalSupply
+            symbol
+            network
+            name
+            description
+            collectionAddress
+            chain
           }
         }
       }

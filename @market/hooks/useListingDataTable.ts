@@ -4,7 +4,7 @@ import { useToken } from 'hooks/useToken'
 
 import { useMemo } from 'react'
 
-import { useAskHelper, useRelevantMarket } from '@market/hooks'
+import { useRelevantMarket } from '@market/hooks'
 import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
 
 interface ListingDataTableProps {
@@ -12,8 +12,7 @@ interface ListingDataTableProps {
 }
 
 export const useListingDataTable = ({ markets }: ListingDataTableProps) => {
-  const { ask } = useRelevantMarket(markets)
-  const { isPrivateAsk } = useAskHelper({ ask })
+  const { ask, isPrivateAsk } = useRelevantMarket(markets)
 
   const formattedListingDataTable = useMemo<DataTableItemProps[] | undefined>(
     () => [

@@ -5,7 +5,7 @@ import { useToken } from 'hooks/useToken'
 
 import React, { useCallback, useMemo, useState } from 'react'
 
-import { useAskHelper, useRelevantMarket } from '@market/hooks'
+import { useRelevantMarket } from '@market/hooks'
 import { PossibleV3AskState, useV3AskStateContext } from '@market/modules/V3Ask/'
 import { useKeyPress } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
@@ -62,12 +62,8 @@ export function V3AskOwnerTrigger({
   openModal,
 }: V3AskOwnerTriggerProps) {
   const { dispatch } = useV3AskStateContext()
-  const { ask } = useRelevantMarket(markets)
-
   const { displayAskAmount, usdAskAmount, hasActivePrivateAsk, isActiveAsk } =
-    useAskHelper({
-      ask,
-    })
+    useRelevantMarket(markets)
 
   const dropdownOptions = useMemo(
     () => (hasActivePrivateAsk ? privateAskDropdownOptions : v3AskDropdownOptions),
@@ -99,7 +95,7 @@ export function V3AskOwnerTrigger({
             label={label}
             symbol="ETH"
             cryptoAmount={displayAskAmount}
-            usdAmount={usdAskAmount}
+            usdAmount={usdAskAmount ?? 0}
           />
         )}
         <PopUp

@@ -1,3 +1,5 @@
+import { V3Ask } from 'types/zora.api.generated'
+
 import { useToken } from 'hooks/useToken'
 
 import { useMemo } from 'react'
@@ -68,53 +70,60 @@ interface AskHelperProps {
 //   }
 // }
 
-export const useAskHelper = ({ ask }: ReturnType<typeof useToken>['markets'][0]) => {
-  const { balance: walletBalance, address: userAddress } = useAuth()
-  const buyerAddress = useMemo(() => ask?.properties?.buyer, [ask])
-  const isPrivateAsk = useMemo(() => buyerAddress || false, [buyerAddress])
-  const isActiveAsk = useMemo(() => ask?.status === 'ACTIVE' || false, [ask])
-  const hasActivePrivateAsk = useMemo(
-    () => isActiveAsk && isPrivateAsk,
-    [isActiveAsk, isPrivateAsk]
-  )
-  const hasActiveV3Ask = useMemo(
-    () => isActiveAsk && !isPrivateAsk,
-    [isActiveAsk, isPrivateAsk]
-  )
-  const isCompletedAsk = useMemo(
-    () => ask?.status === MARKET_INFO_STATUSES.COMPLETE || false,
-    [ask]
-  )
-  const hasAsk = useMemo(() => ask !== undefined, [ask])
-  const hasRelevantAsk = useMemo(() => hasAsk && isActiveAsk, [hasAsk, isActiveAsk])
+export const useAskHelperDeprecated = ({
+  ask,
+}: {
+  ask: ReturnType<typeof useToken>['markets'][0]
+}) => {
+  // const askProperties = ask?.properties
 
-  const rawAskAmount = useMemo(() => ask?.price?.nativePrice.raw, [ask])
-  const displayAskAmount = useMemo(() => ask?.price?.nativePrice.value, [ask])
-  const usdAskAmount = ask?.price.usdPrice
-  const hasSufficientFunds = useMemo(
-    () => (rawAskAmount ? walletBalance?.value.gte(rawAskAmount) : false),
-    [rawAskAmount, walletBalance?.value]
-  )
-  const isValidPrivateAskBuyer = useMemo(
-    () => hasActivePrivateAsk && isAddressMatch(userAddress, buyerAddress),
-    [buyerAddress, hasActivePrivateAsk, userAddress]
-  )
+  // const { balance: walletBalance, address: userAddress } = useAuth()
+  // const buyerAddress = useMemo(() => askProperties.buyer, [askProperties])
+  // const isPrivateAsk = useMemo(() => buyerAddress || false, [buyerAddress])
+  // const isActiveAsk = useMemo(() => ask?.status === 'ACTIVE' || false, [ask])
+  // const hasActivePrivateAsk = useMemo(
+  //   () => isActiveAsk && isPrivateAsk,
+  //   [isActiveAsk, isPrivateAsk]
+  // )
+  // const hasActiveV3Ask = useMemo(
+  //   () => isActiveAsk && !isPrivateAsk,
+  //   [isActiveAsk, isPrivateAsk]
+  // )
+  // const isCompletedAsk = useMemo(
+  //   () => ask?.status === MARKET_INFO_STATUSES.COMPLETE || false,
+  //   [ask]
+  // )
+  // const hasAsk = useMemo(() => askProperties !== undefined, [askProperties])
+  // const hasRelevantAsk = useMemo(() => hasAsk && isActiveAsk, [hasAsk, isActiveAsk])
 
-  console.log({ isActiveAsk })
+  // const rawAskAmount = useMemo(() => ask?.price?.nativePrice.raw, [ask])
+  // const displayAskAmount = useMemo(() => ask?.price?.nativePrice.decimal, [ask])
+  // const usdAskAmount = ask?.price?.usdcPrice?.decimal
+  // const hasSufficientFunds = useMemo(
+  //   () => (rawAskAmount ? walletBalance?.value.gte(rawAskAmount) : false),
+  //   [rawAskAmount, walletBalance?.value]
+  // )
+  // const isValidPrivateAskBuyer = useMemo(
+  //   () =>
+  //     hasActivePrivateAsk && buyerAddress && isAddressMatch(userAddress, buyerAddress),
+  //   [buyerAddress, hasActivePrivateAsk, userAddress]
+  // )
 
-  return {
-    hasAsk,
-    hasRelevantAsk,
-    isPrivateAsk,
-    isActiveAsk,
-    hasActiveV3Ask,
-    hasActivePrivateAsk,
-    isCompletedAsk,
-    buyerAddress,
-    isValidPrivateAskBuyer,
-    rawAskAmount,
-    displayAskAmount,
-    usdAskAmount,
-    hasSufficientFunds,
-  }
+  // return {
+  //   hasAsk,
+  //   hasRelevantAsk,
+  //   isPrivateAsk,
+  //   isActiveAsk,
+  //   hasActiveV3Ask,
+  //   hasActivePrivateAsk,
+  //   isCompletedAsk,
+  //   buyerAddress,
+  //   isValidPrivateAskBuyer,
+  //   rawAskAmount,
+  //   displayAskAmount,
+  //   usdAskAmount,
+  //   hasSufficientFunds,
+  // }
+
+  return null
 }

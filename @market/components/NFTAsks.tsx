@@ -5,7 +5,7 @@ import { useToken } from 'hooks/useToken'
 
 import { useMemo } from 'react'
 
-import { useAskHelper, useRelevantMarket } from '@market/hooks'
+import { useRelevantMarket } from '@market/hooks'
 import { V3AskSidebar } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
 import { FlexProps } from '@zoralabs/zord'
@@ -31,14 +31,12 @@ export function NFTAsks({
   offchainOrders,
   isOwner,
 }: NFTAskProps) {
-  const { ask } = useRelevantMarket(markets)
-  const { hasRelevantAsk } = useAskHelper({ ask })
+  const { hasRelevantAsk } = useRelevantMarket(markets)
+
   const showOffchainOrders = useMemo(
     () => offchainOrders && offchainOrders?.length > 0 && !isOwner,
     [isOwner, offchainOrders]
   )
-
-  console.log({ ask, hasRelevantAsk })
 
   if (hasRelevantAsk) {
     return (
