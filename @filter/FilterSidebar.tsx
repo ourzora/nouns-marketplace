@@ -18,6 +18,7 @@ import { FilterOwnerCollections } from './FilterOwnerCollections'
 import { FilterPriceRange } from './FilterPriceRange'
 import { FilterProperties } from './FilterProperties'
 import { MobileFiltersFooter } from './MobileFiltersFooter'
+import { FILTER_SCROLL_DETECTION_THRESHOLD } from './constants'
 
 export function FilterSidebarContents({
   setHasScrolled,
@@ -42,7 +43,7 @@ export function FilterSidebarContents({
   const childRef = useRef<HTMLDivElement>(null)
   useScrollPosition(
     ({ currPos }) => {
-      setHasScrolled && setHasScrolled(currPos.y > 4)
+      setHasScrolled && setHasScrolled(currPos.y > FILTER_SCROLL_DETECTION_THRESHOLD)
     },
     [],
     // @ts-ignore-next-line
