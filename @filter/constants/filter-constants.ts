@@ -5,6 +5,8 @@ export const FILTER_SIDEBAR_WIDTH = 300
 export const FILTER_WRAPPER_HEIGHT_DESKTOP = `calc(100vh - ${HEADER_HEIGHT}px)`
 export const FILTER_CLEAR_LAYER = 10
 export const FILTER_OPEN_STICKY_OFFSET = 0
+export const FILTER_OPEN_STICKY_OFFSET_MOBILE = 0
+export const FILTER_SCROLL_DETECTION_THRESHOLD = 4
 
 export const themeDefaults = {
   FILTER_HEADER_HEIGHT: 78,

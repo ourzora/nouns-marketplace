@@ -25,13 +25,12 @@ function isOfferLike(value: MarketModule): value is FixedPriceLike {
 }
 
 export const useRelevantMarket = (markets: readonly MarketModule[] = []) => {
-  const auctions: AuctionLike[] = markets.filter(isAuctionLike).sort(getLatestBlockNumber) // @BJ / @Dain: question --> is the latest block number always desired
+  const auctions: AuctionLike[] = markets.filter(isAuctionLike).sort(getLatestBlockNumber)
   const asks: FixedPriceLike[] = markets.filter(isAskLike).sort(getLatestBlockNumber)
-  const offers: FixedPriceLike[] = markets.filter(isOfferLike).sort(getLatestBlockNumber) // <-- *all* active offers should be relevant
+  const offers: FixedPriceLike[] = markets.filter(isOfferLike).sort(getLatestBlockNumber) // <-- *all* active offers are relevant
 
   const ask = asks[0]
   const auction = auctions[0]
-  const offer = offers[0]
 
-  return { offer, ask, auction, auctions }
+  return { offers, ask, auction, auctions }
 }

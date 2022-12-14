@@ -1,6 +1,4 @@
-import { collectionAddresses, daoAddresses } from 'constants/collection-addresses'
-
-import { CollectionsData } from 'hooks'
+import { AggregateAttribute } from 'types/zora.api.generated'
 
 import {
   Dispatch,
@@ -12,37 +10,34 @@ import {
 } from 'react'
 
 const CollectionsContext = createContext<{
-  collections: CollectionsData[]
-  daos: CollectionsData[]
-  collectionAmount: number
-  daosAmount: number
   currentCollection: string
   setCurrentCollection: Dispatch<SetStateAction<string>>
   currentCollectionCount: string | undefined
   setCurrentCollectionCount: Dispatch<SetStateAction<string | undefined>>
+  filterPropertiesList: AggregateAttribute[]
+  setFilterPropertiesList: Dispatch<SetStateAction<AggregateAttribute[]>>
 }>({
-  collections: [],
-  daos: [],
-  collectionAmount: collectionAddresses.length,
-  daosAmount: daoAddresses.length,
   currentCollection: 'Browse...',
   setCurrentCollection: () => {},
   currentCollectionCount: undefined,
   setCurrentCollectionCount: () => {},
+  filterPropertiesList: [],
+  setFilterPropertiesList: () => {},
 })
 
 type CollectionsProps = {
   children?: ReactNode
-  collections?: CollectionsData[] | undefined
-  daos?: CollectionsData[] | undefined
 }
 
 export function useCollectionsContext() {
   return useContext(CollectionsContext)
 }
 
-export function CollectionsProvider({ children, collections, daos }: CollectionsProps) {
+export function CollectionsProvider({ children }: CollectionsProps) {
   const [currentCollection, setCurrentCollection] = useState<string>('Browse...')
+  const [filterPropertiesList, setFilterPropertiesList] = useState<
+    AggregateAttribute[] | []
+  >([])
   const [currentCollectionCount, setCurrentCollectionCount] = useState<
     string | undefined
   >(undefined)
@@ -50,14 +45,12 @@ export function CollectionsProvider({ children, collections, daos }: Collections
   return (
     <CollectionsContext.Provider
       value={{
-        collections: collections ?? [],
-        collectionAmount: collectionAddresses.length,
-        daos: daos ?? [],
-        daosAmount: daoAddresses.length,
         currentCollection,
         setCurrentCollection,
         currentCollectionCount,
         setCurrentCollectionCount,
+        filterPropertiesList,
+        setFilterPropertiesList,
       }}
     >
       {children}

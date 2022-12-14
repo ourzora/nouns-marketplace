@@ -2110,6 +2110,25 @@ export type VideoEncodingTypes = {
   thumbnail?: Maybe<Scalars['String']>
 }
 
+export type AttributesQueryVariables = Exact<{
+  addresses?: InputMaybe<Array<Scalars['String']> | Scalars['String']>
+  network: NetworkInput
+}>
+
+export type AttributesQuery = {
+  __typename?: 'RootQuery'
+  aggregateAttributes: Array<{
+    __typename?: 'AggregateAttribute'
+    traitType: string
+    valueMetrics: Array<{
+      __typename?: 'AggregateAttributeValue'
+      count: number
+      percent: number
+      value: string
+    }>
+  }>
+}
+
 export type NounishAuctionsQueryVariables = Exact<{
   collectionAddress: Scalars['String']
   network?: InputMaybe<NetworkInput>
@@ -2376,6 +2395,53 @@ export type TokenQuery = {
               thumbnail?: string | null
             }
           | null
+      } | null
+      mintInfo?: {
+        __typename?: 'MintInfo'
+        toAddress: string
+        originatorAddress: string
+        price?: {
+          __typename?: 'PriceAtTime'
+          blockNumber: number
+          chainTokenPrice?: {
+            __typename?: 'CurrencyAmount'
+            decimal: number
+            raw: string
+            currency: {
+              __typename?: 'Currency'
+              address: string
+              decimals: number
+              name: string
+            }
+          } | null
+          nativePrice: {
+            __typename?: 'CurrencyAmount'
+            decimal: number
+            raw: string
+            currency: {
+              __typename?: 'Currency'
+              address: string
+              decimals: number
+              name: string
+            }
+          }
+          usdcPrice?: {
+            __typename?: 'CurrencyAmount'
+            decimal: number
+            raw: string
+            currency: {
+              __typename?: 'Currency'
+              address: string
+              decimals: number
+              name: string
+            }
+          } | null
+        } | null
+        mintContext: {
+          __typename?: 'TransactionInfo'
+          blockTimestamp: any
+          blockNumber: number
+        }
       } | null
       image?: {
         __typename?: 'TokenContentMedia'

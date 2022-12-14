@@ -37,16 +37,14 @@ const {
 
 ...
 
-<Filter
-  grid={
+<Filter>
     <NFTGrid
       items={items}
       handleLoadMore={handleLoadMore}
       isReachingEnd={isReachingEnd}
       isValidating={isValidating}
     />
-  }
-/>
+</Filter>
 ```
 
 The `Filter` Component provides UI for filtering, but you don't need to use it. All of the functions and data are exposed via hooks. Items will return an array of NFTs in the shape defined [here](https://github.com/ourzora/nft-hooks/blob/main/src/types/NFTInterface.ts#L253-L315) in our nft-hooks library

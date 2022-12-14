@@ -12,8 +12,6 @@ import { BlocklistGuard, CollectionsProvider } from 'providers'
 import 'styles/styles.css'
 import { SWRConfig } from 'swr'
 
-import { useCollections } from 'hooks'
-
 import { StrictMode, useEffect } from 'react'
 import React from 'react'
 
@@ -82,9 +80,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               })}
             >
               <BlocklistGuard>
-                <CollectionsProvider
-                // collections={collections} daos={daos}
-                >
+                <CollectionsProvider>
                   <ModalContextProvider>
                     <ToastContextProvider>
                       <ContractProvider>

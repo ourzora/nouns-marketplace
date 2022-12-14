@@ -1,4 +1,3 @@
-import { returnDao } from 'constants/collection-addresses'
 import { marketStatsWrapper } from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
@@ -7,7 +6,6 @@ import { useMemo } from 'react'
 
 import { Box, Flex, FlexProps } from '@zoralabs/zord'
 
-import { CollectionStats } from './CollectionStats'
 import { DaoStats } from './DaoStats'
 import { StatBlock } from './StatBlock'
 
@@ -17,7 +15,6 @@ export interface MarketStatsProps extends FlexProps {
 
 export function MarketStats({ contractAddress, ...props }: MarketStatsProps) {
   const { floorPrice, nftCount, ownerCount } = useAggregate(contractAddress)
-  const dao = returnDao(contractAddress)
 
   return useMemo(
     () => (
@@ -36,11 +33,8 @@ export function MarketStats({ contractAddress, ...props }: MarketStatsProps) {
             statType="Floor Price"
             statValue={floorPrice ? `${floorPrice} ETH` : '...'}
           />
-          {dao ? (
-            <DaoStats contractAddress={contractAddress} />
-          ) : (
-            <CollectionStats contractAddress={contractAddress} />
-          )}
+          <DaoStats contractAddress={contractAddress} />
+
           <Box
             style={{ paddingLeft: '1px' }}
             h="100%"
@@ -53,6 +47,6 @@ export function MarketStats({ contractAddress, ...props }: MarketStatsProps) {
         </Flex>
       </Flex>
     ),
-    [contractAddress, dao, floorPrice, nftCount, ownerCount, props]
+    [contractAddress, floorPrice, nftCount, ownerCount, props]
   )
 }

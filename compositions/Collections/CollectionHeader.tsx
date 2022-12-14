@@ -1,9 +1,7 @@
 import { PageHeader } from 'components/PageHeader'
-import { collectionHeaderWrapper, daoHeaderWrapper } from 'styles/styles.css'
+import * as styles from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
-
-import { useMemo } from 'react'
 
 import { AddressWithLink } from '@market'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
@@ -24,21 +22,18 @@ type Props = {
 }
 
 export function PageHeaderWithStats({ collectionAddress, name, layout }: Props) {
-  const { aggregate } = useAggregate(collectionAddress)
+  const { nftCount } = useAggregate(collectionAddress)
 
-  return useMemo(
-    () => (
-      <PageHeader
-        headline={name}
-        copy={`${aggregate?.aggregateStat?.nftCount ?? '...'} NFTs`}
-        align={{
-          '@initial': 'center',
-          '@1024': layout === 'collection' ? 'center' : 'flex-start',
-        }}
-        px={layout === 'collection' ? 'x4' : 'x0'}
-      />
-    ),
-    [aggregate?.aggregateStat?.nftCount]
+  return (
+    <PageHeader
+      headline={name}
+      copy={`${nftCount ?? '...'} NFTs`}
+      align={{
+        '@initial': 'center',
+        '@1024': layout === 'collection' ? 'center' : 'flex-start',
+      }}
+      px={layout === 'collection' ? 'x4' : 'x0'}
+    />
   )
 }
 
@@ -52,47 +47,72 @@ export function CollectionHeader({
 }: CollectionHeaderProps) {
   return (
     <Grid
-      className={[
-        collectionHeaderWrapper,
-        layout === 'dao' ? daoHeaderWrapper : 'collections-header-wrapper',
-        className,
-      ]}
-      mt={{ '@initial': 'x6', '@1024': 'x8' }}
-      {...props}
+      className={[styles.pageGrid]}
+      px={{ '@initial': 'x0', '@1024': 'x8' }}
+      gap="x2"
+      alignSelf="center"
     >
-      <Stack
-        align={{
-          '@initial': 'center',
-          '@1024': layout === 'collection' ? 'center' : 'flex-start',
-        }}
-        gap="x4"
+      <Grid
+        className={[
+          styles.collectionHeaderWrapper,
+          layout === 'dao' ? styles.daoHeaderWrapper : 'collections-header-wrapper',
+          className,
+        ]}
+        mt={{ '@initial': 'x6', '@1024': 'x8' }}
+        {...props}
       >
         <Stack
-          px={{
-            '@initial': 'x4',
-            '@1024': 'x0',
+          align={{
+            '@initial': 'center',
+            '@1024': layout === 'collection' ? 'center' : 'flex-start',
           }}
+          gap="x4"
         >
-          <Flex
-            align="center"
-            direction={{ '@initial': 'column', '@1024': 'row' }}
-            gap={{ '@initial': 'x2', '@1024': 'x4' }}
+          <Stack
+            px={{
+              '@initial': 'x4',
+              '@1024': 'x0',
+            }}
           >
-            <CollectionThumbnail
-              collectionAddress={collection.address}
-              radius="round"
-              m="auto"
-              size="lg"
-              h={layout === 'dao' ? '100%' : 'auto'}
+            <Flex
+              align="center"
+              direction={{ '@initial': 'column', '@1024': 'row' }}
+              gap={{ '@initial': 'x2', '@1024': 'x4' }}
+            >
+              <CollectionThumbnail
+                collectionAddress={collection.address}
+                radius="round"
+                m="auto"
+                size="lg"
+                h={layout === 'dao' ? '100%' : 'auto'}
+                w="100%"
+                style={{ justifyContent: 'center' }}
+              />
+              <PageHeaderWithStats
+                collectionAddress={collection.address}
+                layout={layout}
+                name={collection.name ?? ''}
+              />
+            </Flex>
+            <Flex
               w="100%"
-              style={{ justifyContent: 'center' }}
-            />
-            <PageHeaderWithStats
-              collectionAddress={collection.address}
-              layout={layout}
-              name={collection.name ?? ''}
-            />
-          </Flex>
+              justify={{
+                '@initial': 'center',
+                '@1024': layout === 'dao' ? 'flex-start' : 'center',
+              }}
+            >
+              <AddressWithLink
+                address={collection.address}
+                useEns={false}
+                backgroundColor="background2"
+                px="x4"
+                py="x2"
+                borderRadius="curved"
+                my="x2"
+              />
+            </Flex>
+            {collection.description && <Paragraph>{collection.description}</Paragraph>}
+          </Stack>
           <Flex
             w="100%"
             justify={{
@@ -100,45 +120,27 @@ export function CollectionHeader({
               '@1024': layout === 'dao' ? 'flex-start' : 'center',
             }}
           >
-            <AddressWithLink
-              address={collection.address}
-              useEns={false}
-              backgroundColor="background2"
-              px="x4"
-              py="x2"
-              borderRadius="curved"
-              my="x2"
-            />
+            {children}
           </Flex>
-          {collection.description && <Paragraph>{collection.description}</Paragraph>}
         </Stack>
-        <Flex
-          w="100%"
-          justify={{
-            '@initial': 'center',
-            '@1024': layout === 'dao' ? 'flex-start' : 'center',
-          }}
-        >
-          {children}
-        </Flex>
-      </Stack>
-      {currentAuction && (
-        <Flex
-          w="100%"
-          justify={{
-            '@initial': 'center',
-            '@1024': 'flex-end',
-          }}
-          pt={{
-            '@initial': 'x4',
-          }}
-          px={{
-            '@initial': 'x4',
-          }}
-        >
-          {currentAuction}
-        </Flex>
-      )}
+        {currentAuction && (
+          <Flex
+            w="100%"
+            justify={{
+              '@initial': 'center',
+              '@1024': 'flex-end',
+            }}
+            pt={{
+              '@initial': 'x4',
+            }}
+            px={{
+              '@initial': 'x4',
+            }}
+          >
+            {currentAuction}
+          </Flex>
+        )}
+      </Grid>
     </Grid>
   )
 }

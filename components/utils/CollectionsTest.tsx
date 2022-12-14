@@ -18,15 +18,13 @@ export function CollectionsTest({ collectionAddress }: { collectionAddress?: str
   }, [collectionAddress, clearFilters])
 
   return (
-    <Filter
-      grid={
-        <NFTGridTestData
-          items={items}
-          handleLoadMore={handleLoadMore}
-          isReachingEnd={isReachingEnd}
-          isValidating={isValidating}
-        />
-      }
-    />
+    <Filter>
+      <NFTGridTestData
+        items={items}
+        handleLoadMore={handleLoadMore}
+        isReachingEnd={isReachingEnd}
+        isValidating={isValidating}
+      />
+    </Filter>
   )
 }

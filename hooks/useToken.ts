@@ -11,9 +11,14 @@ import { zoraApiFetcher } from '@shared'
 type Params = {
   collectionAddress: string
   tokenId: string
+  refreshInterval?: number
 }
 
-export function useToken({ collectionAddress, tokenId }: Params) {
+export function useToken({
+  collectionAddress,
+  tokenId,
+  refreshInterval = 30000,
+}: Params) {
   const [cached, setCache] = useState<TypeSafeToken | undefined>()
   const { data, error } = useSWR<TokenQuery>(
     [`${collectionAddress}-${tokenId}`],
@@ -30,7 +35,7 @@ export function useToken({ collectionAddress, tokenId }: Params) {
         setTimeout(() => revalidate({ retryCount }), 30000)
       },
       dedupingInterval: 10000,
-      refreshInterval: 30000,
+      refreshInterval: refreshInterval,
     }
   )
 

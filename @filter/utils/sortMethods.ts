@@ -17,18 +17,18 @@ import {
 export function marketStatusToSortAxis(marketType: MarketStatusFilter) {
   switch (marketType) {
     case 'buy-now':
-      return undefined //MarketCategory.Ask
-    case 'reserve-not-met':
-      return MarketCategory.Auction
-    case 'live':
-      return undefined
+      return MarketCategory.Ask
+    // case 'reserve-not-met':
+    //   return MarketCategory.Auction
+    // case 'live':
+    //   return undefined
   }
 }
 
 export function marketStatusToSortKey(marketType: MarketStatusFilter) {
   switch (marketType) {
-    case 'live':
-      return TokenSortKey.TimedSaleEnding
+    // case 'live':
+    //   return TokenSortKey.TimedSaleEnding
     default:
       return TokenSortKey.ChainTokenPrice
   }
@@ -122,24 +122,31 @@ export function marketTypeToFilterParams(
         ],
       }
     }
-    case 'reserve-not-met':
-      return {
-        marketFilters: [
-          {
-            marketType: MarketType.V2Auction,
-            statuses: [MarketStatus.Active],
-          },
-        ],
-      }
-    case 'live':
-      return {
-        marketFilters: [
-          {
-            marketType: MarketType.V2Auction,
-            statuses: [MarketStatus.Active],
-          },
-        ],
-      }
+    // @BJ TODO: need Nouns Builder markets added to ZDK market types here
+    // Meanwhile, we COULD add:
+    // MarketType.LilNounsAuction
+    // MarketType.NounsAuction
+    // (but these will not be permanent)
+
+    // Re-enable the following 2 cases when using Zora V2 auctions
+    // case 'reserve-not-met':
+    //   return {
+    //     marketFilters: [
+    //       {
+    //         marketType: MarketType.V2Auction,
+    //         statuses: [MarketStatus.Active],
+    //       },
+    //     ],
+    //   }
+    // case 'live':
+    //   return {
+    //     marketFilters: [
+    //       {
+    //         marketType: MarketType.V2Auction,
+    //         statuses: [MarketStatus.Active],
+    //       },
+    //     ],
+    //   }
     default:
       return {}
   }
