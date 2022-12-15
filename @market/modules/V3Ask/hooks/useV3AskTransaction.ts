@@ -6,7 +6,6 @@ import { parseUnits } from '@ethersproject/units'
 import { useV3AskContractContext, useV3AskStateContext } from '@market/modules/V3Ask'
 import * as Sentry from '@sentry/react'
 import { useContractTransaction } from '@shared'
-import { NFTObject } from '@zoralabs/nft-hooks'
 
 // Define Ask Types
 export const V3_ASK: string = 'V3Ask'

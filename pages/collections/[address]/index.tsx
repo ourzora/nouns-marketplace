@@ -7,7 +7,6 @@ import {
   Collections,
 } from 'compositions/Collections'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
-import { CollectionServiceProps, collectionService } from 'services/collectionService'
 import * as styles from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
@@ -20,33 +19,33 @@ import { ActiveAuctionCard, useOneNounsDao } from '@noun-auction'
 import { useWindowWidth } from '@shared'
 import { Grid, Separator, Stack } from '@zoralabs/zord'
 
-const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
-  const { contractAddress: collectionAddress, seo } = fallback
+const Collection = () => {
+  // const { contractAddress: collectionAddress, seo } = fallback
 
-  const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const { dao } = useOneNounsDao({ collectionAddress })
+  // const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
+  // const { dao } = useOneNounsDao({ collectionAddress })
 
-  const { isLarge } = useWindowWidth()
-  const { aggregate } = useAggregate(collectionAddress)
-  // wrapper for useSWR
-  const { data } = useCollection(collectionAddress)
-  const collection = data || fallback?.collection
+  // const { isLarge } = useWindowWidth()
+  // const { aggregate } = useAggregate(collectionAddress)
+  // // wrapper for useSWR
+  // const { data } = useCollection(collectionAddress)
+  // const collection = data || fallback?.collection
 
-  useEffect(() => {
-    if (collection?.name) {
-      const nftCount = aggregate?.aggregateStat.nftCount
-      setCurrentCollection(collection.name)
-      setCurrentCollectionCount(nftCount ? `${nftCount} NFTs` : '... NFTs')
-    }
-    return () => {
-      setCurrentCollection('Explore...')
-      setCurrentCollectionCount(undefined)
-    }
-  }, [aggregate, collection, setCurrentCollection, setCurrentCollectionCount])
+  // useEffect(() => {
+  //   if (collection?.name) {
+  //     const nftCount = aggregate?.aggregateStat.nftCount
+  //     setCurrentCollection(collection.name)
+  //     setCurrentCollectionCount(nftCount ? `${nftCount} NFTs` : '... NFTs')
+  //   }
+  //   return () => {
+  //     setCurrentCollection('Explore...')
+  //     setCurrentCollectionCount(undefined)
+  //   }
+  // }, [aggregate, collection, setCurrentCollection, setCurrentCollectionCount])
 
   return (
     <PageWrapper direction="column" gap="x4">
-      <Seo title={seo.title} description={seo.description} />
+      {/* <Seo title={seo.title} description={seo.description} />
       <Grid
         className={[styles.pageGrid]}
         px={{ '@initial': 'x0', '@1024': 'x8' }}
@@ -64,8 +63,8 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         >
           <MarketStats contractAddress={collectionAddress} />
         </CollectionHeader>
-      </Grid>
-      <CollectionFilterProvider
+      </Grid> */}
+      {/* <CollectionFilterProvider
         useSidebarClearButton
         filtersVisible={isLarge}
         contractAddress={collectionAddress}
@@ -84,16 +83,14 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
         strings={{
           NO_FILTER_RESULTS_COPY: `Sorry no ${collection?.name} NFTs are available for purchase on chain.`,
         }}
-      >
-        <Stack>
-          {dao ? <Separator /> : <CollectionActivityHeader />}
-          <Collections collectionAddress={collectionAddress} />
-        </Stack>
-      </CollectionFilterProvider>
+      > */}
+      <Stack>
+        {/* {dao ? <Separator /> : <CollectionActivityHeader />}
+          <Collections collectionAddress={collectionAddress} /> */}
+      </Stack>
+      {/* </CollectionFilterProvider> */}
     </PageWrapper>
   )
 }
-
-export const getServerSideProps = collectionService
 
 export default Collection
