@@ -1,32 +1,18 @@
 import { Button } from 'components/Button'
 
-import { useToken } from 'hooks/useToken'
-
 import { useCallback } from 'react'
 
 import { SelectListFlow } from '@market/components/SelectListFlow'
+import { useNftMarketContext } from '@media/NFTCard2'
 import { ModalComposition, useModal } from '@modal'
 import { Box, FlexProps } from '@zoralabs/zord'
 
-import {
-  RESET_V3ASK, // V3AskStateProvider,
-  useV3AskStateContext,
-} from './providers/V3AskStateProvider'
+import { RESET_V3ASK, useV3AskStateContext } from './providers/V3AskStateProvider'
 
-export interface UniversalAskModalProps extends FlexProps {
-  tokenId: string
-  contractAddress: string
-  collectionName: string
-  markets: ReturnType<typeof useToken>['markets']
-}
+export interface UniversalAskModalProps extends FlexProps {}
 
-export function UniversalListAskModal({
-  tokenId,
-  contractAddress,
-  collectionName,
-  markets,
-  ...props
-}: UniversalAskModalProps) {
+export function UniversalListAskModal({ ...props }: UniversalAskModalProps) {
+  const { tokenId, collectionAddress } = useNftMarketContext()
   const { requestClose } = useModal()
   const { dispatch } = useV3AskStateContext()
 
@@ -37,7 +23,7 @@ export function UniversalListAskModal({
 
   return (
     <ModalComposition
-      modalName={`list-${tokenId}${contractAddress}`}
+      modalName={`list-${tokenId}${collectionAddress}`}
       modalBehaviorRequiresAuth={true}
       onClose={handleClose}
       trigger={
@@ -47,13 +33,7 @@ export function UniversalListAskModal({
       }
       content={
         <Box p="x8" {...props}>
-          <SelectListFlow
-            tokenId={tokenId}
-            contractAddress={contractAddress}
-            collectionName={collectionName}
-            markets={markets}
-            closeModal={handleClose}
-          />
+          <SelectListFlow closeModal={handleClose} />
         </Box>
       }
     />

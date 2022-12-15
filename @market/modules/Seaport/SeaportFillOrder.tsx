@@ -7,6 +7,7 @@ import React, { Dispatch, SetStateAction, useEffect, useMemo } from 'react'
 import { MarketModalHeading } from '@market/components'
 import { useOffchainOrderAttribution } from '@market/hooks'
 import { useValidateSeaportContractCall } from '@market/modules/Seaport/hooks/useValidateSeaportContractCall'
+import { useNftMarketContext } from '@media/NFTCard2'
 import { useModal } from '@modal'
 import { formatContractError, useAuth } from '@shared'
 import { PrintError } from '@shared/components/PrintError'
@@ -18,14 +19,10 @@ import { SeaportContractCall } from './types/SeaportContractCall'
 
 interface SeaportFillOrderProps extends CommonSeaportFillOrderProps {
   setIsFilled: Dispatch<SetStateAction<boolean>>
-  tokenId: string
-  collectionName: string
 }
 
 export function SeaportFillOrder({
   order,
-  tokenId,
-  collectionName,
   userAddress,
   setIsFilled,
   ...props
@@ -50,8 +47,6 @@ export function SeaportFillOrder({
     return (
       <SeaportFillOrderWithVerifiedContractCall
         order={order}
-        tokenId={tokenId}
-        collectionName={collectionName}
         contractCall={contractCall}
         userAddress={userAddress}
         setIsFilled={setIsFilled}
@@ -68,12 +63,10 @@ function SeaportFillOrderWithVerifiedContractCall({
   userAddress,
   contractCall,
   setIsFilled,
-  contractAddress,
-  collectionName,
-  tokenId,
   ...props
 }: SeaportFillOrderProps & { contractCall: SeaportContractCall }) {
   const { requestClose } = useModal()
+  const { collectionAddress, collectionName, tokenId } = useNftMarketContext()
 
   const { offchainOrder } = order
   const { price } = offchainOrder
@@ -118,7 +111,7 @@ function SeaportFillOrderWithVerifiedContractCall({
       <Stack gap="x8" {...props}>
         <MarketModalHeading
           collectionName={collectionName}
-          contractAddress={contractAddress}
+          contractAddress={collectionAddress}
           tokenId={tokenId}
           action="Buy"
         />

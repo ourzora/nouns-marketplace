@@ -1,36 +1,22 @@
 import { NFTOffchainOrders } from 'compositions'
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
-import { useToken } from 'hooks/useToken'
-
 import { useMemo } from 'react'
+import { TypeSafeMarket } from 'validators/market'
 
 import { useRelevantMarket } from '@market/hooks'
 import { V3AskSidebar } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
+import { useNftMarketContext } from '@media/NFTCard2'
 import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTAskProps extends FlexProps {
-  tokenId: string
-  contractAddress: string
-  collectionName: string
-  markets: ReturnType<typeof useToken>['markets']
   offchainOrders?: OffchainOrderWithToken[]
   isOwner: boolean
 }
 
-// ask?.amount?.eth?.value
-// inalizedV3AskDetails?.rawBuyerAddress ?? ask?.raw.properties.buyer
-// finalizedV3AskDetails?.price
-
-export function NFTAsks({
-  tokenId,
-  contractAddress,
-  collectionName,
-  markets,
-  offchainOrders,
-  isOwner,
-}: NFTAskProps) {
+export function NFTAsks({ offchainOrders, isOwner }: NFTAskProps) {
+  const { markets } = useNftMarketContext()
   const { hasRelevantAsk } = useRelevantMarket(markets)
 
   const showOffchainOrders = useMemo(
@@ -39,39 +25,14 @@ export function NFTAsks({
   )
 
   if (hasRelevantAsk) {
-    return (
-      <V3AskSidebar
-        isOwner={isOwner}
-        tokenId={tokenId}
-        contractAddress={contractAddress}
-        collectionName={collectionName}
-        markets={markets}
-        borderRadius="phat"
-      />
-    )
+    return <V3AskSidebar isOwner={isOwner} borderRadius="phat" />
   }
 
   if (showOffchainOrders) {
-    return (
-      <NFTOffchainOrders
-        tokenId={tokenId}
-        contractAddress={contractAddress}
-        collectionName={collectionName}
-        markets={markets}
-        offchainOrders={offchainOrders!}
-      />
-    )
+    return <NFTOffchainOrders offchainOrders={offchainOrders!} />
   }
 
-  if (isOwner)
-    return (
-      <UniversalListAskFlow
-        tokenId={tokenId}
-        contractAddress={contractAddress}
-        collectionName={collectionName}
-        markets={markets}
-      />
-    )
+  if (isOwner) return <UniversalListAskFlow />
 
   return null
 }

@@ -1,6 +1,7 @@
 import { Button } from 'components/Button'
 
 import React, { useEffect, useMemo } from 'react'
+import { TypeSafeMarket } from 'validators/market'
 
 import { MarketModalHeading } from '@market/components'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
@@ -17,6 +18,8 @@ import { useV3AskStateContext } from '../providers'
 interface V3AskCancelProps extends CommonV3AskComponentProps {
   tokenId: string
   contractAddress: string
+  markets: TypeSafeMarket[]
+  collectionName: string
 }
 
 export function V3AskCancel({

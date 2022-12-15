@@ -1,7 +1,6 @@
-import { useToken } from 'hooks/useToken'
-
 import { useMemo } from 'react'
 import { isV3Ask } from 'validators/isV3Ask'
+import { TypeSafeMarket } from 'validators/market'
 
 import { isAddressMatch, useAuth } from '@shared'
 import {
@@ -43,9 +42,7 @@ function isOfferLike(value: MarketModule): value is FixedPriceLike {
 //   return { offer, ask, auction, auctions }
 // }
 
-export const useRelevantMarket = (
-  markets: ReturnType<typeof useToken>['markets'] = []
-) => {
+export const useRelevantMarket = (markets: TypeSafeMarket[] = []) => {
   const auctions = markets.filter(
     (item) => item?.properties?.__typename === 'V3ReserveAuction'
   )

@@ -1,3 +1,4 @@
+import image from 'next/image'
 import { NounsTokensByOwnerAddressQuery } from 'types/zora.api.generated'
 
 import { NFTCard2 } from '@media/NFTCard2'
@@ -16,21 +17,19 @@ export function NFTGrid2({ items, ...props }: NFTGridProps) {
     <Stack className={nftPageWrapper} gap="x14" pb="x10">
       <Grid {...props} p="x0">
         {items.map((nft) => {
-          const collectionAddress = nft.token.collectionAddress
-          const tokenId = nft.token.tokenId
-
-          console.log(nft.marketsSummary)
+          const { collectionAddress, tokenId, collectionName, name, owner, image } =
+            nft.token
 
           return (
             <NFTCard2
               isOwner={props.isOwner}
-              ownerAddress={nft?.token?.owner ?? undefined}
+              ownerAddress={owner ?? undefined}
               key={`${collectionAddress}-${tokenId}`}
               tokenId={tokenId}
               collectionAddress={collectionAddress}
-              collectionName={nft?.token?.collectionName ?? '..'}
-              tokenName={nft?.token?.name ?? '..'}
-              image={nft?.token?.image ?? null}
+              collectionName={collectionName ?? '..'}
+              tokenName={name ?? '..'}
+              image={image ?? null}
               markets={nft.marketsSummary}
             />
           )

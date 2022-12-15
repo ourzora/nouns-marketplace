@@ -1,6 +1,6 @@
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
-import { useToken } from 'hooks/useToken'
+import { TypeSafeMarket } from 'validators/market'
 
 import { NFTPrimaryAuction } from '@market'
 import { NFTAsks } from '@market/components/NFTAsks'
@@ -15,7 +15,7 @@ interface NFTMarketProps extends BoxProps {
   tokenId: string
   collectionName: string
   isOwner: boolean
-  markets: ReturnType<typeof useToken>['markets']
+  markets: TypeSafeMarket[]
 }
 
 export function NFTMarket({
@@ -46,10 +46,6 @@ export function NFTMarket({
       isOwner={isOwner}
       offchainOrders={offchainOrders}
       className={[nftMarketWrapper, className]}
-      tokenId={tokenId}
-      contractAddress={collectionAddress}
-      collectionName={collectionName}
-      markets={markets}
       p="x4"
       align="flex-start"
       direction="column"

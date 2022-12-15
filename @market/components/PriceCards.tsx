@@ -3,14 +3,12 @@ import { ArrowLeft, ArrowRight } from 'components/Icon'
 import { mediumFont } from 'styles/styles.css'
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
-import { useToken } from 'hooks/useToken'
-
 import React, { useCallback, useMemo, useState } from 'react'
+import { TypeSafeMarket } from 'validators/market'
 
 import { useOffchainOrderAttribution } from '@market/hooks'
 import { SeaportFillOrderFlow } from '@market/modules'
 import { ModalComposition, useModal } from '@modal'
-import { content } from '@modal/Modal.css'
 import { useAuth, useButtonRequiresAuth } from '@shared'
 import { numberFormatter } from '@shared/utils'
 import { Box, Flex, Heading, Paragraph, Stack, Well } from '@zoralabs/zord'
@@ -18,10 +16,6 @@ import { Box, Flex, Heading, Paragraph, Stack, Well } from '@zoralabs/zord'
 import * as styles from './PriceCards.css'
 
 export interface PriceCardsProps {
-  tokenId: string
-  contractAddress: string
-  collectionName: string
-  markets: ReturnType<typeof useToken>['markets']
   offchainOrders: OffchainOrderWithToken[]
   userAddress?: string
 }
@@ -31,10 +25,6 @@ const modalName = 'seaport-fill-modal'
 function PriceCard({
   order,
   userAddress,
-  tokenId,
-  contractAddress,
-  collectionName,
-  markets,
 }: PriceCardsProps & { order: OffchainOrderWithToken }) {
   const { offchainOrder } = order
   const { price } = offchainOrder
@@ -104,14 +94,7 @@ function PriceCard({
         }
         content={
           <Box p="x8">
-            <SeaportFillOrderFlow
-              tokenId={tokenId}
-              contractAddress={contractAddress}
-              collectionName={collectionName}
-              markets={markets}
-              order={order}
-              userAddress={userAddress}
-            />
+            <SeaportFillOrderFlow order={order} userAddress={userAddress} />
           </Box>
         }
       />
@@ -119,13 +102,7 @@ function PriceCard({
   )
 }
 
-export function PriceCards({
-  tokenId,
-  contractAddress,
-  collectionName,
-  markets,
-  offchainOrders,
-}: PriceCardsProps) {
+export function PriceCards({ offchainOrders }: PriceCardsProps) {
   const cardCount = useMemo(() => offchainOrders.length, [offchainOrders])
   const [currentCard, setCurrentCard] = useState<number>(0)
   const { address: userAddress } = useAuth()
@@ -175,10 +152,6 @@ export function PriceCards({
         )}
         <PriceCard
           offchainOrders={offchainOrders}
-          tokenId={tokenId}
-          contractAddress={contractAddress}
-          collectionName={collectionName}
-          markets={markets}
           order={offchainOrders[currentCard]}
           userAddress={userAddress}
         />

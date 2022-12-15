@@ -3,6 +3,7 @@ import { Button } from 'components/Button'
 import { useToken } from 'hooks/useToken'
 
 import React, { useCallback, useMemo, useState } from 'react'
+import { TypeSafeMarket } from 'validators/market'
 
 import { useRelevantMarket } from '@market/hooks'
 import {
@@ -15,7 +16,7 @@ import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { Well } from '@zoralabs/zord'
 
 interface V3AskBuyerTriggerProps {
-  markets: ReturnType<typeof useToken>['markets']
+  markets: TypeSafeMarket[]
   openModal: () => void
 }
 

@@ -2,6 +2,7 @@ import { useToken } from 'hooks/useToken'
 
 import { useEffect, useMemo, useState } from 'react'
 import { isV3Ask } from 'validators/isV3Ask'
+import { TypeSafeMarket } from 'validators/market'
 
 import { useRelevantMarket } from '@market/hooks'
 import { isAddress, shortenAddress } from '@shared'
@@ -14,7 +15,7 @@ import { useV3AskStateContext } from '../providers/V3AskStateProvider'
 interface V3AskInfoProps {
   contractAddress: string
   tokenId: string
-  markets: ReturnType<typeof useToken>['markets']
+  markets: TypeSafeMarket[]
 }
 
 export const useFormattedV3AskInfo = ({

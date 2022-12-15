@@ -1,14 +1,11 @@
-import { format } from 'date-fns'
-
-import { useToken } from 'hooks/useToken'
-
 import { useMemo } from 'react'
+import { TypeSafeMarket } from 'validators/market'
 
 import { useRelevantMarket } from '@market/hooks'
 import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
 
 interface ListingDataTableProps {
-  markets: ReturnType<typeof useToken>['markets']
+  markets: TypeSafeMarket[]
 }
 
 export const useListingDataTable = ({ markets }: ListingDataTableProps) => {

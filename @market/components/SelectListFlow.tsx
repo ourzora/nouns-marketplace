@@ -1,6 +1,5 @@
-import { useToken } from 'hooks/useToken'
-
 import React from 'react'
+import { TypeSafeMarket } from 'validators/market'
 
 import {
   APPROVE_MODULE_FOR_CREATE_PRIVATEASK,
@@ -10,24 +9,14 @@ import {
 } from '@market/modules/V3Ask'
 import { SaleTypeButton } from '@market/modules/V3Ask/SaleTypeButton'
 import { V3AskLearnMoreButton } from '@market/modules/V3Ask/V3AskLearnMoreButton'
+import { useNftMarketContext } from '@media/NFTCard2'
 import { Eyebrow, Stack } from '@zoralabs/zord'
 
 interface SelectListFlowProps {
   closeModal?: () => void
-  tokenId: string
-  contractAddress: string
-  collectionName: string
-  markets: ReturnType<typeof useToken>['markets']
 }
 
-export function SelectListFlow({
-  tokenId,
-  contractAddress,
-  collectionName,
-  markets,
-  closeModal,
-  ...props
-}: SelectListFlowProps) {
+export function SelectListFlow({ closeModal, ...props }: SelectListFlowProps) {
   const { state, dispatch } = useV3AskStateContext()
   const { flow } = state
 
@@ -55,12 +44,5 @@ export function SelectListFlow({
     )
   }
 
-  return (
-    <V3AskFlow
-      tokenId={tokenId}
-      contractAddress={contractAddress}
-      collectionName={collectionName}
-      markets={markets}
-    />
-  )
+  return <V3AskFlow />
 }

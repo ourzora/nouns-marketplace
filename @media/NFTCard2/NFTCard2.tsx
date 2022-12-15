@@ -1,10 +1,8 @@
-import { ImageElement } from 'components'
 import { Link } from 'components/Link'
 import { NounsTokensByOwnerAddressQuery } from 'types/zora.api.generated'
 
-import { useToken } from 'hooks/useToken'
-
-import { useMemo } from 'react'
+import { createContext, useContext, useMemo } from 'react'
+import { TypeSafeMarket } from 'validators/market'
 
 import { NFTCardMarket } from '@market'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
@@ -15,9 +13,9 @@ import {
   titleScroll,
   titleWrapper,
 } from '@media/NftMedia.css'
-import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
-import { FallbackThumbnail } from '@noun-auction'
 import { Box, Flex, Heading, Separator, Stack } from '@zoralabs/zord'
+
+import { ImageWithNounFallback } from '../ImageWithNounFallback'
 
 type ImageType = NounsTokensByOwnerAddressQuery['tokens']['nodes'][0]['token']['image']
 type Props = {
@@ -29,82 +27,22 @@ type Props = {
   isOwner?: boolean
   image: ImageType
   ownerAddress?: string
-  markets: ReturnType<typeof useToken>['markets']
+  markets: TypeSafeMarket[]
 }
+
+type NftMarketContextType = {
+  tokenId: string
+  collectionAddress: string
+  collectionName: string
+  markets: TypeSafeMarket[]
+}
+
+export const NftMarketContext = createContext<NftMarketContextType>(
+  {} as NftMarketContextType
+)
+export const useNftMarketContext = () => useContext(NftMarketContext)
 
 export function NFTCard2({
-  collectionAddress,
-  tokenId,
-  collectionName,
-  image,
-  tokenName,
-  ownerAddress,
-  markets,
-}: Props) {
-  console.log('NFTCard2', collectionAddress, tokenId, collectionName)
-  // maybe it makes sense to have fallback for image here
-  if (!tokenId || !collectionAddress || !image) return null
-
-  return (
-    <NFTCardComponent
-      markets={markets}
-      tokenId={tokenId}
-      collectionAddress={collectionAddress}
-      collectionName={collectionName}
-      image={image}
-      tokenName={tokenName}
-      ownerAddress={ownerAddress}
-    />
-  )
-}
-
-type ImageWithFallbackProps = {
-  collectionAddress: string
-  tokenId: string
-  image: any // very bad type from api, FIXME later
-}
-
-export function ImageWithNounFallback({
-  collectionAddress,
-  tokenId,
-  image,
-}: ImageWithFallbackProps) {
-  const { image: rawImageFallback } = useRawImageTransform(image?.url ?? undefined)
-
-  const decodedImgSrc = useMemo(() => {
-    const imageUrl = image?.url
-    if (image?.mimeType === 'image/svg+xml') {
-      return imageUrl?.includes('data:image/svg+xml') ||
-        imageUrl?.includes('https://api.zora.co')
-        ? imageUrl
-        : `data:image/svg+xml,${imageUrl}` // proper handling of URI-encoded SVG
-    } else {
-      return image?.mediaEncoding?.poster ?? imageUrl
-    }
-  }, [image])
-
-  const srcImg = useMemo(
-    () => decodedImgSrc ?? rawImageFallback,
-    [decodedImgSrc, rawImageFallback]
-  )
-
-  if (srcImg) {
-    return (
-      <ImageElement
-        src={srcImg}
-        w="100%"
-        h="100%"
-        position="absolute"
-        inset="x0"
-        objectFit="cover"
-      />
-    )
-  }
-
-  return <FallbackThumbnail tokenContract={collectionAddress} tokenId={tokenId} />
-}
-
-export function NFTCardComponent({
   collectionAddress,
   collectionName,
   tokenId,
@@ -158,14 +96,16 @@ export function NFTCardComponent({
           </Link>
         </Flex>
         <Separator mt="x1" />
-        <NFTCardMarket
-          ownerAddress={ownerAddress}
-          tokenId={tokenId}
-          contractAddress={collectionAddress}
-          collectionName={collectionName ?? '..'}
-          markets={markets}
-          isOwner={isOwner}
-        />
+        <NftMarketContext.Provider
+          value={{
+            tokenId,
+            collectionAddress,
+            markets,
+            collectionName: collectionName ?? '..',
+          }}
+        >
+          <NFTCardMarket ownerAddress={ownerAddress} isOwner={isOwner} />
+        </NftMarketContext.Provider>
       </Stack>
     </Stack>
   )

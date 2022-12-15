@@ -1,6 +1,5 @@
-import { useToken } from 'hooks/useToken'
-
 import React from 'react'
+import { TypeSafeMarket } from 'validators/market'
 
 import {
   APPROVE_MODULE_FOR_CREATE_PRIVATEASK,
@@ -29,6 +28,7 @@ import {
   VIEW_V3ASK_LISTING,
   useV3AskStateContext,
 } from '@market/modules/V3Ask/providers/V3AskStateProvider'
+import { useNftMarketContext } from '@media/NFTCard2'
 import { Stack, StackProps } from '@zoralabs/zord'
 
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'
@@ -83,15 +83,11 @@ export interface CommonV3AskComponentProps extends StackProps {
   tokenId: string
   contractAddress: string
   collectionName: string
-  markets: ReturnType<typeof useToken>['markets']
+  markets: TypeSafeMarket[]
 }
 
-export function V3AskFlow({
-  tokenId,
-  contractAddress,
-  collectionName,
-  markets,
-}: CommonV3AskComponentProps) {
+export function V3AskFlow() {
+  const { markets, tokenId, collectionAddress, collectionName } = useNftMarketContext()
   const { state, handleNext } = useV3AskStateContext()
   const Component = componentMap[state.status]
 
@@ -101,7 +97,7 @@ export function V3AskFlow({
         key={state.status}
         onNext={handleNext}
         tokenId={tokenId}
-        contractAddress={contractAddress}
+        contractAddress={collectionAddress}
         collectionName={collectionName}
         markets={markets}
       />

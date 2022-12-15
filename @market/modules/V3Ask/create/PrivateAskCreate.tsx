@@ -5,6 +5,7 @@ import React, { useEffect } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
+import { useNftMarketContext } from '@media/NFTCard2'
 import {
   PrintError,
   formatContractError,
@@ -56,14 +57,10 @@ const validate = (values: Values) => {
   return errors
 }
 
-export function PrivateAskCreate({
-  onNext,
-  contractAddress,
-  tokenId,
-  ...props
-}: PrivateAskCreateProps) {
+export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
+  const { tokenId, collectionAddress } = useNftMarketContext()
   const { txStatus, txInProgress, txError, createAsk, finalizedTx } = useV3AskTransaction(
-    { contractAddress, tokenId, askType: PRIVATE_ASK }
+    { contractAddress: collectionAddress, tokenId, askType: PRIVATE_ASK }
   )
   useEffect(() => finalizedTx!! && onNext!(), [finalizedTx, onNext])
 

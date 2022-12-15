@@ -5,6 +5,7 @@ import { OffchainOrderWithToken } from 'types/zora.api.generated'
 import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
 import { useToken } from 'hooks/useToken'
 
+import { TypeSafeMarket } from 'validators/market'
 import { TypeSafeToken } from 'validators/token'
 
 import { CollectionThumbnail } from '@media'
@@ -21,7 +22,7 @@ export interface NFTSidebarProps extends StackProps {
   tokenId: string
   offchainOrders?: OffchainOrderWithToken[]
   token: TypeSafeToken
-  markets: ReturnType<typeof useToken>['markets']
+  markets: TypeSafeMarket[]
 }
 
 export function NFTSidebar({

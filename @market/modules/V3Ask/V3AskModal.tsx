@@ -1,8 +1,7 @@
 import clsx from 'clsx'
 
-import { useToken } from 'hooks/useToken'
-
 import React, { useCallback } from 'react'
+import { TypeSafeMarket } from 'validators/market'
 
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from '@modal/Modal.css'
@@ -13,20 +12,12 @@ import { V3AskTrigger } from './V3AskTrigger'
 import { V3AskStateProvider } from './providers/V3AskStateProvider'
 
 interface V3AskModalProps {
-  tokenId: string
-  contractAddress: string
-  collectionName: string
   modalName: string
   disableCloseOnClickOutside?: boolean
-  markets: ReturnType<typeof useToken>['markets']
   isOwner: boolean
 }
 
 export function V3AskModal({
-  tokenId,
-  contractAddress,
-  collectionName,
-  markets,
   isOwner,
   modalName,
   disableCloseOnClickOutside = false,
@@ -45,10 +36,6 @@ export function V3AskModal({
           <V3AskTrigger
             isOwner={isOwner}
             modalName={modalName}
-            tokenId={tokenId}
-            contractAddress={contractAddress}
-            collectionName={collectionName}
-            markets={markets}
             openModal={modalHandler}
           />
         }
@@ -61,12 +48,7 @@ export function V3AskModal({
           showClose={false}
           padding="x8"
         >
-          <V3AskFlow
-            tokenId={tokenId}
-            contractAddress={contractAddress}
-            collectionName={collectionName}
-            markets={markets}
-          />
+          <V3AskFlow />
         </ModalContent>
       </Modal>
     </V3AskStateProvider>

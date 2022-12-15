@@ -1,14 +1,15 @@
 import { ImageWithNounFallback } from 'components'
 import { Link } from 'components/Link'
-import { NounsTokensByOwnerAddressQuery } from 'types/zora.api.generated'
 
 import { useToken } from 'hooks/useToken'
 
 import { useMemo } from 'react'
+import { TypeSafeMarket } from 'validators/market'
 import { TypeSafeToken } from 'validators/token'
 
 import { NFTCardMarket } from '@market'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { NftMarketContext } from '@media/NFTCard2'
 import {
   cardImageWrapper,
   cardWrapper,
@@ -63,7 +64,7 @@ export function NFTCardComponent({
   markets,
 }: Props & {
   token: TypeSafeToken
-  markets: ReturnType<typeof useToken>['markets']
+  markets: TypeSafeMarket[]
 }) {
   const { isOwner } = useIsOwner(token)
   const fallbackTitle = token.collectionName ?? '..'
@@ -107,14 +108,16 @@ export function NFTCardComponent({
           </Link>
         </Flex>
         <Separator mt="x1" />
-        <NFTCardMarket
-          isOwner={isOwner}
-          ownerAddress={token.owner}
-          tokenId={tokenId}
-          contractAddress={token.collectionAddress}
-          collectionName={token.collectionName}
-          markets={markets}
-        />
+        <NftMarketContext.Provider
+          value={{
+            tokenId: tokenId,
+            collectionAddress: token.collectionAddress,
+            collectionName: token.collectionName ?? '..',
+            markets: markets,
+          }}
+        >
+          <NFTCardMarket ownerAddress={token.owner} isOwner={isOwner} />
+        </NftMarketContext.Provider>
       </Stack>
     </Stack>
   )
