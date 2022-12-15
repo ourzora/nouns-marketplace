@@ -37,6 +37,7 @@ export function useNounsDaos({
     {
       fallbackData,
       refreshInterval,
+      // dedupingInterval: 0,
       onErrorRetry: (_, _1, _2, revalidate, { retryCount }) => {
         // Only retry up to 10 times.
         if (retryCount >= 10) return
@@ -59,24 +60,6 @@ export function useNounsDaos({
     // no need to update when cache changed!
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.nouns?.nounsDaos?.nodes])
-
-  //     const daos = useMemo(() => {
-  //       return data?.nouns?.nounsDaos?.nodes.map(verifyDao) || []
-
-  //       // setCache(data)
-  //       // setCache(newData)
-  //       // return newData && newData?.length > 0 ? newData : []
-
-  //   // if (newData && newData.length > 0) {
-  //   //   const verifiedData = newData.map(verifyDao)
-  //   //   setCache(verifiedData)
-  //   //   return verifiedData
-  //   // } else {
-  //   //   return cached.length > 0 ? cached : []
-  //   // }
-  //   // no need to update when cache changed!
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [data?.nouns?.nounsDaos?.nodes])
 
   console.log('HOOK DAOS', daos)
 
