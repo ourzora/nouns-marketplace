@@ -90,7 +90,6 @@ export function ActiveAuctionCardComponent({
       </Link>
       <Stack gap="x2" mt="x4" px="x4" pb="x4">
         <Flex
-          pb="x1"
           gap={{
             '@initial': 'x2',
             '@1024': 'x0',

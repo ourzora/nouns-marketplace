@@ -12,8 +12,6 @@ import { BlocklistGuard, CollectionsProvider } from 'providers'
 import 'styles/styles.css'
 import { SWRConfig } from 'swr'
 
-import { useCollections } from 'hooks'
-
 import { StrictMode, useEffect } from 'react'
 import React from 'react'
 
@@ -51,7 +49,6 @@ const wagmiClient = createClient({
 export const strategy = new ZDKFetchStrategy('1', GALACTUS_BASE_URL)
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { collections, daos } = useCollections()
   const router = useRouter()
 
   useEffect(() => {
@@ -83,7 +80,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               })}
             >
               <BlocklistGuard>
-                <CollectionsProvider collections={collections} daos={daos}>
+                <CollectionsProvider>
                   <ModalContextProvider>
                     <ToastContextProvider>
                       <ContractProvider>

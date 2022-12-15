@@ -1,3 +1,4 @@
 export * from './Collections'
-export * from './CollectionActivityHeader'
+export * from './CollectionNav'
 export * from './CollectionHeader'
+export * from './CollectionAbout'

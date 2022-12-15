@@ -1,11 +1,12 @@
 import { Link } from 'components/Link'
 
-import { CollectionsData, useAggregate } from 'hooks'
+import { useAggregate } from 'hooks'
 
 import { useMemo } from 'react'
 
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { CollectionLink, numberFormatter, roundTwoDecimals } from '@shared'
+import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Flex, Grid, Label, Stack, StackProps } from '@zoralabs/zord'
 
 import {
@@ -18,7 +19,7 @@ import {
 /* todo: add a skeleton or some kind of loading state */
 
 interface RankingRowProps extends StackProps {
-  collection: CollectionsData
+  collection: Collection
 }
 
 export function RankingRow({ collection, ...props }: RankingRowProps) {

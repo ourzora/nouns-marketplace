@@ -27,7 +27,7 @@ export function AuctionCountdown({
   const { countdownText } = useCountdown(auctionStartTime, auctionEndTime)
 
   return (
-    <Flex direction={direction} wrap="wrap" gap={direction === 'row' ? 'x2' : 'x0'}>
+    <Flex direction={direction} wrap="wrap" gap={direction === 'row' ? 'x2' : 'x2'}>
       {showLabels && (
         <Label
           size="md"

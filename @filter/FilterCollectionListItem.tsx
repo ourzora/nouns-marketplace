@@ -38,7 +38,6 @@ export function FilterCollectionListItem({
     [tokenAddress, tokenContracts]
   )
 
-  // DAIN TODO: fix hover state styling
   return (
     <Stack gap="x1">
       <Button variant="unset" onClick={() => setTokenContracts(tokenAddress)}>
@@ -47,8 +46,7 @@ export function FilterCollectionListItem({
           justify="space-between"
           position="relative"
           className={[collectionBlock, 'zora-collectionListItem']}
-          pt="x1"
-          pb="x1"
+          py="x1"
           w="100%"
         >
           <Flex w="100%" gap="x3" className={collectionBlockContent}>

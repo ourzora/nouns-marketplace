@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
 import { stringDefaults, themeDefaults } from '@filter/constants'
+import { GetNFTReturnType } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
 
 import { FilterStore } from './filter-store'
@@ -11,7 +12,6 @@ export type Theme = typeof themeDefaults
 export type FilterOptionConfig = {
   label?: string
   defaultState?: 'open' | undefined
-  hideBorder?: boolean
   selector?: string
 }
 
@@ -25,19 +25,21 @@ export type PropertiesConfig = {
 
 export interface FilterConfigProps {
   filtersVisible?: boolean
-  useMarketStatus?: boolean
-  useOwnerStatus?: boolean
-  useMediaTypes?: boolean
-  useSortDropdown?: boolean
-  usePriceRange?: PriceRangeFilterConfig | undefined
-  useCollectionSearch?: boolean
-  useCollectionProperties?: PropertiesConfig | undefined
-  useSidebarClearButton?: boolean
+  enableMarketStatus?: boolean
+  enableOwnerStatus?: boolean
+  enableMediaTypes?: boolean
+  enableSortDropdown?: boolean
+  enableSelectedFiltersPanel?: boolean
+  enableFilterToggleButton?: boolean
+  enablePriceRange?: PriceRangeFilterConfig | undefined //@BJ todo: this shouldn't be a boolean AND a configuration, it's confusing
+  enableCollectionSearch?: boolean
+  useCollectionProperties?: PropertiesConfig | undefined //@BJ todo: this shouldn't be a boolean AND a configuration, it's confusing
+  enableSidebarClearButton?: boolean
   /**
    * Flag to show or hide the Filter sidebar and visibility toggle button
    * @default true
    */
-  useSidebarFilter?: boolean
+  enableSidebarFilter?: boolean
   useFilterOwnerCollections?: boolean
   strings?: Partial<Strings>
   theme?: Partial<Theme>
@@ -66,5 +68,6 @@ export interface CollectionFilterContextTypes extends TokenQueryReturnTypes {
 
 export interface CollectionFilterProviderProps extends FilterContextInputProps {
   children?: ReactNode
-  initialPage?: NFTObject[]
+  // initialPage?: NFTObject[]
+  initialPage?: GetNFTReturnType
 }

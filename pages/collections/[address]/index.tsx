@@ -2,38 +2,32 @@ import { Seo } from 'components'
 import { MarketStats } from 'components/MarketStats/MarketStats'
 import { PageWrapper } from 'components/PageWrapper'
 import {
-  CollectionActivityHeader,
+  ActiveCollectionPageView,
+  CollectionAbout,
   CollectionHeader,
+  CollectionNav,
   Collections,
 } from 'compositions/Collections'
+import { CollectionNFTs } from 'compositions/Collections/CollectionNFTs'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { CollectionServiceProps, collectionService } from 'services/collectionService'
-import * as styles from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
 
-import { useEffect, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { CollectionFilterProvider } from '@filter'
-import { useCollection } from '@filter/hooks/useCollection'
-import { ActiveAuctionCard, useOneNounsDao } from '@noun-auction'
 import { useWindowWidth } from '@shared'
-import { Grid, Separator, Stack } from '@zoralabs/zord'
+
+// import { Grid, Separator, Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
-  const { contractAddress: collectionAddress, seo } = fallback
-
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  // const { dao } = useOneNounsDao({ collectionAddress })
+  const { contractAddress: collectionAddress, collection, initialPage, seo } = fallback
 
-  const { isLarge } = useWindowWidth()
+  const [activeView, setActiveView] = useState<ActiveCollectionPageView>('about')
+
+  // const { isLarge } = useWindowWidth()
   const { nftCount } = useAggregate(collectionAddress)
-  // wrapper for useSWR
-  const { data } = useCollection(collectionAddress)
-  const collection = useMemo(
-    () => data || fallback?.collection,
-    [data, fallback.collection]
-  )
 
   useEffect(() => {
     if (collection?.name) {
@@ -49,40 +43,12 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   return (
     <PageWrapper direction="column" gap="x13">
       <Seo title={seo.title} description={seo.description} />
-      {/* <Grid
-        className={[styles.pageGrid]}
-        px={{ '@initial': 'x0', '@1024': 'x4' }}
-        // gap="x2"
-        // gap="x6"
-        alignSelf="center"
-      > */}
       <CollectionHeader collection={collection} />
-      {/* </Grid> */}
-      <CollectionFilterProvider
-        useSidebarClearButton
-        filtersVisible={isLarge}
-        contractAddress={collectionAddress}
-        useSortDropdown
-        useCollectionProperties={{
-          header: 'Traits',
-          selector: 'nouns-market-traits',
-          hideBorder: true,
-        }}
-        usePriceRange={{
-          label: 'Price',
-          defaultState: 'open',
-          hideBorder: true,
-          hideCurrencySelect: true,
-        }}
-        strings={{
-          NO_FILTER_RESULTS_COPY: `Sorry no ${collection?.name} NFTs are available for purchase on chain.`,
-        }}
-      >
-        <Stack>
-          <Separator />
-          <Collections collectionAddress={collectionAddress} />
-        </Stack>
-      </CollectionFilterProvider>
+      <CollectionNav activeView={activeView} setActiveView={setActiveView} />
+
+      {activeView === 'about' && <CollectionAbout collection={collection} />}
+      {activeView === 'nfts' && <CollectionNFTs fallback={fallback} />}
+      {/* {activeView === 'about' && <CollectionActivity collection={collection} />} */}
     </PageWrapper>
   )
 }
