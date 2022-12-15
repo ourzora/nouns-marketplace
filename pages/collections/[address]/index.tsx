@@ -17,6 +17,7 @@ import { useAggregate } from 'hooks'
 import React, { useEffect, useState } from 'react'
 
 import { useWindowWidth } from '@shared'
+import { Stack } from '@zoralabs/zord'
 
 // import { Grid, Separator, Stack } from '@zoralabs/zord'
 
@@ -44,11 +45,12 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
     <PageWrapper direction="column" gap="x13">
       <Seo title={seo.title} description={seo.description} />
       <CollectionHeader collection={collection} />
-      <CollectionNav activeView={activeView} setActiveView={setActiveView} />
-
-      {activeView === 'about' && <CollectionAbout collection={collection} />}
-      {activeView === 'nfts' && <CollectionNFTs fallback={fallback} />}
-      {/* {activeView === 'about' && <CollectionActivity collection={collection} />} */}
+      <Stack gap="x8">
+        <CollectionNav activeView={activeView} setActiveView={setActiveView} />
+        {activeView === 'about' && <CollectionAbout collection={collection} />}
+        {activeView === 'nfts' && <CollectionNFTs fallback={fallback} />}
+        {/* {activeView === 'about' && <CollectionActivity collection={collection} />} */}
+      </Stack>
     </PageWrapper>
   )
 }
