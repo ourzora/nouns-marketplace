@@ -55,7 +55,11 @@ function Home(props: { ssrDAOQuery: NounsDaosQuery; daos: TypeSafeDao[] }) {
       setCursorCache(newCursorCache)
       console.log('NEXT:', fetchedCursor)
     }
-  }, [pageInfo?.endCursor, cursorCache, currentCursor])
+  }, [
+    pageInfo?.endCursor,
+    //cursorCache,
+    currentCursor,
+  ])
 
   useEffect(() => console.log(cursorCache), [cursorCache])
 
@@ -116,7 +120,7 @@ function Home(props: { ssrDAOQuery: NounsDaosQuery; daos: TypeSafeDao[] }) {
             )}
             {pageInfo && !pageInfo?.hasNextPage && <Eyebrow>All DAOs Loaded</Eyebrow>}
           </Flex>
-          <Paragraph size="sm">{cursorCache.toString()}</Paragraph>
+          <Paragraph size="sm">cursorCache: [{cursorCache.toString()}]</Paragraph>
           <Paragraph size="sm">{`prev: ${
             prevCursor === '' ? 'INITIAL' : prevCursor
           }`}</Paragraph>
