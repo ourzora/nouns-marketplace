@@ -18,45 +18,27 @@ import { Button, Eyebrow, Flex, Grid, Paragraph, Stack } from '@zoralabs/zord'
 
 export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
-function Home(props: {
-  // ssrDAOQuery: NounsDaosQuery,
-  daos: TypeSafeDao[]
-}) {
-  const {
-    daos: ssrDAOS,
-    // ssrDAOQuery
-  } = props
+function Home(props: { ssrDAOQuery: NounsDaosQuery; daos: TypeSafeDao[] }) {
+  const { daos: ssrDAOS, ssrDAOQuery } = props
   const [currentCursor, setCurrentCursor] = useState<string>('')
-  // const [nextCursor, setNextCursor] = useState<string>('')
-  // const [prevCursor, setPrevCursor] = useState<string>('')
   const [cursorCache, setCursorCache] = useState<string[]>([])
-  // const [daoCache, setDaoCache] = useState<NounsDaosQuery | undefined>(ssrDAOQuery)
 
   const {
-    response: daoQueryResponse,
+    // response: daoQueryResponse,
     daos: clientDaos,
     pageInfo,
-    isValidating,
+    // isValidating,
   } = useNounsDaos({
     limit: DAO_PAGE_LIMIT,
     after: currentCursor,
-    // fallbackData: currentCursor === '' ? ssrDAOQuery : undefined,
-    // fallbackData: !paginationCursor ? ssrDAOQuery : daoCache,
-    // fallbackData: daoCache,
+    fallbackData: currentCursor === '' ? ssrDAOQuery : undefined,
+    // fallbackData: ssrDAOQuery,
   })
 
   const daos = useMemo(() => clientDaos ?? ssrDAOS, [clientDaos, ssrDAOS])
   const hasDaos = useMemo(() => daos?.length > 0, [daos])
-
-  const lastItem = useMemo(
-    () => (cursorCache.length === 0 ? '' : cursorCache[cursorCache.length - 1]),
-    [cursorCache]
-  )
-
-  // new: ddddddd
-
-  // act
-  // ['aaaaaaaa','bbbbbbbbb','ccccccccc']
+  console.log('daos.length', daos?.length)
+  console.log('daos', daos)
 
   useEffect(() => {
     if (!pageInfo?.endCursor || pageInfo.endCursor === currentCursor) {
@@ -67,68 +49,34 @@ function Home(props: {
     let newCursorCache: string[] = cursorCache
 
     // Add new cursor to pagination cache if it's not already there
-    if (cursorCache.includes(fetchedCursor)) {
-      console.log('ALREADY IN CACHE')
-      // setPrevCursor(cursorCache[cursorCache.indexOf(fetchedCursor) - 1])
-      // setNextCursor(cursorCache[cursorCache.indexOf(fetchedCursor) + 1])
-
-      // setCurrentCursor(cursorCache[cursorCache.indexOf(fetchedCursor) - 2])
-    } else {
-      console.log('ADDING TO CACHE:', fetchedCursor, cursorCache.length)
-
-      // const prevItem = newCursorCache[newCursorCache.length - 1]
-
+    if (!cursorCache.includes(fetchedCursor)) {
+      // console.log('ADDING TO CACHE:', fetchedCursor, cursorCache.length)
       newCursorCache.push(fetchedCursor)
-      // setPrevCursor(lastItem)
-      // if (cursorCache.length !== 0) {
-      //   console.log('SETTING PREV TO ', cursorCache[cursorCache.length - 1])
-      // }
-      // if (cursorCache.length !== 0) {
-      //   console.log('SETTING PREV TO ', lastItem)
-      // }
-
-      // console.log('PREV:', cursorCache[cursorCache.length - 1])
-      // console.log('PREV:', prevCursor)
-      // setNextCursor(fetchedCursor)
       setCursorCache(newCursorCache)
       console.log('NEXT:', fetchedCursor)
     }
-  }, [
-    pageInfo?.endCursor,
-    // , cursorCache, currentCursor
-  ])
+  }, [pageInfo?.endCursor, cursorCache, currentCursor])
 
   useEffect(() => console.log(cursorCache), [cursorCache])
 
   const prevCursor =
-    cursorCache.indexOf(currentCursor) <= 1
+    cursorCache.indexOf(currentCursor) < 1
       ? ''
-      : cursorCache[cursorCache.indexOf(currentCursor)]
+      : cursorCache[cursorCache.indexOf(currentCursor) - 1]
 
-  const nextCursor = cursorCache[cursorCache.indexOf(currentCursor) + 1]
-
-  const pageNext = useCallback(() => {
-    // if (nextCursor) setCurrentCursor(nextCursor)
-    // setCurrentCursor(nextCursor)
-
-    console.log('NEXT', nextCursor)
-    setCurrentCursor(nextCursor)
-  }, [])
+  const nextCursor = pageInfo?.hasNextPage
+    ? cursorCache[cursorCache.indexOf(currentCursor) + 1]
+    : ''
 
   const pagePrev = useCallback(() => {
-    // setCurrentCursor(prevCursor)
-    // setCurrentCursor(prevCursor)
-
-    // const prevCursor =
-    //   cursorCache.indexOf(currentCursor) <= 1
-    //     ? ''
-    //     : cursorCache[cursorCache.indexOf(currentCursor) - 1]
-    console.log('PREV', prevCursor)
+    console.log('SETTING PREV TO: ', prevCursor)
     setCurrentCursor(prevCursor)
-  }, [])
+  }, [prevCursor])
 
-  // console.log('DAOS', daos, daos.length)
-  // console.log('AFTER', pageInfo?.endCursor)
+  const pageNext = useCallback(() => {
+    console.log('SETTING NEXT TO: ', nextCursor)
+    setCurrentCursor(nextCursor)
+  }, [nextCursor])
 
   return (
     <PageWrapper direction="column" gap="x6" align="center">
@@ -158,10 +106,9 @@ function Home(props: {
                 Prev {prevCursor === '' ? 'INITIAL' : prevCursor}
               </Button>
             )}
-            {/* {cursorCache.length > 0 ? ( */}
             {nextCursor && (
               <Button
-                //  loading={isValidating}
+                // loading={isValidating}
                 onClick={pageNext}
               >
                 Next {nextCursor}
@@ -175,6 +122,7 @@ function Home(props: {
           }`}</Paragraph>
           <Paragraph size="sm">{`current: ${currentCursor}`}</Paragraph>
           <Paragraph size="sm">{`next: ${nextCursor}`}</Paragraph>
+          <Paragraph size="sm">{`daos.length: ${daos?.length}`}</Paragraph>
         </Stack>
       )}
     </PageWrapper>
@@ -189,8 +137,7 @@ export async function getServerSideProps() {
 
     return {
       props: {
-        // daos: daos?.nouns?.nounsDaos?.nodes ?? null,
-        // ssrDAOQuery,
+        ssrDAOQuery,
         daos: ssrDAOQuery?.nouns?.nounsDaos?.nodes ?? null,
       },
     }

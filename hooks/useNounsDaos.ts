@@ -20,9 +20,9 @@ interface NounsDaos {
 export function useNounsDaos({
   limit = DAO_PAGE_LIMIT,
   after = '',
-  keyModifier = '',
   refreshInterval = 30000,
   fallbackData,
+  keyModifier = '',
 }: NounsDaos) {
   const [cached, setCache] = useState([] as TypeSafeDao[])
   // const [cached, setCache] = useState<NounsDaosQuery|undefined>(undefined)
@@ -41,7 +41,7 @@ export function useNounsDaos({
         // Only retry up to 10 times.
         if (retryCount >= 10) return
         // Retry after 5 seconds.
-        setTimeout(() => revalidate({ retryCount }), 30000)
+        setTimeout(() => revalidate({ retryCount }), 10000)
       },
     }
   )
@@ -78,8 +78,10 @@ export function useNounsDaos({
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [data?.nouns?.nounsDaos?.nodes])
 
+  console.log('HOOK DAOS', daos)
+
   return {
-    response: data,
+    // response: data,
     daos,
     pageInfo: data?.nouns.nounsDaos.pageInfo,
     isValidating,

@@ -11,13 +11,12 @@ import { DaoRow } from './DaoRow'
 import {
   cell,
   daoMeta,
-  header,
   metadataCells,
   noBorder,
   placeholderCell,
   rowWrap,
 } from './DaoRow.css'
-import { daosWrapper } from './Daos.css'
+import { daosWrapper, header } from './Daos.css'
 
 interface DaoTableProps extends StackProps {
   routePrefix?: string
@@ -58,10 +57,11 @@ export function DaoTable({ routePrefix, className, daos, ...props }: DaoTablePro
             <Box className={[placeholderCell]}></Box>
           </Box>
         )}
-
-        {(daos ?? []).map((dao, index) => (
-          <DaoRow dao={dao} index={index} key={dao.contractAddress} />
-        ))}
+        <ul>
+          {(daos ?? []).map((dao, index) => (
+            <DaoRow dao={dao} index={index} key={dao.contractAddress} />
+          ))}
+        </ul>
       </Stack>
     </Stack>
   )

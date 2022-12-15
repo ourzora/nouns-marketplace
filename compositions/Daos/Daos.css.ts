@@ -49,3 +49,9 @@ export const daosRow = style([
     },
   }),
 ])
+
+export const header = style([
+  {
+    height: '40px!important',
+  },
+])

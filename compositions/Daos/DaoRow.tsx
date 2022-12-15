@@ -35,9 +35,8 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
 
   if (!token || !activeAuction) return null
 
-  const highestBid = activeAuction.highestBidPrice?.chainTokenPrice?.raw || '0'
-  const tokenId = activeAuction.tokenId
-  const collectionAddress = activeAuction.collectionAddress
+  const { tokenId, collectionAddress, highestBidPrice } = activeAuction
+  const highestBid = highestBidPrice?.chainTokenPrice?.raw || '0'
 
   const auctionStatus =
     Date.now() - parseInt(activeAuction.endTime) * 1000 > 0 ? 'Settling' : 'Live'
@@ -136,7 +135,7 @@ export const DaoRowComponent = ({
   }
 
   return (
-    <Box className={[rowWrap, index === 0 ? noBorder : '']}>
+    <Box as="li" className={[rowWrap, index === 0 ? noBorder : '']}>
       <Box className={[daoMeta]}>
         <RPCTokenInfo
           tokenImage={tokenImage}

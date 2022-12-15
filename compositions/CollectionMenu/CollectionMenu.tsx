@@ -21,7 +21,8 @@ export function CollectionMenu() {
   const { hasScrolled, scrollEvent } = useHasScrolled()
   const [filter, setFilter] = useState<string>('')
   const filteredItems = useMemo(
-    () => daos.filter((item) => item?.name?.toLowerCase().includes(filter.toLowerCase())),
+    () =>
+      daos?.filter((item) => item?.name?.toLowerCase().includes(filter.toLowerCase())),
     [filter, daos]
   )
   const hasResults = useMemo(() => filteredItems.length > 0, [filteredItems])
@@ -74,7 +75,7 @@ export function CollectionMenu() {
             <Heading as="h2">
               Browse
               <Text as="span" color="text3" ml="x2">
-                {daos.length}
+                {daos?.length}
               </Text>
             </Heading>
             <SearchInput
