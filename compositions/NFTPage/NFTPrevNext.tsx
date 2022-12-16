@@ -15,12 +15,12 @@ export function NFTPrevNext({ nftObj, className, ...props }: NFTPrevNextProps) {
   if (!nftObj) return null
 
   return (
-    <Flex w="x20">
+    <Flex gap="x2">
       <Button
         className={[styles.nftNextButton]}
         disabled={!hasPreviousNFT}
         onClick={handlePrev}
-        variant="circle"
+        variant="unset"
       >
         ←
       </Button>
@@ -28,7 +28,7 @@ export function NFTPrevNext({ nftObj, className, ...props }: NFTPrevNextProps) {
         className={[styles.nftNextButton]}
         disabled={!hasNextNFT}
         onClick={handleNext}
-        variant="circle"
+        variant="unset"
       >
         →
       </Button>

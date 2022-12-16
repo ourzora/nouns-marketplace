@@ -51,6 +51,11 @@ export const auctionWrapperVariants = {
         gridTemplateRows: '68px 1fr auto',
       },
     ],
+    collectionHero: [
+      atoms({
+        display: 'inline-block',
+      }),
+    ],
     sideBarBid: [
       {
         gridTemplateColumns: '1fr',

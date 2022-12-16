@@ -1,39 +1,102 @@
-import { PageHeader } from 'components/PageHeader'
-import * as styles from 'styles/styles.css'
+import { ImageWithNounFallback } from 'components'
+import * as siteStyles from 'styles/styles.css'
 
-import { useAggregate } from 'hooks'
+import { useToken } from 'hooks/useToken'
+
+import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { AddressWithLink } from '@market'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
+import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
+import { AuctionCountdown, PlaceNounsBid, useNounishAuctionQuery } from '@noun-auction'
+import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
+import { lightFont, useWindowWidth } from '@shared'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Flex, Grid, GridProps, Paragraph, Stack } from '@zoralabs/zord'
+import { Flex, Grid, GridProps, Heading, Paragraph, Stack } from '@zoralabs/zord'
+
+import * as styles from './CollectionHeader.css'
 
 export interface CollectionHeaderProps extends GridProps {
   collection: Collection
   children?: JSX.Element
   currentAuction?: JSX.Element | null
-  layout?: 'dao' | 'collection'
 }
 
-type Props = {
-  collectionAddress: string
-  name: string
-  layout: string
+interface HeroProps {
+  activeAuction: TypeSafeNounsAuction
 }
 
-export function PageHeaderWithStats({ collectionAddress, name, layout }: Props) {
-  const { nftCount } = useAggregate(collectionAddress)
+export function CollectionHero({ activeAuction, ...props }: HeroProps) {
+  const { isLarge } = useWindowWidth()
+  const { token } = useToken({
+    collectionAddress: activeAuction.collectionAddress,
+    tokenId: activeAuction.tokenId,
+  })
+  const { isEnded: auctionCompleted } = useIsAuctionCompleted({
+    activeAuction,
+  })
+  const { formattedCryptoHighestBidPrice, highestBidder } = useNounishAuctionHelper({
+    auction: activeAuction,
+  })
 
   return (
-    <PageHeader
-      headline={name}
-      copy={`${nftCount ?? '...'} NFTs`}
-      align={{
-        '@initial': 'center',
-        '@1024': layout === 'collection' ? 'center' : 'flex-start',
-      }}
-      px={layout === 'collection' ? 'x4' : 'x0'}
-    />
+    <Grid
+      className={['collectionPage-hero', styles.collectionGrid]}
+      borderColor="negative"
+      w="100%"
+      {...props}
+    >
+      <Grid className={[styles.activeAuction]}>
+        <Flex className={[styles.activeAuctionImage]}>
+          {token && (
+            <ImageWithNounFallback token={token} pos="relative" borderRadius="phat" />
+          )}
+        </Flex>
+        <Stack className={[styles.activeAuctionForm]} justify="center" gap="x6">
+          <Heading size={isLarge ? 'xl' : 'lg'} as="h2">
+            {token?.name}
+          </Heading>
+          <Flex gap="x8">
+            <Stack gap="x2">
+              <Paragraph className={[lightFont]} color="text3">
+                Current bid
+              </Paragraph>
+              <Paragraph>
+                {`${formattedCryptoHighestBidPrice} ${activeAuction.highestBidPrice?.nativePrice.currency.name}`}
+              </Paragraph>
+            </Stack>
+            <Stack gap="x2">
+              <Paragraph className={[lightFont]} color="text3">
+                Auction ends in
+              </Paragraph>
+
+              <AuctionCountdown
+                auctionEndTime={activeAuction.endTime}
+                auctionStartTime={activeAuction.startTime}
+                auctionCompleted={auctionCompleted}
+              />
+            </Stack>
+            {highestBidder && (
+              <Stack gap="x2">
+                <Paragraph className={[lightFont]} color="text3">
+                  Top bidder
+                </Paragraph>
+                <AddressWithLink address={highestBidder} />
+              </Stack>
+            )}
+          </Flex>
+          <PlaceNounsBid
+            layout="collectionHero"
+            collectionAddress={activeAuction.collectionAddress}
+            tokenId={activeAuction.tokenId}
+          />
+          {!activeAuction.firstBidTime && (
+            <Paragraph className={[lightFont]} color="text3">
+              No bids yet
+            </Paragraph>
+          )}
+        </Stack>
+      </Grid>
+    </Grid>
   )
 }
 
@@ -41,106 +104,31 @@ export function CollectionHeader({
   collection,
   children,
   currentAuction,
-  layout = 'collection',
   className,
   ...props
 }: CollectionHeaderProps) {
+  const { activeAuction } = useNounishAuctionQuery({
+    collectionAddress: collection.address,
+  })
+
   return (
     <Grid
-      className={[styles.pageGrid]}
-      px={{ '@initial': 'x0', '@1024': 'x8' }}
-      gap="x2"
+      className={[siteStyles.pageGrid]}
+      px={{ '@initial': 'x0', '@1024': 'x4' }}
       alignSelf="center"
     >
-      <Grid
-        className={[
-          styles.collectionHeaderWrapper,
-          layout === 'dao' ? styles.daoHeaderWrapper : 'collections-header-wrapper',
-          className,
-        ]}
+      <Stack
+        w="100%"
+        className={[styles.collectionGrid, className]}
+        display="grid"
         mt={{ '@initial': 'x6', '@1024': 'x8' }}
-        {...props}
+        px={{
+          '@initial': 'x4',
+          '@1024': 'x0',
+        }}
       >
-        <Stack
-          align={{
-            '@initial': 'center',
-            '@1024': layout === 'collection' ? 'center' : 'flex-start',
-          }}
-          gap="x4"
-        >
-          <Stack
-            px={{
-              '@initial': 'x4',
-              '@1024': 'x0',
-            }}
-          >
-            <Flex
-              align="center"
-              direction={{ '@initial': 'column', '@1024': 'row' }}
-              gap={{ '@initial': 'x2', '@1024': 'x4' }}
-            >
-              <CollectionThumbnail
-                collectionAddress={collection.address}
-                radius="round"
-                m="auto"
-                size="lg"
-                h={layout === 'dao' ? '100%' : 'auto'}
-                w="100%"
-                style={{ justifyContent: 'center' }}
-              />
-              <PageHeaderWithStats
-                collectionAddress={collection.address}
-                layout={layout}
-                name={collection.name ?? ''}
-              />
-            </Flex>
-            <Flex
-              w="100%"
-              justify={{
-                '@initial': 'center',
-                '@1024': layout === 'dao' ? 'flex-start' : 'center',
-              }}
-            >
-              <AddressWithLink
-                address={collection.address}
-                useEns={false}
-                backgroundColor="background2"
-                px="x4"
-                py="x2"
-                borderRadius="curved"
-                my="x2"
-              />
-            </Flex>
-            {collection.description && <Paragraph>{collection.description}</Paragraph>}
-          </Stack>
-          <Flex
-            w="100%"
-            justify={{
-              '@initial': 'center',
-              '@1024': layout === 'dao' ? 'flex-start' : 'center',
-            }}
-          >
-            {children}
-          </Flex>
-        </Stack>
-        {currentAuction && (
-          <Flex
-            w="100%"
-            justify={{
-              '@initial': 'center',
-              '@1024': 'flex-end',
-            }}
-            pt={{
-              '@initial': 'x4',
-            }}
-            px={{
-              '@initial': 'x4',
-            }}
-          >
-            {currentAuction}
-          </Flex>
-        )}
-      </Grid>
+        {activeAuction && <CollectionHero activeAuction={activeAuction} />}
+      </Stack>
     </Grid>
   )
 }

@@ -28,7 +28,6 @@ function Home(props: { daos: TypeSafeDao[] }) {
       <Seo />
       <Grid
         px={{ '@initial': 'x4', '@1024': 'x8' }}
-        gap="x2"
         className={styles.pageGrid}
         justify="center"
       >

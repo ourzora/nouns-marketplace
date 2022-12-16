@@ -1,31 +1,38 @@
 import { Seo } from 'components'
-import { MarketStats } from 'components/MarketStats/MarketStats'
 import { PageWrapper } from 'components/PageWrapper'
 import {
-  // CollectionActivityHeader,
+  ActiveCollectionPageView,
+  CollectionAbout,
   CollectionHeader,
-  Collections,
 } from 'compositions/Collections'
+import { ALL_COLLECTION_VIEWS, CollectionNav } from 'compositions/Collections'
+import { CollectionNFTs } from 'compositions/Collections/CollectionNFTs'
+import { useRouter } from 'next/router'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { CollectionServiceProps, collectionService } from 'services/collectionService'
 
 import { useAggregate } from 'hooks'
 
-import { useEffect, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { CollectionFilterProvider } from '@filter'
-import {
-  ActiveAuctionCard, // useOneNounsDao
-} from '@noun-auction'
-import { useWindowWidth } from '@shared'
-import { Grid, Separator, Stack } from '@zoralabs/zord'
+import { Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const { contractAddress: collectionAddress, collection, initialPage, seo } = fallback
-
-  const { isLarge } = useWindowWidth()
+  const { contractAddress: collectionAddress, collection, seo } = fallback
+  const [activeView, setActiveView] = useState<ActiveCollectionPageView>('about')
   const { nftCount } = useAggregate(collectionAddress)
+  const { asPath } = useRouter()
+  const router = useRouter()
+
+  useEffect(() => {
+    const urlHash = asPath.split('#')[1] as ActiveCollectionPageView
+    const isValidHash = ALL_COLLECTION_VIEWS && ALL_COLLECTION_VIEWS.includes(urlHash)
+    setActiveView(isValidHash ? urlHash : 'about')
+    router.push(`/collections/${collectionAddress}/#${isValidHash ? urlHash : 'about'}`)
+    // No deps, should only run on first load:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     if (collection?.name) {
@@ -39,45 +46,19 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   }, [nftCount, collection, setCurrentCollection, setCurrentCollectionCount])
 
   return (
-    <PageWrapper direction="column" gap="x4">
+    <PageWrapper direction="column" gap="x13">
       <Seo title={seo.title} description={seo.description} />
-
-      <CollectionHeader
-        collection={collection}
-        layout={'dao'}
-        currentAuction={
-          <ActiveAuctionCard layout={'row'} collectionAddress={collectionAddress} />
-        }
-      >
-        <MarketStats contractAddress={collectionAddress} />
-      </CollectionHeader>
-
-      <CollectionFilterProvider
-        initialPage={initialPage}
-        enableSidebarClearButton
-        filtersVisible={isLarge}
-        contractAddress={collectionAddress}
-        enableSortDropdown
-        // enableSidebarFilter={false}
-        enableSelectedFiltersPanel
-        useCollectionProperties={{
-          header: 'Traits',
-          selector: 'nouns-market-traits',
-        }}
-        // enablePriceRange={{
-        //   label: 'Price',
-        //   defaultState: 'open',
-        //   hideCurrencySelect: true,
-        // }}
-        strings={{
-          NO_FILTER_RESULTS_COPY: `Sorry no ${collection?.name} NFTs are available for purchase on chain.`,
-        }}
-      >
-        <Stack>
-          <Separator />
-          <Collections collectionAddress={collectionAddress} />
-        </Stack>
-      </CollectionFilterProvider>
+      <CollectionHeader collection={collection} />
+      <Stack gap="x8">
+        <CollectionNav
+          nftCount={nftCount}
+          collectionAddress={collectionAddress}
+          setActiveView={setActiveView}
+        />
+        {activeView === 'about' && <CollectionAbout collection={collection} />}
+        {activeView === 'nfts' && <CollectionNFTs fallback={fallback} />}
+        {/* {activeView === 'about' && <CollectionActivity collection={collection} />} */}
+      </Stack>
     </PageWrapper>
   )
 }
