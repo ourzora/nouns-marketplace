@@ -55,11 +55,8 @@ function Home(props: { ssrDAOQuery: NounsDaosQuery; daos: TypeSafeDao[] }) {
       setCursorCache(newCursorCache)
       console.log('NEXT:', fetchedCursor)
     }
-  }, [
-    pageInfo?.endCursor,
-    //cursorCache,
-    currentCursor,
-  ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageInfo?.endCursor, currentCursor])
 
   useEffect(() => console.log(cursorCache), [cursorCache])
 

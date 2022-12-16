@@ -3,27 +3,21 @@ import { DAODescriptionModal } from 'modals'
 import React from 'react'
 import { TypeSafeDao } from 'validators/dao'
 
-import { lightFont } from '@noun-auction'
 import { useWindowWidth } from '@shared'
-import { Box, Flex, Heading, Label, Stack, StackProps } from '@zoralabs/zord'
+import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
 
 import { DaoRow } from './DaoRow'
-import {
-  cell,
-  daoMeta,
-  metadataCells,
-  noBorder,
-  placeholderCell,
-  rowWrap,
-} from './DaoRow.css'
-import { daosWrapper, header } from './Daos.css'
+import { DaoTableHeader } from './DaoTableHeader'
+import { daosWrapper } from './Daos.css'
 
 interface DaoTableProps extends StackProps {
   routePrefix?: string
   daos: TypeSafeDao[]
 }
 
-export function DaoTable({ routePrefix, className, daos, ...props }: DaoTableProps) {
+export function DaoTable({ routePrefix, daos, className, ...props }: DaoTableProps) {
+  console.log('DaoTable', daos)
+
   const { isLarge } = useWindowWidth()
   return (
     <Stack className={[daosWrapper, className]} {...props}>
@@ -34,31 +28,9 @@ export function DaoTable({ routePrefix, className, daos, ...props }: DaoTablePro
         <DAODescriptionModal />
       </Flex>
       <Stack>
-        {daos && isLarge && (
-          <Box className={[rowWrap, noBorder, header]}>
-            <Box className={[daoMeta]}></Box>
-            <Box className={[metadataCells]}>
-              <Box className={[cell]}>
-                <Label color="tertiary" className={[lightFont]}>
-                  Treasury
-                </Label>
-              </Box>
-              <Box className={[cell]}>
-                <Label color="tertiary" className={[lightFont]}>
-                  Auction Status
-                </Label>
-              </Box>
-              <Box className={[cell]}>
-                <Label color="tertiary" className={[lightFont]}>
-                  Current Bid
-                </Label>
-              </Box>
-            </Box>
-            <Box className={[placeholderCell]}></Box>
-          </Box>
-        )}
+        {daos && isLarge && <DaoTableHeader />}
         <ul>
-          {(daos ?? []).map((dao, index) => (
+          {daos.map((dao, index) => (
             <DaoRow dao={dao} index={index} key={dao.contractAddress} />
           ))}
         </ul>

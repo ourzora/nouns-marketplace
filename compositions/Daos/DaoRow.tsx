@@ -135,7 +135,7 @@ export const DaoRowComponent = ({
   }
 
   return (
-    <Box as="li" className={[rowWrap, index === 0 ? noBorder : '']}>
+    <Box as="li" data-index={index} className={[rowWrap, index === 0 && noBorder]}>
       <Box className={[daoMeta]}>
         <RPCTokenInfo
           tokenImage={tokenImage}
