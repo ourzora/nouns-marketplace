@@ -52,7 +52,7 @@ export function CollectionFilterProvider({
   contractAllowList,
   children,
   filtersVisible = false,
-  enableMarketStatus = true,
+  enableMarketStatus = false,
   enableOwnerStatus = false,
   enableMediaTypes = false,
   enableSortDropdown = true,
