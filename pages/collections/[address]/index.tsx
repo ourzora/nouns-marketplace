@@ -64,11 +64,11 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
           header: 'Traits',
           selector: 'nouns-market-traits',
         }}
-        enablePriceRange={{
-          label: 'Price',
-          defaultState: 'open',
-          hideCurrencySelect: true,
-        }}
+        // enablePriceRange={{
+        //   label: 'Price',
+        //   defaultState: 'open',
+        //   hideCurrencySelect: true,
+        // }}
         strings={{
           NO_FILTER_RESULTS_COPY: `Sorry no ${collection?.name} NFTs are available for purchase on chain.`,
         }}

@@ -58,6 +58,17 @@ export type AggregateAttribute = {
   valueMetrics: Array<AggregateAttributeValue>
 }
 
+export enum AggregateAttributeSortKey {
+  Count = 'COUNT',
+  None = 'NONE',
+  Value = 'VALUE',
+}
+
+export type AggregateAttributeSortKeySortInput = {
+  sortDirection: SortDirection
+  sortKey: AggregateAttributeSortKey
+}
+
 export type AggregateAttributeValue = {
   __typename?: 'AggregateAttributeValue'
   count: Scalars['Int']
@@ -1191,6 +1202,7 @@ export type RootQuery = {
 
 export type RootQueryAggregateAttributesArgs = {
   networks?: InputMaybe<Array<NetworkInput>>
+  sort: AggregateAttributeSortKeySortInput
   where: AggregateAttributesQueryInput
 }
 
@@ -1602,6 +1614,7 @@ export type TokensQueryFilter = {
   marketFilters?: InputMaybe<Array<MarketTypeFilter>>
   mediaType?: InputMaybe<MediaType>
   priceFilter?: InputMaybe<PriceFilter>
+  timeFilter?: InputMaybe<TimeFilter>
 }
 
 export type TokensQueryInput = {
