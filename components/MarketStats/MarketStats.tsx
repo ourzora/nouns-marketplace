@@ -16,7 +16,6 @@ export function MarketStats({ contractAddress, className, ...props }: MarketStat
     <Flex className={className} {...props}>
       <Flex
         gap="x4"
-        // w="100%"
         justify={{
           '@initial': 'flex-start',
           '@1024': 'center',

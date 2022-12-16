@@ -242,7 +242,6 @@ export const nftNextButton = style([
   atoms({
     display: 'inline-block',
     backgroundSize: 'contain',
-    // backgroundColor: 'background2',
     borderRadius: 'round',
     w: 'x9',
   }),

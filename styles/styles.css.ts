@@ -154,37 +154,6 @@ export const hideMobile = style({
   },
 })
 
-// export const collectionHeaderWrapper = style([
-//   {
-//     gridColumn: '1/span 4',
-//     '@media': {
-//       [media.min1024]: {
-//         gridColumn: '1/span 12',
-//       },
-//     },
-//   },
-//   atoms({
-//     w: '100%',
-//     overflowX: 'hidden',
-//     mx: 'auto',
-//   }),
-// ])
-
-// export const marketStatsWrapper = atoms({
-//   w: {
-//     '@initial': '100vw',
-//     '@1024': 'auto',
-//   },
-//   px: {
-//     '@initial': 'x4',
-//     '@1024': 'x0',
-//   },
-//   mb: {
-//     '@initial': 'x2',
-//     '@1024': 'x0',
-//   },
-// })
-
 export const stat = style({
   whiteSpace: 'nowrap',
   lineHeight: `1!important`,

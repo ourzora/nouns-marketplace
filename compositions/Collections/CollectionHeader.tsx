@@ -7,14 +7,9 @@ import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { AddressWithLink } from '@market'
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
-import {
-  AuctionCountdown,
-  PlaceNounsBid, // useActiveOGNounishAuction,
-  useNounishAuctionQuery,
-} from '@noun-auction'
+import { AuctionCountdown, PlaceNounsBid, useNounishAuctionQuery } from '@noun-auction'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import { lightFont, useWindowWidth } from '@shared'
-import { useNFT } from '@zoralabs/nft-hooks'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Flex, Grid, GridProps, Heading, Paragraph, Stack } from '@zoralabs/zord'
 
@@ -36,14 +31,13 @@ export function CollectionHero({ activeAuction, ...props }: HeroProps) {
     collectionAddress: activeAuction.collectionAddress,
     tokenId: activeAuction.tokenId,
   })
-  const { data: nftObj } = useNFT(token?.collectionAddress, token?.tokenId)
   const { isEnded: auctionCompleted } = useIsAuctionCompleted({
     activeAuction,
   })
-
   const { formattedCryptoHighestBidPrice, highestBidder } = useNounishAuctionHelper({
     auction: activeAuction,
   })
+  // const { data: nftObj } = useNFT(token?.collectionAddress, token?.tokenId)
   // const timeStamp = useMemo(() => {
   //   if (!nftObj?.nft?.minted.at?.timestamp) return '...'
   //   return format(new Date(nftObj?.nft?.minted.at?.timestamp), 'LLLL d, yyyy')
@@ -52,7 +46,6 @@ export function CollectionHero({ activeAuction, ...props }: HeroProps) {
   return (
     <Grid
       className={['collectionPage-hero', styles.collectionGrid]}
-      // mt={{ '@initial': 'x6', '@1024': 'x8' }}
       borderColor="negative"
       w="100%"
       {...props}
