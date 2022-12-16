@@ -37,11 +37,6 @@ export function CollectionHero({ activeAuction, ...props }: HeroProps) {
   const { formattedCryptoHighestBidPrice, highestBidder } = useNounishAuctionHelper({
     auction: activeAuction,
   })
-  // const { data: nftObj } = useNFT(token?.collectionAddress, token?.tokenId)
-  // const timeStamp = useMemo(() => {
-  //   if (!nftObj?.nft?.minted.at?.timestamp) return '...'
-  //   return format(new Date(nftObj?.nft?.minted.at?.timestamp), 'LLLL d, yyyy')
-  // }, [nftObj?.nft?.minted.at?.timestamp])
 
   return (
     <Grid
@@ -57,12 +52,6 @@ export function CollectionHero({ activeAuction, ...props }: HeroProps) {
           )}
         </Flex>
         <Stack className={[styles.activeAuctionForm]} justify="center" gap="x6">
-          {/* <Flex align="center" gap="x4">
-            {nftObj && <NFTPrevNext nftObj={nftObj} />}
-            <Paragraph className={[lightFont]} color="text3">
-              {timeStamp}
-            </Paragraph>
-          </Flex> */}
           <Heading size={isLarge ? 'xl' : 'lg'} as="h2">
             {token?.name}
           </Heading>
