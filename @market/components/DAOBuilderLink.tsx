@@ -1,8 +1,5 @@
-import { useEnsName } from 'wagmi'
-
 import { useMemo } from 'react'
 
-import { useShortAddress } from '@shared'
 import { Flex, FlexProps, Icon, Label } from '@zoralabs/zord'
 
 interface AddressWithLinkProps extends FlexProps {
@@ -15,12 +12,6 @@ export function DAOBuilderLink({
   useEns = true,
   ...props
 }: AddressWithLinkProps) {
-  // const { data: ensName } = useEnsName({
-  //   address: address,
-  // })
-
-  // const shortAddress = useShortAddress(address)
-
   const builderLink = useMemo(() => `https://nouns.build/dao/${address}`, [address])
 
   return (

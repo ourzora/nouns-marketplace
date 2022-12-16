@@ -1,4 +1,5 @@
 export * from './Collections'
 export * from './CollectionNav'
+export * from './CollectionNavItem'
 export * from './CollectionHeader'
 export * from './CollectionAbout'

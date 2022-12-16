@@ -1,15 +1,22 @@
+import { ActiveCollectionPageView } from 'compositions/Collections'
+
 export const COLLECTION_ROUTES = {
-  searchCollections: {
-    url: '/search/collections',
-    title: 'Collections',
-    slug: 'collections',
+  // about: {
+  //   url: '/search/collections',
+  //   title: 'Collections',
+  //   slug: 'collections',
+  // },
+  about: { url: 'about' as ActiveCollectionPageView, title: 'About', slug: 'about' },
+  nfts: { url: 'nfts' as ActiveCollectionPageView, title: 'NFTs', slug: 'tokens' },
+  activity: {
+    url: 'activity' as ActiveCollectionPageView,
+    title: 'Activity',
+    slug: 'activity',
   },
-  searchTokens: { url: '/search/tokens', title: 'NFTs', slug: 'tokens' },
-  searchUsers: { url: '/search/users', title: 'Profiles', slug: 'users' },
 }
 
 export const ROUTES = {
   index: { url: '/' },
-  search: { url: '/collections' },
+  collections: { url: '/collections' },
   ...COLLECTION_ROUTES,
 }

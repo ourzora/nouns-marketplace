@@ -4,9 +4,10 @@ import {
   ActiveCollectionPageView,
   CollectionAbout,
   CollectionHeader,
-  CollectionNav,
 } from 'compositions/Collections'
+import { ALL_COLLECTION_VIEWS, CollectionNav } from 'compositions/Collections'
 import { CollectionNFTs } from 'compositions/Collections/CollectionNFTs'
+import { useRouter } from 'next/router'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { CollectionServiceProps, collectionService } from 'services/collectionService'
 
@@ -21,6 +22,17 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { contractAddress: collectionAddress, collection, seo } = fallback
   const [activeView, setActiveView] = useState<ActiveCollectionPageView>('about')
   const { nftCount } = useAggregate(collectionAddress)
+  const { asPath } = useRouter()
+  const router = useRouter()
+
+  useEffect(() => {
+    const urlHash = asPath.split('#')[1] as ActiveCollectionPageView
+    const isValidHash = ALL_COLLECTION_VIEWS && ALL_COLLECTION_VIEWS.includes(urlHash)
+    setActiveView(isValidHash ? urlHash : 'about')
+    router.push(`/collections/${collectionAddress}/#${isValidHash ? urlHash : 'about'}`)
+    // No deps, should only run on first load:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     if (collection?.name) {
@@ -38,7 +50,11 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
       <Seo title={seo.title} description={seo.description} />
       <CollectionHeader collection={collection} />
       <Stack gap="x8">
-        <CollectionNav activeView={activeView} setActiveView={setActiveView} />
+        <CollectionNav
+          nftCount={nftCount}
+          collectionAddress={collectionAddress}
+          setActiveView={setActiveView}
+        />
         {activeView === 'about' && <CollectionAbout collection={collection} />}
         {activeView === 'nfts' && <CollectionNFTs fallback={fallback} />}
         {/* {activeView === 'about' && <CollectionActivity collection={collection} />} */}

@@ -1,20 +1,12 @@
 import { ImageWithNounFallback } from 'components'
-import { MarketStats } from 'components/MarketStats'
-import { PageHeader } from 'components/PageHeader'
 import * as siteStyles from 'styles/styles.css'
-
-import { format } from 'date-fns'
 
 import { useToken } from 'hooks/useToken'
 
-import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
-import { TypeSafeToken } from 'validators/token'
 
-// import { useMemo } from 'react'
-import { AddressWithLink, DAOBuilderLink } from '@market'
+import { AddressWithLink } from '@market'
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
-import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import {
   AuctionCountdown,
   PlaceNounsBid, // useActiveOGNounishAuction,
@@ -33,28 +25,6 @@ export interface CollectionHeaderProps extends GridProps {
   children?: JSX.Element
   currentAuction?: JSX.Element | null
 }
-
-// type Props = {
-//   collectionAddress: string
-//   name: string
-//   layout: string
-// }
-
-// export function PageHeaderWithStats({ collectionAddress, name, layout }: Props) {
-//   const { nftCount } = useAggregate(collectionAddress)
-
-//   return (
-//     <PageHeader
-//       headline={name}
-//       copy={`${nftCount ?? '...'} NFTs`}
-//       align={{
-//         '@initial': 'center',
-//         '@1024': layout === 'collection' ? 'center' : 'flex-start',
-//       }}
-//       px={layout === 'collection' ? 'x4' : 'x0'}
-//     />
-//   )
-// }
 
 interface HeroProps {
   activeAuction: TypeSafeNounsAuction
