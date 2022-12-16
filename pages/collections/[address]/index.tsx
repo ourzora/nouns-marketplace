@@ -1,12 +1,10 @@
 import { Seo } from 'components'
-import { MarketStats } from 'components/MarketStats/MarketStats'
 import { PageWrapper } from 'components/PageWrapper'
 import {
   ActiveCollectionPageView,
   CollectionAbout,
   CollectionHeader,
   CollectionNav,
-  Collections,
 } from 'compositions/Collections'
 import { CollectionNFTs } from 'compositions/Collections/CollectionNFTs'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
@@ -16,18 +14,12 @@ import { useAggregate } from 'hooks'
 
 import React, { useEffect, useState } from 'react'
 
-import { useWindowWidth } from '@shared'
 import { Stack } from '@zoralabs/zord'
-
-// import { Grid, Separator, Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const { contractAddress: collectionAddress, collection, initialPage, seo } = fallback
-
+  const { contractAddress: collectionAddress, collection, seo } = fallback
   const [activeView, setActiveView] = useState<ActiveCollectionPageView>('about')
-
-  // const { isLarge } = useWindowWidth()
   const { nftCount } = useAggregate(collectionAddress)
 
   useEffect(() => {

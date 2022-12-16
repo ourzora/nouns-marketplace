@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, media, space } from '@zoralabs/zord'
+import { atoms, color, media, space } from '@zoralabs/zord'
 
 export const collectionGrid = style([
   {
@@ -61,3 +61,6 @@ export const collectionThumb = style([
     aspectRatio: '1/1',
   },
 ])
+export const menu = style({
+  borderBottom: `2px solid ${color.background2}`,
+})

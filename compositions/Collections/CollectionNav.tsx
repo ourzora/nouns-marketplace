@@ -8,6 +8,8 @@ import React from 'react'
 import { useCollectionFilters } from '@filter'
 import { Stack, color } from '@zoralabs/zord'
 
+import * as styles from './CollectionHeader.css'
+
 // import { FlexProps, Separator } from '@zoralabs/zord'
 
 // import { SearchEntityFilterItem } from './SearchEntityFilterItem';
@@ -48,9 +50,7 @@ export function CollectionNav({
       items={items}
       useCustomHandler
       currentId={activeView}
-      style={{
-        borderBottom: `2px solid ${color.background2}`,
-      }}
+      className={styles.menu}
     />
   )
 }
