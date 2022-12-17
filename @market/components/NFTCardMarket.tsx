@@ -15,12 +15,12 @@ export function NFTCardMarket({ isOwner, ownerAddress, ...props }: NFTCardMarket
   const { markets } = useNftMarketContext()
   const { hasRelevantAsk } = useRelevantMarket(markets)
 
-  if (isOwner) {
-    return <UniversalListAskFlow {...props} />
-  }
-
   if (hasRelevantAsk) {
     return <V3AskModal isOwner={false} modalName="V3AskV3" />
+  }
+
+  if (isOwner) {
+    return <UniversalListAskFlow {...props} />
   }
 
   return <NFTCardMarketOwner size="md" address={ownerAddress} />

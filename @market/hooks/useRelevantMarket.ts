@@ -15,6 +15,8 @@ export const useRelevantMarket = (markets: TypeSafeMarket[] = []) => {
   const ask = asks[0]
   const auction = auctions[0]
 
+  ask?.tokenId === '150' && console.log({ ask })
+
   const askProperties = ask?.properties
   const { balance: walletBalance, address: userAddress } = useAuth()
 

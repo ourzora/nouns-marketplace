@@ -20,6 +20,8 @@ export function NFTGrid2({ items, ...props }: NFTGridProps) {
           const { collectionAddress, tokenId, collectionName, name, owner, image } =
             nft.token
 
+          console.log({ nft })
+
           return (
             <NFTCard2
               isOwner={props.isOwner}

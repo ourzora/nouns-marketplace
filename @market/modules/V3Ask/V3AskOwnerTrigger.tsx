@@ -50,7 +50,7 @@ const privateAskDropdownOptions = [
 ]
 
 export function V3AskOwnerTrigger({ openModal }: V3AskOwnerTriggerProps) {
-  const { markets, tokenId, collectionName } = useNftMarketContext()
+  const { markets } = useNftMarketContext()
   const { dispatch } = useV3AskStateContext()
   const { displayAskAmount, usdAskAmount, hasActivePrivateAsk, isActiveAsk } =
     useRelevantMarket(markets)
