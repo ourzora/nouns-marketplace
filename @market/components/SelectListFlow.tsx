@@ -9,7 +9,7 @@ import {
 } from '@market/modules/V3Ask'
 import { SaleTypeButton } from '@market/modules/V3Ask/SaleTypeButton'
 import { V3AskLearnMoreButton } from '@market/modules/V3Ask/V3AskLearnMoreButton'
-import { useNftMarketContext } from '@media/NFTCard2'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { Eyebrow, Stack } from '@zoralabs/zord'
 
 interface SelectListFlowProps {

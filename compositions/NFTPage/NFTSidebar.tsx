@@ -9,6 +9,7 @@ import { useMemo } from 'react'
 import { TypeSafeMarket } from 'validators/market'
 import { TypeSafeToken } from 'validators/token'
 
+import { NftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { CollectionThumbnail } from '@media'
 import { useNounishAuctionQuery } from '@noun-auction'
 import { useIsOwner } from '@shared'
@@ -72,6 +73,8 @@ export function NFTSidebarComponent({
 
   const { isOwner } = useIsOwner(token)
 
+  console.log({ primarySalePrice, activeAuction, token, markets })
+
   return (
     <Stack
       id="nft-info-sidebar"
@@ -109,18 +112,21 @@ export function NFTSidebarComponent({
         {hasPrimarySalePrice && (
           <NFTProvenance primarySalePrice={primarySalePrice} token={token} />
         )}
-        {activeAuction && (
+        <NftMarketContext.Provider
+          value={{
+            tokenId,
+            collectionAddress,
+            markets,
+            collectionName: token.collectionName ?? '..',
+          }}
+        >
           <NFTMarket
             activeAuction={activeAuction}
             isActiveAuctionToken={isActiveAuctionToken}
-            markets={markets}
             isOwner={isOwner}
-            tokenId={tokenId}
-            collectionAddress={token.collectionAddress}
-            collectionName={token.collectionName}
             offchainOrders={offchainOrders}
           />
-        )}
+        </NftMarketContext.Provider>
       </Stack>
     </Stack>
   )

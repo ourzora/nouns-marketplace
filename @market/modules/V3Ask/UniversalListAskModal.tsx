@@ -3,7 +3,7 @@ import { Button } from 'components/Button'
 import { useCallback } from 'react'
 
 import { SelectListFlow } from '@market/components/SelectListFlow'
-import { useNftMarketContext } from '@media/NFTCard2'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { ModalComposition, useModal } from '@modal'
 import { Box, FlexProps } from '@zoralabs/zord'
 

@@ -5,6 +5,7 @@ import { createContext, useContext, useMemo } from 'react'
 import { TypeSafeMarket } from 'validators/market'
 
 import { NFTCardMarket } from '@market'
+import { NftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import {
   cardImageWrapper,
@@ -29,18 +30,6 @@ type Props = {
   ownerAddress?: string
   markets: TypeSafeMarket[]
 }
-
-type NftMarketContextType = {
-  tokenId: string
-  collectionAddress: string
-  collectionName: string
-  markets: TypeSafeMarket[]
-}
-
-export const NftMarketContext = createContext<NftMarketContextType>(
-  {} as NftMarketContextType
-)
-export const useNftMarketContext = () => useContext(NftMarketContext)
 
 export function NFTCard2({
   collectionAddress,

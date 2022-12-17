@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { useNftMarketContext } from '@media/NFTCard2'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import {
   PrintError,
   formatContractError,

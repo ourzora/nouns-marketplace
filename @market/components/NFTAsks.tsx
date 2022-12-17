@@ -2,12 +2,11 @@ import { NFTOffchainOrders } from 'compositions'
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import { useMemo } from 'react'
-import { TypeSafeMarket } from 'validators/market'
 
 import { useRelevantMarket } from '@market/hooks'
 import { V3AskSidebar } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
-import { useNftMarketContext } from '@media/NFTCard2'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTAskProps extends FlexProps {

@@ -5,7 +5,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 
 import { useRelevantMarket } from '@market/hooks'
 import { PossibleV3AskState, useV3AskStateContext } from '@market/modules/V3Ask/'
-import { useNftMarketContext } from '@media/NFTCard2'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { useKeyPress } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { PopUp, Stack, Text, Well } from '@zoralabs/zord'

@@ -28,7 +28,7 @@ import {
   VIEW_V3ASK_LISTING,
   useV3AskStateContext,
 } from '@market/modules/V3Ask/providers/V3AskStateProvider'
-import { useNftMarketContext } from '@media/NFTCard2'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { Stack, StackProps } from '@zoralabs/zord'
 
 import { PrivateAskApproveModule } from './PrivateAskApproveModule'

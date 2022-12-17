@@ -6,34 +6,61 @@ import { TypeSafeMarket } from 'validators/market'
 import { NFTPrimaryAuction, NFTPrimaryAuctionActive } from '@market'
 import { NFTAsks } from '@market/components/NFTAsks'
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
-import { useNounishAuctionQuery } from '@noun-auction'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { BoxProps } from '@zoralabs/zord'
 
 import { nftMarketWrapper } from './NFTPage.css'
 
 interface NFTMarketProps extends BoxProps {
-  collectionAddress: string
   offchainOrders?: OffchainOrderWithToken[]
-  tokenId: string
-  collectionName: string
   isOwner: boolean
-  markets: TypeSafeMarket[]
   isActiveAuctionToken: boolean
-  activeAuction: TypeSafeNounsAuction
+  activeAuction?: TypeSafeNounsAuction
 }
 
 export function NFTMarket({
   offchainOrders,
   className,
-  collectionAddress,
-  tokenId,
-  collectionName,
   isOwner,
-  markets,
   isActiveAuctionToken,
   activeAuction,
-  ...props
 }: NFTMarketProps) {
+  const { tokenId, collectionAddress } = useNftMarketContext()
+
+  if (activeAuction) {
+    return (
+      <NFTAuctionMarket
+        activeAuction={activeAuction}
+        isActiveAuctionToken={isActiveAuctionToken}
+        tokenId={tokenId}
+        collectionAddress={collectionAddress}
+      />
+    )
+  }
+
+  return (
+    <NFTAsks
+      isOwner={isOwner}
+      offchainOrders={offchainOrders}
+      className={[nftMarketWrapper, className]}
+      p="x4"
+      align="flex-start"
+      direction="column"
+    />
+  )
+}
+
+const NFTAuctionMarket = ({
+  activeAuction,
+  isActiveAuctionToken,
+  tokenId,
+  collectionAddress,
+}: {
+  activeAuction: TypeSafeNounsAuction
+  isActiveAuctionToken: boolean
+  tokenId: string
+  collectionAddress: string
+}) => {
   const { isClaimable } = useNounishAuctionHelper({
     auction: activeAuction,
   })
@@ -49,25 +76,15 @@ export function NFTMarket({
     )
   }
 
-  if (activeAuction && isActiveAuctionToken) {
+  if (isActiveAuctionToken) {
     return (
       <NFTPrimaryAuctionActive
         collectionAddress={collectionAddress}
         tokenId={tokenId}
         primaryAuction={activeAuction}
-        {...props}
       />
     )
   }
 
-  return (
-    <NFTAsks
-      isOwner={isOwner}
-      offchainOrders={offchainOrders}
-      className={[nftMarketWrapper, className]}
-      p="x4"
-      align="flex-start"
-      direction="column"
-    />
-  )
+  return null
 }

@@ -4,7 +4,7 @@ import React from 'react'
 import { TypeSafeMarket } from 'validators/market'
 
 import { useRelevantMarket } from '@market/hooks'
-import { useNftMarketContext } from '@media/NFTCard2'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 
 import { V3AskBuyerTrigger } from './V3AskBuyerTrigger'
 import { V3AskOwnerTrigger } from './V3AskOwnerTrigger'
