@@ -1,9 +1,10 @@
-import { NFTOwner } from '@market/components'
 import { useRelevantMarket } from '@market/hooks'
 import { V3AskModal } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
 import { useNftMarketContext } from '@media/NFTCard2'
 import { FlexProps } from '@zoralabs/zord'
+
+import { NFTCardMarketOwner } from './NFTCardMarketOwner'
 
 export interface NFTCardMarketProps extends FlexProps {
   isOwner?: boolean
@@ -22,5 +23,5 @@ export function NFTCardMarket({ isOwner, ownerAddress, ...props }: NFTCardMarket
     return <V3AskModal isOwner={false} modalName="V3AskV3" />
   }
 
-  return <NFTOwner size="md" align="left" address={ownerAddress} />
+  return <NFTCardMarketOwner size="md" address={ownerAddress} />
 }

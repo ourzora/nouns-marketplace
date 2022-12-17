@@ -40,7 +40,6 @@ function PriceCard({
   )
 
   const {
-    attribution,
     logo: PlatformLogo,
     platformName,
     platformButtonColor,

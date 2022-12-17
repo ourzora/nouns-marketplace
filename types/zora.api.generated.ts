@@ -58,6 +58,17 @@ export type AggregateAttribute = {
   valueMetrics: Array<AggregateAttributeValue>
 }
 
+export enum AggregateAttributeSortKey {
+  Count = 'COUNT',
+  None = 'NONE',
+  Value = 'VALUE',
+}
+
+export type AggregateAttributeSortKeySortInput = {
+  sortDirection: SortDirection
+  sortKey: AggregateAttributeSortKey
+}
+
 export type AggregateAttributeValue = {
   __typename: 'AggregateAttributeValue'
   count: Scalars['Int']
@@ -1191,6 +1202,7 @@ export type RootQuery = {
 
 export type RootQueryAggregateAttributesArgs = {
   networks?: InputMaybe<Array<NetworkInput>>
+  sort: AggregateAttributeSortKeySortInput
   where: AggregateAttributesQueryInput
 }
 
@@ -1602,6 +1614,7 @@ export type TokensQueryFilter = {
   marketFilters?: InputMaybe<Array<MarketTypeFilter>>
   mediaType?: InputMaybe<MediaType>
   priceFilter?: InputMaybe<PriceFilter>
+  timeFilter?: InputMaybe<TimeFilter>
 }
 
 export type TokensQueryInput = {
@@ -2228,6 +2241,7 @@ export type NounishAuctionsQuery = {
 
 export type NounsDaosQueryVariables = Exact<{
   network: NetworkInput
+  limit: Scalars['Int']
 }>
 
 export type NounsDaosQuery = {
@@ -2458,6 +2472,53 @@ export type TokenQuery = {
               thumbnail?: string | null
             }
           | null
+      } | null
+      mintInfo?: {
+        __typename: 'MintInfo'
+        toAddress: string
+        originatorAddress: string
+        price?: {
+          __typename: 'PriceAtTime'
+          blockNumber: number
+          chainTokenPrice?: {
+            __typename: 'CurrencyAmount'
+            decimal: number
+            raw: string
+            currency: {
+              __typename: 'Currency'
+              address: string
+              decimals: number
+              name: string
+            }
+          } | null
+          nativePrice: {
+            __typename: 'CurrencyAmount'
+            decimal: number
+            raw: string
+            currency: {
+              __typename: 'Currency'
+              address: string
+              decimals: number
+              name: string
+            }
+          }
+          usdcPrice?: {
+            __typename: 'CurrencyAmount'
+            decimal: number
+            raw: string
+            currency: {
+              __typename: 'Currency'
+              address: string
+              decimals: number
+              name: string
+            }
+          } | null
+        } | null
+        mintContext: {
+          __typename: 'TransactionInfo'
+          blockTimestamp: any
+          blockNumber: number
+        }
       } | null
       image?: {
         __typename: 'TokenContentMedia'

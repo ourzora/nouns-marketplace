@@ -5,10 +5,12 @@ import { OffchainOrderWithToken } from 'types/zora.api.generated'
 import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
 import { useToken } from 'hooks/useToken'
 
+import { useMemo } from 'react'
 import { TypeSafeMarket } from 'validators/market'
 import { TypeSafeToken } from 'validators/token'
 
 import { CollectionThumbnail } from '@media'
+import { useNounishAuctionQuery } from '@noun-auction'
 import { useIsOwner } from '@shared'
 import { DescriptionWithMaxLines } from '@shared/components'
 import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
@@ -59,6 +61,14 @@ export function NFTSidebarComponent({
   const { primarySalePrice, hasPrimarySalePrice } = usePrimarySalePrice({
     collectionAddress,
   })
+  const { activeAuction } = useNounishAuctionQuery({
+    collectionAddress,
+  })
+
+  const isActiveAuctionToken = useMemo(
+    () => activeAuction?.tokenId === tokenId,
+    [activeAuction?.tokenId, tokenId]
+  )
 
   const { isOwner } = useIsOwner(token)
 
@@ -99,14 +109,18 @@ export function NFTSidebarComponent({
         {hasPrimarySalePrice && (
           <NFTProvenance primarySalePrice={primarySalePrice} token={token} />
         )}
-        <NFTMarket
-          markets={markets}
-          isOwner={isOwner}
-          tokenId={tokenId}
-          collectionAddress={token.collectionAddress}
-          collectionName={token.collectionName}
-          offchainOrders={offchainOrders}
-        />
+        {activeAuction && (
+          <NFTMarket
+            activeAuction={activeAuction}
+            isActiveAuctionToken={isActiveAuctionToken}
+            markets={markets}
+            isOwner={isOwner}
+            tokenId={tokenId}
+            collectionAddress={token.collectionAddress}
+            collectionName={token.collectionName}
+            offchainOrders={offchainOrders}
+          />
+        )}
       </Stack>
     </Stack>
   )

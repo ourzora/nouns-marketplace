@@ -17,7 +17,7 @@ export const usePrimaryAuctionDataTable = ({
   primarySalePrice,
 }: NounishAuctionInfoProps) => {
   const { collectionAddress, tokenId } = t
-  const { token, markets } = useToken({
+  const { markets } = useToken({
     collectionAddress: collectionAddress,
     tokenId: tokenId,
   })

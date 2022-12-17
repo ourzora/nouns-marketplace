@@ -9,12 +9,14 @@ export interface NFTPrimaryAuctionProps extends FlexProps {
   primaryAuction: TypeSafeNounsAuction
   collectionAddress: string
   tokenId: string
+  isActiveAuctionToken: boolean
 }
 
 export function NFTPrimaryAuction({
   primaryAuction,
   collectionAddress,
   tokenId,
+  isActiveAuctionToken,
   ...props
 }: NFTPrimaryAuctionProps) {
   const { isEnded } = useNounishAuctionHelper({

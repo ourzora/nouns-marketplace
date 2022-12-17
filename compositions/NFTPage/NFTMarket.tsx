@@ -1,9 +1,11 @@
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
+import { TypeSafeNounsAuction } from 'validators/auction'
 import { TypeSafeMarket } from 'validators/market'
 
-import { NFTPrimaryAuction } from '@market'
+import { NFTPrimaryAuction, NFTPrimaryAuctionActive } from '@market'
 import { NFTAsks } from '@market/components/NFTAsks'
+import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { useNounishAuctionQuery } from '@noun-auction'
 import { BoxProps } from '@zoralabs/zord'
 
@@ -16,6 +18,8 @@ interface NFTMarketProps extends BoxProps {
   collectionName: string
   isOwner: boolean
   markets: TypeSafeMarket[]
+  isActiveAuctionToken: boolean
+  activeAuction: TypeSafeNounsAuction
 }
 
 export function NFTMarket({
@@ -26,17 +30,32 @@ export function NFTMarket({
   collectionName,
   isOwner,
   markets,
+  isActiveAuctionToken,
+  activeAuction,
+  ...props
 }: NFTMarketProps) {
-  const { activeAuction, hasActiveAuction } = useNounishAuctionQuery({
-    collectionAddress,
+  const { isClaimable } = useNounishAuctionHelper({
+    auction: activeAuction,
   })
 
-  if (hasActiveAuction) {
+  if (isClaimable) {
     return (
       <NFTPrimaryAuction
+        isActiveAuctionToken={isActiveAuctionToken}
         collectionAddress={collectionAddress}
         tokenId={tokenId}
         primaryAuction={activeAuction!}
+      />
+    )
+  }
+
+  if (activeAuction && isActiveAuctionToken) {
+    return (
+      <NFTPrimaryAuctionActive
+        collectionAddress={collectionAddress}
+        tokenId={tokenId}
+        primaryAuction={activeAuction}
+        {...props}
       />
     )
   }

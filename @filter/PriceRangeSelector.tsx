@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Currency } from '@shared'
-import { Flex, Input, Paragraph } from '@zoralabs/zord'
+import { Flex, InputField, Paragraph } from '@zoralabs/zord'
 
 import { errorText } from './CollectionsFilter.css'
 import { CurrencySelect } from './CurrencySelect'
@@ -18,32 +18,30 @@ export interface PriceRangeSelectorProps {
   currencyOptions?: Currency[]
   onSelect: (value: PriceRangeReturnValue) => void
   step?: number
+  minPlaceholder?: string
+  maxPlaceholder?: string
 }
 
 export function PriceRangeSelector({
   currencyOptions = [],
   onSelect,
   step = 0.01,
+  minPlaceholder = 'Min',
+  maxPlaceholder = 'Max',
 }: PriceRangeSelectorProps) {
   const [minValue, setMinValue] = useState(0)
   const [maxValue, setMaxValue] = useState(0)
   const [currency, setCurrency] = useState<Currency>(currencyOptions[0])
 
-  const { usePriceRange } = useCollectionFilters()
+  const { enablePriceRange } = useCollectionFilters()
 
-  const minHandler = useCallback(
-    (e) => {
-      setMinValue(parseFloat(e.target.value))
-    },
-    [minValue]
-  )
+  const minHandler = useCallback((e) => {
+    setMinValue(parseFloat(e.target.value))
+  }, [])
 
-  const maxHandler = useCallback(
-    (e) => {
-      setMaxValue(parseFloat(e.target.value))
-    },
-    [maxValue]
-  )
+  const maxHandler = useCallback((e) => {
+    setMaxValue(parseFloat(e.target.value))
+  }, [])
 
   const error = useMemo(() => {
     if (minValue > maxValue) {
@@ -76,23 +74,25 @@ export function PriceRangeSelector({
   return (
     <Flex direction="column" gap="x3">
       <Flex gap="x3">
-        <Input
+        <InputField
+          name="from"
           step={step}
           type="number"
           onChange={minHandler}
-          placeholder="Min"
+          placeholder={minPlaceholder}
           min={0}
-          size="sm"
+          affix="ETH"
         />
-        <Input
+        <InputField
+          name="to"
           step={step}
           type="number"
           onChange={maxHandler}
-          placeholder="Max"
+          placeholder={maxPlaceholder}
           min={0}
-          size="sm"
+          affix="ETH"
         />
-        {!usePriceRange?.hideCurrencySelect && (
+        {!enablePriceRange?.hideCurrencySelect && (
           <CurrencySelect
             options={currencyOptions}
             name="currency"
