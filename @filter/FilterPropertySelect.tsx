@@ -1,4 +1,4 @@
-import { AggregateAttribute, AggregateAttributeValue } from 'types/zora.api.generated'
+import { AggregateAttribute } from 'types/zora.api.generated'
 
 import { useMemo } from 'react'
 
@@ -8,20 +8,10 @@ import { Box, Flex, Label, Select } from '@zoralabs/zord'
 import * as styles from './CollectionsFilter.css'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 
-function sortTraitsByName(a: AggregateAttributeValue, b: AggregateAttributeValue) {
-  return a.value < b.value ? -1 : 1
-}
-
 export function FilterPropertySelect({ traitType, valueMetrics }: AggregateAttribute) {
   const {
     filterStore: { setCollectionAttributes, filters },
   } = useCollectionFilters()
-
-  const sortedValueMetrics = useMemo(
-    // TODO: ideally this sorting functionality happens on the back-end
-    () => valueMetrics.sort(sortTraitsByName),
-    [valueMetrics]
-  )
 
   const isReset = useMemo(
     () => !filters.collectionAttributes.length,
@@ -52,7 +42,7 @@ export function FilterPropertySelect({ traitType, valueMetrics }: AggregateAttri
         }
       >
         <Box as="option" value="" key={`${traitType}-default`} w="100%" />
-        {sortedValueMetrics.map((valueMetric) => (
+        {valueMetrics.map((valueMetric) => (
           <Box as="option" value={valueMetric.value} key={valueMetric.value} w="100%">
             {valueMetric.value}
           </Box>

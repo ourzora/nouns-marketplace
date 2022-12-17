@@ -3,10 +3,7 @@ import { useMemo } from 'react'
 import { Filter } from '@filter'
 import { NFTCard, NFTGrid } from '@media'
 import { nftGridWrapper } from '@media/NftMedia.css'
-import { useNounishAuctionQuery } from '@noun-auction'
 import { NFTObject } from '@zoralabs/nft-hooks'
-
-// import { NounishActivityRow } from './NounishActivityRow'
 
 type DaoGridProps = {
   collectionAddress: string

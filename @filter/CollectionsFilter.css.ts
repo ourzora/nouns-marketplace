@@ -34,19 +34,22 @@ export const checkBox = atoms({
 export const filtersButton = style([
   {
     gap: 6,
+    paddingLeft: `${vars.space.x4}!important`,
+    paddingRight: `${vars.space.x3}!important`,
   },
-  atoms({
-    pl: 'x0',
-  }),
 ])
 
-export const activityButton = atoms({
-  gap: 'x3',
-  whiteSpace: 'nowrap',
-  flexDirection: 'row-reverse',
-  pl: 'x4',
-  pr: 'x3',
-})
+export const activityButton = style([
+  {
+    paddingLeft: `${vars.space.x4}!important`,
+    paddingRight: `${vars.space.x3}!important`,
+  },
+  atoms({
+    gap: 'x3',
+    whiteSpace: 'nowrap',
+    flexDirection: 'row-reverse',
+  }),
+])
 
 export const filterWrapper = style({
   top: `${FILTER_OPEN_STICKY_OFFSET}px`,

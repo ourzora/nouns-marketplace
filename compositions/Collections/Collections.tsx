@@ -30,7 +30,7 @@ export function Collections({
     <Stack className={['zora-collections-filter-parent', styles.collections]}>
       <DaoGrid
         collectionAddress={collectionAddress}
-        // view={view} // <-- Seems unused?
+        // view={view} // <-- TBD whether we add an Activity view
         {...gridProps}
       />
     </Stack>

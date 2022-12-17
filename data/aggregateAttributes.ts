@@ -5,7 +5,7 @@ export const AGGREGATE_ATTRIBUTE_QUERY = gql`
     aggregateAttributes(
       where: { collectionAddresses: $addresses }
       networks: [$network]
-      sort: AggregateAttributeSortKeySortInput.COUNT
+      sort: { sortKey: VALUE, sortDirection: ASC }
     ) {
       traitType
       valueMetrics {
