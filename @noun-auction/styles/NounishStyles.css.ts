@@ -229,6 +229,10 @@ export const debugWrapper = style([
   },
 ])
 
+export const placeBidTriggerWrapper = atoms({
+  alignSelf: 'flex-start',
+})
+
 export const placeBidTrigger = style([
   {
     whiteSpace: 'nowrap',

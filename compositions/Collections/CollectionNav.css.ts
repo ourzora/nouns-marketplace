@@ -7,3 +7,9 @@ export const activeLine = style([
     bottom: -2,
   },
 ])
+
+export const navItem = style([
+  {
+    userSelect: 'none',
+  },
+])
