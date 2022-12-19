@@ -32,7 +32,6 @@ function Home(props: { ssrDAOQuery: NounsDaosQuery; daos: TypeSafeDao[] }) {
     limit: DAO_PAGE_LIMIT,
     after: currentCursor,
     fallbackData: currentCursor === '' ? ssrDAOQuery : undefined,
-    // fallbackData: ssrDAOQuery,
   })
 
   const daos = useMemo(() => clientDaos ?? ssrDAOS, [clientDaos, ssrDAOS])

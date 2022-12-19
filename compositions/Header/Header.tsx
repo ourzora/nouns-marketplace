@@ -29,7 +29,7 @@ export function Header() {
             <Flex h={{ '@initial': 'x10', '@1024': 'auto' }}>
               <NounsLink />
             </Flex>
-            {/* <CollectionMenu /> */}
+            <CollectionMenu />
           </Flex>
 
           <Flex

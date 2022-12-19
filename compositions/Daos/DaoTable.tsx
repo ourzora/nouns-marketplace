@@ -29,7 +29,7 @@ export function DaoTable({ routePrefix, daos, className, ...props }: DaoTablePro
       </Flex>
       <Stack>
         {daos && isLarge && <DaoTableHeader />}
-        <ul>
+        <ul className="nouns-dao-table">
           {daos.map((dao, index) => (
             <DaoRow dao={dao} index={index} key={dao.contractAddress} />
           ))}
