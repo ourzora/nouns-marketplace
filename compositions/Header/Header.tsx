@@ -11,7 +11,7 @@ import { NounsLink } from './NounsLink'
 export function Header() {
   return (
     <Flex className={headerStyles.headerWrapper}>
-      <Grid className={['header-grid', styles.pageGrid]} gap="x2">
+      <Grid className={['header-grid', styles.pageGrid]}>
         <Flex
           as="header"
           className={[headerStyles.header]}

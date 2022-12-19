@@ -31,7 +31,7 @@ export function PlaceNounsBid({
           modalBehaviorRequiresAuth={true}
           trigger={
             <Button
-              as="span"
+              as="button"
               className={placeBidTrigger}
               size="md"
               variant={layout === 'sideBarBid' ? 'secondary' : 'primary'}

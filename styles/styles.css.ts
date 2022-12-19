@@ -154,54 +154,6 @@ export const hideMobile = style({
   },
 })
 
-export const collectionHeaderWrapper = style([
-  {
-    gridColumn: '1/span 4',
-    '@media': {
-      [media.min1024]: {
-        gridColumn: '1/span 12',
-      },
-    },
-  },
-  atoms({
-    w: '100%',
-    overflowX: 'hidden',
-    mx: 'auto',
-  }),
-])
-
-export const daoHeaderWrapper = style([
-  {
-    gridTemplateColumns: '1fr',
-    '@media': {
-      [media.min1024]: {
-        gridTemplateColumns: '1fr 1fr',
-      },
-    },
-  },
-  atoms({
-    pb: {
-      '@initial': 'x2',
-      '@1024': 'x6',
-    },
-  }),
-])
-
-export const marketStatsWrapper = atoms({
-  w: {
-    '@initial': '100vw',
-    '@1024': 'auto',
-  },
-  px: {
-    '@initial': 'x4',
-    '@1024': 'x0',
-  },
-  mb: {
-    '@initial': 'x2',
-    '@1024': 'x0',
-  },
-})
-
 export const stat = style({
   whiteSpace: 'nowrap',
   lineHeight: `1!important`,
@@ -222,6 +174,7 @@ export const pageGrid = style([
   },
   atoms({
     px: { '@initial': 'x0', '@1024': 'x8' },
+    gap: { '@initial': 'x4', '@1024': 'x6' },
   }),
 ])
 
