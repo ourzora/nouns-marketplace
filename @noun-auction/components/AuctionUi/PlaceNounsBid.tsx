@@ -5,6 +5,7 @@ import { ModalComposition } from '@modal'
 import {
   auctionWrapperVariants,
   placeBidTrigger,
+  placeBidTriggerWrapper,
 } from '@noun-auction/styles/NounishStyles.css'
 import { Stack } from '@zoralabs/zord'
 
@@ -29,6 +30,7 @@ export function PlaceNounsBid({
         <ModalComposition
           modalName={`nouns-bid-${tokenId}`}
           modalBehaviorRequiresAuth={true}
+          className={placeBidTriggerWrapper}
           trigger={
             <Button
               as="button"
