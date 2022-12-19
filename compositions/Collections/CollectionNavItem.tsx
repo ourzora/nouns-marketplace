@@ -33,7 +33,7 @@ export function CollectionNavItem({
     <NextLink href={href} passHref {...props}>
       <a onClick={() => setActiveView(pageSection)}>
         <Flex
-          className={mixins({ hoverFadeOut: true })}
+          className={[styles.navItem, mixins({ hoverFadeOut: true })]}
           pos="relative"
           gap="x1"
           pb="x2"

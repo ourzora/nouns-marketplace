@@ -29,7 +29,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
     const urlHash = asPath.split('#')[1] as ActiveCollectionPageView
     const isValidHash = ALL_COLLECTION_VIEWS && ALL_COLLECTION_VIEWS.includes(urlHash)
     setActiveView(isValidHash ? urlHash : 'about')
-    router.push(`/collections/${collectionAddress}/#${isValidHash ? urlHash : 'about'}`)
+    router.push(`/collections/${collectionAddress}/#${isValidHash ? urlHash : 'nfts'}`)
     // No deps, should only run on first load:
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
