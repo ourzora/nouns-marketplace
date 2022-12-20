@@ -39,7 +39,6 @@
     "@zoralabs/nouns-protocol": "^1.0.1",
     "@zoralabs/v3": "1.0.13",
     "@zoralabs/zdk": "^2.2.0",
-    "@zoralabs/zord": "^2.1.0",
     "assert": "^2.0.0",
     "bignumber.js": "^9.0.2",
     "date-fns": "^2.28.0",
