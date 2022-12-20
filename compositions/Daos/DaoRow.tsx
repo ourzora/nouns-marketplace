@@ -26,8 +26,9 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
   const { activeAuction } = useNounishAuctionQuery({
     collectionAddress: dao.collectionAddress,
   })
-
+  // dao.contractAddress ??
   const { token } = useToken({
+    // collectionAddress: dao.collectionAddress,
     collectionAddress: dao.collectionAddress,
     // FIXME: @oleg
     tokenId: activeAuction?.tokenId ?? '',
@@ -39,16 +40,17 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
     // return null
     return (
       <Box>
+        {/* {dao.collectionAddress} {token?.tokenId} {activeAuction?.address} */}
         {dao.collectionAddress} {token?.tokenId} {activeAuction?.address}
       </Box>
     )
   }
 
-  const { tokenId, collectionAddress, highestBidPrice } = activeAuction
-  const highestBid = highestBidPrice?.chainTokenPrice?.raw || '0'
+  // const { tokenId, collectionAddress, highestBidPrice } = activeAuction!
+  // const highestBid = highestBidPrice?.chainTokenPrice?.raw || '0'
 
-  const auctionStatus =
-    Date.now() - parseInt(activeAuction.endTime) * 1000 > 0 ? 'Settling' : 'Live'
+  // const auctionStatus =
+  //   Date.now() - parseInt(activeAuction!.endTime) * 1000 > 0 ? 'Settling' : 'Live'
 
   if (
     isAddressMatch('0xd310a3041dfcf14def5ccbc508668974b5da7174', dao.collectionAddress)
@@ -56,18 +58,29 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
     console.log('DUPE?')
   }
 
+  // return (
+  //   <Box>
+  //     {dao.collectionAddress} {token?.tokenId} {activeAuction?.address}
+  //   </Box>
+  // )
+
   return (
-    <DaoRowComponent
-      index={index}
-      tokenId={tokenId}
-      tokenName={token.name}
-      collectionAddress={collectionAddress}
-      collectionName={dao.name ?? token.collectionName ?? '...'}
-      highestBid={highestBid}
-      treasuryAddress={dao.treasuryAddress}
-      tokenImage={token?.image.url ?? undefined}
-      auctionStatus={auctionStatus}
-    />
+    (token && activeAuction && (
+      <DaoRowComponent
+        index={index}
+        tokenId={activeAuction!.tokenId}
+        tokenName={token?.name!}
+        collectionAddress={activeAuction!.collectionAddress}
+        collectionName={dao.name ?? token?.collectionName! ?? '...'}
+        highestBid={activeAuction!.highestBidPrice?.chainTokenPrice?.raw || '0'}
+        treasuryAddress={dao.treasuryAddress}
+        tokenImage={token?.image.url ?? undefined}
+        auctionStatus={
+          Date.now() - parseInt(activeAuction!.endTime) * 1000 > 0 ? 'Settling' : 'Live'
+        }
+      />
+    )) ||
+    null
   )
 }
 
