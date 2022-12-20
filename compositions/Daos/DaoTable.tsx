@@ -30,9 +30,13 @@ export function DaoTable({ routePrefix, daos, className, ...props }: DaoTablePro
       <Stack>
         {daos && isLarge && <DaoTableHeader />}
         <ul className="nouns-dao-table">
-          {daos.map((dao, index) => (
-            <DaoRow dao={dao} index={index} key={dao.contractAddress} />
-          ))}
+          {daos.map((dao, index) => {
+            // console.log(dao.collectionAddress)
+            return (
+              // <DaoRow dao={dao} index={index} key={dao.contractAddress} />
+              <DaoRow dao={dao} index={index} key={dao.collectionAddress} />
+            )
+          })}
         </ul>
       </Stack>
     </Stack>

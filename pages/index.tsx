@@ -14,69 +14,59 @@ import { TypeSafeDao } from 'validators/dao'
 import * as Sentry from '@sentry/react'
 import { zoraApiFetcher } from '@shared'
 import { CollectionsQuery } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Button, Eyebrow, Flex, Grid, Paragraph, Stack } from '@zoralabs/zord'
+import { Box, Button, Flex, Grid, Paragraph, Stack } from '@zoralabs/zord'
+
+const DEBUG = true
 
 export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
 function Home(props: { ssrDAOQuery: NounsDaosQuery; daos: TypeSafeDao[] }) {
   const { daos: ssrDAOS, ssrDAOQuery } = props
-  const [currentCursor, setCurrentCursor] = useState<string>('')
-  const [cursorCache, setCursorCache] = useState<string[]>([])
+  const [currentIndex, setCurrentIndex] = useState<number>(0)
+  const [cursorCache, setCursorCache] = useState<string[]>([''])
 
   const {
-    // response: daoQueryResponse,
+    response: daoQueryResponse,
     daos: clientDaos,
     pageInfo,
     // isValidating,
   } = useNounsDaos({
     limit: DAO_PAGE_LIMIT,
-    after: currentCursor,
-    fallbackData: currentCursor === '' ? ssrDAOQuery : undefined,
+    // after: currentCursor,
+    after: cursorCache[currentIndex],
+    fallbackData: currentIndex === 0 ? ssrDAOQuery : undefined,
   })
 
   const daos = useMemo(() => clientDaos ?? ssrDAOS, [clientDaos, ssrDAOS])
   const hasDaos = useMemo(() => daos?.length > 0, [daos])
+  console.log('DAO RESPONSE', daoQueryResponse)
   console.log('daos.length', daos?.length)
   console.log('daos', daos)
 
   useEffect(() => {
-    if (!pageInfo?.endCursor || pageInfo.endCursor === currentCursor) {
-      console.log('CONDITIONAL RETURN')
-      return
-    }
-    const fetchedCursor = pageInfo.endCursor
-    let newCursorCache: string[] = cursorCache
+    if (pageInfo?.endCursor && pageInfo.endCursor !== cursorCache[currentIndex]) {
+      const fetchedCursor = pageInfo.endCursor
+      let newCursorCache: string[] = cursorCache
 
-    // Add new cursor to pagination cache if it's not already there
-    if (!cursorCache.includes(fetchedCursor)) {
-      // console.log('ADDING TO CACHE:', fetchedCursor, cursorCache.length)
-      newCursorCache.push(fetchedCursor)
-      setCursorCache(newCursorCache)
-      console.log('NEXT:', fetchedCursor)
+      // Add new cursor to pagination cache if it's not already there
+      if (!cursorCache.includes(fetchedCursor)) {
+        newCursorCache.push(fetchedCursor)
+        setCursorCache(newCursorCache)
+        console.log('NEXT:', fetchedCursor)
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageInfo?.endCursor, currentCursor])
+  }, [pageInfo?.endCursor])
 
   useEffect(() => console.log(cursorCache), [cursorCache])
 
-  const prevCursor =
-    cursorCache.indexOf(currentCursor) < 1
-      ? ''
-      : cursorCache[cursorCache.indexOf(currentCursor) - 1]
-
-  const nextCursor = pageInfo?.hasNextPage
-    ? cursorCache[cursorCache.indexOf(currentCursor) + 1]
-    : ''
-
   const pagePrev = useCallback(() => {
-    console.log('SETTING PREV TO: ', prevCursor)
-    setCurrentCursor(prevCursor)
-  }, [prevCursor])
+    setCurrentIndex(currentIndex - 1)
+  }, [currentIndex])
 
   const pageNext = useCallback(() => {
-    console.log('SETTING NEXT TO: ', nextCursor)
-    setCurrentCursor(nextCursor)
-  }, [nextCursor])
+    setCurrentIndex(currentIndex + 1)
+  }, [currentIndex])
 
   return (
     <PageWrapper direction="column" gap="x6" align="center">
@@ -93,37 +83,48 @@ function Home(props: { ssrDAOQuery: NounsDaosQuery; daos: TypeSafeDao[] }) {
         />
 
         {hasDaos && <DaoTable daos={daos} className={styles.homepageTable} />}
+        {hasDaos && (
+          <Stack gap="x1" className={styles.homepageTable}>
+            <Flex gap="x2" justify="space-between">
+              <Box>
+                {currentIndex !== 0 && (
+                  <Button onClick={pagePrev} alignSelf="flex-start">
+                    Prev {currentIndex === 1 ? 'INITIAL' : cursorCache[currentIndex - 1]}
+                  </Button>
+                )}
+              </Box>
+              <Box>
+                {pageInfo?.hasNextPage && (
+                  <Button onClick={pageNext} alignSelf="flex-end">
+                    Next {cursorCache[currentIndex + 1]}
+                  </Button>
+                )}
+              </Box>
+            </Flex>
+            {DEBUG && (
+              <Stack align="center">
+                <Stack>
+                  {hasDaos &&
+                    daos.map((dao) => (
+                      <Paragraph key={dao.collectionAddress}>
+                        {dao.collectionAddress}
+                      </Paragraph>
+                    ))}
+                </Stack>
+                <Paragraph size="sm">cursorCache: [{cursorCache.toString()}]</Paragraph>
+                <Paragraph size="sm">{`prev: ${
+                  currentIndex === 0 ? 'INITIAL' : cursorCache[currentIndex - 1]
+                }`}</Paragraph>
+                <Paragraph size="sm">{`current: ${cursorCache[currentIndex]}`}</Paragraph>
+                <Paragraph size="sm">{`next: ${
+                  cursorCache[currentIndex] + 1
+                }`}</Paragraph>
+                <Paragraph size="sm">{`daos.length: ${daos?.length}`}</Paragraph>
+              </Stack>
+            )}
+          </Stack>
+        )}
       </Grid>
-      {hasDaos && (
-        <Stack gap="x1">
-          <Flex gap="x2">
-            {currentCursor !== '' && (
-              <Button
-                //  loading={isValidating}
-                onClick={pagePrev}
-              >
-                Prev {prevCursor === '' ? 'INITIAL' : prevCursor}
-              </Button>
-            )}
-            {nextCursor && (
-              <Button
-                // loading={isValidating}
-                onClick={pageNext}
-              >
-                Next {nextCursor}
-              </Button>
-            )}
-            {pageInfo && !pageInfo?.hasNextPage && <Eyebrow>All DAOs Loaded</Eyebrow>}
-          </Flex>
-          <Paragraph size="sm">cursorCache: [{cursorCache.toString()}]</Paragraph>
-          <Paragraph size="sm">{`prev: ${
-            prevCursor === '' ? 'INITIAL' : prevCursor
-          }`}</Paragraph>
-          <Paragraph size="sm">{`current: ${currentCursor}`}</Paragraph>
-          <Paragraph size="sm">{`next: ${nextCursor}`}</Paragraph>
-          <Paragraph size="sm">{`daos.length: ${daos?.length}`}</Paragraph>
-        </Stack>
-      )}
     </PageWrapper>
   )
 }

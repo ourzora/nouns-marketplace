@@ -4,7 +4,7 @@ import { NounsDaosQuery } from 'types/zora.api.generated'
 
 import { NOUNS_DAOS_QUERY } from 'data/nounsDaos'
 
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { TypeSafeDao, verifyDao } from 'validators/dao'
 
 import { zoraApiFetcher } from '@shared'
@@ -27,8 +27,10 @@ export function useNounsDaos({
   const [cached, setCache] = useState([] as TypeSafeDao[])
   // const [cached, setCache] = useState<NounsDaosQuery|undefined>(undefined)
 
+  const key = keyModifier || after ? `nounsDaos-${keyModifier}-${after}` : `nounsDaos`
+
   const { data, isValidating } = useSWR<NounsDaosQuery>(
-    [keyModifier ? `nounsDaos-${keyModifier}` : `nounsDaos`],
+    [key],
     () =>
       zoraApiFetcher(NOUNS_DAOS_QUERY, {
         limit,
@@ -37,6 +39,7 @@ export function useNounsDaos({
     {
       fallbackData,
       refreshInterval,
+      revalidateOnMount: true,
       // dedupingInterval: 0,
       onErrorRetry: (_, _1, _2, revalidate, { retryCount }) => {
         // Only retry up to 10 times.
@@ -47,25 +50,26 @@ export function useNounsDaos({
     }
   )
 
-  const daos = useMemo(() => {
-    const newData = data?.nouns?.nounsDaos?.nodes
+  // const daos = useMemo(() => {
+  //   const newData = data?.nouns?.nounsDaos?.nodes
 
-    if (newData && newData.length > 0) {
-      const verifiedData = newData.map(verifyDao)
-      setCache(verifiedData)
-      return verifiedData
-    } else {
-      return cached.length > 0 ? cached : []
-    }
-    // no need to update when cache changed!
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.nouns?.nounsDaos?.nodes])
+  //   if (newData && newData.length > 0) {
+  //     const verifiedData = newData.map(verifyDao)
+  //     setCache(verifiedData)
+  //     return verifiedData
+  //   } else {
+  //     return cached.length > 0 ? cached : []
+  //   }
+  //   // no need to update when cache changed!
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [data?.nouns?.nounsDaos?.nodes])
 
-  console.log('HOOK DAOS', daos)
+  // !keyModifier && console.log('HOOK DAOS', daos)
 
   return {
-    // response: data,
-    daos,
+    response: data,
+    // daos,
+    daos: data?.nouns?.nounsDaos?.nodes.map(verifyDao) || [],
     pageInfo: data?.nouns.nounsDaos.pageInfo,
     isValidating,
   }
