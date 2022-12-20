@@ -1,4 +1,4 @@
-import { atoms } from '@zord'
+import { atoms } from '@zord/atoms'
 
 export const nounsGlasses = atoms({
   h: 'x8',

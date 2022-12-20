@@ -3,7 +3,12 @@ import { HEADER_HEIGHT } from 'styles/style-constants'
 import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, ease, media, typography, vars } from '@zord'
+// import { atoms, ease, media, typography, vars } from '@zord'
+import { atoms } from '@zord/atoms'
+import { vars } from '@zord/theme'
+import { ease, media, typography } from '@zord/tokens'
+
+// import { ease } from '@zord/tokens'
 
 export const borderStyle = `2px solid ${vars.color.border}`
 

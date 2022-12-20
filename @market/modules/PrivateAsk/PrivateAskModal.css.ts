@@ -1,5 +1,8 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, media, vars } from '@zord'
+// import { atoms, media, vars } from '@zord'
+import { atoms } from '@zord/atoms'
+import { vars } from '@zord/theme'
+import { media } from '@zord/tokens'
 
 export const content = style([
   {
