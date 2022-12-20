@@ -1,6 +1,7 @@
 import { buttonVariants } from 'components/Button/Button.css'
 
-import { SettleAuctionProps } from '@noun-auction/components/common'
+import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
+import { StackProps } from '@zord'
 
 import { isOGNounAddress } from '../NounsBidForm'
 import { SettleAuctionBuilder } from './SettleAuctionBuilder'

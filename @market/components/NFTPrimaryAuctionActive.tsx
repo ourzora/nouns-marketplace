@@ -6,7 +6,7 @@ import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { PlaceNounsBid } from '@noun-auction'
 import { DataTable, PriceWithLabel } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { FlexProps, Stack } from '@zoralabs/zord'
+import { FlexProps, Stack } from '@zord'
 
 interface NFTPrimaryAuctionActiveProps extends FlexProps {
   nftObj: NFTObject

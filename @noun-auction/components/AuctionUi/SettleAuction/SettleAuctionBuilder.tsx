@@ -4,12 +4,12 @@ import { ContractTransaction } from 'ethers'
 
 import { useCallback, useEffect, useState } from 'react'
 
-import { SettleAuctionProps } from '@noun-auction/components/common'
 import {
   Auction as AuctionInterface,
   Auction__factory as BuilderNounsAuction__factory,
 } from '@zoralabs/nouns-protocol/dist/typechain'
 
+import { SettleAuctionProps } from './SettleAuction'
 import { SettleAuctionComponent } from './SettleAuctionComponent'
 
 export function SettleAuctionBuilder({

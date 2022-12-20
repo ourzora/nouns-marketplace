@@ -5,7 +5,7 @@ import { useCallback } from 'react'
 import { SelectListFlow } from '@market/components/SelectListFlow'
 import { ModalComposition, useModal } from '@modal'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Box, FlexProps } from '@zoralabs/zord'
+import { Box, FlexProps } from '@zord'
 
 import {
   RESET_V3ASK, // V3AskStateProvider,

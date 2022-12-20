@@ -3,7 +3,7 @@ import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { FlexProps } from '@zoralabs/zord'
+import { FlexProps } from '@zord'
 
 import { NFTPrimaryAuctionActive, NFTPrimaryAuctionEndedSettlement } from './'
 

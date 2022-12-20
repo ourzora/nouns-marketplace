@@ -9,7 +9,7 @@ import { AddressWithLink, DAOBuilderLink } from '@market'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { lightFont } from '@shared'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Flex, Grid, GridProps, Paragraph, Stack } from '@zoralabs/zord'
+import { Flex, Grid, GridProps, Paragraph, Stack } from '@zord'
 
 import * as styles from './CollectionHeader.css'
 

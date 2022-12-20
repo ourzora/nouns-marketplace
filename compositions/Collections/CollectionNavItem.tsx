@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import React from 'react'
 
-import { Box, Flex, FlexProps, Label, mixins } from '@zoralabs/zord'
+import { Box, Flex, FlexProps, Label, mixins } from '@zord'
 
 import { ActiveCollectionPageView } from './CollectionNav'
 import * as styles from './CollectionNav.css'

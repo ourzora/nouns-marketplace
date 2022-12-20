@@ -1,5 +1,5 @@
 import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
-import { Flex } from '@zoralabs/zord'
+import { Flex } from '@zord'
 
 import * as styles from './CollectionsFilter.css'
 import { SelectedFilters } from './SelectedFilters'

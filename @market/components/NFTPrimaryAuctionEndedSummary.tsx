@@ -5,7 +5,7 @@ import { TypeSafeNounsAuction } from 'validators/auction'
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { PriceWithLabel } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { FlexProps, Paragraph, Stack, Well } from '@zoralabs/zord'
+import { FlexProps, Paragraph, Stack, Well } from '@zord'
 
 interface SummaryProps extends FlexProps {
   nftObj: NFTObject

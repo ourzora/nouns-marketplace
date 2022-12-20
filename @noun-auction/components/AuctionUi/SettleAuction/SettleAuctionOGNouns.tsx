@@ -9,9 +9,9 @@ import {
   lilNounsAbi,
   nounsAbi,
 } from '@noun-auction'
-import { SettleAuctionProps } from '@noun-auction/components/common'
 import { useButtonRequiresAuth } from '@shared'
 
+import { SettleAuctionProps } from './SettleAuction'
 import { SettleAuctionComponent } from './SettleAuctionComponent'
 
 export function SettleAuctionOGNouns({

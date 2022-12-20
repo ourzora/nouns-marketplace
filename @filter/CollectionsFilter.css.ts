@@ -11,9 +11,7 @@ import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 import { atoms } from '@zord/atoms'
 import { vars } from '@zord/theme'
-import { ease, media, typography } from '@zord/tokens'
-
-// import { ease } from '@zord/tokens'
+import { color, ease, media, radii, space, typography } from '@zord/tokens'
 
 export const borderStyle = `2px solid ${vars.color.border}`
 

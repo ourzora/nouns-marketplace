@@ -9,7 +9,7 @@ import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { useNounishAuctionQuery } from '@noun-auction'
 import { useNFTProvider } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { BoxProps } from '@zoralabs/zord'
+import { BoxProps } from '@zord'
 
 import { nftMarketWrapper } from './NFTPage.css'
 
