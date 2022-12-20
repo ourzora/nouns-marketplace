@@ -12,12 +12,11 @@ import { BlocklistGuard, CollectionsProvider } from 'providers'
 import 'styles/styles.css'
 import { SWRConfig } from 'swr'
 
-import { useCollections } from 'hooks'
-
 import { StrictMode, useEffect } from 'react'
 import React from 'react'
 
-import { ContractProvider, PrivateAskContractProvider } from '@market'
+import '@fontsource/inter/500.css'
+import { ContractProvider, V3AskContractProvider } from '@market'
 import { ModalContextProvider } from '@modal'
 import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/rainbowkit'
 import '@rainbow-me/rainbowkit/styles.css'
@@ -49,7 +48,6 @@ const wagmiClient = createClient({
 export const strategy = new ZDKFetchStrategy('1', GALACTUS_BASE_URL)
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { collections, daos } = useCollections()
   const router = useRouter()
 
   useEffect(() => {
@@ -67,7 +65,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <WagmiConfig client={wagmiClient}>
         <SWRConfig
           value={{
-            refreshInterval: 3000,
+            refreshInterval: 10000,
             fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
           }}
         >
@@ -81,11 +79,11 @@ function MyApp({ Component, pageProps }: AppProps) {
               })}
             >
               <BlocklistGuard>
-                <CollectionsProvider collections={collections} daos={daos}>
+                <CollectionsProvider>
                   <ModalContextProvider>
                     <ToastContextProvider>
                       <ContractProvider>
-                        <PrivateAskContractProvider>
+                        <V3AskContractProvider>
                           <Header />
                           <NextNProgress
                             color="rgba(0,0,0,.5)"
@@ -97,7 +95,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                           />
                           <Component {...pageProps} />
                           <Footer />
-                        </PrivateAskContractProvider>
+                        </V3AskContractProvider>
                       </ContractProvider>
                     </ToastContextProvider>
                   </ModalContextProvider>

@@ -28,6 +28,13 @@ export const content = style([
   atoms({ position: 'fixed' }),
 ])
 
+export const fullScreen = style([
+  {
+    transform: 'unset',
+  },
+  // atoms({ position: 'fixed' }),
+])
+
 export const background = style([
   {
     borderRadius: 'normal',

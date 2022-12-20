@@ -20,23 +20,25 @@ export interface ActiveAuctionRowProps {
   tokenId: string
   collectionAddress: string
   auctionCompleted: boolean
+  auctionStartTime: string
   auctionEndTime: string
   highestBid: string
   highestBidder?: string
   auctionContractAddress: string
   minBidIncrementPercentage: number
   routePrefix?: string
-  useModal?: boolean
+  enableModal?: boolean
   showLabels?: boolean
   useErrorMsg?: boolean
   showTopBid?: boolean
   layout?: keyof typeof auctionWrapperVariants['layout']
   tokenImage: TokenContentMedia | undefined
   collectionName?: string
+  tokenName?: string
 }
 
 export function ActiveAuctionRow({
-  useModal,
+  enableModal,
   showLabels,
   useErrorMsg,
   layout,
@@ -46,15 +48,18 @@ export function ActiveAuctionRow({
   highestBid,
   highestBidder,
   auctionContractAddress,
+  auctionStartTime,
   auctionEndTime,
   tokenImage,
   collectionName,
+  tokenName,
 }: ActiveAuctionRowProps) {
   const rowLayout = useMemo(
     () => (
       <>
         <Link href={`collections/${collectionAddress}`} passHref>
           <AuctionCountdown
+            auctionStartTime={auctionStartTime}
             auctionEndTime={auctionEndTime}
             auctionCompleted={auctionCompleted}
             direction={'row' || 'withHistory' ? 'column' : 'row'}
@@ -105,6 +110,7 @@ export function ActiveAuctionRow({
     ),
     [
       auctionCompleted,
+      auctionStartTime,
       auctionEndTime,
       collectionAddress,
       highestBid,
@@ -127,6 +133,7 @@ export function ActiveAuctionRow({
         />
         <AuctionCountdown
           auctionCompleted={auctionCompleted}
+          auctionStartTime={auctionStartTime}
           auctionEndTime={auctionEndTime}
           direction="row"
           showLabels={showLabels}
@@ -135,7 +142,7 @@ export function ActiveAuctionRow({
         />
       </Stack>
     ),
-    [auctionCompleted, auctionEndTime, highestBidder, showLabels]
+    [auctionCompleted, auctionEndTime, auctionStartTime, highestBidder, showLabels]
   )
 
   return (
@@ -143,6 +150,7 @@ export function ActiveAuctionRow({
       {layout !== 'sideBarBid' && (
         <Link href={`collections/${collectionAddress}`} passHref>
           <RPCTokenInfo
+            tokenName={tokenName}
             collectionName={collectionName}
             tokenImage={tokenImage?.url ?? undefined}
             tokenId={tokenId}
@@ -188,7 +196,7 @@ export function ActiveAuctionRow({
             View Collection
           </CollectionLink>
         )}
-        {!useModal && <Separator mt="x1" />}
+        {!enableModal && <Separator mt="x1" />}
         {auctionCompleted ? (
           <SettleAuction
             auctionContractAddress={auctionContractAddress}
@@ -201,7 +209,7 @@ export function ActiveAuctionRow({
             layout={layout === 'sideBarBid' ? 'row' : 'historyOnly'}
             tokenId={tokenId}
             collectionAddress={collectionAddress}
-            useModal={useModal}
+            enableModal={enableModal}
           />
         )}
       </Flex>

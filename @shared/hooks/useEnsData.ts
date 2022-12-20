@@ -1,5 +1,6 @@
+import { useEnsAvatar, useEnsName } from 'wagmi'
+
 import { shortenAddress } from '@shared/utils'
-import { useEnsName, useEnsAvatar } from 'wagmi'
 
 export function useEnsData({
   address,

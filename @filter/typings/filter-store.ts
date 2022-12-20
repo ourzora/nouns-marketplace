@@ -25,10 +25,10 @@ export type UseFiltersProps = {
 
 export type AdditionalMarketStatusFilters = 'buy-now-completed' | null
 export type MarketStatusFilter =
-  | 'live'
   | 'buy-now'
-  | 'reserve-not-met'
   | 'buy-now-completed'
+  // | 'live' // Re-enable if using Zora V2 Auctions
+  // | 'reserve-not-met' // Re-enable if using Zora V2 Auctions
   | null
 export type MediaTypeFilter = MediaType | null
 export type OwnerStatusFilter = 'collected' | 'minted' | null

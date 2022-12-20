@@ -1,6 +1,7 @@
-import { useIsomorphicLayoutEffect } from 'framer-motion'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 
-import { useEffect, useRef } from 'react'
+const isBrowser = typeof window !== 'undefined'
+const useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect
 
 export function useInterval(callback: () => void, delay: number | null) {
   const savedCallback = useRef(callback)

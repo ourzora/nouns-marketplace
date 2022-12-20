@@ -9,7 +9,7 @@ import { useOffchainOrderAttribution } from '@market/hooks'
 import { SeaportFillOrderFlow } from '@market/modules'
 import { ModalComposition, useModal } from '@modal'
 import { useAuth, useButtonRequiresAuth } from '@shared'
-import { numberFormatterUSDC } from '@shared/utils'
+import { numberFormatter } from '@shared/utils'
 import { NFTObject } from '@zoralabs/nft-hooks'
 import { Box, Flex, Heading, Paragraph, Stack, Well } from '@zord'
 
@@ -37,7 +37,7 @@ function PriceCard({
   const { chainTokenPrice, usdcPrice } = price
 
   const formattedUSD = useMemo(
-    () => (usdcPrice ? numberFormatterUSDC(usdcPrice?.decimal) : '...'),
+    () => (usdcPrice ? numberFormatter(usdcPrice?.decimal) : '...'),
     [usdcPrice]
   )
   const formattedETH = useMemo(
@@ -46,7 +46,6 @@ function PriceCard({
   )
 
   const {
-    attribution,
     logo: PlatformLogo,
     platformName,
     platformButtonColor,

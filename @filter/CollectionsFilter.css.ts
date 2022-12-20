@@ -1,9 +1,14 @@
+import { PRIMARY_LAYER } from 'constants/layers'
 import { HEADER_HEIGHT } from 'styles/style-constants'
 
-import { FILTER_HEADER_HEIGHT, FILTER_SIDEBAR_WIDTH } from '@filter/constants'
+import {
+  FILTER_HEADER_HEIGHT,
+  FILTER_OPEN_STICKY_OFFSET,
+  FILTER_OPEN_STICKY_OFFSET_MOBILE,
+  FILTER_SIDEBAR_WIDTH,
+} from '@filter/constants'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-// import { atoms, ease, media, typography, vars } from '@zord'
 import { atoms } from '@zord/atoms'
 import { vars } from '@zord/theme'
 import { ease, media, typography } from '@zord/tokens'
@@ -33,33 +38,36 @@ export const checkBox = atoms({
 export const filtersButton = style([
   {
     gap: 6,
+    paddingLeft: `${vars.space.x4}!important`,
+    paddingRight: `${vars.space.x3}!important`,
+  },
+])
+
+export const activityButton = style([
+  {
+    paddingLeft: `${vars.space.x4}!important`,
+    paddingRight: `${vars.space.x3}!important`,
   },
   atoms({
-    pl: 'x0',
+    gap: 'x3',
+    whiteSpace: 'nowrap',
+    flexDirection: 'row-reverse',
   }),
 ])
 
-export const activityButton = atoms({
-  gap: 'x3',
-  whiteSpace: 'nowrap',
-  flexDirection: 'row-reverse',
-  pl: 'x4',
-  pr: 'x3',
-})
-
 export const filterWrapper = style({
-  top: `var(--filter-offset-desktop)`,
+  top: `${FILTER_OPEN_STICKY_OFFSET}px`,
   background: 'white',
   zIndex: 2,
   '@media': {
     'screen and (max-width: 768px)': {
-      top: `var(--filter-offset-mobile)`,
+      top: `${FILTER_OPEN_STICKY_OFFSET_MOBILE}px`,
     },
   },
 })
 
 export const openFilterWrapper = style({
-  height: `calc(100vh - var(--filter-offset-desktop))`,
+  height: `calc(100vh - ${FILTER_OPEN_STICKY_OFFSET}px)`,
   '@media': {
     'screen and (max-width: 768px)': {
       position: 'fixed',
@@ -77,6 +85,14 @@ export const filterWrapperContainer = style({
 
 export const filterOpen = style({
   gridTemplateColumns: `${FILTER_SIDEBAR_WIDTH + 32}px 1fr`,
+})
+
+export const gridFilterHeaderPanel = style({
+  '@media': {
+    [media.min1024]: {
+      height: FILTER_HEADER_HEIGHT,
+    },
+  },
 })
 
 export const filterHeader = style([
@@ -99,35 +115,25 @@ export const filterHeader = style([
   }),
 ])
 
-export const stickyFilterHeader = style({
-  top: `0px`,
-  //backdropFilter: 'blur(20px)',
-  //backgroundColor: 'rgba(255, 255, 255, 0.92)',
-})
+export const stickyFilterHeader = atoms({ top: 'x0' })
 
 export const avatarPadding = style({
   paddingLeft: '3px',
 })
 
-export const filterCounter = style({
-  whiteSpace: 'nowrap',
-})
-
-export const filterSidebar = style([
-  {
-    // overflowY: 'scroll',
-    height: `calc(100% - ${HEADER_HEIGHT}px)`,
-    '@media': {
-      'screen and (max-width: 768px)': {
-        position: 'relative',
-        background: vars.color.background1,
-        width: '100%',
-        paddingRight: '0',
-        height: '100%',
-      },
+export const filterSidebar = style(
+  [
+    {
+      overflowY: 'scroll',
     },
-  },
-])
+  ],
+  atoms({
+    backgroundColor: 'background1',
+    pr: { '@initial': 'x0' },
+    w: '100%',
+    h: { '@initial': '100%', '@768': '100vh' },
+  })
+)
 
 export const sideBarSeparator = style({
   borderTop: borderStyle,
@@ -209,10 +215,6 @@ export const filterOption = style({
       cursor: 'not-allowed', // to discuss: cursor won't show because of pointerEvents directive above
     },
   },
-})
-
-export const filterOptionsWrapper = style({
-  borderBottom: `2px solid ${vars.color.border}`,
 })
 
 export const activityModal = style([
@@ -344,7 +346,35 @@ export const mobileFiltersFooter = style([
     left: 'x0',
     p: 'x4',
     gap: 'x4',
-    backgroundColor: 'primary',
     w: '100%',
   }),
 ])
+
+export const selectLabel = style(
+  {
+    zIndex: PRIMARY_LAYER,
+    lineHeight: `${typography.lineHeight[40]}!important`, // should be 55 per designs, revisit
+    textIndent: space.x4,
+  },
+  atoms({
+    pointerEvents: 'none',
+    userSelect: 'none',
+  })
+)
+
+export const selectDropdown = style(
+  {
+    appearance: 'none',
+    borderRadius: `${radii.curved}!important`,
+    border: '2px solid transparent',
+    selectors: {
+      '&:focus': {
+        borderColor: color.accent,
+      },
+    },
+  },
+  atoms({
+    userSelect: 'none',
+    backgroundColor: 'background2',
+  })
+)

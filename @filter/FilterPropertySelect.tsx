@@ -1,42 +1,54 @@
-import { Button } from 'components/Button'
+import { AggregateAttribute } from 'types/zora.api.generated'
 
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 
-import { CollectionAttributeValue } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Checkbox, Paragraph } from '@zord'
+import { lightFont } from '@shared'
+import { Box, Flex, Label, Select } from '@zord'
 
-import { filterPropertySelect } from './CollectionsFilter.css'
+import * as styles from './CollectionsFilter.css'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
 
-export function FilterPropertySelect({
-  traitType,
-  valueMetric,
-}: {
-  traitType: string
-  valueMetric: CollectionAttributeValue
-}) {
+export function FilterPropertySelect({ traitType, valueMetrics }: AggregateAttribute) {
   const {
     filterStore: { setCollectionAttributes, filters },
   } = useCollectionFilters()
 
-  const isSelected = useMemo(
-    () =>
-      filters.collectionAttributes.findIndex(
-        (a) => a.traitType === traitType && a.value === valueMetric.value
-      ) >= 0,
-    [filters.collectionAttributes, traitType, valueMetric.value]
+  const isReset = useMemo(
+    () => !filters.collectionAttributes.length,
+    [filters.collectionAttributes.length]
   )
 
-  const setValue = useCallback(() => {
-    setCollectionAttributes({ traitType, value: valueMetric.value })
-  }, [setCollectionAttributes, traitType, valueMetric.value])
-
   return (
-    <Button variant="unset" w="100%" className={filterPropertySelect} onClick={setValue}>
-      <Checkbox name={valueMetric.value} id={valueMetric.value} checked={isSelected} />
-      <Paragraph ml="x2" size="sm">
-        {valueMetric.value}
-      </Paragraph>
-    </Button>
+    <Flex position="relative">
+      <Label
+        as="label"
+        htmlFor="filter-property"
+        position="absolute"
+        className={styles.selectLabel}
+        textTransform="capitalize"
+        pointerEvents="none"
+      >
+        {traitType}
+      </Label>
+      <Select
+        name="filter-property"
+        id="filter-property"
+        value={isReset ? '' : undefined}
+        w="100%"
+        color="text1"
+        textAlign="right"
+        className={[styles.selectDropdown, lightFont]}
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+          setCollectionAttributes({ traitType, value: e.target.value })
+        }
+      >
+        <Box as="option" value="" key={`${traitType}-default`} w="100%" />
+        {valueMetrics.map((valueMetric) => (
+          <Box as="option" value={valueMetric.value} key={valueMetric.value} w="100%">
+            {valueMetric.value}
+          </Box>
+        ))}
+      </Select>
+    </Flex>
   )
 }

@@ -6,17 +6,28 @@ import { FlexProps, Paragraph, Stack, Text } from '@zord'
 export interface PageHeaderProps extends FlexProps {
   headline: Maybe<string> | undefined
   copy?: string
+  direction?: FlexProps['direction']
 }
 
-export function PageHeader({ headline, copy, ...props }: PageHeaderProps) {
+export function PageHeader({
+  headline,
+  direction = 'column',
+  copy,
+  ...props
+}: PageHeaderProps) {
   return (
-    <Stack
+    <Flex
+      direction={direction}
       gap={{ '@initial': 'x0', '@1024': 'x1' }}
       className={[pageHeaderWrapper, 'page-header-wrapper']}
       {...props}
     >
       {headline && (
-        <Text className={[pageHeadline]} textAlign="center" as="h1">
+        <Text
+          as="h1"
+          className={[pageHeadline]}
+          textAlign={direction === 'column' ? 'center' : 'left'}
+        >
           {headline}
         </Text>
       )}
@@ -25,6 +36,6 @@ export function PageHeader({ headline, copy, ...props }: PageHeaderProps) {
           {copy}
         </Paragraph>
       )}
-    </Stack>
+    </Flex>
   )
 }

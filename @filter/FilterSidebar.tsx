@@ -1,22 +1,16 @@
 import { Button } from 'components/Button'
 
-import { useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useRef, useState } from 'react'
 
 import { useCollectionFilters } from '@filter/providers'
 import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filter/state'
 import { Modal, ModalContent, useModal } from '@modal'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { useWindowWidth } from '@shared'
-import { Box, Flex, Heading, Icon, Stack } from '@zord'
+import { Box, Flex, Heading, Icon, Separator, Stack } from '@zord'
 
 import { ClearFilters } from './ClearFilters'
-import {
-  filterSidebar,
-  filterSidebarModalBackground,
-  filterSidebarModalContent,
-  filterSidebarScrolled,
-  sideBarSeparator,
-} from './CollectionsFilter.css'
+import * as styles from './CollectionsFilter.css'
 import { CollectionsFilterList } from './CollectionsFilterList'
 import { FilterHeader } from './FilterHeader'
 import { FilterOptions } from './FilterOptions'
@@ -24,38 +18,32 @@ import { FilterOwnerCollections } from './FilterOwnerCollections'
 import { FilterPriceRange } from './FilterPriceRange'
 import { FilterProperties } from './FilterProperties'
 import { MobileFiltersFooter } from './MobileFiltersFooter'
+import { FILTER_SCROLL_DETECTION_THRESHOLD } from './constants'
 
-export function FilterSidebar() {
-  const { requestClose } = useModal()
-
+export function FilterSidebarContents({
+  setHasScrolled,
+}: {
+  setHasScrolled?: Dispatch<SetStateAction<boolean>>
+}) {
   const {
-    filterStore: {
-      showFilters,
-      setMarketStatus,
-      setMediaType,
-      setOwnerStatus,
-      filters,
-      toggleShowFilters,
-    },
+    filterStore: { setMarketStatus, setMediaType, setOwnerStatus, filters },
     ownerAddress,
     contractAddress,
-    useMarketStatus,
-    useOwnerStatus,
-    useMediaTypes,
-    usePriceRange,
+    enableMarketStatus,
+    enableOwnerStatus,
+    enableMediaTypes,
+    enablePriceRange,
     useFilterOwnerCollections,
-    useCollectionSearch,
+    enableCollectionSearch,
     useCollectionProperties,
-    useSidebarClearButton,
+    enableSidebarClearButton,
   } = useCollectionFilters()
 
-  const [hasScrolled, setHasScrolled] = useState(false)
   const parentRef = useRef<HTMLDivElement>(null)
   const childRef = useRef<HTMLDivElement>(null)
-
   useScrollPosition(
     ({ currPos }) => {
-      setHasScrolled(currPos.y > 4)
+      setHasScrolled && setHasScrolled(currPos.y > FILTER_SCROLL_DETECTION_THRESHOLD)
     },
     [],
     // @ts-ignore-next-line
@@ -64,20 +52,18 @@ export function FilterSidebar() {
     10,
     parentRef
   )
-
-  const { isLarge } = useWindowWidth()
-
-  const sidebarComposition = (
+  return (
     <Stack
       gap="x2"
       w="100%"
       pb="x8"
-      position="absolute"
-      className={[filterSidebar, 'zora-filterSidebar']}
+      position={{ '@initial': 'relative', '@768': 'absolute' }}
+      className={[styles.filterSidebar, 'zora-filterSidebar']}
       ref={parentRef}
     >
-      <Box position="relative" ref={childRef}>
-        {useMarketStatus && (
+      <Stack gap="x8" position="relative" ref={childRef}>
+        {enablePriceRange && <FilterPriceRange />}
+        {enableMarketStatus && (
           <FilterOptions
             label="Market Status"
             options={marketStatusOptions}
@@ -86,7 +72,7 @@ export function FilterSidebar() {
             showCheckbox
           />
         )}
-        {useOwnerStatus && ownerAddress && (
+        {enableOwnerStatus && ownerAddress && (
           <FilterOptions
             label="Owner Status"
             options={ownerStatusOptions}
@@ -95,7 +81,7 @@ export function FilterSidebar() {
             showCheckbox
           />
         )}
-        {useMediaTypes && (
+        {enableMediaTypes && (
           <FilterOptions
             label="Media Type"
             options={mediaTypeOptions}
@@ -105,34 +91,44 @@ export function FilterSidebar() {
           />
         )}
         {ownerAddress && useFilterOwnerCollections && <FilterOwnerCollections />}
-        {usePriceRange && <FilterPriceRange />}
         {contractAddress && useCollectionProperties && (
           <FilterProperties collectionAddress={contractAddress} />
         )}
-        {useCollectionSearch && !contractAddress ? <CollectionsFilterList /> : null}
-        {useSidebarClearButton ? (
-          <ClearFilters
-            w="100%"
-            display={{
-              '@initial': 'none',
-              '@1024': 'block',
-            }}
-          />
-        ) : null}
-      </Box>
+        {enableCollectionSearch && !contractAddress && <CollectionsFilterList />}
+        {enableSidebarClearButton && (
+          <Stack gap="x4">
+            <Separator />
+            <ClearFilters
+              w="100%"
+              display={{
+                '@initial': 'none',
+                '@1024': 'block',
+              }}
+            />
+          </Stack>
+        )}
+      </Stack>
     </Stack>
   )
+}
 
-  const sideBarMobile = (
+export function FilterSidebarMobile() {
+  const { requestClose } = useModal()
+
+  const {
+    filterStore: { showFilters, toggleShowFilters },
+  } = useCollectionFilters()
+  return (
     <Modal open={showFilters} onOpenChange={requestClose}>
       <ModalContent
         title="modal"
         showClose={false}
         padding="x0"
-        modalContentOverrides={filterSidebarModalContent}
-        modalBackgroundOverrides={filterSidebarModalBackground}
+        modalContentOverrides={styles.filterSidebarModalContent}
+        modalBackgroundOverrides={styles.filterSidebarModalBackground}
+        fullscreen
       >
-        <Stack px="x4" pt="x8">
+        <Stack px="x6" pt="x6">
           <Flex w="100%" justify="space-between" pb="x6">
             <Heading as="h1" size="sm">
               Filters
@@ -141,32 +137,50 @@ export function FilterSidebar() {
               <Icon id="Close" size="md" />
             </Button>
           </Flex>
-          {sidebarComposition}
+          <FilterSidebarContents />
           <MobileFiltersFooter />
         </Stack>
       </ModalContent>
     </Modal>
   )
+}
+
+export function FilterSidebar() {
+  const {
+    enableFilterToggleButton,
+    filterStore: { showFilters },
+  } = useCollectionFilters()
+
+  const { isLarge } = useWindowWidth()
+  const [hasScrolled, setHasScrolled] = useState(false)
 
   return (
-    <>
+    <Box
+      position="sticky"
+      top="x0"
+      w="100%"
+      className={[
+        'zora-collectionFilterWrapper',
+        styles.filterWrapper,
+        showFilters && styles.openFilterWrapper,
+      ]}
+    >
       {isLarge ? (
         <Box h="100%" w="100%" position="sticky" display={showFilters ? 'block' : 'none'}>
-          <FilterHeader />
+          {enableFilterToggleButton && <FilterHeader />}
           <Box
             position="relative"
+            mt={enableFilterToggleButton ? 'x0' : 'x8'}
             className={[
-              sideBarSeparator,
-              {
-                [filterSidebarScrolled]: hasScrolled,
-              },
+              styles.sideBarSeparator,
+              hasScrolled && styles.filterSidebarScrolled,
             ]}
           />
-          {sidebarComposition}
+          <FilterSidebarContents setHasScrolled={setHasScrolled} />
         </Box>
       ) : (
-        sideBarMobile
+        <FilterSidebarMobile />
       )}
-    </>
+    </Box>
   )
 }

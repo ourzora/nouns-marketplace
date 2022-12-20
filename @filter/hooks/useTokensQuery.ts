@@ -1,10 +1,11 @@
 import useSWRInfinite from 'swr/infinite'
 
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import { flatten } from 'lodash'
 
 import { getAddress } from '@ethersproject/address'
+import { GetNFTReturnType } from '@shared'
 import { zdk } from '@shared/utils/zdk'
 import { transformNFTZDK } from '@zoralabs/nft-hooks/dist/backends'
 import { prepareJson } from '@zoralabs/nft-hooks/dist/fetcher/NextUtils'
@@ -22,16 +23,12 @@ export interface UseTokenQueryProps {
   contractAllowList?: string[] | undefined
   contractAddress?: string | null
   ownerAddress?: string
-  initialData?: NFTObject[]
+  initialData?: GetNFTReturnType
   sort?: TokenSortInput
   filter?: TokensQueryFilter
   where?: TokensQueryInput
   initialPageSize?: number
-}
-
-type GetNFTReturnType = {
-  tokens: NFTObject[]
-  nextCursor?: string | null
+  refreshInterval?: number
 }
 
 async function getNFTs(query: TokensQueryArgs): Promise<GetNFTReturnType> {
@@ -53,8 +50,9 @@ export function useTokensQuery({
   sort,
   filter,
   where,
-}: // initialData,
-UseTokenQueryProps) {
+  initialData,
+  refreshInterval = 30000,
+}: UseTokenQueryProps) {
   const getKey = (pageIndex: number, previousPageData: GetNFTReturnType) => {
     if (pageIndex > 0 && !previousPageData.nextCursor) return null // reached the end
     return {
@@ -87,11 +85,12 @@ UseTokenQueryProps) {
     size,
     isValidating,
   } = useSWRInfinite<GetNFTReturnType>(getKey, getNFTs, {
-    // fallbackData: [initialData],
-    refreshInterval: 5000,
+    fallbackData: initialData && [initialData],
+    refreshInterval: refreshInterval,
   })
 
-  const data = resp?.map((r) => r.tokens)
+  const data = useMemo(() => resp?.map((r) => r.tokens), [resp])
+  const flattenedData = useMemo(() => flatten(data), [data])
 
   const handleLoadMore = useCallback(() => setSize(size + 1), [setSize, size])
 
@@ -103,7 +102,7 @@ UseTokenQueryProps) {
   const isRefreshing = isValidating && data && data.length === size
 
   return {
-    data: flatten(data),
+    data: flattenedData,
     isValidating,
     isRefreshing,
     isLoadingMore,

@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { OneNounsDaoQuery } from 'types/zora.api.generated'
 
-import { ONE_NOUNS_DAO } from 'data/oneNounceDao'
+import { ONE_NOUNS_DAO } from 'data/oneNounsDao'
 
 import { useMemo, useState } from 'react'
 import { TypeSafeDao, verifyDao } from 'validators/dao'
@@ -26,6 +26,7 @@ export function useOneNounsDao({ collectionAddress }: { collectionAddress: strin
       return cached
     }
     // no need to update when cache changed!
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.nouns?.nounsDaos?.nodes])
 
   return {

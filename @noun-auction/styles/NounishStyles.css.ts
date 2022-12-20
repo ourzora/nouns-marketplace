@@ -55,6 +55,11 @@ export const auctionWrapperVariants = {
         gridTemplateRows: '68px 1fr auto',
       },
     ],
+    collectionHero: [
+      atoms({
+        display: 'inline-block',
+      }),
+    ],
     sideBarBid: [
       {
         gridTemplateColumns: '1fr',
@@ -202,7 +207,7 @@ export const sidebarHighBid = style([
     fontWeight: 400,
   },
   atoms({
-    color: 'onAccent',
+    color: 'text1',
   }),
 ])
 
@@ -227,6 +232,10 @@ export const debugWrapper = style([
     gridColumnEnd: 6,
   },
 ])
+
+export const placeBidTriggerWrapper = atoms({
+  alignSelf: 'flex-start',
+})
 
 export const placeBidTrigger = style([
   {

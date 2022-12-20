@@ -10,7 +10,6 @@ import { DescriptionWithMaxLines } from '@shared/components'
 import { Flex, Heading, Stack, StackProps } from '@zord'
 
 import { NFTMarket } from './NFTMarket'
-import { NFTOffchainOrders } from './NFTOffchainOrders'
 import * as styles from './NFTPage.css'
 import { NFTProvenance } from './NFTProvenance'
 
@@ -45,9 +44,10 @@ export function NFTSidebarComponent({
   offchainOrders,
   ...props
 }: NFTSidebarProps) {
-  const { primarySalePrice } = usePrimarySalePrice({ collectionAddress })
+  const { primarySalePrice, hasPrimarySalePrice } = usePrimarySalePrice({
+    collectionAddress,
+  })
   const { token } = useToken({ collectionAddress, tokenId })
-  const fallbackTitle = `${token?.collectionName} #${token?.tokenId}`
 
   if (!token) return null
 
@@ -73,7 +73,7 @@ export function NFTSidebarComponent({
       </Flex>
       <Flex justify="space-between" align="center">
         <Heading as="h1" size="xl">
-          {fallbackTitle}
+          {token?.name}
         </Heading>
       </Flex>
 
@@ -85,14 +85,12 @@ export function NFTSidebarComponent({
         description={token.description}
       />
       <Stack gap="x4" mt="auto">
-        {primarySalePrice && (
+        {hasPrimarySalePrice && (
           <NFTProvenance primarySalePrice={primarySalePrice} token={token} />
         )}
         <NFTMarket
           collectionAddress={collectionAddress}
           offchainOrders={offchainOrders}
-          tokenId={tokenId}
-          token={token}
         />
       </Stack>
     </Stack>

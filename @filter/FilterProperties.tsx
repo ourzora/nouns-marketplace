@@ -1,43 +1,47 @@
-import { useCollectionFilters } from '@filter/providers'
-import { Accordion, Box, Label, Stack } from '@zord'
+import { useCollectionsContext } from 'providers'
+import { AggregateAttribute } from 'types/zora.api.generated'
 
-import { filterOptionsWrapper } from './CollectionsFilter.css'
+import { useEffect } from 'react'
+
+import { useCollectionFilters } from '@filter/providers'
+import { Box, Label, Stack } from '@zord'
+
 import { FilterPropertySelect } from './FilterPropertySelect'
-import { useCollection } from './hooks/useCollection'
+import { useCollectionAttributes } from './hooks/useCollectionAttributes'
 
 export function FilterProperties({ collectionAddress }: { collectionAddress: string }) {
-  const { data } = useCollection(collectionAddress)
+  const { filterPropertiesList, setFilterPropertiesList } = useCollectionsContext()
+  const { aggregateAttributes } = useCollectionAttributes({
+    addresses: collectionAddress,
+  })
   const { useCollectionProperties } = useCollectionFilters()
 
-  if (!data?.attributes) {
+  useEffect(() => {
+    if (!aggregateAttributes) return
+    setFilterPropertiesList(aggregateAttributes)
+  }, [aggregateAttributes, setFilterPropertiesList])
+
+  if (!filterPropertiesList || filterPropertiesList.length === 0) {
     return null
   }
 
   return (
-    <Stack className={['filter-properties', useCollectionProperties?.selector]}>
+    <Stack gap="x4" className={['filter-properties', useCollectionProperties?.selector]}>
       {useCollectionProperties?.header && (
-        <Label className="zord-attributesHeading" mb="x4" size="lg">
+        <Label className="zord-attributesHeading" size="lg">
           {useCollectionProperties?.header}
         </Label>
       )}
-      {data?.attributes.map((property) => (
-        <Box
-          key={property.traitType}
-          className={!useCollectionProperties?.hideBorder && filterOptionsWrapper}
-        >
-          <Accordion label={property.traitType ? property.traitType : ''}>
-            <Stack pb="x4" gap="x5" className={['filter-properties-list']}>
-              {property.valueMetrics.map((valueMetric) => (
-                <FilterPropertySelect
-                  key={valueMetric.value}
-                  traitType={property.traitType || ''}
-                  valueMetric={valueMetric}
-                />
-              ))}
-            </Stack>
-          </Accordion>
-        </Box>
-      ))}
+      <Stack gap="x2">
+        {filterPropertiesList.map((property: AggregateAttribute) => (
+          <Box key={property.traitType} className={['filter-properties-list']}>
+            <FilterPropertySelect
+              traitType={property.traitType || ''}
+              valueMetrics={property.valueMetrics}
+            />
+          </Box>
+        ))}
+      </Stack>
     </Stack>
   )
 }

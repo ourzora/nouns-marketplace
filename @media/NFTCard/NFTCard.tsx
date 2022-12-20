@@ -15,8 +15,8 @@ import {
   titleScroll,
   titleWrapper,
 } from '@media/NftMedia.css'
-import { useIsOwner, useNFTProvider } from '@shared'
-import { Box, Flex, Heading, Separator, Stack } from '@zord'
+import { useNFTProvider } from '@shared'
+import { Box, Flex, Heading, Label, Separator, Stack } from '@zord'
 
 type Props = {
   collectionAddress: string
@@ -46,7 +46,6 @@ export function NFTCardComponent({
   collectionAddress,
   token,
 }: Props & { token: TypeSafeToken }) {
-  const { isOwner } = useIsOwner(token)
   const fallbackTitle = token.collectionName ?? '..'
   const tokenId = token.tokenId
 
@@ -83,7 +82,9 @@ export function NFTCardComponent({
                 radius="round"
                 size="xs"
               />
-              <Heading size="xs">{token.collectionName}</Heading>
+              <Label size="lg" color="text1">
+                {token.collectionName}
+              </Label>
             </Flex>
           </Link>
         </Flex>

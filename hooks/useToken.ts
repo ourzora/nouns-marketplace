@@ -11,9 +11,14 @@ import { zoraApiFetcher } from '@shared'
 type Params = {
   collectionAddress: string
   tokenId: string
+  refreshInterval?: number
 }
 
-export function useToken({ collectionAddress, tokenId }: Params) {
+export function useToken({
+  collectionAddress,
+  tokenId,
+  refreshInterval = 30000,
+}: Params) {
   const [cached, setCache] = useState<TypeSafeToken | undefined>()
   const { data, error } = useSWR<TokenQuery>(
     [`${collectionAddress}-${tokenId}`],
@@ -30,7 +35,7 @@ export function useToken({ collectionAddress, tokenId }: Params) {
         setTimeout(() => revalidate({ retryCount }), 5000)
       },
       dedupingInterval: 10000,
-      refreshInterval: 5000,
+      refreshInterval: refreshInterval,
     }
   )
 
@@ -45,6 +50,7 @@ export function useToken({ collectionAddress, tokenId }: Params) {
       return cached
     }
     // no need to update when cache changed!
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.token?.token])
 
   return {

@@ -5,11 +5,11 @@ import { color, media, typography } from '@zord/tokens'
 
 export const horizontalMenuButton = style([
   {
-    borderBottom: `2px solid transparent`,
+    borderBottom: `2px solid transparent!important`,
     lineHeight: typography.lineHeight[24],
     selectors: {
       '&.active': {
-        borderBottom: `2px solid ${color.accent}`,
+        borderBottom: `2px solid ${color.accent}!important`,
       },
     },
   },

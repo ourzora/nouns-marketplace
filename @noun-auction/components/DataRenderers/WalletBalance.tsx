@@ -39,7 +39,6 @@ export function WalletBalance({
           style={{ lineHeight: '1.15' }}
           align={layout === 'sideBarBid' ? 'left' : 'right'}
           color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
-          mb={layout === 'sideBarBid' ? 'x2' : 'x0'}
         >
           {label}
         </Label>

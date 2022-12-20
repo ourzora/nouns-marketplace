@@ -65,7 +65,7 @@ export function ActiveAuctionCardComponent({
   activeAuction: TypeSafeNounsAuction
   token: TypeSafeToken
 }) {
-  const { collectionAddress, endTime } = activeAuction
+  const { collectionAddress, endTime, startTime } = activeAuction
   const { isEnded: auctionCompleted } = useIsAuctionCompleted({
     activeAuction,
   })
@@ -90,7 +90,6 @@ export function ActiveAuctionCardComponent({
       </Link>
       <Stack gap="x2" mt="x4" px="x4" pb="x4">
         <Flex
-          pb="x1"
           gap={{
             '@initial': 'x2',
             '@1024': 'x0',
@@ -130,6 +129,7 @@ export function ActiveAuctionCardComponent({
         <Grid className={activeAuctionCardData}>
           <AuctionCountdown
             auctionCompleted={auctionCompleted}
+            auctionStartTime={startTime}
             auctionEndTime={endTime}
             showLabels
             align="flex-start"

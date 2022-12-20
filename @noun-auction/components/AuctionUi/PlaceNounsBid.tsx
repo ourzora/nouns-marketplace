@@ -5,13 +5,14 @@ import { ModalComposition } from '@modal'
 import {
   auctionWrapperVariants,
   placeBidTrigger,
+  placeBidTriggerWrapper,
 } from '@noun-auction/styles/NounishStyles.css'
 import { Stack } from '@zord'
 
 import { NounsBidForm } from './NounsBidForm'
 
 type PlaceNounsBidProps = {
-  useModal?: boolean
+  enableModal?: boolean
   tokenId: string
   collectionAddress: string
   layout: keyof typeof auctionWrapperVariants['layout']
@@ -21,17 +22,18 @@ export function PlaceNounsBid({
   layout,
   tokenId,
   collectionAddress,
-  useModal = true,
+  enableModal = true,
 }: PlaceNounsBidProps) {
   return (
     <>
-      {useModal ? (
+      {enableModal ? (
         <ModalComposition
           modalName={`nouns-bid-${tokenId}`}
           modalBehaviorRequiresAuth={true}
+          className={placeBidTriggerWrapper}
           trigger={
             <Button
-              as="span"
+              as="button"
               className={placeBidTrigger}
               size="md"
               variant={layout === 'sideBarBid' ? 'secondary' : 'primary'}

@@ -20,13 +20,13 @@ export function useTokenHelper(nftObj: NFTObject) {
 
   const hasPreviousNFT = useMemo(() => {
     // !0 === true
-    if (tokenID === undefined) return false
+    if (tokenID === undefined || nftCount === undefined) return false
     return tokenID > firstTokenID
   }, [firstTokenID, tokenID])
 
   const hasNextNFT = useMemo(() => {
     // !0 === true
-    if (tokenID === undefined) return false
+    if (tokenID === undefined || nftCount === undefined) return false
     const lastTokenId =
       nftCount === 0 ? nftCount : nftCount - (isFirstTokenIDZero ? 1 : 0)
     return lastTokenId > tokenID

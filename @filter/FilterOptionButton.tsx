@@ -52,8 +52,9 @@ export function FilterOptionButton({
       mr={rightPad ? 'x1' : 'x0'}
       borderColor={checked || useBorder ? 'border' : 'background2'}
       borderStyle="solid"
-      borderWidth="thin"
-      borderRadius="round"
+      borderWidth="normal"
+      backgroundColor="background2"
+      borderRadius="curved"
       color="accent"
       onClick={onClick}
     >

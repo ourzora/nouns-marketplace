@@ -36,7 +36,7 @@ export function TransactionSubmitButton({
     [loading, txInProgress, txStatus]
   )
 
-  const isDisabled = isLoading || disabled
+  const isDisabled = useMemo(() => isLoading || disabled, [isLoading, disabled])
   const variableButtonBehavior = useButtonRequiresAuth(onClick)
 
   return (

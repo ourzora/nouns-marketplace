@@ -13,46 +13,53 @@ export interface NounButtonProps extends ButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement> | (() => void)
 }
 
-export function Button({
-  children,
-  as,
-  variant = 'primary',
-  gap,
-  loading,
-  size,
-  icon,
-  iconAlign,
-  iconSize,
-  onClick,
-  className,
-  title,
-  target,
-  ...props
-}: NounButtonProps) {
-  return (
-    <ZordButton
-      as={as}
-      variant={variant}
-      gap={gap}
-      size={size}
-      loading={loading}
-      icon={icon}
-      iconSize={iconSize}
-      iconAlign={iconAlign}
-      title={title}
-      target={target}
-      onClick={onClick}
-      {...props}
-      className={[
-        button({
-          loading,
-          size,
-          variant,
-        }),
-        className,
-      ]}
-    >
-      {children}
-    </ZordButton>
-  )
-}
+// eslint-disable-next-line react/display-name
+export const Button = React.forwardRef<HTMLButtonElement, NounButtonProps>(
+  (
+    {
+      // export function Button({
+      children,
+      as,
+      variant = 'primary',
+      gap,
+      loading,
+      size,
+      icon,
+      iconAlign,
+      iconSize,
+      onClick,
+      className,
+      title,
+      target,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <ZordButton
+        as={as}
+        variant={variant}
+        gap={gap}
+        size={size}
+        loading={loading}
+        icon={icon}
+        iconSize={iconSize}
+        iconAlign={iconAlign}
+        title={title}
+        target={target}
+        onClick={onClick}
+        {...props}
+        className={[
+          button({
+            loading,
+            size,
+            variant,
+          }),
+          className,
+        ]}
+      >
+        {children}
+      </ZordButton>
+    )
+  }
+)

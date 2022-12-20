@@ -24,6 +24,7 @@ export function HorizontalMenu({
   setId,
   currentId,
   useCustomHandler = false,
+  className,
   ...props
 }: HorizontalMenuProps) {
   const setCategory = useCallback(
@@ -36,7 +37,7 @@ export function HorizontalMenu({
 
   return (
     <Flex
-      className={['zora-horizontalmenu', horizontalMenuWrapper]}
+      className={['zora-horizontalmenu', horizontalMenuWrapper, className]}
       justify="center"
       {...props}
     >

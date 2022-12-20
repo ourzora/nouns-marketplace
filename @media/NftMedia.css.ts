@@ -93,6 +93,7 @@ export const titleScroll = style([
 export const titleHeading = style([
   {
     paddingRight: 'var(--titlePad)',
+    fontSize: '24px!important', // TODO: Remove when zord vendoring is complete
   },
 ])
 

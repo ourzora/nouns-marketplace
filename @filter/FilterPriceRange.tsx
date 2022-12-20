@@ -2,33 +2,35 @@ import { Button } from 'components/Button'
 
 import { useCollectionFilters } from '@filter/providers'
 import { ETH_CURRENCY_SHIM } from '@shared'
-import { Accordion, Box, Stack } from '@zord'
+import { Label, Stack } from '@zord'
 
-import { filterOptionsWrapper } from './CollectionsFilter.css'
 import { PriceRangeSelector } from './PriceRangeSelector'
 
 export function FilterPriceRange() {
   const {
     filterStore: { setPriceRange, priceRangeSelection, invalidPriceRange },
-    usePriceRange,
+    enablePriceRange,
   } = useCollectionFilters()
 
   return (
-    <Box className={!usePriceRange?.hideBorder && filterOptionsWrapper} pb="x0">
-      <Accordion
-        label={usePriceRange?.label || 'Price Range'}
-        defaultState={usePriceRange?.defaultState}
+    <Stack gap="x4">
+      <Label className="zord-attributesHeading" size="lg">
+        Price
+      </Label>
+      <PriceRangeSelector
+        onSelect={priceRangeSelection}
+        currencyOptions={[ETH_CURRENCY_SHIM]}
+        minPlaceholder="From"
+        maxPlaceholder="To"
+      />
+      <Button
+        size="md"
+        variant="secondary"
+        disabled={invalidPriceRange}
+        onClick={setPriceRange}
       >
-        <Stack gap="x4" pb="x4">
-          <PriceRangeSelector
-            onSelect={priceRangeSelection}
-            currencyOptions={[ETH_CURRENCY_SHIM]}
-          />
-          <Button variant="outline" disabled={invalidPriceRange} onClick={setPriceRange}>
-            Apply
-          </Button>
-        </Stack>
-      </Accordion>
-    </Box>
+        Apply
+      </Button>
+    </Stack>
   )
 }

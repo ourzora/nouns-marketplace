@@ -12,10 +12,11 @@ import {
 
 import { SettleAuctionComponent } from './SettleAuctionComponent'
 
-export function SettleAuctionBuiler({
+export function SettleAuctionBuilder({
   useErrorMsg = false,
   auctionContractAddress,
   layout,
+  settlementType,
   ...props
 }: SettleAuctionProps) {
   const { data: signer } = useSigner()
@@ -55,11 +56,12 @@ export function SettleAuctionBuiler({
 
   return (
     <SettleAuctionComponent
-      {...props}
+      settlementType={settlementType}
       layout={layout}
       handleOnSubmit={handleOnSubmit}
       isLoading={isLoading}
       txSubmitted={!!txSubmitted}
+      {...props}
     />
   )
 }

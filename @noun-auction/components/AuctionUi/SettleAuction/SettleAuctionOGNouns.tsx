@@ -1,6 +1,6 @@
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import {
   LIL_NOUNS_AUCTION_ADDRESS,
@@ -18,17 +18,21 @@ export function SettleAuctionOGNouns({
   useErrorMsg = false,
   auctionContractAddress,
   layout,
+  settlementType,
   ...props
 }: SettleAuctionProps) {
   const [showError, setShowError] = useState(false)
   const [txSubmitted, setTxSubmitted] = useState(false)
 
-  let abi =
-    auctionContractAddress === NOUNS_AUCTION_ADDRESS
-      ? nounsAbi
-      : LIL_NOUNS_AUCTION_ADDRESS === auctionContractAddress
-      ? lilNounsAbi
-      : createBidAbiFragment
+  const abi = useMemo(
+    () =>
+      auctionContractAddress === NOUNS_AUCTION_ADDRESS
+        ? nounsAbi
+        : LIL_NOUNS_AUCTION_ADDRESS === auctionContractAddress
+        ? lilNounsAbi
+        : createBidAbiFragment,
+    [auctionContractAddress]
+  )
 
   const { config, error: prepareError } = usePrepareContractWrite({
     addressOrName: auctionContractAddress as string,
@@ -55,11 +59,12 @@ export function SettleAuctionOGNouns({
 
   return (
     <SettleAuctionComponent
-      {...props}
+      settlementType={settlementType}
       layout={layout}
       handleOnSubmit={buttonBehavior}
       isLoading={isLoading}
       txSubmitted={!!txSubmitted}
+      {...props}
     />
   )
 }

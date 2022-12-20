@@ -6,17 +6,17 @@ import { WalletBalance } from '@market/components/WalletBalance'
 import { formatCryptoVal, useAuth } from '@shared'
 import { BoxProps, Flex, Heading, Label, Stack } from '@zord'
 
-export interface FillV3AskInfoProps extends BoxProps {
+export interface ViewV3AskInfoProps extends BoxProps {
   token: TypeSafeToken
   askPrice?: string
   showBalance?: boolean
 }
 
-export function FillV3AskInfo({
+export function ViewV3AskInfo({
   token,
   askPrice,
   showBalance = true,
-}: FillV3AskInfoProps) {
+}: ViewV3AskInfoProps) {
   const { address } = useAuth()
 
   const cryptoVal = useMemo(() => {
@@ -39,11 +39,11 @@ export function FillV3AskInfo({
         <Label className="zora-market-fillAskInfo-label" color="text3">
           Minted by
         </Label>
-        {/* {nft?.nft?.minted?.address ? (
-          <AddressWithLink address={nft.nft.minted.address} />
+        {token.mintInfo?.toAddress ? (
+          <AddressWithLink address={token.mintInfo?.toAddress} />
         ) : (
           '...'
-        )} */}
+        )}
       </Flex>
       <Stack align="flex-end">
         {askPrice && (

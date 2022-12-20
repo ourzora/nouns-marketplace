@@ -1,19 +1,20 @@
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import { useMemo } from 'react'
-import { TypeSafeToken } from 'validators/token'
+import { TypeSafeNounsAuction } from 'validators/auction'
 
+import { NFTPrimaryAuction } from '@market'
 import { NFTAsks } from '@market/components/NFTAsks'
-import { NounishAuction, useActiveOGNounishAuction, useOneNounsDao } from '@noun-auction'
-import { useNFT } from '@zoralabs/nft-hooks'
-import { BoxProps } from '@zord'
+import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
+import { useNounishAuctionQuery } from '@noun-auction'
+import { useNFTProvider } from '@shared'
+import { NFTObject } from '@zoralabs/nft-hooks'
+import { BoxProps } from '@zoralabs/zord'
 
 import { nftMarketWrapper } from './NFTPage.css'
 
 interface NFTMarketProps extends BoxProps {
   collectionAddress: string
-  tokenId: string
-  token: TypeSafeToken
   offchainOrders?: OffchainOrderWithToken[]
 }
 
@@ -21,29 +22,50 @@ export function NFTMarket({
   offchainOrders,
   className,
   collectionAddress,
-  token,
-  tokenId,
 }: NFTMarketProps) {
-  const { dao } = useOneNounsDao({ collectionAddress })
-  const { data: activeAuction } = useActiveOGNounishAuction()
-  const { data: nftObj } = useNFT(collectionAddress, tokenId)
+  const { nft: nftObj } = useNFTProvider()
+  const { activeAuction } = useNounishAuctionQuery({
+    collectionAddress,
+  })
+  if (nftObj && activeAuction) {
+    return (
+      <NFTMarketComponent
+        className={className}
+        nftObj={nftObj}
+        activeAuction={activeAuction}
+        offchainOrders={offchainOrders}
+        collectionAddress={collectionAddress}
+      />
+    )
+  }
 
-  const hasNounishAuction = useMemo(
-    () => activeAuction?.properties?.tokenId === tokenId,
-    [activeAuction?.properties?.tokenId, tokenId]
+  return null
+}
+
+export function NFTMarketComponent({
+  offchainOrders,
+  className,
+  nftObj,
+  activeAuction,
+}: NFTMarketProps & {
+  nftObj: NFTObject
+  activeAuction: TypeSafeNounsAuction
+}) {
+  const isActiveAuctionToken = useMemo(
+    () => activeAuction?.tokenId === nftObj?.nft?.tokenId,
+    [nftObj?.nft?.tokenId, activeAuction?.tokenId]
   )
 
-  if (hasNounishAuction && dao) {
+  const { isClaimable } = useNounishAuctionHelper({
+    auction: activeAuction,
+  })
+
+  if (isActiveAuctionToken || isClaimable) {
     return (
-      <NounishAuction
-        dao={dao!}
-        hideThumbnail
-        hideTitle
-        hideCollectionTitle
-        showLabels
-        layout="sideBarBid"
-        useErrorMsg
-        className={className}
+      <NFTPrimaryAuction
+        nftObj={nftObj}
+        primaryAuction={activeAuction}
+        isActiveAuctionToken={isActiveAuctionToken}
       />
     )
   }

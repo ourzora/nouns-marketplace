@@ -6,7 +6,7 @@ import { NOUNS_DAOS_QUERY } from 'data/nounsDaos'
 
 import { useNounsDaos } from 'hooks/useNounsDaos'
 
-import React from 'react'
+import React, { useMemo } from 'react'
 import { TypeSafeDao } from 'validators/dao'
 
 import * as Sentry from '@sentry/react'
@@ -17,14 +17,17 @@ import { Grid } from '@zord'
 export type CollectionParsed = CollectionsQuery['collections']['nodes']
 
 function Home(props: { daos: TypeSafeDao[] }) {
-  const clientDaos = useNounsDaos()
+  const clientDaos = useNounsDaos({ limit: 30 })
+  const hasDaos = useMemo(
+    () => props.daos?.length > 0 || clientDaos?.length > 0,
+    [clientDaos, props.daos]
+  )
 
   return (
     <PageWrapper direction="column" gap="x6" align="center">
       <Seo />
       <Grid
         px={{ '@initial': 'x4', '@1024': 'x8' }}
-        gap="x2"
         className={styles.pageGrid}
         justify="center"
       >
@@ -33,7 +36,7 @@ function Home(props: { daos: TypeSafeDao[] }) {
           mt={{ '@initial': 'x6', '@1024': 'x24' }}
           mb={{ '@initial': 'x8', '@1024': 'x24' }}
         />
-        {props.daos?.length > 0 && (
+        {hasDaos && (
           <DaoTable daos={clientDaos || props.daos} className={styles.homepageTable} />
         )}
       </Grid>
@@ -43,7 +46,7 @@ function Home(props: { daos: TypeSafeDao[] }) {
 
 export async function getServerSideProps() {
   try {
-    const daos = await zoraApiFetcher(NOUNS_DAOS_QUERY)
+    const daos = await zoraApiFetcher(NOUNS_DAOS_QUERY, { limit: 30 })
 
     return {
       props: {

@@ -1,60 +1,50 @@
 import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
-import { Button, Flex, Text } from '@zord'
+import { Button, Flex } from '@zord'
 
 import { ActiveFilterCounter } from './ActiveFilterCounter'
-import {
-  filterCounter,
-  filterHeader,
-  filtersButton,
-  stickyFilterHeader,
-} from './CollectionsFilter.css'
+import * as styles from './CollectionsFilter.css'
+import { SelectedFilters } from './SelectedFilters'
+import { SortDropdown } from './SortDropdown'
 
-export function FilterHeader({
-  children,
-  itemCount = 0,
-}: {
-  children?: JSX.Element
-  itemCount?: number
-}) {
+export function FilterHeader({}: { children?: JSX.Element }) {
   const {
+    enableSortDropdown,
+    enableSelectedFiltersPanel,
+    enableSidebarFilter,
     filterStore: { toggleShowFilters, showFilters, activeFilterCount },
   } = useCollectionFilters()
 
-  return (
-    <Flex
-      className={[
-        filterHeader,
-        {
-          [stickyFilterHeader]: !showFilters,
-        },
-      ]}
-    >
-      <Flex align="center" gap="x2">
-        <Button
-          variant={activeFilterCount > 0 ? 'primary' : 'secondary'}
-          borderRadius="round"
-          size="sm"
-          icon={showFilters ? 'ChevronLeft' : undefined}
-          className={filtersButton}
-          onClick={toggleShowFilters}
-        >
-          Filters
-          <ActiveFilterCounter />
-        </Button>
-        {itemCount > 0 && (
-          <Text
-            className={filterCounter}
-            as="span"
-            variant="paragraph-sm"
-            color="text3"
-            pl="x1"
-            pr="x10"
-          >
-            {itemCount} items
-          </Text>
-        )}
+  if (!showFilters && enableSidebarFilter) {
+    return (
+      <Flex
+        className={[
+          'filter-header',
+          styles.filterHeader,
+          !showFilters && styles.stickyFilterHeader,
+        ]}
+      >
+        <Flex align="center" gap="x2">
+          {!showFilters && (
+            <Button
+              variant={activeFilterCount > 0 ? 'primary' : 'secondary'}
+              borderRadius="round"
+              size="sm"
+              icon={showFilters ? 'ChevronLeft' : undefined}
+              className={styles.filtersButton}
+              onClick={toggleShowFilters}
+            >
+              Filters
+              <ActiveFilterCounter />
+            </Button>
+          )}
+        </Flex>
+        <>
+          {enableSelectedFiltersPanel && <SelectedFilters />}
+          {enableSortDropdown && <SortDropdown />}
+        </>
       </Flex>
-      {children}
-    </Flex>
-  )
+    )
+  }
+
+  return null
 }

@@ -14,7 +14,7 @@ const NFT = ({
   tokenId,
   offchainOrders,
 }: {
-  nft: NFTObject | undefined
+  nft: NFTObject
   tokenAddress: string
   tokenId: string
   offchainOrders: OffchainOrderWithToken[]
