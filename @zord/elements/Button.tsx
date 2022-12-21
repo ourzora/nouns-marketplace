@@ -31,7 +31,7 @@ export interface ButtonProps extends FlexProps {
     | 'circleSolid'
     | 'ghost'
     | 'unset'
-  size?: 'xs' | 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg'
   icon?: IconProps['id']
   iconAlign?: 'left' | 'right'
   type?: 'submit' | 'reset' | 'button'

@@ -39,19 +39,6 @@ export const baseButton = style([
 ])
 
 export const buttonSize = {
-  // xs: style([
-  //   {
-  //     width: 'auto',
-  //   },
-  //   atoms({
-  //     display: 'inline-flex',
-  //     px: 'x2',
-  //     height: 'x7',
-  //     minWidth: 'x10',
-  //     fontSize: 14,
-  //     fontWeight: 'label',
-  //   }),
-  // ]),
   sm: style([
     {
       width: 'auto',
