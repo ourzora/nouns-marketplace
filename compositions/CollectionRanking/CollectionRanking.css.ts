@@ -1,7 +1,8 @@
 import { MAX_WIDTH } from 'styles/style-constants'
 
 import { globalStyle, style } from '@vanilla-extract/css'
-import { atoms, color, media, radii } from '@zoralabs/zord'
+import { atoms } from '@zord/atoms'
+import { color, media, radii } from '@zord/tokens'
 
 export const rankingWrapper = style([
   {

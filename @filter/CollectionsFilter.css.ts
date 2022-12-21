@@ -9,7 +9,9 @@ import {
 } from '@filter/constants'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, color, ease, media, radii, space, typography, vars } from '@zoralabs/zord'
+import { atoms } from '@zord/atoms'
+import { vars } from '@zord/theme'
+import { color, ease, media, radii, space, typography } from '@zord/tokens'
 
 export const borderStyle = `2px solid ${vars.color.border}`
 

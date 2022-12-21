@@ -4,7 +4,8 @@ import React from 'react'
 
 import { AvatarImage, CopyButton } from '@shared'
 import { useToggle } from '@shared/hooks/useToggle'
-import { Flex, FlexProps, Icon, Paragraph, mixins } from '@zoralabs/zord'
+import { Flex, FlexProps, Icon, Paragraph } from '@zord'
+import { mixins } from '@zord/mixins'
 
 import * as styles from './DataTableItem.css'
 

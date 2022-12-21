@@ -7,7 +7,7 @@ import {
   placeBidTrigger,
   placeBidTriggerWrapper,
 } from '@noun-auction/styles/NounishStyles.css'
-import { Stack } from '@zoralabs/zord'
+import { Stack } from '@zord'
 
 import { NounsBidForm } from './NounsBidForm'
 

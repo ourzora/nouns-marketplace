@@ -1,5 +1,5 @@
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { Grid, Stack, StackProps } from '@zoralabs/zord'
+import { Grid, Stack, StackProps } from '@zord'
 
 import { FilterGridHeader, FilterHeader, FilterResultsLoading, FilterSidebar } from './'
 import * as styles from './CollectionsFilter.css'

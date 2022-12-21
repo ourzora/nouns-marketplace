@@ -7,7 +7,7 @@ import { noTextWrap } from 'styles/styles.css'
 import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit'
 import { useEnsData } from '@shared/hooks'
-import { Box, Flex, Icon, PopUp, Separator, Stack, Text } from '@zoralabs/zord'
+import { Box, Flex, Icon, PopUp, Separator, Stack, Text } from '@zord'
 
 import * as styles from './Header.css'
 

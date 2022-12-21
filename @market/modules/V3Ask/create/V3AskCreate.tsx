@@ -6,7 +6,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
 import { PrintError, formatContractError, validateCurrency } from '@shared'
-import { Heading, InputField, Stack } from '@zoralabs/zord'
+import { Heading, InputField, Stack } from '@zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import { V3AskLearnMoreButton } from '../V3AskLearnMoreButton'

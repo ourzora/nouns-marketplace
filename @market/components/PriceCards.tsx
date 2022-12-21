@@ -11,7 +11,7 @@ import { ModalComposition, useModal } from '@modal'
 import { useAuth, useButtonRequiresAuth } from '@shared'
 import { numberFormatter } from '@shared/utils'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Box, Flex, Heading, Paragraph, Stack, Well } from '@zoralabs/zord'
+import { Box, Flex, Heading, Paragraph, Stack, Well } from '@zord'
 
 import * as styles from './PriceCards.css'
 

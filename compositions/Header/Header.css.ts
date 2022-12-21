@@ -1,7 +1,9 @@
 import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE, MAX_WIDTH } from 'styles/style-constants'
 
 import { globalStyle, style } from '@vanilla-extract/css'
-import { atoms, color, media, radii, space, vars } from '@zoralabs/zord'
+import { atoms } from '@zord/atoms'
+import { vars } from '@zord/theme'
+import { color, media, radii, space } from '@zord/tokens'
 
 export const headerWrapper = style([
   atoms({

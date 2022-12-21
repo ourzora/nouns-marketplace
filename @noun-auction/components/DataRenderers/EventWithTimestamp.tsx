@@ -1,4 +1,4 @@
-import { Label, Stack, StackProps } from '@zoralabs/zord'
+import { Label, Stack, StackProps } from '@zord'
 
 import { TxTimestamp } from './TxTimestamp'
 

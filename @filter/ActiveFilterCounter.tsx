@@ -1,5 +1,5 @@
 import { useCollectionFilters } from '@filter'
-import { Flex, Text } from '@zoralabs/zord'
+import { Flex, Text } from '@zord'
 
 export function ActiveFilterCounter() {
   const {

@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { Flex, Label, Stack } from '@zoralabs/zord'
+import { Flex, Label, Stack } from '@zord'
 
 import { FilterOptionButton } from './FilterOptionButton'
 

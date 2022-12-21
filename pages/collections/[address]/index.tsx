@@ -1,12 +1,13 @@
 import { Seo } from 'components'
 import { PageWrapper } from 'components/PageWrapper'
-import {
-  ActiveCollectionPageView,
-  CollectionAbout,
-  CollectionHeader,
-} from 'compositions/Collections'
-import { ALL_COLLECTION_VIEWS, CollectionNav } from 'compositions/Collections'
+import { CollectionHeader } from 'compositions/Collections'
+import { CollectionAbout } from 'compositions/Collections/CollectionAbout'
 import { CollectionNFTs } from 'compositions/Collections/CollectionNFTs'
+import {
+  ALL_COLLECTION_VIEWS,
+  ActiveCollectionPageView,
+  CollectionNav,
+} from 'compositions/Collections/CollectionNav'
 import { useRouter } from 'next/router'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
 import { CollectionServiceProps, collectionService } from 'services/collectionService'
@@ -15,7 +16,7 @@ import { useAggregate } from 'hooks'
 
 import React, { useEffect, useState } from 'react'
 
-import { Stack } from '@zoralabs/zord'
+import { Stack } from '@zord'
 
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()

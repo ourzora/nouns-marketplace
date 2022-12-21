@@ -1,6 +1,8 @@
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, media, radii, vars } from '@zoralabs/zord'
+import { atoms } from '@zord/atoms'
+import { vars } from '@zord/theme'
+import { media, radii } from '@zord/tokens'
 
 export const buttonVariants = {
   loading: {

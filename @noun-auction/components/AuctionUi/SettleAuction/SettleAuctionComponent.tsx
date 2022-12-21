@@ -4,7 +4,7 @@ import { buttonVariants } from 'components/Button/Button.css'
 import { useMemo } from 'react'
 
 import * as styles from '@noun-auction/styles/NounishStyles.css'
-import { BoxProps, Stack } from '@zoralabs/zord'
+import { BoxProps, Stack } from '@zord'
 
 export type SettlementType = 'settle' | 'claim'
 

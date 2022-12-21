@@ -4,7 +4,7 @@ import { V3AskModal } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
 import { useIsOwner, useNFTProvider } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { FlexProps } from '@zoralabs/zord'
+import { FlexProps } from '@zord'
 
 export interface NFTCardMarketProps extends FlexProps {}
 

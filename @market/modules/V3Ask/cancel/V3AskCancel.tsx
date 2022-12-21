@@ -8,7 +8,7 @@ import { useListingDataTable } from '@market/hooks'
 import { useModal } from '@modal/useModal'
 import { DataTable, PrintError, formatContractError } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Flex, Stack } from '@zoralabs/zord'
+import { Flex, Stack } from '@zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import * as styles from '../V3AskFlow.css'

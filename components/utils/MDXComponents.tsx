@@ -1,4 +1,4 @@
-import { Box, Heading, Paragraph } from '@zoralabs/zord'
+import { Box, Heading, Paragraph } from '@zord'
 
 import {
   aSelector,

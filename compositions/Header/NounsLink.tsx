@@ -1,7 +1,7 @@
 import { NounsGlasses } from 'components'
 import Link from 'next/link'
 
-import { Flex } from '@zoralabs/zord'
+import { Flex } from '@zord'
 
 import { nounsGlassesLink } from './Header.css'
 

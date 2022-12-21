@@ -8,7 +8,7 @@ import { PossibleV3AskState, useV3AskStateContext } from '@market/modules/V3Ask/
 import { useKeyPress } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { PopUp, Stack, Text, Well } from '@zoralabs/zord'
+import { PopUp, Stack, Text, Well } from '@zord'
 
 import { UniversalListAskFlow } from './UniversalListAskFlow'
 import * as styles from './V3AskFlow.css'

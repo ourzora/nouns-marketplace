@@ -9,7 +9,7 @@ import {
 import { SaleTypeButton } from '@market/modules/V3Ask/SaleTypeButton'
 import { V3AskLearnMoreButton } from '@market/modules/V3Ask/V3AskLearnMoreButton'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Eyebrow, Stack } from '@zoralabs/zord'
+import { Eyebrow, Stack } from '@zord'
 
 interface SelectListFlowProps {
   closeModal?: () => void

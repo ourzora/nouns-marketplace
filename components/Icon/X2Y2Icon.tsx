@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Flex, FlexProps } from '@zoralabs/zord'
+import { Flex, FlexProps } from '@zord'
 
 interface IconProps extends FlexProps {}
 

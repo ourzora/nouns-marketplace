@@ -1,6 +1,6 @@
 import { Button } from 'components/Button'
 
-import { BoxProps, Flex, Icon, Label, Paragraph, Stack, Tag, Well } from '@zoralabs/zord'
+import { BoxProps, Flex, Icon, Label, Paragraph, Stack, Tag, Well } from '@zord'
 
 import * as styles from './V3AskFlow.css'
 

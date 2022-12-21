@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { vars } from '@zoralabs/zord'
+import { vars } from '@zord/theme'
 
 export const grid = style([
   {

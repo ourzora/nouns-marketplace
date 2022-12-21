@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, media } from '@zoralabs/zord'
+import { atoms } from '@zord/atoms'
+import { media } from '@zord/tokens'
 
 export const nftGridWrapperVariants = {
   layout: {

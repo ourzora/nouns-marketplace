@@ -4,7 +4,7 @@ import { pageHeadline } from 'styles/styles.css'
 
 import { AddressWithLink } from '@market'
 import { useShortAddress } from '@shared'
-import { Stack, Text } from '@zoralabs/zord'
+import { Stack, Text } from '@zord'
 
 export function ManageHeader({ ownerAddress }: { ownerAddress: string }) {
   const { data: ensName } = useEnsName({

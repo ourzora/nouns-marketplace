@@ -8,7 +8,7 @@ import { V3AskSidebar } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
 import { useIsOwner } from '@shared/hooks/useIsOwner'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { FlexProps } from '@zoralabs/zord'
+import { FlexProps } from '@zord'
 
 export interface NFTAskProps extends FlexProps {
   nftObj: NFTObject

@@ -1,6 +1,6 @@
 import { NFTProvider } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
-import { Grid, GridProps, Stack } from '@zoralabs/zord'
+import { Grid, GridProps, Stack } from '@zord'
 
 import { NFTGridLoadMore } from './NFTGridLoadMore'
 

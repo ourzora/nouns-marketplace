@@ -6,7 +6,7 @@ import { ModalTitleAndDescription, ViewV3AskInfo } from '@market/components'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { ErrorBoundary } from '@sentry/nextjs'
 import { useAuth } from '@shared/hooks'
-import { Flex, Stack } from '@zoralabs/zord'
+import { Flex, Stack } from '@zord'
 
 export enum MODAL_TYPES {
   list = 'list',

@@ -5,7 +5,7 @@ import {
   transactionEventWrapper,
 } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont, useShortAddress } from '@shared'
-import { Flex, Grid, GridProps, Label, Stack } from '@zoralabs/zord'
+import { Flex, Grid, GridProps, Label, Stack } from '@zord'
 
 import { EnsAvatar } from './EnsAvatar'
 import { EthAmount } from './EthAmount'

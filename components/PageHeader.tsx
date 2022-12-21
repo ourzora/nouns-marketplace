@@ -1,7 +1,7 @@
 import { pageHeaderWrapper, pageHeadline } from 'styles/styles.css'
 
 import { Maybe } from '@zoralabs/nft-hooks/dist/backends/zora-indexer-v1/zora-indexer-types'
-import { Flex, FlexProps, Paragraph, Text } from '@zoralabs/zord'
+import { Flex, FlexProps, Paragraph, Text } from '@zord'
 
 export interface PageHeaderProps extends FlexProps {
   headline: Maybe<string> | undefined

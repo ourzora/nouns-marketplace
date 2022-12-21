@@ -1,5 +1,5 @@
 import { NounishAuction, useOneNounsDao } from '@noun-auction'
-import { Heading, Stack, StackProps } from '@zoralabs/zord'
+import { Heading, Stack, StackProps } from '@zord'
 
 import { nftMarketWrapper } from './NFTPage.css'
 

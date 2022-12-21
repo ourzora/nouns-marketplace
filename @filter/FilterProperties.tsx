@@ -4,7 +4,7 @@ import { AggregateAttribute } from 'types/zora.api.generated'
 import { useEffect } from 'react'
 
 import { useCollectionFilters } from '@filter/providers'
-import { Box, Label, Stack } from '@zoralabs/zord'
+import { Box, Label, Stack } from '@zord'
 
 import { FilterPropertySelect } from './FilterPropertySelect'
 import { useCollectionAttributes } from './hooks/useCollectionAttributes'

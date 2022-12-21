@@ -16,7 +16,7 @@ import {
   titleWrapper,
 } from '@media/NftMedia.css'
 import { useNFTProvider } from '@shared'
-import { Box, Flex, Heading, Label, Separator, Stack } from '@zoralabs/zord'
+import { Box, Flex, Heading, Label, Separator, Stack } from '@zord'
 
 type Props = {
   collectionAddress: string

@@ -1,7 +1,7 @@
 import { useCountdown } from '@noun-auction/hooks'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
-import { Flex, FlexProps, Label } from '@zoralabs/zord'
+import { Flex, FlexProps, Label } from '@zord'
 
 interface CountdownProps extends FlexProps {
   showLabels?: boolean

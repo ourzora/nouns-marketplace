@@ -31,8 +31,8 @@ import {
   Text,
   TextArea,
   Well,
-  color,
-} from '@zoralabs/zord'
+} from '@zord'
+import { color } from '@zord/tokens'
 
 import ZordMarkup from '../../docs/zordMarkup.md'
 

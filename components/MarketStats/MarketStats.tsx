@@ -1,6 +1,6 @@
 import { useAggregate } from 'hooks'
 
-import { Flex, FlexProps } from '@zoralabs/zord'
+import { Flex, FlexProps } from '@zord'
 
 import { DaoStats } from './DaoStats'
 import { StatBlock } from './StatBlock'

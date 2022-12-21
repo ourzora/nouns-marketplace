@@ -1,4 +1,4 @@
-import { Box } from '@zoralabs/zord'
+import { Box } from '@zord'
 
 import { codeWrapper } from './UtilStyles.css'
 

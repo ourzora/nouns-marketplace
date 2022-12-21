@@ -17,7 +17,7 @@ import {
 } from '@noun-auction'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import { useButtonRequiresAuth } from '@shared'
-import { Box, Flex, Grid, Input, Label, Separator, Stack } from '@zoralabs/zord'
+import { Box, Flex, Grid, Input, Label, Separator, Stack } from '@zord'
 
 export type NounsBidFormComponentProps = {
   activeAuction: TypeSafeNounsAuction

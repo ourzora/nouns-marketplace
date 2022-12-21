@@ -10,7 +10,7 @@ import { useValidateSeaportContractCall } from '@market/modules/Seaport/hooks/us
 import { useModal } from '@modal'
 import { formatContractError, useAuth } from '@shared'
 import { PrintError } from '@shared/components/PrintError'
-import { Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
+import { Flex, Heading, Paragraph, Separator, Stack } from '@zord'
 
 import { CommonSeaportFillOrderProps } from './SeaportFillOrderFlow'
 import { useSeaportTransaction } from './hooks/useSeaportTransaction'

@@ -6,7 +6,7 @@ import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import { NFTProvider } from '@shared/providers/NFTProvider'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Grid, Stack } from '@zoralabs/zord'
+import { Grid, Stack } from '@zord'
 
 const NFT = ({
   nft,

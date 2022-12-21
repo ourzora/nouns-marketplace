@@ -7,7 +7,7 @@ import { DataTable } from '@shared/components/DataTable'
 import { useCopyToClipboard } from '@shared/hooks/useCopyToClipboard'
 import { useToast } from '@toast'
 import { ToastStatus, ToastVariant } from '@toast/toastReducer'
-import { Heading, Stack } from '@zoralabs/zord'
+import { Heading, Stack } from '@zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import { useFormattedV3AskInfo } from '../hooks'

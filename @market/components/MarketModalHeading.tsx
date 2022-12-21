@@ -2,7 +2,7 @@ import React from 'react'
 
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Flex, Heading } from '@zoralabs/zord'
+import { Flex, Heading } from '@zord'
 
 interface MarketModalHeadingProps {
   nftObj: NFTObject

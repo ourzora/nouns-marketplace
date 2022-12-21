@@ -8,7 +8,7 @@ import { TypeSafeDao } from 'validators/dao'
 import { CollectionThumbnail } from '@media'
 import { useModal } from '@modal'
 import { useWindowWidth } from '@shared/hooks'
-import { Eyebrow, Flex, Icon, Label, Stack } from '@zoralabs/zord'
+import { Eyebrow, Flex, Icon, Label, Stack } from '@zord'
 
 import * as styles from './CollectionMenu.css'
 

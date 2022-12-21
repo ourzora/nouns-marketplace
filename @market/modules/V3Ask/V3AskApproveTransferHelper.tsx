@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { TransactionSubmitButton } from '@market/components'
 import { PrintError } from '@shared/components/PrintError'
 import { Zorb } from '@zora-brand'
-import { Stack } from '@zoralabs/zord'
+import { Stack } from '@zord'
 
 import { V3AskCheckApprovalSpinner } from './V3AskCheckApprovalSpinner'
 import { CommonV3AskComponentProps } from './V3AskFlow'

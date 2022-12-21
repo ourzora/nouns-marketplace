@@ -9,7 +9,7 @@ import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { AuctionCountdown, PlaceNounsBid } from '@noun-auction'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import { lightFont, useWindowWidth } from '@shared'
-import { Flex, Grid, Heading, Paragraph, Stack } from '@zoralabs/zord'
+import { Flex, Grid, Heading, Paragraph, Stack } from '@zord'
 
 import * as styles from './CollectionHeader.css'
 

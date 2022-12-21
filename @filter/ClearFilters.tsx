@@ -1,7 +1,7 @@
 import { Button, NounButtonProps } from 'components/Button'
 
 import { useCollectionFilters } from '@filter'
-import { Flex } from '@zoralabs/zord'
+import { Flex } from '@zord'
 
 import { ActiveFilterCounter } from './ActiveFilterCounter'
 
