@@ -18,7 +18,7 @@ export function CollectionLink({ collection }: { collection: TypeSafeDao }) {
   const { isSmall } = useWindowWidth()
 
   return (
-    <Link href={`/collections/${collection.collectionAddress}`} passHref>
+    <Link href={`/daos/${collection.collectionAddress}`} passHref>
       <Flex align="center" justify="space-between" gap="x4" onClick={requestClose}>
         <Flex align="center" gap="x4">
           <CollectionThumbnail

@@ -30,7 +30,7 @@ export function V3AskCreateSuccess({
   onNext,
   ...props
 }: V3AskCreateSuccessProps) {
-  const askURL = `https://noun.market/collections/${contractAddress}/${tokenId}`
+  const askURL = `https://noun.market/daos/${contractAddress}/${tokenId}`
   const [_, copied, copy] = useCopyToClipboard(askURL)
   const { toastDispatch } = useToast()
   const { state } = useV3AskStateContext()
