@@ -78,9 +78,8 @@ export function NFTSidebarComponent({
       </Flex>
 
       <DescriptionWithMaxLines
-        baseLineheight={30}
+        baseLineheight={24}
         maxLines={2}
-        paragraphClassName={mediumFont}
         overflowY="hidden"
         description={token.description}
       />

@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 
 import * as styles from '@noun-auction/styles/NounishStyles.css'
-import { lightFont } from '@shared'
 import { useNFT } from '@zoralabs/nft-hooks'
 import { Box, Button, Flex, Heading, Stack } from '@zord'
 
@@ -63,12 +62,7 @@ export function TokenInfo({
             )}
             {!hideCollectionTitle && (
               <Box mb="x1">
-                <Button
-                  onClick={contractLinkHandler}
-                  variant="unset"
-                  color="text3"
-                  className={[lightFont]}
-                >
+                <Button onClick={contractLinkHandler} variant="unset" color="text3">
                   {data?.nft?.contract?.name}
                 </Button>
               </Box>

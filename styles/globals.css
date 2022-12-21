@@ -13,10 +13,10 @@
   src: url('/fonts/PT-Root-UI_Medium.woff');
 }
 
-@font-face {
+/* @font-face {
   font-family: ptBold;
   src: url('/fonts/PT-Root-UI_Bold.woff');
-}
+} */
 
 * {
   box-sizing: border-box;

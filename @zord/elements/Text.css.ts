@@ -2,38 +2,11 @@ import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 
 import { atoms } from '../atoms'
-import { media } from '../tokens'
-
-// globalStyle('h1, h2, h3, h4, h5', {
-//   fontFamily: 'var(--display-font)!important',
-//   lineHeight: '1.125!important',
-// })
-
-// globalStyle('p', {
-//   fontFamily: 'var(--ui-font)!important',
-// })
-
-// globalStyle('light-font', {
-//   fontWeight: 300,
-//   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
-// })
-
-// export const lightFont = style({
-//   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
-//   fontWeight: 300,
-// })
 
 // export const mediumFont = style({
 //   fontFamily: 'PTRootUIWebLight, Arial, Helvetica, sans-serif!important',
 //   fontWeight: 600,
 // })
-
-// export const fontWeight = { // in zord's typography.ts
-//   paragraph: '400',
-//   heading: '500',
-//   label: '600',
-//   display: '700',
-// }
 
 export const textVariants = {
   italic: {

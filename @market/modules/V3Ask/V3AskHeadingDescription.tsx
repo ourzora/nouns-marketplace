@@ -1,5 +1,3 @@
-import { mediumFont } from 'styles/styles.css'
-
 import { Heading, Paragraph, Stack } from '@zord'
 
 interface HeadingDescriptionProps {
@@ -16,11 +14,7 @@ export function V3AskHeadingDescription({
       <Heading as="h3" size="md">
         {heading}
       </Heading>
-      {description && (
-        <Paragraph size="lg" color="text3" className={[mediumFont]}>
-          {description}
-        </Paragraph>
-      )}
+      {description && <Paragraph color="text3">{description}</Paragraph>}
     </Stack>
   )
 }

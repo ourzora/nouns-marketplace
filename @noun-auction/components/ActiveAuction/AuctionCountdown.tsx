@@ -1,7 +1,6 @@
 import { useCountdown } from '@noun-auction/hooks'
 import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
-import { lightFont } from '@shared'
-import { Flex, FlexProps, Label } from '@zord'
+import { Flex, FlexProps, Heading, Label } from '@zord'
 
 interface CountdownProps extends FlexProps {
   showLabels?: boolean
@@ -31,20 +30,20 @@ export function AuctionCountdown({
       {showLabels && (
         <Label
           size="md"
-          className={[layout === 'sideBarBid' && sideBarUpperLabel, lightFont]}
+          className={[layout === 'sideBarBid' && sideBarUpperLabel]}
           color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
           align={{ '@initial': 'left', '@1024': 'right' }}
         >
           {auctionCompleted ? 'Status' : label}&nbsp;
         </Label>
       )}
-      <Label
-        size="md"
+      <Heading
+        size="xs"
         align={{ '@initial': 'left', '@1024': 'right' }}
         className={[layout === 'sideBarBid' && sideBarUpperLabel]}
       >
         {auctionCompleted ? endedCopy : countdownText}
-      </Label>
+      </Heading>
     </Flex>
   )
 }

@@ -1,8 +1,7 @@
 import { useMemo } from 'react'
 
-import { lightFont } from '@shared'
 import { useNFTProvider } from '@shared/providers/NFTProvider'
-import { BoxProps, Grid, Heading, Label, Stack } from '@zord'
+import { BoxProps, Grid, Heading, Label, Paragraph, Stack } from '@zord'
 
 import {
   nftAttribute,
@@ -29,15 +28,10 @@ export function NFTAttributes({ ...props }: NFTAttributesProps) {
         {nft?.metadata?.attributes &&
           nft?.metadata?.attributes.map((attribute) => (
             <Stack key={attribute.name} className={nftAttribute}>
-              <Label
-                size="lg"
-                className={lightFont}
-                color="text3"
-                textTransform="capitalize"
-              >
+              <Paragraph color="text3" textTransform="capitalize">
                 {attribute.name}
-              </Label>
-              <Label size="lg" textTransform="capitalize">
+              </Paragraph>
+              <Label size="lg" textTransform="capitalize" textAlign="center">
                 {attribute.value}
               </Label>
             </Stack>

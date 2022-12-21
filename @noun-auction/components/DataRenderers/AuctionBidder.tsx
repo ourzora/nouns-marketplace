@@ -9,7 +9,7 @@ import {
   auctionWrapperVariants,
   sideBarUpperLabel,
 } from '@noun-auction/styles/NounishStyles.css'
-import { isAddressMatch, lightFont, useShortAddress } from '@shared'
+import { isAddressMatch, useShortAddress } from '@shared'
 import { addressToEtherscanLink } from '@shared/utils/addressToEtherscanLink'
 import { Flex, FlexProps, Icon, Label } from '@zord'
 
@@ -65,7 +65,7 @@ export function AuctionBidder({
       {showLabels && (
         <Label
           size={layout === 'sideBarBid' ? 'lg' : 'md'}
-          className={[layout === 'sideBarBid' && sideBarUpperLabel, lightFont]}
+          className={[layout === 'sideBarBid' && sideBarUpperLabel]}
           color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
           style={{ lineHeight: '1.15' }}
         >

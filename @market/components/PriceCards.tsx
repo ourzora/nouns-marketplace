@@ -1,5 +1,4 @@
 import { ArrowLeft, ArrowRight } from 'components/Icon'
-import { mediumFont } from 'styles/styles.css'
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import React, { useCallback, useMemo, useState } from 'react'
@@ -65,7 +64,7 @@ function PriceCard({
       <Stack>
         <Flex w="100%" justify="space-between">
           {platformName && (
-            <Paragraph inline className={mediumFont} color="text2">
+            <Paragraph inline color="text2">
               Price on {platformName}
             </Paragraph>
           )}
@@ -77,7 +76,7 @@ function PriceCard({
           </Heading>
         </Flex>
         {usdcPrice && (
-          <Paragraph color="text2" inline className={mediumFont}>
+          <Paragraph color="text2" inline>
             {formattedUSD} USD
           </Paragraph>
         )}

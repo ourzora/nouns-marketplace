@@ -1,6 +1,5 @@
 import { stat } from 'styles/styles.css'
 
-import { lightFont } from '@shared'
 import { Label, Stack, Text } from '@zord'
 
 export function StatBlock({
@@ -25,7 +24,7 @@ export function StatBlock({
         // variant="heading-xs"
         inline
         color="text3"
-        className={[lightFont, stat]}
+        className={[stat]}
       >
         {statType}
       </Label>

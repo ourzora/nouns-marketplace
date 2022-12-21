@@ -1,7 +1,7 @@
 import * as styles from 'styles/styles.css'
 
 import { Maybe } from '@zoralabs/nft-hooks/dist/backends/zora-indexer-v1/zora-indexer-types'
-import { FlexProps, Paragraph, Stack, Text } from '@zord'
+import { FlexProps, Heading, Paragraph, Stack } from '@zord'
 
 export interface HomePageHeaderProps extends FlexProps {
   headline: Maybe<string> | undefined
@@ -16,17 +16,17 @@ export function HomePageHeader({ headline, copy, ...props }: HomePageHeaderProps
       {...props}
     >
       {headline && (
-        <Text
+        <Heading
           className={[styles.homepageHeadline]}
           textAlign="center"
           as="h1"
           style={{ lineHeight: 1.125 }}
         >
           {headline}
-        </Text>
+        </Heading>
       )}
       {copy && (
-        <Paragraph as="p" size="lg" textAlign="center" color="text1">
+        <Paragraph size="md" textAlign="center" color="text1">
           {copy}
         </Paragraph>
       )}

@@ -36,7 +36,7 @@ export function V3AskCancel({ onNext, nft, ...props }: V3AskCancelProps) {
         <MarketModalHeading nftObj={nft} action="Delist" />
 
         <DataTable
-          rowSize="lg"
+          rowSize="md"
           rowVariant="withBorder"
           items={formattedListingDataTable}
         />

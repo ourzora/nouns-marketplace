@@ -2,8 +2,7 @@ import NextLink from 'next/link'
 import Link from 'next/link'
 
 import * as styles from '@noun-auction/styles/NounishStyles.css'
-import { lightFont } from '@shared'
-import { Box, BoxProps, Button, Flex, Label, Stack } from '@zord'
+import { Box, BoxProps, Button, Flex, Span, Stack } from '@zord'
 
 import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 
@@ -36,21 +35,21 @@ export function RPCTokenInfo({
           )}
         </Button>
       </NextLink>
-      <Stack justify="space-around">
-        <Box>
-          <Box className={styles.rowCollectionName}>
-            <Link href={`/collections/${collectionAddress}`} passHref>
-              {tokenName ?? '...'}
-            </Link>
-          </Box>
-          <Box mt="x1">
-            <Label as="a" color="tertiary" className={[lightFont]}>
-              <Link href={`/collections/${collectionAddress}`} passHref>
-                {collectionName ?? '...'}
-              </Link>
-            </Label>
-          </Box>
+      <Stack justify="center" gap="x1">
+        {/* <Box> */}
+        <Box className={styles.rowCollectionName}>
+          <Link href={`/collections/${collectionAddress}`} passHref>
+            {tokenName ?? '...'}
+          </Link>
         </Box>
+        <Box>
+          <Link href={`/collections/${collectionAddress}`} passHref>
+            <Span as="a" color="tertiary">
+              {collectionName ?? '...'}
+            </Span>
+          </Link>
+        </Box>
+        {/* </Box> */}
       </Stack>
     </Flex>
   )

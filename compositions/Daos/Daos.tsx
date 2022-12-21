@@ -3,9 +3,8 @@ import { DAODescriptionModal } from 'modals'
 import React from 'react'
 import { TypeSafeDao } from 'validators/dao'
 
-import { lightFont } from '@noun-auction'
 import { useWindowWidth } from '@shared'
-import { Box, Flex, Heading, Label, Stack, StackProps } from '@zord'
+import { Box, Flex, Heading, Paragraph, Stack, StackProps } from '@zord'
 
 import { DaoRow } from './DaoRow'
 import {
@@ -29,9 +28,7 @@ export function DaoTable({ routePrefix, className, daos, ...props }: DaoTablePro
   return (
     <Stack className={[daosWrapper, className]} {...props}>
       <Flex gap="x2" align="center">
-        <Heading as="h2" size="lg">
-          DAOs
-        </Heading>
+        <Heading as="h2">DAOs</Heading>
         <DAODescriptionModal />
       </Flex>
       <Stack>
@@ -40,19 +37,13 @@ export function DaoTable({ routePrefix, className, daos, ...props }: DaoTablePro
             <Box className={[daoMeta]}></Box>
             <Box className={[metadataCells]}>
               <Box className={[cell]}>
-                <Label color="tertiary" className={[lightFont]}>
-                  Treasury
-                </Label>
+                <Paragraph color="tertiary">Treasury</Paragraph>
               </Box>
               <Box className={[cell]}>
-                <Label color="tertiary" className={[lightFont]}>
-                  Auction Status
-                </Label>
+                <Paragraph color="tertiary">Auction Status</Paragraph>
               </Box>
               <Box className={[cell]}>
-                <Label color="tertiary" className={[lightFont]}>
-                  Current Bid
-                </Label>
+                <Paragraph color="tertiary">Current Bid</Paragraph>
               </Box>
             </Box>
             <Box className={[placeholderCell]}></Box>

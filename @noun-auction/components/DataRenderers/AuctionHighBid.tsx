@@ -1,5 +1,4 @@
 import { sidebarHighBid } from '@noun-auction/styles/NounishStyles.css'
-import { lightFont } from '@shared'
 import { Flex, FlexProps, Label } from '@zord'
 
 import { EthAmount } from './EthAmount'
@@ -28,7 +27,6 @@ export function AuctionHighBid({
       {showLabels && (
         <Label
           size={layout === 'sideBarBid' ? 'lg' : 'md'}
-          className={lightFont}
           style={{ lineHeight: '1.15' }}
           align={layout === 'sideBarBid' ? 'left' : 'right'}
           color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}

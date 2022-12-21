@@ -37,8 +37,3 @@ globalStyle(`${errorBox} pre`, {
   color: 'red',
   whiteSpace: 'pre-wrap',
 })
-
-export const lightFont = style({
-  fontFamily: 'PTRootUIWebLight!important',
-  fontWeight: 300,
-})

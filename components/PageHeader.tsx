@@ -32,7 +32,7 @@ export function PageHeader({
         </Text>
       )}
       {copy && (
-        <Paragraph as="p" size="lg" textAlign="center" color="text3">
+        <Paragraph textAlign="center" color="text3">
           {copy}
         </Paragraph>
       )}

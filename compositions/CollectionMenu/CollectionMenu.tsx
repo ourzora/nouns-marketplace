@@ -7,7 +7,6 @@ import { useNounsDaos } from 'hooks/useNounsDaos'
 import { useCallback, useMemo, useState } from 'react'
 
 import { ModalComposition } from '@modal'
-import { lightFont } from '@shared'
 import { useHasScrolled } from '@shared/hooks/useHasScrolled'
 import { Box, Button, Flex, Heading, Icon, Label, Paragraph, Stack, Text } from '@zord'
 
@@ -56,7 +55,7 @@ export function CollectionMenu() {
                 '@initial': 'none',
                 '@1024': 'inline',
               }}
-              className={[lightFont, noTextWrap]}
+              className={[noTextWrap]}
             >
               {currentCollectionCount}
             </Label>

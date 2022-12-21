@@ -8,7 +8,7 @@ import * as rowStyles from './DataTableItem.css'
 interface DataTableProps extends FlexProps {
   items?: DataTableItemProps[]
   rowVariant?: keyof typeof rowStyles.rowVariants['variant']
-  rowSize?: 'lg' | 'sm'
+  rowSize?: 'md' | 'sm'
 }
 
 export function DataTable({

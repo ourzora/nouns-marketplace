@@ -1,4 +1,3 @@
-import { OpenSeaIcon } from 'components/Icon'
 import { mediumFont } from 'styles/styles.css'
 
 import React, { Dispatch, SetStateAction, useEffect, useMemo } from 'react'
@@ -116,31 +115,31 @@ function SeaportFillOrderWithVerifiedContractCall({
         <MarketModalHeading nftObj={nft} action="Buy" />
         <Stack gap="x3" {...props}>
           <Flex justify="space-between">
-            <Paragraph size="lg" inline color="text2" className={[mediumFont]}>
+            <Paragraph inline color="text2">
               Marketplace
             </Paragraph>
             <Flex gap="x2">
-              <Paragraph size="lg" inline color="text1">
+              <Heading size="xs" inline color="text1">
                 {platformName}
-              </Paragraph>
+              </Heading>
               <PlatformLogo />
             </Flex>
           </Flex>
           <Separator />
           <Flex justify="space-between">
-            <Paragraph size="lg" inline color="text2" className={[mediumFont]}>
+            <Paragraph inline color="text2">
               Savings
             </Paragraph>
-            <Paragraph size="lg" inline color="text1">
+            <Heading size="xs" inline color="text1">
               ~{savings} ETH
-            </Paragraph>
+            </Heading>
           </Flex>
-          <Paragraph size="md" color="text2" className={[mediumFont]}>
+          <Paragraph color="text2">
             vs. competing marketplaces that charge a 2.5% fee
           </Paragraph>
           <Separator />
           <Flex justify="space-between">
-            <Paragraph size="lg" inline color="text2" className={[mediumFont]}>
+            <Paragraph inline color="text2">
               Price
             </Paragraph>
             <Heading as="h1" color="text1">

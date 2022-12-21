@@ -103,7 +103,7 @@ export function PriceRangeSelector({
       </Flex>
 
       {error && (
-        <Paragraph className={errorText} size="xs">
+        <Paragraph className={errorText} size="sm">
           {error}
         </Paragraph>
       )}

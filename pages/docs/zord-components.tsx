@@ -14,7 +14,6 @@ import {
   Input,
   InputField,
   Label,
-  MenuText,
   Modal,
   ModalContent,
   Paragraph,
@@ -162,10 +161,6 @@ export default function NounsAuctionHistory() {
               <Eyebrow>Paragraphs</Eyebrow>
               <Paragraph size="md">Paragraph md</Paragraph>
               <Paragraph size="sm">Paragraph sm</Paragraph>
-            </Flex>
-            <Flex direction="column">
-              <Eyebrow>MenuText</Eyebrow>
-              <MenuText>MenuText</MenuText>
             </Flex>
             <Flex direction="column">
               <Eyebrow>Eyebrow</Eyebrow>

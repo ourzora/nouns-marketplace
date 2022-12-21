@@ -1,10 +1,8 @@
-import { lightFont } from 'styles/styles.css'
-
 import React from 'react'
 
 import { AvatarImage, CopyButton } from '@shared'
 import { useToggle } from '@shared/hooks/useToggle'
-import { Flex, FlexProps, Icon, Paragraph } from '@zord'
+import { Flex, FlexProps, Heading, Icon, Paragraph } from '@zord'
 import { mixins } from '@zord/mixins'
 
 import * as styles from './DataTableItem.css'
@@ -27,7 +25,7 @@ export interface DataTableItemProps extends FlexProps {
   value?: string
   address?: string
   variant?: keyof typeof styles.rowVariants['variant']
-  size?: 'lg' | 'sm'
+  size?: 'md' | 'sm'
 }
 
 export function DataTableItem({
@@ -44,23 +42,24 @@ export function DataTableItem({
 
   return (
     <Flex justify="space-between" w="100%" {...props} className={styles.row({ variant })}>
-      <Paragraph size={size} inline color="text3" className={[lightFont]}>
+      <Paragraph size={size} inline color="text3">
         {children}
       </Paragraph>
 
       <Flex gap="x2" align="center">
         {showCopied && (
-          <Paragraph size="xs" color="text3">
+          <Paragraph size="sm" color="text3">
             Copied
           </Paragraph>
         )}
 
         {!!address && <AvatarImage address={address} size="24" variant="hairlineLight" />}
 
-        <Paragraph
+        <Heading
           display="flex"
           className={(styles.center, !!url?.href && mixins({ hoverFadeOut: true }))}
-          size={size}
+          // size={size}
+          size="xs"
           as={url?.href ? 'a' : 'div'}
           inline
           {...url}
@@ -70,7 +69,7 @@ export function DataTableItem({
           {url?.href && (
             <Icon display="inline" id="ArrowRightAngle" ml="x1" top="x0" color="text3" />
           )}
-        </Paragraph>
+        </Heading>
 
         {!!copyValue && (
           <CopyButton value={copyValue} onStatusChange={handleCopyStatus} />

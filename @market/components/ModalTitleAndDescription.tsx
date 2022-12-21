@@ -20,7 +20,7 @@ export function ModalTitleAndDescription({
         </Heading>
       )}
       {description && (
-        <Paragraph size="lg" mb="x4">
+        <Paragraph size="md" mb="x4">
           {description}
         </Paragraph>
       )}

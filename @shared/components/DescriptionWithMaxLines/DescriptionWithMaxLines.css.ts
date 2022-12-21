@@ -4,7 +4,8 @@ import { typography } from '@zord/tokens'
 
 export const button = style([
   {
-    lineHeight: typography.lineHeight['30'],
+    // lineHeight: typography.lineHeight['30'],
+    lineHeight: typography.lineHeight['24'],
   },
   atoms({
     position: 'absolute',

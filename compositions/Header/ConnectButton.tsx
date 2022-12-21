@@ -12,6 +12,7 @@ import {
   ButtonProps,
   Flex,
   Icon,
+  Paragraph,
   PopUp,
   Separator,
   Stack,
@@ -61,10 +62,7 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
         w="auto"
         {...props}
       >
-        <Text as="span" variant="paragraph-lg">
-          &#x26A0;
-        </Text>{' '}
-        Wrong network
+        <Paragraph as="span">&#x26A0;</Paragraph> Wrong network
       </Button>
     )
   }

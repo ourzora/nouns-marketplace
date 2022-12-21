@@ -1,7 +1,7 @@
 import React, { WheelEvent, forwardRef, useCallback, useState } from 'react'
 import { PolymorphicForwardRefExoticComponent } from 'react-polymorphic-types'
 
-import { Box, BoxComponentProps, Flex, Label, Text, textVariants } from '.'
+import { Box, BoxComponentProps, Flex, Heading, Label, textVariants } from '.'
 import { FieldAnnotation } from './FieldAnnotation'
 import { Icon, IconProps } from './Icon'
 import * as styles from './InputField.css'
@@ -144,13 +144,14 @@ export function InnerInputField(
           />
 
           {affix && (
-            <Text
+            <Heading
+              size="xs"
+              // size="sm"
               className={[large && styles.inputLarge]}
-              variant="paragraph-sm"
               color="secondary"
             >
               {affix}
-            </Text>
+            </Heading>
           )}
 
           {affixElement}

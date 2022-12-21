@@ -6,9 +6,9 @@ import { useToken } from 'hooks/useToken'
 
 import { TypeSafeDao } from 'validators/dao'
 
-import { EthAmount, RPCTokenInfo, lightFont, useNounishAuctionQuery } from '@noun-auction'
+import { EthAmount, RPCTokenInfo, useNounishAuctionQuery } from '@noun-auction'
 import { numberFormatter, useWindowWidth } from '@shared'
-import { Box, Button, Flex, Label } from '@zord'
+import { Box, Button, Flex, Heading, Paragraph } from '@zord'
 
 import {
   cardHeader,
@@ -107,28 +107,22 @@ export const DaoRowComponent = ({
         </Box>
         <Flex wrap>
           <Box className={mobileCell}>
-            <Label color="tertiary" className={[lightFont]}>
-              Current Bid
-            </Label>
+            <Paragraph color="tertiary">Current Bid</Paragraph>
             <EthAmount ethAmount={highestBid} />
           </Box>
           <Box className={mobileCell}>
-            <Label color="tertiary" className={[lightFont]}>
-              Auction Status
-            </Label>
-            {auctionStatus}
+            <Paragraph color="tertiary">Auction Status</Paragraph>
+            <Heading size="xs">{auctionStatus}</Heading>
           </Box>
           <Box className={mobileCell}>
-            <Label color="tertiary" className={[lightFont]}>
-              Treasury
-            </Label>
-            {treasury?.formatted ? numberFormatter(treasury?.formatted) : '...'}
-            {` ${treasury?.symbol ?? ''}`}
+            <Paragraph color="tertiary">Treasury</Paragraph>
+            <Heading size="xs">
+              {treasury?.formatted ? numberFormatter(treasury?.formatted) : '...'}
+              {` ${treasury?.symbol ?? ''}`}
+            </Heading>
           </Box>
           <Box className={mobileCell}>
-            <Label color="tertiary" className={[lightFont]}>
-              Proposals
-            </Label>
+            <Paragraph color="tertiary">Proposals</Paragraph>
           </Box>
         </Flex>
       </Box>
@@ -148,11 +142,13 @@ export const DaoRowComponent = ({
         />
       </Box>
       <Box className={[metadataCells]}>
-        <Box className={[cell]}>
+        <Heading size="xs" className={[cell]}>
           {treasury?.formatted ? numberFormatter(treasury?.formatted) : '...'}
           {` ${treasury?.symbol}`}
-        </Box>
-        <Box className={[cell]}>{auctionStatus}</Box>
+        </Heading>
+        <Heading size="xs" className={[cell]}>
+          {auctionStatus}
+        </Heading>
         <Box className={[cell]}>
           <EthAmount ethAmount={highestBid} />
         </Box>

@@ -1,5 +1,5 @@
 import { Link } from 'components/Link'
-import { leadingTight, lightFont, mediumFont } from 'styles/styles.css'
+import { leadingTight, mediumFont } from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
 
@@ -39,9 +39,7 @@ export function CollectionLink({ collection }: { collection: TypeSafeDao }) {
           </Stack>
         </Flex>
         <Flex gap="x2" align="center">
-          <Label color="text2" className={lightFont}>
-            {nftCount} NFTs
-          </Label>
+          <Label color="text2">{nftCount} NFTs</Label>
           <Icon id="ChevronRight" color="text3" />
         </Flex>
       </Flex>

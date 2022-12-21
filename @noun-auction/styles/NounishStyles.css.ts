@@ -308,10 +308,6 @@ export const auctionEventRow = style([
 ])
 
 /* STYLE UTILS */
-export const lightFont = style({
-  fontWeight: '300!important',
-  fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
-})
 
 /* Thumbnail */
 export const tokenInfoWrapper = style([

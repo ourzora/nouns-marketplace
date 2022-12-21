@@ -13,21 +13,11 @@ export type { FlexProps } from './Flex'
 export { Stack } from './Stack'
 export type { StackProps } from './Stack'
 
-export {
-  Text,
-  MenuText,
-  Paragraph,
-  Heading,
-  Display,
-  Eyebrow,
-  Label,
-  textVariants,
-} from './Text'
+export { Text, Paragraph, Heading, Eyebrow, Label, Span, textVariants } from './Text'
 export type {
   TextProps,
   ParagraphProps,
   HeadingProps,
-  DisplayProps,
   EyebrowProps,
   LabelProps,
   MenuProps,

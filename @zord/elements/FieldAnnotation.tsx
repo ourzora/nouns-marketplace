@@ -16,7 +16,7 @@ export function FieldAnnotation({
   error,
   className,
   indentFields = true,
-  variant = 'paragraph-xs',
+  variant = 'paragraph-sm',
   ...props
 }: FieldAnnotationProps) {
   return (

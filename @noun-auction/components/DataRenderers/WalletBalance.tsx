@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 
 import { auctionWrapperVariants } from '@noun-auction'
 import { SharedDataRendererProps } from '@noun-auction'
-import { lightFont, roundFourDecimals } from '@shared'
+import { roundFourDecimals } from '@shared'
 import { Flex, Label } from '@zord'
 
 export function WalletBalance({
@@ -35,7 +35,6 @@ export function WalletBalance({
       {showLabels && (
         <Label
           size={layout === 'sideBarBid' ? 'lg' : 'md'}
-          className={lightFont}
           style={{ lineHeight: '1.15' }}
           align={layout === 'sideBarBid' ? 'left' : 'right'}
           color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}

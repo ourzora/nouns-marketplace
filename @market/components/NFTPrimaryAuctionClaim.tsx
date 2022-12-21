@@ -1,5 +1,3 @@
-import { mediumFont } from 'styles/styles.css'
-
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
@@ -28,7 +26,7 @@ export function NFTPrimaryAuctionClaim({ nftObj, primaryAuction, ...props }: Cla
           label="Sold for"
         />
       )}
-      <Paragraph size="md" className={[mediumFont]} color="text2">
+      <Paragraph size="md" color="text2">
         Ownership will be transferred after you claim the NFT
       </Paragraph>
     </Well>

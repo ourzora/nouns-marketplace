@@ -4,7 +4,7 @@ import {
   transactionBidder,
   transactionEventWrapper,
 } from '@noun-auction/styles/NounishStyles.css'
-import { lightFont, useShortAddress } from '@shared'
+import { useShortAddress } from '@shared'
 import { Flex, Grid, GridProps, Label, Stack } from '@zord'
 
 import { EnsAvatar } from './EnsAvatar'
@@ -58,9 +58,7 @@ export function BidTransactionEvent({
             }}
           >
             <Label style={{ lineHeight: 1.25 }}>{ensName ? ensName : shortAddress}</Label>
-            <Label style={{ lineHeight: 1.25 }} className={lightFont}>
-              {message}
-            </Label>
+            <Label style={{ lineHeight: 1.25 }}>{message}</Label>
           </Flex>
           <TxTimestamp transactionInfo={transactionInfo} />
         </Stack>

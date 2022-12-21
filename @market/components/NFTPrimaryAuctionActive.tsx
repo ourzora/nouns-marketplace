@@ -28,7 +28,7 @@ export function NFTPrimaryAuctionActive({
 
   return (
     <Stack gap="x4" {...props}>
-      <DataTable rowSize="lg" items={formattedAuctionDataTable} />
+      <DataTable rowSize="md" items={formattedAuctionDataTable} />
       <Stack gap="x4" backgroundColor="accent" borderRadius="phat" p="x6">
         {formattedCryptoHighestBidPrice && formattedUSDHighestBidPrice && (
           <PriceWithLabel
