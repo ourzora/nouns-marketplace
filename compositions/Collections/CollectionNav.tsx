@@ -33,19 +33,18 @@ export function CollectionNav({
       >
         <CollectionNavItem
           collectionAddress={collectionAddress}
-          pageSection={ROUTES.about.url}
-          setActiveView={setActiveView}
-        >
-          {ROUTES.about.title}
-        </CollectionNavItem>
-
-        <CollectionNavItem
-          collectionAddress={collectionAddress}
           pageSection={ROUTES.nfts.url}
           count={nftCount}
           setActiveView={setActiveView}
         >
           {ROUTES.nfts.title}
+        </CollectionNavItem>
+        <CollectionNavItem
+          collectionAddress={collectionAddress}
+          pageSection={ROUTES.about.url}
+          setActiveView={setActiveView}
+        >
+          {ROUTES.about.title}
         </CollectionNavItem>
 
         {/* <CollectionNavItem

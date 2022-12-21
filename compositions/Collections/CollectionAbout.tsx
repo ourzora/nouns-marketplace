@@ -47,14 +47,15 @@ export function CollectionAbout({
           '@1024': 'x0',
         }}
       >
-        <Flex
+        <Grid
           className={['collectionPage-meta', styles.collectionGrid, styles.activeAuction]}
-          direction={{ '@initial': 'column', '@1024': 'row' }}
           w="100%"
-          justify="space-between"
-          alignSelf="flex-start"
         >
-          <Stack gap={{ '@initial': 'x4', '@1024': 'x6' }} align="flex-start">
+          <Stack
+            gap={{ '@initial': 'x4', '@1024': 'x6' }}
+            align="flex-start"
+            className={[styles.collectionNameAndStats]}
+          >
             <Flex
               align="center"
               direction={{ '@initial': 'column', '@1024': 'row' }}
@@ -64,14 +65,13 @@ export function CollectionAbout({
                 className={styles.collectionThumb}
                 collectionAddress={collection.address}
                 radius="round"
-                m="auto"
+                alignSelf="flex-start"
                 size="md"
-                h="100%"
-                w="100%"
               />
               <PageHeader
+                direction="row"
                 headline={collection.name ?? ''}
-                align={{
+                justify={{
                   '@initial': 'center',
                   '@1024': 'flex-start',
                 }}
@@ -85,6 +85,7 @@ export function CollectionAbout({
             <MarketStats contractAddress={collection.address} />
           </Stack>
           <Flex
+            className={[styles.collectionLinks]}
             w="100%"
             gap="x2"
             direction="column"
@@ -117,7 +118,7 @@ export function CollectionAbout({
               />
             )}
           </Flex>
-        </Flex>
+        </Grid>
       </Stack>
     </Grid>
   )

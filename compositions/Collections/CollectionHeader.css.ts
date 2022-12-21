@@ -1,3 +1,4 @@
+// import { grid } from '@market/modules/V3Ask/V3AskFlow.css'
 import { style } from '@vanilla-extract/css'
 import { atoms, color, media, space } from '@zoralabs/zord'
 
@@ -21,6 +22,7 @@ export const activeAuction = style([
   {
     gridTemplateColumns: 'repeat(4, [col-start] 1fr)',
     gridColumn: '1/span 4',
+    display: 'grid',
     '@media': {
       [media.min1024]: {
         gridTemplateColumns: 'repeat(8, [col-start] 1fr)',
@@ -32,7 +34,6 @@ export const activeAuction = style([
     gap: { '@initial': 'x4', '@1024': 'x6' },
   }),
 ])
-
 export const activeAuctionImage = style([
   {
     gridColumn: 'span 4',
@@ -40,6 +41,17 @@ export const activeAuctionImage = style([
   atoms({
     borderRadius: 'curved',
   }),
+])
+export const collectionNameAndStats = style([
+  {
+    gridColumn: 'span 5',
+  },
+])
+
+export const collectionLinks = style([
+  {
+    gridColumn: 'span 3',
+  },
 ])
 
 export const activeAuctionForm = style([
@@ -59,6 +71,7 @@ export const activeAuctionForm = style([
 export const collectionThumb = style([
   {
     aspectRatio: '1/1',
+    width: '80px',
   },
 ])
 export const menu = style({
