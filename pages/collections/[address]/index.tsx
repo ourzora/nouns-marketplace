@@ -20,7 +20,7 @@ import { Stack } from '@zoralabs/zord'
 const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
   const { contractAddress: collectionAddress, collection, seo } = fallback
-  const [activeView, setActiveView] = useState<ActiveCollectionPageView>('about')
+  const [activeView, setActiveView] = useState<ActiveCollectionPageView>('nfts')
   const { nftCount } = useAggregate(collectionAddress)
   const { asPath } = useRouter()
   const router = useRouter()
