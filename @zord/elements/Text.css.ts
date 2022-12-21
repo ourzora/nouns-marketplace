@@ -2,6 +2,38 @@ import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 
 import { atoms } from '../atoms'
+import { media } from '../tokens'
+
+// globalStyle('h1, h2, h3, h4, h5', {
+//   fontFamily: 'var(--display-font)!important',
+//   lineHeight: '1.125!important',
+// })
+
+// globalStyle('p', {
+//   fontFamily: 'var(--ui-font)!important',
+// })
+
+// globalStyle('light-font', {
+//   fontWeight: 300,
+//   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
+// })
+
+// export const lightFont = style({
+//   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
+//   fontWeight: 300,
+// })
+
+// export const mediumFont = style({
+//   fontFamily: 'PTRootUIWebLight, Arial, Helvetica, sans-serif!important',
+//   fontWeight: 600,
+// })
+
+// export const fontWeight = { // in zord's typography.ts
+//   paragraph: '400',
+//   heading: '500',
+//   label: '600',
+//   display: '700',
+// }
 
 export const textVariants = {
   italic: {
@@ -26,31 +58,81 @@ export const textVariants = {
         letterSpacing: '0.05em',
       }),
     ]),
-    'heading-xs': atoms({
-      fontSize: 20,
-      fontWeight: 'heading',
-      lineHeight: 30,
-    }),
-    'heading-sm': atoms({
-      fontSize: 30,
-      fontWeight: 'heading',
-      lineHeight: 40,
-    }),
-    'heading-md': atoms({
-      fontSize: 35,
-      fontWeight: 'heading',
-      lineHeight: 50,
-    }),
-    'heading-lg': atoms({
-      fontSize: 40,
-      fontWeight: 'heading',
-      lineHeight: 55,
-    }),
-    'heading-xl': atoms({
-      fontSize: 50,
-      fontWeight: 'heading',
-      lineHeight: 70,
-    }),
+    // 'heading-xs': atoms({
+    //   fontSize: 20,
+    //   fontWeight: 'heading',
+    //   lineHeight: 30,
+    // }),
+    'heading-xs': style([
+      {
+        fontFamily: 'var(--ui-font)', // h5 font intentionally differs
+        fontWeight: 700,
+      },
+      atoms({
+        fontSize: { '@initial': 16, '@1024': 18 },
+        lineHeight: 24,
+      }),
+    ]),
+    // 'heading-sm': atoms({
+    //   fontSize: 30,
+    //   fontWeight: 'heading',
+    //   lineHeight: 40,
+    // }),
+    'heading-sm': style([
+      {
+        fontFamily: 'var(--display-font)!important',
+      },
+      atoms({
+        fontWeight: 'heading',
+        fontSize: { '@initial': 20, '@1024': 24 },
+        lineHeight: { '@initial': 24, '@1024': 28 },
+      }),
+    ]),
+    // 'heading-md': atoms({
+    //   fontSize: 35,
+    //   fontWeight: 'heading',
+    //   lineHeight: 50,
+    // }),
+    'heading-md': style([
+      {
+        fontFamily: 'var(--display-font)!important',
+      },
+      atoms({
+        fontWeight: 'heading',
+        fontSize: { '@initial': 30, '@1024': 36 },
+        lineHeight: { '@initial': 32, '@1024': 40 },
+      }),
+    ]),
+    // 'heading-lg': atoms({
+    //   fontSize: 40,
+    //   fontWeight: 'heading',
+    //   lineHeight: 55,
+    // }),
+    'heading-lg': style([
+      {
+        fontFamily: 'var(--display-font)!important',
+      },
+      atoms({
+        fontWeight: 'heading',
+        fontSize: { '@initial': 42, '@1024': 52 },
+        lineHeight: { '@initial': 48, '@1024': 62 },
+      }),
+    ]),
+    // 'heading-xl': atoms({
+    //   fontSize: 50,
+    //   fontWeight: 'heading',
+    //   lineHeight: 70,
+    // }),
+    'heading-xl': style([
+      {
+        fontFamily: 'var(--display-font)!important',
+      },
+      atoms({
+        fontWeight: 'heading',
+        fontSize: { '@initial': 42, '@1024': 64 },
+        lineHeight: { '@initial': 48, '@1024': 72 },
+      }),
+    ]),
     'label-xs': atoms({
       fontSize: 12,
       fontWeight: 'label',
@@ -71,51 +153,38 @@ export const textVariants = {
       fontWeight: 'label',
       lineHeight: 30,
     }),
-    'menu-lg': atoms({
-      fontSize: 28,
-      fontWeight: 'label',
-      lineHeight: 34,
-    }),
-    'paragraph-xs': atoms({
-      fontSize: 12,
-      fontWeight: 'paragraph',
-      lineHeight: 20,
-    }),
-    'paragraph-sm': atoms({
-      fontSize: 14,
-      fontWeight: 'paragraph',
-      lineHeight: 24,
-    }),
-    'paragraph-md': atoms({
-      fontSize: 16,
-      fontWeight: 'paragraph',
-      lineHeight: 25,
-    }),
-    'paragraph-lg': atoms({
-      fontSize: 18,
-      fontWeight: 'paragraph',
-      lineHeight: 30,
-    }),
-    'display-xs': atoms({
-      fontSize: 40,
-      fontWeight: 'display',
-      lineHeight: 50,
-    }),
-    'display-sm': atoms({
-      fontSize: 50,
-      fontWeight: 'display',
-      lineHeight: 65,
-    }),
-    'display-md': atoms({
-      fontSize: 65,
-      fontWeight: 'display',
-      lineHeight: 85,
-    }),
-    'display-lg': atoms({
-      fontSize: 80,
-      fontWeight: 'display',
-      lineHeight: 95,
-    }),
+    // 'paragraph-sm': atoms({
+    //   fontSize: 14,
+    //   fontWeight: 'paragraph',
+    //   lineHeight: 24,
+    // }),
+    'paragraph-sm': style([
+      // <span> in noun.market Figma
+      {
+        fontFamily: 'var(--ui-font)!important',
+      },
+      atoms({
+        fontSize: 16,
+        fontWeight: 'paragraph',
+        lineHeight: 24,
+      }),
+    ]),
+    // 'paragraph-md': atoms({
+    //   fontSize: 16,
+    //   fontWeight: 'paragraph',
+    //   lineHeight: 25,
+    // }),
+    'paragraph-md': style([
+      // <p> in noun.market Figma
+      {
+        fontFamily: 'var(--ui-font)!important',
+      },
+      atoms({
+        fontSize: { '@initial': 16, '@1024': 18 },
+        fontWeight: 'paragraph',
+        lineHeight: 24,
+      }),
+    ]),
     link: style([
       atoms({
         textDecoration: 'underline',
