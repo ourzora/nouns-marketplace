@@ -93,6 +93,7 @@ export const DaoRowComponent = ({
           <RPCTokenInfo
             tokenImage={tokenImage}
             tokenId={tokenId}
+            tokenName={tokenName}
             collectionAddress={collectionAddress}
             collectionName={collectionName}
             cursor="pointer"
