@@ -43,7 +43,7 @@ export const useFormattedV3AskInfo = ({
   }, [ask?.price?.nativePrice?.decimal, finalizedV3AskDetails?.price, hasRelevantV3Ask])
 
   const possibleENSBuyerAddress = useMemo(() => {
-    if (!isV3Ask(ask.properties) || !hasRelevantV3Ask || !hasActivePrivateAsk)
+    if (!isV3Ask(ask?.properties) || !hasRelevantV3Ask || !hasActivePrivateAsk)
       return undefined
     return finalizedV3AskDetails?.rawBuyerAddress ?? ask?.properties?.buyer ?? undefined
   }, [
