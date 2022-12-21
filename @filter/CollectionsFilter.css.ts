@@ -25,7 +25,7 @@ export const textButton = style([
 ])
 
 export const textSmall = style({
-  fontSize: typography.fontSize[14],
+  fontSize: 14,
 })
 
 export const checkBox = atoms({
@@ -36,18 +36,18 @@ export const checkBox = atoms({
 export const filtersButton = style([
   {
     gap: 6,
-    paddingLeft: `${vars.space.x4}!important`,
-    paddingRight: `${vars.space.x3}!important`,
   },
+  atoms({
+    pl: 'x4',
+    pr: 'x3',
+  }),
 ])
 
 export const activityButton = style([
-  {
-    paddingLeft: `${vars.space.x4}!important`,
-    paddingRight: `${vars.space.x3}!important`,
-  },
   atoms({
     gap: 'x3',
+    pl: 'x4',
+    pr: 'x3',
     whiteSpace: 'nowrap',
     flexDirection: 'row-reverse',
   }),
@@ -230,7 +230,7 @@ export const activityModal = style([
 export const filterPropertySelect = style([
   {
     textAlign: 'left',
-    justifyContent: 'flex-start!important', // TODO: remove !important invocations when zord has been vendored into marketplace
+    justifyContent: 'flex-start',
     height: 'unset!important',
   },
 ])
@@ -240,7 +240,7 @@ const pill = {
   height: vars.space.x10,
   borderRadius: vars.radii.round,
   marginBottom: 0,
-  fontSize: typography.fontSize[16],
+  fontSize: 16,
   fontWeight: typography.fontWeight.label,
   lineHeight: 1,
 }
@@ -250,7 +250,7 @@ export const currencySelectVariants = {
     large: {
       px: vars.space.x4,
       height: vars.space.x15,
-      fontSize: typography.fontSize[16],
+      fontSize: 16,
     },
     greyPill: {
       ...pill,
@@ -277,14 +277,14 @@ export const currencySelect = recipe({
 const symbolTextVariants = {
   variant: {
     large: {
-      fontSize: typography.fontSize[16],
+      fontSize: 16,
     },
     greyPill: {
-      fontSize: typography.fontSize[16],
+      fontSize: 16,
       fontWeight: typography.fontWeight.label,
     },
     whitePill: {
-      fontSize: typography.fontSize[16],
+      fontSize: 16,
       fontWeight: typography.fontWeight.label,
     },
   },
@@ -363,7 +363,6 @@ export const selectLabel = style(
 export const selectDropdown = style(
   {
     appearance: 'none',
-    borderRadius: `${radii.curved}!important`,
     border: '2px solid transparent',
     selectors: {
       '&:focus': {
@@ -373,6 +372,7 @@ export const selectDropdown = style(
   },
   atoms({
     userSelect: 'none',
+    borderRadius: 'curved',
     backgroundColor: 'background2',
   })
 )

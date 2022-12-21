@@ -23,6 +23,7 @@ export const theme = createThemeContract({
       16: '',
       18: '',
       20: '',
+      22: '',
       28: '',
       30: '',
       35: '',

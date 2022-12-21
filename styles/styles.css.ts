@@ -99,7 +99,7 @@ export const maxWidthSm = style([
 
 globalStyle('.zord-accordionTrigger > span', {
   fontFamily: "'Londrina Solid', cursive!important",
-  fontSize: typography.fontSize[20],
+  fontSize: 20,
   paddingBottom: 10,
 })
 
@@ -110,7 +110,7 @@ globalStyle('.zord-attributesHeading', {
 
 globalStyle('.nouns-market-traits h3 > button > span', {
   fontFamily: "'ptBold', Arial, Helvetica, sans-serif!important",
-  fontSize: typography.fontSize[14],
+  fontSize: 14,
   textTransform: 'capitalize',
   paddingBottom: 0,
 })
@@ -126,7 +126,7 @@ globalStyle('.nouns-market-traits h3 > button', {
 export const pageHeadline = style([
   {
     fontWeight: typography.fontWeight.display,
-    fontSize: typography.fontSize[48],
+    fontSize: 48,
     lineHeight: typography.lineHeight[40],
     '@media': {
       [media.min1024]: {

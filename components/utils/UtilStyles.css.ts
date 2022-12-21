@@ -52,7 +52,7 @@ export const blockQuoteSelector = style([
 ])
 
 globalStyle(`${blockQuoteSelector} > p`, {
-  fontSize: typography.fontSize[16],
+  fontSize: 16,
 })
 
 export const ulSelector = style([

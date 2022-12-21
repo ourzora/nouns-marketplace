@@ -1,11 +1,9 @@
-import { Button, NounButtonProps } from 'components/Button'
-
 import { useCollectionFilters } from '@filter'
-import { Flex } from '@zord'
+import { Button, ButtonProps, Flex } from '@zord'
 
 import { ActiveFilterCounter } from './ActiveFilterCounter'
 
-export function ClearFilters({ ...props }: NounButtonProps) {
+export function ClearFilters({ ...props }: ButtonProps) {
   const {
     filterStore: { clearFilters, hasFilters },
   } = useCollectionFilters()

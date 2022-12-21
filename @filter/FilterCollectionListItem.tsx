@@ -1,11 +1,9 @@
-import { Button } from 'components/Button'
-
 import { useMemo } from 'react'
 
 import { isAddressMatch, shortenAddress } from '@shared'
 import { numberFormatter } from '@shared'
 import { Zorb } from '@zora-brand'
-import { Box, Flex, Stack, Text } from '@zord'
+import { Box, Button, Flex, Stack, Text } from '@zord'
 import { mixins } from '@zord/mixins'
 
 import {

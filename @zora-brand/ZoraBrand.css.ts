@@ -6,8 +6,8 @@ export const zoraBrand = style({
   fontWeight: '500!important',
   letterSpacing: '.05em',
   fontFamily: "'Inter', sans-serif!important",
-  fontSize: `${typography.fontSize[12]}!important`,
-  lineHeight: `${typography.lineHeight[20]}!important`,
+  fontSize: 12,
+  lineHeight: typography.lineHeight[20],
   color: '#808080',
 })
 

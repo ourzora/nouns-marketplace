@@ -31,7 +31,7 @@ export const errorBox = style([
 ])
 
 globalStyle(`${errorBox} pre`, {
-  fontSize: typography.fontSize[14],
+  fontSize: 14,
   fontFamily: 'SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace!important',
   lineHeight: '1!important',
   color: 'red',

@@ -1,8 +1,6 @@
-import { Button } from 'components/Button'
-
 import { useCollectionFilters } from '@filter/providers'
 import { ETH_CURRENCY_SHIM } from '@shared'
-import { Label, Stack } from '@zord'
+import { Button, Label, Stack } from '@zord'
 
 import { PriceRangeSelector } from './PriceRangeSelector'
 

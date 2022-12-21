@@ -199,7 +199,7 @@ export const sidebarBidWrapper = style([
 
 export const sidebarHighBid = style([
   {
-    fontSize: typography.fontSize['35'],
+    fontSize: 35,
     fontFamily: "'Londrina Solid', cursive!important",
     fontWeight: 400,
   },
@@ -209,7 +209,7 @@ export const sidebarHighBid = style([
 ])
 
 export const sideBarUpperLabel = style({
-  fontSize: typography.fontSize[18],
+  fontSize: 18,
 })
 
 export const bidHistoryWrapper = style([

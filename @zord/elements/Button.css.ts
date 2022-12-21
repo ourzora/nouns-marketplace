@@ -39,44 +39,49 @@ export const baseButton = style([
 ])
 
 export const buttonSize = {
-  xs: style([
-    {
-      width: 'auto',
-    },
-    atoms({
-      display: 'inline-flex',
-      px: 'x2',
-      height: 'x7',
-      minWidth: 'x10',
-      fontSize: 14,
-      fontWeight: 'label',
-    }),
-  ]),
+  // xs: style([
+  //   {
+  //     width: 'auto',
+  //   },
+  //   atoms({
+  //     display: 'inline-flex',
+  //     px: 'x2',
+  //     height: 'x7',
+  //     minWidth: 'x10',
+  //     fontSize: 14,
+  //     fontWeight: 'label',
+  //   }),
+  // ]),
   sm: style([
     {
       width: 'auto',
+      borderRadius: '12px', // ZORDTODO
     },
     atoms({
       display: 'inline-flex',
-      px: 'x3',
+      px: 'x4',
+      py: 'x2',
       height: 'x10',
       minWidth: 'x19',
-      fontSize: 14,
+      fontSize: { '@initial': 16, '@768': 18 },
       fontWeight: 'label',
     }),
   ]),
   md: style([
     atoms({
-      h: 'x12',
+      px: { '@initial': 'x4', '@1024': 'x6' },
+      py: { '@initial': 'x2', '@1024': 'x4' },
+      height: { '@initial': 'x10', '@1024': 'x14' },
+      fontSize: { '@initial': 16, '@768': 18 },
       fontWeight: 'label',
-      fontSize: 16,
     }),
   ]),
   lg: atoms({
-    px: 'x4',
+    px: 'x6',
+    py: { '@initial': 'x4', '@1024': 'x6' },
     height: 'x15',
     minWidth: 'x23',
-    fontSize: 16,
+    fontSize: { '@initial': 20, '@768': 22 },
     fontWeight: 'label',
   }),
 }
@@ -225,6 +230,7 @@ export const buttonVariants = {
     }),
   ]),
   // @TODO: We don't need this. It should be the default.
+  // ZORDTODO: move to baseButton above and reset all buttons site-wide
   unset: style({
     backgroundColor: 'unset',
     gap: 'unset',
