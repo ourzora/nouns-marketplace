@@ -3,7 +3,7 @@ import { MarketStats } from 'components/MarketStats/MarketStats'
 import { PageWrapper } from 'components/PageWrapper'
 import {
   ALL_COLLECTION_VIEWS,
-  ActiveCollectionPageView, // CollectionActivityHeader,
+  ActiveCollectionPageView,
   CollectionHeader,
   Collections,
 } from 'compositions/Collections'
@@ -19,8 +19,10 @@ import { ActiveAuctionCard } from '@noun-auction'
 import { Separator, Stack } from '@zoralabs/zord'
 
 const Collection = ({ fallback }: { fallback: any }) => {
+  console.log('fallback', fallback)
+
   const { setCurrentCollection, setCurrentCollectionCount } = useCollectionsContext()
-  const { contractAddress: collectionAddress, collection, seo } = fallback
+  const { contractAddress, collectionAddress, collection, seo } = fallback
   const [activeView, setActiveView] = useState<ActiveCollectionPageView>('nfts')
   const { nftCount } = useAggregate(collectionAddress)
   const { asPath } = useRouter()

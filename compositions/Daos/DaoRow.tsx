@@ -29,7 +29,6 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
 
   const { token } = useToken({
     collectionAddress: dao.collectionAddress,
-    // FIXME: @oleg
     tokenId: activeAuction?.tokenId ?? '',
   })
 
@@ -48,6 +47,7 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
       tokenId={tokenId}
       tokenName={token.name}
       collectionAddress={collectionAddress}
+      contractAddress={dao.contractAddress}
       collectionName={dao.name ?? token.collectionName ?? '...'}
       highestBid={highestBid}
       treasuryAddress={dao.treasuryAddress}
@@ -67,11 +67,13 @@ type DaoRowProps = {
   highestBid: string
   treasuryAddress: string
   auctionStatus: string
+  contractAddress: string
 }
 
 export const DaoRowComponent = ({
   index,
   collectionAddress,
+  contractAddress,
   tokenId,
   tokenImage,
   tokenName,
@@ -158,7 +160,7 @@ export const DaoRowComponent = ({
           <EthAmount ethAmount={highestBid} />
         </Box>
       </Box>
-      <Link href={`/collections/${collectionAddress}`} passHref>
+      <Link href={`/collections/${contractAddress}`} passHref>
         <Button variant="secondary" as="a">
           View
         </Button>
