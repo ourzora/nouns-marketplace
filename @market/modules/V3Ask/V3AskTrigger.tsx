@@ -1,7 +1,4 @@
-import { useToken } from 'hooks/useToken'
-
 import React from 'react'
-import { TypeSafeMarket } from 'validators/market'
 
 import { useRelevantMarket } from '@market/hooks'
 import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
@@ -13,14 +10,15 @@ interface V3AskTriggerProps {
   openModal: () => void
   modalName: string
   isOwner: boolean
+  showOnlyTrigger: boolean
 }
 
-export function V3AskTrigger({ isOwner, openModal }: V3AskTriggerProps) {
+export function V3AskTrigger({ isOwner, openModal, showOnlyTrigger }: V3AskTriggerProps) {
   const { markets } = useNftMarketContext()
   const { ask } = useRelevantMarket(markets)
 
   if (isOwner) {
-    return <V3AskOwnerTrigger openModal={openModal} />
+    return <V3AskOwnerTrigger showOnlyTrigger={showOnlyTrigger} openModal={openModal} />
   }
 
   if (ask) {

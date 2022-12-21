@@ -14,12 +14,14 @@ interface V3AskModalProps {
   modalName: string
   disableCloseOnClickOutside?: boolean
   isOwner: boolean
+  showOnlyTrigger?: boolean
 }
 
 export function V3AskModal({
   isOwner,
   modalName,
   disableCloseOnClickOutside = false,
+  showOnlyTrigger = false,
 }: V3AskModalProps) {
   const { modalType, requestClose, requestOpen } = useModal()
   const modalHandler = useCallback(() => {
@@ -36,6 +38,7 @@ export function V3AskModal({
             isOwner={isOwner}
             modalName={modalName}
             openModal={modalHandler}
+            showOnlyTrigger={showOnlyTrigger}
           />
         }
       >

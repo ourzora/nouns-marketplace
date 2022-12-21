@@ -17,7 +17,7 @@ export function NFTCardMarket({ isOwner, ownerAddress, ...props }: NFTCardMarket
   const { hasRelevantAsk } = useRelevantMarket(markets)
 
   if (hasRelevantAsk) {
-    return <V3AskModal isOwner={isOwner || false} modalName="V3AskV3" />
+    return <V3AskModal isOwner={isOwner || false} modalName="V3AskV3" showOnlyTrigger />
   }
 
   if (isOwner) {

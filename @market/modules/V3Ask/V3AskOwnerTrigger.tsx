@@ -15,6 +15,7 @@ import * as styles from './V3AskFlow.css'
 
 interface V3AskOwnerTriggerProps {
   openModal: () => void
+  showOnlyTrigger: boolean
 }
 
 const v3AskDropdownOptions = [
@@ -49,7 +50,10 @@ const privateAskDropdownOptions = [
   },
 ]
 
-export function V3AskOwnerTrigger({ openModal }: V3AskOwnerTriggerProps) {
+export function V3AskOwnerTrigger({
+  openModal,
+  showOnlyTrigger,
+}: V3AskOwnerTriggerProps) {
   const { markets } = useNftMarketContext()
   const { dispatch } = useV3AskStateContext()
   const { displayAskAmount, usdAskAmount, hasActivePrivateAsk, isActiveAsk } =
@@ -76,6 +80,50 @@ export function V3AskOwnerTrigger({ openModal }: V3AskOwnerTriggerProps) {
     () => (hasActivePrivateAsk ? 'Private Listing' : 'Listing'),
     [hasActivePrivateAsk]
   )
+
+  if (isActiveAsk && showOnlyTrigger) {
+    return (
+      <PopUp
+        open={open}
+        placement="bottom-end"
+        wrapperClassName={clsx('privateask-owner-popup-wrapper', styles.popupWrapper)}
+        triggerClassName={clsx('privateask-owner-popup-trigger', styles.popupTrigger)}
+        trigger={
+          <Button
+            w="100%"
+            variant="secondary"
+            onClick={() => setOpen(true)}
+            className={['manage-dropdown']}
+          >
+            Manage Listing...
+          </Button>
+        }
+      >
+        <Stack aria-label="Manage Dropdown" w="x64" borderRadius="curved">
+          {dropdownOptions.map((option) => (
+            <Button
+              variant="ghost"
+              w="100%"
+              justify="space-between"
+              style={{
+                whiteSpace: 'nowrap',
+              }}
+              key={option.label}
+              onClick={() => handleClick(option.action)}
+            >
+              <Text
+                as="span"
+                pr="x10"
+                color={option.destructive ? 'negative' : undefined}
+              >
+                {option.label}
+              </Text>
+            </Button>
+          ))}
+        </Stack>
+      </PopUp>
+    )
+  }
 
   if (isActiveAsk) {
     return (
