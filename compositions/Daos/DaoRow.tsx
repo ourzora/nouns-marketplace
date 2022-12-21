@@ -154,7 +154,7 @@ export const DaoRowComponent = ({
         </Box>
       </Box>
       <Link href={`/collections/${collectionAddress}`} passHref>
-        <Button variant="secondary" as="a">
+        <Button variant="secondary" size="sm">
           View
         </Button>
       </Link>

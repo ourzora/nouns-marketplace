@@ -55,6 +55,9 @@ export const buttonSize = {
     }),
   ]),
   md: style([
+    {
+      borderRadius: '16px', // ZORDTODO
+    },
     atoms({
       px: { '@initial': 'x4', '@1024': 'x6' },
       py: { '@initial': 'x2', '@1024': 'x4' },
@@ -63,14 +66,19 @@ export const buttonSize = {
       fontWeight: 'label',
     }),
   ]),
-  lg: atoms({
-    px: 'x6',
-    py: { '@initial': 'x4', '@1024': 'x6' },
-    height: 'x15',
-    minWidth: 'x23',
-    fontSize: { '@initial': 20, '@768': 22 },
-    fontWeight: 'label',
-  }),
+  lg: style([
+    {
+      borderRadius: '16px', // ZORDTODO
+    },
+    atoms({
+      px: 'x6',
+      py: { '@initial': 'x4', '@1024': 'x6' },
+      height: 'x15',
+      minWidth: 'x23',
+      fontSize: { '@initial': 20, '@768': 22 },
+      fontWeight: 'label',
+    }),
+  ]),
 }
 
 export const buttonVariants = {
