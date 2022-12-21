@@ -1,11 +1,10 @@
-import { Button } from 'components/Button'
 import * as styles from 'compositions/Header/Header.css'
 import Link from 'next/link'
 import { mediumFont } from 'styles/styles.css'
 
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from '@modal/Modal.css'
-import { Heading, Label, Paragraph, Stack } from '@zord'
+import { Button, Heading, Label, Paragraph, Stack } from '@zord'
 
 export function AboutModal() {
   const { requestClose } = useModal()

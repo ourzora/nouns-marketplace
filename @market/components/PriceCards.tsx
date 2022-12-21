@@ -1,4 +1,3 @@
-import { Button } from 'components/Button'
 import { ArrowLeft, ArrowRight } from 'components/Icon'
 import { mediumFont } from 'styles/styles.css'
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
@@ -11,7 +10,7 @@ import { ModalComposition, useModal } from '@modal'
 import { useAuth, useButtonRequiresAuth } from '@shared'
 import { numberFormatter } from '@shared/utils'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Box, Flex, Heading, Paragraph, Stack, Well } from '@zord'
+import { Box, Button, Flex, Heading, Paragraph, Stack, Well } from '@zord'
 
 import * as styles from './PriceCards.css'
 

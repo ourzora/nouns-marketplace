@@ -1,8 +1,7 @@
-import { Button } from 'components/Button'
 import { PageWrapper } from 'components/PageWrapper'
 import { useRouter } from 'next/router'
 
-import { Display, Stack } from '@zord'
+import { Button, Display, Stack } from '@zord'
 
 export default function Custom404() {
   const router = useRouter()

@@ -1,7 +1,5 @@
-import { buttonVariants } from 'components/Button/Button.css'
-
 import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
-import { StackProps } from '@zord'
+import { StackProps, buttonVariants } from '@zord'
 
 import { isOGNounAddress } from '../NounsBidForm'
 import { SettleAuctionBuilder } from './SettleAuctionBuilder'
@@ -13,7 +11,7 @@ export interface SettleAuctionProps extends StackProps {
   auctionContractAddress: string
   settlementType?: SettlementType
   layout: keyof typeof auctionWrapperVariants['layout']
-  buttonVariant?: keyof typeof buttonVariants['variant']
+  buttonVariant?: keyof typeof buttonVariants
 }
 
 export function SettleAuction({ auctionContractAddress, ...rest }: SettleAuctionProps) {

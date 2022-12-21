@@ -1,4 +1,3 @@
-import { Button } from 'components/Button'
 import { mediumFont } from 'styles/styles.css'
 
 import React, { useEffect, useMemo } from 'react'
@@ -10,7 +9,7 @@ import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { useModal } from '@modal'
 import { formatContractError } from '@shared'
 import { PrintError } from '@shared/components/PrintError'
-import { Flex, Heading, Paragraph, Separator, Stack } from '@zord'
+import { Button, Flex, Heading, Paragraph, Separator, Stack } from '@zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import * as styles from '../V3AskFlow.css'

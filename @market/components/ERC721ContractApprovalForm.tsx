@@ -1,11 +1,9 @@
-import { Button } from 'components/Button'
-
 import { useCallback, useEffect, useState } from 'react'
 
 import { ModalTitleAndDescription, TransactionSubmitButton } from '@market/components'
 import { useERC721TokenApproval } from '@market/hooks'
 import { PrintError, useContractTransaction } from '@shared'
-import { Box, Grid, Paragraph, Stack, Text } from '@zord'
+import { Box, Button, Grid, Paragraph, Stack, Text } from '@zord'
 
 interface ContractApprovalFormProps {
   title: string

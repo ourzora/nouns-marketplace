@@ -1,12 +1,10 @@
-import { Button } from 'components/Button'
-
 import React, { useEffect, useMemo } from 'react'
 
 import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
 import { useCopyToClipboard } from '@shared'
 import { useToast } from '@toast'
 import { ToastStatus, ToastVariant } from '@toast/toastReducer'
-import { Stack } from '@zord'
+import { Button, Stack } from '@zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import { V3AskHeadingDescription } from '../V3AskHeadingDescription'

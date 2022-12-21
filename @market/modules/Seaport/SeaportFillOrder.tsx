@@ -1,4 +1,3 @@
-import { Button } from 'components/Button'
 import { OpenSeaIcon } from 'components/Icon'
 import { mediumFont } from 'styles/styles.css'
 
@@ -10,7 +9,7 @@ import { useValidateSeaportContractCall } from '@market/modules/Seaport/hooks/us
 import { useModal } from '@modal'
 import { formatContractError, useAuth } from '@shared'
 import { PrintError } from '@shared/components/PrintError'
-import { Flex, Heading, Paragraph, Separator, Stack } from '@zord'
+import { Button, Flex, Heading, Paragraph, Separator, Stack } from '@zord'
 
 import { CommonSeaportFillOrderProps } from './SeaportFillOrderFlow'
 import { useSeaportTransaction } from './hooks/useSeaportTransaction'

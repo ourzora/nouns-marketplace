@@ -1,10 +1,9 @@
-import { Button } from 'components/Button'
 import NextLink from 'next/link'
 import Link from 'next/link'
 
 import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
-import { Box, BoxProps, Flex, Label, Stack } from '@zord'
+import { Box, BoxProps, Button, Flex, Label, Stack } from '@zord'
 
 import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 

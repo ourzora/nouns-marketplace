@@ -1,5 +1,3 @@
-import { Button } from 'components/Button'
-
 import { Dispatch, SetStateAction, useRef, useState } from 'react'
 
 import { useCollectionFilters } from '@filter/providers'
@@ -7,7 +5,7 @@ import { marketStatusOptions, mediaTypeOptions, ownerStatusOptions } from '@filt
 import { Modal, ModalContent, useModal } from '@modal'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { useWindowWidth } from '@shared'
-import { Box, Flex, Heading, Icon, Separator, Stack } from '@zord'
+import { Box, Button, Flex, Heading, Icon, Separator, Stack } from '@zord'
 
 import { ClearFilters } from './ClearFilters'
 import * as styles from './CollectionsFilter.css'

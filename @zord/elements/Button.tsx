@@ -18,6 +18,7 @@ import {
 } from './Button.css'
 import { iconVariants } from './Icon.css'
 
+export { buttonVariants }
 export interface ButtonProps extends FlexProps {
   disabled?: boolean
   variant?:

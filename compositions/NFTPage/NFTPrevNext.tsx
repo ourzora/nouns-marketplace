@@ -1,8 +1,6 @@
-import { Button } from 'components/Button'
-
 import { useTokenHelper } from '@shared/hooks'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Flex, StackProps } from '@zord'
+import { Button, Flex, StackProps } from '@zord'
 
 import * as styles from './NFTPage.css'
 

@@ -1,5 +1,3 @@
-import { Button } from 'components/Button'
-
 import React, { useCallback, useMemo, useState } from 'react'
 
 import { useAskHelper, useRelevantMarket } from '@market/hooks'
@@ -11,7 +9,7 @@ import {
 import { useButtonRequiresAuth } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Well } from '@zord'
+import { Button, Well } from '@zord'
 
 interface V3AskBuyerTriggerProps {
   nft: NFTObject

@@ -1,17 +1,26 @@
 import { useAccount, useDisconnect, useNetwork } from 'wagmi'
 
-import { Button, NounButtonProps } from 'components/Button'
 import Link from 'next/link'
 import { noTextWrap } from 'styles/styles.css'
 
 import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit'
 import { useEnsData } from '@shared/hooks'
-import { Box, Flex, Icon, PopUp, Separator, Stack, Text } from '@zord'
+import {
+  Box,
+  Button,
+  ButtonProps,
+  Flex,
+  Icon,
+  PopUp,
+  Separator,
+  Stack,
+  Text,
+} from '@zord'
 
 import * as styles from './Header.css'
 
-interface ConnectButtonProps extends NounButtonProps {
+interface ConnectButtonProps extends ButtonProps {
   connectText?: string
 }
 

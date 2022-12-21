@@ -1,7 +1,6 @@
 import { useBalance } from 'wagmi'
 
 import { Link } from 'components'
-import { Button } from 'components/Button'
 
 import { useToken } from 'hooks/useToken'
 
@@ -9,7 +8,7 @@ import { TypeSafeDao } from 'validators/dao'
 
 import { EthAmount, RPCTokenInfo, lightFont, useNounishAuctionQuery } from '@noun-auction'
 import { numberFormatter, useWindowWidth } from '@shared'
-import { Box, Flex, Label } from '@zord'
+import { Box, Button, Flex, Label } from '@zord'
 
 import {
   cardHeader,

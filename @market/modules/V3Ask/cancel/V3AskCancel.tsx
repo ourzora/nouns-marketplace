@@ -1,5 +1,3 @@
-import { Button } from 'components/Button'
-
 import React, { useEffect, useMemo } from 'react'
 
 import { MarketModalHeading } from '@market/components'
@@ -8,7 +6,7 @@ import { useListingDataTable } from '@market/hooks'
 import { useModal } from '@modal/useModal'
 import { DataTable, PrintError, formatContractError } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Flex, Stack } from '@zord'
+import { Button, Flex, Stack } from '@zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import * as styles from '../V3AskFlow.css'

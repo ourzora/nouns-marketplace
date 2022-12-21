@@ -1,7 +1,7 @@
 export { Box } from './Box'
 export type { BoxProps, BoxComponentProps } from './Box'
 
-export { Button } from './Button'
+export { Button, buttonVariants } from './Button'
 export type { ButtonProps } from './Button'
 
 export { Grid } from './Grid'

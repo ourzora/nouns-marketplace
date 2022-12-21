@@ -1,16 +1,14 @@
-import { Button, NounButtonProps } from 'components/Button'
-
 import { useMemo } from 'react'
 
 import { WalletCallStatus, useButtonRequiresAuth } from '@shared/hooks'
-import { Box } from '@zord'
+import { Box, Button, ButtonProps } from '@zord'
 
 /**
  * Render a button that will submit a transaction to the blockchain.
  * This button handles loading, disabling, and error states.
  */
 
-interface TransactionSubmitButtonProps extends NounButtonProps {
+interface TransactionSubmitButtonProps extends ButtonProps {
   disabled?: boolean
   loading?: boolean
   onClick?: () => void

@@ -1,4 +1,3 @@
-import { Button } from 'components/Button'
 import { useRouter } from 'next/router'
 
 import { useCallback } from 'react'
@@ -6,7 +5,7 @@ import { useCallback } from 'react'
 import * as styles from '@noun-auction/styles/NounishStyles.css'
 import { lightFont } from '@shared'
 import { useNFT } from '@zoralabs/nft-hooks'
-import { Box, Flex, Heading, Stack } from '@zord'
+import { Box, Button, Flex, Heading, Stack } from '@zord'
 
 import { TokenInfoConfig } from '../NounishAuction'
 import { NounishThumbnail } from './NounishThumbnail'
