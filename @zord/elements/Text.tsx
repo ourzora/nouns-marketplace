@@ -62,7 +62,7 @@ export const Text: PolymorphicForwardRefExoticComponent<
 > = React.forwardRef(InnerText)
 
 export interface ParagraphProps extends Omit<TextProps, 'variant'> {
-  size?: 'xs' | 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md'
 }
 
 export type ParagraphComponentProps<
@@ -91,22 +91,6 @@ export function Heading<E extends React.ElementType = typeof BoxDefaultElement>(
   ...props
 }: HeadingComponentProps<E>) {
   return <Text variant={`heading-${size}`} {...props} />
-}
-
-export interface DisplayProps extends Omit<TextProps, 'variant'> {
-  size?: 'xs' | 'sm' | 'md' | 'lg'
-}
-
-export type DisplayComponentProps<
-  E extends React.ElementType = typeof BoxDefaultElement
-> = PolymorphicPropsWithRef<DisplayProps, E>
-
-export function Display<E extends React.ElementType = typeof BoxDefaultElement>({
-  size = 'md',
-  variant,
-  ...props
-}: DisplayComponentProps<E>) {
-  return <Text variant={`display-${size}`} {...props} />
 }
 
 export interface EyebrowProps extends Omit<TextProps, 'variant'> {}
@@ -143,8 +127,13 @@ export type MenuTextComponentProps<
   E extends React.ElementType = typeof BoxDefaultElement
 > = PolymorphicPropsWithRef<MenuProps, E>
 
-export function MenuText<E extends React.ElementType = typeof BoxDefaultElement>({
+export function Span<E extends React.ElementType = typeof BoxDefaultElement>({
+  variant,
   ...props
-}: MenuTextComponentProps<E>) {
-  return <Text variant="menu-lg" {...props} />
+}: ParagraphComponentProps<E>) {
+  return <Text variant={`paragraph-sm`} {...props} />
 }
+
+// ZORDTODO:
+// Eyebrow --> Span?
+// Label - uh oh

@@ -1,7 +1,7 @@
 import { PageWrapper } from 'components/PageWrapper'
 import { useRouter } from 'next/router'
 
-import { Button, Display, Stack } from '@zord'
+import { Button, Heading, Stack } from '@zord'
 
 export default function Custom404() {
   const router = useRouter()
@@ -9,9 +9,9 @@ export default function Custom404() {
   return (
     <PageWrapper>
       <Stack align="center" justify="center" w="100%" gap="x6">
-        <Display size="sm" as="h1" align="center">
+        <Heading size="xl" as="h1" align="center">
           Sorry! Page Not Found
-        </Display>
+        </Heading>
         <Button variant="secondary" align="center" onClick={() => router.push('/')}>
           Return Home
         </Button>

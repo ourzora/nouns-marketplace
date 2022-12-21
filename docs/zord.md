@@ -602,7 +602,6 @@ One more thing to point out: className takes an array: `className={['zora-userca
 In the `<UserCard>` code block above, we discussed `<Header>` briefly. It's worth going into more detail. Under the hood, `<Header>` is based on a generic `<Text>` component, which inherits its behaviour from `<Box>`. `<Text>` has a large number of variants with custom fontSize, fontWeight, lineHeight. Rather than exposing this large set of variants as a single complex `<Text>` component, Zord creates a number of convenient text components to reflect these presets:
 
 ```
-<Display>
 <Heading>
 <Paragraph>
 <Eyebrow>
