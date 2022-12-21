@@ -1,4 +1,3 @@
-import image from 'next/image'
 import { NounsTokensByOwnerAddressQuery } from 'types/zora.api.generated'
 
 import { NFTCard2 } from '@media/NFTCard2'
@@ -19,8 +18,6 @@ export function NFTGrid2({ items, ...props }: NFTGridProps) {
         {items.map((nft) => {
           const { collectionAddress, tokenId, collectionName, name, owner, image } =
             nft.token
-
-          console.log({ nft })
 
           return (
             <NFTCard2

@@ -73,8 +73,6 @@ export function NFTSidebarComponent({
 
   const { isOwner } = useIsOwner(token)
 
-  console.log({ primarySalePrice, activeAuction, token, markets })
-
   return (
     <Stack
       id="nft-info-sidebar"

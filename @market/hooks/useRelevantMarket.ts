@@ -12,10 +12,8 @@ export const useRelevantMarket = (markets: TypeSafeMarket[] = []) => {
   const asks = markets.filter((item) => item?.properties?.__typename === 'V3Ask')
   const offers = markets.filter((item) => item?.properties?.__typename === 'V1Offer')
 
-  const ask = asks[0]
+  const ask = asks.find((ask) => ask.status === 'ACTIVE')
   const auction = auctions[0]
-
-  ask?.tokenId === '150' && console.log({ ask })
 
   const askProperties = ask?.properties
   const { balance: walletBalance, address: userAddress } = useAuth()

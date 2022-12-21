@@ -1,7 +1,7 @@
 import { Link } from 'components/Link'
 import { NounsTokensByOwnerAddressQuery } from 'types/zora.api.generated'
 
-import { createContext, useContext, useMemo } from 'react'
+import { useMemo } from 'react'
 import { TypeSafeMarket } from 'validators/market'
 
 import { NFTCardMarket } from '@market'

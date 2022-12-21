@@ -1,7 +1,8 @@
 import { useRelevantMarket } from '@market/hooks'
-import { V3AskModal } from '@market/modules/V3Ask'
+import { V3AskModal, V3AskOwnerTrigger } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
 import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
+import { useModal } from '@modal'
 import { FlexProps } from '@zoralabs/zord'
 
 import { NFTCardMarketOwner } from './NFTCardMarketOwner'
@@ -16,7 +17,7 @@ export function NFTCardMarket({ isOwner, ownerAddress, ...props }: NFTCardMarket
   const { hasRelevantAsk } = useRelevantMarket(markets)
 
   if (hasRelevantAsk) {
-    return <V3AskModal isOwner={false} modalName="V3AskV3" />
+    return <V3AskModal isOwner={isOwner || false} modalName="V3AskV3" />
   }
 
   if (isOwner) {

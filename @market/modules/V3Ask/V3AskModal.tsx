@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 
 import React, { useCallback } from 'react'
-import { TypeSafeMarket } from 'validators/market'
 
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from '@modal/Modal.css'

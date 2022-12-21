@@ -7,8 +7,9 @@ import { NFTGrid2 } from '@media/NFTGrid2'
 import { nftGridWrapper } from '@media/NftMedia.css'
 import { Separator } from '@zoralabs/zord'
 
-const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
+const Manage = ({ ownerAddress, initialPage }: ManageNFTsServiceProps) => {
   const { tokensByAddress } = useTokensByAddress({ ownerAddress })
+
   return (
     <PageWrapper direction="column" gap="x4">
       <Seo title={`Manage | ${ownerAddress}`}></Seo>
@@ -23,7 +24,11 @@ const Manage = ({ ownerAddress }: ManageNFTsServiceProps) => {
           '@1024': 'x2',
         }}
       />
-      <NFTGrid2 items={tokensByAddress} className={nftGridWrapper()} isOwner={true} />
+      <NFTGrid2
+        items={tokensByAddress || initialPage}
+        className={nftGridWrapper()}
+        isOwner={true}
+      />
     </PageWrapper>
   )
 }
