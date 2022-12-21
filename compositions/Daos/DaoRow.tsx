@@ -160,7 +160,7 @@ export const DaoRowComponent = ({
           <EthAmount ethAmount={highestBid} />
         </Box>
       </Box>
-      <Link href={`/daos/${contractAddress}`} passHref>
+      <Link href={`/daos/${collectionAddress}`} passHref>
         <Button variant="secondary" as="a">
           View
         </Button>
