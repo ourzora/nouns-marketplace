@@ -2261,6 +2261,7 @@ export type NounishAuctionsQuery = {
 export type NounsDaosQueryVariables = Exact<{
   network: NetworkInput
   limit: Scalars['Int']
+  after?: InputMaybe<Scalars['String']>
 }>
 
 export type NounsDaosQuery = {
@@ -2283,6 +2284,12 @@ export type NounsDaosQuery = {
         contractAddress?: string | null
         networkInfo: { __typename?: 'NetworkInfo'; chain: Chain; network: Network }
       }>
+      pageInfo: {
+        __typename?: 'PageInfo'
+        hasNextPage: boolean
+        endCursor?: string | null
+        limit: number
+      }
     }
   }
 }

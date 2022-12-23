@@ -67,12 +67,6 @@ export const placeholderCell = style([
   },
 ])
 
-export const header = style([
-  {
-    height: '40px!important',
-  },
-])
-
 // mobile
 
 export const mobileCardWrapper = style([

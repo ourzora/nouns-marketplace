@@ -8,7 +8,7 @@ import { useToken } from 'hooks/useToken'
 import { TypeSafeDao } from 'validators/dao'
 
 import { EthAmount, RPCTokenInfo, lightFont, useNounishAuctionQuery } from '@noun-auction'
-import { numberFormatter, useWindowWidth } from '@shared'
+import { isAddressMatch, numberFormatter, useWindowWidth } from '@shared'
 import { Box, Flex, Label } from '@zoralabs/zord'
 
 import {
@@ -33,14 +33,28 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
     tokenId: activeAuction?.tokenId ?? '',
   })
 
-  if (!token || !activeAuction) return null
+  if (!token || !activeAuction) {
+    console.log('NOT RENDERING DAO', dao.collectionAddress)
+    console.log('TOKEN', token, 'AUCTION', activeAuction)
+    // return null
+    return (
+      <Box>
+        {dao.collectionAddress} {token?.tokenId} {activeAuction?.address}
+      </Box>
+    )
+  }
 
-  const highestBid = activeAuction.highestBidPrice?.chainTokenPrice?.raw || '0'
-  const tokenId = activeAuction.tokenId
-  const collectionAddress = activeAuction.collectionAddress
+  const { tokenId, collectionAddress, highestBidPrice } = activeAuction
+  const highestBid = highestBidPrice?.chainTokenPrice?.raw || '0'
 
   const auctionStatus =
     Date.now() - parseInt(activeAuction.endTime) * 1000 > 0 ? 'Settling' : 'Live'
+
+  if (
+    isAddressMatch('0xd310a3041dfcf14def5ccbc508668974b5da7174', dao.collectionAddress)
+  ) {
+    console.log('DUPE?')
+  }
 
   return (
     <DaoRowComponent
@@ -137,7 +151,7 @@ export const DaoRowComponent = ({
   }
 
   return (
-    <Box className={[rowWrap, index === 0 ? noBorder : '']}>
+    <Box as="li" data-index={index} className={[rowWrap, index === 0 && noBorder]}>
       <Box className={[daoMeta]}>
         <RPCTokenInfo
           tokenImage={tokenImage}

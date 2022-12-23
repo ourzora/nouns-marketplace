@@ -1,1 +1,1 @@
-export * from './Daos'
+export * from './DaoTable'

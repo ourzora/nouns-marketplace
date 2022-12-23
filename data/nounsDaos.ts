@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 
 export const NOUNS_DAOS_QUERY = gql`
-  query NounsDaos($network: NetworkInput!, $limit: Int!) {
+  query NounsDaos($network: NetworkInput!, $limit: Int!, $after: String) {
     nouns {
-      nounsDaos(networks: [$network], pagination: { limit: $limit }) {
+      nounsDaos(networks: [$network], pagination: { limit: $limit, after: $after }) {
         nodes {
           name
           collectionAddress
@@ -20,6 +20,11 @@ export const NOUNS_DAOS_QUERY = gql`
             chain
             network
           }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+          limit
         }
       }
     }

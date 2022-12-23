@@ -32,7 +32,7 @@ export function useToken({
         // Only retry up to 1 times.
         if (retryCount >= 2) return
         // Retry after 5 seconds.
-        setTimeout(() => revalidate({ retryCount }), 5000)
+        setTimeout(() => revalidate({ retryCount }), 30000)
       },
       dedupingInterval: 10000,
       refreshInterval: refreshInterval,

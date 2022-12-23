@@ -17,12 +17,12 @@ import { CollectionNavList } from './CollectionNavList'
 
 export function CollectionMenu() {
   const { currentCollection, currentCollectionCount } = useCollectionsContext()
-  const daos = useNounsDaos({ limit: 50 })
-  const daoCount = useMemo(() => daos.length, [daos])
+  const { daos } = useNounsDaos({ limit: 50, keyModifier: 'collectionMenu' })
   const { hasScrolled, scrollEvent } = useHasScrolled()
   const [filter, setFilter] = useState<string>('')
   const filteredItems = useMemo(
-    () => daos.filter((item) => item?.name?.toLowerCase().includes(filter.toLowerCase())),
+    () =>
+      daos?.filter((item) => item?.name?.toLowerCase().includes(filter.toLowerCase())),
     [filter, daos]
   )
   const hasResults = useMemo(() => filteredItems.length > 0, [filteredItems])
@@ -75,7 +75,7 @@ export function CollectionMenu() {
             <Heading as="h2">
               Browse
               <Text as="span" color="text3" ml="x2">
-                {daoCount}
+                {daos?.length}
               </Text>
             </Heading>
             <SearchInput
