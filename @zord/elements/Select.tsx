@@ -5,7 +5,7 @@ import React from 'react'
 import { BoxProps } from './Box'
 import { Flex } from './Flex'
 import { Icon } from './Icon'
-import { inputContainer, inputField, inputFieldBaseInput } from './InputField.css'
+import { inputField, inputFieldBaseInput } from './InputField.css'
 import { baseSelect, baseSelectContainer } from './Select.css'
 import { Paragraph } from './Text'
 
@@ -34,7 +34,6 @@ export const Select = ({
 
   return (
     <Flex
-      // className={[inputContainer, containerClassName]}
       className={[baseSelectContainer, containerClassName]}
       w="100%"
       pos="relative"
@@ -51,11 +50,9 @@ export const Select = ({
           position="relative"
           display="block"
           width="100%"
-          // flex={1}
           pr="x9"
           fontSize={large ? 20 : 14}
           className={[inputFieldBaseInput, baseSelect, className]}
-          // className={[baseSelect, className]}
           style={{ appearance: 'none' }}
           disabled={!!disabled}
           {...props}

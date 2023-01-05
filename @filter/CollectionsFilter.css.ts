@@ -361,16 +361,9 @@ export const selectLabel = style(
 export const selectDropdown = style(
   {
     appearance: 'none',
-    // border: '2px solid transparent',
-    selectors: {
-      '&:focus': {
-        borderColor: color.accent,
-      },
-    },
   },
   atoms({
     userSelect: 'none',
-    borderRadius: 'curved',
     backgroundColor: 'background2',
   })
 )

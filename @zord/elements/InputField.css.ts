@@ -48,7 +48,6 @@ export const inputContainer = style([
   },
   atoms({
     p: 'x3',
-    // p: 'x0', <-- what we want
     borderWidth: 'normal',
     borderStyle: 'solid',
     borderRadius: 'small',
