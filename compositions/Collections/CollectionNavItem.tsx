@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 
 import { Box, Flex, FlexProps, Label } from '@zord'
-import { mixins } from '@zord/mixins'
+import { mixins } from '@zord/config'
 
 import { ActiveCollectionPageView } from './CollectionNav'
 import * as styles from './CollectionNav.css'

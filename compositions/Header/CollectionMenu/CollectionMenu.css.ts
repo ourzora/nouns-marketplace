@@ -1,7 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms } from '@zord/atoms'
-import { vars } from '@zord/theme'
-import { color, media, space } from '@zord/tokens'
+import { atoms, color, media, space, vars } from '@zord/config'
 
 export const tabsButton = style([
   {

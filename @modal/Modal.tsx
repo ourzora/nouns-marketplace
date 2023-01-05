@@ -4,8 +4,7 @@ import React from 'react'
 
 import * as Dialog from '@radix-ui/react-dialog'
 import { Box, Icon, IconProps, ThemeProvider as ZordProvider } from '@zord'
-import { Atoms } from '@zord/atoms'
-import { mixins } from '@zord/mixins'
+import { Atoms, mixins } from '@zord/config'
 
 import * as styles from './Modal.css'
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Hyperlink } from '@shared/components/DataTable/DataTableItem'
 import { Button, ButtonProps, Icon, Paragraph } from '@zord'
-import { mixins } from '@zord/mixins'
+import { mixins } from '@zord/config'
 
 import * as styles from './V3AskLearnMoreButton.css'
 

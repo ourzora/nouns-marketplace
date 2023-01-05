@@ -1,6 +1,5 @@
 import { keyframes, style } from '@vanilla-extract/css'
-import { atoms } from '@zord/atoms'
-import { vars } from '@zord/theme'
+import { atoms, vars } from '@zord/config'
 
 const MODAL_BACKDROP_LAYER = 20
 

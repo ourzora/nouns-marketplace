@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 import { Button, Icon, Stack } from '@zord'
-import { color } from '@zord/tokens'
+import { color } from '@zord/config'
 
 import NFTFilterReadme from '../../@filter/README.md'
 import ZoraMarketReadme from '../../@market/README.md'

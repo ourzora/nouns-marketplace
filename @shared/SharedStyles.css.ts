@@ -1,6 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css'
-import { atoms } from '@zord/atoms'
-import { color, typography } from '@zord/tokens'
+import { atoms, color } from '@zord/config'
 
 export const linkButton = style([
   {

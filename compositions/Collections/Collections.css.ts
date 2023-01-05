@@ -1,9 +1,7 @@
 import { MAX_WIDTH } from 'styles/style-constants'
 
 import { style } from '@vanilla-extract/css'
-import { atoms } from '@zord/atoms'
-import { vars } from '@zord/theme'
-import { media } from '@zord/tokens'
+import { atoms, media, vars } from '@zord/config'
 
 export const collections = style([
   {

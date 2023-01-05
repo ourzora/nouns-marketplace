@@ -1,7 +1,6 @@
 import { globalStyle, style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms } from '@zord/atoms'
-import { color, media, radii, space, typography } from '@zord/tokens'
+import { atoms, color, media, radii, space } from '@zord/config'
 
 export const auctionWrapperVariants = {
   layout: {

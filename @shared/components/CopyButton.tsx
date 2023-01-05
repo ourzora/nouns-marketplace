@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import { useCopyToClipboard } from '@shared'
 import { Button, ButtonProps, Icon } from '@zord'
-import { mixins } from '@zord/mixins'
+import { mixins } from '@zord/config'
 
 /**
  * Button that copies text to clipboard, handles copy status and state

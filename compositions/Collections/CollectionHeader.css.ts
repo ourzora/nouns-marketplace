@@ -1,6 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms } from '@zord/atoms'
-import { color, media, space } from '@zord/tokens'
+import { atoms, color, media, space } from '@zord/config'
 
 export const collectionGrid = style([
   {

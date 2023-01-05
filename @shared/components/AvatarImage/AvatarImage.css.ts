@@ -3,8 +3,7 @@ import { avatarSizes } from 'styles/avatarSizes.css'
 
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms } from '@zord/atoms'
-import { vars } from '@zord/theme'
+import { atoms, vars } from '@zord/config'
 
 export const indexPrimary = style({
   zIndex: PRIMARY_LAYER,

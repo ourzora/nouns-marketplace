@@ -1,7 +1,6 @@
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms } from '@zord/atoms'
-import { color } from '@zord/tokens'
+import { atoms, color } from '@zord/config'
 
 export const center = atoms({ alignItems: 'center' })
 

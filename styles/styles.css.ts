@@ -1,7 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css'
-import { atoms } from '@zord/atoms'
-import { vars } from '@zord/theme'
-import { color, media, radii, typography } from '@zord/tokens'
+import { atoms, color, media, radii, typography, vars } from '@zord/config'
 
 import {
   FOOTER_HEIGHT,

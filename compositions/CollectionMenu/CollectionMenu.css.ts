@@ -1,6 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms } from '@zord/atoms'
-import { color, media } from '@zord/tokens'
+import { atoms, color, media } from '@zord/config'
 
 export const collectionTrigger = style([
   {

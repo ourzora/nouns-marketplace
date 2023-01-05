@@ -27,14 +27,18 @@ Adding to your project boils down to:
 
 ### Usage with Next.js
 
+In a NextJS environment, we need to work around an issue that occurs in the dev environment that causes an out-of-memory error because Next's ReactRefreshWebpackPlugin dependency can't handle [Barrel exports](https://basarat.gitbook.io/typescript/main-1/barrel) when exporting both PascalCase React components _*and*_ Vanilla Extract's `createTheme`: [Out-of-memory error with ReactRefreshWebpackPlugin + CamelCase barrel exports](https://github.com/vanilla-extract-css/vanilla-extract/issues/679)
+
+As a result, we explicitly export Zord components from `@zord`, and theme/configuration items like tokens, spacing, radii, color, and media breakpoints from `@zord/config`:
+
 ```tsx
 // pages/_app.tsx
 import type { AppProps } from 'next/app'
 
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/600.css'
-import { ThemeProvider, lightTheme } from '@zord'
-import '@zord/index.css'
+import { ThemeProvider } from '@zord'
+import { lightTheme } from '@zord/config'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (

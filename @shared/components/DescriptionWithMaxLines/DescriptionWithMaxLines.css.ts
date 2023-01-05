@@ -1,6 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms } from '@zord/atoms'
-import { typography } from '@zord/tokens'
+import { atoms, typography } from '@zord/config'
 
 export const button = style([
   {

@@ -1,8 +1,7 @@
 import { MAX_WIDTH } from 'styles/style-constants'
 
 import { style } from '@vanilla-extract/css'
-import { atoms } from '@zord/atoms'
-import { media, space } from '@zord/tokens'
+import { atoms, media, space } from '@zord/config'
 
 export const footerWrap = atoms({
   w: '100%',

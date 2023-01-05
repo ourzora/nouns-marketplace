@@ -3,7 +3,7 @@ import React from 'react'
 import { AvatarImage, CopyButton } from '@shared'
 import { useToggle } from '@shared/hooks/useToggle'
 import { Flex, FlexProps, Heading, Icon, Paragraph } from '@zord'
-import { mixins } from '@zord/mixins'
+import { mixins } from '@zord/config'
 
 import * as styles from './DataTableItem.css'
 
