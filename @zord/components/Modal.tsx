@@ -4,10 +4,9 @@ import React from 'react'
 
 import * as Dialog from '@radix-ui/react-dialog'
 
+import { lightTheme, mixins, vars } from '../config'
 import { Box, Icon } from '../elements'
-import { ThemeProvider as ZordProvider, lightTheme } from '../index'
-import { mixins } from '../mixins'
-import { vars } from '../theme.css'
+import { ThemeProvider as ZordProvider } from '../index'
 import * as styles from './Modal.css'
 
 export interface ModalContentProps extends Dialog.DialogContentProps {
@@ -91,3 +90,5 @@ function CloseButton({ className, ...props }: CloseButtonProps) {
     </Dialog.Close>
   )
 }
+
+ModalContent.displayName = 'ModalContent'
