@@ -4,7 +4,7 @@ import { isAddressMatch, shortenAddress } from '@shared'
 import { numberFormatter } from '@shared'
 import { Zorb } from '@zora-brand'
 import { Box, Button, Flex, Paragraph, Stack, Text } from '@zord'
-import { mixins } from '@zord/mixins'
+import { mixins } from '@zord/config'
 
 import {
   collectionBlock,

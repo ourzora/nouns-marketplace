@@ -349,7 +349,7 @@ export const mobileFiltersFooter = style([
 export const selectLabel = style(
   {
     zIndex: PRIMARY_LAYER,
-    lineHeight: `${typography.lineHeight[40]}!important`, // should be 55 per designs, revisit
+    lineHeight: `${typography.lineHeight[55]}!important`,
     textIndent: space.x4,
   },
   atoms({
@@ -361,7 +361,7 @@ export const selectLabel = style(
 export const selectDropdown = style(
   {
     appearance: 'none',
-    border: '2px solid transparent',
+    // border: '2px solid transparent',
     selectors: {
       '&:focus': {
         borderColor: color.accent,

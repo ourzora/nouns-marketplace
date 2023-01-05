@@ -2,11 +2,14 @@ import { ClassValue } from 'clsx'
 
 import React from 'react'
 
-import { Flex, FlexProps } from './Flex'
+import { BoxProps } from './Box'
+import { Flex } from './Flex'
 import { Icon } from './Icon'
 import { inputContainer, inputField, inputFieldBaseInput } from './InputField.css'
+import { baseSelect, baseSelectContainer } from './Select.css'
+import { Paragraph } from './Text'
 
-export interface SelectProps extends FlexProps {
+export interface SelectProps extends BoxProps {
   autoFocus?: boolean
   containerClassName?: ClassValue
   defaultValue?: string
@@ -31,36 +34,39 @@ export const Select = ({
 
   return (
     <Flex
-      className={[inputContainer, containerClassName]}
+      // className={[inputContainer, containerClassName]}
+      className={[baseSelectContainer, containerClassName]}
       w="100%"
       pos="relative"
       align="center"
-      h={large ? 'x16' : 'x10'}
-      px="x3"
+      h={large ? 'x16' : 'x14'}
+      borderRadius="curved"
+      px="x0"
       gap={large ? 'x2' : 'x1'}
       cursor={disabled ? 'not-allowed' : 'auto'}
     >
       <Flex w="100%" className={[`zord-select`, inputField]}>
-        <Flex
+        <Paragraph
           as="select"
           position="relative"
           display="block"
           width="100%"
-          flex={1}
-          pr="x8"
+          // flex={1}
+          pr="x9"
           fontSize={large ? 20 : 14}
-          className={[inputFieldBaseInput, className]}
+          className={[inputFieldBaseInput, baseSelect, className]}
+          // className={[baseSelect, className]}
           style={{ appearance: 'none' }}
           disabled={!!disabled}
           {...props}
         >
           {children}
-        </Flex>
+        </Paragraph>
 
         <Icon
           id="ChevronDown"
           color="tertiary"
-          right="x3"
+          right="x4"
           position="absolute"
           pointerEvents="none"
           display="flex"
