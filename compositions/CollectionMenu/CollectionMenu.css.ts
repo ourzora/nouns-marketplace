@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, color, media } from '@zord/config'
+import { atoms, color, media, radii, space } from '@zord/config'
 
 export const collectionTrigger = style([
   {
@@ -10,7 +10,7 @@ export const collectionTrigger = style([
         flexShrink: 0,
       },
       [media.min1024]: {
-        height: '56px',
+        height: space.x14,
       },
     },
   },
@@ -39,9 +39,14 @@ export const modalWrapper = style([
 
 export const filteredItems = style([
   {
-    maxHeight: 'calc((80px * 5) + (80px * 0.5) + (16px * 5) + 2px)', // (80px * 5 rows) + (0.5 * 1 row) + (5 * 16px gap) + 2px borderTop
-    borderBottomLeftRadius: '10px',
-    borderBottomRightRadius: '10px',
+    maxHeight: `calc((${space.x10} * 5.5) + (${space.x4} * 5) + 2px)`, // (40px * 5 rows) + (0.5 * 1 row) + (5 * 16px gap) + 2px borderTop
+    borderBottomLeftRadius: radii.curved,
+    borderBottomRightRadius: radii.curved,
+    '@media': {
+      [media.min576]: {
+        maxHeight: `calc((${space.x14} * 5.5) + (${space.x4} * 5) + 2px)`, // (56px * 5 rows...
+      },
+    },
   },
 ])
 
