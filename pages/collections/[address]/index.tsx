@@ -42,7 +42,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
       setCurrentCollectionCount(nftCount ? `${nftCount} NFTs` : '... NFTs')
     }
     return () => {
-      setCurrentCollection('Explore...')
+      setCurrentCollection('Browse...')
       setCurrentCollectionCount(undefined)
     }
   }, [nftCount, collection, setCurrentCollection, setCurrentCollectionCount])
