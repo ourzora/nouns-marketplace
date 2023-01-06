@@ -11,12 +11,12 @@ import {
   Button,
   ButtonProps,
   Flex,
+  Heading,
   Icon,
   Paragraph,
   PopUp,
   Separator,
   Stack,
-  Text,
 } from '@zord'
 
 import * as styles from './Header.css'
@@ -85,9 +85,9 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
             <Link passHref href={`/manage/${address}`}>
               <Button size="md" as="a" variant="unset" className={styles.topMenuItem}>
                 <EnsAvatar address={address} />
-                <Box ml={'x2'} as="span" className={[noTextWrap]}>
+                <Heading size="xs" ml={'x2'} as="span" inline className={[noTextWrap]}>
                   {displayName}
-                </Box>{' '}
+                </Heading>{' '}
               </Button>
             </Link>
             <Button
@@ -102,8 +102,10 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
           <Separator />
           <Box as="ul" pt="x2">
             <Flex as="li">
-              <Link href={`/manage/${address}`}>
-                <a className={styles.connectMenuItem}>Manage NFTs</a>
+              <Link href={`/manage/${address}`} passHref>
+                <Heading size="xs" as="a" className={styles.connectMenuItem}>
+                  Manage NFTs
+                </Heading>
               </Link>
             </Flex>
           </Box>

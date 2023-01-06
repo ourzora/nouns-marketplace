@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 
-import { useToggle } from '@shared/hooks'
-import useAutoFocus from '@shared/hooks/useAutoFocus'
+import { useAutoFocus, useToggle } from '@shared/hooks'
 import { BoxProps, Flex, Icon } from '@zord'
 
 import * as styles from './SearchInput.css'

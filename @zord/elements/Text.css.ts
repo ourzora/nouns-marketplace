@@ -1,12 +1,7 @@
-import { style } from '@vanilla-extract/css'
+import { globalStyle, style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 
 import { atoms } from '../atoms'
-
-// export const mediumFont = style({
-//   fontFamily: 'PTRootUIWebLight, Arial, Helvetica, sans-serif!important',
-//   fontWeight: 600,
-// })
 
 export const textVariants = {
   italic: {
@@ -46,14 +41,9 @@ export const textVariants = {
         lineHeight: 24,
       }),
     ]),
-    // 'heading-sm': atoms({
-    //   fontSize: 30,
-    //   fontWeight: 'heading',
-    //   lineHeight: 40,
-    // }),
     'heading-sm': style([
       {
-        fontFamily: 'var(--display-font)!important',
+        fontFamily: 'var(--display-font)',
       },
       atoms({
         fontWeight: 'heading',
@@ -61,14 +51,9 @@ export const textVariants = {
         lineHeight: { '@initial': 24, '@1024': 28 },
       }),
     ]),
-    // 'heading-md': atoms({
-    //   fontSize: 35,
-    //   fontWeight: 'heading',
-    //   lineHeight: 50,
-    // }),
     'heading-md': style([
       {
-        fontFamily: 'var(--display-font)!important',
+        fontFamily: 'var(--display-font)',
       },
       atoms({
         fontWeight: 'heading',
@@ -83,7 +68,7 @@ export const textVariants = {
     // }),
     'heading-lg': style([
       {
-        fontFamily: 'var(--display-font)!important',
+        fontFamily: 'var(--display-font)',
       },
       atoms({
         fontWeight: 'heading',
@@ -98,7 +83,7 @@ export const textVariants = {
     // }),
     'heading-xl': style([
       {
-        fontFamily: 'var(--display-font)!important',
+        fontFamily: 'var(--display-font)',
       },
       atoms({
         fontWeight: 'heading',
@@ -134,7 +119,7 @@ export const textVariants = {
     'paragraph-sm': style([
       // <span> in noun.market Figma
       {
-        fontFamily: 'var(--ui-font)!important',
+        fontFamily: 'var(--ui-font)',
       },
       atoms({
         fontSize: 16,
@@ -150,13 +135,23 @@ export const textVariants = {
     'paragraph-md': style([
       // <p> in noun.market Figma
       {
-        fontFamily: 'var(--ui-font)!important',
+        fontFamily: 'var(--ui-font)',
       },
       atoms({
         fontSize: { '@initial': 16, '@1024': 18 },
         fontWeight: 'paragraph',
         lineHeight: 24,
       }),
+    ]),
+    default: style([
+      {
+        fontFamily: 'inherit',
+      },
+      // atoms({
+      //   fontSize: { '@initial': 16, '@1024': 18 },
+      //   fontWeight: 'paragraph',
+      //   lineHeight: 24,
+      // }),
     ]),
     link: style([
       atoms({
@@ -174,6 +169,19 @@ export const textVariants = {
 
 export const text = recipe({
   variants: textVariants,
+  defaultVariants: {
+    variant: 'default',
+  },
 })
+
+globalStyle(
+  `
+  ${textVariants.variant['paragraph-md']} > a,
+  ${textVariants.variant['paragraph-sm']} > a
+`,
+  {
+    fontWeight: 'bold',
+  }
+)
 
 // export type TextVariants = RecipeVariants<typeof text>

@@ -1,6 +1,6 @@
 export const fonts = {
-  heading: 'Inter, sans-serif',
-  body: 'Inter, sans-serif',
+  heading: "'Londrina Solid', Verdana, Geneva, sans-serif",
+  body: 'PT Root UI, Arial, Helvetica, sans-serif',
   mono: `'Roboto Mono', monospace`,
 }
 

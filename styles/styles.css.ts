@@ -47,24 +47,9 @@ export const noTextWrap = style({
   whiteSpace: 'nowrap',
 })
 
-export const textCenter = style({
-  textAlign: 'center',
-})
-
 export const leadingTight = style({
   lineHeight: 1.125,
 })
-
-export const buttonStyle = style([
-  {
-    backgroundColor: 'var(--light-grey)',
-  },
-  atoms({
-    p: 'x2',
-    borderRadius: 'round',
-    justifyContent: 'center',
-  }),
-])
 
 export const pageWrapper = style([
   {
@@ -97,14 +82,14 @@ export const maxWidthSm = style([
 ])
 
 globalStyle('.zord-accordionTrigger > span', {
-  fontFamily: "'Londrina Solid', cursive!important",
+  fontFamily: "'Londrina Solid', cursive",
   fontSize: 20,
   paddingBottom: 10,
 })
 
 globalStyle('.zord-attributesHeading', {
-  fontFamily: "'Londrina Solid', cursive!important",
-  fontSize: '24px!important', // @BJ todo: replace when zord is vendored
+  fontFamily: "'Londrina Solid', cursive",
+  fontSize: '24px', // @BJ todo: replace when zord is vendored
 })
 
 globalStyle('.nouns-market-traits h3 > button > span', {
@@ -115,25 +100,13 @@ globalStyle('.nouns-market-traits h3 > button > span', {
 })
 
 globalStyle('.nouns-market-traits h3 > button', {
-  backgroundColor: `${color.background2}!important`,
+  backgroundColor: `${color.background2}`,
   padding: 10,
   borderRadius: radii.curved,
   marginBottom: 5,
 })
 
 /* PAGE HEADER */
-export const pageHeadline = style([
-  {
-    fontWeight: typography.fontWeight.display,
-    fontSize: 48,
-    lineHeight: typography.lineHeight[40],
-    '@media': {
-      [media.min1024]: {
-        lineHeight: typography.lineHeight[50],
-      },
-    },
-  },
-])
 
 export const pageHeaderWrapper = style([
   {
@@ -146,14 +119,6 @@ export const pageHeaderWrapper = style([
     my: 'x0',
   }),
 ])
-
-export const hideMobile = style({
-  '@media': {
-    '(max-width: 500px)': {
-      display: 'none',
-    },
-  },
-})
 
 export const stat = style({
   whiteSpace: 'nowrap',

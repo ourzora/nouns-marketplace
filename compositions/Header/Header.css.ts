@@ -148,7 +148,8 @@ globalStyle(`${popupTrigger} button`, {
 })
 
 export const topMenuItem = style({
-  height: '32px!important',
+  // height: '32px!important',
+  height: '32px',
 })
 
 export const linksMenuItem = style([
@@ -198,6 +199,9 @@ export const connectMenuItem = style([
 export const disconnectButton = style([
   {
     color: 'red',
+    fontWeight: 'bold',
+    fontSize: 18,
+    lineHeight: 1,
     ':hover': {
       cursor: 'pointer',
     },

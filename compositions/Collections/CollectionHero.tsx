@@ -44,7 +44,7 @@ export function CollectionHero({ activeAuction, ...props }: HeroProps) {
           )}
         </Flex>
         <Stack className={[styles.activeAuctionForm]} justify="center" gap="x6">
-          <Heading size={isLarge ? 'xl' : 'lg'} as="h2">
+          <Heading size={isLarge ? 'lg' : 'md'} as="h2">
             {token?.name}
           </Heading>
           <Flex gap="x8">

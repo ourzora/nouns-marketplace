@@ -1,10 +1,8 @@
 import { useEnsName } from 'wagmi'
 
-import { pageHeadline } from 'styles/styles.css'
-
 import { AddressWithLink } from '@market'
 import { useShortAddress } from '@shared'
-import { Stack, Text } from '@zord'
+import { Heading, Stack } from '@zord'
 
 export function ManageHeader({ ownerAddress }: { ownerAddress: string }) {
   const { data: ensName } = useEnsName({
@@ -26,9 +24,9 @@ export function ManageHeader({ ownerAddress }: { ownerAddress: string }) {
       }}
       gap="x2"
     >
-      <Text textAlign="center" className={[pageHeadline]} as="h1">
+      <Heading as="h1" size="xl" textAlign="center">
         {ensName ? ensName : shortAddress}
-      </Text>
+      </Heading>
       <AddressWithLink
         address={ownerAddress}
         useEns={false}
