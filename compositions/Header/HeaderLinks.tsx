@@ -24,7 +24,7 @@ function Links() {
           className={styles.linksMenuItem}
           size="lg"
         >
-          Noun Center
+          Nouns Center
         </Label>
       </Box>
       <Box as="li">
