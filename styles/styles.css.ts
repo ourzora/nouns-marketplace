@@ -14,41 +14,8 @@ globalStyle('html, body', {
   padding: 0,
 })
 
-// globalStyle('*', {
-// fontFamily: "'ptBold', Arial, Helvetica, sans-serif!important",
-// fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
-// })
-
-// globalStyle('h1, h2, h3, h4, h5', {
-//   fontFamily: 'var(--display-font)!important',
-//   lineHeight: '1.125!important',
-// })
-
-// globalStyle('p', {
-//   fontFamily: 'var(--ui-font)!important',
-// })
-
-// globalStyle('light-font', {
-//   fontWeight: 300,
-//   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
-// })
-
-// export const lightFont = style({
-//   fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
-//   fontWeight: 300,
-// })
-
-export const mediumFont = style({
-  fontFamily: 'PTRootUIWebLight, Arial, Helvetica, sans-serif!important',
-  fontWeight: 600,
-})
-
 export const noTextWrap = style({
   whiteSpace: 'nowrap',
-})
-
-export const leadingTight = style({
-  lineHeight: 1.125,
 })
 
 export const pageWrapper = style([
@@ -81,19 +48,12 @@ export const maxWidthSm = style([
   }),
 ])
 
-globalStyle('.zord-accordionTrigger > span', {
-  fontFamily: "'Londrina Solid', cursive",
-  fontSize: 20,
-  paddingBottom: 10,
-})
-
 globalStyle('.zord-attributesHeading', {
   fontFamily: "'Londrina Solid', cursive",
   fontSize: '24px', // @BJ todo: replace when zord is vendored
 })
 
 globalStyle('.nouns-market-traits h3 > button > span', {
-  // fontFamily: "'ptBold', Arial, Helvetica, sans-serif!important",
   fontSize: 14,
   textTransform: 'capitalize',
   paddingBottom: 0,

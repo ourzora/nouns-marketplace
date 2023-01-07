@@ -1,6 +1,6 @@
 import { SearchInput } from 'compositions'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
-import { mediumFont, noTextWrap } from 'styles/styles.css'
+import { noTextWrap } from 'styles/styles.css'
 
 import { useNounsDaos } from 'hooks/useNounsDaos'
 
@@ -79,7 +79,6 @@ export function CollectionMenu() {
             <SearchInput
               placeholder="Quick search..."
               className="collectionmenu-quicksearch"
-              inputClassNameOverrides={mediumFont}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleChange(event.target.value)
               }
@@ -99,9 +98,7 @@ export function CollectionMenu() {
                 <CollectionNavList items={filteredItems} />
               ) : (
                 <Flex justify="center" align="center" h="x20">
-                  <Paragraph className={mediumFont} color="text3">
-                    Nothing found
-                  </Paragraph>
+                  <Paragraph color="text3">Nothing found</Paragraph>
                 </Flex>
               )}
             </Box>

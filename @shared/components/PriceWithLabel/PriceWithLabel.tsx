@@ -1,8 +1,6 @@
-import { mediumFont } from 'styles/styles.css'
-
 import React from 'react'
 
-import { Eyebrow, Heading, Stack } from '@zord'
+import { Heading, Paragraph, Stack } from '@zord'
 
 export interface PriceWithLabelProps {
   cryptoAmount: string
@@ -19,20 +17,21 @@ export function PriceWithLabel({
   label,
   invertColor,
 }: PriceWithLabelProps) {
+  const invertedPColor = invertColor ? 'text3' : 'text2'
   return (
     <Stack>
       {label && (
-        <Eyebrow inline className={mediumFont} color={invertColor ? 'text2' : 'text3'}>
+        <Paragraph inline color={invertedPColor}>
           {label}
-        </Eyebrow>
+        </Paragraph>
       )}
       <Heading as="h2" size="sm" inline color={invertColor ? 'onAccent' : 'text1'}>
         {cryptoAmount} {symbol}
       </Heading>
       {usdAmount && (
-        <Eyebrow color="text2" inline className={mediumFont}>
+        <Paragraph color={invertedPColor} inline>
           {usdAmount} USD
-        </Eyebrow>
+        </Paragraph>
       )}
     </Stack>
   )

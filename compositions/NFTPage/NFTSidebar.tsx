@@ -1,5 +1,4 @@
 import { Link } from 'components'
-import { mediumFont } from 'styles/styles.css'
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'

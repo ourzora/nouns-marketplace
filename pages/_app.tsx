@@ -24,7 +24,6 @@ import { ToastContextProvider } from '@toast'
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 
-// import '@zord/index.css'
 import '../styles/globals.css'
 import '../styles/reset.css'
 

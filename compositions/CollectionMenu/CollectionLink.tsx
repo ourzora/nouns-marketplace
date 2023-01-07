@@ -1,5 +1,4 @@
 import { Link } from 'components/Link'
-import { leadingTight, mediumFont } from 'styles/styles.css'
 
 import { useAggregate } from 'hooks'
 
@@ -8,7 +7,7 @@ import { TypeSafeDao } from 'validators/dao'
 import { CollectionThumbnail } from '@media'
 import { useModal } from '@modal'
 import { useWindowWidth } from '@shared/hooks'
-import { Eyebrow, Flex, Icon, Label, Stack } from '@zord'
+import { Flex, Heading, Icon, Label, Span, Stack } from '@zord'
 
 import * as styles from './CollectionMenu.css'
 
@@ -27,14 +26,14 @@ export function CollectionLink({ collection }: { collection: TypeSafeDao }) {
           />
           <Stack gap="x1">
             <Flex gap="x2" align="center">
-              <Label size={isSmall ? 'md' : 'lg'} className={leadingTight} color="text1">
+              <Heading size="xs" inline color="text1">
                 {collection.name}
-              </Label>
+              </Heading>
             </Flex>
             {floorPrice && (
-              <Eyebrow color="text2" as="p" className={[styles.floor, mediumFont]}>
+              <Span color="text2" as="p" className={[styles.floor]}>
                 Floor: {floorPrice} ETH
-              </Eyebrow>
+              </Span>
             )}
           </Stack>
         </Flex>

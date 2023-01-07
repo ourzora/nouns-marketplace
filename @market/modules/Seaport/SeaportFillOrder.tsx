@@ -1,5 +1,3 @@
-import { mediumFont } from 'styles/styles.css'
-
 import React, { Dispatch, SetStateAction, useEffect, useMemo } from 'react'
 
 import { MarketModalHeading } from '@market/components'

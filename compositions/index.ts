@@ -1,5 +1,4 @@
 export * from './CollectionMenu'
-export * from './CollectionRanking'
 export * from './Collections'
 export * from './Daos'
 export * from './Footer'

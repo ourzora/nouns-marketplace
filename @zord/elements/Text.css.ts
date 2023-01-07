@@ -177,7 +177,9 @@ export const text = recipe({
 globalStyle(
   `
   ${textVariants.variant['paragraph-md']} > a,
-  ${textVariants.variant['paragraph-sm']} > a
+  ${textVariants.variant['paragraph-sm']} > a,
+  ${textVariants.variant['paragraph-md']} > strong,
+  ${textVariants.variant['paragraph-sm']} > strong
 `,
   {
     fontWeight: 'bold',
