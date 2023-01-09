@@ -10,9 +10,9 @@ import { TypeSafeToken } from 'validators/token'
 import {
   cardImageWrapper,
   cardWrapper,
-  titleHeading,
+  titlePadding,
   titleWrapper,
-} from '@media/NftMedia.css'
+} from '@media/NFTMedia.css'
 import { useNounishAuctionQuery } from '@noun-auction/hooks'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import {
@@ -75,6 +75,13 @@ export function ActiveAuctionCardComponent({
     [token]
   )
 
+  const enableTitleScroll = useMemo(() => {
+    // TODO: move into useTokenHelper when all instances of NFTObject are changed to TypeSafeToken
+    if (token?.metadata?.name) {
+      return token?.metadata?.name.split('').length > 25
+    }
+  }, [token?.metadata?.name])
+
   return (
     <Stack
       w="100%"
@@ -108,7 +115,7 @@ export function ActiveAuctionCardComponent({
           }}
         >
           <Flex className={[titleWrapper]}>
-            <Heading as="h4" size="sm" className={titleHeading}>
+            <Heading as="h4" size="sm" className={enableTitleScroll && titlePadding}>
               {fallbackTitle}
             </Heading>
           </Flex>

@@ -13,13 +13,13 @@ export const offsetY = style({
 })
 
 export const button = style({
-  height: 'unset!important', // TODO: removeme when zord is vendored
+  height: 'unset',
 
   selectors: {
     '&:not([disabled]):hover': {
       cursor: 'pointer',
       backgroundColor: vars.color.background2,
-      borderRadius: '12px!important', // TODO: removeme when zord is vendored
+      borderRadius: '12px',
     },
   },
 })
@@ -34,15 +34,15 @@ export const savings = style({
 
 export const popupTrigger = style([
   {
-    border: '0!important',
-    padding: '0!important',
+    border: '0',
+    padding: '0',
   },
   atoms({
     padding: 'x0',
   }),
 ])
 export const popupWrapper = style({
-  borderRadius: '16px!important', // TODO: removeme when zord is vendored
+  borderRadius: '16px',
 })
 export const stretch = atoms({
   alignItems: 'stretch',

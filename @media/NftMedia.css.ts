@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, media } from '@zord/config'
+import { atoms, media, space } from '@zord/config'
 
 export const nftGridWrapperVariants = {
   layout: {
@@ -89,12 +89,9 @@ export const titleScroll = style([
   },
 ])
 
-export const titleHeading = style([
-  {
-    paddingRight: 'var(--titlePad)',
-    fontSize: '24px!important', // TODO: Remove when zord vendoring is complete
-  },
-])
+export const titlePadding = atoms({
+  paddingRight: 'x10',
+})
 
 /* Thumbnail */
 export const nftThumbnail = style([

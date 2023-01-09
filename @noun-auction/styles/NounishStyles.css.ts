@@ -196,21 +196,6 @@ export const sidebarBidWrapper = style([
   }),
 ])
 
-export const sidebarHighBid = style([
-  {
-    fontSize: 35,
-    fontFamily: "'Londrina Solid', cursive!important",
-    fontWeight: 400,
-  },
-  atoms({
-    color: 'text1',
-  }),
-])
-
-export const sideBarUpperLabel = style({
-  fontSize: 18,
-})
-
 export const bidHistoryWrapper = style([
   {
     gridRowStart: 2,
@@ -346,9 +331,6 @@ export const nounishThumbnail = style([
     w: '100%',
   }),
 ])
-export const thumbnailLink = style({
-  height: 'unset!important',
-})
 
 export const nounishThumbnailImage = style([
   atoms({

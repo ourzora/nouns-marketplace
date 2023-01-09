@@ -1,12 +1,12 @@
 import { style } from '@vanilla-extract/css'
-import { color } from '@zord/config'
+import { atoms, color } from '@zord/config'
 
-export const arrowButton = style({
-  // @TODO BJ: remove !important when zord has been vendored in
-  borderRadius: '100%!important',
-  padding: `6px!important`,
-  background: `${color.background2}!important`,
-})
+export const arrowButton = style([
+  {
+    padding: `6px`,
+  },
+  atoms({ borderRadius: 'round', backgroundColor: 'background2' }),
+])
 
 export const arrow = style({
   color: color.onAccentDisabled,

@@ -21,6 +21,7 @@ export type PriceRangeFilterConfig = {
 
 export type PropertiesConfig = {
   header?: string
+  enabled?: boolean
 } & FilterOptionConfig
 
 export interface FilterConfigProps {

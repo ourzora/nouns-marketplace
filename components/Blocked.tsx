@@ -110,7 +110,7 @@ interface Render404Props {
 
 function Blocked({ heading, message = DEFAULT_MESSAGE }: Render404Props) {
   return (
-    <PageWrapper fullHeight style={{ alignItems: 'center' }}>
+    <PageWrapper fullHeight align="center">
       <Stack
         mt="x10"
         gap="x3"

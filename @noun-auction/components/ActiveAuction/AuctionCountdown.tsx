@@ -1,6 +1,5 @@
 import { useCountdown } from '@noun-auction/hooks'
-import { sideBarUpperLabel } from '@noun-auction/styles/NounishStyles.css'
-import { Flex, FlexProps, Heading, Label } from '@zord'
+import { Flex, FlexProps, Heading, Label, Paragraph } from '@zord'
 
 interface CountdownProps extends FlexProps {
   showLabels?: boolean
@@ -22,26 +21,26 @@ export function AuctionCountdown({
   auctionCompleted,
   auctionStartTime,
   auctionEndTime,
+  ...props
 }: CountdownProps) {
   const { countdownText } = useCountdown(auctionStartTime, auctionEndTime)
 
   return (
-    <Flex direction={direction} wrap="wrap" gap={direction === 'row' ? 'x2' : 'x2'}>
+    <Flex
+      direction={direction}
+      wrap="wrap"
+      gap={direction === 'row' ? 'x2' : 'x2'}
+      {...props}
+    >
       {showLabels && (
-        <Label
-          size="md"
-          className={[layout === 'sideBarBid' && sideBarUpperLabel]}
+        <Paragraph
           color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
           align={{ '@initial': 'left', '@1024': 'right' }}
         >
           {auctionCompleted ? 'Status' : label}&nbsp;
-        </Label>
+        </Paragraph>
       )}
-      <Heading
-        size="xs"
-        align={{ '@initial': 'left', '@1024': 'right' }}
-        className={[layout === 'sideBarBid' && sideBarUpperLabel]}
-      >
+      <Heading size="xs" align={{ '@initial': 'left', '@1024': 'right' }}>
         {auctionCompleted ? endedCopy : countdownText}
       </Heading>
     </Flex>

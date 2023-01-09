@@ -25,7 +25,7 @@ export function RPCTokenInfo({
   return (
     <Flex className={['nounish-auction__token-info', styles.tokenInfoWrapper]} {...props}>
       <NextLink href={`/collections/${collectionAddress}/${tokenId}`} passHref>
-        <Button as="a" variant="unset" className={styles.thumbnailLink}>
+        <Button as="a" variant="unset">
           {!!tokenId && !!collectionAddress && (
             <NounishThumbnail
               image={tokenImage}
@@ -36,7 +36,6 @@ export function RPCTokenInfo({
         </Button>
       </NextLink>
       <Stack justify="center" gap="x1">
-        {/* <Box> */}
         <Box className={styles.rowCollectionName}>
           <Link href={`/collections/${collectionAddress}/${tokenId}`} passHref>
             {tokenName ?? '...'}
@@ -49,7 +48,6 @@ export function RPCTokenInfo({
             </Span>
           </Link>
         </Box>
-        {/* </Box> */}
       </Stack>
     </Flex>
   )

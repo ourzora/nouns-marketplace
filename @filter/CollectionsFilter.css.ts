@@ -225,14 +225,6 @@ export const activityModal = style([
   }),
 ])
 
-export const filterPropertySelect = style([
-  {
-    textAlign: 'left',
-    justifyContent: 'flex-start',
-    height: 'unset!important',
-  },
-])
-
 const pill = {
   padding: `0 ${vars.space.x3}`,
   height: vars.space.x10,
@@ -349,10 +341,10 @@ export const mobileFiltersFooter = style([
 export const selectLabel = style(
   {
     zIndex: PRIMARY_LAYER,
-    lineHeight: `${typography.lineHeight[55]}!important`,
     textIndent: space.x4,
   },
   atoms({
+    lineHeight: 55,
     pointerEvents: 'none',
     userSelect: 'none',
   })

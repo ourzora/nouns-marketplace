@@ -32,8 +32,8 @@ globalStyle(`${codeWrapper} pre`, {
 
 export const h1Selector = style([
   {
-    paddingTop: 50,
-    marginTop: -50,
+    // paddingTop: 50,
+    // marginTop: -50,
   },
   atoms({
     pos: 'relative',

@@ -16,7 +16,7 @@ export function EthAmount({ ethAmount, ethSymbol = 'ETH', ...props }: EthAmountP
   if (!ethAmount) return null
 
   return (
-    <Heading size="xs" {...props}>
+    <Heading size="xs" inline {...props}>
       {formattedEthAmount} {ethSymbol}
     </Heading>
   )

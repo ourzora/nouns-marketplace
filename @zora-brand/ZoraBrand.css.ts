@@ -2,9 +2,9 @@ import { style } from '@vanilla-extract/css'
 import { atoms, media, typography } from '@zord/config'
 
 export const zoraBrand = style({
-  fontWeight: '500!important',
+  fontWeight: '500',
   letterSpacing: '.05em',
-  fontFamily: "'Inter', sans-serif!important",
+  fontFamily: "'Inter', sans-serif",
   fontSize: 12,
   lineHeight: typography.lineHeight[20],
   color: '#808080',
