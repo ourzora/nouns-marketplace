@@ -38,7 +38,7 @@ export function RPCTokenInfo({
       <Stack justify="center" gap="x1">
         {/* <Box> */}
         <Box className={styles.rowCollectionName}>
-          <Link href={`/collections/${collectionAddress}`} passHref>
+          <Link href={`/collections/${collectionAddress}/${tokenId}`} passHref>
             {tokenName ?? '...'}
           </Link>
         </Box>

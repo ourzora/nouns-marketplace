@@ -86,7 +86,7 @@ export function PopUp({
         <>
           <Box
             backgroundColor="background1"
-            borderRadius="small"
+            borderRadius="phat"
             p={padding}
             ref={setPopperElement}
             className={[wrapperClassName, container]}
