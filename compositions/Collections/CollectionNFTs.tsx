@@ -25,7 +25,8 @@ export const CollectionNFTs = ({ fallback }: { fallback: CollectionServiceProps 
       filtersVisible={isLarge}
       contractAddress={collectionAddress}
       enableSortDropdown
-      useCollectionProperties={{
+      collectionPropertiesConfig={{
+        enabled: true,
         header: 'Traits',
         selector: 'nouns-market-traits',
       }}

@@ -9,7 +9,7 @@ import {
 import { SaleTypeButton } from '@market/modules/V3Ask/SaleTypeButton'
 import { V3AskLearnMoreButton } from '@market/modules/V3Ask/V3AskLearnMoreButton'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Eyebrow, Stack } from '@zord'
+import { Eyebrow, Span, Stack } from '@zord'
 
 interface SelectListFlowProps {
   closeModal?: () => void
@@ -29,7 +29,7 @@ export function SelectListFlow({ nftObj, closeModal, ...props }: SelectListFlowP
     return (
       <Stack gap="x5" {...props}>
         <Stack gap="x2">
-          <Eyebrow>Sale type</Eyebrow>
+          <Span textTransform="uppercase">Sale type</Span>
 
           <SaleTypeButton
             label="Fixed Price"

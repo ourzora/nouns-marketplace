@@ -25,7 +25,7 @@ export function FilterCollectionListItem({
   count?: number
 }) {
   const {
-    useCollectionProperties,
+    collectionPropertiesConfig,
     filterStore: {
       setTokenContracts,
       filters: { tokenContracts },
@@ -79,7 +79,7 @@ export function FilterCollectionListItem({
           )}
         </Flex>
       </Button>
-      {isSelected && useCollectionProperties && (
+      {isSelected && collectionPropertiesConfig?.enabled && (
         <FilterProperties collectionAddress={tokenAddress} />
       )}
     </Stack>

@@ -48,24 +48,6 @@ export const maxWidthSm = style([
   }),
 ])
 
-globalStyle('.zord-attributesHeading', {
-  fontFamily: "'Londrina Solid', cursive",
-  fontSize: '24px', // @BJ todo: replace when zord is vendored
-})
-
-globalStyle('.nouns-market-traits h3 > button > span', {
-  fontSize: 14,
-  textTransform: 'capitalize',
-  paddingBottom: 0,
-})
-
-globalStyle('.nouns-market-traits h3 > button', {
-  backgroundColor: `${color.background2}`,
-  padding: 10,
-  borderRadius: radii.curved,
-  marginBottom: 5,
-})
-
 /* PAGE HEADER */
 
 export const pageHeaderWrapper = style([

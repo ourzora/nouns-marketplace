@@ -33,7 +33,7 @@ export function FilterSidebarContents({
     enablePriceRange,
     useFilterOwnerCollections,
     enableCollectionSearch,
-    useCollectionProperties,
+    collectionPropertiesConfig,
     enableSidebarClearButton,
   } = useCollectionFilters()
 
@@ -89,7 +89,7 @@ export function FilterSidebarContents({
           />
         )}
         {ownerAddress && useFilterOwnerCollections && <FilterOwnerCollections />}
-        {contractAddress && useCollectionProperties && (
+        {contractAddress && collectionPropertiesConfig?.enabled && (
           <FilterProperties collectionAddress={contractAddress} />
         )}
         {enableCollectionSearch && !contractAddress && <CollectionsFilterList />}

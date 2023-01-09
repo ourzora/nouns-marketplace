@@ -33,7 +33,7 @@ export interface FilterConfigProps {
   enableFilterToggleButton?: boolean
   enablePriceRange?: PriceRangeFilterConfig | undefined //@BJ todo: this shouldn't be a boolean AND a configuration, it's confusing
   enableCollectionSearch?: boolean
-  useCollectionProperties?: PropertiesConfig | undefined //@BJ todo: this shouldn't be a boolean AND a configuration, it's confusing
+  collectionPropertiesConfig?: PropertiesConfig | undefined
   enableSidebarClearButton?: boolean
   /**
    * Flag to show or hide the Filter sidebar and visibility toggle button

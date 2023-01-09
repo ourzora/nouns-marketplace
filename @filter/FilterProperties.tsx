@@ -4,7 +4,7 @@ import { AggregateAttribute } from 'types/zora.api.generated'
 import { useEffect } from 'react'
 
 import { useCollectionFilters } from '@filter/providers'
-import { Box, Label, Stack } from '@zord'
+import { Box, Heading, Label, Stack } from '@zord'
 
 import { FilterPropertySelect } from './FilterPropertySelect'
 import { useCollectionAttributes } from './hooks/useCollectionAttributes'
@@ -14,7 +14,7 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
   const { aggregateAttributes } = useCollectionAttributes({
     addresses: collectionAddress,
   })
-  const { useCollectionProperties } = useCollectionFilters()
+  const { collectionPropertiesConfig } = useCollectionFilters()
 
   useEffect(() => {
     if (!aggregateAttributes) return
@@ -26,11 +26,12 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
   }
 
   return (
-    <Stack gap="x4" className={['filter-properties', useCollectionProperties?.selector]}>
-      {useCollectionProperties?.header && (
-        <Label className="zord-attributesHeading" size="lg">
-          {useCollectionProperties?.header}
-        </Label>
+    <Stack
+      gap="x4"
+      className={['filter-properties', collectionPropertiesConfig?.selector]}
+    >
+      {collectionPropertiesConfig?.header && (
+        <Heading size="sm">{collectionPropertiesConfig?.header}</Heading>
       )}
       <Stack gap="x2">
         {filterPropertiesList.map((property: AggregateAttribute) => (
