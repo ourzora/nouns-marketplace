@@ -41,7 +41,7 @@ export function NFTCard2({
   ownerAddress,
   markets,
 }: Props) {
-  const fallbackTitle = collectionName ?? '..'
+  const fallbackTitle = `${collectionName} #${tokenId}` ?? '..'
 
   const useTitleScroll = useMemo(() => {
     if (tokenName) {
