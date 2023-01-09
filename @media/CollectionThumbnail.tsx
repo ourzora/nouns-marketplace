@@ -8,7 +8,7 @@ import { TypeSafeToken } from 'validators/token'
 import { useFirstTokenID } from '@shared/hooks'
 import { Box, BoxProps, Flex, Label } from '@zord'
 
-import { nftThumbnail } from './NFTMedia.css'
+import { nftThumbnail } from './mediaStyles.css'
 
 export type SizeProps = '100%' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | undefined
 

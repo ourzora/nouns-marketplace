@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { Filter } from '@filter'
 import { NFTCard, NFTGrid } from '@media'
-import { nftGridWrapper } from '@media/NFTMedia.css'
+import { nftGridWrapper } from '@media/mediaStyles.css'
 import { NFTObject } from '@zoralabs/nft-hooks'
 
 type DaoGridProps = {

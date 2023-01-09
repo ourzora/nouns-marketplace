@@ -14,7 +14,7 @@ import {
   titlePadding,
   titleScroll,
   titleWrapper,
-} from '@media/NFTMedia.css'
+} from '@media/mediaStyles.css'
 import { useNFTProvider } from '@shared'
 import { Box, Flex, Heading, Label, Separator, Stack } from '@zord'
 

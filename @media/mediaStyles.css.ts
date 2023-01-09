@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, media, space } from '@zord/config'
+import { atoms, media } from '@zord/config'
 
 export const nftGridWrapperVariants = {
   layout: {
@@ -11,7 +11,6 @@ export const nftGridWrapperVariants = {
           [media.min576]: {
             gridTemplateColumns: 'repeat(2, 1fr)',
           },
-          // [`(min-width: 1240px)`]: {
           [media.min1440]: {
             gridTemplateColumns: 'repeat(3, 1fr)',
           },

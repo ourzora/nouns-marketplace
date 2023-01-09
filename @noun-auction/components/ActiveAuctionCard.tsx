@@ -12,7 +12,7 @@ import {
   cardWrapper,
   titlePadding,
   titleWrapper,
-} from '@media/NFTMedia.css'
+} from '@media/mediaStyles.css'
 import { useNounishAuctionQuery } from '@noun-auction/hooks'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
 import {
