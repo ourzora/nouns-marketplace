@@ -4,19 +4,18 @@ import { mediumFont } from 'styles/styles.css'
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import React, { useCallback, useMemo, useState } from 'react'
+import { TypeSafeMarket } from 'validators/market'
 
 import { useOffchainOrderAttribution } from '@market/hooks'
 import { SeaportFillOrderFlow } from '@market/modules'
 import { ModalComposition, useModal } from '@modal'
 import { useAuth, useButtonRequiresAuth } from '@shared'
 import { numberFormatter } from '@shared/utils'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { Box, Flex, Heading, Paragraph, Stack, Well } from '@zoralabs/zord'
 
 import * as styles from './PriceCards.css'
 
 export interface PriceCardsProps {
-  nft: NFTObject
   offchainOrders: OffchainOrderWithToken[]
   userAddress?: string
 }
@@ -26,12 +25,7 @@ const modalName = 'seaport-fill-modal'
 function PriceCard({
   order,
   userAddress,
-  nft,
-}: {
-  order: OffchainOrderWithToken
-  nft: NFTObject
-  userAddress?: string
-}) {
+}: PriceCardsProps & { order: OffchainOrderWithToken }) {
   const { offchainOrder } = order
   const { price } = offchainOrder
   const { chainTokenPrice, usdcPrice } = price
@@ -99,7 +93,7 @@ function PriceCard({
         }
         content={
           <Box p="x8">
-            <SeaportFillOrderFlow nft={nft} order={order} userAddress={userAddress} />
+            <SeaportFillOrderFlow order={order} userAddress={userAddress} />
           </Box>
         }
       />
@@ -107,7 +101,7 @@ function PriceCard({
   )
 }
 
-export function PriceCards({ nft, offchainOrders }: PriceCardsProps) {
+export function PriceCards({ offchainOrders }: PriceCardsProps) {
   const cardCount = useMemo(() => offchainOrders.length, [offchainOrders])
   const [currentCard, setCurrentCard] = useState<number>(0)
   const { address: userAddress } = useAuth()
@@ -156,7 +150,7 @@ export function PriceCards({ nft, offchainOrders }: PriceCardsProps) {
           </Flex>
         )}
         <PriceCard
-          nft={nft}
+          offchainOrders={offchainOrders}
           order={offchainOrders[currentCard]}
           userAddress={userAddress}
         />

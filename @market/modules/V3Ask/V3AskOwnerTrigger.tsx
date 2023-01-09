@@ -3,19 +3,19 @@ import { Button } from 'components/Button'
 
 import React, { useCallback, useMemo, useState } from 'react'
 
-import { useAskHelper, useRelevantMarket } from '@market/hooks'
+import { useRelevantMarket } from '@market/hooks'
 import { PossibleV3AskState, useV3AskStateContext } from '@market/modules/V3Ask/'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { useKeyPress } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { PopUp, Stack, Text, Well } from '@zoralabs/zord'
 
 import { UniversalListAskFlow } from './UniversalListAskFlow'
 import * as styles from './V3AskFlow.css'
 
 interface V3AskOwnerTriggerProps {
-  nft: NFTObject
   openModal: () => void
+  showOnlyTrigger: boolean
 }
 
 const v3AskDropdownOptions = [
@@ -50,14 +50,14 @@ const privateAskDropdownOptions = [
   },
 ]
 
-export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
+export function V3AskOwnerTrigger({
+  openModal,
+  showOnlyTrigger,
+}: V3AskOwnerTriggerProps) {
+  const { markets } = useNftMarketContext()
   const { dispatch } = useV3AskStateContext()
-  const { ask } = useRelevantMarket(nft.markets)
-
   const { displayAskAmount, usdAskAmount, hasActivePrivateAsk, isActiveAsk } =
-    useAskHelper({
-      ask,
-    })
+    useRelevantMarket(markets)
 
   const dropdownOptions = useMemo(
     () => (hasActivePrivateAsk ? privateAskDropdownOptions : v3AskDropdownOptions),
@@ -81,6 +81,50 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
     [hasActivePrivateAsk]
   )
 
+  if (isActiveAsk && showOnlyTrigger) {
+    return (
+      <PopUp
+        open={open}
+        placement="bottom-end"
+        wrapperClassName={clsx('privateask-owner-popup-wrapper', styles.popupWrapper)}
+        triggerClassName={clsx('privateask-owner-popup-trigger', styles.popupTrigger)}
+        trigger={
+          <Button
+            w="100%"
+            variant="secondary"
+            onClick={() => setOpen(true)}
+            className={['manage-dropdown']}
+          >
+            Manage Listing...
+          </Button>
+        }
+      >
+        <Stack aria-label="Manage Dropdown" w="x64" borderRadius="curved">
+          {dropdownOptions.map((option) => (
+            <Button
+              variant="ghost"
+              w="100%"
+              justify="space-between"
+              style={{
+                whiteSpace: 'nowrap',
+              }}
+              key={option.label}
+              onClick={() => handleClick(option.action)}
+            >
+              <Text
+                as="span"
+                pr="x10"
+                color={option.destructive ? 'negative' : undefined}
+              >
+                {option.label}
+              </Text>
+            </Button>
+          ))}
+        </Stack>
+      </PopUp>
+    )
+  }
+
   if (isActiveAsk) {
     return (
       <Well gap="x6" borderRadius="phat">
@@ -89,7 +133,7 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
             label={label}
             symbol="ETH"
             cryptoAmount={displayAskAmount}
-            usdAmount={usdAskAmount}
+            usdAmount={usdAskAmount ?? 0}
           />
         )}
         <PopUp
@@ -135,5 +179,5 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
     )
   }
 
-  return <UniversalListAskFlow nftObj={nft} />
+  return <UniversalListAskFlow />
 }

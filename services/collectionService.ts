@@ -5,7 +5,6 @@ import { GetServerSideProps } from 'next'
 
 import * as Sentry from '@sentry/react'
 import { GetNFTReturnType, zdk } from '@shared'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import {
   Collection,
   CollectionStatsAggregateQuery,

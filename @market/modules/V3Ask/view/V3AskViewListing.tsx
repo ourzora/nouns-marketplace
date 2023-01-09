@@ -14,9 +14,18 @@ import { useFormattedV3AskInfo } from '../hooks'
 
 interface V3AskFillAskSuccessProps extends CommonV3AskComponentProps {}
 
-export function V3AskViewListing({ nft, ...props }: V3AskFillAskSuccessProps) {
+export function V3AskViewListing({
+  contractAddress,
+  tokenId,
+  markets,
+  ...props
+}: V3AskFillAskSuccessProps) {
   const { requestClose } = useModal()
-  const { formattedAskDetails, copyableValue } = useFormattedV3AskInfo({ nft })
+  const { formattedAskDetails, copyableValue } = useFormattedV3AskInfo({
+    markets,
+    contractAddress,
+    tokenId,
+  })
 
   const [_, copied, copy] = useCopyToClipboard(copyableValue)
   const { toastDispatch } = useToast()
@@ -36,7 +45,7 @@ export function V3AskViewListing({ nft, ...props }: V3AskFillAskSuccessProps) {
 
   return (
     <>
-      <Stack gap="x8">
+      <Stack gap="x8" {...props}>
         <Heading as="h2">Private Listing Data</Heading>
 
         {formattedAskDetails && <DataTable items={formattedAskDetails} />}

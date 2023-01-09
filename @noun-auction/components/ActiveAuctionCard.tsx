@@ -83,7 +83,7 @@ export function ActiveAuctionCardComponent({
       className={cardWrapper}
       style={{ maxWidth: '500px' }}
     >
-      <Link href={`/collections/${collectionAddress}/${tokenId}`}>
+      <Link href={`/daos/${collectionAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="tertiary">
           <ImageWithNounFallback token={token} />
         </Box>

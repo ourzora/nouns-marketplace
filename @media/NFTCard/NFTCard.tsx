@@ -4,9 +4,11 @@ import { Link } from 'components/Link'
 import { useToken } from 'hooks/useToken'
 
 import { useMemo } from 'react'
+import { TypeSafeMarket } from 'validators/market'
 import { TypeSafeToken } from 'validators/token'
 
 import { NFTCardMarket } from '@market'
+import { NftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import {
   cardImageWrapper,
@@ -15,7 +17,8 @@ import {
   titleScroll,
   titleWrapper,
 } from '@media/NftMedia.css'
-import { useNFTProvider } from '@shared'
+import { useIsOwner, useNFTProvider } from '@shared'
+import { NFTObject } from '@zoralabs/nft-hooks'
 import { Box, Flex, Heading, Label, Separator, Stack } from '@zoralabs/zord'
 
 type Props = {
@@ -28,24 +31,42 @@ export function NFTCard({ collectionAddress }: Props) {
 
   if (!tokenId || !collectionAddress) return null
 
-  return <NFTCardOuterComponent tokenId={tokenId} collectionAddress={collectionAddress} />
+  return (
+    <NFTCardOuterComponent
+      nft={nft}
+      tokenId={tokenId}
+      collectionAddress={collectionAddress}
+    />
+  )
 }
 
 export function NFTCardOuterComponent({
   collectionAddress,
   tokenId,
-}: Props & { tokenId: string }) {
-  const { token } = useToken({ collectionAddress, tokenId })
+  nft,
+}: Props & { tokenId: string; nft: NFTObject }) {
+  const { token, markets } = useToken({ collectionAddress, tokenId })
 
   if (!token || !collectionAddress) return null
 
-  return <NFTCardComponent token={token} collectionAddress={collectionAddress} />
+  return (
+    <NFTCardComponent
+      markets={markets}
+      token={token}
+      collectionAddress={collectionAddress}
+    />
+  )
 }
 
 export function NFTCardComponent({
   collectionAddress,
   token,
-}: Props & { token: TypeSafeToken }) {
+  markets,
+}: Props & {
+  token: TypeSafeToken
+  markets: TypeSafeMarket[]
+}) {
+  const { isOwner } = useIsOwner(token)
   const fallbackTitle = token.collectionName ?? '..'
   const tokenId = token.tokenId
 
@@ -57,7 +78,7 @@ export function NFTCardComponent({
 
   return (
     <Stack w="100%" position="relative" overflow="hidden" className={cardWrapper}>
-      <Link href={`/collections/${collectionAddress}/${tokenId}`}>
+      <Link href={`/daos/${collectionAddress}/${tokenId}`}>
         <Box w="100%" className={cardImageWrapper} backgroundColor="background2">
           {collectionAddress && tokenId && <ImageWithNounFallback token={token} />}
         </Box>
@@ -75,7 +96,7 @@ export function NFTCardComponent({
           </Heading>
         </Flex>
         <Flex align="center" gap="x2" justify="space-between">
-          <Link href={`/collections/${collectionAddress}`}>
+          <Link href={`/daos/${collectionAddress}`}>
             <Flex align="center" gap="x2">
               <CollectionThumbnail
                 collectionAddress={collectionAddress}
@@ -89,7 +110,16 @@ export function NFTCardComponent({
           </Link>
         </Flex>
         <Separator mt="x1" />
-        <NFTCardMarket />
+        <NftMarketContext.Provider
+          value={{
+            tokenId: tokenId,
+            collectionAddress: token.collectionAddress,
+            collectionName: token.collectionName ?? '..',
+            markets: markets,
+          }}
+        >
+          <NFTCardMarket ownerAddress={token.owner} isOwner={isOwner} />
+        </NftMarketContext.Provider>
       </Stack>
     </Stack>
   )

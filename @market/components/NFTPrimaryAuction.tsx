@@ -1,21 +1,21 @@
-import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { FlexProps } from '@zoralabs/zord'
 
 import { NFTPrimaryAuctionActive, NFTPrimaryAuctionEndedSettlement } from './'
 
 export interface NFTPrimaryAuctionProps extends FlexProps {
-  nftObj: NFTObject
   primaryAuction: TypeSafeNounsAuction
+  collectionAddress: string
+  tokenId: string
   isActiveAuctionToken: boolean
 }
 
 export function NFTPrimaryAuction({
-  nftObj,
   primaryAuction,
+  collectionAddress,
+  tokenId,
   isActiveAuctionToken,
   ...props
 }: NFTPrimaryAuctionProps) {
@@ -27,14 +27,7 @@ export function NFTPrimaryAuction({
 
   if (isEnded) {
     // Anyone can settle auction
-
-    return (
-      <NFTPrimaryAuctionEndedSettlement
-        nftObj={nftObj}
-        primaryAuction={primaryAuction}
-        {...props}
-      />
-    )
+    return <NFTPrimaryAuctionEndedSettlement primaryAuction={primaryAuction} {...props} />
   }
 
   // if (isEnded) { // @Oleg: please ignore for now. Won't be shown.
@@ -47,15 +40,12 @@ export function NFTPrimaryAuction({
   //   )
   // }
 
-  if (isActiveAuctionToken) {
-    return (
-      <NFTPrimaryAuctionActive
-        nftObj={nftObj}
-        primaryAuction={primaryAuction}
-        {...props}
-      />
-    )
-  }
-
-  return null
+  return (
+    <NFTPrimaryAuctionActive
+      collectionAddress={collectionAddress}
+      tokenId={tokenId}
+      primaryAuction={primaryAuction}
+      {...props}
+    />
+  )
 }

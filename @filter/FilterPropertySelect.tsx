@@ -33,7 +33,6 @@ export function FilterPropertySelect({ traitType, valueMetrics }: AggregateAttri
       <Select
         name="filter-property"
         id="filter-property"
-        value={isReset ? '' : undefined}
         w="100%"
         color="text1"
         textAlign="right"

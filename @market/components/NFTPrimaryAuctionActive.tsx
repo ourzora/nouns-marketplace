@@ -1,31 +1,27 @@
-import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useAuctionDataTable } from '@market/hooks'
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { PlaceNounsBid } from '@noun-auction'
 import { DataTable, PriceWithLabel } from '@shared'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { FlexProps, Stack } from '@zoralabs/zord'
 
 interface NFTPrimaryAuctionActiveProps extends FlexProps {
-  nftObj: NFTObject
   primaryAuction: TypeSafeNounsAuction
+  collectionAddress: string
+  tokenId: string
 }
 
 export function NFTPrimaryAuctionActive({
-  nftObj,
   primaryAuction,
+  collectionAddress,
+  tokenId,
   ...props
 }: NFTPrimaryAuctionActiveProps) {
-  const {
-    formattedCryptoHighestBidPrice,
-    formattedUSDHighestBidPrice,
-    highestBidder,
-    hasBid,
-  } = useNounishAuctionHelper({
-    auction: primaryAuction,
-  })
+  const { formattedCryptoHighestBidPrice, formattedUSDHighestBidPrice, hasBid } =
+    useNounishAuctionHelper({
+      auction: primaryAuction,
+    })
 
   const { formattedAuctionDataTable } = useAuctionDataTable({
     primaryAuction,
@@ -39,19 +35,17 @@ export function NFTPrimaryAuctionActive({
           <PriceWithLabel
             symbol="ETH"
             cryptoAmount={formattedCryptoHighestBidPrice}
-            usdAmount={hasBid ? formattedUSDHighestBidPrice : '$0'}
+            usdAmount={hasBid ? formattedUSDHighestBidPrice : 0}
             label="Current Bid"
             invertColor
           />
         )}
-        {nftObj?.nft?.contract.address && (
-          <PlaceNounsBid
-            layout="sideBarBid"
-            collectionAddress={nftObj.nft?.contract.address}
-            tokenId={nftObj.nft?.tokenId}
-            enableModal
-          />
-        )}
+        <PlaceNounsBid
+          layout="sideBarBid"
+          collectionAddress={collectionAddress}
+          tokenId={tokenId}
+          enableModal
+        />
       </Stack>
     </Stack>
   )

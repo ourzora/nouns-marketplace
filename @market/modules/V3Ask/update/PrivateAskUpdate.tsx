@@ -5,7 +5,6 @@ import React, { useEffect } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseUnits } from '@ethersproject/units'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { useAskHelper } from '@market/hooks/useAskHelper'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { PrintError } from '@shared/components/PrintError'
 import { formatContractError } from '@shared/utils'
@@ -42,16 +41,21 @@ const validate = (values: Values) => {
   return errors
 }
 
-export function PrivateAskUpdate({ onNext, ...props }: PrivateAskUpdateProps) {
-  const { nft } = props
-  const { markets } = nft
-  const { ask } = useRelevantMarket(markets)
-  const { buyerAddress } = useAskHelper({ ask })
+export function PrivateAskUpdate({
+  onNext,
+  tokenId,
+  contractAddress,
+  markets,
+  ...props
+}: PrivateAskUpdateProps) {
+  const { ask, buyerAddress } = useRelevantMarket(markets)
   const { txStatus, txInProgress, txError, finalizedTx, updateAsk } = useV3AskTransaction(
-    { nft: nft, askType: PRIVATE_ASK }
+    { contractAddress, tokenId, askType: PRIVATE_ASK }
   )
 
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])
+
+  if (!buyerAddress) return null
 
   return (
     <Formik

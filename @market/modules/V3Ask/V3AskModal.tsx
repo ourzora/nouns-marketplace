@@ -4,7 +4,6 @@ import React, { useCallback } from 'react'
 
 import { Modal, ModalContent, useModal } from '@modal'
 import { customBackground, customContent } from '@modal/Modal.css'
-import { NFTObject } from '@zoralabs/nft-hooks'
 
 import { V3AskFlow } from './V3AskFlow'
 import * as styles from './V3AskModal.css'
@@ -12,32 +11,36 @@ import { V3AskTrigger } from './V3AskTrigger'
 import { V3AskStateProvider } from './providers/V3AskStateProvider'
 
 interface V3AskModalProps {
-  nftObj: NFTObject
   modalName: string
   disableCloseOnClickOutside?: boolean
+  isOwner: boolean
+  showOnlyTrigger?: boolean
 }
 
 export function V3AskModal({
-  nftObj,
+  isOwner,
   modalName,
   disableCloseOnClickOutside = false,
+  showOnlyTrigger = false,
 }: V3AskModalProps) {
   const { modalType, requestClose, requestOpen } = useModal()
   const modalHandler = useCallback(() => {
     requestOpen(modalName)
   }, [modalName, requestOpen])
-  const { nft } = nftObj
-
-  if (!nft) {
-    return null
-  }
 
   return (
     <V3AskStateProvider>
       <Modal
         open={modalType === modalName}
         onOpenChange={requestClose}
-        trigger={<V3AskTrigger nft={nftObj} openModal={modalHandler} />}
+        trigger={
+          <V3AskTrigger
+            isOwner={isOwner}
+            modalName={modalName}
+            openModal={modalHandler}
+            showOnlyTrigger={showOnlyTrigger}
+          />
+        }
       >
         <ModalContent
           className={clsx(styles.content, styles.modalBackground)}
@@ -47,7 +50,7 @@ export function V3AskModal({
           showClose={false}
           padding="x8"
         >
-          <V3AskFlow nft={nftObj} />
+          <V3AskFlow />
         </ModalContent>
       </Modal>
     </V3AskStateProvider>

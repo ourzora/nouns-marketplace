@@ -33,7 +33,7 @@ export function PrivateAskApproveModule({
   return isAwaitingApprovalCheck ? (
     <V3AskCheckApprovalSpinner text="Checking Private Ask Module Approval..." />
   ) : (
-    <Stack gap="x8">
+    <Stack gap="x8" {...props}>
       <Stack gap="x8" align="center">
         <Zorb size={52} />
         <V3AskHeadingDescription

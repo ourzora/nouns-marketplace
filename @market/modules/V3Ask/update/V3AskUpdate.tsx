@@ -40,9 +40,9 @@ const validate = (values: Values) => {
 }
 
 export function V3AskUpdate({ onNext, ...props }: V3AskUpdateProps) {
-  const { nft } = props
+  const { contractAddress, tokenId } = props
   const { txStatus, txInProgress, txError, finalizedTx, updateAsk } = useV3AskTransaction(
-    { nft: nft }
+    { contractAddress, tokenId }
   )
 
   useEffect(() => finalizedTx!! && onNext && onNext(), [finalizedTx, onNext])

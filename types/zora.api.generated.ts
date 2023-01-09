@@ -19,7 +19,7 @@ export type Scalars = {
 }
 
 export type ActiveMarket = {
-  __typename?: 'ActiveMarket'
+  __typename: 'ActiveMarket'
   collectionAddress?: Maybe<Scalars['String']>
   marketAddress: Scalars['String']
   marketType: ActiveMarketType
@@ -53,7 +53,7 @@ export enum ActiveMarketType {
 }
 
 export type AggregateAttribute = {
-  __typename?: 'AggregateAttribute'
+  __typename: 'AggregateAttribute'
   traitType: Scalars['String']
   valueMetrics: Array<AggregateAttributeValue>
 }
@@ -70,7 +70,7 @@ export type AggregateAttributeSortKeySortInput = {
 }
 
 export type AggregateAttributeValue = {
-  __typename?: 'AggregateAttributeValue'
+  __typename: 'AggregateAttributeValue'
   count: Scalars['Int']
   percent: Scalars['Float']
   value: Scalars['String']
@@ -83,7 +83,7 @@ export type AggregateAttributesQueryInput = {
 }
 
 export type AggregateStat = {
-  __typename?: 'AggregateStat'
+  __typename: 'AggregateStat'
   floorPrice?: Maybe<Scalars['Float']>
   nftCount: Scalars['Int']
   ownerCount: Scalars['Int']
@@ -119,7 +119,7 @@ export type AggregateStatSalesVolumeArgs = {
 }
 
 export type ApprovalEvent = {
-  __typename?: 'ApprovalEvent'
+  __typename: 'ApprovalEvent'
   approvalEventType: ApprovalEventType
   approved?: Maybe<Scalars['Boolean']>
   approvedAddress: Scalars['String']
@@ -139,7 +139,7 @@ export type AttributeFilter = {
 }
 
 export type AudioEncodingTypes = {
-  __typename?: 'AudioEncodingTypes'
+  __typename: 'AudioEncodingTypes'
   large?: Maybe<Scalars['String']>
   original: Scalars['String']
 }
@@ -151,7 +151,7 @@ export enum Chain {
 }
 
 export type Collection = {
-  __typename?: 'Collection'
+  __typename: 'Collection'
   address: Scalars['String']
   attributes?: Maybe<Array<CollectionAttribute>>
   description: Scalars['String']
@@ -174,20 +174,20 @@ export type CollectionAddressOwnerAddressAttributesInput = {
 }
 
 export type CollectionAttribute = {
-  __typename?: 'CollectionAttribute'
+  __typename: 'CollectionAttribute'
   traitType?: Maybe<Scalars['String']>
   valueMetrics: Array<CollectionAttributeValue>
 }
 
 export type CollectionAttributeValue = {
-  __typename?: 'CollectionAttributeValue'
+  __typename: 'CollectionAttributeValue'
   count: Scalars['Int']
   percent: Scalars['Float']
   value: Scalars['String']
 }
 
 export type CollectionConnection = {
-  __typename?: 'CollectionConnection'
+  __typename: 'CollectionConnection'
   nodes: Array<Collection>
   pageInfo: PageInfo
 }
@@ -208,21 +208,21 @@ export type CollectionsQueryInput = {
 }
 
 export type Currency = {
-  __typename?: 'Currency'
+  __typename: 'Currency'
   address: Scalars['String']
   decimals: Scalars['Int']
   name: Scalars['String']
 }
 
 export type CurrencyAmount = {
-  __typename?: 'CurrencyAmount'
+  __typename: 'CurrencyAmount'
   currency: Currency
   decimal: Scalars['Float']
   raw: Scalars['String']
 }
 
 export type Event = {
-  __typename?: 'Event'
+  __typename: 'Event'
   collectionAddress?: Maybe<Scalars['String']>
   eventType: EventType
   networkInfo: NetworkInfo
@@ -232,7 +232,7 @@ export type Event = {
 }
 
 export type EventConnection = {
-  __typename?: 'EventConnection'
+  __typename: 'EventConnection'
   nodes: Array<Event>
   pageInfo: PageInfo
 }
@@ -292,7 +292,7 @@ export type EventsQueryInput = {
 }
 
 export type ImageEncodingTypes = {
-  __typename?: 'ImageEncodingTypes'
+  __typename: 'ImageEncodingTypes'
   large?: Maybe<Scalars['String']>
   original: Scalars['String']
   poster?: Maybe<Scalars['String']>
@@ -303,7 +303,7 @@ export type ImageEncodingTypesVideoEncodingTypesAudioEncodingTypesUnsupportedEnc
   AudioEncodingTypes | ImageEncodingTypes | UnsupportedEncodingTypes | VideoEncodingTypes
 
 export type LilNounsAuction = {
-  __typename?: 'LilNounsAuction'
+  __typename: 'LilNounsAuction'
   address: Scalars['String']
   amount?: Maybe<PriceAtTime>
   auctionCurrency: Scalars['String']
@@ -324,7 +324,7 @@ export type LilNounsAuction = {
 }
 
 export type LilNounsAuctionBidEventProperties = {
-  __typename?: 'LilNounsAuctionBidEventProperties'
+  __typename: 'LilNounsAuctionBidEventProperties'
   extended: Scalars['Boolean']
   lilNounId: Scalars['String']
   sender: Scalars['String']
@@ -332,14 +332,14 @@ export type LilNounsAuctionBidEventProperties = {
 }
 
 export type LilNounsAuctionCreatedEventProperties = {
-  __typename?: 'LilNounsAuctionCreatedEventProperties'
+  __typename: 'LilNounsAuctionCreatedEventProperties'
   endTime: Scalars['String']
   lilNounId: Scalars['String']
   startTime: Scalars['String']
 }
 
 export type LilNounsAuctionEvent = {
-  __typename?: 'LilNounsAuctionEvent'
+  __typename: 'LilNounsAuctionEvent'
   address: Scalars['String']
   collectionAddress: Scalars['String']
   lilNounsAuctionEventType: LilNounsAuctionEventType
@@ -367,23 +367,23 @@ export enum LilNounsAuctionEventType {
 }
 
 export type LilNounsAuctionExtendedEventProperties = {
-  __typename?: 'LilNounsAuctionExtendedEventProperties'
+  __typename: 'LilNounsAuctionExtendedEventProperties'
   endTime: Scalars['String']
   lilNounId: Scalars['String']
 }
 
 export type LilNounsAuctionMinBidIncrementPercentageUpdatedEventProperties = {
-  __typename?: 'LilNounsAuctionMinBidIncrementPercentageUpdatedEventProperties'
+  __typename: 'LilNounsAuctionMinBidIncrementPercentageUpdatedEventProperties'
   minBidIncrementPercentage: Scalars['String']
 }
 
 export type LilNounsAuctionReservePriceUpdatedEventProperties = {
-  __typename?: 'LilNounsAuctionReservePriceUpdatedEventProperties'
+  __typename: 'LilNounsAuctionReservePriceUpdatedEventProperties'
   reservePrice: Scalars['String']
 }
 
 export type LilNounsAuctionSettledEventProperties = {
-  __typename?: 'LilNounsAuctionSettledEventProperties'
+  __typename: 'LilNounsAuctionSettledEventProperties'
   amount: Scalars['String']
   lilNounId: Scalars['String']
   price: PriceAtTime
@@ -391,12 +391,12 @@ export type LilNounsAuctionSettledEventProperties = {
 }
 
 export type LilNounsAuctionTimeBufferUpdatedEventProperties = {
-  __typename?: 'LilNounsAuctionTimeBufferUpdatedEventProperties'
+  __typename: 'LilNounsAuctionTimeBufferUpdatedEventProperties'
   timeBuffer: Scalars['String']
 }
 
 export type Market = {
-  __typename?: 'Market'
+  __typename: 'Market'
   collectionAddress?: Maybe<Scalars['String']>
   marketAddress: Scalars['String']
   marketType: MarketType
@@ -464,13 +464,13 @@ export type MarketTypeFilter = {
 }
 
 export type MarketWithToken = {
-  __typename?: 'MarketWithToken'
+  __typename: 'MarketWithToken'
   market: Market
   token?: Maybe<Token>
 }
 
 export type MarketWithTokenConnection = {
-  __typename?: 'MarketWithTokenConnection'
+  __typename: 'MarketWithTokenConnection'
   nodes: Array<MarketWithToken>
   pageInfo: PageInfo
 }
@@ -495,7 +495,7 @@ export enum MediaType {
 }
 
 export type Mint = {
-  __typename?: 'Mint'
+  __typename: 'Mint'
   collectionAddress: Scalars['String']
   networkInfo: NetworkInfo
   originatorAddress: Scalars['String']
@@ -506,7 +506,7 @@ export type Mint = {
 }
 
 export type MintEvent = {
-  __typename?: 'MintEvent'
+  __typename: 'MintEvent'
   collectionAddress: Scalars['String']
   originatorAddress: Scalars['String']
   price?: Maybe<PriceAtTime>
@@ -515,7 +515,7 @@ export type MintEvent = {
 }
 
 export type MintInfo = {
-  __typename?: 'MintInfo'
+  __typename: 'MintInfo'
   mintContext: TransactionInfo
   originatorAddress: Scalars['String']
   price?: Maybe<PriceAtTime>
@@ -535,7 +535,7 @@ export type MintSortKeySortInput = {
 }
 
 export type MintWithTokenAndMarkets = {
-  __typename?: 'MintWithTokenAndMarkets'
+  __typename: 'MintWithTokenAndMarkets'
   markets: Array<Market>
   mint: Mint
   token?: Maybe<Token>
@@ -548,7 +548,7 @@ export type MintWithTokenAndMarketsMarketsArgs = {
 }
 
 export type MintWithTokenAndMarketsConnection = {
-  __typename?: 'MintWithTokenAndMarketsConnection'
+  __typename: 'MintWithTokenAndMarketsConnection'
   nodes: Array<MintWithTokenAndMarkets>
   pageInfo: PageInfo
 }
@@ -570,7 +570,7 @@ export enum Network {
 }
 
 export type NetworkInfo = {
-  __typename?: 'NetworkInfo'
+  __typename: 'NetworkInfo'
   chain: Chain
   network: Network
 }
@@ -581,7 +581,7 @@ export type NetworkInput = {
 }
 
 export type Nouns = {
-  __typename?: 'Nouns'
+  __typename: 'Nouns'
   nounsActiveMarket?: Maybe<NounsBuilderAuction>
   nounsDaos: NounsDaoConnection
   nounsEvents: NounsEventConnection
@@ -621,7 +621,7 @@ export type NounsActiveMarketQueryInput = {
 }
 
 export type NounsAuction = {
-  __typename?: 'NounsAuction'
+  __typename: 'NounsAuction'
   address: Scalars['String']
   amount?: Maybe<PriceAtTime>
   auctionCurrency: Scalars['String']
@@ -642,7 +642,7 @@ export type NounsAuction = {
 }
 
 export type NounsAuctionBidEventProperties = {
-  __typename?: 'NounsAuctionBidEventProperties'
+  __typename: 'NounsAuctionBidEventProperties'
   extended: Scalars['Boolean']
   nounId: Scalars['String']
   sender: Scalars['String']
@@ -650,14 +650,14 @@ export type NounsAuctionBidEventProperties = {
 }
 
 export type NounsAuctionCreatedEventProperties = {
-  __typename?: 'NounsAuctionCreatedEventProperties'
+  __typename: 'NounsAuctionCreatedEventProperties'
   endTime: Scalars['String']
   nounId: Scalars['String']
   startTime: Scalars['String']
 }
 
 export type NounsAuctionEvent = {
-  __typename?: 'NounsAuctionEvent'
+  __typename: 'NounsAuctionEvent'
   address: Scalars['String']
   collectionAddress: Scalars['String']
   nounsAuctionEventType: NounsAuctionEventType
@@ -685,23 +685,23 @@ export enum NounsAuctionEventType {
 }
 
 export type NounsAuctionExtendedEventProperties = {
-  __typename?: 'NounsAuctionExtendedEventProperties'
+  __typename: 'NounsAuctionExtendedEventProperties'
   endTime: Scalars['String']
   nounId: Scalars['String']
 }
 
 export type NounsAuctionMinBidIncrementPercentageUpdatedEventProperties = {
-  __typename?: 'NounsAuctionMinBidIncrementPercentageUpdatedEventProperties'
+  __typename: 'NounsAuctionMinBidIncrementPercentageUpdatedEventProperties'
   minBidIncrementPercentage: Scalars['String']
 }
 
 export type NounsAuctionReservePriceUpdatedEventProperties = {
-  __typename?: 'NounsAuctionReservePriceUpdatedEventProperties'
+  __typename: 'NounsAuctionReservePriceUpdatedEventProperties'
   reservePrice: Scalars['String']
 }
 
 export type NounsAuctionSettledEventProperties = {
-  __typename?: 'NounsAuctionSettledEventProperties'
+  __typename: 'NounsAuctionSettledEventProperties'
   amount: Scalars['String']
   nounId: Scalars['String']
   price: PriceAtTime
@@ -709,12 +709,12 @@ export type NounsAuctionSettledEventProperties = {
 }
 
 export type NounsAuctionTimeBufferUpdatedEventProperties = {
-  __typename?: 'NounsAuctionTimeBufferUpdatedEventProperties'
+  __typename: 'NounsAuctionTimeBufferUpdatedEventProperties'
   timeBuffer: Scalars['String']
 }
 
 export type NounsBuilderAuction = {
-  __typename?: 'NounsBuilderAuction'
+  __typename: 'NounsBuilderAuction'
   address: Scalars['String']
   amount?: Maybe<PriceAtTime>
   auction?: Maybe<Scalars['String']>
@@ -742,7 +742,7 @@ export type NounsBuilderAuction = {
 }
 
 export type NounsBuilderAuctionAuctionBidEventProperties = {
-  __typename?: 'NounsBuilderAuctionAuctionBidEventProperties'
+  __typename: 'NounsBuilderAuctionAuctionBidEventProperties'
   amount: Scalars['String']
   amountPrice: PriceAtTime
   bidder: Scalars['String']
@@ -752,14 +752,14 @@ export type NounsBuilderAuctionAuctionBidEventProperties = {
 }
 
 export type NounsBuilderAuctionAuctionCreatedEventProperties = {
-  __typename?: 'NounsBuilderAuctionAuctionCreatedEventProperties'
+  __typename: 'NounsBuilderAuctionAuctionCreatedEventProperties'
   endTime: Scalars['String']
   startTime: Scalars['String']
   tokenId: Scalars['String']
 }
 
 export type NounsBuilderAuctionAuctionSettledEventProperties = {
-  __typename?: 'NounsBuilderAuctionAuctionSettledEventProperties'
+  __typename: 'NounsBuilderAuctionAuctionSettledEventProperties'
   amount: Scalars['String']
   amountPrice: PriceAtTime
   tokenId: Scalars['String']
@@ -767,18 +767,18 @@ export type NounsBuilderAuctionAuctionSettledEventProperties = {
 }
 
 export type NounsBuilderAuctionConnection = {
-  __typename?: 'NounsBuilderAuctionConnection'
+  __typename: 'NounsBuilderAuctionConnection'
   nodes: Array<NounsBuilderAuction>
   pageInfo: PageInfo
 }
 
 export type NounsBuilderAuctionDurationUpdatedEventProperties = {
-  __typename?: 'NounsBuilderAuctionDurationUpdatedEventProperties'
+  __typename: 'NounsBuilderAuctionDurationUpdatedEventProperties'
   duration: Scalars['String']
 }
 
 export type NounsBuilderAuctionEvent = {
-  __typename?: 'NounsBuilderAuctionEvent'
+  __typename: 'NounsBuilderAuctionEvent'
   address: Scalars['String']
   auction: Scalars['String']
   collectionAddress: Scalars['String']
@@ -810,23 +810,23 @@ export enum NounsBuilderAuctionEventType {
 }
 
 export type NounsBuilderAuctionMinBidIncrementPercentageUpdatedEventProperties = {
-  __typename?: 'NounsBuilderAuctionMinBidIncrementPercentageUpdatedEventProperties'
+  __typename: 'NounsBuilderAuctionMinBidIncrementPercentageUpdatedEventProperties'
   minBidIncrementPercentage: Scalars['String']
 }
 
 export type NounsBuilderAuctionReservePriceUpdatedEventProperties = {
-  __typename?: 'NounsBuilderAuctionReservePriceUpdatedEventProperties'
+  __typename: 'NounsBuilderAuctionReservePriceUpdatedEventProperties'
   reserve: Scalars['String']
   reservePrice: PriceAtTime
 }
 
 export type NounsBuilderAuctionTimeBufferUpdatedEventProperties = {
-  __typename?: 'NounsBuilderAuctionTimeBufferUpdatedEventProperties'
+  __typename: 'NounsBuilderAuctionTimeBufferUpdatedEventProperties'
   timeBuffer: Scalars['String']
 }
 
 export type NounsBuilderGovernorEvent = {
-  __typename?: 'NounsBuilderGovernorEvent'
+  __typename: 'NounsBuilderGovernorEvent'
   address: Scalars['String']
   auction: Scalars['String']
   collectionAddress: Scalars['String']
@@ -866,12 +866,12 @@ export enum NounsBuilderGovernorEventType {
 }
 
 export type NounsBuilderGovernorProposalCanceledEventProperties = {
-  __typename?: 'NounsBuilderGovernorProposalCanceledEventProperties'
+  __typename: 'NounsBuilderGovernorProposalCanceledEventProperties'
   proposalId: Scalars['String']
 }
 
 export type NounsBuilderGovernorProposalCreatedEventProperties = {
-  __typename?: 'NounsBuilderGovernorProposalCreatedEventProperties'
+  __typename: 'NounsBuilderGovernorProposalCreatedEventProperties'
   abstainVotes: Scalars['String']
   againstVotes: Scalars['String']
   calldatas: Array<Scalars['String']>
@@ -893,41 +893,41 @@ export type NounsBuilderGovernorProposalCreatedEventProperties = {
 }
 
 export type NounsBuilderGovernorProposalExecutedEventProperties = {
-  __typename?: 'NounsBuilderGovernorProposalExecutedEventProperties'
+  __typename: 'NounsBuilderGovernorProposalExecutedEventProperties'
   proposalId: Scalars['String']
 }
 
 export type NounsBuilderGovernorProposalQueuedEventProperties = {
-  __typename?: 'NounsBuilderGovernorProposalQueuedEventProperties'
+  __typename: 'NounsBuilderGovernorProposalQueuedEventProperties'
   eta: Scalars['String']
   proposalId: Scalars['String']
 }
 
 export type NounsBuilderGovernorProposalThresholdBpsUpdatedEventProperties = {
-  __typename?: 'NounsBuilderGovernorProposalThresholdBpsUpdatedEventProperties'
+  __typename: 'NounsBuilderGovernorProposalThresholdBpsUpdatedEventProperties'
   newBps: Scalars['String']
   prevBps: Scalars['String']
 }
 
 export type NounsBuilderGovernorProposalVetoedEventProperties = {
-  __typename?: 'NounsBuilderGovernorProposalVetoedEventProperties'
+  __typename: 'NounsBuilderGovernorProposalVetoedEventProperties'
   proposalId: Scalars['String']
 }
 
 export type NounsBuilderGovernorQuorumVotesBpsUpdated = {
-  __typename?: 'NounsBuilderGovernorQuorumVotesBpsUpdated'
+  __typename: 'NounsBuilderGovernorQuorumVotesBpsUpdated'
   newBps: Scalars['String']
   prevBps: Scalars['String']
 }
 
 export type NounsBuilderGovernorVetoerUpdatedEventProperties = {
-  __typename?: 'NounsBuilderGovernorVetoerUpdatedEventProperties'
+  __typename: 'NounsBuilderGovernorVetoerUpdatedEventProperties'
   newVetoer: Scalars['String']
   prevVetoer: Scalars['String']
 }
 
 export type NounsBuilderGovernorVoteCastEventProperties = {
-  __typename?: 'NounsBuilderGovernorVoteCastEventProperties'
+  __typename: 'NounsBuilderGovernorVoteCastEventProperties'
   proposalId: Scalars['String']
   reason: Scalars['String']
   support: Scalars['String']
@@ -936,19 +936,19 @@ export type NounsBuilderGovernorVoteCastEventProperties = {
 }
 
 export type NounsBuilderGovernorVotingDelayUpdatedEventProperties = {
-  __typename?: 'NounsBuilderGovernorVotingDelayUpdatedEventProperties'
+  __typename: 'NounsBuilderGovernorVotingDelayUpdatedEventProperties'
   newVotingDelay: Scalars['String']
   prevVotingDelay: Scalars['String']
 }
 
 export type NounsBuilderGovernorVotingPeriodUpdatedEventProperties = {
-  __typename?: 'NounsBuilderGovernorVotingPeriodUpdatedEventProperties'
+  __typename: 'NounsBuilderGovernorVotingPeriodUpdatedEventProperties'
   newVotingPeriod: Scalars['String']
   prevVotingPeriod: Scalars['String']
 }
 
 export type NounsBuilderManagerDaoDeployedEventProperties = {
-  __typename?: 'NounsBuilderManagerDaoDeployedEventProperties'
+  __typename: 'NounsBuilderManagerDaoDeployedEventProperties'
   auction: Scalars['String']
   governor: Scalars['String']
   metadata: Scalars['String']
@@ -957,7 +957,7 @@ export type NounsBuilderManagerDaoDeployedEventProperties = {
 }
 
 export type NounsBuilderManagerEvent = {
-  __typename?: 'NounsBuilderManagerEvent'
+  __typename: 'NounsBuilderManagerEvent'
   address: Scalars['String']
   nounsBuilderManagerEventType: NounsBuilderManagerEventType
   properties: NounsBuilderManagerDaoDeployedEventProperties
@@ -968,7 +968,7 @@ export enum NounsBuilderManagerEventType {
 }
 
 export type NounsDao = {
-  __typename?: 'NounsDao'
+  __typename: 'NounsDao'
   auctionAddress?: Maybe<Scalars['String']>
   collectionAddress: Scalars['String']
   contractAddress?: Maybe<Scalars['String']>
@@ -983,13 +983,13 @@ export type NounsDao = {
 }
 
 export type NounsDaoConnection = {
-  __typename?: 'NounsDaoConnection'
+  __typename: 'NounsDaoConnection'
   nodes: Array<NounsDao>
   pageInfo: PageInfo
 }
 
 export type NounsEvent = {
-  __typename?: 'NounsEvent'
+  __typename: 'NounsEvent'
   collectionAddress: Scalars['String']
   eventType: NounsEventType
   networkInfo: NetworkInfo
@@ -998,7 +998,7 @@ export type NounsEvent = {
 }
 
 export type NounsEventConnection = {
-  __typename?: 'NounsEventConnection'
+  __typename: 'NounsEventConnection'
   nodes: Array<NounsEvent>
   pageInfo: PageInfo
 }
@@ -1064,7 +1064,7 @@ export type NounsSortKeySortInput = {
 }
 
 export type OffchainOrder = {
-  __typename?: 'OffchainOrder'
+  __typename: 'OffchainOrder'
   calldata?: Maybe<Scalars['String']>
   collectionAddress?: Maybe<Scalars['String']>
   contractAddress: Scalars['String']
@@ -1092,13 +1092,13 @@ export type OffchainOrderSortKeySortInput = {
 }
 
 export type OffchainOrderWithToken = {
-  __typename?: 'OffchainOrderWithToken'
+  __typename: 'OffchainOrderWithToken'
   offchainOrder: OffchainOrder
   token?: Maybe<Token>
 }
 
 export type OffchainOrderWithTokenConnection = {
-  __typename?: 'OffchainOrderWithTokenConnection'
+  __typename: 'OffchainOrderWithTokenConnection'
   nodes: Array<OffchainOrderWithToken>
   pageInfo: PageInfo
 }
@@ -1114,14 +1114,14 @@ export type OffchainOrdersQueryInput = {
 }
 
 export type OwnerCount = {
-  __typename?: 'OwnerCount'
+  __typename: 'OwnerCount'
   count: Scalars['Int']
   owner: Scalars['String']
   tokenIds: Array<Scalars['String']>
 }
 
 export type OwnerCountConnection = {
-  __typename?: 'OwnerCountConnection'
+  __typename: 'OwnerCountConnection'
   nodes: Array<OwnerCount>
   pageInfo: PageInfo
 }
@@ -1133,7 +1133,7 @@ export type OwnersByCountQueryInput = {
 }
 
 export type PageInfo = {
-  __typename?: 'PageInfo'
+  __typename: 'PageInfo'
   endCursor?: Maybe<Scalars['String']>
   hasNextPage: Scalars['Boolean']
   limit: Scalars['Int']
@@ -1145,7 +1145,7 @@ export type PaginationInput = {
 }
 
 export type PriceAtTime = {
-  __typename?: 'PriceAtTime'
+  __typename: 'PriceAtTime'
   blockNumber: Scalars['Int']
   chainTokenPrice?: Maybe<CurrencyAmount>
   nativePrice: CurrencyAmount
@@ -1161,7 +1161,7 @@ export type PriceFilter = {
 }
 
 export type ReceivedItem = {
-  __typename?: 'ReceivedItem'
+  __typename: 'ReceivedItem'
   address: Scalars['String']
   amount: Scalars['String']
   itemType: Scalars['String']
@@ -1171,7 +1171,7 @@ export type ReceivedItem = {
 }
 
 export type RootQuery = {
-  __typename?: 'RootQuery'
+  __typename: 'RootQuery'
   /** Gets the total set of NFT attributes */
   aggregateAttributes: Array<AggregateAttribute>
   /** Gets counts, sales volume, and other statistics */
@@ -1278,7 +1278,7 @@ export type RootQueryTokensArgs = {
 }
 
 export type Sale = {
-  __typename?: 'Sale'
+  __typename: 'Sale'
   buyerAddress: Scalars['String']
   collectionAddress: Scalars['String']
   networkInfo: NetworkInfo
@@ -1321,13 +1321,13 @@ export enum SaleType {
 }
 
 export type SaleWithToken = {
-  __typename?: 'SaleWithToken'
+  __typename: 'SaleWithToken'
   sale: Sale
   token?: Maybe<Token>
 }
 
 export type SaleWithTokenConnection = {
-  __typename?: 'SaleWithTokenConnection'
+  __typename: 'SaleWithTokenConnection'
   nodes: Array<SaleWithToken>
   pageInfo: PageInfo
 }
@@ -1346,7 +1346,7 @@ export type SalesQueryInput = {
 }
 
 export type SalesVolume = {
-  __typename?: 'SalesVolume'
+  __typename: 'SalesVolume'
   chainTokenPrice: Scalars['Float']
   totalCount: Scalars['Int']
   usdcPrice: Scalars['Float']
@@ -1358,12 +1358,12 @@ export type SalesVolumeFilter = {
 }
 
 export type SeaportCounterIncrementedProperties = {
-  __typename?: 'SeaportCounterIncrementedProperties'
+  __typename: 'SeaportCounterIncrementedProperties'
   newCounter: Scalars['String']
 }
 
 export type SeaportEvent = {
-  __typename?: 'SeaportEvent'
+  __typename: 'SeaportEvent'
   address: Scalars['String']
   eventType: SeaportEventType
   offerer: Scalars['String']
@@ -1384,7 +1384,7 @@ export enum SeaportEventType {
 }
 
 export type SeaportOrder = {
-  __typename?: 'SeaportOrder'
+  __typename: 'SeaportOrder'
   conduitKey: Scalars['String']
   considerations: Array<SeaportOrderItem>
   counter: Scalars['String']
@@ -1403,14 +1403,14 @@ export type SeaportOrder = {
 }
 
 export type SeaportOrderFulfilledProperties = {
-  __typename?: 'SeaportOrderFulfilledProperties'
+  __typename: 'SeaportOrderFulfilledProperties'
   consideration: Array<ReceivedItem>
   offer: Array<SpentItem>
   recipient: Scalars['String']
 }
 
 export type SeaportOrderItem = {
-  __typename?: 'SeaportOrderItem'
+  __typename: 'SeaportOrderItem'
   address: Scalars['String']
   criteria?: Maybe<Scalars['String']>
   endAmount: Scalars['String']
@@ -1437,7 +1437,7 @@ export type SearchQueryInput = {
 }
 
 export type SearchResult = {
-  __typename?: 'SearchResult'
+  __typename: 'SearchResult'
   collectionAddress: Scalars['String']
   description?: Maybe<Scalars['String']>
   entity?: Maybe<TokenCollection>
@@ -1448,7 +1448,7 @@ export type SearchResult = {
 }
 
 export type SearchResultConnection = {
-  __typename?: 'SearchResultConnection'
+  __typename: 'SearchResultConnection'
   nodes: Array<SearchResult>
   pageInfo: PageInfo
 }
@@ -1464,7 +1464,7 @@ export enum SortDirection {
 }
 
 export type SpentItem = {
-  __typename?: 'SpentItem'
+  __typename: 'SpentItem'
   address: Scalars['String']
   amount: Scalars['String']
   itemType: Scalars['String']
@@ -1483,7 +1483,7 @@ export type TimeFilter = {
 }
 
 export type Token = {
-  __typename?: 'Token'
+  __typename: 'Token'
   attributes?: Maybe<Array<TokenAttribute>>
   collectionAddress: Scalars['String']
   collectionName?: Maybe<Scalars['String']>
@@ -1504,7 +1504,7 @@ export type Token = {
 }
 
 export type TokenAttribute = {
-  __typename?: 'TokenAttribute'
+  __typename: 'TokenAttribute'
   displayType?: Maybe<Scalars['String']>
   traitType?: Maybe<Scalars['String']>
   value?: Maybe<Scalars['String']>
@@ -1513,7 +1513,7 @@ export type TokenAttribute = {
 export type TokenCollection = Collection | Token
 
 export type TokenContentMedia = {
-  __typename?: 'TokenContentMedia'
+  __typename: 'TokenContentMedia'
   mediaEncoding?: Maybe<ImageEncodingTypesVideoEncodingTypesAudioEncodingTypesUnsupportedEncodingTypes>
   mimeType?: Maybe<Scalars['String']>
   size?: Maybe<Scalars['String']>
@@ -1521,7 +1521,7 @@ export type TokenContentMedia = {
 }
 
 export type TokenContract = {
-  __typename?: 'TokenContract'
+  __typename: 'TokenContract'
   chain: Scalars['Int']
   collectionAddress: Scalars['String']
   description?: Maybe<Scalars['String']>
@@ -1558,7 +1558,7 @@ export enum TokenStandard {
 }
 
 export type TokenWithFullMarketHistory = {
-  __typename?: 'TokenWithFullMarketHistory'
+  __typename: 'TokenWithFullMarketHistory'
   events: Array<Event>
   markets: Array<Market>
   sales: Array<Sale>
@@ -1584,7 +1584,7 @@ export type TokenWithFullMarketHistorySalesArgs = {
 }
 
 export type TokenWithMarketsSummary = {
-  __typename?: 'TokenWithMarketsSummary'
+  __typename: 'TokenWithMarketsSummary'
   events: Array<Event>
   marketsSummary: Array<Market>
   sales: Array<Sale>
@@ -1604,7 +1604,7 @@ export type TokenWithMarketsSummarySalesArgs = {
 }
 
 export type TokenWithMarketsSummaryConnection = {
-  __typename?: 'TokenWithMarketsSummaryConnection'
+  __typename: 'TokenWithMarketsSummaryConnection'
   nodes: Array<TokenWithMarketsSummary>
   pageInfo: PageInfo
 }
@@ -1624,7 +1624,7 @@ export type TokensQueryInput = {
 }
 
 export type TransactionInfo = {
-  __typename?: 'TransactionInfo'
+  __typename: 'TransactionInfo'
   blockNumber: Scalars['Int']
   blockTimestamp: Scalars['datetime']
   logIndex?: Maybe<Scalars['Int']>
@@ -1632,7 +1632,7 @@ export type TransactionInfo = {
 }
 
 export type TransferEvent = {
-  __typename?: 'TransferEvent'
+  __typename: 'TransferEvent'
   collectionAddress: Scalars['String']
   fromAddress: Scalars['String']
   toAddress: Scalars['String']
@@ -1640,12 +1640,12 @@ export type TransferEvent = {
 }
 
 export type UnsupportedEncodingTypes = {
-  __typename?: 'UnsupportedEncodingTypes'
+  __typename: 'UnsupportedEncodingTypes'
   original: Scalars['String']
 }
 
 export type V1Ask = {
-  __typename?: 'V1Ask'
+  __typename: 'V1Ask'
   address: Scalars['String']
   amount: PriceAtTime
   collectionAddress: Scalars['String']
@@ -1656,7 +1656,7 @@ export type V1Ask = {
 }
 
 export type V1BidShare = {
-  __typename?: 'V1BidShare'
+  __typename: 'V1BidShare'
   address: Scalars['String']
   collectionAddress: Scalars['String']
   creator: Scalars['String']
@@ -1667,28 +1667,28 @@ export type V1BidShare = {
 }
 
 export type V1MarketAskCreatedEventProperties = {
-  __typename?: 'V1MarketAskCreatedEventProperties'
+  __typename: 'V1MarketAskCreatedEventProperties'
   amount: Scalars['String']
   currency: Scalars['String']
   price: PriceAtTime
 }
 
 export type V1MarketAskRemovedEventProperties = {
-  __typename?: 'V1MarketAskRemovedEventProperties'
+  __typename: 'V1MarketAskRemovedEventProperties'
   amount: Scalars['String']
   currency: Scalars['String']
   price: PriceAtTime
 }
 
 export type V1MarketBidShareUpdatedEventProperties = {
-  __typename?: 'V1MarketBidShareUpdatedEventProperties'
+  __typename: 'V1MarketBidShareUpdatedEventProperties'
   creator: Scalars['String']
   owner: Scalars['String']
   previousOwner: Scalars['String']
 }
 
 export type V1MarketEvent = {
-  __typename?: 'V1MarketEvent'
+  __typename: 'V1MarketEvent'
   address: Scalars['String']
   collectionAddress: Scalars['String']
   properties: V1MarketEventProperties
@@ -1714,7 +1714,7 @@ export enum V1MarketEventType {
 }
 
 export type V1MarketOfferCreatedEventProperties = {
-  __typename?: 'V1MarketOfferCreatedEventProperties'
+  __typename: 'V1MarketOfferCreatedEventProperties'
   amount: Scalars['String']
   bidder: Scalars['String']
   currency: Scalars['String']
@@ -1724,7 +1724,7 @@ export type V1MarketOfferCreatedEventProperties = {
 }
 
 export type V1MarketOfferFinalizedEventProperties = {
-  __typename?: 'V1MarketOfferFinalizedEventProperties'
+  __typename: 'V1MarketOfferFinalizedEventProperties'
   amount: Scalars['String']
   bidder: Scalars['String']
   currency: Scalars['String']
@@ -1734,7 +1734,7 @@ export type V1MarketOfferFinalizedEventProperties = {
 }
 
 export type V1MarketOfferRemovedEventProperties = {
-  __typename?: 'V1MarketOfferRemovedEventProperties'
+  __typename: 'V1MarketOfferRemovedEventProperties'
   amount: Scalars['String']
   bidder: Scalars['String']
   currency: Scalars['String']
@@ -1744,7 +1744,7 @@ export type V1MarketOfferRemovedEventProperties = {
 }
 
 export type V1MediaEvent = {
-  __typename?: 'V1MediaEvent'
+  __typename: 'V1MediaEvent'
   address: Scalars['String']
   collectionAddress: Scalars['String']
   eventType: V1MediaEventType
@@ -1759,7 +1759,7 @@ export enum V1MediaEventType {
 }
 
 export type V1Offer = {
-  __typename?: 'V1Offer'
+  __typename: 'V1Offer'
   address: Scalars['String']
   amount: PriceAtTime
   bidder: Scalars['String']
@@ -1772,7 +1772,7 @@ export type V1Offer = {
 }
 
 export type V2Auction = {
-  __typename?: 'V2Auction'
+  __typename: 'V2Auction'
   address: Scalars['String']
   amountCuratorReceived?: Maybe<PriceAtTime>
   amountTokenOwnerReceived?: Maybe<PriceAtTime>
@@ -1794,12 +1794,12 @@ export type V2Auction = {
 }
 
 export type V2AuctionApprovalUpdatedEventProperties = {
-  __typename?: 'V2AuctionApprovalUpdatedEventProperties'
+  __typename: 'V2AuctionApprovalUpdatedEventProperties'
   approved: Scalars['Boolean']
 }
 
 export type V2AuctionBidEventProperties = {
-  __typename?: 'V2AuctionBidEventProperties'
+  __typename: 'V2AuctionBidEventProperties'
   extended: Scalars['Boolean']
   firstBid: Scalars['Boolean']
   price: PriceAtTime
@@ -1808,12 +1808,12 @@ export type V2AuctionBidEventProperties = {
 }
 
 export type V2AuctionCanceledEventProperties = {
-  __typename?: 'V2AuctionCanceledEventProperties'
+  __typename: 'V2AuctionCanceledEventProperties'
   tokenOwner: Scalars['String']
 }
 
 export type V2AuctionCreatedEventProperties = {
-  __typename?: 'V2AuctionCreatedEventProperties'
+  __typename: 'V2AuctionCreatedEventProperties'
   auctionCurrency: Scalars['String']
   curator: Scalars['String']
   curatorFeePercentage: Scalars['Int']
@@ -1824,12 +1824,12 @@ export type V2AuctionCreatedEventProperties = {
 }
 
 export type V2AuctionDurationExtendedEventProperties = {
-  __typename?: 'V2AuctionDurationExtendedEventProperties'
+  __typename: 'V2AuctionDurationExtendedEventProperties'
   duration: Scalars['String']
 }
 
 export type V2AuctionEndedEventProperties = {
-  __typename?: 'V2AuctionEndedEventProperties'
+  __typename: 'V2AuctionEndedEventProperties'
   amount: Scalars['String']
   auctionCurrency: Scalars['String']
   curator: Scalars['String']
@@ -1839,7 +1839,7 @@ export type V2AuctionEndedEventProperties = {
 }
 
 export type V2AuctionEvent = {
-  __typename?: 'V2AuctionEvent'
+  __typename: 'V2AuctionEvent'
   address: Scalars['String']
   auctionId: Scalars['Int']
   collectionAddress: Scalars['String']
@@ -1868,13 +1868,13 @@ export enum V2AuctionEventType {
 }
 
 export type V2AuctionReservePriceUpdatedEventProperties = {
-  __typename?: 'V2AuctionReservePriceUpdatedEventProperties'
+  __typename: 'V2AuctionReservePriceUpdatedEventProperties'
   price: PriceAtTime
   reservePrice: Scalars['String']
 }
 
 export type V3Ask = {
-  __typename?: 'V3Ask'
+  __typename: 'V3Ask'
   address: Scalars['String']
   askCurrency: Scalars['String']
   askPrice: PriceAtTime
@@ -1889,7 +1889,7 @@ export type V3Ask = {
 }
 
 export type V3AskCanceledEventProperties = {
-  __typename?: 'V3AskCanceledEventProperties'
+  __typename: 'V3AskCanceledEventProperties'
   askCurrency: Scalars['String']
   askPrice: Scalars['String']
   findersFeeBps: Scalars['Int']
@@ -1899,7 +1899,7 @@ export type V3AskCanceledEventProperties = {
 }
 
 export type V3AskCreatedEventProperties = {
-  __typename?: 'V3AskCreatedEventProperties'
+  __typename: 'V3AskCreatedEventProperties'
   askCurrency: Scalars['String']
   askPrice: Scalars['String']
   findersFeeBps: Scalars['Int']
@@ -1909,7 +1909,7 @@ export type V3AskCreatedEventProperties = {
 }
 
 export type V3AskEvent = {
-  __typename?: 'V3AskEvent'
+  __typename: 'V3AskEvent'
   address: Scalars['String']
   collectionAddress: Scalars['String']
   properties: V3AskEventProperties
@@ -1944,7 +1944,7 @@ export enum V3AskEventType {
 }
 
 export type V3AskFilledEventProperties = {
-  __typename?: 'V3AskFilledEventProperties'
+  __typename: 'V3AskFilledEventProperties'
   askCurrency: Scalars['String']
   askPrice: Scalars['String']
   buyer: Scalars['String']
@@ -1956,7 +1956,7 @@ export type V3AskFilledEventProperties = {
 }
 
 export type V3AskPriceUpdatedEventProperties = {
-  __typename?: 'V3AskPriceUpdatedEventProperties'
+  __typename: 'V3AskPriceUpdatedEventProperties'
   askCurrency: Scalars['String']
   askPrice: Scalars['String']
   findersFeeBps: Scalars['Int']
@@ -1966,7 +1966,7 @@ export type V3AskPriceUpdatedEventProperties = {
 }
 
 export type V3AsksCoreEthAskEventProperties = {
-  __typename?: 'V3AsksCoreEthAskEventProperties'
+  __typename: 'V3AsksCoreEthAskEventProperties'
   askCurrency: Scalars['String']
   askPrice: Scalars['String']
   price: PriceAtTime
@@ -1976,7 +1976,7 @@ export type V3AsksCoreEthAskEventProperties = {
 }
 
 export type V3AsksCoreEthAskFilledEventProperties = {
-  __typename?: 'V3AsksCoreEthAskFilledEventProperties'
+  __typename: 'V3AsksCoreEthAskFilledEventProperties'
   askCurrency: Scalars['String']
   askPrice: Scalars['String']
   buyer: Scalars['String']
@@ -1987,7 +1987,7 @@ export type V3AsksCoreEthAskFilledEventProperties = {
 }
 
 export type V3AsksCoreEthRoyaltyPayoutEventProperties = {
-  __typename?: 'V3AsksCoreEthRoyaltyPayoutEventProperties'
+  __typename: 'V3AsksCoreEthRoyaltyPayoutEventProperties'
   amount: PriceAtTime
   askCurrency: Scalars['String']
   askPrice: Scalars['String']
@@ -1997,7 +1997,7 @@ export type V3AsksCoreEthRoyaltyPayoutEventProperties = {
 }
 
 export type V3ModuleManagerEvent = {
-  __typename?: 'V3ModuleManagerEvent'
+  __typename: 'V3ModuleManagerEvent'
   address: Scalars['String']
   approved: Scalars['Boolean']
   eventType: V3ModuleManagerEventType
@@ -2010,7 +2010,7 @@ export enum V3ModuleManagerEventType {
 }
 
 export type V3PrivateAskEventProperties = {
-  __typename?: 'V3PrivateAskEventProperties'
+  __typename: 'V3PrivateAskEventProperties'
   askCurrency: Scalars['String']
   askPrice: Scalars['String']
   buyer: Scalars['String']
@@ -2021,7 +2021,7 @@ export type V3PrivateAskEventProperties = {
 }
 
 export type V3ReserveAuction = {
-  __typename?: 'V3ReserveAuction'
+  __typename: 'V3ReserveAuction'
   address: Scalars['String']
   collectionAddress: Scalars['String']
   currency: Scalars['String']
@@ -2046,7 +2046,7 @@ export type V3ReserveAuction = {
 }
 
 export type V3ReserveAuctionAuctionProperties = {
-  __typename?: 'V3ReserveAuctionAuctionProperties'
+  __typename: 'V3ReserveAuctionAuctionProperties'
   currency: Scalars['String']
   duration: Scalars['String']
   finder: Scalars['String']
@@ -2063,7 +2063,7 @@ export type V3ReserveAuctionAuctionProperties = {
 }
 
 export type V3ReserveAuctionEvent = {
-  __typename?: 'V3ReserveAuctionEvent'
+  __typename: 'V3ReserveAuctionEvent'
   address: Scalars['String']
   collectionAddress: Scalars['String']
   eventType: V3ReserveAuctionEventType
@@ -2087,7 +2087,7 @@ export enum V3ReserveAuctionEventType {
 }
 
 export type V3ReserveAuctionV1AuctionBidProperties = {
-  __typename?: 'V3ReserveAuctionV1AuctionBidProperties'
+  __typename: 'V3ReserveAuctionV1AuctionBidProperties'
   auction: V3ReserveAuctionAuctionProperties
   extended: Scalars['Boolean']
   firstBid: Scalars['Boolean']
@@ -2095,51 +2095,32 @@ export type V3ReserveAuctionV1AuctionBidProperties = {
 }
 
 export type V3ReserveAuctionV1AuctionCanceledProperties = {
-  __typename?: 'V3ReserveAuctionV1AuctionCanceledProperties'
+  __typename: 'V3ReserveAuctionV1AuctionCanceledProperties'
   auction: V3ReserveAuctionAuctionProperties
 }
 
 export type V3ReserveAuctionV1AuctionCreatedProperties = {
-  __typename?: 'V3ReserveAuctionV1AuctionCreatedProperties'
+  __typename: 'V3ReserveAuctionV1AuctionCreatedProperties'
   auction: V3ReserveAuctionAuctionProperties
 }
 
 export type V3ReserveAuctionV1AuctionEndedProperties = {
-  __typename?: 'V3ReserveAuctionV1AuctionEndedProperties'
+  __typename: 'V3ReserveAuctionV1AuctionEndedProperties'
   auction: V3ReserveAuctionAuctionProperties
 }
 
 export type V3ReserveAuctionV1AuctionReservePriceUpdatedProperties = {
-  __typename?: 'V3ReserveAuctionV1AuctionReservePriceUpdatedProperties'
+  __typename: 'V3ReserveAuctionV1AuctionReservePriceUpdatedProperties'
   auction: V3ReserveAuctionAuctionProperties
 }
 
 export type VideoEncodingTypes = {
-  __typename?: 'VideoEncodingTypes'
+  __typename: 'VideoEncodingTypes'
   large?: Maybe<Scalars['String']>
   original: Scalars['String']
   poster?: Maybe<Scalars['String']>
   preview?: Maybe<Scalars['String']>
   thumbnail?: Maybe<Scalars['String']>
-}
-
-export type AttributesQueryVariables = Exact<{
-  addresses?: InputMaybe<Array<Scalars['String']> | Scalars['String']>
-  network: NetworkInput
-}>
-
-export type AttributesQuery = {
-  __typename?: 'RootQuery'
-  aggregateAttributes: Array<{
-    __typename?: 'AggregateAttribute'
-    traitType: string
-    valueMetrics: Array<{
-      __typename?: 'AggregateAttributeValue'
-      count: number
-      percent: number
-      value: string
-    }>
-  }>
 }
 
 export type NounishAuctionsQueryVariables = Exact<{
@@ -2148,11 +2129,11 @@ export type NounishAuctionsQueryVariables = Exact<{
 }>
 
 export type NounishAuctionsQuery = {
-  __typename?: 'RootQuery'
+  __typename: 'RootQuery'
   nouns: {
-    __typename?: 'Nouns'
+    __typename: 'Nouns'
     nounsActiveMarket?: {
-      __typename?: 'NounsBuilderAuction'
+      __typename: 'NounsBuilderAuction'
       auction?: string | null
       collectionAddress: string
       duration: string
@@ -2173,36 +2154,36 @@ export type NounishAuctionsQuery = {
       address: string
       highestBidder?: string | null
       amount?: {
-        __typename?: 'PriceAtTime'
+        __typename: 'PriceAtTime'
         blockNumber: number
         chainTokenPrice?: {
-          __typename?: 'CurrencyAmount'
+          __typename: 'CurrencyAmount'
           decimal: number
           raw: string
           currency: {
-            __typename?: 'Currency'
+            __typename: 'Currency'
             address: string
             decimals: number
             name: string
           }
         } | null
         nativePrice: {
-          __typename?: 'CurrencyAmount'
+          __typename: 'CurrencyAmount'
           decimal: number
           raw: string
           currency: {
-            __typename?: 'Currency'
+            __typename: 'Currency'
             address: string
             decimals: number
             name: string
           }
         }
         usdcPrice?: {
-          __typename?: 'CurrencyAmount'
+          __typename: 'CurrencyAmount'
           decimal: number
           raw: string
           currency: {
-            __typename?: 'Currency'
+            __typename: 'Currency'
             address: string
             decimals: number
             name: string
@@ -2210,45 +2191,45 @@ export type NounishAuctionsQuery = {
         } | null
       } | null
       highestBidPrice?: {
-        __typename?: 'PriceAtTime'
+        __typename: 'PriceAtTime'
         blockNumber: number
         chainTokenPrice?: {
-          __typename?: 'CurrencyAmount'
+          __typename: 'CurrencyAmount'
           decimal: number
           raw: string
           currency: {
-            __typename?: 'Currency'
+            __typename: 'Currency'
             address: string
             decimals: number
             name: string
           }
         } | null
         nativePrice: {
-          __typename?: 'CurrencyAmount'
+          __typename: 'CurrencyAmount'
           decimal: number
           raw: string
           currency: {
-            __typename?: 'Currency'
+            __typename: 'Currency'
             address: string
             decimals: number
             name: string
           }
         }
         usdcPrice?: {
-          __typename?: 'CurrencyAmount'
+          __typename: 'CurrencyAmount'
           decimal: number
           raw: string
           currency: {
-            __typename?: 'Currency'
+            __typename: 'Currency'
             address: string
             decimals: number
             name: string
           }
         } | null
       } | null
-      networkInfo: { __typename?: 'NetworkInfo'; chain: Chain; network: Network }
+      networkInfo: { __typename: 'NetworkInfo'; chain: Chain; network: Network }
       transactionInfo: {
-        __typename?: 'TransactionInfo'
+        __typename: 'TransactionInfo'
         blockNumber: number
         blockTimestamp: any
         logIndex?: number | null
@@ -2264,13 +2245,13 @@ export type NounsDaosQueryVariables = Exact<{
 }>
 
 export type NounsDaosQuery = {
-  __typename?: 'RootQuery'
+  __typename: 'RootQuery'
   nouns: {
-    __typename?: 'Nouns'
+    __typename: 'Nouns'
     nounsDaos: {
-      __typename?: 'NounsDaoConnection'
+      __typename: 'NounsDaoConnection'
       nodes: Array<{
-        __typename?: 'NounsDao'
+        __typename: 'NounsDao'
         name?: string | null
         collectionAddress: string
         auctionAddress?: string | null
@@ -2281,7 +2262,7 @@ export type NounsDaosQuery = {
         totalSupply?: number | null
         treasuryAddress?: string | null
         contractAddress?: string | null
-        networkInfo: { __typename?: 'NetworkInfo'; chain: Chain; network: Network }
+        networkInfo: { __typename: 'NetworkInfo'; chain: Chain; network: Network }
       }>
     }
   }
@@ -2295,23 +2276,23 @@ export type OffchainOrderForTokenQueryVariables = Exact<{
 }>
 
 export type OffchainOrderForTokenQuery = {
-  __typename?: 'RootQuery'
+  __typename: 'RootQuery'
   offchainOrders: {
-    __typename?: 'OffchainOrderWithTokenConnection'
+    __typename: 'OffchainOrderWithTokenConnection'
     nodes: Array<{
-      __typename?: 'OffchainOrderWithToken'
+      __typename: 'OffchainOrderWithToken'
       offchainOrder: {
-        __typename?: 'OffchainOrder'
+        __typename: 'OffchainOrder'
         calldata?: string | null
         contractAddress: string
         price: {
-          __typename?: 'PriceAtTime'
-          chainTokenPrice?: { __typename?: 'CurrencyAmount'; decimal: number } | null
-          usdcPrice?: { __typename?: 'CurrencyAmount'; decimal: number } | null
+          __typename: 'PriceAtTime'
+          chainTokenPrice?: { __typename: 'CurrencyAmount'; decimal: number } | null
+          usdcPrice?: { __typename: 'CurrencyAmount'; decimal: number } | null
         }
       }
       token?: {
-        __typename?: 'Token'
+        __typename: 'Token'
         collectionName?: string | null
         tokenId: string
       } | null
@@ -2325,13 +2306,13 @@ export type OneNounsDaoQueryVariables = Exact<{
 }>
 
 export type OneNounsDaoQuery = {
-  __typename?: 'RootQuery'
+  __typename: 'RootQuery'
   nouns: {
-    __typename?: 'Nouns'
+    __typename: 'Nouns'
     nounsDaos: {
-      __typename?: 'NounsDaoConnection'
+      __typename: 'NounsDaoConnection'
       nodes: Array<{
-        __typename?: 'NounsDao'
+        __typename: 'NounsDao'
         name?: string | null
         collectionAddress: string
         auctionAddress?: string | null
@@ -2342,7 +2323,7 @@ export type OneNounsDaoQuery = {
         totalSupply?: number | null
         treasuryAddress?: string | null
         contractAddress?: string | null
-        networkInfo: { __typename?: 'NetworkInfo'; chain: Chain; network: Network }
+        networkInfo: { __typename: 'NetworkInfo'; chain: Chain; network: Network }
       }>
     }
   }
@@ -2355,11 +2336,101 @@ export type TokenQueryVariables = Exact<{
 }>
 
 export type TokenQuery = {
-  __typename?: 'RootQuery'
+  __typename: 'RootQuery'
   token?: {
-    __typename?: 'TokenWithFullMarketHistory'
+    __typename: 'TokenWithFullMarketHistory'
+    markets: Array<{
+      __typename: 'Market'
+      collectionAddress?: string | null
+      marketAddress: string
+      marketType: MarketType
+      status: string
+      tokenId?: string | null
+      properties?:
+        | { __typename: 'LilNounsAuction' }
+        | { __typename: 'NounsAuction' }
+        | { __typename: 'NounsBuilderAuction' }
+        | { __typename: 'V1Ask' }
+        | { __typename: 'V1BidShare' }
+        | {
+            __typename: 'V1Offer'
+            address: string
+            bidder: string
+            collectionAddress: string
+            currency: string
+            recipient: string
+            sellOnShare: string
+            tokenId: string
+            v1OfferStatus: string
+            amount: {
+              __typename: 'PriceAtTime'
+              nativePrice: { __typename: 'CurrencyAmount'; decimal: number; raw: string }
+              usdcPrice?: {
+                __typename: 'CurrencyAmount'
+                decimal: number
+                raw: string
+              } | null
+            }
+          }
+        | { __typename: 'V2Auction' }
+        | {
+            __typename: 'V3Ask'
+            address: string
+            askCurrency: string
+            buyer?: string | null
+            collectionAddress: string
+            seller: string
+            tokenId: string
+            v3AskStatus: string
+            askPrice: {
+              __typename: 'PriceAtTime'
+              nativePrice: { __typename: 'CurrencyAmount'; decimal: number; raw: string }
+              usdcPrice?: {
+                __typename: 'CurrencyAmount'
+                decimal: number
+                raw: string
+              } | null
+            }
+          }
+        | {
+            __typename: 'V3ReserveAuction'
+            estimatedDurationTime?: any | null
+            address: string
+            collectionAddress: string
+            currency: string
+            duration: string
+            extended: boolean
+            finder: string
+            findersFeeBps: string
+            firstBid: boolean
+            firstBidTime: string
+            highestBid: string
+            highestBidder: string
+            reserve: string
+            seller: string
+            sellerFundsRecipient: string
+            startTime: string
+            status: string
+            tokenId: string
+            price?: {
+              __typename: 'PriceAtTime'
+              nativePrice: { __typename: 'CurrencyAmount'; decimal: number; raw: string }
+              usdcPrice?: {
+                __typename: 'CurrencyAmount'
+                decimal: number
+                raw: string
+              } | null
+            } | null
+          }
+        | null
+      price?: {
+        __typename: 'PriceAtTime'
+        nativePrice: { __typename: 'CurrencyAmount'; decimal: number; raw: string }
+        usdcPrice?: { __typename: 'CurrencyAmount'; decimal: number; raw: string } | null
+      } | null
+    }>
     token: {
-      __typename?: 'Token'
+      __typename: 'Token'
       collectionAddress: string
       collectionName?: string | null
       tokenUrlMimeType?: string | null
@@ -2370,22 +2441,22 @@ export type TokenQuery = {
       description?: string | null
       lastRefreshTime?: any | null
       owner?: string | null
-      networkInfo: { __typename?: 'NetworkInfo'; chain: Chain; network: Network }
+      networkInfo: { __typename: 'NetworkInfo'; chain: Chain; network: Network }
       attributes?: Array<{
-        __typename?: 'TokenAttribute'
+        __typename: 'TokenAttribute'
         displayType?: string | null
         traitType?: string | null
         value?: string | null
       }> | null
       content?: {
-        __typename?: 'TokenContentMedia'
+        __typename: 'TokenContentMedia'
         mimeType?: string | null
         size?: string | null
         url?: string | null
         mediaEncoding?:
-          | { __typename?: 'AudioEncodingTypes'; large?: string | null; original: string }
+          | { __typename: 'AudioEncodingTypes'; large?: string | null; original: string }
           | {
-              __typename?: 'ImageEncodingTypes'
+              __typename: 'ImageEncodingTypes'
               large?: string | null
               poster?: string | null
               original: string
@@ -2393,7 +2464,7 @@ export type TokenQuery = {
             }
           | { __typename: 'UnsupportedEncodingTypes'; original: string }
           | {
-              __typename?: 'VideoEncodingTypes'
+              __typename: 'VideoEncodingTypes'
               large?: string | null
               poster?: string | null
               original: string
@@ -2403,40 +2474,40 @@ export type TokenQuery = {
           | null
       } | null
       mintInfo?: {
-        __typename?: 'MintInfo'
+        __typename: 'MintInfo'
         toAddress: string
         originatorAddress: string
         price?: {
-          __typename?: 'PriceAtTime'
+          __typename: 'PriceAtTime'
           blockNumber: number
           chainTokenPrice?: {
-            __typename?: 'CurrencyAmount'
+            __typename: 'CurrencyAmount'
             decimal: number
             raw: string
             currency: {
-              __typename?: 'Currency'
+              __typename: 'Currency'
               address: string
               decimals: number
               name: string
             }
           } | null
           nativePrice: {
-            __typename?: 'CurrencyAmount'
+            __typename: 'CurrencyAmount'
             decimal: number
             raw: string
             currency: {
-              __typename?: 'Currency'
+              __typename: 'Currency'
               address: string
               decimals: number
               name: string
             }
           }
           usdcPrice?: {
-            __typename?: 'CurrencyAmount'
+            __typename: 'CurrencyAmount'
             decimal: number
             raw: string
             currency: {
-              __typename?: 'Currency'
+              __typename: 'Currency'
               address: string
               decimals: number
               name: string
@@ -2444,20 +2515,20 @@ export type TokenQuery = {
           } | null
         } | null
         mintContext: {
-          __typename?: 'TransactionInfo'
+          __typename: 'TransactionInfo'
           blockTimestamp: any
           blockNumber: number
         }
       } | null
       image?: {
-        __typename?: 'TokenContentMedia'
+        __typename: 'TokenContentMedia'
         mimeType?: string | null
         url?: string | null
         size?: string | null
         mediaEncoding?:
-          | { __typename?: 'AudioEncodingTypes'; large?: string | null; original: string }
+          | { __typename: 'AudioEncodingTypes'; large?: string | null; original: string }
           | {
-              __typename?: 'ImageEncodingTypes'
+              __typename: 'ImageEncodingTypes'
               large?: string | null
               poster?: string | null
               original: string
@@ -2465,7 +2536,7 @@ export type TokenQuery = {
             }
           | { __typename: 'UnsupportedEncodingTypes'; original: string }
           | {
-              __typename?: 'VideoEncodingTypes'
+              __typename: 'VideoEncodingTypes'
               large?: string | null
               poster?: string | null
               original: string
@@ -2475,7 +2546,7 @@ export type TokenQuery = {
           | null
       } | null
       tokenContract?: {
-        __typename?: 'TokenContract'
+        __typename: 'TokenContract'
         totalSupply?: number | null
         symbol?: string | null
         network: string
@@ -2486,4 +2557,212 @@ export type TokenQuery = {
       } | null
     }
   } | null
+}
+
+export type NounsTokensByOwnerAddressQueryVariables = Exact<{
+  ownerAddress: Scalars['String']
+}>
+
+export type NounsTokensByOwnerAddressQuery = {
+  __typename: 'RootQuery'
+  tokens: {
+    __typename: 'TokenWithMarketsSummaryConnection'
+    nodes: Array<{
+      __typename: 'TokenWithMarketsSummary'
+      token: {
+        __typename: 'Token'
+        collectionAddress: string
+        collectionName?: string | null
+        description?: string | null
+        lastRefreshTime?: any | null
+        metadata?: any | null
+        name?: string | null
+        tokenId: string
+        owner?: string | null
+        tokenUrlMimeType?: string | null
+        tokenUrl?: string | null
+        image?: {
+          __typename: 'TokenContentMedia'
+          url?: string | null
+          size?: string | null
+          mimeType?: string | null
+          mediaEncoding?:
+            | {
+                __typename: 'AudioEncodingTypes'
+                large?: string | null
+                original: string
+              }
+            | {
+                __typename: 'ImageEncodingTypes'
+                large?: string | null
+                poster?: string | null
+                original: string
+                thumbnail?: string | null
+              }
+            | { __typename: 'UnsupportedEncodingTypes'; original: string }
+            | {
+                __typename: 'VideoEncodingTypes'
+                large?: string | null
+                poster?: string | null
+                original: string
+                preview?: string | null
+                thumbnail?: string | null
+              }
+            | null
+        } | null
+        tokenContract?: {
+          __typename: 'TokenContract'
+          collectionAddress: string
+          symbol?: string | null
+          totalSupply?: number | null
+          network: string
+          name?: string | null
+          description?: string | null
+          chain: number
+        } | null
+        networkInfo: { __typename: 'NetworkInfo'; chain: Chain; network: Network }
+        attributes?: Array<{
+          __typename: 'TokenAttribute'
+          displayType?: string | null
+          traitType?: string | null
+          value?: string | null
+        }> | null
+        content?: {
+          __typename: 'TokenContentMedia'
+          mimeType?: string | null
+          size?: string | null
+          url?: string | null
+          mediaEncoding?:
+            | {
+                __typename: 'AudioEncodingTypes'
+                large?: string | null
+                original: string
+              }
+            | {
+                __typename: 'ImageEncodingTypes'
+                large?: string | null
+                poster?: string | null
+                original: string
+                thumbnail?: string | null
+              }
+            | { __typename: 'UnsupportedEncodingTypes'; original: string }
+            | {
+                __typename: 'VideoEncodingTypes'
+                large?: string | null
+                poster?: string | null
+                original: string
+                preview?: string | null
+                thumbnail?: string | null
+              }
+            | null
+        } | null
+      }
+      marketsSummary: Array<{
+        __typename: 'Market'
+        collectionAddress?: string | null
+        marketAddress: string
+        marketType: MarketType
+        status: string
+        tokenId?: string | null
+        properties?:
+          | { __typename: 'LilNounsAuction' }
+          | { __typename: 'NounsAuction' }
+          | { __typename: 'NounsBuilderAuction' }
+          | { __typename: 'V1Ask' }
+          | { __typename: 'V1BidShare' }
+          | {
+              __typename: 'V1Offer'
+              address: string
+              bidder: string
+              collectionAddress: string
+              currency: string
+              recipient: string
+              sellOnShare: string
+              tokenId: string
+              v1OfferStatus: string
+              amount: {
+                __typename: 'PriceAtTime'
+                nativePrice: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                }
+                usdcPrice?: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                } | null
+              }
+            }
+          | { __typename: 'V2Auction' }
+          | {
+              __typename: 'V3Ask'
+              address: string
+              askCurrency: string
+              buyer?: string | null
+              collectionAddress: string
+              seller: string
+              tokenId: string
+              v3AskStatus: string
+              askPrice: {
+                __typename: 'PriceAtTime'
+                nativePrice: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                }
+                usdcPrice?: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                } | null
+              }
+            }
+          | {
+              __typename: 'V3ReserveAuction'
+              estimatedDurationTime?: any | null
+              address: string
+              collectionAddress: string
+              currency: string
+              duration: string
+              extended: boolean
+              finder: string
+              findersFeeBps: string
+              firstBid: boolean
+              firstBidTime: string
+              highestBid: string
+              highestBidder: string
+              reserve: string
+              seller: string
+              sellerFundsRecipient: string
+              startTime: string
+              status: string
+              tokenId: string
+              price?: {
+                __typename: 'PriceAtTime'
+                nativePrice: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                }
+                usdcPrice?: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                } | null
+              } | null
+            }
+          | null
+        price?: {
+          __typename: 'PriceAtTime'
+          nativePrice: { __typename: 'CurrencyAmount'; decimal: number; raw: string }
+          usdcPrice?: {
+            __typename: 'CurrencyAmount'
+            decimal: number
+            raw: string
+          } | null
+        } | null
+      }>
+    }>
+  }
 }

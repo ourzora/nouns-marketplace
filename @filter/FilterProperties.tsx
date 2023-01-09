@@ -36,6 +36,7 @@ export function FilterProperties({ collectionAddress }: { collectionAddress: str
         {filterPropertiesList.map((property: AggregateAttribute) => (
           <Box key={property.traitType} className={['filter-properties-list']}>
             <FilterPropertySelect
+              __typename={property.__typename}
               traitType={property.traitType || ''}
               valueMetrics={property.valueMetrics}
             />

@@ -5,7 +5,6 @@ import React, { useEffect, useMemo } from 'react'
 
 import { MarketModalHeading } from '@market/components'
 import { TransactionSubmitButton } from '@market/components/TransactionSubmitButton'
-import { useAskHelper } from '@market/hooks/useAskHelper'
 import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { useModal } from '@modal'
 import { formatContractError } from '@shared'
@@ -19,13 +18,16 @@ import { useV3AskTransaction } from '../hooks/useV3AskTransaction'
 
 interface V3AskFillAskProps extends CommonV3AskComponentProps {}
 
-export function V3AskFillAsk({ onNext, ...props }: V3AskFillAskProps) {
+export function V3AskFillAsk({
+  onNext,
+  tokenId,
+  contractAddress,
+  collectionName,
+  markets,
+  ...props
+}: V3AskFillAskProps) {
   const { requestClose } = useModal()
-  const { markets } = props.nft
-  const { ask } = useRelevantMarket(markets)
-  const { displayAskAmount, hasSufficientFunds } = useAskHelper({
-    ask,
-  })
+  const { displayAskAmount, hasSufficientFunds } = useRelevantMarket(markets)
 
   const askPriceSummary = useMemo(
     // todo: get this data from usePrimaryAuctionDataTable when we've switched from NFTObject to TypeSafeToken
@@ -40,12 +42,13 @@ export function V3AskFillAsk({ onNext, ...props }: V3AskFillAskProps) {
   )
 
   const savings = useMemo(
-    () => (displayAskAmount ? (parseFloat(displayAskAmount) * 0.025).toFixed(5) : '0'),
+    () => (displayAskAmount ? (displayAskAmount * 0.025).toFixed(5) : '0'),
     [displayAskAmount]
   )
 
   const { txStatus, txInProgress, txError, finalizedTx, fillAsk } = useV3AskTransaction({
-    nft: props.nft,
+    tokenId,
+    contractAddress,
   })
   const isDisabled = useMemo(
     () => txInProgress || !hasSufficientFunds || !displayAskAmount,
@@ -55,7 +58,12 @@ export function V3AskFillAsk({ onNext, ...props }: V3AskFillAskProps) {
 
   return (
     <Stack gap="x3" {...props}>
-      <MarketModalHeading nftObj={props.nft} action="Buy" />
+      <MarketModalHeading
+        tokenId={tokenId}
+        contractAddress={contractAddress}
+        collectionName={collectionName}
+        action="Buy"
+      />
 
       <Flex justify="space-between">
         <Paragraph size="lg" inline color="text3" className={[mediumFont]}>
@@ -89,7 +97,7 @@ export function V3AskFillAsk({ onNext, ...props }: V3AskFillAskProps) {
             type="submit"
             txStatus={txStatus}
             txInProgress={txInProgress}
-            onClick={() => fillAsk({ price: displayAskAmount })}
+            onClick={() => fillAsk({ price: displayAskAmount?.toString() })}
             disabled={isDisabled}
             w="auto"
             flex={1}

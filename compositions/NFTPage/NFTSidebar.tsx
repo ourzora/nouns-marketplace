@@ -5,7 +5,14 @@ import { OffchainOrderWithToken } from 'types/zora.api.generated'
 import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
 import { useToken } from 'hooks/useToken'
 
+import { useMemo } from 'react'
+import { TypeSafeMarket } from 'validators/market'
+import { TypeSafeToken } from 'validators/token'
+
+import { NftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { CollectionThumbnail } from '@media'
+import { useNounishAuctionQuery } from '@noun-auction'
+import { useIsOwner } from '@shared'
 import { DescriptionWithMaxLines } from '@shared/components'
 import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
 
@@ -17,6 +24,8 @@ export interface NFTSidebarProps extends StackProps {
   collectionAddress: string
   tokenId: string
   offchainOrders?: OffchainOrderWithToken[]
+  token: TypeSafeToken
+  markets: TypeSafeMarket[]
 }
 
 export function NFTSidebar({
@@ -24,14 +33,18 @@ export function NFTSidebar({
   tokenId,
   offchainOrders,
   ...props
-}: NFTSidebarProps) {
-  if (!collectionAddress || !tokenId) return null
+}: Omit<NFTSidebarProps, 'token' | 'markets'>) {
+  const { token, markets } = useToken({ collectionAddress, tokenId })
+
+  if (!token) return null
 
   return (
     <NFTSidebarComponent
+      markets={markets}
       collectionAddress={collectionAddress}
       tokenId={tokenId}
       offchainOrders={offchainOrders}
+      token={token}
       {...props}
     />
   )
@@ -42,14 +55,23 @@ export function NFTSidebarComponent({
   collectionAddress,
   tokenId,
   offchainOrders,
+  token,
+  markets,
   ...props
 }: NFTSidebarProps) {
   const { primarySalePrice, hasPrimarySalePrice } = usePrimarySalePrice({
     collectionAddress,
   })
-  const { token } = useToken({ collectionAddress, tokenId })
+  const { activeAuction } = useNounishAuctionQuery({
+    collectionAddress,
+  })
 
-  if (!token) return null
+  const isActiveAuctionToken = useMemo(
+    () => activeAuction?.tokenId === tokenId,
+    [activeAuction?.tokenId, tokenId]
+  )
+
+  const { isOwner } = useIsOwner(token)
 
   return (
     <Stack
@@ -58,7 +80,7 @@ export function NFTSidebarComponent({
       {...props}
     >
       <Flex>
-        <Link href={`/collections/${token.collectionAddress}`}>
+        <Link href={`/daos/${token.collectionAddress}`}>
           <CollectionThumbnail
             collectionAddress={token.collectionAddress}
             showTitle
@@ -88,10 +110,21 @@ export function NFTSidebarComponent({
         {hasPrimarySalePrice && (
           <NFTProvenance primarySalePrice={primarySalePrice} token={token} />
         )}
-        <NFTMarket
-          collectionAddress={collectionAddress}
-          offchainOrders={offchainOrders}
-        />
+        <NftMarketContext.Provider
+          value={{
+            tokenId,
+            collectionAddress,
+            markets,
+            collectionName: token.collectionName ?? '..',
+          }}
+        >
+          <NFTMarket
+            activeAuction={activeAuction}
+            isActiveAuctionToken={isActiveAuctionToken}
+            isOwner={isOwner}
+            offchainOrders={offchainOrders}
+          />
+        </NftMarketContext.Provider>
       </Stack>
     </Stack>
   )

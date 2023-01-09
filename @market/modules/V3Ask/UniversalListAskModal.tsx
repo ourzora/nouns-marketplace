@@ -3,36 +3,27 @@ import { Button } from 'components/Button'
 import { useCallback } from 'react'
 
 import { SelectListFlow } from '@market/components/SelectListFlow'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { ModalComposition, useModal } from '@modal'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { Box, FlexProps } from '@zoralabs/zord'
 
-import {
-  RESET_V3ASK, // V3AskStateProvider,
-  useV3AskStateContext,
-} from './providers/V3AskStateProvider'
+import { RESET_V3ASK, useV3AskStateContext } from './providers/V3AskStateProvider'
 
-export interface UniversalAskModalProps extends FlexProps {
-  nftObj: NFTObject
-}
+export interface UniversalAskModalProps extends FlexProps {}
 
-export function UniversalListAskModal({ nftObj, ...props }: UniversalAskModalProps) {
-  const { nft } = nftObj
+export function UniversalListAskModal({ ...props }: UniversalAskModalProps) {
+  const { tokenId, collectionAddress } = useNftMarketContext()
   const { requestClose } = useModal()
-  const { state, dispatch } = useV3AskStateContext()
+  const { dispatch } = useV3AskStateContext()
 
   const handleClose = useCallback(() => {
     requestClose()
     dispatch && dispatch({ type: RESET_V3ASK })
   }, [dispatch, requestClose])
 
-  if (!nft) {
-    return null
-  }
-
   return (
     <ModalComposition
-      modalName={`list-${nft.tokenId}${nft.contract.address}`}
+      modalName={`list-${tokenId}${collectionAddress}`}
       modalBehaviorRequiresAuth={true}
       onClose={handleClose}
       trigger={
@@ -41,8 +32,8 @@ export function UniversalListAskModal({ nftObj, ...props }: UniversalAskModalPro
         </Button>
       }
       content={
-        <Box p="x8">
-          <SelectListFlow nftObj={nftObj} closeModal={handleClose} />
+        <Box p="x8" {...props}>
+          <SelectListFlow closeModal={handleClose} />
         </Box>
       }
     />

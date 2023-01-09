@@ -1,18 +1,17 @@
 import React from 'react'
 
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { Stack, StackProps } from '@zoralabs/zord'
 
 import { V3AskModal } from './V3AskModal'
 
 interface V3AskSidebarProps extends StackProps {
-  nftObj: NFTObject
+  isOwner: boolean
 }
 
-export function V3AskSidebar({ nftObj, className, ...props }: V3AskSidebarProps) {
+export function V3AskSidebar({ className, isOwner, ...props }: V3AskSidebarProps) {
   return (
     <Stack {...props} className={className}>
-      <V3AskModal modalName="V3AskV3" nftObj={nftObj} />
+      <V3AskModal isOwner={isOwner} modalName="V3AskV3" />
     </Stack>
   )
 }

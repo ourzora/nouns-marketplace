@@ -3,37 +3,35 @@ import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import { useMemo } from 'react'
 
-import { useAskHelper, useRelevantMarket } from '@market/hooks'
+import { useRelevantMarket } from '@market/hooks'
 import { V3AskSidebar } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
-import { useIsOwner } from '@shared/hooks/useIsOwner'
-import { NFTObject } from '@zoralabs/nft-hooks'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { FlexProps } from '@zoralabs/zord'
 
 export interface NFTAskProps extends FlexProps {
-  nftObj: NFTObject
   offchainOrders?: OffchainOrderWithToken[]
+  isOwner: boolean
 }
 
-export function NFTAsks({ nftObj, offchainOrders, ...props }: NFTAskProps) {
-  const { markets } = nftObj
-  const { ask } = useRelevantMarket(markets)
-  const { isOwner } = useIsOwner(nftObj)
-  const { hasRelevantAsk } = useAskHelper({ ask })
+export function NFTAsks({ offchainOrders, isOwner }: NFTAskProps) {
+  const { markets } = useNftMarketContext()
+  const { hasRelevantAsk } = useRelevantMarket(markets)
+
   const showOffchainOrders = useMemo(
     () => offchainOrders && offchainOrders?.length > 0 && !isOwner,
     [isOwner, offchainOrders]
   )
 
   if (hasRelevantAsk) {
-    return <V3AskSidebar nftObj={nftObj} borderRadius="phat" />
+    return <V3AskSidebar isOwner={isOwner} borderRadius="phat" />
   }
 
   if (showOffchainOrders) {
-    return <NFTOffchainOrders nft={nftObj} offchainOrders={offchainOrders!} />
+    return <NFTOffchainOrders offchainOrders={offchainOrders!} />
   }
 
-  if (isOwner) return <UniversalListAskFlow nftObj={nftObj} />
+  if (isOwner) return <UniversalListAskFlow />
 
   return null
 }

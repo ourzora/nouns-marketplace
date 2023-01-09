@@ -1,24 +1,11 @@
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { FlexProps, Stack } from '@zoralabs/zord'
 
 import { UniversalListAskModal } from './UniversalListAskModal'
 import { V3AskStateProvider } from './providers/V3AskStateProvider'
 
-export interface UniversalAskModalProps extends FlexProps {
-  nftObj: NFTObject
-}
+export interface UniversalAskModalProps extends FlexProps {}
 
-export function UniversalListAskFlow({
-  nftObj,
-  className,
-  ...props
-}: UniversalAskModalProps) {
-  const { nft } = nftObj
-
-  if (!nft) {
-    return null
-  }
-
+export function UniversalListAskFlow({ className, ...props }: UniversalAskModalProps) {
   return (
     <V3AskStateProvider>
       <Stack
@@ -27,7 +14,7 @@ export function UniversalListAskFlow({
         justify="flex-end"
         className={['zora-universal-list-ask-flow', className]}
       >
-        <UniversalListAskModal nftObj={nftObj} />
+        <UniversalListAskModal />
       </Stack>
     </V3AskStateProvider>
   )

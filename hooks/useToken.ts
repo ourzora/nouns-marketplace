@@ -55,6 +55,7 @@ export function useToken({
 
   return {
     token,
+    markets: data?.token?.markets ?? [],
     error,
   }
 }

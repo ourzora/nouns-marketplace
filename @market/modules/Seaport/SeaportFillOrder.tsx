@@ -7,6 +7,7 @@ import React, { Dispatch, SetStateAction, useEffect, useMemo } from 'react'
 import { MarketModalHeading } from '@market/components'
 import { useOffchainOrderAttribution } from '@market/hooks'
 import { useValidateSeaportContractCall } from '@market/modules/Seaport/hooks/useValidateSeaportContractCall'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { useModal } from '@modal'
 import { formatContractError, useAuth } from '@shared'
 import { PrintError } from '@shared/components/PrintError'
@@ -22,7 +23,6 @@ interface SeaportFillOrderProps extends CommonSeaportFillOrderProps {
 
 export function SeaportFillOrder({
   order,
-  nft,
   userAddress,
   setIsFilled,
   ...props
@@ -47,7 +47,6 @@ export function SeaportFillOrder({
     return (
       <SeaportFillOrderWithVerifiedContractCall
         order={order}
-        nft={nft}
         contractCall={contractCall}
         userAddress={userAddress}
         setIsFilled={setIsFilled}
@@ -61,13 +60,13 @@ export function SeaportFillOrder({
 
 function SeaportFillOrderWithVerifiedContractCall({
   order,
-  nft,
   userAddress,
   contractCall,
   setIsFilled,
   ...props
 }: SeaportFillOrderProps & { contractCall: SeaportContractCall }) {
   const { requestClose } = useModal()
+  const { collectionAddress, collectionName, tokenId } = useNftMarketContext()
 
   const { offchainOrder } = order
   const { price } = offchainOrder
@@ -91,11 +90,7 @@ function SeaportFillOrderWithVerifiedContractCall({
     loading: loadingValidation,
   } = useValidateSeaportContractCall(contractCall)
 
-  const {
-    attribution,
-    logo: PlatformLogo,
-    platformName,
-  } = useOffchainOrderAttribution(
+  const { logo: PlatformLogo, platformName } = useOffchainOrderAttribution(
     offchainOrder.calldata!,
     offchainOrder?.properties?.salt
   )
@@ -114,7 +109,12 @@ function SeaportFillOrderWithVerifiedContractCall({
   return (
     contractCall && (
       <Stack gap="x8" {...props}>
-        <MarketModalHeading nftObj={nft} action="Buy" />
+        <MarketModalHeading
+          collectionName={collectionName}
+          contractAddress={collectionAddress}
+          tokenId={tokenId}
+          action="Buy"
+        />
         <Stack gap="x3" {...props}>
           <Flex justify="space-between">
             <Paragraph size="lg" inline color="text2" className={[mediumFont]}>

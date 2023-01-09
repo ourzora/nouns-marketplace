@@ -16,6 +16,21 @@ const nextConfig = {
   //   esmExternals: false,
   // },
 
+  async redirects() {
+    return [
+      {
+        source: '/collections',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/collections/:address*',
+        destination: '/daos/:address*',
+        permanent: true,
+      },
+    ]
+  },
+
   images: {
     domains: [
       // For debugging images

@@ -1,84 +1,87 @@
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
-import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
+import { TypeSafeMarket } from 'validators/market'
 
-import { NFTPrimaryAuction } from '@market'
+import { NFTPrimaryAuction, NFTPrimaryAuctionActive } from '@market'
 import { NFTAsks } from '@market/components/NFTAsks'
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
-import { useNounishAuctionQuery } from '@noun-auction'
-import { useNFTProvider } from '@shared'
-import { NFTObject } from '@zoralabs/nft-hooks'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
 import { BoxProps } from '@zoralabs/zord'
 
 import { nftMarketWrapper } from './NFTPage.css'
 
 interface NFTMarketProps extends BoxProps {
-  collectionAddress: string
   offchainOrders?: OffchainOrderWithToken[]
+  isOwner: boolean
+  isActiveAuctionToken: boolean
+  activeAuction?: TypeSafeNounsAuction
 }
 
 export function NFTMarket({
   offchainOrders,
   className,
-  collectionAddress,
+  isOwner,
+  isActiveAuctionToken,
+  activeAuction,
 }: NFTMarketProps) {
-  const { nft: nftObj } = useNFTProvider()
-  const { activeAuction } = useNounishAuctionQuery({
-    collectionAddress,
-  })
-  if (nftObj && activeAuction) {
+  const { tokenId, collectionAddress } = useNftMarketContext()
+
+  if (activeAuction) {
     return (
-      <NFTMarketComponent
-        className={className}
-        nftObj={nftObj}
+      <NFTAuctionMarket
         activeAuction={activeAuction}
-        offchainOrders={offchainOrders}
+        isActiveAuctionToken={isActiveAuctionToken}
+        tokenId={tokenId}
         collectionAddress={collectionAddress}
       />
     )
   }
 
-  return null
+  return (
+    <NFTAsks
+      isOwner={isOwner}
+      offchainOrders={offchainOrders}
+      className={[nftMarketWrapper, className]}
+      p="x4"
+      align="flex-start"
+      direction="column"
+    />
+  )
 }
 
-export function NFTMarketComponent({
-  offchainOrders,
-  className,
-  nftObj,
+const NFTAuctionMarket = ({
   activeAuction,
-}: NFTMarketProps & {
-  nftObj: NFTObject
+  isActiveAuctionToken,
+  tokenId,
+  collectionAddress,
+}: {
   activeAuction: TypeSafeNounsAuction
-}) {
-  const isActiveAuctionToken = useMemo(
-    () => activeAuction?.tokenId === nftObj?.nft?.tokenId,
-    [nftObj?.nft?.tokenId, activeAuction?.tokenId]
-  )
-
+  isActiveAuctionToken: boolean
+  tokenId: string
+  collectionAddress: string
+}) => {
   const { isClaimable } = useNounishAuctionHelper({
     auction: activeAuction,
   })
 
-  if (isActiveAuctionToken || isClaimable) {
+  if (isClaimable) {
     return (
       <NFTPrimaryAuction
-        nftObj={nftObj}
-        primaryAuction={activeAuction}
         isActiveAuctionToken={isActiveAuctionToken}
+        collectionAddress={collectionAddress}
+        tokenId={tokenId}
+        primaryAuction={activeAuction!}
       />
     )
   }
 
-  if (nftObj) {
+  if (isActiveAuctionToken) {
     return (
-      <NFTAsks
-        offchainOrders={offchainOrders}
-        className={[nftMarketWrapper, className]}
-        nftObj={nftObj}
-        p="x4"
-        align="flex-start"
-        direction="column"
+      <NFTPrimaryAuctionActive
+        collectionAddress={collectionAddress}
+        tokenId={tokenId}
+        primaryAuction={activeAuction}
       />
     )
   }

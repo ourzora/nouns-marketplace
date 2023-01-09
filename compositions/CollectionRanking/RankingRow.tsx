@@ -34,7 +34,7 @@ export function RankingRow({ collection, ...props }: RankingRowProps) {
 
   return (
     <Stack {...props}>
-      <Link href={`/collections/${collection.address}`} passHref>
+      <Link href={`/daos/${collection.address}`} passHref>
         <Grid className={[rankingRow]}>
           <Flex className={[rankingRowInfo, 'collection-row__collection-info']}>
             <CollectionThumbnail

@@ -4,7 +4,6 @@ export * from './FillV3AskInfo'
 export * from './NFTAsks'
 export * from './NFTPrimaryAuction'
 export * from './NFTPrimaryAuctionActive'
-export * from './NFTPrimaryAuctionEndedSummary'
 export * from './NFTPrimaryAuctionEndedSettlement'
 
 /* Approval Forms */

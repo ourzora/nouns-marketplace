@@ -1,37 +1,28 @@
-import { NFTCardMarketOwner } from '@market/components'
-import { useAskHelper, useRelevantMarket } from '@market/hooks'
-import { V3AskModal } from '@market/modules/V3Ask'
+import { useRelevantMarket } from '@market/hooks'
+import { V3AskModal, V3AskOwnerTrigger } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
-import { useIsOwner, useNFTProvider } from '@shared'
-import { NFTObject } from '@zoralabs/nft-hooks'
+import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
+import { useModal } from '@modal'
 import { FlexProps } from '@zoralabs/zord'
 
-export interface NFTCardMarketProps extends FlexProps {}
+import { NFTCardMarketOwner } from './NFTCardMarketOwner'
 
-export function NFTCardMarket(props: NFTCardMarketProps) {
-  const { nft: nftObj } = useNFTProvider()
-
-  if (!nftObj) return null
-
-  return <NFTCardMarketComponent nftObj={nftObj} {...props} />
+export interface NFTCardMarketProps extends FlexProps {
+  isOwner?: boolean
+  ownerAddress?: string
 }
 
-export function NFTCardMarketComponent({
-  nftObj,
-  ...props
-}: { nftObj: NFTObject } & NFTCardMarketProps) {
-  const { markets } = nftObj
-  const { isOwner } = useIsOwner(nftObj)
-  const { ask } = useRelevantMarket(markets)
-  const { hasRelevantAsk } = useAskHelper({ ask })
-
-  if (isOwner) {
-    return <UniversalListAskFlow nftObj={nftObj} {...props} />
-  }
+export function NFTCardMarket({ isOwner, ownerAddress, ...props }: NFTCardMarketProps) {
+  const { markets } = useNftMarketContext()
+  const { hasRelevantAsk } = useRelevantMarket(markets)
 
   if (hasRelevantAsk) {
-    return <V3AskModal modalName="V3AskV3" nftObj={nftObj} />
+    return <V3AskModal isOwner={isOwner || false} modalName="V3AskV3" showOnlyTrigger />
   }
 
-  return <NFTCardMarketOwner size="md" address={nftObj.nft?.owner?.address} />
+  if (isOwner) {
+    return <UniversalListAskFlow {...props} />
+  }
+
+  return <NFTCardMarketOwner size="md" address={ownerAddress} />
 }

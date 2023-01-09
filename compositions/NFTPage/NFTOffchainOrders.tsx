@@ -1,16 +1,15 @@
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
+import { TypeSafeMarket } from 'validators/market'
+
 import { PriceCards } from '@market/components/PriceCards'
-import { NFTObject } from '@zoralabs/nft-hooks'
 import { Stack, StackProps } from '@zoralabs/zord'
 
 export interface NFTOffchainOrdersProps extends StackProps {
-  nft: NFTObject
   offchainOrders: OffchainOrderWithToken[]
 }
 
 export function NFTOffchainOrders({
-  nft,
   offchainOrders,
   className,
   ...props
@@ -21,7 +20,7 @@ export function NFTOffchainOrders({
   // so we aren't displaying orders that cannot be filled.
   return (
     <Stack className={[className]} {...props}>
-      <PriceCards nft={nft} offchainOrders={offchainOrders} />
+      <PriceCards offchainOrders={offchainOrders} />
     </Stack>
   )
 }

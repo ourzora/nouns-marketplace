@@ -5,7 +5,7 @@ import { Link } from './Link'
 export function HomepageExplore() {
   return (
     <Flex w="100%" justify="center">
-      <Link href="/collections">
+      <Link href="/daos">
         <Flex
           align="center"
           borderRadius="curved"

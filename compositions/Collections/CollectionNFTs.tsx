@@ -1,5 +1,4 @@
 import { Collections } from 'compositions/Collections'
-import { CollectionServiceProps } from 'services/collectionService'
 
 import React from 'react'
 
@@ -14,7 +13,7 @@ export interface CollectionAboutProps extends GridProps {
   currentAuction?: JSX.Element | null
 }
 
-export const CollectionNFTs = ({ fallback }: { fallback: CollectionServiceProps }) => {
+export const CollectionNFTs = ({ fallback }: { fallback: any }) => {
   const { contractAddress: collectionAddress, collection, initialPage } = fallback
   const { isLarge } = useWindowWidth()
 

@@ -26,6 +26,9 @@ interface DaoTableProps extends StackProps {
 
 export function DaoTable({ routePrefix, className, daos, ...props }: DaoTableProps) {
   const { isLarge } = useWindowWidth()
+
+  console.log(daos)
+
   return (
     <Stack className={[daosWrapper, className]} {...props}>
       <Flex gap="x2" align="center">

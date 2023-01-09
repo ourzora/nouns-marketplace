@@ -12,7 +12,7 @@ import { useV3AskStateContext } from '../providers'
 
 interface V3AskCreateSuccessProps extends CommonV3AskComponentProps {}
 
-export function V3AskUpdateSuccess({ nft, onNext, ...props }: V3AskCreateSuccessProps) {
+export function V3AskUpdateSuccess({ onNext, ...props }: V3AskCreateSuccessProps) {
   const { state } = useV3AskStateContext()
   const heading = useMemo(
     () => (state.flow === PRIVATE_ASK ? 'Private Listing Updated' : 'Listing Updated'),

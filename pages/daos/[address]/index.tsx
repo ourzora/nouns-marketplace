@@ -30,7 +30,7 @@ const Collection = ({ fallback }: { fallback: CollectionServiceProps }) => {
     const isValidHash = ALL_COLLECTION_VIEWS && ALL_COLLECTION_VIEWS.includes(urlHash)
     const activeView = isValidHash ? urlHash : 'nfts'
     setActiveView(activeView)
-    router.push(`/collections/${collectionAddress}/#${activeView}`)
+    router.push(`/daos/${collectionAddress}/#${activeView}`)
     // No deps, should only run on first load:
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
