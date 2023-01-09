@@ -31,10 +31,6 @@ globalStyle(`${codeWrapper} pre`, {
 })
 
 export const h1Selector = style([
-  {
-    // paddingTop: 50,
-    // marginTop: -50,
-  },
   atoms({
     pos: 'relative',
   }),
@@ -42,10 +38,10 @@ export const h1Selector = style([
 
 export const blockQuoteSelector = style([
   {
-    color: color.text3,
     borderLeft: `3px solid ${color.accentActive}`,
   },
   atoms({
+    color: 'text3',
     pl: 'x2',
   }),
 ])

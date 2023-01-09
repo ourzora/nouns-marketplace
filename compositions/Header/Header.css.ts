@@ -12,13 +12,9 @@ export const headerWrapper = style([
 
 export const header = style([
   {
-    width: MAX_WIDTH.XL,
     height: HEADER_HEIGHT_MOBILE,
-    justifyContent: 'space-between',
-    alignItems: 'center',
     borderBottom: `2px solid ${color.background2}`,
     gridColumn: '1/span 4',
-    margin: '0 auto',
     '@media': {
       [media.min1024]: {
         maxWidth: `calc(${MAX_WIDTH.XL}px + (2 * ${vars.space.x8}))`,
@@ -31,9 +27,10 @@ export const header = style([
   atoms({
     w: '100%',
     pos: 'relative',
-    alignItems: {
-      '@1024': 'center',
-    },
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    my: 'x0',
+    mx: 'auto',
     gap: {
       '@initial': 'x2',
       '@768': 'x6',
