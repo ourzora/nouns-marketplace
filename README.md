@@ -109,15 +109,15 @@ In general we use [Wagmi](https://wagmi.sh/docs/providers/configuring-chains) as
 
 # Codebase Structure:
 
-You may notice that there are a number of directories prefixed with the @ symbol. These sit outside of the conventional next.js app application structure. The reasoning behind this is that we would like to treat this codebase as an incubator for potential packages that could be broken out and included in a variety of other applications along side this one. You will find further documentation within these directories. Note that these are a work in progress, and we welcome input around features and api design.
+You may notice that there are a number of directories prefixed with the @ symbol. These sit outside of the conventional next.js app application structure. The reasoning behind this is that we would like to treat this codebase as an incubator for potential packages that could be broken out and included in a variety of other applications alongside this one. You will find further documentation within these directories. Note that these are a work in progress, and we welcome input around features and api design.
 
 ### Currently we have included:
 
 - @filter: Component suite designed to accomplish NFT display and filtering.
 - @noun-auction: Componentry, provider, hooks designed for interaction and display of nounish auction activity.
-- @market: Zora Protocol market interaction componente / providers / hooks. Currently supporting Zora V3 Asks (list / buy). Along with module approvals. More functionality on the roadmap!
+- @market: Zora Protocol market interaction components / providers / hooks. Currently supporting Zora V3 Asks (public + private list / buy). Along with module approvals. More functionality on the roadmap!
 - @media: NFT display componentry.
-- @shared: Catch all for util functions, hooks, constants and components used both in the primary apps and the above (more tightly scoped) pieces of functionality.
+- @shared: Catch-all for util functions, hooks, constants and components used both in the primary apps and the above (more tightly scoped) pieces of functionality.
 
 # How to Contribute:
 
