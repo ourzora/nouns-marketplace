@@ -42,8 +42,8 @@ export function DaoTable({ routePrefix, className, daos, ...props }: DaoTablePro
           </Flex>
         )}
         <Stack as="ul">
-          {(daos ?? []).map((dao, index) => (
-            <DaoRow as="li" dao={dao} index={index} key={dao.contractAddress} />
+          {(daos ?? []).map((dao) => (
+            <DaoRow dao={dao} key={dao.contractAddress} />
           ))}
         </Stack>
       </Stack>

@@ -8,7 +8,7 @@ import { TypeSafeDao } from 'validators/dao'
 
 import { EthAmount, RPCTokenInfo, useNounishAuctionQuery } from '@noun-auction'
 import { numberFormatter, useWindowWidth } from '@shared'
-import { Box, Button, Flex, Heading, Paragraph } from '@zord'
+import { Box, BoxProps, Button, Flex, Heading, Paragraph } from '@zord'
 
 import {
   cardHeader,
@@ -20,7 +20,11 @@ import {
   rowWrap,
 } from './DaoRow.css'
 
-export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
+interface DaoRowProps extends BoxProps {
+  dao: TypeSafeDao
+}
+
+export const DaoRow = ({ dao, ...props }: DaoRowProps) => {
   const { activeAuction } = useNounishAuctionQuery({
     collectionAddress: dao.collectionAddress,
   })
@@ -42,7 +46,6 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
 
   return (
     <DaoRowComponent
-      index={index}
       tokenId={tokenId}
       tokenName={token.name}
       collectionAddress={collectionAddress}
@@ -51,12 +54,12 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
       treasuryAddress={dao.treasuryAddress}
       tokenImage={token?.image.url ?? undefined}
       auctionStatus={auctionStatus}
+      {...props}
     />
   )
 }
 
-type DaoRowProps = {
-  index: number
+interface DaoRowComponentProps extends BoxProps {
   tokenId: string
   collectionAddress: string
   tokenImage?: string
@@ -68,7 +71,6 @@ type DaoRowProps = {
 }
 
 export const DaoRowComponent = ({
-  index,
   collectionAddress,
   tokenId,
   tokenImage,
@@ -77,7 +79,8 @@ export const DaoRowComponent = ({
   highestBid,
   treasuryAddress,
   auctionStatus,
-}: DaoRowProps) => {
+  ...props
+}: DaoRowComponentProps) => {
   const { data: treasury } = useBalance({
     addressOrName: treasuryAddress,
   })
@@ -86,7 +89,7 @@ export const DaoRowComponent = ({
 
   if (!isLarge) {
     return (
-      <Box className={[mobileCardWrapper]}>
+      <Box className={[mobileCardWrapper]} {...props}>
         <Box className={cardHeader}>
           <RPCTokenInfo
             tokenImage={tokenImage}
@@ -129,7 +132,7 @@ export const DaoRowComponent = ({
   }
 
   return (
-    <Box className={[rowWrap]}>
+    <Box as="li" className={[rowWrap]} {...props}>
       <Box className={[daoMeta]}>
         <RPCTokenInfo
           tokenImage={tokenImage}
