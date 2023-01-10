@@ -17,7 +17,6 @@ import {
   metadataCells,
   mobileCardWrapper,
   mobileCell,
-  noBorder,
   rowWrap,
 } from './DaoRow.css'
 
@@ -130,7 +129,7 @@ export const DaoRowComponent = ({
   }
 
   return (
-    <Box className={[rowWrap, index === 0 ? noBorder : '']}>
+    <Box className={[rowWrap]}>
       <Box className={[daoMeta]}>
         <RPCTokenInfo
           tokenImage={tokenImage}

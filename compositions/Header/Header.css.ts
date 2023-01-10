@@ -67,8 +67,6 @@ export const manageButton = style([
 
 export const connectButton = style([
   {
-    justifyContent: 'space-around',
-    borderRadius: 16,
     '@media': {
       [media.min1024]: {
         height: '56px',
@@ -81,21 +79,21 @@ export const connectButton = style([
       '@initial': 'flex-end',
       '@1024': 'flex-start',
     },
+    borderRadius: 'phat',
   }),
 ])
 
 export const nounsCenterLink = style([
   {
-    display: 'none',
     '@media': {
       [media.min576]: {
         flexShrink: 0,
-        display: 'block',
       },
     },
   },
   atoms({
     cursor: 'pointer',
+    display: { '@initial': 'none', '@576': 'block' },
   }),
 ])
 
@@ -141,18 +139,17 @@ export const popupTrigger = style({
 
 globalStyle(`${popupTrigger} button`, {
   padding: space.x3,
-  borderRadius: 16,
+  borderRadius: radii.phat,
 })
 
 export const topMenuItem = style({
-  // height: '32px!important',
   height: '32px',
 })
 
 export const linksMenuItem = style([
   {
     display: 'flex',
-    borderRadius: '8px',
+    borderRadius: radii.curved,
     ':hover': {
       cursor: 'pointer',
       backgroundColor: color.background2,
@@ -176,9 +173,7 @@ export const linksMenuItem = style([
 
 export const connectMenuItem = style([
   {
-    width: '100%',
-    display: 'block',
-    borderRadius: '8px',
+    borderRadius: radii.curved,
     userSelect: 'none',
     ':hover': {
       cursor: 'pointer',
@@ -186,6 +181,8 @@ export const connectMenuItem = style([
     },
   },
   atoms({
+    width: '100%',
+    display: 'block',
     alignItems: 'center',
     w: '100%',
     px: 'x4',
@@ -195,19 +192,12 @@ export const connectMenuItem = style([
 
 export const disconnectButton = style([
   {
-    color: 'red',
-    fontWeight: 'bold',
+    color: vars.color.negative,
+    fontWeight: vars.fontWeight.label,
     fontSize: 18,
     lineHeight: 1,
     ':hover': {
       cursor: 'pointer',
     },
-  },
-])
-
-export const popupWrapper = style([
-  {
-    // only works with !important
-    borderRadius: '20px!important',
   },
 ])

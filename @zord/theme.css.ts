@@ -4,6 +4,7 @@ import {
   globalStyle,
   style,
 } from '@vanilla-extract/css'
+
 import '@vanilla-extract/private'
 
 import { border, ease, radii, size, space, typography } from './tokens'
@@ -25,22 +26,19 @@ export const theme = createThemeContract({
       20: '',
       22: '',
       24: '',
-      28: '',
       30: '',
       35: '',
       36: '',
-      40: '',
       42: '',
-      48: '',
-      50: '',
       52: '',
       64: '',
-      65: '',
       80: '',
+      96: '',
       unset: '',
     },
     lineHeight: {
       0: '',
+      1: '',
       14: '',
       20: '',
       24: '',
@@ -55,7 +53,6 @@ export const theme = createThemeContract({
       55: '',
       62: '',
       65: '',
-      70: '',
       72: '',
       85: '',
       95: '',

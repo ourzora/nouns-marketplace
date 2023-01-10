@@ -4,18 +4,10 @@ import React from 'react'
 import { TypeSafeDao } from 'validators/dao'
 
 import { useWindowWidth } from '@shared'
-import { Box, Flex, Heading, Paragraph, Stack, StackProps } from '@zord'
+import { Box, Flex, Heading, Span, Stack, StackProps } from '@zord'
 
 import { DaoRow } from './DaoRow'
-import {
-  cell,
-  daoMeta,
-  header,
-  metadataCells,
-  noBorder,
-  placeholderCell,
-  rowWrap,
-} from './DaoRow.css'
+import { cell, daoMeta, header, metadataCells, placeholderCell } from './DaoRow.css'
 import { daosWrapper } from './Daos.css'
 
 interface DaoTableProps extends StackProps {
@@ -33,26 +25,27 @@ export function DaoTable({ routePrefix, className, daos, ...props }: DaoTablePro
       </Flex>
       <Stack>
         {daos && isLarge && (
-          <Box className={[rowWrap, noBorder, header]}>
+          <Flex className={[header]}>
             <Box className={[daoMeta]}></Box>
             <Box className={[metadataCells]}>
               <Box className={[cell]}>
-                <Paragraph color="tertiary">Treasury</Paragraph>
+                <Span color="tertiary">Treasury</Span>
               </Box>
               <Box className={[cell]}>
-                <Paragraph color="tertiary">Auction Status</Paragraph>
+                <Span color="tertiary">Auction Status</Span>
               </Box>
               <Box className={[cell]}>
-                <Paragraph color="tertiary">Current Bid</Paragraph>
+                <Span color="tertiary">Current Bid</Span>
               </Box>
             </Box>
             <Box className={[placeholderCell]}></Box>
-          </Box>
+          </Flex>
         )}
-
-        {(daos ?? []).map((dao, index) => (
-          <DaoRow dao={dao} index={index} key={dao.contractAddress} />
-        ))}
+        <Stack as="ul">
+          {(daos ?? []).map((dao, index) => (
+            <DaoRow as="li" dao={dao} index={index} key={dao.contractAddress} />
+          ))}
+        </Stack>
       </Stack>
     </Stack>
   )

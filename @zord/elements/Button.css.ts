@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css'
+import { radii } from '@zord/config'
 
 import { atoms } from '../atoms'
 import { vars } from '../theme'
@@ -42,7 +43,7 @@ export const buttonSize = {
   sm: style([
     {
       width: 'auto',
-      borderRadius: '12px', // ZORDTODO
+      borderRadius: radii.curved,
     },
     atoms({
       display: 'inline-flex',
@@ -56,7 +57,7 @@ export const buttonSize = {
   ]),
   md: style([
     {
-      borderRadius: '16px', // ZORDTODO
+      borderRadius: radii.phat,
     },
     atoms({
       px: { '@initial': 'x4', '@1024': 'x6' },
@@ -68,7 +69,7 @@ export const buttonSize = {
   ]),
   lg: style([
     {
-      borderRadius: '16px', // ZORDTODO
+      borderRadius: radii.phat,
     },
     atoms({
       px: 'x6',
@@ -225,7 +226,7 @@ export const buttonVariants = {
     }),
   ]),
   // @TODO: We don't need this. It should be the default.
-  // ZORDTODO: move to baseButton above and reset all buttons site-wide
+  // - move to baseButton above and reset all buttons site-wide
   unset: style({
     backgroundColor: 'unset',
     gap: 'unset',

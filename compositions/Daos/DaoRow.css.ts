@@ -7,14 +7,11 @@ export const rowWrap = style([
     '@media': {
       [media.min1024]: {
         borderTop: `2px solid ${color.background2}`,
-        transition: 'border-color 250ms ease',
       },
-      '(hover: hover)': {
-        selectors: {
-          '&:hover': {
-            // backgroundColor: `${color.background2}`,
-          },
-        },
+    },
+    selectors: {
+      '&:first-child': {
+        borderTop: 'none',
       },
     },
   },
@@ -22,11 +19,6 @@ export const rowWrap = style([
     display: 'flex',
     alignItems: 'center',
   }),
-])
-export const noBorder = style([
-  {
-    borderTop: 'none!important', // hate it
-  },
 ])
 
 export const daoMeta = style([
@@ -37,11 +29,11 @@ export const daoMeta = style([
 
 export const metadataCells = style([
   {
-    marginRight: '32px',
     flexGrow: 1,
-    gap: '24px',
   },
   atoms({
+    marginRight: 'x8',
+    gap: 'x6',
     display: 'flex',
   }),
 ])
@@ -49,11 +41,13 @@ export const metadataCells = style([
 export const cell = style([
   {
     width: '33%',
+  },
+  atoms({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'flex-end',
-  },
+  }),
 ])
 
 export const cardHeader = atoms({
@@ -68,29 +62,33 @@ export const placeholderCell = style([
 ])
 
 export const header = style([
-  {
-    height: '40px!important',
-  },
+  atoms({
+    height: 'x10',
+  }),
 ])
 
 // mobile
 
 export const mobileCardWrapper = style([
   {
-    padding: '16px',
-    borderRadius: '16px',
     border: `2px solid ${color.background2}`,
-    marginBottom: '16px',
   },
+  atoms({
+    p: 'x4',
+    borderRadius: 'phat',
+    mb: 'x4',
+  }),
 ])
 
 export const mobileCell = style([
   {
     width: '50%',
     height: '50px',
-    marginBottom: '12px',
+  },
+  atoms({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-  },
+    mb: 'x3',
+  }),
 ])

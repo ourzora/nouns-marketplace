@@ -133,7 +133,3 @@ export function Span<E extends React.ElementType = typeof BoxDefaultElement>({
 }: ParagraphComponentProps<E>) {
   return <Text variant={`paragraph-sm`} {...props} />
 }
-
-// ZORDTODO:
-// Eyebrow --> Span?
-// Label - uh oh

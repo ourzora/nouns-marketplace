@@ -96,17 +96,20 @@ export const homepageTable = style({
 })
 
 export const homepageHeadline = style([
-  {
-    fontWeight: typography.fontWeight.display,
-    fontSize: 42, // one-off
-    lineHeight: 48,
-    '@media': {
-      [media.min1024]: {
-        fontSize: 96, // one-off
-        lineHeight: 94,
-      },
-    },
-  },
+  // {
+  //   fontWeight: typography.fontWeight.display,
+  //   lineHeight: 48,
+  //   '@media': {
+  //     [media.min1024]: {
+  //       lineHeight: 1,
+  //     },
+  //   },
+  // },
+  atoms({
+    fontWeight: 'display',
+    fontSize: { '@initial': 42, '@1024': 96 },
+    lineHeight: { '@initial': 48, '@1024': 1 },
+  }),
 ])
 
 export const homepageHeaderWrapper = style([

@@ -15,7 +15,7 @@ export const codeWrapper = style([
 ])
 
 export const code = {
-  fontSize: '12px',
+  fontSize: 12,
   fontFamily: 'SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace!important',
   lineHeight: '1.125!important',
 }

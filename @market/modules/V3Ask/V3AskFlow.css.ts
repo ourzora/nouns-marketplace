@@ -19,7 +19,7 @@ export const button = style({
     '&:not([disabled]):hover': {
       cursor: 'pointer',
       backgroundColor: vars.color.background2,
-      borderRadius: '12px',
+      borderRadius: vars.radii.curved,
     },
   },
 })
@@ -33,17 +33,12 @@ export const savings = style({
 })
 
 export const popupTrigger = style([
-  {
-    border: '0',
-    padding: '0',
-  },
   atoms({
     padding: 'x0',
+    borderWidth: 'none',
   }),
 ])
-export const popupWrapper = style({
-  borderRadius: '16px',
-})
+
 export const stretch = atoms({
   alignItems: 'stretch',
 })

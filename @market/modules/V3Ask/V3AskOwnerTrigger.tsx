@@ -94,7 +94,7 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
         <PopUp
           open={open}
           placement="bottom-end"
-          wrapperClassName={clsx('privateask-owner-popup-wrapper', styles.popupWrapper)}
+          wrapperClassName={clsx('privateask-owner-popup-wrapper')}
           triggerClassName={clsx('privateask-owner-popup-trigger', styles.popupTrigger)}
           trigger={
             <Button

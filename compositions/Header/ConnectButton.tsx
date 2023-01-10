@@ -72,7 +72,6 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
       <PopUp
         padding="x0"
         placement="bottom-end"
-        wrapperClassName={styles.popupWrapper}
         trigger={
           <Button variant="secondary" type="button" size="md" w="auto">
             <Box as="span">{displayName}</Box>

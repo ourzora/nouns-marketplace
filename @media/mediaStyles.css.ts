@@ -40,10 +40,10 @@ export const nftGridWrapper = recipe({
 /* Card */
 export const cardWrapper = style([
   {
-    backgroundColor: '#ffffff',
     border: '1px solid rgba(0,0,0,.075)',
   },
   atoms({
+    backgroundColor: 'background1',
     borderRadius: 'phat',
     position: 'relative',
   }),
@@ -67,25 +67,20 @@ export const cardImageWrapper = style([
 ])
 
 export const titleWrapper = style([
-  {
-    whiteSpace: 'nowrap',
-  },
   atoms({
+    whiteSpace: 'nowrap',
     w: '100%',
   }),
 ])
 
 export const titleScroll = style([
   {
-    overflowX: 'auto',
-    '@media': {
-      'screen and (max-width: 768px)': {
-        overflowX: 'scroll',
-      },
-    },
     maskImage:
       'linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))',
   },
+  atoms({
+    overflowX: { '@initial': 'scroll', '@768': 'auto' },
+  }),
 ])
 
 export const titlePadding = atoms({

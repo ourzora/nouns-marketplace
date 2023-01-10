@@ -26,11 +26,6 @@ export const textVariants = {
         letterSpacing: '0.05em',
       }),
     ]),
-    // 'heading-xs': atoms({
-    //   fontSize: 20,
-    //   fontWeight: 'heading',
-    //   lineHeight: 30,
-    // }),
     'heading-xs': style([
       {
         fontFamily: 'var(--ui-font)', // h5 font intentionally differs
@@ -61,11 +56,6 @@ export const textVariants = {
         lineHeight: { '@initial': 32, '@1024': 40 },
       }),
     ]),
-    // 'heading-lg': atoms({
-    //   fontSize: 40,
-    //   fontWeight: 'heading',
-    //   lineHeight: 55,
-    // }),
     'heading-lg': style([
       {
         fontFamily: 'var(--display-font)',
@@ -76,11 +66,6 @@ export const textVariants = {
         lineHeight: { '@initial': 48, '@1024': 62 },
       }),
     ]),
-    // 'heading-xl': atoms({
-    //   fontSize: 50,
-    //   fontWeight: 'heading',
-    //   lineHeight: 70,
-    // }),
     'heading-xl': style([
       {
         fontFamily: 'var(--display-font)',
@@ -111,11 +96,6 @@ export const textVariants = {
       fontWeight: 'label',
       lineHeight: 30,
     }),
-    // 'paragraph-sm': atoms({
-    //   fontSize: 14,
-    //   fontWeight: 'paragraph',
-    //   lineHeight: 24,
-    // }),
     'paragraph-sm': style([
       // <span> in noun.market Figma
       {
@@ -127,11 +107,6 @@ export const textVariants = {
         lineHeight: 24,
       }),
     ]),
-    // 'paragraph-md': atoms({
-    //   fontSize: 16,
-    //   fontWeight: 'paragraph',
-    //   lineHeight: 25,
-    // }),
     'paragraph-md': style([
       // <p> in noun.market Figma
       {
@@ -147,11 +122,6 @@ export const textVariants = {
       {
         fontFamily: 'inherit',
       },
-      // atoms({
-      //   fontSize: { '@initial': 16, '@1024': 18 },
-      //   fontWeight: 'paragraph',
-      //   lineHeight: 24,
-      // }),
     ]),
     link: style([
       atoms({

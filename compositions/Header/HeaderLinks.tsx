@@ -36,12 +36,7 @@ function Links() {
 
 function MobileLinks() {
   return (
-    <PopUp
-      padding="x0"
-      placement="bottom-end"
-      wrapperClassName={styles.popupWrapper}
-      triggerClassName={styles.popupTrigger}
-    >
+    <PopUp padding="x0" placement="bottom-end" triggerClassName={styles.popupTrigger}>
       <Links />
     </PopUp>
   )

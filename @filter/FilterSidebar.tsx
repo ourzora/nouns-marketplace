@@ -92,7 +92,9 @@ export function FilterSidebarContents({
         {contractAddress && collectionPropertiesConfig?.enabled && (
           <FilterProperties collectionAddress={contractAddress} />
         )}
-        {enableCollectionSearch && !contractAddress && <CollectionsFilterList />}
+        {/* {enableCollectionSearch && !contractAddress &&  */}
+        <CollectionsFilterList />
+        {/* } */}
         {enableSidebarClearButton && (
           <Stack gap="x4">
             <Separator />

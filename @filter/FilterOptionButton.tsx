@@ -36,12 +36,7 @@ export function FilterOptionButton({
   }
   return (
     <Flex
-      className={[
-        filterOption,
-        {
-          [avatarPadding]: hasAvatar,
-        },
-      ]}
+      className={[filterOption, hasAvatar && avatarPadding]}
       gap="x1"
       align="center"
       justify="center"
