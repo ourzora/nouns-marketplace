@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { Flex, Icon } from '@zoralabs/zord'
+import { Flex, Icon } from '@zord'
 
 import { LoadMoreObserver } from './LoadMoreObserver'
 

@@ -1,6 +1,5 @@
-// import { grid } from '@market/modules/V3Ask/V3AskFlow.css'
 import { style } from '@vanilla-extract/css'
-import { atoms, color, media, space } from '@zoralabs/zord'
+import { atoms, color, media, space } from '@zord/config'
 
 export const collectionGrid = style([
   {

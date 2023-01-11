@@ -1,10 +1,7 @@
-import { Button, NounButtonProps } from 'components/Button'
-import { buttonVariants } from 'components/Button/Button.css'
-
 import { useMemo } from 'react'
 
 import * as styles from '@noun-auction/styles/NounishStyles.css'
-import { BoxProps, Stack } from '@zoralabs/zord'
+import { BoxProps, Button, Stack, buttonVariants } from '@zord'
 
 export type SettlementType = 'settle' | 'claim'
 
@@ -14,7 +11,7 @@ type SettleAuctionComponentProps = {
   isLoading: boolean
   txSubmitted: boolean
   settlementType?: SettlementType
-  buttonVariant?: keyof typeof buttonVariants['variant']
+  buttonVariant?: keyof typeof buttonVariants
 } & BoxProps
 
 const buttonText = {

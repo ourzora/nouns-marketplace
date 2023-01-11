@@ -1,8 +1,6 @@
-import { Button } from 'components/Button'
-
 import { useCollectionFilters } from '@filter/providers'
 import { ETH_CURRENCY_SHIM } from '@shared'
-import { Label, Stack } from '@zoralabs/zord'
+import { Button, Heading, Stack } from '@zord'
 
 import { PriceRangeSelector } from './PriceRangeSelector'
 
@@ -14,9 +12,7 @@ export function FilterPriceRange() {
 
   return (
     <Stack gap="x4">
-      <Label className="zord-attributesHeading" size="lg">
-        Price
-      </Label>
+      <Heading size="sm">Price</Heading>
       <PriceRangeSelector
         onSelect={priceRangeSelection}
         currencyOptions={[ETH_CURRENCY_SHIM]}

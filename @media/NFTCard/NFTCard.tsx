@@ -11,12 +11,12 @@ import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import {
   cardImageWrapper,
   cardWrapper,
-  titleHeading,
+  titlePadding,
   titleScroll,
   titleWrapper,
-} from '@media/NftMedia.css'
+} from '@media/mediaStyles.css'
 import { useNFTProvider } from '@shared'
-import { Box, Flex, Heading, Label, Separator, Stack } from '@zoralabs/zord'
+import { Box, Flex, Heading, Label, Separator, Stack } from '@zord'
 
 type Props = {
   collectionAddress: string
@@ -49,7 +49,7 @@ export function NFTCardComponent({
   const fallbackTitle = token.collectionName ?? '..'
   const tokenId = token.tokenId
 
-  const useTitleScroll = useMemo(() => {
+  const enableTitleScroll = useMemo(() => {
     if (token?.metadata?.name) {
       return token?.metadata?.name.split('').length > 25
     }
@@ -63,14 +63,8 @@ export function NFTCardComponent({
         </Box>
       </Link>
       <Stack gap="x2" px="x4" py="x4" flex={1}>
-        <Flex
-          className={[titleWrapper, useTitleScroll && titleScroll]}
-          style={{
-            /* @ts-ignore */
-            '--titlePad': titleScroll ? '40px' : '0px',
-          }}
-        >
-          <Heading as="h4" size="sm" className={titleHeading}>
+        <Flex className={[titleWrapper, enableTitleScroll && titleScroll]}>
+          <Heading as="h4" size="sm" className={[enableTitleScroll && titlePadding]}>
             {fallbackTitle} #{token.tokenId}
           </Heading>
         </Flex>

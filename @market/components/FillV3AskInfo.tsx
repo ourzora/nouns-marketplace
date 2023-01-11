@@ -4,7 +4,7 @@ import { TypeSafeToken } from 'validators/token'
 import { AddressWithLink } from '@market/components/AddressWithLink'
 import { WalletBalance } from '@market/components/WalletBalance'
 import { formatCryptoVal, useAuth } from '@shared'
-import { BoxProps, Flex, Heading, Label, Stack } from '@zoralabs/zord'
+import { BoxProps, Flex, Heading, Label, Stack } from '@zord'
 
 export interface ViewV3AskInfoProps extends BoxProps {
   token: TypeSafeToken

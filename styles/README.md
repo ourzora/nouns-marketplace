@@ -1,4 +1,6 @@
-# Additional Styling on top of zord:
+# Additional styling on top of zord:
+
+If you want to make modifications to the core design system elements in zord, feel free to make changes to the components directly in the @zord dir. Note that substantive changes to sizing and/or layout may affect components that implement them, so be careful to check where they're in use and adapt accordingly.
 
 ### You can set global styles and use classNames to inherit them using this pattern:
 
@@ -10,14 +12,14 @@ globalStyle('light-font', {
 })
 ```
 
-### Vanilla Css
+### Vanilla CSS
 
-Of course you can always just write vanilla css! the className prop accepts an array on any zord element:
+Of course you can always just write vanilla CSS! the className prop accepts an array on any zord element:
 
 ```
-className={['style-a-written-in-vanilla-css', styleBWrittenInVanillaExtractSyleSheet]}
+className={['style-written-in-vanilla-css', styleBWrittenInVanillaExtractSyleSheet]}
 ```
 
-Also setting some global css variables is a good way to go for colors etc.
+Also setting some global CSS variables is a good way to go for colors etc.
 
-css variables can also be responsive with breakpoints.
+CSS variables can also be responsive with breakpoints.

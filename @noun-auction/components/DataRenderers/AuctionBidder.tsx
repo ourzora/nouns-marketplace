@@ -5,13 +5,10 @@ import Link from 'next/link'
 import { useMemo } from 'react'
 
 import { AddressZero } from '@ethersproject/constants'
-import {
-  auctionWrapperVariants,
-  sideBarUpperLabel,
-} from '@noun-auction/styles/NounishStyles.css'
-import { isAddressMatch, lightFont, useShortAddress } from '@shared'
+import { auctionWrapperVariants } from '@noun-auction/styles/NounishStyles.css'
+import { isAddressMatch, useShortAddress } from '@shared'
 import { addressToEtherscanLink } from '@shared/utils/addressToEtherscanLink'
-import { Flex, FlexProps, Icon, Label } from '@zoralabs/zord'
+import { Flex, FlexProps, Heading, Icon, Label, Paragraph } from '@zord'
 
 import { EnsAvatar } from './EnsAvatar'
 
@@ -63,56 +60,45 @@ export function AuctionBidder({
       {...props}
     >
       {showLabels && (
-        <Label
-          size={layout === 'sideBarBid' ? 'lg' : 'md'}
-          className={[layout === 'sideBarBid' && sideBarUpperLabel, lightFont]}
-          color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
-          style={{ lineHeight: '1.15' }}
-        >
+        <Paragraph color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}>
           {label}&nbsp;
-        </Label>
+        </Paragraph>
       )}
-      <Flex>
-        <Label
-          size="md"
-          style={{ lineHeight: '1.15' }}
-          align="right"
-          className={[sideBarUpperLabel]}
-          color={hasNonZeroHighestBidder ? 'primary' : 'tertiary'}
-        >
-          {hasNonZeroHighestBidder ? (
-            <Flex gap="x2" align="center">
-              {bidderEtherscanLink && (
-                <Link
-                  href={bidderEtherscanLink}
-                  passHref
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <a>
-                    <Flex gap="x1">
-                      <Label size="md" align={'center'} style={{ lineHeight: '1.15' }}>
-                        {ensName ?? shortAddress}
-                      </Label>
-                      {useAvatar && (
-                        <>
-                          {layout !== 'sideBarBid' && highestBidder ? (
-                            <EnsAvatar address={highestBidder} />
-                          ) : (
-                            <Icon id="ArrowRightAngle" />
-                          )}
-                        </>
-                      )}
-                    </Flex>
-                  </a>
-                </Link>
-              )}
-            </Flex>
-          ) : (
-            <>No bids</>
-          )}
-        </Label>
-      </Flex>
+      {/* <Flex> */}
+      <Heading
+        size="xs"
+        // size="md"
+        align="right"
+        // color={hasNonZeroHighestBidder ? 'primary' : 'tertiary'}
+      >
+        {hasNonZeroHighestBidder ? (
+          <Flex gap="x2" align="center">
+            {bidderEtherscanLink && (
+              <Link href={bidderEtherscanLink} passHref rel="noreferrer" target="_blank">
+                <a>
+                  <Flex gap="x1">
+                    <Heading size="xs" align="center">
+                      {ensName ?? shortAddress}
+                    </Heading>
+                    {useAvatar && (
+                      <>
+                        {layout !== 'sideBarBid' && highestBidder ? (
+                          <EnsAvatar address={highestBidder} />
+                        ) : (
+                          <Icon id="ArrowRightAngle" />
+                        )}
+                      </>
+                    )}
+                  </Flex>
+                </a>
+              </Link>
+            )}
+          </Flex>
+        ) : (
+          <>No bids</>
+        )}
+      </Heading>
+      {/* </Flex> */}
     </Flex>
   )
 }

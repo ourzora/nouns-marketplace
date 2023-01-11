@@ -4,7 +4,7 @@ import {
   nounishThumbnail,
   nounishThumbnailImage,
 } from '@noun-auction/styles/NounishStyles.css'
-import { Box, BoxProps } from '@zoralabs/zord'
+import { Box, BoxProps } from '@zord'
 
 import { FallbackThumbnail } from './FallbackThumbnail'
 

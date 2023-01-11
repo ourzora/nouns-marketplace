@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 
 import { formatCryptoVal } from '@shared'
-import { Label, LabelProps } from '@zoralabs/zord'
+import { Heading, HeadingProps } from '@zord'
 
-interface EthAmountProps extends LabelProps {
+interface EthAmountProps extends HeadingProps {
   ethAmount: string
   ethSymbol?: 'Ξ' | 'ETH'
 }
@@ -16,8 +16,8 @@ export function EthAmount({ ethAmount, ethSymbol = 'ETH', ...props }: EthAmountP
   if (!ethAmount) return null
 
   return (
-    <Label {...props}>
+    <Heading size="xs" inline {...props}>
       {formattedEthAmount} {ethSymbol}
-    </Label>
+    </Heading>
   )
 }

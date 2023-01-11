@@ -2,7 +2,7 @@ import { APP_TITLE } from 'utils/env-vars'
 
 import { NOUNS_GLASSES } from 'styles/style-constants'
 
-import { Box, BoxProps } from '@zoralabs/zord'
+import { Box, BoxProps } from '@zord'
 
 import { nounsGlasses } from './NounsGlasses.css'
 

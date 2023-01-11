@@ -1,6 +1,3 @@
-import { Button } from 'components/Button'
-import { mediumFont } from 'styles/styles.css'
-
 import React, { useEffect, useMemo } from 'react'
 
 import { MarketModalHeading } from '@market/components'
@@ -10,7 +7,7 @@ import { useRelevantMarket } from '@market/hooks/useRelevantMarket'
 import { useModal } from '@modal'
 import { formatContractError } from '@shared'
 import { PrintError } from '@shared/components/PrintError'
-import { Flex, Heading, Paragraph, Separator, Stack } from '@zoralabs/zord'
+import { Button, Flex, Heading, Paragraph, Separator, Stack } from '@zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import * as styles from '../V3AskFlow.css'
@@ -58,20 +55,20 @@ export function V3AskFillAsk({ onNext, ...props }: V3AskFillAskProps) {
       <MarketModalHeading nftObj={props.nft} action="Buy" />
 
       <Flex justify="space-between">
-        <Paragraph size="lg" inline color="text3" className={[mediumFont]}>
+        <Paragraph inline color="text3">
           Savings
         </Paragraph>
-        <Paragraph size="lg" inline color="text1">
+        <Heading size="xs" inline color="text1">
           ~{savings} ETH
-        </Paragraph>
+        </Heading>
       </Flex>
-      <Paragraph size="md" color="text3" className={[mediumFont]}>
+      <Paragraph size="md" color="text3">
         vs. competing marketplaces that charge a 2.5% fee
       </Paragraph>
       <Separator />
       {askPriceSummary && (
         <Flex justify="space-between">
-          <Paragraph size="lg" inline color="text3" className={[mediumFont]}>
+          <Paragraph inline color="text3">
             {askPriceSummary.label}
           </Paragraph>
           <Heading as="h1" color="text1">

@@ -1,6 +1,4 @@
-import { Button } from 'components/Button'
 import { ArrowLeft, ArrowRight } from 'components/Icon'
-import { mediumFont } from 'styles/styles.css'
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import React, { useCallback, useMemo, useState } from 'react'
@@ -11,7 +9,7 @@ import { ModalComposition, useModal } from '@modal'
 import { useAuth, useButtonRequiresAuth } from '@shared'
 import { numberFormatter } from '@shared/utils'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Box, Flex, Heading, Paragraph, Stack, Well } from '@zoralabs/zord'
+import { Box, Button, Flex, Heading, Paragraph, Stack, Well } from '@zord'
 
 import * as styles from './PriceCards.css'
 
@@ -66,7 +64,7 @@ function PriceCard({
       <Stack>
         <Flex w="100%" justify="space-between">
           {platformName && (
-            <Paragraph inline className={mediumFont} color="text2">
+            <Paragraph inline color="text2">
               Price on {platformName}
             </Paragraph>
           )}
@@ -78,7 +76,7 @@ function PriceCard({
           </Heading>
         </Flex>
         {usdcPrice && (
-          <Paragraph color="text2" inline className={mediumFont}>
+          <Paragraph color="text2" inline>
             {formattedUSD} USD
           </Paragraph>
         )}

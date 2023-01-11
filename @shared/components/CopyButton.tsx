@@ -1,15 +1,14 @@
-import { Button, NounButtonProps } from 'components/Button'
-
 import React, { useEffect } from 'react'
 
 import { useCopyToClipboard } from '@shared'
-import { Icon, mixins } from '@zoralabs/zord'
+import { Button, ButtonProps, Icon } from '@zord'
+import { mixins } from '@zord/config'
 
 /**
  * Button that copies text to clipboard, handles copy status and state
  */
 
-export interface CopyButtonProps extends NounButtonProps {
+export interface CopyButtonProps extends ButtonProps {
   onStatusChange?: (success: boolean) => void
   value: string
 }

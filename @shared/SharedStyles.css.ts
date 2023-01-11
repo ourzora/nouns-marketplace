@@ -1,5 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css'
-import { atoms, color, typography } from '@zoralabs/zord'
+import { atoms, color } from '@zord/config'
 
 export const linkButton = style([
   {
@@ -30,14 +30,9 @@ export const errorBox = style([
 ])
 
 globalStyle(`${errorBox} pre`, {
-  fontSize: typography.fontSize[14],
+  fontSize: 14,
   fontFamily: 'SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace!important',
   lineHeight: '1!important',
   color: 'red',
   whiteSpace: 'pre-wrap',
-})
-
-export const lightFont = style({
-  fontFamily: 'PTRootUIWebLight!important',
-  fontWeight: 300,
 })

@@ -1,11 +1,10 @@
-import { Button } from 'components/Button'
-
 import { useMemo } from 'react'
 
 import { isAddressMatch, shortenAddress } from '@shared'
 import { numberFormatter } from '@shared'
 import { Zorb } from '@zora-brand'
-import { Box, Flex, Stack, Text, mixins } from '@zoralabs/zord'
+import { Box, Button, Flex, Paragraph, Stack, Text } from '@zord'
+import { mixins } from '@zord/config'
 
 import {
   collectionBlock,
@@ -26,7 +25,7 @@ export function FilterCollectionListItem({
   count?: number
 }) {
   const {
-    useCollectionProperties,
+    collectionPropertiesConfig,
     filterStore: {
       setTokenContracts,
       filters: { tokenContracts },
@@ -66,11 +65,11 @@ export function FilterCollectionListItem({
                   {tokenName || shortenAddress(tokenAddress)}
                 </Text>
               </Box>
-              {count ? (
-                <Text variant="paragraph-xs" color="text3">
+              {count && (
+                <Paragraph size="sm" color="text3">
                   {numberFormatter(count)} item{count !== 1 ? 's' : ''}
-                </Text>
-              ) : null}
+                </Paragraph>
+              )}
             </Flex>
           </Flex>
           {isSelected && (
@@ -80,7 +79,7 @@ export function FilterCollectionListItem({
           )}
         </Flex>
       </Button>
-      {isSelected && useCollectionProperties && (
+      {isSelected && collectionPropertiesConfig?.enabled && (
         <FilterProperties collectionAddress={tokenAddress} />
       )}
     </Stack>

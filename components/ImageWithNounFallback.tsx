@@ -4,7 +4,7 @@ import { TypeSafeToken } from 'validators/token'
 import { useOptionalImageURIDecode } from '@media/hooks/useImageURIDecode'
 import { useRawImageTransform } from '@media/hooks/useRawImageTransform'
 import { FallbackThumbnail } from '@noun-auction'
-import { BoxProps } from '@zoralabs/zord'
+import { BoxProps } from '@zord'
 
 import { ImageElement } from './ImageElement'
 

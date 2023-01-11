@@ -9,7 +9,7 @@ import {
   rowButtonWrapper,
   sidebarBidWrapper,
 } from '@noun-auction/styles/NounishStyles.css'
-import { Flex, Separator, Stack } from '@zoralabs/zord'
+import { Flex, Separator, Stack } from '@zord'
 
 import { PlaceNounsBid, SettleAuction } from '../AuctionUi'
 import { AuctionBidder, AuctionHighBid, CollectionLink } from '../DataRenderers'

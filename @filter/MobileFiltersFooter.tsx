@@ -1,7 +1,5 @@
-import { Button } from 'components/Button'
-
 import { useCollectionFilters } from '@filter/providers/CollectionFilterProvider'
-import { Grid } from '@zoralabs/zord'
+import { Button, Grid } from '@zord'
 
 import { ClearFilters } from './ClearFilters'
 import * as styles from './CollectionsFilter.css'

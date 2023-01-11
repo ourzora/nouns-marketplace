@@ -75,13 +75,6 @@
     </Flex>
   </Well>
   <Well style={{ gridColumn: '2/span 6' }} label="Typography">
-    <Flex direction="column">
-      <Eyebrow>Display</Eyebrow>
-      <Display size="lg">Display lg</Display>
-      <Display size="md">Display md</Display>
-      <Display size="sm">Display sm</Display>
-      <Display size="xs">Heading xs</Display>
-    </Flex>
 
     <Flex direction="column">
       <Eyebrow>Headings</Eyebrow>

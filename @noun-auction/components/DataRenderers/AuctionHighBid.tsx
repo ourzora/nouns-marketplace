@@ -1,6 +1,4 @@
-import { sidebarHighBid } from '@noun-auction/styles/NounishStyles.css'
-import { lightFont } from '@shared'
-import { Flex, FlexProps, Label } from '@zoralabs/zord'
+import { Flex, FlexProps, Paragraph } from '@zord'
 
 import { EthAmount } from './EthAmount'
 
@@ -26,22 +24,17 @@ export function AuctionHighBid({
   return (
     <Flex direction={direction} gap="x2" className={className} {...props}>
       {showLabels && (
-        <Label
-          size={layout === 'sideBarBid' ? 'lg' : 'md'}
-          className={lightFont}
-          style={{ lineHeight: '1.15' }}
+        <Paragraph
           align={layout === 'sideBarBid' ? 'left' : 'right'}
           color={layout === 'sideBarBid' ? 'tertiary' : 'secondary'}
         >
           {auctionCompleted ? 'Winning bid' : label}
-        </Label>
+        </Paragraph>
       )}
       {highestBid && (
         <EthAmount
-          style={{ lineHeight: '1.15' }}
           size="md"
           align={layout === 'sideBarBid' ? 'left' : 'right'}
-          className={layout === 'sideBarBid' && sidebarHighBid}
           ethAmount={highestBid}
         />
       )}

@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import { Button } from 'components/Button'
 
 import React, { useCallback, useMemo, useState } from 'react'
 
@@ -8,7 +7,7 @@ import { PossibleV3AskState, useV3AskStateContext } from '@market/modules/V3Ask/
 import { useKeyPress } from '@shared'
 import { PriceWithLabel } from '@shared/components/PriceWithLabel'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { PopUp, Stack, Text, Well } from '@zoralabs/zord'
+import { Button, PopUp, Stack, Text, Well } from '@zord'
 
 import { UniversalListAskFlow } from './UniversalListAskFlow'
 import * as styles from './V3AskFlow.css'
@@ -95,7 +94,7 @@ export function V3AskOwnerTrigger({ nft, openModal }: V3AskOwnerTriggerProps) {
         <PopUp
           open={open}
           placement="bottom-end"
-          wrapperClassName={clsx('privateask-owner-popup-wrapper', styles.popupWrapper)}
+          wrapperClassName={clsx('privateask-owner-popup-wrapper')}
           triggerClassName={clsx('privateask-owner-popup-trigger', styles.popupTrigger)}
           trigger={
             <Button

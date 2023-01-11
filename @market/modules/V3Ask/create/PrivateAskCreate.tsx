@@ -13,7 +13,7 @@ import {
   validateENSAddress,
 } from '@shared'
 import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
-import { Heading, InputField, Stack } from '@zoralabs/zord'
+import { Heading, InputField, Stack } from '@zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import { V3AskLearnMoreButton } from '../V3AskLearnMoreButton'

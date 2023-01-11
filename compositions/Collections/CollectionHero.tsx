@@ -8,8 +8,8 @@ import { AddressWithLink } from '@market'
 import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { AuctionCountdown, PlaceNounsBid } from '@noun-auction'
 import { useIsAuctionCompleted } from '@noun-auction/hooks/useIsAuctionCompleted'
-import { lightFont, useWindowWidth } from '@shared'
-import { Flex, Grid, Heading, Paragraph, Stack } from '@zoralabs/zord'
+import { useWindowWidth } from '@shared'
+import { Flex, Grid, Heading, Paragraph, Stack } from '@zord'
 
 import * as styles from './CollectionHeader.css'
 
@@ -44,22 +44,18 @@ export function CollectionHero({ activeAuction, ...props }: HeroProps) {
           )}
         </Flex>
         <Stack className={[styles.activeAuctionForm]} justify="center" gap="x6">
-          <Heading size={isLarge ? 'xl' : 'lg'} as="h2">
+          <Heading size={isLarge ? 'lg' : 'md'} as="h2">
             {token?.name}
           </Heading>
           <Flex gap="x8">
             <Stack gap="x2">
-              <Paragraph className={[lightFont]} color="text3">
-                Current bid
-              </Paragraph>
-              <Paragraph>
+              <Paragraph color="text3">Current bid</Paragraph>
+              <Heading size="xs">
                 {`${formattedCryptoHighestBidPrice} ${activeAuction.highestBidPrice?.nativePrice.currency.name}`}
-              </Paragraph>
+              </Heading>
             </Stack>
             <Stack gap="x2">
-              <Paragraph className={[lightFont]} color="text3">
-                Auction ends in
-              </Paragraph>
+              <Paragraph color="text3">Auction ends in</Paragraph>
 
               <AuctionCountdown
                 auctionEndTime={activeAuction.endTime}
@@ -69,9 +65,7 @@ export function CollectionHero({ activeAuction, ...props }: HeroProps) {
             </Stack>
             {highestBidder && (
               <Stack gap="x2">
-                <Paragraph className={[lightFont]} color="text3">
-                  Top bidder
-                </Paragraph>
+                <Paragraph color="text3">Top bidder</Paragraph>
                 <AddressWithLink address={highestBidder} />
               </Stack>
             )}
@@ -82,9 +76,7 @@ export function CollectionHero({ activeAuction, ...props }: HeroProps) {
             tokenId={activeAuction.tokenId}
           />
           {!activeAuction.firstBidTime && (
-            <Paragraph className={[lightFont]} color="text3">
-              No bids yet
-            </Paragraph>
+            <Paragraph color="text3">No bids yet</Paragraph>
           )}
         </Stack>
       </Grid>

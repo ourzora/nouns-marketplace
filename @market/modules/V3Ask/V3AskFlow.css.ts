@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, vars } from '@zoralabs/zord'
+import { atoms, vars } from '@zord/config'
 
 export const grid = style([
   {
@@ -13,13 +13,13 @@ export const offsetY = style({
 })
 
 export const button = style({
-  height: 'unset!important', // TODO: removeme when zord is vendored
+  height: 'unset',
 
   selectors: {
     '&:not([disabled]):hover': {
       cursor: 'pointer',
       backgroundColor: vars.color.background2,
-      borderRadius: '12px!important', // TODO: removeme when zord is vendored
+      borderRadius: vars.radii.curved,
     },
   },
 })
@@ -33,17 +33,12 @@ export const savings = style({
 })
 
 export const popupTrigger = style([
-  {
-    border: '0!important',
-    padding: '0!important',
-  },
   atoms({
     padding: 'x0',
+    borderWidth: 'none',
   }),
 ])
-export const popupWrapper = style({
-  borderRadius: '16px!important', // TODO: removeme when zord is vendored
-})
+
 export const stretch = atoms({
   alignItems: 'stretch',
 })

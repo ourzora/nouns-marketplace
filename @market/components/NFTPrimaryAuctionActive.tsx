@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { TypeSafeNounsAuction } from 'validators/auction'
 
 import { useAuctionDataTable } from '@market/hooks'
@@ -6,7 +5,7 @@ import { useNounishAuctionHelper } from '@market/hooks/useNounishAuctionHelper'
 import { PlaceNounsBid } from '@noun-auction'
 import { DataTable, PriceWithLabel } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { FlexProps, Stack } from '@zoralabs/zord'
+import { FlexProps, Stack } from '@zord'
 
 interface NFTPrimaryAuctionActiveProps extends FlexProps {
   nftObj: NFTObject
@@ -18,14 +17,10 @@ export function NFTPrimaryAuctionActive({
   primaryAuction,
   ...props
 }: NFTPrimaryAuctionActiveProps) {
-  const {
-    formattedCryptoHighestBidPrice,
-    formattedUSDHighestBidPrice,
-    highestBidder,
-    hasBid,
-  } = useNounishAuctionHelper({
-    auction: primaryAuction,
-  })
+  const { formattedCryptoHighestBidPrice, formattedUSDHighestBidPrice, hasBid } =
+    useNounishAuctionHelper({
+      auction: primaryAuction,
+    })
 
   const { formattedAuctionDataTable } = useAuctionDataTable({
     primaryAuction,
@@ -33,7 +28,7 @@ export function NFTPrimaryAuctionActive({
 
   return (
     <Stack gap="x4" {...props}>
-      <DataTable rowSize="lg" items={formattedAuctionDataTable} />
+      <DataTable rowSize="md" items={formattedAuctionDataTable} />
       <Stack gap="x4" backgroundColor="accent" borderRadius="phat" p="x6">
         {formattedCryptoHighestBidPrice && formattedUSDHighestBidPrice && (
           <PriceWithLabel

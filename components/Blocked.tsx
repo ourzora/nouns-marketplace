@@ -2,7 +2,7 @@ import { PageWrapper } from 'components'
 
 import React, { SVGProps } from 'react'
 
-import { Heading, Paragraph, Stack } from '@zoralabs/zord'
+import { Heading, Paragraph, Stack } from '@zord'
 
 export function Skull(props: SVGProps<SVGSVGElement>) {
   return (
@@ -110,7 +110,7 @@ interface Render404Props {
 
 function Blocked({ heading, message = DEFAULT_MESSAGE }: Render404Props) {
   return (
-    <PageWrapper fullHeight style={{ alignItems: 'center' }}>
+    <PageWrapper fullHeight align="center">
       <Stack
         mt="x10"
         gap="x3"

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Stack, StackProps } from '@zoralabs/zord'
+import { Stack, StackProps } from '@zord'
 
 import { V3AskModal } from './V3AskModal'
 

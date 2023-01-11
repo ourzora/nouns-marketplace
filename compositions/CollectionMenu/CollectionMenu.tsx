@@ -1,16 +1,14 @@
-import { Button } from 'components/Button'
 import { SearchInput } from 'compositions'
 import { useCollectionsContext } from 'providers/CollectionsProvider'
-import { mediumFont, noTextWrap } from 'styles/styles.css'
+import { noTextWrap } from 'styles/styles.css'
 
 import { useNounsDaos } from 'hooks/useNounsDaos'
 
 import { useCallback, useMemo, useState } from 'react'
 
 import { ModalComposition } from '@modal'
-import { lightFont } from '@shared'
 import { useHasScrolled } from '@shared/hooks/useHasScrolled'
-import { Box, Flex, Heading, Icon, Label, Paragraph, Stack, Text } from '@zoralabs/zord'
+import { Box, Button, Flex, Heading, Icon, Label, Paragraph, Stack, Text } from '@zord'
 
 import * as styles from './CollectionMenu.css'
 import { CollectionNavList } from './CollectionNavList'
@@ -57,7 +55,7 @@ export function CollectionMenu() {
                 '@initial': 'none',
                 '@1024': 'inline',
               }}
-              className={[lightFont, noTextWrap]}
+              className={[noTextWrap]}
             >
               {currentCollectionCount}
             </Label>
@@ -81,7 +79,6 @@ export function CollectionMenu() {
             <SearchInput
               placeholder="Quick search..."
               className="collectionmenu-quicksearch"
-              inputClassNameOverrides={mediumFont}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleChange(event.target.value)
               }
@@ -101,9 +98,7 @@ export function CollectionMenu() {
                 <CollectionNavList items={filteredItems} />
               ) : (
                 <Flex justify="center" align="center" h="x20">
-                  <Paragraph className={mediumFont} color="text3">
-                    Nothing found
-                  </Paragraph>
+                  <Paragraph color="text3">Nothing found</Paragraph>
                 </Flex>
               )}
             </Box>

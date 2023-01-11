@@ -1,5 +1,3 @@
-import { Button } from 'components/Button'
-
 import { NFTSummary } from '@market'
 import { ModalComposition } from '@modal'
 import {
@@ -7,7 +5,7 @@ import {
   placeBidTrigger,
   placeBidTriggerWrapper,
 } from '@noun-auction/styles/NounishStyles.css'
-import { Stack } from '@zoralabs/zord'
+import { Button, Stack } from '@zord'
 
 import { NounsBidForm } from './NounsBidForm'
 

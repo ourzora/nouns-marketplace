@@ -1,5 +1,4 @@
-import { lightFont } from '@shared'
-import { Label, Stack, StackProps } from '@zoralabs/zord'
+import { Label, Stack, StackProps } from '@zord'
 
 import { AddressWithLink } from './AddressWithLink'
 
@@ -15,7 +14,7 @@ export function NFTCardMarketOwner({ address, size = 'md' }: NFTCardMarketOwnerP
 
   return (
     <Stack justify="space-between">
-      <Label size={size} className={lightFont} color="text3">
+      <Label size={size} color="text3">
         Owned by
       </Label>
       <AddressWithLink address={address} />

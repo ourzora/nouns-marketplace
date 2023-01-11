@@ -1,4 +1,4 @@
-import { atoms } from '@zoralabs/zord'
+import { atoms } from '@zord/config'
 
 export const nounsGlasses = atoms({
   h: 'x8',

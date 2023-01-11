@@ -3,8 +3,7 @@ import { format } from 'date-fns'
 import { useMemo } from 'react'
 
 import * as Sentry from '@sentry/react'
-import { lightFont } from '@shared'
-import { Flex, FlexProps, Icon, Label, Stack } from '@zoralabs/zord'
+import { Flex, FlexProps, Icon, Label, Stack } from '@zord'
 
 export interface TxTimestampProps extends FlexProps {
   transactionInfo: {
@@ -33,9 +32,7 @@ export function TxTimestamp({ transactionInfo }: TxTimestampProps) {
         align="center"
         gap="x1"
       >
-        <Label className={lightFont} color="text3">
-          {timeStamp}
-        </Label>
+        <Label color="text3">{timeStamp}</Label>
         <Icon id="ArrowRightAngle" color="text3" />
       </Flex>
     </Stack>

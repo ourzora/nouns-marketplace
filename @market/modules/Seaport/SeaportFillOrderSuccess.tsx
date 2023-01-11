@@ -1,10 +1,8 @@
-import { Button } from 'components/Button'
-
 import React from 'react'
 
 import { ModalTitleAndDescription, SuccessCheckmark } from '@market/components/'
 import { useModal } from '@modal'
-import { Stack } from '@zoralabs/zord'
+import { Button, Stack } from '@zord'
 
 import { CommonSeaportFillOrderProps } from './SeaportFillOrderFlow'
 

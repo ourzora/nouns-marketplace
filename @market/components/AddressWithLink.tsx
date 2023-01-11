@@ -3,7 +3,7 @@ import { useEnsName } from 'wagmi'
 import { useMemo } from 'react'
 
 import { useShortAddress } from '@shared'
-import { Flex, FlexProps, Icon, Label } from '@zoralabs/zord'
+import { Flex, FlexProps, Heading, Icon } from '@zord'
 
 interface AddressWithLinkProps extends FlexProps {
   address: string
@@ -36,9 +36,9 @@ export function AddressWithLink({
       rel="noreferrer"
       {...props}
     >
-      <Label className="zora-market-addressWithLink">
+      <Heading size="xs" className="zora-market-addressWithLink">
         {ensName && useEns ? ensName : shortAddress}
-      </Label>
+      </Heading>
       <Icon id="ArrowRightAngle" />
     </Flex>
   )

@@ -1,5 +1,5 @@
 import { useCollectionFilters } from '@filter/providers'
-import { Heading, Stack } from '@zoralabs/zord'
+import { Heading, Stack } from '@zord'
 
 import { stringDefaults } from './constants'
 

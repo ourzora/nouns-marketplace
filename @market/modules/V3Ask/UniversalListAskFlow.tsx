@@ -1,5 +1,5 @@
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { FlexProps, Stack } from '@zoralabs/zord'
+import { FlexProps, Stack } from '@zord'
 
 import { UniversalListAskModal } from './UniversalListAskModal'
 import { V3AskStateProvider } from './providers/V3AskStateProvider'

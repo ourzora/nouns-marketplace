@@ -1,6 +1,6 @@
 import { globalStyle, style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, color, media, radii, space, typography } from '@zoralabs/zord'
+import { atoms, color, media, radii, space } from '@zord/config'
 
 export const auctionWrapperVariants = {
   layout: {
@@ -196,21 +196,6 @@ export const sidebarBidWrapper = style([
   }),
 ])
 
-export const sidebarHighBid = style([
-  {
-    fontSize: typography.fontSize['35'],
-    fontFamily: "'Londrina Solid', cursive!important",
-    fontWeight: 400,
-  },
-  atoms({
-    color: 'text1',
-  }),
-])
-
-export const sideBarUpperLabel = style({
-  fontSize: typography.fontSize[18],
-})
-
 export const bidHistoryWrapper = style([
   {
     gridRowStart: 2,
@@ -307,10 +292,6 @@ export const auctionEventRow = style([
 ])
 
 /* STYLE UTILS */
-export const lightFont = style({
-  fontWeight: '300!important',
-  fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
-})
 
 /* Thumbnail */
 export const tokenInfoWrapper = style([
@@ -350,9 +331,6 @@ export const nounishThumbnail = style([
     w: '100%',
   }),
 ])
-export const thumbnailLink = style({
-  height: 'unset!important',
-})
 
 export const nounishThumbnailImage = style([
   atoms({

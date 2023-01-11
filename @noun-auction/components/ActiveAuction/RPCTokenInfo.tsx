@@ -1,10 +1,8 @@
-import { Button } from 'components/Button'
 import NextLink from 'next/link'
 import Link from 'next/link'
 
 import * as styles from '@noun-auction/styles/NounishStyles.css'
-import { lightFont } from '@shared'
-import { Box, BoxProps, Flex, Label, Stack } from '@zoralabs/zord'
+import { Box, BoxProps, Button, Flex, Span, Stack } from '@zord'
 
 import { NounishThumbnail } from '../DataRenderers/NounishThumbnail'
 
@@ -27,7 +25,7 @@ export function RPCTokenInfo({
   return (
     <Flex className={['nounish-auction__token-info', styles.tokenInfoWrapper]} {...props}>
       <NextLink href={`/collections/${collectionAddress}/${tokenId}`} passHref>
-        <Button as="a" variant="unset" className={styles.thumbnailLink}>
+        <Button as="a" variant="unset">
           {!!tokenId && !!collectionAddress && (
             <NounishThumbnail
               image={tokenImage}
@@ -37,20 +35,18 @@ export function RPCTokenInfo({
           )}
         </Button>
       </NextLink>
-      <Stack justify="space-around">
+      <Stack justify="center" gap="x1">
+        <Box className={styles.rowCollectionName}>
+          <Link href={`/collections/${collectionAddress}/${tokenId}`} passHref>
+            {tokenName ?? '...'}
+          </Link>
+        </Box>
         <Box>
-          <Box className={styles.rowCollectionName}>
-            <Link href={`/collections/${collectionAddress}`} passHref>
-              {tokenName ?? '...'}
-            </Link>
-          </Box>
-          <Box mt="x1">
-            <Label as="a" color="tertiary" className={[lightFont]}>
-              <Link href={`/collections/${collectionAddress}`} passHref>
-                {collectionName ?? '...'}
-              </Link>
-            </Label>
-          </Box>
+          <Link href={`/collections/${collectionAddress}`} passHref>
+            <Span as="a" color="tertiary">
+              {collectionName ?? '...'}
+            </Span>
+          </Link>
         </Box>
       </Stack>
     </Flex>

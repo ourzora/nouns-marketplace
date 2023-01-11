@@ -1,9 +1,7 @@
-import { Button } from 'components/Button'
-
 import { useMemo } from 'react'
 
 import { ModalComposition } from '@modal'
-import { Box, BoxProps, Heading, Paragraph, Stack } from '@zoralabs/zord'
+import { Box, BoxProps, Button, Heading, Paragraph, Stack } from '@zord'
 
 import * as styles from './DescriptionWithMaxLines.css'
 
@@ -33,18 +31,19 @@ export function DescriptionWithMaxLines({
       style={{ height: `${initialHeight}px` }}
       overflow="hidden"
     >
-      <Paragraph as="p" size="lg" inline color="text3" className={paragraphClassName}>
+      <Paragraph inline color="text3" className={paragraphClassName}>
         {description}
       </Paragraph>
       <ModalComposition
         className={styles.button}
         modalName={`nft-description`}
         trigger={
-          description.length > 120 ? (
+          description.length > 64 ? (
             <Button
               pos="absolute"
               bottom="x0"
               right="x0"
+              display="block"
               variant="unset"
               size="sm"
               className={styles.button}
@@ -62,13 +61,7 @@ export function DescriptionWithMaxLines({
         content={
           <Stack p="x8" gap="x8">
             <Heading as="h2">Description</Heading>
-            <Paragraph
-              as="p"
-              size="lg"
-              inline
-              color="text3"
-              className={paragraphClassName}
-            >
+            <Paragraph inline color="text3" className={paragraphClassName}>
               {description}
             </Paragraph>
           </Stack>

@@ -1,4 +1,4 @@
-import { FlexProps } from '@zoralabs/zord'
+import { FlexProps } from '@zord'
 
 export interface SharedDataRendererProps extends FlexProps {
   label?: string | boolean

@@ -1,5 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css'
-import { atoms, color, radii, space, typography } from '@zoralabs/zord'
+import { atoms, color, radii, space } from '@zord/config'
 
 export const codeWrapper = style([
   atoms({
@@ -15,7 +15,7 @@ export const codeWrapper = style([
 ])
 
 export const code = {
-  fontSize: '12px',
+  fontSize: 12,
   fontFamily: 'SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace!important',
   lineHeight: '1.125!important',
 }
@@ -31,10 +31,6 @@ globalStyle(`${codeWrapper} pre`, {
 })
 
 export const h1Selector = style([
-  {
-    paddingTop: 50,
-    marginTop: -50,
-  },
   atoms({
     pos: 'relative',
   }),
@@ -42,16 +38,16 @@ export const h1Selector = style([
 
 export const blockQuoteSelector = style([
   {
-    color: color.text3,
     borderLeft: `3px solid ${color.accentActive}`,
   },
   atoms({
+    color: 'text3',
     pl: 'x2',
   }),
 ])
 
 globalStyle(`${blockQuoteSelector} > p`, {
-  fontSize: typography.fontSize[16],
+  fontSize: 16,
 })
 
 export const ulSelector = style([

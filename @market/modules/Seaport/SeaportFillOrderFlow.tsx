@@ -3,7 +3,7 @@ import { OffchainOrderWithToken } from 'types/zora.api.generated'
 import React, { useState } from 'react'
 
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { StackProps } from '@zoralabs/zord'
+import { StackProps } from '@zord'
 
 import { SeaportFillOrder } from './SeaportFillOrder'
 import { SeaportFillOrderSuccess } from './SeaportFillOrderSuccess'

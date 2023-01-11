@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { Flex, Label, Stack } from '@zoralabs/zord'
+import { Flex, Heading, Stack } from '@zord'
 
 import { FilterOptionButton } from './FilterOptionButton'
 
@@ -33,9 +33,7 @@ export function FilterOptions({
 
   return (
     <Stack gap="x4">
-      <Label className="zord-attributesHeading" size="lg">
-        {label}
-      </Label>
+      <Heading size="sm">{label}</Heading>
       <Flex gap="x2" wrap="wrap">
         {options.map((option: any) => (
           <FilterOptionButton

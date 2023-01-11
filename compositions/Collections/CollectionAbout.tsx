@@ -7,9 +7,8 @@ import { useMemo } from 'react'
 
 import { AddressWithLink, DAOBuilderLink } from '@market'
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
-import { lightFont } from '@shared'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Flex, Grid, GridProps, Paragraph, Stack } from '@zoralabs/zord'
+import { Flex, Grid, GridProps, Paragraph, Stack } from '@zord'
 
 import * as styles from './CollectionHeader.css'
 
@@ -78,9 +77,7 @@ export function CollectionAbout({
                 px="x0"
               />
             </Flex>
-            {collection.description && (
-              <Paragraph className={[lightFont]}>{collection.description}</Paragraph>
-            )}
+            {collection.description && <Paragraph>{collection.description}</Paragraph>}
 
             <MarketStats contractAddress={collection.address} />
           </Stack>

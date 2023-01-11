@@ -2,7 +2,7 @@ import { TypeSafeToken } from 'validators/token'
 
 import { usePrimaryAuctionDataTable } from '@market/modules/V3Ask/hooks'
 import { DataTable } from '@shared/components'
-import { BoxProps } from '@zoralabs/zord'
+import { BoxProps } from '@zord'
 
 interface NFTProvenanceProps extends BoxProps {
   token: TypeSafeToken

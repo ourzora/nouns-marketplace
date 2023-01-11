@@ -1,5 +1,6 @@
-import { Box, BoxProps, Heading, Paragraph } from '@zoralabs/zord'
 import React from 'react'
+
+import { Box, BoxProps, Heading, Paragraph } from '@zord'
 
 interface ModalTitleAndDescriptionProps extends BoxProps {
   description?: string | undefined
@@ -19,7 +20,7 @@ export function ModalTitleAndDescription({
         </Heading>
       )}
       {description && (
-        <Paragraph size="lg" mb="x4">
+        <Paragraph size="md" mb="x4">
           {description}
         </Paragraph>
       )}

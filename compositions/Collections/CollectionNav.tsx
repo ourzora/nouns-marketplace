@@ -2,7 +2,7 @@ import { ROUTES } from 'constants/routes'
 
 import React from 'react'
 
-import { Flex, FlexProps, Separator, Stack } from '@zoralabs/zord'
+import { Flex, FlexProps, Separator, Stack } from '@zord'
 
 import { CollectionNavItem } from './CollectionNavItem'
 

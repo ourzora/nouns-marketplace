@@ -1,7 +1,7 @@
-import { pageHeaderWrapper, pageHeadline } from 'styles/styles.css'
+import { pageHeaderWrapper } from 'styles/styles.css'
 
 import { Maybe } from '@zoralabs/nft-hooks/dist/backends/zora-indexer-v1/zora-indexer-types'
-import { Flex, FlexProps, Paragraph, Text } from '@zoralabs/zord'
+import { Flex, FlexProps, Heading, Paragraph } from '@zord'
 
 export interface PageHeaderProps extends FlexProps {
   headline: Maybe<string> | undefined
@@ -23,16 +23,12 @@ export function PageHeader({
       {...props}
     >
       {headline && (
-        <Text
-          as="h1"
-          className={[pageHeadline]}
-          textAlign={direction === 'column' ? 'center' : 'left'}
-        >
+        <Heading as="h1" size="xl" textAlign={direction === 'column' ? 'center' : 'left'}>
           {headline}
-        </Text>
+        </Heading>
       )}
       {copy && (
-        <Paragraph as="p" size="lg" textAlign="center" color="text3">
+        <Paragraph textAlign="center" color="text3">
           {copy}
         </Paragraph>
       )}

@@ -1,4 +1,4 @@
-import { Icon, Stack } from '@zoralabs/zord'
+import { Icon, Stack } from '@zord'
 
 export function FilterResultsLoading() {
   return (

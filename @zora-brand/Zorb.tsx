@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { Box } from '@zoralabs/zord'
+import { Box } from '@zord'
 
 import { gradientForAddress } from './utils/gradient'
 

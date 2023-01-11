@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { Flex, FlexProps, Icon, Label } from '@zoralabs/zord'
+import { Flex, FlexProps, Icon, Label } from '@zord'
 
 interface AddressWithLinkProps extends FlexProps {
   address: string

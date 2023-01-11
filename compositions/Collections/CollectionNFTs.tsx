@@ -6,7 +6,7 @@ import React from 'react'
 import { CollectionFilterProvider } from '@filter'
 import { useWindowWidth } from '@shared'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { GridProps } from '@zoralabs/zord'
+import { GridProps } from '@zord'
 
 export interface CollectionAboutProps extends GridProps {
   collection: Collection
@@ -25,7 +25,8 @@ export const CollectionNFTs = ({ fallback }: { fallback: CollectionServiceProps 
       filtersVisible={isLarge}
       contractAddress={collectionAddress}
       enableSortDropdown
-      useCollectionProperties={{
+      collectionPropertiesConfig={{
+        enabled: true,
         header: 'Traits',
         selector: 'nouns-market-traits',
       }}

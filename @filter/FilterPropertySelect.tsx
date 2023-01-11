@@ -2,8 +2,7 @@ import { AggregateAttribute } from 'types/zora.api.generated'
 
 import { useMemo } from 'react'
 
-import { lightFont } from '@shared'
-import { Box, Flex, Label, Select } from '@zoralabs/zord'
+import { Box, Flex, Label, Select } from '@zord'
 
 import * as styles from './CollectionsFilter.css'
 import { useCollectionFilters } from './providers/CollectionFilterProvider'
@@ -37,7 +36,7 @@ export function FilterPropertySelect({ traitType, valueMetrics }: AggregateAttri
         w="100%"
         color="text1"
         textAlign="right"
-        className={[styles.selectDropdown, lightFont]}
+        className={[styles.selectDropdown]}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
           setCollectionAttributes({ traitType, value: e.target.value })
         }

@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms } from '@zoralabs/zord'
+import { atoms } from '@zord/config'
 
 export const avatarSizes = {
   '16': atoms({

@@ -1,9 +1,7 @@
-import { Button } from 'components/Button'
-
 import React, { useMemo } from 'react'
 
 import { SuccessCheckmark } from '@market/components/SuccessCheckmark'
-import { Stack } from '@zoralabs/zord'
+import { Button, Stack } from '@zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import { V3AskHeadingDescription } from '../V3AskHeadingDescription'

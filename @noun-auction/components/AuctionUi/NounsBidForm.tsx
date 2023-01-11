@@ -5,7 +5,7 @@ import {
   LIL_NOUNS_AUCTION_ADDRESS,
   NOUNS_AUCTION_ADDRESS,
 } from '@noun-auction/constants/nounish-markets'
-import { BoxProps } from '@zoralabs/zord'
+import { BoxProps } from '@zord'
 
 import { BuilderNounsBidForm } from './BuilderNounsBidForm'
 import { OGNounsBidForm } from './OGNounsBidForm'

@@ -3,7 +3,7 @@ import NextLink from 'next/link'
 import { ReactNode } from 'react'
 
 import { placeBidTrigger } from '@noun-auction/styles/NounishStyles.css'
-import { Label, LabelProps } from '@zoralabs/zord'
+import { Label, LabelProps } from '@zord'
 
 export interface CollectionLinkProps extends LabelProps {
   collectionAddress: string

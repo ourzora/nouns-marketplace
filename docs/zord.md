@@ -4,7 +4,7 @@
 
 Adding to your project boils down to:
 
-1. Add Zord stylesheet from `@zoralabs/zord/index.css`
+1. Add Zord stylesheet from `@zord/index.css`
 2. Set up webfonts
 3. Add Zord ThemeProvider and theme
 4. Add peer dependencies (we're working on making this easier!)
@@ -27,14 +27,18 @@ Adding to your project boils down to:
 
 ### Usage with Next.js
 
+In a NextJS environment, we need to work around an issue that occurs in the dev environment that causes an out-of-memory error because Next's ReactRefreshWebpackPlugin dependency can't handle [Barrel exports](https://basarat.gitbook.io/typescript/main-1/barrel) when exporting both PascalCase React components _*and*_ Vanilla Extract's `createTheme`: [Out-of-memory error with ReactRefreshWebpackPlugin + CamelCase barrel exports](https://github.com/vanilla-extract-css/vanilla-extract/issues/679)
+
+As a result, we explicitly export Zord components from `@zord`, and theme/configuration items like tokens, spacing, radii, color, and media breakpoints from `@zord/config`:
+
 ```tsx
 // pages/_app.tsx
 import type { AppProps } from 'next/app'
 
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/600.css'
-import { ThemeProvider, lightTheme } from '@zoralabs/zord'
-import '@zoralabs/zord/index.css'
+import { ThemeProvider } from '@zord'
+import { lightTheme } from '@zord/config'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -505,7 +509,7 @@ There are a few ways of applying responsive styles:
 
 ```
 // ComponentName.css.ts
-import { atoms, media } from '@zoralabs/zord'
+import { atoms, media } from '@zord'
 
 export const marginTop = atoms({
   mt: { '@initial': 'x32', '@768': 'x64' },
@@ -602,7 +606,6 @@ One more thing to point out: className takes an array: `className={['zora-userca
 In the `<UserCard>` code block above, we discussed `<Header>` briefly. It's worth going into more detail. Under the hood, `<Header>` is based on a generic `<Text>` component, which inherits its behaviour from `<Box>`. `<Text>` has a large number of variants with custom fontSize, fontWeight, lineHeight. Rather than exposing this large set of variants as a single complex `<Text>` component, Zord creates a number of convenient text components to reflect these presets:
 
 ```
-<Display>
 <Heading>
 <Paragraph>
 <Eyebrow>

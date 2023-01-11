@@ -1,11 +1,9 @@
-import { Button } from 'components/Button'
-
 import React, { useCallback } from 'react'
 
 import * as ToastPrimitive from '@radix-ui/react-toast'
 import { useToggle } from '@shared/hooks/useToggle'
 import { ToastItem } from '@toast/toastReducer'
-import { Flex, Icon, Label, Paragraph, Stack } from '@zoralabs/zord'
+import { Button, Flex, Icon, Label, Paragraph, Stack } from '@zord'
 
 import * as styles from './Toast.css'
 

@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, vars } from '@zoralabs/zord'
+import { atoms, vars } from '@zord/config'
 
 export const container = style([
   {

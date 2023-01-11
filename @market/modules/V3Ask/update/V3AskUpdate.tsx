@@ -8,7 +8,7 @@ import { TransactionSubmitButton } from '@market/components/TransactionSubmitBut
 import { PrintError } from '@shared/components/PrintError'
 import { formatContractError } from '@shared/utils'
 import { validateCurrency } from '@shared/utils/validateCurrency'
-import { Heading, InputField, Stack } from '@zoralabs/zord'
+import { Heading, InputField, Stack } from '@zord'
 
 import { CommonV3AskComponentProps } from '../V3AskFlow'
 import { useV3AskTransaction } from '../hooks/useV3AskTransaction'

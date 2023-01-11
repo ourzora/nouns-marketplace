@@ -1,7 +1,7 @@
 import { TOAST_LAYER } from 'constants/layers'
 
 import { keyframes, style } from '@vanilla-extract/css'
-import { atoms, mixins } from '@zoralabs/zord'
+import { atoms, mixins } from '@zord/config'
 
 // const slideRight = keyframes({
 //   from: { transform: 'translateX(var(--radix-toast-swipe-end-x))' },

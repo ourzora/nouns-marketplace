@@ -2,7 +2,7 @@ import { fullHeightPageWrapper, pageWrapper } from 'styles/styles.css'
 
 import { ReactNode } from 'react'
 
-import { Flex, FlexProps } from '@zoralabs/zord'
+import { Flex, FlexProps } from '@zord'
 
 export interface PageWrapperProps extends FlexProps {
   children: ReactNode

@@ -2,7 +2,7 @@ import React, { useCallback, useLayoutEffect, useRef, useState } from 'react'
 
 import { isAddressMatch } from '@shared'
 import { Currency } from '@shared'
-import { Box, BoxComponentProps, Select, Text } from '@zoralabs/zord'
+import { Box, BoxComponentProps, Paragraph, Select, Text } from '@zord'
 
 import * as styles from './CollectionsFilter.css'
 
@@ -50,9 +50,9 @@ export function CurrencySelect({
 
   return (
     <Box pos="relative" inset="x0" {...props}>
-      <Text ref={inputRef} className={styles.symbolText({ variant })}>
+      <Paragraph size="sm" ref={inputRef} className={styles.symbolText({ variant })}>
         {symbol}
-      </Text>
+      </Paragraph>
 
       <Select
         name={name}

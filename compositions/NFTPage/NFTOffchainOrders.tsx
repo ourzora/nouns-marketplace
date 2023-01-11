@@ -2,7 +2,7 @@ import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import { PriceCards } from '@market/components/PriceCards'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Stack, StackProps } from '@zoralabs/zord'
+import { Stack, StackProps } from '@zord'
 
 export interface NFTOffchainOrdersProps extends StackProps {
   nft: NFTObject

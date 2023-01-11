@@ -9,7 +9,7 @@ import {
 } from '@filter/constants'
 import { style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
-import { atoms, color, ease, media, radii, space, typography, vars } from '@zoralabs/zord'
+import { atoms, color, ease, media, space, typography, vars } from '@zord/config'
 
 export const borderStyle = `2px solid ${vars.color.border}`
 
@@ -23,7 +23,7 @@ export const textButton = style([
 ])
 
 export const textSmall = style({
-  fontSize: typography.fontSize[14],
+  fontSize: 14,
 })
 
 export const checkBox = atoms({
@@ -34,18 +34,18 @@ export const checkBox = atoms({
 export const filtersButton = style([
   {
     gap: 6,
-    paddingLeft: `${vars.space.x4}!important`,
-    paddingRight: `${vars.space.x3}!important`,
   },
+  atoms({
+    pl: 'x4',
+    pr: 'x3',
+  }),
 ])
 
 export const activityButton = style([
-  {
-    paddingLeft: `${vars.space.x4}!important`,
-    paddingRight: `${vars.space.x3}!important`,
-  },
   atoms({
     gap: 'x3',
+    pl: 'x4',
+    pr: 'x3',
     whiteSpace: 'nowrap',
     flexDirection: 'row-reverse',
   }),
@@ -117,101 +117,113 @@ export const avatarPadding = style({
   paddingLeft: '3px',
 })
 
-export const filterSidebar = style(
-  [
-    {
-      overflowY: 'scroll',
-    },
-  ],
+export const filterSidebar = style([
   atoms({
+    overflowY: 'scroll',
     backgroundColor: 'background1',
     pr: { '@initial': 'x0' },
     w: '100%',
     h: { '@initial': '100%', '@768': '100vh' },
-  })
-)
+  }),
+])
 
-export const sideBarSeparator = style({
-  borderTop: borderStyle,
-  position: 'relative',
-  width: 'calc(100% - 32px)',
-  zIndex: 100,
-  opacity: 0,
-  transition: `opacity 150ms ${vars.ease.in}`,
-})
+export const sideBarSeparator = style([
+  {
+    borderTop: borderStyle,
+    width: 'calc(100% - 32px)',
+    zIndex: 100,
+    opacity: 0,
+    transition: `opacity 150ms ${vars.ease.in}`,
+  },
+  atoms({
+    position: 'relative',
+  }),
+])
 
 export const filterSidebarScrolled = style({
   opacity: 1,
 })
 
-export const collectionBlock = style({
-  textAlign: 'left',
-  overflow: 'visible',
-  selectors: {
-    '&:hover&:after': {
-      opacity: 1,
-      transition: `opacity 50ms ${vars.ease.inOut}`,
-    },
-    '&:hover': {
-      paddingLeft: '3px',
-      transition: `padding 150ms ${vars.ease.inOut}`,
-    },
-    '&:after': {
-      content: '',
-      position: 'absolute',
-      zIndex: 0,
-      width: '100%',
-      height: '100%',
-      inset: '0',
-      opacity: 0,
-      backgroundColor: vars.color.background2,
-      cursor: 'pointer',
-      borderRadius: vars.radii.small,
+export const collectionBlock = style([
+  {
+    selectors: {
+      '&:hover&:after': {
+        opacity: 1,
+        transition: `opacity 50ms ${vars.ease.inOut}`,
+      },
+      '&:hover': {
+        transition: `padding 150ms ${vars.ease.inOut}`,
+      },
+      '&:after': {
+        content: '',
+        position: 'absolute',
+        zIndex: 0,
+        width: '100%',
+        height: '100%',
+        inset: '0',
+        opacity: 0,
+        backgroundColor: vars.color.background2,
+        cursor: 'pointer',
+        borderRadius: vars.radii.curved,
+      },
     },
   },
-})
+  atoms({
+    textAlign: 'left',
+    overflow: 'visible',
+    pl: 'x1',
+  }),
+])
 
 export const collectionBlockContent = style({
   zIndex: 1,
 })
 
-export const collectionBlockMeta = style({
-  alignSelf: 'center',
-  gap: 'unset',
-  cursor: 'pointer',
-})
+export const collectionBlockMeta = style([
+  {
+    gap: 'unset',
+  },
+  atoms({
+    alignSelf: 'center',
+    cursor: 'pointer',
+  }),
+])
 
-export const filterOption = style({
-  height: '40px',
-  width: 'auto',
-  minWidth: '76px',
-  cursor: 'pointer',
-  outline: 0,
-  transition: `border 100ms ${ease.inOut}, background 100ms ${ease.inOut}, transform 200ms ${ease.out}`,
-  userSelect: 'none',
-  backgroundColor: 'transparent',
-  selectors: {
-    '&:hover:not([disabled])': {
-      backgroundColor: vars.color.background1,
-    },
-    '&:focus-visible': {
-      outline: '2px solid rgb(32, 103, 243)',
-      outlineStyle: 'auto',
-    },
-    '&:active': {
-      transform: 'scale(0.95)',
-    },
-    '&[disabled]': {
-      cursor: 'not-allowed',
-      color: vars.color.text3,
-      pointerEvents: 'none',
-    },
-    '&:active&[disabled]': {
-      transform: 'unset',
-      cursor: 'not-allowed', // to discuss: cursor won't show because of pointerEvents directive above
+export const filterOption = style([
+  {
+    outline: 0,
+    transition: `border 100ms ${ease.inOut}, background 100ms ${ease.inOut}, transform 200ms ${ease.out}`,
+    cursor: 'pointer',
+    selectors: {
+      '&:hover:not([disabled])': {
+        backgroundColor: vars.color.background1,
+      },
+      '&:focus-visible': {
+        outline: '2px solid rgb(32, 103, 243)',
+        outlineStyle: 'auto',
+      },
+      '&:active': {
+        transform: 'scale(0.95)',
+      },
+      '&[disabled]': {
+        cursor: 'not-allowed',
+        color: vars.color.text3,
+        pointerEvents: 'none',
+      },
+      '&:active&[disabled]': {
+        transform: 'unset',
+        cursor: 'not-allowed', // to discuss: cursor won't show because of pointerEvents directive above
+      },
     },
   },
-})
+  atoms({
+    height: 'x10',
+    width: 'auto',
+    minWidth: 'x19', // 76px
+    userSelect: 'none',
+    backgroundColor: 'transparent',
+  }),
+])
 
 export const activityModal = style([
   {
@@ -225,20 +237,12 @@ export const activityModal = style([
   }),
 ])
 
-export const filterPropertySelect = style([
-  {
-    textAlign: 'left',
-    justifyContent: 'flex-start!important', // TODO: remove !important invocations when zord has been vendored into marketplace
-    height: 'unset!important',
-  },
-])
-
 const pill = {
   padding: `0 ${vars.space.x3}`,
   height: vars.space.x10,
   borderRadius: vars.radii.round,
   marginBottom: 0,
-  fontSize: typography.fontSize[16],
+  fontSize: 16,
   fontWeight: typography.fontWeight.label,
   lineHeight: 1,
 }
@@ -248,7 +252,7 @@ export const currencySelectVariants = {
     large: {
       px: vars.space.x4,
       height: vars.space.x15,
-      fontSize: typography.fontSize[16],
+      fontSize: 16,
     },
     greyPill: {
       ...pill,
@@ -275,14 +279,14 @@ export const currencySelect = recipe({
 const symbolTextVariants = {
   variant: {
     large: {
-      fontSize: typography.fontSize[16],
+      fontSize: 16,
     },
     greyPill: {
-      fontSize: typography.fontSize[16],
+      fontSize: 16,
       fontWeight: typography.fontWeight.label,
     },
     whitePill: {
-      fontSize: typography.fontSize[16],
+      fontSize: 16,
       fontWeight: typography.fontWeight.label,
     },
   },
@@ -346,31 +350,24 @@ export const mobileFiltersFooter = style([
   }),
 ])
 
-export const selectLabel = style(
+export const selectLabel = style([
   {
     zIndex: PRIMARY_LAYER,
-    lineHeight: `${typography.lineHeight[40]}!important`, // should be 55 per designs, revisit
     textIndent: space.x4,
   },
   atoms({
+    lineHeight: 55,
     pointerEvents: 'none',
     userSelect: 'none',
-  })
-)
+  }),
+])
 
-export const selectDropdown = style(
+export const selectDropdown = style([
   {
     appearance: 'none',
-    borderRadius: `${radii.curved}!important`,
-    border: '2px solid transparent',
-    selectors: {
-      '&:focus': {
-        borderColor: color.accent,
-      },
-    },
   },
   atoms({
     userSelect: 'none',
     backgroundColor: 'background2',
-  })
-)
+  }),
+])

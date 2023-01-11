@@ -1,15 +1,14 @@
 import { useBalance } from 'wagmi'
 
 import { Link } from 'components'
-import { Button } from 'components/Button'
 
 import { useToken } from 'hooks/useToken'
 
 import { TypeSafeDao } from 'validators/dao'
 
-import { EthAmount, RPCTokenInfo, lightFont, useNounishAuctionQuery } from '@noun-auction'
+import { EthAmount, RPCTokenInfo, useNounishAuctionQuery } from '@noun-auction'
 import { numberFormatter, useWindowWidth } from '@shared'
-import { Box, Flex, Label } from '@zoralabs/zord'
+import { Box, BoxProps, Button, Flex, Heading, Paragraph } from '@zord'
 
 import {
   cardHeader,
@@ -18,11 +17,14 @@ import {
   metadataCells,
   mobileCardWrapper,
   mobileCell,
-  noBorder,
   rowWrap,
 } from './DaoRow.css'
 
-export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
+interface DaoRowProps extends BoxProps {
+  dao: TypeSafeDao
+}
+
+export const DaoRow = ({ dao, ...props }: DaoRowProps) => {
   const { activeAuction } = useNounishAuctionQuery({
     collectionAddress: dao.collectionAddress,
   })
@@ -44,7 +46,6 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
 
   return (
     <DaoRowComponent
-      index={index}
       tokenId={tokenId}
       tokenName={token.name}
       collectionAddress={collectionAddress}
@@ -53,12 +54,12 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
       treasuryAddress={dao.treasuryAddress}
       tokenImage={token?.image.url ?? undefined}
       auctionStatus={auctionStatus}
+      {...props}
     />
   )
 }
 
-type DaoRowProps = {
-  index: number
+interface DaoRowComponentProps extends BoxProps {
   tokenId: string
   collectionAddress: string
   tokenImage?: string
@@ -70,7 +71,6 @@ type DaoRowProps = {
 }
 
 export const DaoRowComponent = ({
-  index,
   collectionAddress,
   tokenId,
   tokenImage,
@@ -79,7 +79,8 @@ export const DaoRowComponent = ({
   highestBid,
   treasuryAddress,
   auctionStatus,
-}: DaoRowProps) => {
+  ...props
+}: DaoRowComponentProps) => {
   const { data: treasury } = useBalance({
     addressOrName: treasuryAddress,
   })
@@ -88,7 +89,7 @@ export const DaoRowComponent = ({
 
   if (!isLarge) {
     return (
-      <Box className={[mobileCardWrapper]}>
+      <Box className={[mobileCardWrapper]} {...props}>
         <Box className={cardHeader}>
           <RPCTokenInfo
             tokenImage={tokenImage}
@@ -108,28 +109,22 @@ export const DaoRowComponent = ({
         </Box>
         <Flex wrap>
           <Box className={mobileCell}>
-            <Label color="tertiary" className={[lightFont]}>
-              Current Bid
-            </Label>
+            <Paragraph color="tertiary">Current Bid</Paragraph>
             <EthAmount ethAmount={highestBid} />
           </Box>
           <Box className={mobileCell}>
-            <Label color="tertiary" className={[lightFont]}>
-              Auction Status
-            </Label>
-            {auctionStatus}
+            <Paragraph color="tertiary">Auction Status</Paragraph>
+            <Heading size="xs">{auctionStatus}</Heading>
           </Box>
           <Box className={mobileCell}>
-            <Label color="tertiary" className={[lightFont]}>
-              Treasury
-            </Label>
-            {treasury?.formatted ? numberFormatter(treasury?.formatted) : '...'}
-            {` ${treasury?.symbol ?? ''}`}
+            <Paragraph color="tertiary">Treasury</Paragraph>
+            <Heading size="xs">
+              {treasury?.formatted ? numberFormatter(treasury?.formatted) : '...'}
+              {` ${treasury?.symbol ?? ''}`}
+            </Heading>
           </Box>
           <Box className={mobileCell}>
-            <Label color="tertiary" className={[lightFont]}>
-              Proposals
-            </Label>
+            <Paragraph color="tertiary">Proposals</Paragraph>
           </Box>
         </Flex>
       </Box>
@@ -137,7 +132,7 @@ export const DaoRowComponent = ({
   }
 
   return (
-    <Box className={[rowWrap, index === 0 ? noBorder : '']}>
+    <Box as="li" className={[rowWrap]} {...props}>
       <Box className={[daoMeta]}>
         <RPCTokenInfo
           tokenImage={tokenImage}
@@ -149,17 +144,19 @@ export const DaoRowComponent = ({
         />
       </Box>
       <Box className={[metadataCells]}>
-        <Box className={[cell]}>
+        <Heading size="xs" className={[cell]}>
           {treasury?.formatted ? numberFormatter(treasury?.formatted) : '...'}
           {` ${treasury?.symbol}`}
-        </Box>
-        <Box className={[cell]}>{auctionStatus}</Box>
+        </Heading>
+        <Heading size="xs" className={[cell]}>
+          {auctionStatus}
+        </Heading>
         <Box className={[cell]}>
           <EthAmount ethAmount={highestBid} />
         </Box>
       </Box>
       <Link href={`/collections/${collectionAddress}`} passHref>
-        <Button variant="secondary" as="a">
+        <Button variant="secondary" size="sm">
           View
         </Button>
       </Link>

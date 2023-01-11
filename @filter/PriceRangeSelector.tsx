@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Currency } from '@shared'
-import { Flex, InputField, Paragraph } from '@zoralabs/zord'
+import { Flex, InputField, Paragraph } from '@zord'
 
 import { errorText } from './CollectionsFilter.css'
 import { CurrencySelect } from './CurrencySelect'
@@ -103,7 +103,7 @@ export function PriceRangeSelector({
       </Flex>
 
       {error && (
-        <Paragraph className={errorText} size="xs">
+        <Paragraph className={errorText} size="sm">
           {error}
         </Paragraph>
       )}

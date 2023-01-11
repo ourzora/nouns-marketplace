@@ -1,5 +1,3 @@
-import { Button } from 'components/Button'
-
 import { useCallback, useMemo } from 'react'
 
 import { useCollectionFilters } from '@filter/providers'
@@ -11,7 +9,7 @@ import {
   SelectOption,
   Status,
 } from '@filter/typings'
-import { Flex } from '@zoralabs/zord'
+import { Button, Flex } from '@zord'
 
 import * as styles from './CollectionsFilter.css'
 import { FilterOptionButton } from './FilterOptionButton'

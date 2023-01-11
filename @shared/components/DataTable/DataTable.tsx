@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 
-import { Flex, FlexProps } from '@zoralabs/zord'
+import { Flex, FlexProps } from '@zord'
 
 import { DataTableItem, DataTableItemProps } from './DataTableItem'
 import * as rowStyles from './DataTableItem.css'
@@ -8,7 +8,7 @@ import * as rowStyles from './DataTableItem.css'
 interface DataTableProps extends FlexProps {
   items?: DataTableItemProps[]
   rowVariant?: keyof typeof rowStyles.rowVariants['variant']
-  rowSize?: 'lg' | 'sm'
+  rowSize?: 'md' | 'sm'
 }
 
 export function DataTable({

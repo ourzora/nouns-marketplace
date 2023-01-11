@@ -1,6 +1,6 @@
 import { Fragment, ReactNode } from 'react'
 
-import { Checkbox, Flex, Icon, Text } from '@zoralabs/zord'
+import { Checkbox, Flex, Icon, Text } from '@zord'
 
 import { avatarPadding, filterOption } from './CollectionsFilter.css'
 
@@ -36,12 +36,7 @@ export function FilterOptionButton({
   }
   return (
     <Flex
-      className={[
-        filterOption,
-        {
-          [avatarPadding]: hasAvatar,
-        },
-      ]}
+      className={[filterOption, hasAvatar && avatarPadding]}
       gap="x1"
       align="center"
       justify="center"

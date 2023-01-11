@@ -1,5 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css'
-import { atoms, color, media, radii, typography, vars } from '@zoralabs/zord'
+import { atoms, color, media, radii, typography, vars } from '@zord/config'
 
 import {
   FOOTER_HEIGHT,
@@ -14,56 +14,9 @@ globalStyle('html, body', {
   padding: 0,
 })
 
-globalStyle('*', {
-  fontFamily: "'ptBold', Arial, Helvetica, sans-serif!important",
-})
-
-globalStyle('h1, h2, h3, h4, h5', {
-  fontFamily: 'var(--display-font)!important',
-  lineHeight: '1.125!important',
-})
-
-globalStyle('p', {
-  fontFamily: 'var(--ui-font)!important',
-})
-
-globalStyle('light-font', {
-  fontWeight: 300,
-  fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
-})
-
-export const lightFont = style({
-  fontFamily: "'ptRegular', Arial, Helvetica, sans-serif!important",
-  fontWeight: 300,
-})
-
-export const mediumFont = style({
-  fontFamily: 'PTRootUIWebLight, Arial, Helvetica, sans-serif!important',
-  fontWeight: 600,
-})
-
 export const noTextWrap = style({
   whiteSpace: 'nowrap',
 })
-
-export const textCenter = style({
-  textAlign: 'center',
-})
-
-export const leadingTight = style({
-  lineHeight: 1.125,
-})
-
-export const buttonStyle = style([
-  {
-    backgroundColor: 'var(--light-grey)',
-  },
-  atoms({
-    p: 'x2',
-    borderRadius: 'round',
-    justifyContent: 'center',
-  }),
-])
 
 export const pageWrapper = style([
   {
@@ -95,44 +48,7 @@ export const maxWidthSm = style([
   }),
 ])
 
-globalStyle('.zord-accordionTrigger > span', {
-  fontFamily: "'Londrina Solid', cursive!important",
-  fontSize: typography.fontSize[20],
-  paddingBottom: 10,
-})
-
-globalStyle('.zord-attributesHeading', {
-  fontFamily: "'Londrina Solid', cursive!important",
-  fontSize: '24px!important', // @BJ todo: replace when zord is vendored
-})
-
-globalStyle('.nouns-market-traits h3 > button > span', {
-  fontFamily: "'ptBold', Arial, Helvetica, sans-serif!important",
-  fontSize: typography.fontSize[14],
-  textTransform: 'capitalize',
-  paddingBottom: 0,
-})
-
-globalStyle('.nouns-market-traits h3 > button', {
-  backgroundColor: `${color.background2}!important`,
-  padding: 10,
-  borderRadius: radii.curved,
-  marginBottom: 5,
-})
-
 /* PAGE HEADER */
-export const pageHeadline = style([
-  {
-    fontWeight: typography.fontWeight.display,
-    fontSize: typography.fontSize[48],
-    lineHeight: typography.lineHeight[40],
-    '@media': {
-      [media.min1024]: {
-        lineHeight: typography.lineHeight[50],
-      },
-    },
-  },
-])
 
 export const pageHeaderWrapper = style([
   {
@@ -145,14 +61,6 @@ export const pageHeaderWrapper = style([
     my: 'x0',
   }),
 ])
-
-export const hideMobile = style({
-  '@media': {
-    '(max-width: 500px)': {
-      display: 'none',
-    },
-  },
-})
 
 export const stat = style({
   whiteSpace: 'nowrap',
@@ -188,17 +96,20 @@ export const homepageTable = style({
 })
 
 export const homepageHeadline = style([
-  {
-    fontWeight: typography.fontWeight.display,
-    fontSize: 42, // one-off
-    lineHeight: 48,
-    '@media': {
-      [media.min1024]: {
-        fontSize: 96, // one-off
-        lineHeight: 94,
-      },
-    },
-  },
+  // {
+  //   fontWeight: typography.fontWeight.display,
+  //   lineHeight: 48,
+  //   '@media': {
+  //     [media.min1024]: {
+  //       lineHeight: 1,
+  //     },
+  //   },
+  // },
+  atoms({
+    fontWeight: 'display',
+    fontSize: { '@initial': 42, '@1024': 96 },
+    lineHeight: { '@initial': 48, '@1024': 1 },
+  }),
 ])
 
 export const homepageHeaderWrapper = style([

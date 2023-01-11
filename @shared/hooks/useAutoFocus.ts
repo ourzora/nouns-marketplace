@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react'
 
-function useAutoFocus(trigger: boolean = false) {
+export function useAutoFocus(trigger: boolean = false) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const setFocus = useCallback(() => {
@@ -21,5 +21,3 @@ function useAutoFocus(trigger: boolean = false) {
 
   return inputRef
 }
-
-export default useAutoFocus

@@ -3,14 +3,8 @@ import clsx, { ClassValue } from 'clsx'
 import React from 'react'
 
 import * as Dialog from '@radix-ui/react-dialog'
-import {
-  Atoms,
-  Box,
-  Icon,
-  IconProps,
-  ThemeProvider as ZordProvider,
-  mixins,
-} from '@zoralabs/zord'
+import { Box, Icon, IconProps, ThemeProvider as ZordProvider } from '@zord'
+import { Atoms, mixins } from '@zord/config'
 
 import * as styles from './Modal.css'
 

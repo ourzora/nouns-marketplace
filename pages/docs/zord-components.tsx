@@ -7,7 +7,6 @@ import {
   Box,
   Button,
   Checkbox,
-  Display,
   Eyebrow,
   Flex,
   Heading,
@@ -15,7 +14,6 @@ import {
   Input,
   InputField,
   Label,
-  MenuText,
   Modal,
   ModalContent,
   Paragraph,
@@ -31,8 +29,8 @@ import {
   Text,
   TextArea,
   Well,
-  color,
-} from '@zoralabs/zord'
+} from '@zord'
+import { color } from '@zord/config'
 
 import ZordMarkup from '../../docs/zordMarkup.md'
 
@@ -145,14 +143,6 @@ export default function NounsAuctionHistory() {
           </Well>
           <Well style={{ gridColumn: '2/span 6' }} label="Typography">
             <Flex direction="column">
-              <Eyebrow>Display</Eyebrow>
-              <Display size="lg">Display lg</Display>
-              <Display size="md">Display md</Display>
-              <Display size="sm">Display sm</Display>
-              <Display size="xs">Heading xs</Display>
-            </Flex>
-
-            <Flex direction="column">
               <Eyebrow>Headings</Eyebrow>
               <Heading size="xl">Heading xl</Heading>
               <Heading size="lg">Heading lg</Heading>
@@ -169,21 +159,15 @@ export default function NounsAuctionHistory() {
             </Flex>
             <Flex direction="column">
               <Eyebrow>Paragraphs</Eyebrow>
-              <Paragraph size="lg">Paragraph lg</Paragraph>
               <Paragraph size="md">Paragraph md</Paragraph>
               <Paragraph size="sm">Paragraph sm</Paragraph>
-              <Paragraph size="xs">Paragraph xs</Paragraph>
-            </Flex>
-            <Flex direction="column">
-              <Eyebrow>MenuText</Eyebrow>
-              <MenuText>MenuText</MenuText>
             </Flex>
             <Flex direction="column">
               <Eyebrow>Eyebrow</Eyebrow>
             </Flex>
             <Flex direction="column">
               <Eyebrow>Responsive Text</Eyebrow>
-              <Text fontWeight="display" fontSize={{ '@initial': 48, '@576': 65 }}>
+              <Text fontWeight="display" fontSize={{ '@initial': 42, '@576': 64 }}>
                 Custom size which gets smaller at 576px breakpoint
               </Text>
             </Flex>

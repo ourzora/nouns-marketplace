@@ -1,17 +1,27 @@
 import { useAccount, useDisconnect, useNetwork } from 'wagmi'
 
-import { Button, NounButtonProps } from 'components/Button'
 import Link from 'next/link'
 import { noTextWrap } from 'styles/styles.css'
 
 import { EnsAvatar } from '@noun-auction/components/DataRenderers/EnsAvatar'
 import { useChainModal, useConnectModal } from '@rainbow-me/rainbowkit'
 import { useEnsData } from '@shared/hooks'
-import { Box, Flex, Icon, PopUp, Separator, Stack, Text } from '@zoralabs/zord'
+import {
+  Box,
+  Button,
+  ButtonProps,
+  Flex,
+  Heading,
+  Icon,
+  Paragraph,
+  PopUp,
+  Separator,
+  Stack,
+} from '@zord'
 
 import * as styles from './Header.css'
 
-interface ConnectButtonProps extends NounButtonProps {
+interface ConnectButtonProps extends ButtonProps {
   connectText?: string
 }
 
@@ -52,10 +62,7 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
         w="auto"
         {...props}
       >
-        <Text as="span" variant="paragraph-lg">
-          &#x26A0;
-        </Text>{' '}
-        Wrong network
+        <Paragraph as="span">&#x26A0;</Paragraph> Wrong network
       </Button>
     )
   }
@@ -65,9 +72,8 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
       <PopUp
         padding="x0"
         placement="bottom-end"
-        wrapperClassName={styles.popupWrapper}
         trigger={
-          <Button variant="ghost" type="button" size="md" w="auto">
+          <Button variant="secondary" type="button" size="md" w="auto">
             <Box as="span">{displayName}</Box>
             <Icon id="ChevronDown" />
           </Button>
@@ -78,9 +84,9 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
             <Link passHref href={`/manage/${address}`}>
               <Button size="md" as="a" variant="unset" className={styles.topMenuItem}>
                 <EnsAvatar address={address} />
-                <Box ml={'x2'} as="span" className={[noTextWrap]}>
+                <Heading size="xs" ml={'x2'} as="span" inline className={[noTextWrap]}>
                   {displayName}
-                </Box>{' '}
+                </Heading>{' '}
               </Button>
             </Link>
             <Button
@@ -95,8 +101,10 @@ export function ConnectButton({ connectText = 'Connect', ...props }: ConnectButt
           <Separator />
           <Box as="ul" pt="x2">
             <Flex as="li">
-              <Link href={`/manage/${address}`}>
-                <a className={styles.connectMenuItem}>Manage NFTs</a>
+              <Link href={`/manage/${address}`} passHref>
+                <Heading size="xs" as="a" className={styles.connectMenuItem}>
+                  Manage NFTs
+                </Heading>
               </Link>
             </Flex>
           </Box>

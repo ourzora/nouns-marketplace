@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
 import { useCollectionFilters } from '@filter'
-import { Stack } from '@zoralabs/zord'
+import { Stack } from '@zord'
 
 import * as styles from './Collections.css'
 import { DaoGrid } from './DaoGrid'

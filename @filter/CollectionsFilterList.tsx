@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { SearchableEntity } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Accordion, InputField, Stack } from '@zoralabs/zord'
+import { Heading, InputField, Stack } from '@zord'
 
 import { FilterCollectionListItem } from './FilterCollectionListItem'
 import { useSearchQuery } from './hooks/useSearchQuery'
@@ -11,8 +11,9 @@ export function CollectionsFilterList() {
   const { data = [] } = useSearchQuery(query, SearchableEntity.Collection)
 
   return (
-    <Accordion label="Collections">
-      <Stack gap="x2" pb="x2">
+    <Stack gap="x4" pb="x2">
+      <Heading size="sm">Collections</Heading>
+      <Stack gap="x2">
         <InputField
           icon="Search"
           name="search"
@@ -34,6 +35,6 @@ export function CollectionsFilterList() {
           />
         ))}
       </Stack>
-    </Accordion>
+    </Stack>
   )
 }

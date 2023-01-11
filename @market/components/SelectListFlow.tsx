@@ -9,7 +9,7 @@ import {
 import { SaleTypeButton } from '@market/modules/V3Ask/SaleTypeButton'
 import { V3AskLearnMoreButton } from '@market/modules/V3Ask/V3AskLearnMoreButton'
 import { NFTObject } from '@zoralabs/nft-hooks'
-import { Eyebrow, Stack } from '@zoralabs/zord'
+import { Heading, Stack } from '@zord'
 
 interface SelectListFlowProps {
   closeModal?: () => void
@@ -28,20 +28,21 @@ export function SelectListFlow({ nftObj, closeModal, ...props }: SelectListFlowP
   if (!flow) {
     return (
       <Stack gap="x5" {...props}>
-        <Stack gap="x2">
-          <Eyebrow>Sale type</Eyebrow>
-
-          <SaleTypeButton
-            label="Fixed Price"
-            description="Sell for a fixed price. Anyone can buy the NFT."
-            onNext={() => dispatch({ type: APPROVE_MODULE_FOR_CREATE_V3ASK })}
-          />
-          <SaleTypeButton
-            label="Private Listing"
-            description="Sell to a specific buyer address, safely and securely."
-            tag="New"
-            onNext={() => dispatch({ type: APPROVE_MODULE_FOR_CREATE_PRIVATEASK })}
-          />
+        <Stack gap="x6">
+          <Heading size="md">Sale type</Heading>
+          <Stack gap="x4">
+            <SaleTypeButton
+              label="Fixed Price"
+              description="Sell for a fixed price. Anyone can buy the NFT."
+              onNext={() => dispatch({ type: APPROVE_MODULE_FOR_CREATE_V3ASK })}
+            />
+            <SaleTypeButton
+              label="Private Listing"
+              description="Sell to a specific buyer address, safely and securely."
+              tag="New"
+              onNext={() => dispatch({ type: APPROVE_MODULE_FOR_CREATE_PRIVATEASK })}
+            />
+          </Stack>
         </Stack>
 
         <V3AskLearnMoreButton />

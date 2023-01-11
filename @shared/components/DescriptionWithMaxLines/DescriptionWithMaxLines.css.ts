@@ -1,9 +1,10 @@
 import { style } from '@vanilla-extract/css'
-import { atoms, typography } from '@zoralabs/zord'
+import { atoms, typography } from '@zord/config'
 
 export const button = style([
   {
-    lineHeight: typography.lineHeight['30'],
+    // lineHeight: typography.lineHeight['30'],
+    lineHeight: typography.lineHeight['24'],
   },
   atoms({
     position: 'absolute',

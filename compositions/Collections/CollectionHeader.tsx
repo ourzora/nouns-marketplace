@@ -2,7 +2,7 @@ import * as siteStyles from 'styles/styles.css'
 
 import { useNounishAuctionQuery } from '@noun-auction'
 import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
-import { Grid, GridProps, Stack } from '@zoralabs/zord'
+import { Grid, GridProps, Stack } from '@zord'
 
 import * as styles from './CollectionHeader.css'
 import { CollectionHero } from './CollectionHero'

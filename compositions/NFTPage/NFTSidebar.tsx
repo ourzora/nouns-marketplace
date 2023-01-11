@@ -1,5 +1,4 @@
 import { Link } from 'components'
-import { mediumFont } from 'styles/styles.css'
 import { OffchainOrderWithToken } from 'types/zora.api.generated'
 
 import { usePrimarySalePrice } from 'hooks/usePrimarySalePrice'
@@ -7,7 +6,7 @@ import { useToken } from 'hooks/useToken'
 
 import { CollectionThumbnail } from '@media'
 import { DescriptionWithMaxLines } from '@shared/components'
-import { Flex, Heading, Stack, StackProps } from '@zoralabs/zord'
+import { Flex, Heading, Stack, StackProps } from '@zord'
 
 import { NFTMarket } from './NFTMarket'
 import * as styles from './NFTPage.css'
@@ -78,9 +77,8 @@ export function NFTSidebarComponent({
       </Flex>
 
       <DescriptionWithMaxLines
-        baseLineheight={30}
+        baseLineheight={24}
         maxLines={2}
-        paragraphClassName={mediumFont}
         overflowY="hidden"
         description={token.description}
       />

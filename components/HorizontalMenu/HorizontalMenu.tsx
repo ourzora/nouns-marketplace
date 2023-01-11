@@ -1,9 +1,6 @@
-import { Button } from 'components/Button'
-
 import { Dispatch, MouseEvent, SetStateAction, useCallback } from 'react'
 
-import { lightFont } from '@shared'
-import { Box, Flex, FlexProps } from '@zoralabs/zord'
+import { Box, Button, Flex, FlexProps } from '@zord'
 
 import { horizontalMenuButton, horizontalMenuWrapper } from './HorizontalMenu.css'
 
@@ -57,7 +54,7 @@ export function HorizontalMenu({
               {item.label}
             </Box>
             {item.count && (
-              <Box as="span" className={lightFont} color="text3">
+              <Box as="span" color="text3">
                 &nbsp;{item.count}
               </Box>
             )}
