@@ -6,15 +6,15 @@ import { DataTableItemProps } from '@shared/components/DataTable/DataTableItem'
 import { resolvePossibleENSAddress } from '@shared/utils/resolvePossibleENSAddress'
 import { NFTObject } from '@zoralabs/nft-hooks'
 
-import { useV3AskContractContext } from '../providers/V3AskContractProvider'
 import { useV3AskStateContext } from '../providers/V3AskStateProvider'
+import { useV3AskContracts } from './useV3AskContracts'
 
 interface V3AskInfoProps {
   nft: NFTObject
 }
 
 export const useFormattedV3AskInfo = ({ nft: nftObj }: V3AskInfoProps) => {
-  const { V3Asks, PrivateAsks } = useV3AskContractContext()
+  const { V3Asks, PrivateAsks } = useV3AskContracts()
   const { finalizedV3AskDetails } = useV3AskStateContext()
   const { nft, markets } = nftObj
 

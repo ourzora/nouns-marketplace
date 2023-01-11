@@ -1,6 +1,6 @@
 import { useAccount, useSigner } from 'wagmi'
 
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   ASKS_CORE_ETH_ADDRESS,
@@ -26,25 +26,7 @@ const defaultPrivateAsks = AsksPrivateEth__factory.connect(
   defaultProvider
 )
 
-export type V3AskContractContext = {
-  ModuleManager: ZoraModuleManagerInterface
-  V3Asks: AsksCoreEthInterface
-  PrivateAsks: AsksPrivateEthInterface
-  isReadOnly: boolean
-}
-
-export const V3AskContractCtx = createContext<V3AskContractContext>({
-  ModuleManager: defaultModuleManager,
-  V3Asks: defaultV3Asks,
-  PrivateAsks: defaultPrivateAsks,
-  isReadOnly: true,
-})
-
-export function useV3AskContractContext(): V3AskContractContext {
-  return useContext(V3AskContractCtx)
-}
-
-const V3AskContractProvider: React.FC = ({ children }) => {
+export function useV3AskContracts() {
   const { address } = useAccount()
   const { data: signer } = useSigner()
   const [isReadOnly, setIsReadOnly] = useState<boolean>(false)
@@ -85,18 +67,10 @@ const V3AskContractProvider: React.FC = ({ children }) => {
     }
   }, [address, isReadOnly])
 
-  return (
-    <V3AskContractCtx.Provider
-      value={{
-        ModuleManager,
-        V3Asks,
-        PrivateAsks,
-        isReadOnly,
-      }}
-    >
-      {children}
-    </V3AskContractCtx.Provider>
-  )
+  return {
+    ModuleManager,
+    V3Asks,
+    PrivateAsks,
+    isReadOnly,
+  }
 }
-
-export { V3AskContractProvider }

@@ -3,10 +3,10 @@ import { useCallback, useMemo, useState } from 'react'
 import { useZoraV3ModuleApproval } from '@market/hooks/useZoraV3ModuleApproval'
 import { useContractTransaction } from '@shared/hooks/useContractTransaction'
 
-import { useV3AskContractContext } from '../providers/V3AskContractProvider'
+import { useV3AskContracts } from './useV3AskContracts'
 
 export function useV3AskModuleApproval() {
-  const { V3Asks } = useV3AskContractContext()
+  const { V3Asks } = useV3AskContracts()
   const [error, setError] = useState<string>()
 
   const { txStatus, handleTx, txInProgress } = useContractTransaction()
