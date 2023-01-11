@@ -1,13 +1,15 @@
+import { TokenWithMarketsSummary } from 'types/zora.api.generated'
+
 import { useMemo } from 'react'
 
 import { Filter } from '@filter'
-import { NFTCard, NFTGrid } from '@media'
+import { NFTCard } from '@media'
+import { NFTGrid2 } from '@media/NFTGrid2'
 import { nftGridWrapper } from '@media/NftMedia.css'
-import { NFTObject } from '@zoralabs/nft-hooks'
 
 type DaoGridProps = {
   collectionAddress: string
-  items: NFTObject[]
+  items: TokenWithMarketsSummary[]
   isValidating: boolean
   isReachingEnd?: boolean
   handleLoadMore?: () => void
@@ -22,37 +24,18 @@ export function DaoGrid({
   handleLoadMore,
   collectionAddress,
 }: DaoGridProps) {
-  // const { activeAuction } = useNounishAuctionQuery({
-  //   collectionAddress,
-  // })
-
   const renderer = useMemo(() => {
-    // if (!activeAuction?.tokenId) return <></>
-
-    // return view === 'nfts' || !activeAuction?.tokenId ? (
     return <NFTCard collectionAddress={collectionAddress} />
-    // ) : (
-    //   <NounishActivityRow
-    //     collectionAddress={collectionAddress}
-    //     tokenId={activeAuction?.tokenId}
-    //   />
-    // )
-  }, [
-    collectionAddress,
-    // activeAuction?.tokenId,
-    //  view
-  ])
+  }, [collectionAddress])
 
   return (
     <Filter className="dao-filter">
-      <NFTGrid
+      <NFTGrid2
         items={items}
         handleLoadMore={handleLoadMore}
         isReachingEnd={isReachingEnd}
         isValidating={isValidating}
-        nftRenderer={renderer}
         className={nftGridWrapper({
-          // layout: view === 'nfts' ? 'grid' : 'activityRows',
           layout: 'grid',
         })}
       />

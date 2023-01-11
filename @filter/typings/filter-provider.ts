@@ -1,8 +1,9 @@
+import { TokenWithMarketsSummary } from 'types/zora.api.generated'
+
 import { ReactNode } from 'react'
 
 import { stringDefaults, themeDefaults } from '@filter/constants'
 import { GetNFTReturnType } from '@shared'
-import { NFTObject } from '@zoralabs/nft-hooks'
 
 import { FilterStore } from './filter-store'
 
@@ -52,7 +53,7 @@ export interface FilterContextInputProps extends FilterConfigProps {
 }
 
 export interface TokenQueryReturnTypes extends FilterContextInputProps {
-  items: NFTObject[]
+  items: TokenWithMarketsSummary[]
   isValidating: boolean
   isReachingEnd: boolean | undefined
   isEmpty: boolean
@@ -69,5 +70,6 @@ export interface CollectionFilterContextTypes extends TokenQueryReturnTypes {
 export interface CollectionFilterProviderProps extends FilterContextInputProps {
   children?: ReactNode
   // initialPage?: NFTObject[]
+  // TODO remove
   initialPage?: GetNFTReturnType
 }

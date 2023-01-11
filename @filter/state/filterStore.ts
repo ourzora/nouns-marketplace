@@ -1,3 +1,5 @@
+import { MediaType } from 'types/zora.api.generated'
+
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import {
@@ -12,7 +14,6 @@ import {
   SortMethodType,
   TokenContractsFilter,
 } from '@filter/typings'
-import { MediaType } from '@zoralabs/zdk/dist/queries/queries-sdk'
 
 import { removeItemAtIndex } from '../utils/store'
 

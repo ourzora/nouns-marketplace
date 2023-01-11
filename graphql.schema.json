@@ -9698,15 +9698,11 @@
                 "name": "sort",
                 "description": null,
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "AggregateAttributeSortKeySortInput",
-                    "ofType": null
-                  }
+                  "kind": "INPUT_OBJECT",
+                  "name": "AggregateAttributeSortKeySortInput",
+                  "ofType": null
                 },
-                "defaultValue": null,
+                "defaultValue": "null",
                 "isDeprecated": false,
                 "deprecationReason": null
               },

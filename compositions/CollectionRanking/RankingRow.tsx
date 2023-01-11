@@ -1,4 +1,5 @@
 import { Link } from 'components/Link'
+import { Collection } from 'types/zora.api.generated'
 
 import { useAggregate } from 'hooks'
 
@@ -6,7 +7,6 @@ import { useMemo } from 'react'
 
 import { CollectionThumbnail } from '@media/CollectionThumbnail'
 import { CollectionLink, numberFormatter, roundTwoDecimals } from '@shared'
-import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Flex, Grid, Label, Stack, StackProps } from '@zoralabs/zord'
 
 import {

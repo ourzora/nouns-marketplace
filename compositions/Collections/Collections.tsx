@@ -17,6 +17,8 @@ export function Collections({
 }: CollectionsProps) {
   const { items, isValidating, isReachingEnd, handleLoadMore } = useCollectionFilters()
 
+  console.log('items', items)
+
   const gridProps = useMemo(() => {
     return {
       items,

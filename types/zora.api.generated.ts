@@ -1202,7 +1202,7 @@ export type RootQuery = {
 
 export type RootQueryAggregateAttributesArgs = {
   networks?: InputMaybe<Array<NetworkInput>>
-  sort: AggregateAttributeSortKeySortInput
+  sort?: InputMaybe<AggregateAttributeSortKeySortInput>
   where: AggregateAttributesQueryInput
 }
 
@@ -2121,6 +2121,243 @@ export type VideoEncodingTypes = {
   poster?: Maybe<Scalars['String']>
   preview?: Maybe<Scalars['String']>
   thumbnail?: Maybe<Scalars['String']>
+}
+
+export type AttributesQueryVariables = Exact<{
+  addresses?: InputMaybe<Array<Scalars['String']> | Scalars['String']>
+  network: NetworkInput
+}>
+
+export type AttributesQuery = {
+  __typename: 'RootQuery'
+  aggregateAttributes: Array<{
+    __typename: 'AggregateAttribute'
+    traitType: string
+    valueMetrics: Array<{
+      __typename: 'AggregateAttributeValue'
+      count: number
+      percent: number
+      value: string
+    }>
+  }>
+}
+
+export type FilteredTokensQueryVariables = Exact<{
+  where?: InputMaybe<TokensQueryInput>
+  sort?: InputMaybe<TokenSortInput>
+  filter?: InputMaybe<TokensQueryFilter>
+  pagination?: InputMaybe<PaginationInput>
+  networks?: InputMaybe<Array<NetworkInput> | NetworkInput>
+}>
+
+export type FilteredTokensQuery = {
+  __typename: 'RootQuery'
+  tokens: {
+    __typename: 'TokenWithMarketsSummaryConnection'
+    pageInfo: {
+      __typename: 'PageInfo'
+      endCursor?: string | null
+      hasNextPage: boolean
+      limit: number
+    }
+    nodes: Array<{
+      __typename: 'TokenWithMarketsSummary'
+      token: {
+        __typename: 'Token'
+        collectionAddress: string
+        collectionName?: string | null
+        description?: string | null
+        lastRefreshTime?: any | null
+        metadata?: any | null
+        name?: string | null
+        tokenId: string
+        owner?: string | null
+        tokenUrlMimeType?: string | null
+        tokenUrl?: string | null
+        image?: {
+          __typename: 'TokenContentMedia'
+          url?: string | null
+          size?: string | null
+          mimeType?: string | null
+          mediaEncoding?:
+            | {
+                __typename: 'AudioEncodingTypes'
+                large?: string | null
+                original: string
+              }
+            | {
+                __typename: 'ImageEncodingTypes'
+                large?: string | null
+                poster?: string | null
+                original: string
+                thumbnail?: string | null
+              }
+            | { __typename: 'UnsupportedEncodingTypes'; original: string }
+            | {
+                __typename: 'VideoEncodingTypes'
+                large?: string | null
+                poster?: string | null
+                original: string
+                preview?: string | null
+                thumbnail?: string | null
+              }
+            | null
+        } | null
+        tokenContract?: {
+          __typename: 'TokenContract'
+          collectionAddress: string
+          symbol?: string | null
+          totalSupply?: number | null
+          network: string
+          name?: string | null
+          description?: string | null
+          chain: number
+        } | null
+        networkInfo: { __typename: 'NetworkInfo'; chain: Chain; network: Network }
+        attributes?: Array<{
+          __typename: 'TokenAttribute'
+          displayType?: string | null
+          traitType?: string | null
+          value?: string | null
+        }> | null
+        content?: {
+          __typename: 'TokenContentMedia'
+          mimeType?: string | null
+          size?: string | null
+          url?: string | null
+          mediaEncoding?:
+            | {
+                __typename: 'AudioEncodingTypes'
+                large?: string | null
+                original: string
+              }
+            | {
+                __typename: 'ImageEncodingTypes'
+                large?: string | null
+                poster?: string | null
+                original: string
+                thumbnail?: string | null
+              }
+            | { __typename: 'UnsupportedEncodingTypes'; original: string }
+            | {
+                __typename: 'VideoEncodingTypes'
+                large?: string | null
+                poster?: string | null
+                original: string
+                preview?: string | null
+                thumbnail?: string | null
+              }
+            | null
+        } | null
+      }
+      marketsSummary: Array<{
+        __typename: 'Market'
+        collectionAddress?: string | null
+        marketAddress: string
+        marketType: MarketType
+        status: string
+        tokenId?: string | null
+        properties?:
+          | { __typename: 'LilNounsAuction' }
+          | { __typename: 'NounsAuction' }
+          | { __typename: 'NounsBuilderAuction' }
+          | { __typename: 'V1Ask' }
+          | { __typename: 'V1BidShare' }
+          | {
+              __typename: 'V1Offer'
+              address: string
+              bidder: string
+              collectionAddress: string
+              currency: string
+              recipient: string
+              sellOnShare: string
+              tokenId: string
+              v1OfferStatus: string
+              amount: {
+                __typename: 'PriceAtTime'
+                nativePrice: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                }
+                usdcPrice?: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                } | null
+              }
+            }
+          | { __typename: 'V2Auction' }
+          | {
+              __typename: 'V3Ask'
+              address: string
+              askCurrency: string
+              buyer?: string | null
+              collectionAddress: string
+              seller: string
+              tokenId: string
+              v3AskStatus: string
+              askPrice: {
+                __typename: 'PriceAtTime'
+                nativePrice: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                }
+                usdcPrice?: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                } | null
+              }
+            }
+          | {
+              __typename: 'V3ReserveAuction'
+              estimatedDurationTime?: any | null
+              address: string
+              collectionAddress: string
+              currency: string
+              duration: string
+              extended: boolean
+              finder: string
+              findersFeeBps: string
+              firstBid: boolean
+              firstBidTime: string
+              highestBid: string
+              highestBidder: string
+              reserve: string
+              seller: string
+              sellerFundsRecipient: string
+              startTime: string
+              status: string
+              tokenId: string
+              price?: {
+                __typename: 'PriceAtTime'
+                nativePrice: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                }
+                usdcPrice?: {
+                  __typename: 'CurrencyAmount'
+                  decimal: number
+                  raw: string
+                } | null
+              } | null
+            }
+          | null
+        price?: {
+          __typename: 'PriceAtTime'
+          nativePrice: { __typename: 'CurrencyAmount'; decimal: number; raw: string }
+          usdcPrice?: {
+            __typename: 'CurrencyAmount'
+            decimal: number
+            raw: string
+          } | null
+        } | null
+      }>
+    }>
+  }
 }
 
 export type NounishAuctionsQueryVariables = Exact<{

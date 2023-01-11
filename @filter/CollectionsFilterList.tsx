@@ -1,6 +1,7 @@
+import { SearchableEntity } from 'types/zora.api.generated'
+
 import { useState } from 'react'
 
-import { SearchableEntity } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { Accordion, InputField, Stack } from '@zoralabs/zord'
 
 import { FilterCollectionListItem } from './FilterCollectionListItem'

@@ -1,8 +1,7 @@
 import { useRelevantMarket } from '@market/hooks'
-import { V3AskModal, V3AskOwnerTrigger } from '@market/modules/V3Ask'
+import { V3AskModal } from '@market/modules/V3Ask'
 import { UniversalListAskFlow } from '@market/modules/V3Ask/UniversalListAskFlow'
 import { useNftMarketContext } from '@market/providers/NftMarketContextProvider'
-import { useModal } from '@modal'
 import { FlexProps } from '@zoralabs/zord'
 
 import { NFTCardMarketOwner } from './NFTCardMarketOwner'

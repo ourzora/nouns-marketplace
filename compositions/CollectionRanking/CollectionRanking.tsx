@@ -1,5 +1,6 @@
 import { CollectionDescriptionModal } from 'modals'
 import { CollectionParsed } from 'pages'
+import { Collection } from 'types/zora.api.generated'
 
 import { useMemo } from 'react'
 
@@ -39,9 +40,15 @@ export function CollectionRanking({
             '@1024': 'x6',
           }}
         >
-          {(collections ?? []).map((collection) => (
-            <RankingRow key={collection.address} collection={collection} />
-          ))}
+          {(collections ?? []).map(
+            (collection) =>
+              collection && (
+                <RankingRow
+                  key={collection.address}
+                  collection={collection as Collection}
+                />
+              )
+          )}
         </Stack>
       )}
     </Stack>

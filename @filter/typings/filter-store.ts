@@ -1,7 +1,8 @@
+import { MediaType } from 'types/zora.api.generated'
+
 import { MouseEventHandler } from 'react'
 
 import { Currency } from '@shared'
-import { MediaType } from '@zoralabs/zdk/dist/queries/queries-sdk'
 
 type Address = string
 

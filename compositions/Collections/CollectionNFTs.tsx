@@ -1,10 +1,10 @@
 import { Collections } from 'compositions/Collections'
+import { Collection } from 'types/zora.api.generated'
 
 import React from 'react'
 
 import { CollectionFilterProvider } from '@filter'
 import { useWindowWidth } from '@shared'
-import { Collection } from '@zoralabs/zdk/dist/queries/queries-sdk'
 import { GridProps } from '@zoralabs/zord'
 
 export interface CollectionAboutProps extends GridProps {

@@ -1,4 +1,6 @@
-import { createContext, useContext, useMemo } from 'react'
+import { TokenWithMarketsSummary } from 'types/zora.api.generated'
+
+import { ReactNode, createContext, useContext, useMemo } from 'react'
 
 import {
   attributesToFilterParams,
@@ -7,11 +9,15 @@ import {
   sortMethodToSortParams,
 } from '@filter'
 import { stringDefaults, themeDefaults } from '@filter/constants'
-import { useTokensQuery } from '@filter/hooks/useTokensQuery'
+import {
+  PaginatedFilteredTokensQueryResponse,
+  useTokensQuery,
+} from '@filter/hooks/useTokensQuery'
 import { initialFilterStore, useFilterStore } from '@filter/state/filterStore'
 import {
   CollectionFilterContextTypes,
   CollectionFilterProviderProps,
+  FilterContextInputProps,
 } from '@filter/typings'
 import { MARKET_INFO_STATUSES } from '@zoralabs/nft-hooks/dist/types/NFTInterface'
 
@@ -66,7 +72,10 @@ export function CollectionFilterProvider({
   useFilterOwnerCollections = false,
   strings = stringDefaults,
   theme = themeDefaults,
-}: CollectionFilterProviderProps) {
+}: {
+  children?: ReactNode
+  initialPage?: PaginatedFilteredTokensQueryResponse
+} & FilterContextInputProps) {
   const filterStore = useFilterStore(filtersVisible)
   const { filters } = filterStore
   const {
@@ -79,8 +88,7 @@ export function CollectionFilterProvider({
     contractAllowList,
     contractAddress,
     ownerAddress,
-    // initialData: initialPage && { tokens: initialPage },
-    initialData: initialPage && initialPage,
+    initialData: initialPage,
     refreshInterval: 60000,
     sort: sortMethodToSortParams(filters.sortMethod, filters.marketStatus),
     filter: {
@@ -91,15 +99,20 @@ export function CollectionFilterProvider({
     },
   })
 
-  const tokensWithActiveMarkets = useMemo(
-    () =>
-      items.filter((token) =>
-        token.markets?.map((mkt) =>
-          [MARKET_INFO_STATUSES.ACTIVE, MARKET_INFO_STATUSES.PENDING].includes(mkt.status)
-        )
-      ),
-    [items]
-  )
+  console.log({ AAAA: items })
+
+  const tokensWithActiveMarkets = useMemo(() => {
+    if (items.length === 0) return []
+
+    return items[0].tokens.filter((token) =>
+      token.marketsSummary?.map((mkt) =>
+        [
+          MARKET_INFO_STATUSES.ACTIVE.toString(),
+          MARKET_INFO_STATUSES.PENDING.toString(),
+        ].includes(mkt.status)
+      )
+    )
+  }, [items])
 
   // - Allows us to adjust the options available to users when sorting (eg. no sorting by price when there are no prices!)
   const tokensHaveActiveMarkets = useMemo(
@@ -111,7 +124,7 @@ export function CollectionFilterProvider({
     <CollectionFilterContext.Provider
       value={{
         filterStore,
-        items,
+        items: items.length > 0 ? items[0].tokens : ([] as TokenWithMarketsSummary[]),
         isValidating,
         isReachingEnd,
         isEmpty,
