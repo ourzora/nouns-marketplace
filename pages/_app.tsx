@@ -9,23 +9,28 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar'
 import { BlocklistGuard, CollectionsProvider } from 'providers'
+
 import 'styles/styles.css'
+
 import { SWRConfig } from 'swr'
 
 import { StrictMode, useEffect } from 'react'
 import React from 'react'
 
 import '@fontsource/inter/500.css'
+
 import { ContractProvider, V3AskContractProvider } from '@market'
 import { ModalContextProvider } from '@modal'
 import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/rainbowkit'
+
 import '@rainbow-me/rainbowkit/styles.css'
+
 import { ToastContextProvider } from '@toast'
 import { NFTFetchConfiguration } from '@zoralabs/nft-hooks'
 import { ZDKFetchStrategy } from '@zoralabs/nft-hooks/dist/strategies'
 
-import '../styles/globals.css'
 import '../styles/reset.css'
+import '../styles/globals.css'
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 
