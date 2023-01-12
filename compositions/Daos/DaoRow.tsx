@@ -34,17 +34,17 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
     tokenId: activeAuction?.tokenId ?? '',
   })
 
-  if (!token || !activeAuction) {
-    console.log('NOT RENDERING DAO', dao.collectionAddress)
-    console.log('TOKEN', token, 'AUCTION', activeAuction)
-    // return null
-    return (
-      <Box>
-        {/* {dao.collectionAddress} {token?.tokenId} {activeAuction?.address} */}
-        {dao.collectionAddress} {token?.tokenId} {activeAuction?.address}
-      </Box>
-    )
-  }
+  // if (!token || !activeAuction) {
+  //   console.log('NOT RENDERING DAO', dao.collectionAddress)
+  //   console.log('TOKEN', token, 'AUCTION', activeAuction)
+  //   // return null
+  //   return (
+  //     <Box>
+  //       {/* {dao.collectionAddress} {token?.tokenId} {activeAuction?.address} */}
+  //       {dao.collectionAddress} {token?.tokenId} {activeAuction?.address}
+  //     </Box>
+  //   )
+  // }
 
   // const { tokenId, collectionAddress, highestBidPrice } = activeAuction!
   // const highestBid = highestBidPrice?.chainTokenPrice?.raw || '0'
@@ -52,11 +52,11 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
   // const auctionStatus =
   //   Date.now() - parseInt(activeAuction!.endTime) * 1000 > 0 ? 'Settling' : 'Live'
 
-  if (
-    isAddressMatch('0xd310a3041dfcf14def5ccbc508668974b5da7174', dao.collectionAddress)
-  ) {
-    console.log('DUPE?')
-  }
+  // if (
+  //   isAddressMatch('0xd310a3041dfcf14def5ccbc508668974b5da7174', dao.collectionAddress)
+  // ) {
+  //   console.log('DUPE?')
+  // }
 
   // return (
   //   <Box>
@@ -64,33 +64,48 @@ export const DaoRow = ({ dao, index }: { dao: TypeSafeDao; index: number }) => {
   //   </Box>
   // )
 
+  console.log(
+    'DAO: ',
+    dao.collectionAddress,
+    'AUCTION: ',
+    activeAuction?.collectionAddress
+  )
+
+  const auctionStatus = !activeAuction
+    ? 'Inactive'
+    : Date.now() - parseInt(activeAuction!.endTime) * 1000 > 0
+    ? 'Settling'
+    : 'Live'
+
   return (
-    (token && activeAuction && (
-      <DaoRowComponent
-        index={index}
-        tokenId={activeAuction!.tokenId}
-        tokenName={token?.name!}
-        collectionAddress={activeAuction!.collectionAddress}
-        collectionName={dao.name ?? token?.collectionName! ?? '...'}
-        highestBid={activeAuction!.highestBidPrice?.chainTokenPrice?.raw || '0'}
-        treasuryAddress={dao.treasuryAddress}
-        tokenImage={token?.image.url ?? undefined}
-        auctionStatus={
-          Date.now() - parseInt(activeAuction!.endTime) * 1000 > 0 ? 'Settling' : 'Live'
-        }
-      />
-    )) ||
-    null
+    // (token && activeAuction && (
+    <DaoRowComponent
+      index={index}
+      tokenId={activeAuction?.tokenId}
+      tokenName={token?.name}
+      // collectionAddress={activeAuction!.collectionAddress}
+      collectionAddress={dao.collectionAddress}
+      treasuryAddress={dao.treasuryAddress}
+      collectionName={dao.name ?? token?.collectionName! ?? '...'}
+      highestBid={activeAuction?.highestBidPrice?.chainTokenPrice?.raw || '0'}
+      tokenImage={token?.image.url ?? undefined}
+      auctionStatus={
+        auctionStatus
+        // Date.now() - parseInt(activeAuction!.endTime) * 1000 > 0 ? 'Settling' : 'Live'
+      }
+    />
+    // )) ||
+    // null
   )
 }
 
 type DaoRowProps = {
   index: number
-  tokenId: string
+  tokenId?: string
   collectionAddress: string
   tokenImage?: string
   collectionName: string
-  tokenName: string
+  tokenName?: string
   highestBid: string
   treasuryAddress: string
   auctionStatus: string
@@ -99,7 +114,7 @@ type DaoRowProps = {
 export const DaoRowComponent = ({
   index,
   collectionAddress,
-  tokenId,
+  tokenId = '1',
   tokenImage,
   tokenName,
   collectionName,
