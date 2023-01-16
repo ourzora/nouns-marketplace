@@ -1,5 +1,5 @@
 import { useCountdown } from '@noun-auction/hooks'
-import { Flex, FlexProps, Heading, Label, Paragraph } from '@zord'
+import { Flex, FlexProps, Heading, Paragraph } from '@zord'
 
 interface CountdownProps extends FlexProps {
   showLabels?: boolean
