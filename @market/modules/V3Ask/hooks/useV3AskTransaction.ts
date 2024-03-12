@@ -3,17 +3,19 @@ import { BigNumber, ContractTransaction } from 'ethers'
 import { useState } from 'react'
 
 import { parseUnits } from '@ethersproject/units'
-import { useV3AskContractContext, useV3AskStateContext } from '@market/modules/V3Ask'
+import { useV3AskStateContext } from '@market/modules/V3Ask'
 import * as Sentry from '@sentry/react'
 import { useContractTransaction } from '@shared'
 import { NFTObject } from '@zoralabs/nft-hooks'
+
+import { useV3AskContracts } from './useV3AskContracts'
 
 // Define Ask Types
 export const V3_ASK: string = 'V3Ask'
 export const PRIVATE_ASK: string = 'PrivateAsk'
 export type AskType = typeof V3_ASK | typeof PRIVATE_ASK
 
-//  Define Ask Transactions
+// Define Ask Transactions
 export const CREATE_V3_ASK: string = 'createV3Ask'
 export const CANCEL_V3_ASK: string = 'cancelV3Ask'
 export const FILL_V3_ASK: string = 'fillV3Ask'
@@ -43,7 +45,7 @@ export const useV3AskTransaction = ({
   nft: nftObj,
   askType = V3_ASK,
 }: useV3AskTransactionProps) => {
-  const { V3Asks, PrivateAsks } = useV3AskContractContext()
+  const { V3Asks, PrivateAsks } = useV3AskContracts()
   const { txStatus, handleTx, txInProgress } = useContractTransaction()
   const [isSubmitting, setSubmitting] = useState<boolean>(false)
   const { setFinalizedV3AskDetails } = useV3AskStateContext()
@@ -54,7 +56,7 @@ export const useV3AskTransaction = ({
   const isPrivate: boolean = askType === PRIVATE_ASK
   const ActiveAskModule = isPrivate ? PrivateAsks : V3Asks
 
-  async function makeAskTransaction(
+  async function executeAskTransaction(
     txType: V3AskTransaction,
     price?: string, // as user-facing display value (eg. 0.0001 ETH), not raw BigNumber
     buyerAddress?: string,
@@ -141,7 +143,7 @@ export const useV3AskTransaction = ({
     buyerAddress, // for Private Asks only, unneeded for V3Asks
     rawBuyerAddress, // for Private Asks only, unneeded for V3Asks
   }: WriteAskTxValues) {
-    makeAskTransaction(CREATE_V3_ASK, price, buyerAddress, rawBuyerAddress)
+    executeAskTransaction(CREATE_V3_ASK, price, buyerAddress, rawBuyerAddress)
   }
 
   async function updateAsk({
@@ -149,13 +151,13 @@ export const useV3AskTransaction = ({
     buyerAddress, // for Private Asks only, unneeded for V3Asks
     rawBuyerAddress, // for Private Asks only, unneeded for V3Asks
   }: WriteAskTxValues) {
-    makeAskTransaction(UPDATE_V3_ASK, price, buyerAddress, rawBuyerAddress)
+    executeAskTransaction(UPDATE_V3_ASK, price, buyerAddress, rawBuyerAddress)
   }
   async function cancelAsk() {
-    makeAskTransaction(CANCEL_V3_ASK)
+    executeAskTransaction(CANCEL_V3_ASK)
   }
   async function fillAsk({ price }: AskTxValues) {
-    makeAskTransaction(FILL_V3_ASK, price)
+    executeAskTransaction(FILL_V3_ASK, price)
   }
 
   return {

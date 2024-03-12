@@ -26,7 +26,7 @@ interface Values {
   amount: string
 }
 
-const validate = (values: Values) => {
+const validate = async (values: Values) => {
   let newValue: BigNumber
   try {
     newValue = parseUnits(values.amount.toString() || '0', 'ether')
@@ -44,13 +44,19 @@ const validate = (values: Values) => {
   if (invalidAmount) errors.amount = invalidAmount
 
   // address
-  const isEns = validateENSAddress(values.buyeraddress)
+  const isENS = validateENSAddress(values.buyeraddress)
+  const ensIsResolvable = isENS
+    ? await resolvePossibleENSAddress(values.buyeraddress)
+    : false
   if (!values.buyeraddress) {
     // @ts-ignore
     errors.buyeraddress = 'Buyer address required'
-  } else if (!isAddress(values.buyeraddress) && !isEns) {
+  } else if ((!isAddress(values.buyeraddress) && !isENS) || (isENS && !ensIsResolvable)) {
     // @ts-ignore
-    errors.buyeraddress = 'Buyer address not valid'
+    errors.buyeraddress =
+      isENS && !ensIsResolvable
+        ? 'ENS address cannot be resolved'
+        : 'Buyer address not valid'
   }
 
   return errors
@@ -69,6 +75,7 @@ export function PrivateAskCreate({ onNext, ...props }: PrivateAskCreateProps) {
       validate={validate}
       onSubmit={async (values) => {
         const resolvedBuyerAddress = await resolvePossibleENSAddress(values.buyeraddress)
+        console.log('resolvedBuyerAddress', resolvedBuyerAddress)
         createAsk({
           price: values.amount,
           buyerAddress: resolvedBuyerAddress!,
